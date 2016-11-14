@@ -1,8 +1,7 @@
-const path = require('path')
 const logger = require('winston')
 const moment = require('moment')
 
-const { Emojis: emoji, Localisation } = require('../util')
+const { Emojis: emoji } = require('../util')
 const UsageManager = require('../managers/UsageManager')
 
 class Command {
@@ -35,6 +34,7 @@ class Command {
     }
 
     this.timers = new Map()
+    this.i18n = bot.engine.i18n
   }
 
   _verify ({
@@ -45,7 +45,8 @@ class Command {
     adminOnly = false,
     hidden = false,
     cooldown = 5,
-    usage = []
+    usage = [],
+    enableLocales = true
   } = {}) {
     this.labels = typeof name === 'string'
     ? [name].concat(aliases)
@@ -62,17 +63,13 @@ class Command {
 
     this.usage = usage
     this.resolver.load(usage)
-
-    let title = this.labels[0]
-    let locales = this.i18n = new Localisation(path.join(this.bot.paths.resources, 'i18n', title))
-    locales.init()
   }
 
   _createResponder ({ msg, rawArgs, settings, client }) {
     let responder = (...args) => responder.send(...args)
 
     for (let method in this.responseMethods) {
-      responder[method] = (response = '', options = {}, ...args) => {
+      responder[method] = (response = '', options = {}) => {
         if (Array.isArray(response)) response = response.join('\n')
         response = this.responseMethods[method](msg, response)
         const formats = responder._formats
@@ -89,7 +86,7 @@ class Command {
         delete responder._formats
         delete responder._file
         let prom = (options.DM ? this.client.getDMChannel(msg.author.id) : Promise.resolve(msg.channel))
-        .then(channel => this.send(channel, response, options, ...args))
+        .then(channel => this.send(channel, response, options))
 
         prom.catch(err => logger.error(`${this.labels[0]} command failed to call ${method} - ${err}`))
 
@@ -117,7 +114,7 @@ class Command {
       return this.client.createMessage(msg.channel.id, '', fileObj)
     }
 
-    responder.dialog = async (dialogs, options = {}) => {
+    responder.dialog = async (dialogs = [], options = {}) => {
       options.cancel = options.cancel || 'cancel'
       const args = {}
       let cancelled = false
@@ -126,15 +123,11 @@ class Command {
         const input = new UsageManager(this.bot)
         input.load(dialog.input)
 
-        if (Array.isArray(prompt) && prompt.length) {
-          prompt[0] = `**${prompt[0]}**`
-        } else {
-          prompt = `**${prompt}**`
-        }
-        let p1 = await responder(prompt)
+        if (Array.isArray(prompt) && prompt.length) prompt[0] = `**${prompt[0]}**`
+        let p1 = await responder(prompt, options)
         const collector = this.bot.engine.bridge.collect(msg.channel.id, ans => (
           ans.author.id === msg.author.id
-        ), { time: options.time || 60 })
+        ), options)
 
         const awaitMessage = async (msg) => {
           let ans
@@ -144,27 +137,39 @@ class Command {
             try {
               return await input.resolve(ans, [ans.cleanContent])
             } catch (err) {
-              let p2 = await responder.format('emoji:fail').send(`${err.message || err}\n\nEnter \`${options.cancel}\` to exit the menu.`)
+              let tags = err.tags || {}
+              tags.cancel = `\`${options.cancel}\``
+              let p2 = await responder.format('emoji:fail').send(`${err.message || err}\n\n{{%menus.EXIT}}`, { tags })
               return awaitMessage(p2)
             }
           } catch (o) {
-            return Promise.reject(o.reason)
+            return Promise.reject(o)
           } finally {
-            msg.delete()
-            if (msg.channel.permissionsOf(client.user.id).has('manageMessages')) {
-              if (ans) ans.delete()
+            if (msg) msg.delete()
+            if (ans) {
+              if (ans.channel.permissionsOf(client.user.id).has('manageMessages')) {
+                ans.delete()
+              }
             }
           }
         }
 
         try {
-          Object.assign(args, await awaitMessage(p1))
+          Object.assign(args, await awaitMessage())
           collector.stop()
         } catch (err) {
-          responder.success(err ? `the menu has closed: **${err}**.` : 'you have exited the menu.')
+          if (err) {
+            let tags = {}
+            tags[err.reason] = err.arg
+            responder.error(`{{%menus.ERRORED}} **{{%collector.${err.reason}}}**`, { err: `**${err.reason}**`, tags })
+          } else {
+            responder.success('{{%menus.EXITED}}')
+          }
           collector.stop()
           cancelled = true
           break
+        } finally {
+          p1.delete()
         }
       }
 
@@ -192,7 +197,7 @@ class Command {
         logger.error(err)
       }
     }).catch(err => {
-      return responder.error(err.message || err)
+      return responder.error(err.message || err, err)
     })
   }
 
@@ -205,10 +210,13 @@ class Command {
       } else {
         const diff = moment().diff(moment(this.timers.get(awaitID)), 'seconds')
         if (diff < this.cooldown) {
-          responder.reply(
-            `please cool down! (**${this.cooldown - diff}** seconds left)`,
-            {}, { delay: 0, deleteDelay: 5000 }
-          )
+          responder.reply('{{%COOLDOWN}}', {
+            delay: 0,
+            deleteDelay: 5000,
+            tags: {
+              time: `**${this.cooldown - diff}**`
+            }
+          })
           return false
         } else {
           this.timers.delete(awaitID)
@@ -223,13 +231,13 @@ class Command {
 
   handle () { return true }
 
-  async send (channel, content, file = null, { lang = 'en' } = {}, { delay = 0, deleteDelay = 0, tags = {} } = {}) {
+  async send (channel, content, { file = null, lang = 'en', delay = 0, deleteDelay = 0, tags = {} } = {}) {
     if (delay) {
       await Promise.delay(delay)
     }
 
     if (Array.isArray(content)) content = content.join('\n')
-    content = this.i18n.parse(content, lang, tags)
+    content = this.i18n.parse(content, this.labels[0], lang, tags)
     content = content.match(/(.|[\r\n]){1,2000}/g)
 
     try {

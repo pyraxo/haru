@@ -22,23 +22,9 @@ class Credits extends MultiCommand {
     }, 'default')
   }
 
-  async getUser (data, id) {
-    try {
-      return await data.User.fetch(id)
-    } catch (err) {
-      if (err.name === 'DocumentNotFoundError') {
-        const User = data.User.model
-        let user = new User({ id })
-        await user.save()
-        return user
-      }
-      throw err
-    }
-  }
-
   async topup (data, id, amt) {
     try {
-      let user = await this.getUser(data, id)
+      let user = await data.User.fetch(id)
       user.credits += amt
       await user.save()
       return user
@@ -47,11 +33,18 @@ class Credits extends MultiCommand {
     }
   }
 
-  default ({ msg, data }, responder) {
-    this.getUser(data, msg.author.id).then(user => {
-      responder.format('emoji:credits')
-      .send(`${msg.author.username}'s account balance: **\`${user.credits}\`** credits.`)
-    }).catch(this.logError)
+  async default ({ msg, data }, responder) {
+    try {
+      let user = await data.User.fetch(msg.author.id)
+      responder.format('emoji:credits').send('{{balance}}', {
+        tags: {
+          user: msg.author.username,
+          balance: `**\`${user.credits}\`**`
+        }
+      })
+    } catch (err) {
+      this.logError(err)
+    }
   }
 
   async claim ({ msg, cache, data }, responder) {
@@ -64,49 +57,73 @@ class Credits extends MultiCommand {
           const amt = ~~(Math.random() * 100) + 50
           await this.topup(data, msg.author.id, amt)
           await cache.store(claimID, 1, 28800)
-          responder.format('emoji:credits').reply(`**${amt}** credits have been added to your account.`)
+          responder.format('emoji:credits').reply('{{topup}}', { tags: { amount: `**${amt}**` } })
           break
         }
         default: {
-          responder.format('emoji:credits').reply(
-            `your claimable credit refreshes in **${moment(res + moment()).fromNow(true)}**.`
-          )
+          responder.format('emoji:credits').reply('{{cooldown}}', {
+            tags: { time: `**${moment(res + moment()).fromNow(true)}**` }
+          })
           break
         }
       }
     } catch (err) {
-      throw new Error(`Error claiming credits for ${msg.author.username} (${msg.author.id}): ${err}`)
+      logger.error(`Error claiming credits for ${msg.author.username} (${msg.author.id}): ${err}`)
     }
   }
 
   async give ({ msg, cache, data, args }, responder) {
-    const credits = (await this.getUser(data, msg.author.id)).credits
-    const user = args.member.user
-    const code = ~~(Math.random() * 8999) + 1000
+    const member = args.member[0]
+    if (member.id === msg.author.id) {
+      responder.error('{{selfSenderError}}')
+      return
+    }
+    const credits = (await data.User.fetch(msg.author.id)).credits
+    const user = member.user
     const amt = args.amount
 
+    if (user.bot) {
+      responder.error('{{botUserError}}')
+      return
+    }
+
+    if (credits < amt) {
+      responder.error('{{insufficientCredits}}', { tags: { balance: `**${credits}**` } })
+      return
+    }
+
+    const code = ~~(Math.random() * 8999) + 1000
+
     responder.format('emoji:atm').dialog([{
-      prompt: [
-        'Credits Transfer\n',
-        `**${msg.author.username}**, you are transferring **${amt}** credits to **${user.username}#${user.discriminator}**\n`,
-        `__Current balance__: **\`$ ${credits}\`**`,
-        `__Balance after transfer__: **\`$ ${credits - amt}\`**\n`,
-        `➡  |  To confirm, enter **\`${code}\`** to proceed or **\`exit\`** to quit the menu.`
-      ],
+      prompt: '{{dialog}}',
       input: { type: 'int', name: 'code' }
-    }]).then(arg => {
+    }], {
+      tags: {
+        author: `**${msg.author.username}**`,
+        amount: `**${amt}**`,
+        user: `**${user.username}#${user.discriminator}**`,
+        balance: `**\`$ ${credits}\`**`,
+        afterAmount: `**\`$ ${credits - amt}\`**`,
+        code: `**\`${code}\`**`,
+        exit: '**`cancel`**'
+      },
+      tries: 1
+    }).then(arg => {
       if (arg.code !== code) {
-        responder.error('you have entered an invalid code. Your credits have **not** been transferred.')
+        responder.error('{{invalidCode}}')
         return
       }
       Promise.all([
         this.topup(data, msg.author.id, -amt),
         this.topup(data, user.id, amt)
       ]).then(() => {
-        responder.format('emoji:credits').reply([
-          `you have transferred **${amt}** credits to **${user.username}**'s account.\n`,
-          `__Updated balance__: **\`$ ${credits - amt}\`**\n`
-        ].join('\n'))
+        responder.format('emoji:credits').reply('{{confirmation}}', {
+          tags: {
+            amount: `**${amt}**`,
+            user: `**${user.username}**`,
+            afterAmount: `**\`$ ${credits - amt}\`**`
+          }
+        })
       }, err => {
         logger.error('Error carrying out transaction')
         logger.error(`S: ${msg.author.username} (${msg.author.id}) | T: ${user.username} (${user.id})`)

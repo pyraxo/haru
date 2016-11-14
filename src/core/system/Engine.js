@@ -10,6 +10,7 @@ const Router = require('./Router')
 
 const IPC = require('../managers/IPCManager')
 const ModelManager = require('../managers/ModelManager')
+const { Locales } = require('../util')
 
 class Engine extends EventEmitter {
   constructor (bot) {
@@ -25,6 +26,7 @@ class Engine extends EventEmitter {
     this.commands = new Commander(bot)
     this.modules = new Router(bot.client, bot)
     this.bridge = new Bridge(this.commands)
+    this.i18n = new Locales(path.join(bot.paths.resources, 'i18n'))
 
     ipc.on('registered', command => this.emit('register:ipc', command))
     db.on('loaded', id => this.emit('register:db', id))
@@ -70,6 +72,7 @@ class Engine extends EventEmitter {
   loadCommands (mod) {
     let count = 0
     this.commands.eject(mod)
+    this.i18n.reload()
 
     const commands = requireAll(this.paths.commands)
     for (let group in commands) {

@@ -30,7 +30,7 @@ module.exports = {
   padStart,
   readdirRecursive,
   Collection: require('./Collection'),
-  Localisation: require('./Localisation'),
+  Locales: require('./Locales'),
   Parser: require('./Parser'),
   Emojis: require('./Emojis'),
   LocalCache: require('./LocalCache')

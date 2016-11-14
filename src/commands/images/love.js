@@ -15,7 +15,7 @@ class Love extends Command {
   }
 
   handle ({ msg, args }, responder) {
-    const input = args.text ? args.text.replace(/<@!*(\d+)>/gi, (matched, id) => {
+    const input = args.text ? args.text.replace(/<@!*(\d{17,18})>/gi, (matched, id) => {
       let member = msg.guild.members.find(m => m.id === id)
       return member ? member.nick || member.user.username : matched
     }) : msg.author.username
@@ -32,7 +32,7 @@ class Love extends Command {
     .toBuffer('PNG', (err, buf) => {
       if (err) {
         logger.error(`Error creating 'love' image - ${err}`)
-        responder.error('an error has occurred! Please try again later.')
+        responder.error('{{%ERROR}}')
         return
       }
       responder.upload(buf, 'love.png')

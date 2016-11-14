@@ -33,7 +33,12 @@ class UsageManager {
     try {
       return await resolver.resolve(content, arg, msg, this.bot)
     } catch (err) {
-      throw new TypeError(`Invalid input: ${err.message.replace('{arg}', '**`' + (arg.displayName || 'argument') + '`**')}`)
+      let tags = err.tags || {}
+      tags.arg = `**\`${arg.displayName || 'argument'}\`**`
+      return Promise.reject({
+        message: err.message,
+        tags
+      })
     }
   }
 
@@ -45,13 +50,19 @@ class UsageManager {
     const optionalArgs = argsCount - requiredArgs
 
     if (argsCount < requiredArgs) {
-      let reply = `Insufficient arguments - Expected at least **${requiredArgs}**, saw **${argsCount}**.`
+      let err = {
+        message: '{{%resolver.INSUFFICIENT_ARGS}}',
+        tags: {
+          requiredArgs: `**${requiredArgs}**`,
+          argsCount: `**${argsCount}**.`
+        }
+      }
       if (data.prefix && data.command) {
-        reply += `\n**Correct usage**: \`${data.prefix}${data.command} ${(this.usage.length
+        err.message += `\n**{{%resolver.CORRECT_USAGE}}**: \`${data.prefix}${data.command} ${(this.usage.length
         ? this.usage.map(arg => arg.optional ? `[${arg.displayName}]` : `<${arg.name}>`).join(' ')
         : '')}\``
       }
-      throw new Error(reply)
+      throw err
     }
 
     let args = {}

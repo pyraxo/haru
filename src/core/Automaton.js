@@ -43,7 +43,7 @@ class Automaton extends EventEmitter {
   }
 
   loadClient () {
-    let client = new Client(process.env.CLIENT_TOKEN, {
+    let client = this.client = new Client(process.env.CLIENT_TOKEN, {
       messageLimit: 0,
       getAllUsers: true,
       disableEveryone: true,
@@ -62,12 +62,10 @@ class Automaton extends EventEmitter {
     client.on('error', err => this.emit('error', err))
     client.on('shardReady', id => this.emit('shardReady', id))
     client.on('disconnect', () => this.emit('disconnect'))
-
-    this.client = client
   }
 
   loadEngine () {
-    let engine = new Engine(this)
+    let engine = this.engine = new Engine(this)
 
     engine.on('loaded:commands', count => logger.info(`Loaded ${count} commands`))
     engine.on('loaded:middleware', count => logger.info(`Loaded ${count} middleware`))
@@ -81,7 +79,6 @@ class Automaton extends EventEmitter {
     engine.on('register:db', id => logger.info(`Registering DB model '${id}'`))
 
     engine.run()
-    this.engine = engine
   }
 
   run () {

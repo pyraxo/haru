@@ -76,7 +76,7 @@ class MultiCommand extends Command {
         logger.error(err)
       }
     }).catch(err => {
-      return responder.format('emoji:fail').send(err.message || err)
+      return responder.format('emoji:fail').send(err.message || err, err)
     })
   }
 }
