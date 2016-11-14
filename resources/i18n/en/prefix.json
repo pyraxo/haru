@@ -1,0 +1,4 @@
+{
+  "success": "successfully changed this guild's prefix to {{prefix}}",
+  "revert": "reverted this guild's prefix back to {{prefix}}"
+}
