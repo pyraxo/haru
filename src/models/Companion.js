@@ -15,6 +15,9 @@ module.exports = function () {
         wins: number().default(0),
         losses: number().default(0)
       })
+    },
+    relations: {
+      belongsTo: ['User', 'companions', 'id', 'userId']
     }
   }
 }

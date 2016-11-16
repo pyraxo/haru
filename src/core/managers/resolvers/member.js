@@ -8,11 +8,18 @@ module.exports = {
     content = String(content).toLowerCase()
     let user = content.match(/^<@!?(\d{17,18})>$/) || content.match(/^(\d{17,18})$/)
     if (!user) {
-      let members = guild.members.filter(m => (
-        m.user.username === content || m.nick === content ||
-        `${m.user.username}#${m.user.discriminator}` === content ||
-        `${m.nick}#${m.user.discriminator}` === content
-      ))
+      let members = guild.members.filter(m => {
+        const name = m.user.username.toLowerCase()
+        const nick = m.nick.toLowerCase()
+        const discrim = m.user.discriminator
+        return name === content || nick === content ||
+        `${name}#${discrim}` === content ||
+        `${nick}#${discrim}` === content ||
+        name.startsWith(content) ||
+        nick.startsWith(content) ||
+        name.includes(content) ||
+        nick.includes(content)
+      })
       if (members.length) {
         return Promise.resolve(members)
       } else {

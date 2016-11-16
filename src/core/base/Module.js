@@ -1,11 +1,13 @@
-class Module {
+const Base = require('./Base')
+
+class Module extends Base {
   constructor (bot, options) {
+    super(bot)
     if (this.constructor === Module) {
       throw new Error('Must extend abstract Module')
     }
 
     this._verify(options)
-    this.bot = bot
   }
 
   _verify ({ name, events = {} }) {

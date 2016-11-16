@@ -1,5 +1,5 @@
 const path = require('path')
-const { Module, Collection, readdirRecursive } = require('../core')
+const { Module, Collection, readdirRecursive } = require('../../core')
 
 class ImageCache extends Module {
   constructor (...args) {

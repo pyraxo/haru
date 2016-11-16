@@ -71,12 +71,8 @@ class Automaton extends EventEmitter {
     engine.on('loaded:middleware', count => logger.info(`Loaded ${count} middleware`))
     engine.on('loaded:modules', count => logger.info(`Loaded ${count} modules`))
 
-    engine.on('reload:commands', count => logger.info(`Reloading ${count} commands`))
-    engine.on('reload:middleware', count => logger.info(`Reloading ${count} middleware`))
-    engine.on('reload:modules', count => logger.info(`Reloading ${count} modules`))
-
-    engine.on('register:ipc', command => logger.info(`Registering IPC command '${command}'`))
-    engine.on('register:db', id => logger.info(`Registering DB model '${id}'`))
+    engine.on('register:ipc', command => logger.debug(`Registering IPC command '${command}'`))
+    engine.on('register:db', id => logger.debug(`Registering DB model '${id}'`))
 
     engine.run()
   }

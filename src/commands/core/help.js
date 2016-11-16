@@ -12,7 +12,7 @@ class HelpMenu extends Command {
     })
   }
 
-  handle ({ msg, commander, settings, args }, responder) {
+  async handle ({ msg, commander, settings, args }, responder) {
     const prefix = settings.prefix
     if (args.command) {
       const command = args.command.cmd

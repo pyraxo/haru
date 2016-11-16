@@ -14,7 +14,7 @@ async function readdirRecursive (dir) {
   }
 
   dirs = files.filter(isDir)
-  files = files.filter(file => !isDir(file)).map(file => path.join(dir, file))
+  files = files.filter(file => !isDir(file)).map(file => path.join(dir, file)).filter(file => !path.basename(file).startsWith('.'))
   list = list.concat(files)
 
   while (dirs.length) {

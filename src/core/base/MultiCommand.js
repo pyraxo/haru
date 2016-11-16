@@ -59,13 +59,14 @@ class MultiCommand extends Command {
     }
   }
 
-  handle (container, responder) {
+  async handle (container, responder) {
     const type = container.args.action
     const resolver = this.type ? this.resolver : this.resolvers[type].resolver
     const command = this.type ? container.trigger : `${container.trigger} ${type}`
-    resolver.resolve(container.msg, container.rawArgs.slice(1), {
-      prefix: container.settings.prefix, command
-    }).then((args = {}) => {
+    try {
+      let args = await resolver.resolve(container.msg, container.rawArgs.slice(1), {
+        prefix: container.settings.prefix, command
+      })
       for (let key in args) {
         container.args[key] = args[key]
       }
@@ -75,9 +76,9 @@ class MultiCommand extends Command {
         logger.error(`Failed to run ${command}`)
         logger.error(err)
       }
-    }).catch(err => {
-      return responder.format('emoji:fail').send(err.message || err, err)
-    })
+    } catch (err) {
+      responder.format('emoji:fail').send(err.message || err, err)
+    }
   }
 }
 

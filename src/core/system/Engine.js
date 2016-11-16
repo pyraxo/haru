@@ -10,7 +10,7 @@ const Router = require('./Router')
 
 const IPC = require('../managers/IPCManager')
 const ModelManager = require('../managers/ModelManager')
-const { Locales } = require('../util')
+const { Locales, readdirRecursive } = require('../util')
 
 class Engine extends EventEmitter {
   constructor (bot) {
@@ -94,35 +94,41 @@ class Engine extends EventEmitter {
     this.bridge.destroy()
 
     let count = 0
-    let mw = requireAll(this.paths.middleware)
-    mw = Object.keys(mw).sort((a, b) => mw[a].priority - mw[b].priority).map(m => mw[m])
-    mw.forEach(m => {
-      this.bridge.push(m)
-      count++
+    readdirRecursive(this.paths.middleware).then(mw => {
+      mw = mw.map(mw => require(mw))
+      mw = Object.keys(mw).sort((a, b) => mw[a].priority - mw[b].priority).map(m => mw[m])
+      mw.forEach(m => {
+        this.bridge.push(m)
+        count++
+      })
+      this.emit('loaded:middleware', count)
     })
-    this.emit('loaded:middleware', count)
   }
 
   loadModules () {
     let count = 0
-    const modules = requireAll(this.paths.modules)
-    for (let module in modules) {
-      this.modules.attach(modules, modules[module])
-      count++
-    }
-    this.modules.setup()
+    readdirRecursive(this.paths.modules).then(modules => {
+      modules = modules.map(m => require(m))
+      for (let module in modules) {
+        this.modules.attach(modules, modules[module])
+        count++
+      }
+      this.modules.setup()
 
-    this.emit('loaded:modules', count)
+      this.emit('loaded:modules', count)
+    })
   }
 
   loadIpc () {
     let count = 0
-    const processes = requireAll(this.paths.ipc)
-    for (let proc in processes) {
-      this.ipc.register(processes[proc])
-      count++
-    }
-    this.emit('loaded:ipc', count)
+    readdirRecursive(this.paths.ipc).then(processes => {
+      processes = processes.map(i => require(i))
+      for (let proc in processes) {
+        this.ipc.register(processes[proc])
+        count++
+      }
+      this.emit('loaded:ipc', count)
+    })
   }
 
   async reload (type = 'commands', cat = '.') {

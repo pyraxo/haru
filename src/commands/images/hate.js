@@ -14,9 +14,9 @@ class Hate extends Command {
     })
   }
 
-  handle ({ msg, args }, responder) {
+  async handle ({ msg, args }, responder) {
     const input = args.text ? args.text.replace(/<@!*(\d{17,18})>/gi, (matched, id) => {
-      let member = msg.guild.members.find(m => m.id === id)
+      let member = msg.guild.members.get(id)
       return member ? member.nick || member.user.username : matched
     }) : msg.author.username
     const text = [

@@ -1,0 +1,13 @@
+{
+  "notInVoice": "you need to be in a voice channel!",
+  "success": [
+    "Connected to '{{voice}}' and bound to {{text}}.\n",
+    "Use the {{command}} command to start playing songs! "
+  ],
+  "errors": {
+    "notChannel": "you are not in a voice channel!",
+    "alreadyBinded": "I am already bound to {{text}}!",
+    "noPerms": "I don't have the permissions to `connect` and/or `speak` in {{voice}}!",
+    "error": "something bad happened! Please try again later."
+  }
+}

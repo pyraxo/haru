@@ -11,7 +11,8 @@ class Eval extends Command {
     })
   }
 
-  handle ({ msg, settings }, responder) {
+  async handle (container, responder) {
+    const { msg, settings } = container
     let resp
     try {
       resp = eval(msg.content.substr(settings.prefix.length).split(' ').slice(1).join(' '))
@@ -37,7 +38,8 @@ class FullEval extends Command {
     })
   }
 
-  handle ({ msg }, responder) {
+  async handle (container, responder) {
+    const { msg } = container
     const content = msg.content.split(' ').slice(1).join(' ')
     this.bot.engine.ipc.awaitResponse('evaluate', { content })
     .then(data => responder.format('code:js').send(data.map(d => {

@@ -15,7 +15,7 @@ class Reload extends Command {
     })
   }
 
-  handle ({ args }, responder) {
+  async handle ({ args }, responder) {
     this.bot.engine.ipc.awaitResponse('reload', { type: args.type, group: args.group })
     .then(data => responder.format('code:js').send(data.map(d => util.inspect(d)).join('\n')))
     .catch(err => responder.format('code:js').send(err))

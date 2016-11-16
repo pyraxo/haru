@@ -13,8 +13,8 @@
     "you have transferred {{amount}} credits to {{user}}'s account.\n",
     "__Updated balance__: {{afterAmount}}"
   ],
-  "invalidCode": "you have entered an invalid code. Your credits have **not** been transferred.",
-  "selfSenderError": "you can't send credits to yourself.",
-  "insufficientCredits": "you have insufficient ({{balance}}) credits.",
-  "botUserError": "you can't send credits to bots."
+  "invalidCode": "you have entered an invalid code! Your credits haven't been transferred.",
+  "selfSenderError": "you can't send credits to yourself!",
+  "insufficientCredits": "you have insufficient ({{balance}}) credits!",
+  "botUserError": "you can't send credits to bots!"
 }

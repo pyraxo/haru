@@ -5,5 +5,6 @@ module.exports = {
   search: '🔍',
   inbox: '📥',
   credits: '💳',
-  atm: '🏧'
+  atm: '🏧',
+  headphones: '🎧'
 }

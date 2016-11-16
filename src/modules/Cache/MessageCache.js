@@ -1,12 +1,11 @@
-const { Module, Collection } = require('../core')
+const { Module, Collection } = require('../../core')
 
 class MessageCache extends Module {
   constructor (...args) {
     super(...args, {
       name: 'messages',
       events: {
-        ready: 'cacheAll',
-        messageReactionAdd: 'checkReactions'
+        ready: 'cacheAll'
       }
     })
 
@@ -26,10 +25,6 @@ class MessageCache extends Module {
         this.cache.set(keys[idx].replace('messages:', ''), list)
       })
     }
-  }
-
-  checkReactions () {
-
   }
 }
 

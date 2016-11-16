@@ -3,15 +3,15 @@ const moment = require('moment')
 
 const { Emojis: emoji } = require('../util')
 const UsageManager = require('../managers/UsageManager')
+const Base = require('./Base')
 
-class Command {
+class Command extends Base {
   constructor (bot, options, ...args) {
+    super(bot)
     if (this.constructor === Command) {
       throw new Error('Cannot instantiate abstract Command')
     }
 
-    this.bot = bot
-    this.client = bot.client
     this.resolver = new UsageManager(bot)
     this._verify(options, ...args)
 
@@ -34,7 +34,6 @@ class Command {
     }
 
     this.timers = new Map()
-    this.i18n = bot.engine.i18n
   }
 
   _verify ({
@@ -105,13 +104,17 @@ class Command {
       return responder
     }
 
-    responder.upload = (file, name) => {
+    responder.upload = (file, name, content = '') => {
       let fileObj = { file, name }
       if ((!file || !name) && responder._file) {
         file = responder._file
         delete responder._file
       }
-      return this.client.createMessage(msg.channel.id, '', fileObj)
+      return msg.channel.createMessage(content, fileObj)
+    }
+
+    responder.embed = (embed, content = '', file = null) => {
+      return msg.channel.createMessage(content, file, embed)
     }
 
     responder.dialog = async (dialogs = [], options = {}) => {
@@ -190,12 +193,10 @@ class Command {
       command: container.trigger
     }).then((args = {}) => {
       container.args = args
-      try {
-        this.handle(container, responder)
-      } catch (err) {
-        logger.error(`Failed to run ${this.labels[0]}`)
+      this.handle(container, responder).catch(err => {
+        logger.error(`Rejection from ${this.labels[0]}`)
         logger.error(err)
-      }
+      })
     }).catch(err => {
       return responder.error(err.message || err, err)
     })
@@ -229,49 +230,7 @@ class Command {
     return true
   }
 
-  handle () { return true }
-
-  async send (channel, content, { file = null, lang = 'en', delay = 0, deleteDelay = 0, tags = {} } = {}) {
-    if (delay) {
-      await Promise.delay(delay)
-    }
-
-    if (Array.isArray(content)) content = content.join('\n')
-    content = this.i18n.parse(content, this.labels[0], lang, tags)
-    content = content.match(/(.|[\r\n]){1,2000}/g)
-
-    try {
-      if (!content || !content.length) throw new Error('Cannot send empty string')
-      let replies = await Promise.mapSeries(content, (c, idx) => {
-        return channel.createMessage(c, idx === 0 ? file : null).then(m => {
-          if (deleteDelay) setTimeout(() => m.delete(), deleteDelay)
-          return m
-        })
-      })
-      // TODO: resolve the array directly instead of checking if length is 1 then resolve first msg
-      return replies.length > 1 ? replies : replies[0]
-    } catch (err) {
-      logger.error(`Error sending message to ${channel.name} (${channel.id}) - ${err}`)
-    }
-  }
-
-  // Utility
-  parseNumber (number) {
-    if (typeof number === 'number') number = number.toString()
-    return number.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-  }
-
-  locateUser ({ msg, isPrivate }, query) {
-    query = query.toLowerCase()
-    if (isPrivate) return msg.author
-    const guild = msg.guild
-    const isInString = (str, query) => str === query || str.startsWith(query) || str.includes(query)
-    const member = guild.members.find(m => {
-      if (m.nick && isInString(m.nick.toLowerCase(), query)) return true
-      return isInString(m.user.username.toLowerCase(), query)
-    })
-    return member ? member.user : null
-  }
+  async handle () { return true }
 
   logError (err) {
     logger.error(`Error running ${this.labels[0]} command: ${err}`)

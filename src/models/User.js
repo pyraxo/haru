@@ -17,6 +17,9 @@ module.exports = function () {
       companions: array().default([])
     },
     cache: true,
-    expiry: 300 * 1000
+    expiry: 300 * 1000,
+    relations: {
+      hasMany: ['Companion', 'companions', 'id', 'userId']
+    }
   }
 }
