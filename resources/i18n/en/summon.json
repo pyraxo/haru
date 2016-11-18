@@ -6,7 +6,7 @@
   ],
   "errors": {
     "notChannel": "you are not in a voice channel!",
-    "alreadyBinded": "I am already bound to {{text}}!",
+    "alreadyBinded": "I am already bound to {{text}}! Use commands in that channel.",
     "noPerms": "I don't have the permissions to `connect` and/or `speak` in {{voice}}!",
     "error": "something bad happened! Please try again later."
   }

@@ -3,10 +3,10 @@ const moment = require('moment')
 const Collection = require('./Collection')
 
 class LocalCache extends Collection {
-  constructor (model, ttl = 3600 * 1000) {
+  constructor (model, ttl = 3600) {
     super()
 
-    this.ttl = ttl
+    this.ttl = ttl * 1000
     this.timers = new Collection()
 
     if (model) {
@@ -67,6 +67,11 @@ class LocalCache extends Collection {
     let oldValue = await this.fetch(key)
     this.store(key, newValue)
     return oldValue
+  }
+
+  clearAll () {
+    this.clear()
+    this.timers.clear()
   }
 
   clear (key) {

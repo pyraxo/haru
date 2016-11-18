@@ -46,7 +46,7 @@ class Base {
     }
 
     if (Array.isArray(content)) content = content.join('\n')
-    content = this.i18n.parse(content, this.labels[0], lang, tags)
+    content = this.i18n.parse(content, this.labels ? this.labels[0] : this.name.split(':')[0] || null, lang, tags)
     content = content.match(/(.|[\r\n]){1,2000}/g)
 
     try {

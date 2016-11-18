@@ -12,6 +12,7 @@ require('dotenv-safe').config({
   path: path.join(__dirname, '.env'),
   allowEmptyValues: true
 })
+require('moment-duration-format')
 
 const processShards = parseInt(process.env.CLIENT_SHARDS_PER_PROCESS, 10)
 const firstShardID = parseInt(process.env.BASE_SHARD_ID, 10) * processShards

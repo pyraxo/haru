@@ -1,0 +1,11 @@
+{
+  "queued": "Queued",
+  "errors": {
+    "notInChannel": "bring me into a voice channel with {{command}} first!",
+    "emptyQueue": [
+      "there is nothing in the queue!\n",
+      "Use the {{play}} command to queue a song!"
+    ],
+    "tooLong": "that song is too long! Queue one shorter than 90 minutes."
+  }
+}

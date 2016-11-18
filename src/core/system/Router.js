@@ -1,4 +1,3 @@
-const logger = require('winston')
 const { Collection } = require('../util')
 
 class Router extends Collection {
