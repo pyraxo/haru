@@ -1,7 +1,7 @@
 {
   "apps": [{
     "name": "haru",
-    "script": "build/index.js",
+    "script": "index.js",
     "watch": false
   }]
 }
