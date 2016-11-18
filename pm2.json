@@ -2,6 +2,7 @@
   "apps": [{
     "name": "haru",
     "script": "index.js",
-    "watch": false
+    "watch": false,
+    "node_args": "--harmony_async_await"
   }]
 }
