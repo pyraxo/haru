@@ -47,15 +47,11 @@ class Cleverbot extends Module {
     this.cookies = {}
   }
 
-  async message (msg) {
-    if (!msg.mentions.find(u => u.id === this.client.user.id)) return
-    const trigger = msg.content.split(' ')[0]
-    if (!trigger.match(new RegExp('<@!*' + this.client.user.id + '>'))) return
-
-    let response = await this.write(msg.cleanContent.split(' ').slice(1).join(' '))
+  async respond (message, channel) {
+    let response = await this.write(message)
     response = this.processUnicode(response.message)
     if (!response) return
-    this.send(msg.channel, `💬  |  ${entities.decodeHTML(response)}`)
+    this.send(channel, `💬  |  ${entities.decodeHTML(response)}`)
   }
 
   processUnicode (text) {
