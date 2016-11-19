@@ -1,6 +1,5 @@
 const crypto = require('crypto')
 const http = require('http')
-const logger = require('winston')
 const entities = require('entities')
 
 const { Module } = require('../core')
@@ -52,9 +51,11 @@ class Cleverbot extends Module {
     if (!msg.mentions.find(u => u.id === this.client.user.id)) return
     const trigger = msg.content.split(' ')[0]
     if (!trigger.match(new RegExp('<@!*' + this.client.user.id + '>'))) return
-    const response = this.processUnicode((await this.write(msg.content.substr(trigger.length + 1))).message)
-    const channel = await (msg.guild ? Promise.resolve(msg.channel) : this.client.getDMChannel(msg.author.id))
-    this.send(channel, `💬  |  ${entities.decodeHTML(response.message)}`)
+
+    let response = await this.write(msg.cleanContent.split(' ').slice(1).join(' '))
+    response = this.processUnicode(response.message)
+    if (!response) return
+    this.send(msg.channel, `💬  |  ${entities.decodeHTML(response)}`)
   }
 
   processUnicode (text) {
@@ -108,7 +109,7 @@ class Cleverbot extends Module {
   write (message) {
     let body = this.params
     body.stimulus = message
-    body.icognocheck = this.digest(this.encodeParams(body).substr(9, 35))
+    body.icognocheck = this.digest(this.encodeParams(body).substring(9, 35))
 
     let cookieArr = []
     for (const key in this.cookies) {
