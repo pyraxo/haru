@@ -86,8 +86,8 @@ class Play extends Command {
 
     try {
       const result = await searcher.searchYT(msg, 'video', text, 10)
-      if (!result) {
-        return responder.error('{{noResults}}', { tags: { query: `**${text}**` } })
+      if (!result || !result.items.length) {
+        return responder.error('{{errors.noResults}}', { tags: { query: `**${text}**` } })
       }
       const info = await music.add(msg.guild.id, voiceChannel, `https://www.youtube.com/watch?v=${result.items[0].id.videoId}`)
       const length = info.length ? `(${moment.duration(info.length, 'seconds').format('h[h] m[m] s[s]')}) ` : ''

@@ -6,16 +6,11 @@ const { Module } = require('../../core')
 class Player extends Module {
   constructor (...args) {
     super(...args, {
-      name: 'music:player',
-      events: {
-        ready: 'start'
-      }
+      name: 'music:player'
     })
-
-    setTimeout(() => this.start(), 1000)
   }
 
-  start () {
+  init () {
     this.manager = this.bot.engine.modules.get('music')
     this.queue = this.bot.engine.modules.get('music:queue')
   }

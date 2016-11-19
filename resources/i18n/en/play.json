@@ -6,6 +6,7 @@
       "there is nothing in the queue!\n",
       "Use the {{play}} command to queue a song!"
     ],
-    "tooLong": "that song is too long! Queue one shorter than 90 minutes."
+    "tooLong": "that song is too long! Queue one shorter than 90 minutes.",
+    "noResults": "the query {{query}} gave no results."
   }
 }

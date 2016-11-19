@@ -4,7 +4,8 @@ const path = require('path')
 const padEnd = (v, n = 0, c = ' ') => String(v).length >= n ? '' + v : String(v) + String(c).repeat(n - String(v).length)
 const padStart = (v, n = 0, c = ' ') => String(v).length >= n ? '' + v : (String(c).repeat(n) + v).slice(-n)
 
-async function readdirRecursive (dir) {
+async function readdirRecursive (...paths) {
+  const dir = path.join(...paths)
   let list = []
   let files = fs.readdirSync(dir)
   let dirs

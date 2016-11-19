@@ -1,6 +1,6 @@
 const chalk = require('chalk')
 const logger = require('winston')
-const { Module } = require('../core')
+const { Module } = require('../../core')
 
 class Guildmaster extends Module {
   constructor (...args) {

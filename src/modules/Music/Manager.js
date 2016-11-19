@@ -7,20 +7,15 @@ const { Module } = require('../../core')
 class Music extends Module {
   constructor (...args) {
     super(...args, {
-      name: 'music',
-      events: {
-        ready: 'start'
-      }
+      name: 'music'
     })
 
     this.connections = new Map()
     this.volume = new Map()
     this.redis = this.bot.engine.cache.client
-
-    setTimeout(() => this.start(), 1000)
   }
 
-  start () {
+  init () {
     this.player = this.bot.engine.modules.get('music:player')
     this.queue = this.bot.engine.modules.get('music:queue')
   }

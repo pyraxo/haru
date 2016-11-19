@@ -90,11 +90,11 @@ class Engine extends EventEmitter {
     this.emit('loaded:commands', count)
   }
 
-  loadMiddleware () {
+  loadMiddleware (group = '.') {
     this.bridge.destroy()
 
     let count = 0
-    readdirRecursive(this.paths.middleware).then(mw => {
+    readdirRecursive(this.paths.middleware, group).then(mw => {
       mw = mw.map(mw => require(mw))
       mw = Object.keys(mw).sort((a, b) => mw[a].priority - mw[b].priority).map(m => mw[m])
       mw.forEach(m => {
@@ -105,23 +105,22 @@ class Engine extends EventEmitter {
     })
   }
 
-  loadModules () {
+  loadModules (group = '.') {
     let count = 0
-    readdirRecursive(this.paths.modules).then(modules => {
+    readdirRecursive(this.paths.modules, group).then(modules => {
       modules = modules.map(m => require(m))
       for (let module in modules) {
         this.modules.attach(modules, modules[module])
         count++
       }
-      this.modules.setup()
-
+      this.modules.initAll()
       this.emit('loaded:modules', count)
     })
   }
 
-  loadIpc () {
+  loadIpc (group = '.') {
     let count = 0
-    readdirRecursive(this.paths.ipc).then(processes => {
+    readdirRecursive(this.paths.ipc, group).then(processes => {
       processes = processes.map(i => require(i))
       for (let proc in processes) {
         this.ipc.register(processes[proc])
@@ -145,7 +144,7 @@ class Engine extends EventEmitter {
       delete require.cache[require.resolve(filepath)]
       count++
     })
-    this.emit(`load:${type}`, count)
+    this.emit(`reload:${type}`, count)
     return count
   }
 }
