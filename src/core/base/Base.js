@@ -51,12 +51,12 @@ class Base {
 
     try {
       if (!content || !content.length) {
-        let msg = await channel.createMessage('', file, embed)
+        let msg = await channel.createMessage({ embed, content: '' }, file)
         if (deleteDelay) setTimeout(() => msg.delete(), deleteDelay)
         return msg
       }
       let replies = await Promise.mapSeries(content, (c, idx) => {
-        return channel.createMessage(c, !idx ? file : null, !idx ? embed : null).then(msg => {
+        return channel.createMessage(!idx ? { embed, content: c } : c, !idx ? file : null).then(msg => {
           if (deleteDelay) setTimeout(() => msg.delete(), deleteDelay)
           return msg
         })
@@ -65,6 +65,10 @@ class Base {
     } catch (err) {
       logger.error(`Error sending message to ${channel.name} (${channel.id}) - ${err}`)
     }
+  }
+
+  hexToInt (colour) {
+    return parseInt(colour.replace('#', ''), 16)
   }
 }
 

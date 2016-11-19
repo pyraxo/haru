@@ -17,14 +17,19 @@ class Eval extends Command {
     try {
       resp = eval(msg.content.substr(settings.prefix.length).split(' ').slice(1).join(' '))
     } catch (err) {
-      resp = `${err.message}\n\n${err.stack}`
+      resp = err
     }
-    if (Array.isArray(resp) || typeof resp === 'object') {
-      resp = util.inspect(resp)
-    }
-    responder.format('code:js').send(
-      resp.length > 200 ? resp.substr(0, 200) + '...' : resp
-    )
+
+    const success = !(resp instanceof Error)
+    const isPromise = (resp instanceof Promise)
+
+    const message = await responder.embed(this.createEmbed(isPromise ? null : success, isPromise, resp.message || resp)).send()
+
+    if (!isPromise) return
+
+    resp
+    .then(result => message.edit({ content: '', embed: this.createEmbed(true, true, result) }))
+    .catch(err => message.edit({ content: '', embed: this.createEmbed(false, true, err) }))
   }
 }
 

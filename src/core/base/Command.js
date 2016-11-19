@@ -33,6 +33,16 @@ class Command extends Base {
       emoji: (res, type) => `${emoji[type] || emoji.success}  |  ${res}`
     }
 
+    this.colours = {
+      blue: { hex: '#117ea6' },
+      green: { hex: '#1f8b4c' },
+      red: { hex: '#be2626' }
+    }
+
+    for (const colour in this.colours) {
+      this.colours[colour].int = this.hexToInt(this.colours[colour].hex)
+    }
+
     this.timers = new Map()
   }
 
@@ -64,7 +74,7 @@ class Command extends Base {
     this.resolver.load(usage)
   }
 
-  _createResponder ({ msg, rawArgs, settings, client }) {
+  createResponder ({ msg, rawArgs, settings, client }) {
     let responder = (...args) => responder.send(...args)
 
     for (let method in this.responseMethods) {
@@ -81,9 +91,12 @@ class Command extends Base {
           }
         }
         if (responder._file) options.file = responder._file
+        if (responder._embed) options.embed = responder._embed
 
         delete responder._formats
         delete responder._file
+        delete responder._embed
+
         let prom = (options.DM ? this.client.getDMChannel(msg.author.id) : Promise.resolve(msg.channel))
         .then(channel => this.send(channel, response, options))
 
@@ -113,8 +126,9 @@ class Command extends Base {
       return msg.channel.createMessage(content, fileObj)
     }
 
-    responder.embed = (embed, content = '', file = null) => {
-      return msg.channel.createMessage(content, file, embed)
+    responder.embed = (embed) => {
+      responder._embed = embed
+      return responder
     }
 
     responder.dialog = async (dialogs = [], options = {}) => {
@@ -183,8 +197,31 @@ class Command extends Base {
     return responder
   }
 
+  createEmbed (success = true, isPromise = false, result) {
+    let embed = {
+      description: String(result.content || result.message || result)
+    }
+    let title
+    let color
+    if (success) {
+      title = isPromise ? 'Promise resolved' : 'Success'
+      color = this.colours.green.int
+    } else {
+      if (success === null && isPromise) {
+        title = 'Promise resolving'
+        color = this.colours.blue.int
+      } else {
+        title = isPromise ? 'Promise rejected' : 'Error'
+        color = this.colours.red.int
+      }
+    }
+    embed.title = title
+    embed.color = color
+    return embed
+  }
+
   _execute (container) {
-    const responder = this._createResponder(container)
+    const responder = this.createResponder(container)
 
     if (!this._execCheck(container, responder)) return
 
