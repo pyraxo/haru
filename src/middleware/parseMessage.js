@@ -1,11 +1,14 @@
 module.exports = {
   priority: 6,
   process: async container => {
-    const { settings, msg, commander } = container
+    const { settings, msg, commander, modules } = container
     const { prefix } = settings
     const defPrefix = process.env.CLIENT_PREFIX
 
     if (!msg.content.startsWith(prefix) && !msg.content.startsWith(defPrefix)) {
+      const cleverbot = modules.get('cleverbot')
+      if (!cleverbot) return
+      await cleverbot.message(msg)
       return
     }
 
