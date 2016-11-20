@@ -1,4 +1,3 @@
-const util = require('util')
 const { Command } = require('../../core')
 
 class Eval extends Command {
@@ -13,7 +12,7 @@ class Eval extends Command {
 
   createEmbed (success = true, isPromise = false, result) {
     let embed = {
-      description: String(result.content || result.message || result)
+      description: String(result ? result.content || result.message || result : 'null')
     }
     let title
     let color

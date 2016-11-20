@@ -10,8 +10,7 @@ class Info extends Command {
 
   async handle ({ msg, settings }, responder) {
     const description = this.i18n.get('info.info', settings.lang)
-    return responder('', { embed: {
-      title: 'About Me!',
+    return responder.format(['emoji:info', 'bold']).send('Please ensure you have embeds enabled!', { embed: {
       description,
       color: 14892182,
       url: 'https://pyraxo.moe/haru',

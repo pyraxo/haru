@@ -3,7 +3,6 @@ module.exports = function () {
   const string = type.string
   const number = type.number
   const bool = type.boolean
-  const array = type.array
 
   return {
     tableName: 'User',
@@ -13,13 +12,12 @@ module.exports = function () {
       exp: number().default(0),
       deleted: bool().default(false),
       title: string().default('Commoner'),
-      description: string().default('A simple wandering soul'),
-      companions: array().default([])
+      description: string().default('A simple wandering soul')
     },
     cache: true,
     expiry: 300 * 1000,
     relations: {
-      hasMany: ['Companion', 'companions', 'id', 'userId']
+      hasOne: ['Companion', 'companion', 'id', 'userId']
     }
   }
 }

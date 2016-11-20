@@ -122,6 +122,7 @@ class Command extends Base {
     }
 
     responder.dialog = async (dialogs = [], options = {}) => {
+      const { tries = 10, time = 60, matches = 10, filter } = options
       options.cancel = options.cancel || 'cancel'
       const args = {}
       let cancelled = false
@@ -132,14 +133,19 @@ class Command extends Base {
 
         if (Array.isArray(prompt) && prompt.length) prompt[0] = `**${prompt[0]}**`
         let p1 = await responder(prompt, options)
-        const collector = this.bot.engine.bridge.collect(msg.channel.id, ans => (
-          ans.author.id === msg.author.id
-        ), options)
+        const collector = this.bot.engine.bridge.collect({
+          channel: msg.channel.id,
+          author: msg.author.id,
+          tries,
+          time,
+          matches,
+          filter
+        })
 
         const awaitMessage = async (msg) => {
           let ans
           try {
-            ans = await collector.next
+            ans = await collector.next()
             if (ans.content.toLowerCase() === options.cancel) return Promise.reject()
             try {
               return await input.resolve(ans, [ans.cleanContent])

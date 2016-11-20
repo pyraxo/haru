@@ -17,7 +17,7 @@ module.exports = function () {
       })
     },
     relations: {
-      belongsTo: ['User', 'companions', 'id', 'userId']
+      belongsTo: ['User', 'companion', 'id', 'userId']
     }
   }
 }

@@ -28,7 +28,6 @@ class LocalCache extends Collection {
     let value = this.get(key)
     if (typeof value === 'undefined' && this.model) {
       try {
-        if (!this.model) return
         value = await this.model.get(key).run()
       } catch (err) {
         if (err.name === 'DocumentNotFoundError') {
@@ -45,7 +44,7 @@ class LocalCache extends Collection {
   async fetchJoin (key, options) {
     let value = await this.fetch(key)
     for (let type in options) {
-      if (typeof value[type] === 'undefined') {
+      if (options[type] === true && typeof value[type] === 'undefined') {
         try {
           if (!this.model) return
           value = await this.model.get(key).getJoin(options).run()
