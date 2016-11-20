@@ -9,6 +9,20 @@ class Base {
     this.bot = bot
     this.client = bot.client
     this.i18n = bot.engine.i18n
+
+    this.colours = {
+      blue: { hex: '#117ea6' },
+      green: { hex: '#1f8b4c' },
+      red: { hex: '#be2626' }
+    }
+
+    for (const colour in this.colours) {
+      this.colours[colour].int = this.hexToInt(this.colours[colour].hex)
+    }
+  }
+
+  getColour (colour) {
+    return (this.colours[colour] || this.colours.blue).int
   }
 
   parseNumber (number) {

@@ -33,16 +33,6 @@ class Command extends Base {
       emoji: (res, type) => `${emoji[type] || emoji.success}  |  ${res}`
     }
 
-    this.colours = {
-      blue: { hex: '#117ea6' },
-      green: { hex: '#1f8b4c' },
-      red: { hex: '#be2626' }
-    }
-
-    for (const colour in this.colours) {
-      this.colours[colour].int = this.hexToInt(this.colours[colour].hex)
-    }
-
     this.timers = new Map()
   }
 
