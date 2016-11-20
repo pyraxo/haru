@@ -197,29 +197,6 @@ class Command extends Base {
     return responder
   }
 
-  createEmbed (success = true, isPromise = false, result) {
-    let embed = {
-      description: String(result.content || result.message || result)
-    }
-    let title
-    let color
-    if (success) {
-      title = isPromise ? 'Promise resolved' : 'Success'
-      color = this.colours.green.int
-    } else {
-      if (success === null && isPromise) {
-        title = 'Promise resolving'
-        color = this.colours.blue.int
-      } else {
-        title = isPromise ? 'Promise rejected' : 'Error'
-        color = this.colours.red.int
-      }
-    }
-    embed.title = title
-    embed.color = color
-    return embed
-  }
-
   _execute (container) {
     const responder = this.createResponder(container)
 

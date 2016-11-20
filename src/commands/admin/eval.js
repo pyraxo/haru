@@ -11,6 +11,29 @@ class Eval extends Command {
     })
   }
 
+  createEmbed (success = true, isPromise = false, result) {
+    let embed = {
+      description: String(result.content || result.message || result)
+    }
+    let title
+    let color
+    if (success) {
+      title = isPromise ? 'Promise resolved' : 'Success'
+      color = this.colours.green.int
+    } else {
+      if (success === null && isPromise) {
+        title = 'Promise resolving'
+        color = this.colours.blue.int
+      } else {
+        title = isPromise ? 'Promise rejected' : 'Error'
+        color = this.colours.red.int
+      }
+    }
+    embed.title = title
+    embed.color = color
+    return embed
+  }
+
   async handle (container, responder) {
     const { msg, settings } = container
     let resp
