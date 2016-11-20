@@ -1,7 +1,15 @@
 {
   "help": "Displays info on commands",
+  "info": "Information about me",
   "credits": "Currency system",
   "wage": "Claim your credits every 8 hours",
   "hate": "I-I hate you!",
-  "love": "I-I love you!"
+  "love": "I-I love you!",
+  "prefix": "Allows moderators to set a guild's prefix",
+  "play": "Streams some music",
+  "skip": "Skips the current music track",
+  "stop": "Stops currently playing music",
+  "summon": "Summons me to a voice channel",
+  "companions": "Animal companion system",
+  "battle": "Fight other users' companions"
 }
