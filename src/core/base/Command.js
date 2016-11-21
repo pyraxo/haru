@@ -1,5 +1,6 @@
 const logger = require('winston')
 const moment = require('moment')
+const emojis = require('node-emoji')
 
 const { Emojis: emoji } = require('../util')
 const UsageManager = require('../managers/UsageManager')
@@ -30,7 +31,7 @@ class Command extends Base {
       strikethrough: (res) => `~~${res}~~`,
       inlineCode: (res) => `\`${res}\``,
       code: (res, type = '') => `\`\`\`${type}\n${res}\n\`\`\``,
-      emoji: (res, type) => `${emoji[type] || emoji.success}  |  ${res}`
+      emoji: (res, type) => `${this.i18n.locate(type, emoji) || emojis.get(type) || emoji.success}  |  ${res}`
     }
 
     this.timers = new Map()
@@ -158,12 +159,7 @@ class Command extends Base {
           } catch (o) {
             return Promise.reject(o)
           } finally {
-            if (msg) msg.delete()
-            if (ans) {
-              if (ans.channel.permissionsOf(client.user.id).has('manageMessages')) {
-                ans.delete()
-              }
-            }
+            this.deleteMessages([msg, ans])
           }
         }
 

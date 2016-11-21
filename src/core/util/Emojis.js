@@ -1,10 +1,17 @@
 module.exports = {
+  // Common
   success: '✅',
   fail: '❎',
   info: 'ℹ',
   search: '🔍',
   inbox: '📥',
+
+  // Currency
   credits: '💳',
-  atm: '🏧',
-  headphones: '🎧'
+
+  // Music
+  headphones: '🎧',
+  skip: '⏩',
+  play: '▶',
+  stop: '⏹'
 }

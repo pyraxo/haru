@@ -49,19 +49,19 @@ class Player extends Module {
     })
 
     conn.once('end', async () => {
-      this.send(textChannel, `⏹  |  {{finishedPlaying}} **${mediaInfo.title}** `)
+      this.send(textChannel, `:stop:  |  {{finishedPlaying}} **${mediaInfo.title}** `)
       if (channel.voiceMembers.size === 1 && channel.voiceMembers.has(this.client.user.id)) {
         return this.stop(channel, true)
       }
       if (!(await this.queue.getLength(channel.guild.id)) || !(await this.queue.shift(channel.guild.id))) {
-        this.send(textChannel, 'ℹ  |  {{queueFinish}}')
+        this.send(textChannel, ':info:  |  {{queueFinish}}')
         return this.stop(channel)
       }
       return this.manager.play(channel)
     })
 
     return this.send(textChannel, [
-      `▶  |  {{nowPlaying}}: **${mediaInfo.title}** ` +
+      `:play:  |  {{nowPlaying}}: **${mediaInfo.title}** ` +
       (mediaInfo.length ? `(${moment.duration(mediaInfo.length, 'seconds').format('h[h] m[m] s[s]')})` : ''),
       `<${mediaInfo.url}>`
     ])
@@ -91,11 +91,11 @@ class Player extends Module {
     let result = await this.queue.shift(guildID)
     const textChannel = this.manager.getBoundChannel(guildID)
     if (!textChannel) return
-    this.send(textChannel, `⏩  |  {{skipping}} **${result.title}**`)
+    this.send(textChannel, `:skip:  |  {{skipping}} **${result.title}**`)
 
     const length = await this.queue.getLength(channel.guild.id)
     if (!length) {
-      this.send(textChannel, 'ℹ  |  {{queueFinish}}')
+      this.send(textChannel, ':info:  |  {{queueFinish}}')
       return
     }
     return this.manager.play(channel)

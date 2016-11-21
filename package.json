@@ -33,6 +33,7 @@
     "moment": "^2.13.0",
     "moment-duration-format": "^1.3.0",
     "moment-timezone": "^0.5.5",
+    "node-emoji": "^1.4.1",
     "node-opus": "^0.2.4",
     "redis": "^2.6.1",
     "require-all": "^2.0.0",

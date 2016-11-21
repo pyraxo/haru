@@ -14,10 +14,10 @@ module.exports = function () {
       stats: object().schema({
         wins: number().default(0),
         losses: number().default(0)
-      })
+      }).default({})
     },
     relations: {
-      belongsTo: ['User', 'companion', 'id', 'userId']
+      belongsTo: ['User', 'companion', 'id', 'id']
     }
   }
 }

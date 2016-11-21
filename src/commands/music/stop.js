@@ -11,19 +11,19 @@ class Stop extends Command {
   }
 
   async handle ({ msg, settings, client }, responder) {
-    const manager = this.bot.engine.modules.get('music')
-    if (!manager) return
-    if (manager.getBoundChannel(msg.guild.id) !== msg.channel.id) {
+    const music = this.bot.engine.modules.get('music')
+    if (!music) return
+    if (music.getBoundChannel(msg.guild.id) !== msg.channel.id) {
       return
     }
-    const conn = manager.getConnection(msg.channel)
+    const conn = music.getConnection(msg.channel)
     if (!conn) {
       return responder.error(this.i18n.shift(this.i18n.get('play.errors.notInChannel', settings.lang), {
         command: `**\`${settings.prefix}summon\`**`
       }))
     }
     const voice = client.getChannel(conn.channelID)
-    await manager.player.stop(voice, true)
+    await music.player.stop(voice, true)
     responder.format('emoji:headphones').send('{{success}}', {
       tags: {
         voice: `**${voice.name}**`,

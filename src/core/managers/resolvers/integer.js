@@ -3,19 +3,13 @@ module.exports = {
   resolve: (content, { min = 0, max = Infinity }) => {
     const num = parseInt(content, 10)
     if (isNaN(num)) {
-      return Promise.reject({ message: '{{%resolver.int.NOT_INT}}' })
+      return Promise.reject('int.NOT_INT')
     }
     if (num > max) {
-      return Promise.reject({
-        message: '{{%resolver.int.MAX}}',
-        tags: { max }
-      })
+      return Promise.reject('int.MAX')
     }
     if (num < min) {
-      return Promise.reject({
-        message: '{{%resolver.int.MIN}}',
-        tags: { min }
-      })
+      return Promise.reject('int.MIN')
     }
     return Promise.resolve(num)
   }

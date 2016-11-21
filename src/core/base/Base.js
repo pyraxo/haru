@@ -1,4 +1,6 @@
+const emoji = require('node-emoji')
 const logger = require('winston')
+const { Emojis } = require('../util')
 
 class Base {
   constructor (bot) {
@@ -13,7 +15,11 @@ class Base {
     this.colours = {
       blue: { hex: '#117ea6' },
       green: { hex: '#1f8b4c' },
-      red: { hex: '#be2626' }
+      red: { hex: '#be2626' },
+      pink: { hex: '#E33C96' },
+      gold: { hex: '#d5a500' },
+      silver: { hex: '#b7b7b7' },
+      bronze: { hex: '#a17419' }
     }
 
     for (const colour in this.colours) {
@@ -60,7 +66,10 @@ class Base {
     }
 
     if (Array.isArray(content)) content = content.join('\n')
-    content = this.i18n.parse(content, this.labels ? this.labels[0] : this.name.split(':')[0] || null, lang, tags)
+    content = this.i18n.parse(content, this.name ? this.name.split(':')[0] : (this.labels ? this.labels[0] : 'common') || null, lang, tags)
+    content = content.replace(/:(\S+):/gi, (matched, name) => {
+      return this.i18n.locate(name, Emojis) || emoji.get(name) || matched
+    })
     content = content.match(/(.|[\r\n]){1,2000}/g)
 
     try {
@@ -78,6 +87,15 @@ class Base {
       return replies[0]
     } catch (err) {
       logger.error(`Error sending message to ${channel.name} (${channel.id}) - ${err}`)
+    }
+  }
+
+  deleteMessages (msgs) {
+    const id = this.client.user.id
+    for (let msg of msgs.filter(m => m)) {
+      if (msg.author.id === id || msg.channel.permissionsOf(id).has('manageMessages')) {
+        msg.delete()
+      }
     }
   }
 

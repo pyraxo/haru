@@ -10,12 +10,13 @@ class MultiCommand extends Command {
     this.userStates = new Map()
   }
 
-  registerSubcommand (type) {
+  registerSubcommand (type, localeKey) {
     if (!type || typeof this.types === 'undefined') return
     let resolver = this.resolvers[type]
     if (typeof resolver === 'undefined') throw new Error(`${type} is an invalid type`)
     this.resolver = resolver.resolver
     this.type = resolver.name
+    this.name = localeKey
   }
 
   registerSubcommands (types, defaultAction) {

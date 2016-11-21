@@ -2,7 +2,7 @@ const crypto = require('crypto')
 const http = require('http')
 const entities = require('entities')
 
-const { Module } = require('../core')
+const { Module } = require('../../core')
 
 class Cleverbot extends Module {
   constructor (...args) {

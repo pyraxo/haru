@@ -17,11 +17,12 @@
     "CORRECT_USAGE": "Correct usage",
     "NO_QUERY": "No query supplied",
     "NO_ARG": "{{arg}} not found",
+    "NO_END_QUOTE": "Missing end quote",
     "string": {
       "NOT_STRING": "{{arg}} must be a string",
       "MAX": "{{arg}} length cannot be more than {{max}}",
       "MIN": "{{arg}} length cannot be less than {{min}}",
-      "ONE_OF": "{arg} must be one of the following:"
+      "ONE_OF": "{{arg}} must be one of the following"
     },
     "list": {
       "MAX": "{{arg}} length cannot contain more than {{max}} items",

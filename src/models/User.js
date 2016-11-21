@@ -17,7 +17,7 @@ module.exports = function () {
     cache: true,
     expiry: 300 * 1000,
     relations: {
-      hasOne: ['Companion', 'companion', 'id', 'userId']
+      hasOne: ['Companion', 'companion', 'id', 'id']
     }
   }
 }

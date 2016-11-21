@@ -1,0 +1,20 @@
+{
+  "noPet": "you don't own a companion yet! Use {{command}} to purchase one!",
+  "ownedPet": "you already own a companion!",
+  "cannotAfford": "you need {{amount}} credits but only have {{balance}}!",
+  "intro": "Choose a starter companion, {{user}}!",
+  "dialog": [
+    "**Companion Purchase**\n",
+    "{{author}}, you have selected {{animal}} as your companion.",
+    "Are you certain you'd like to purchase it for {{amount}} credits?\n",
+    "To confirm, please write {{code}}, or anything else to exit."
+  ],
+  "invalidCode": "you have entered an invalid code! The transaction was cancelled.",
+  "error": "an error has occurred! The transaction was cancelled. Try again later.",
+  "result": [
+    "**Companion Purchased**\n",
+    "{{author}}, you have successfully purchased {{animal}} as your companion.",
+    "__Current Balance__: {{balance}} credits\n",
+    "You may rename your companion with the {{command}} command."
+  ]
+}

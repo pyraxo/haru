@@ -11,15 +11,15 @@ class Summon extends Command {
   }
 
   async handle ({ msg, settings, client }, responder) {
-    const manager = this.bot.engine.modules.get('music')
-    if (!manager) return
+    const music = this.bot.engine.modules.get('music')
+    if (!music) return
     const member = msg.member
     const channel = member.voiceState.channelID
     if (channel === null) {
       responder.error('{{notInVoice}}')
       return
     }
-    manager.connect(channel, msg.channel).then(conn => {
+    music.connect(channel, msg.channel).then(conn => {
       responder.format('emoji:headphones').send('{{success}}', {
         tags: {
           voice: `**${msg.guild.channels.find(c => c.id === channel).name}**`,
@@ -34,7 +34,7 @@ class Summon extends Command {
       }
       responder.error(`{{errors.${err}}}`, {
         tags: {
-          text: msg.guild.channels.get(manager.getBoundChannel(msg.guild.id)).mention,
+          text: msg.guild.channels.get(music.getBoundChannel(msg.guild.id)).mention,
           voice: `**${msg.guild.channels.find(c => c.id === channel).name}**`
         }
       })

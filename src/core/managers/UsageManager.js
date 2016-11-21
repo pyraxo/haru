@@ -33,36 +33,32 @@ class UsageManager {
     try {
       return await resolver.resolve(content, arg, msg, this.bot)
     } catch (err) {
-      let tags = err.tags || {}
-      tags.arg = `**\`${arg.displayName || 'argument'}\`**`
-      return Promise.reject({
-        message: err.message,
-        tags
-      })
+      arg.arg = `**\`${arg.displayName || 'argument'}\`**`
+      return Promise.reject({ message: err.message ? err.message : `{{%resolver.${err}}}`, tags: arg })
     }
   }
 
-  async resolve (message, rawArgs, data = {}) {
-    if (!this.usage.length) return {}
+  resolve (message, rawArgs, data = {}) {
+    if (!this.usage.length) return Promise.resolve()
 
     const argsCount = rawArgs.length
     const requiredArgs = this.minArgs
     const optionalArgs = argsCount - requiredArgs
 
     if (argsCount < requiredArgs) {
-      let err = {
-        message: '{{%resolver.INSUFFICIENT_ARGS}}',
+      let msg = '{{%resolver.INSUFFICIENT_ARGS}}'
+      if (data.prefix && data.command) {
+        msg += `\n**{{%resolver.CORRECT_USAGE}}**: \`${data.prefix}${data.command} ${(this.usage.length
+        ? this.usage.map(arg => arg.optional ? `[${arg.displayName}]` : `<${arg.name}>`).join(' ')
+        : '')}\``
+      }
+      return Promise.reject({
+        message: msg,
         tags: {
           requiredArgs: `**${requiredArgs}**`,
           argsCount: `**${argsCount}**.`
         }
-      }
-      if (data.prefix && data.command) {
-        err.message += `\n**{{%resolver.CORRECT_USAGE}}**: \`${data.prefix}${data.command} ${(this.usage.length
-        ? this.usage.map(arg => arg.optional ? `[${arg.displayName}]` : `<${arg.name}>`).join(' ')
-        : '')}\``
-      }
-      throw err
+      })
     }
 
     let args = {}
@@ -86,7 +82,7 @@ class UsageManager {
             rawArg = rawArgs.slice(idx, endQuote + 1).join(' ').replace(/"/g, '')
             idx = endQuote
           } else {
-            throw new RangeError('Missing end quote')
+            return Promise.reject('{{%resolver.NO_END_QUOTE}}')
           }
         }
       }

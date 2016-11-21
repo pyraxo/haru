@@ -10,6 +10,6 @@
   "skip": "Skips the current music track",
   "stop": "Stops currently playing music",
   "summon": "Summons me to a voice channel",
-  "companions": "Animal companion system",
+  "companion": "Animal companion system",
   "battle": "Fight other users' companions"
 }

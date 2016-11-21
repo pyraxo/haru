@@ -1,6 +1,6 @@
 const { Module } = require('../../core')
 
-class PetBattles extends Module {
+class Battles extends Module {
   constructor (...args) {
     super(...args, {
       name: 'companions.battles',
@@ -9,4 +9,4 @@ class PetBattles extends Module {
   }
 }
 
-module.exports = PetBattles
+module.exports = Battles

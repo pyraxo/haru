@@ -3,22 +3,16 @@ module.exports = {
   resolve: (content, { choices = [], categories = [], max = Infinity, min = 0, optional = false }) => {
     if (typeof content === 'undefined') {
       if (!optional) {
-        return Promise.reject({ message: '{{%resolver.string.NOT_STRING}}' })
+        return Promise.reject('string.NOT_STRING')
       }
       return Promise.resolve(content)
     }
     const num = content.length
     if (num > max) {
-      return Promise.reject({
-        message: '{{%resolver.string.MAX}}',
-        tags: { max }
-      })
+      return Promise.reject('string.MAX')
     }
     if (num < min) {
-      return Promise.reject({
-        message: '{{%resolver.list.MIN}}',
-        tags: { min }
-      })
+      return Promise.reject('string.MIN')
     }
     if (choices.length && !choices.includes(content)) {
       return Promise.reject({

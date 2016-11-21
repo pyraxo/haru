@@ -4,36 +4,22 @@ module.exports = {
     const list = content.split(separator)
     const num = list.length
     if (num > max) {
-      return Promise.reject({
-        message: '{{%resolver.list.MAX}}',
-        tags: { max }
-      })
+      return Promise.reject('list.MAX')
     }
     if (num < min) {
-      return Promise.reject({
-        message: '{{%resolver.list.MIN}}',
-        tags: { min }
-      })
+      return Promise.reject('list.MIN')
     }
 
     const itemLength = list.map(item => item.length)
     if (Math.max(...itemLength) > maxLength) {
-      return Promise.reject({
-        message: '{{%resolver.list.MAX_LENGTH}}',
-        tags: { maxLength }
-      })
+      return Promise.reject('list.MAX_LENGTH')
     }
     if (Math.min(...itemLength) < minLength) {
-      return Promise.reject({
-        message: '{{%resolver.list.MIN_LENGTH}}',
-        tags: { minLength }
-      })
+      return Promise.reject('list.MAX_LENGTH')
     }
 
     if (unique && new Set(list).size < list.length) {
-      return Promise.reject({
-        message: '{{%resolver.list.DUPES}}'
-      })
+      return Promise.reject('list.DUPES')
     }
     return Promise.resolve(list)
   }

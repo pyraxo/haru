@@ -15,13 +15,16 @@ class Info extends Command {
       color: 14892182,
       url: 'https://pyraxo.moe/haru',
       author: {
-        name: 'Designed by pyraxo',
-        url: 'https://pyraxo.moe',
-        icon_url: 'https://twitter.com/pyraxo/profile_image?size=original'
+        name: 'haru',
+        url: 'https://pyraxo.moe/haru',
+        icon_url: this.client.user.avatarURL
       },
       fields: [
-        { name: 'Source code (iris)', value: 'https://git.io/iris', inline: true },
-        { name: 'Invite me!', value: 'https://pyraxo.moe/haru', inline: true }
+        { name: 'Author', value: '[pyraxo#6400](https://pyraxo.moe)', inline: true },
+        { name: 'Library', value: '[eris / nodeJS](https://github.com/abalabahaha/eris)', inline: true },
+        { name: 'Version', value: '2.0.0', inline: true },
+        { name: 'Source code', value: '[Bot Base](https://git.io/iris) - Developed for **haru** and [Tatsumaki](https://tatsumaki.xyz)' },
+        { name: 'Invite me!', value: 'https://pyraxo.moe/haru' }
       ]
     }})
   }

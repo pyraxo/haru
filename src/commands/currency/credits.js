@@ -96,7 +96,7 @@ class Credits extends MultiCommand {
 
     responder.format('emoji:atm').dialog([{
       prompt: '{{dialog}}',
-      input: { type: 'int', name: 'code' }
+      input: { type: 'string', name: 'code' }
     }], {
       tags: {
         author: `**${msg.author.username}**`,
@@ -109,7 +109,7 @@ class Credits extends MultiCommand {
       },
       tries: 1
     }).then(arg => {
-      if (arg.code !== code) {
+      if (parseInt(arg.code, 10) !== code) {
         responder.error('{{invalidCode}}')
         return
       }
@@ -140,7 +140,7 @@ class Claim extends Credits {
       description: 'Claim your credits every 8 hours'
     })
 
-    this.registerSubcommand('claim')
+    this.registerSubcommand('claim', 'credits')
   }
 }
 
