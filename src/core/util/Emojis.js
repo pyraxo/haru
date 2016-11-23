@@ -13,5 +13,9 @@ module.exports = {
   headphones: '🎧',
   skip: '⏩',
   play: '▶',
-  stop: '⏹'
+  stop: '⏹',
+
+  // Companions
+  atk: '⚔',
+  def: '🛡'
 }

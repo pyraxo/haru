@@ -25,10 +25,8 @@ class Stop extends Command {
     const voice = client.getChannel(conn.channelID)
     await music.player.stop(voice, true)
     responder.format('emoji:headphones').send('{{success}}', {
-      tags: {
-        voice: `**${voice.name}**`,
-        text: msg.channel.mention
-      }
+      voice: `**${voice.name}**`,
+      text: msg.channel.mention
     })
   }
 }

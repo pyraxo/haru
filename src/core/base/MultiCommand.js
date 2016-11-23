@@ -16,7 +16,6 @@ class MultiCommand extends Command {
     if (typeof resolver === 'undefined') throw new Error(`${type} is an invalid type`)
     this.resolver = resolver.resolver
     this.type = resolver.name
-    this.name = localeKey
   }
 
   registerSubcommands (types, defaultAction) {
@@ -65,12 +64,10 @@ class MultiCommand extends Command {
     const resolver = this.type ? this.resolver : this.resolvers[type].resolver
     const command = this.type ? container.trigger : `${container.trigger} ${type}`
     try {
-      let args = await resolver.resolve(container.msg, container.rawArgs.slice(1), {
+      const args = await resolver.resolve(container.msg, container.rawArgs.slice(this.type ? 0 : 1), {
         prefix: container.settings.prefix, command
       })
-      for (let key in args) {
-        container.args[key] = args[key]
-      }
+      Object.assign(container.args, args)
       try {
         this[this.type || this.resolvers[type].name](container, responder)
       } catch (err) {
@@ -78,7 +75,7 @@ class MultiCommand extends Command {
         logger.error(err)
       }
     } catch (err) {
-      responder.format('emoji:fail').send(err.message || err, err)
+      return responder.error(err.message || err.err || err, err)
     }
   }
 }

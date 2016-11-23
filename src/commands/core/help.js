@@ -59,12 +59,10 @@ class HelpMenu extends Command {
     reply.push('```**')
     responder.send(reply.join('\n'), {
       DM: true,
-      tags: {
-        prefix: `\`${prefix}\``,
-        defaultPrefix: `\`${process.env.CLIENT_PREFIX}\``,
-        helpCommand: `\`${prefix}help <command>\``,
-        exampleCommand: `\`${prefix}help credits\``
-      }
+      prefix: `\`${prefix}\``,
+      defaultPrefix: `\`${process.env.CLIENT_PREFIX}\``,
+      helpCommand: `\`${prefix}help <command>\``,
+      exampleCommand: `\`${prefix}help credits\``
     })
     .then(m => {
       if (msg.guild) {

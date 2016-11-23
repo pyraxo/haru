@@ -10,7 +10,7 @@ class Module extends Base {
     this._verify(options)
   }
 
-  _verify ({ name, events = {} }) {
+  _verify ({ name, events = {}, localeKey }) {
     if (typeof name === 'undefined') throw new Error(`${this.constructor.name} is not named`)
     if (typeof events !== 'object') throw new Error('Module event must be an object')
 
@@ -26,6 +26,7 @@ class Module extends Base {
 
     this.name = name
     this.events = events
+    this.localeKey = localeKey
   }
 }
 

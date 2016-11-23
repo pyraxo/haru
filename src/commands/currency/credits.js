@@ -37,10 +37,8 @@ class Credits extends MultiCommand {
     try {
       let user = await data.User.fetch(msg.author.id)
       responder.format('emoji:credits').send('{{balance}}', {
-        tags: {
-          user: msg.author.username,
-          balance: `**\`${user.credits}\`**`
-        }
+        user: msg.author.username,
+        balance: `**\`${user.credits}\`**`
       })
     } catch (err) {
       this.logError(err)
@@ -57,12 +55,12 @@ class Credits extends MultiCommand {
           const amt = ~~(Math.random() * 100) + 50
           await this.topup(data, msg.author.id, amt)
           await cache.store(claimID, 1, 28800)
-          responder.format('emoji:credits').reply('{{topup}}', { tags: { amount: `**${amt}**` } })
+          responder.format('emoji:credits').reply('{{topup}}', { amount: `**${amt}**` })
           break
         }
         default: {
           responder.format('emoji:credits').reply('{{cooldown}}', {
-            tags: { time: `**${moment(res + moment()).fromNow(true)}**` }
+            time: `**${moment(res + moment()).fromNow(true)}**`
           })
           break
         }
@@ -88,7 +86,7 @@ class Credits extends MultiCommand {
     }
 
     if (credits < amt) {
-      responder.error('{{insufficientCredits}}', { tags: { balance: `**${credits}**` } })
+      responder.error('{{insufficientCredits}}', { balance: `**${credits}**` })
       return
     }
 
@@ -98,15 +96,13 @@ class Credits extends MultiCommand {
       prompt: '{{dialog}}',
       input: { type: 'string', name: 'code' }
     }], {
-      tags: {
-        author: `**${msg.author.username}**`,
-        amount: `**${amt}**`,
-        user: `**${user.username}#${user.discriminator}**`,
-        balance: `**\`$ ${credits}\`**`,
-        afterAmount: `**\`$ ${credits - amt}\`**`,
-        code: `**\`${code}\`**`,
-        exit: '**`cancel`**'
-      },
+      author: `**${msg.author.username}**`,
+      amount: `**${amt}**`,
+      user: `**${user.username}#${user.discriminator}**`,
+      balance: `**\`$ ${credits}\`**`,
+      afterAmount: `**\`$ ${credits - amt}\`**`,
+      code: `**\`${code}\`**`,
+      exit: '**`cancel`**',
       tries: 1
     }).then(arg => {
       if (parseInt(arg.code, 10) !== code) {
@@ -118,11 +114,9 @@ class Credits extends MultiCommand {
         this.topup(data, user.id, amt)
       ]).then(() => {
         responder.format('emoji:credits').reply('{{confirmation}}', {
-          tags: {
-            amount: `**${amt}**`,
-            user: `**${user.username}**`,
-            afterAmount: `**\`$ ${credits - amt}\`**`
-          }
+          amount: `**${amt}**`,
+          user: `**${user.username}**`,
+          afterAmount: `**\`$ ${credits - amt}\`**`
         })
       }, err => {
         logger.error('Error carrying out transaction')
@@ -137,10 +131,11 @@ class Claim extends Credits {
   constructor (...args) {
     super(...args, {
       name: 'wage',
-      description: 'Claim your credits every 8 hours'
+      description: 'Claim your credits every 8 hours',
+      localeKey: 'credits'
     })
 
-    this.registerSubcommand('claim', 'credits')
+    this.registerSubcommand('claim')
   }
 }
 

@@ -2,6 +2,16 @@ const emoji = require('node-emoji')
 const logger = require('winston')
 const { Emojis } = require('../util')
 
+const colours = {
+  blue: '#117ea6',
+  green: '#1f8b4c',
+  red: '#be2626',
+  pink: '#E33C96',
+  gold: '#d5a500',
+  silver: '#b7b7b7',
+  bronze: '#a17419'
+}
+
 class Base {
   constructor (bot) {
     if (this.constructor === Base) {
@@ -12,23 +22,14 @@ class Base {
     this.client = bot.client
     this.i18n = bot.engine.i18n
 
-    this.colours = {
-      blue: { hex: '#117ea6' },
-      green: { hex: '#1f8b4c' },
-      red: { hex: '#be2626' },
-      pink: { hex: '#E33C96' },
-      gold: { hex: '#d5a500' },
-      silver: { hex: '#b7b7b7' },
-      bronze: { hex: '#a17419' }
-    }
-
-    for (const colour in this.colours) {
-      this.colours[colour].int = this.hexToInt(this.colours[colour].hex)
+    this.colours = {}
+    for (const colour in colours) {
+      this.colours[colour] = this.hexToInt(colours[colour])
     }
   }
 
   getColour (colour) {
-    return (this.colours[colour] || this.colours.blue).int
+    return this.colours[colour] || this.colours.blue
   }
 
   parseNumber (number) {
@@ -58,15 +59,26 @@ class Base {
     return true
   }
 
+  t (content = '', lang = 'en', tags = {}) {
+    const file = this.name ? this.name.split(':')[0] : (this.labels ? this.labels[0] : 'common')
+    return this.i18n.parse(content, this.localeKey || file || null, lang, tags)
+  }
+
   async send (channel, content, options = {}) {
     if (typeof channel === 'string') channel = this.client.getChannel(channel)
-    const { file = {}, lang = 'en', delay = 0, deleteDelay = 0, tags = {}, embed = {} } = options
+    let { file = {}, lang, delay = 0, deleteDelay = 0, embed = {} } = options
     if (delay) {
       await Promise.delay(delay)
     }
 
+    if (!lang && channel.guild) {
+      lang = (await this.bot.engine.db.data.Guild.fetch(channel.guild.id)).lang
+    } else {
+      lang = 'en'
+    }
+
     if (Array.isArray(content)) content = content.join('\n')
-    content = this.i18n.parse(content, this.name ? this.name.split(':')[0] : (this.labels ? this.labels[0] : 'common') || null, lang, tags)
+    content = this.t(content, lang, options)
     content = content.replace(/:(\S+):/gi, (matched, name) => {
       return this.i18n.locate(name, Emojis) || emoji.get(name) || matched
     })

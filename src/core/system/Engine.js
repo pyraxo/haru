@@ -69,15 +69,15 @@ class Engine extends EventEmitter {
     this.emit('loaded:db')
   }
 
-  loadCommands (mod) {
+  loadCommands (mod, cmd) {
     let count = 0
     this.commands.eject(mod)
-    this.i18n.reload()
 
     const commands = requireAll(this.paths.commands)
     for (let group in commands) {
       if (typeof mod === 'string' && group !== mod) continue
       for (let command in commands[group]) {
+        if (typeof cmd === 'string' && cmd !== command) continue
         let cmds = commands[group][command]
         cmds = Array.isArray(cmds) ? cmds : [cmds]
 
@@ -90,11 +90,12 @@ class Engine extends EventEmitter {
     this.emit('loaded:commands', count)
   }
 
-  loadMiddleware (group = '.') {
+  loadMiddleware (group = '.', file) {
     this.bridge.destroy()
 
     let count = 0
     readdirRecursive(this.paths.middleware, group).then(mw => {
+      if (typeof file === 'string') mw = mw.filter(m => path.basename(m).startsWith(file))
       mw = mw.map(mw => require(mw))
       mw = Object.keys(mw).sort((a, b) => mw[a].priority - mw[b].priority).map(m => mw[m])
       mw.forEach(m => {
@@ -105,12 +106,13 @@ class Engine extends EventEmitter {
     })
   }
 
-  loadModules (group = '.') {
+  loadModules (group = '.', file) {
     let count = 0
-    readdirRecursive(this.paths.modules, group).then(modules => {
-      modules = modules.map(m => require(m))
-      for (let module in modules) {
-        this.modules.attach(modules, modules[module])
+    readdirRecursive(this.paths.modules, group).then(mod => {
+      if (typeof file === 'string') mod = mod.filter(m => path.basename(m).startsWith(file))
+      mod = mod.map(m => require(m))
+      for (let module in mod) {
+        this.modules.attach(mod, mod[module])
         count++
       }
       this.modules.initAll()
@@ -118,19 +120,22 @@ class Engine extends EventEmitter {
     })
   }
 
-  loadIpc (group = '.') {
+  loadIpc (group = '.', file) {
     let count = 0
-    readdirRecursive(this.paths.ipc, group).then(processes => {
-      processes = processes.map(i => require(i))
-      for (let proc in processes) {
-        this.ipc.register(processes[proc])
+    readdirRecursive(this.paths.ipc, group).then(prcs => {
+      if (typeof file === 'string') prcs = prcs.filter(m => path.basename(m).startsWith(file))
+      prcs = prcs.map(i => require(i))
+      for (let proc in prcs) {
+        this.ipc.register(prcs[proc])
         count++
       }
       this.emit('loaded:ipc', count)
     })
   }
 
-  async reload (type = 'commands', cat = '.') {
+  async reload (type = 'commands', cat = '.', file = '.') {
+    this.i18n.reload()
+
     const dir = this.paths[type]
     if (!dir) {
       const err = new TypeError(`"${type}" not found`)
@@ -140,7 +145,7 @@ class Engine extends EventEmitter {
 
     let count = 0
     Object.keys(require.cache).forEach(filepath => {
-      if (!filepath.startsWith(path.join(dir, cat))) return
+      if (!filepath.startsWith(path.join(dir, cat, file))) return
       delete require.cache[require.resolve(filepath)]
       count++
     })

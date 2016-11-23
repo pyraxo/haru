@@ -18,14 +18,14 @@ class Eval extends Command {
     let color
     if (success) {
       title = isPromise ? 'Promise resolved' : 'Success'
-      color = this.colours.green.int
+      color = this.colours.green
     } else {
       if (success === null && isPromise) {
         title = 'Promise resolving'
-        color = this.colours.blue.int
+        color = this.colours.blue
       } else {
         title = isPromise ? 'Promise rejected' : 'Error'
-        color = this.colours.red.int
+        color = this.colours.red
       }
     }
     embed.title = title

@@ -50,13 +50,13 @@ class Play extends Command {
 
     const conn = music.getConnection(msg.channel)
     if (!conn) {
-      return responder.error('{{errors.notInChannel}}', { tags: { command: `**\`${settings.prefix}summon\`**` } })
+      return responder.error('{{errors.notInChannel}}', { command: `**\`${settings.prefix}summon\`**` })
     }
     const voiceChannel = client.getChannel(conn.channelID)
     if (rawArgs.length === 0) {
       try {
         if (!(await music.queue.getLength(msg.guild.id))) {
-          return responder.format('emoji:info').reply('{{errors.emptyQueue}}', { tags: { play: `**\`${settings.prefix}play\`**` } })
+          return responder.format('emoji:info').reply('{{errors.emptyQueue}}', { play: `**\`${settings.prefix}play\`**` })
         }
         return music.play(voiceChannel)
       } catch (err) {
@@ -80,14 +80,14 @@ class Play extends Command {
           logger.error(err)
           return responder.error('{{%ERROR}}')
         }
-        return responder.error(`{{errors.${err}}}`, { tags: { command: `**\`${settings.prefix}summon\`**` } })
+        return responder.error(`{{errors.${err}}}`, { command: `**\`${settings.prefix}summon\`**` })
       }
     }
 
     try {
       const result = await searcher.searchYT(msg, 'video', text, 10)
       if (!result || !result.items.length) {
-        return responder.error('{{errors.noResults}}', { tags: { query: `**${text}**` } })
+        return responder.error('{{errors.noResults}}', { query: `**${text}**` })
       }
       const info = await music.add(msg.guild.id, voiceChannel, `https://www.youtube.com/watch?v=${result.items[0].id.videoId}`)
       const length = info.length ? `(${moment.duration(info.length, 'seconds').format('h[h] m[m] s[s]')}) ` : ''
@@ -98,7 +98,7 @@ class Play extends Command {
         logger.error(err)
         return responder.error('{{%ERROR}}')
       }
-      return responder.error(`{{errors.${err}}}`, { tags: { command: `**\`${settings.prefix}summon\`**` } })
+      return responder.error(`{{errors.${err}}}`, { command: `**\`${settings.prefix}summon\`**` })
     }
   }
 }

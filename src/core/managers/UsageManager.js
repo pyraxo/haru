@@ -25,19 +25,6 @@ class UsageManager {
     this.usage = usage
   }
 
-  async execResolve (type, content, arg, msg) {
-    const resolver = this._resolvers[type]
-    if (typeof resolver === 'undefined') {
-      throw new TypeError('Invalid resolver type')
-    }
-    try {
-      return await resolver.resolve(content, arg, msg, this.bot)
-    } catch (err) {
-      arg.arg = `**\`${arg.displayName || 'argument'}\`**`
-      return Promise.reject({ message: err.message ? err.message : `{{%resolver.${err}}}`, tags: arg })
-    }
-  }
-
   resolve (message, rawArgs, data = {}) {
     if (!this.usage.length) return Promise.resolve()
 
@@ -48,16 +35,14 @@ class UsageManager {
     if (argsCount < requiredArgs) {
       let msg = '{{%resolver.INSUFFICIENT_ARGS}}'
       if (data.prefix && data.command) {
-        msg += `\n**{{%resolver.CORRECT_USAGE}}**: \`${data.prefix}${data.command} ${(this.usage.length
-        ? this.usage.map(arg => arg.optional ? `[${arg.displayName}]` : `<${arg.name}>`).join(' ')
-        : '')}\``
+        msg += `\n**{{%resolver.CORRECT_USAGE}}**: \`${data.prefix}${data.command} ` + (this.usage.length
+        ? this.usage.map(arg => arg.optional ? `[${arg.displayName}]` : `<${arg.displayName}>`).join(' ')
+        : '') + '`'
       }
       return Promise.reject({
         message: msg,
-        tags: {
-          requiredArgs: `**${requiredArgs}**`,
-          argsCount: `**${argsCount}**.`
-        }
+        requiredArgs: `**${requiredArgs}**`,
+        argsCount: `**${argsCount}**.`
       })
     }
 
@@ -99,7 +84,30 @@ class UsageManager {
 
   resolveArg (arg, rawArg, msg) {
     return Promise.all(arg.types.map(type => this.execResolve(type, rawArg, arg, msg)))
-    .then(results => results[0])
+    .then(results => {
+      const resolved = results.filter(v => !v.err)
+
+      if (resolved.length) {
+        return resolved[0].result
+      }
+      return Promise.reject(results[0])
+    })
+  }
+
+  async execResolve (type, content, arg, msg) {
+    const resolver = this._resolvers[type]
+    if (typeof resolver === 'undefined') {
+      return Promise.reject({ err: 'Invalid resolver type' })
+    }
+    try {
+      return Promise.resolve({ result: await resolver.resolve(content, arg, msg, this.bot) })
+    } catch (err) {
+      const result = Object.assign(arg, {
+        arg: `**\`${arg.displayName || 'argument'}\`**`,
+        err: err.message ? err.message : `{{%resolver.${err}}}`
+      })
+      return Promise.resolve(result)
+    }
   }
 }
 

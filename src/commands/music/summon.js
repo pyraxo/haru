@@ -21,11 +21,9 @@ class Summon extends Command {
     }
     music.connect(channel, msg.channel).then(conn => {
       responder.format('emoji:headphones').send('{{success}}', {
-        tags: {
-          voice: `**${msg.guild.channels.find(c => c.id === channel).name}**`,
-          text: msg.channel.mention,
-          command: `**\`${settings.prefix}play\`**`
-        }
+        voice: `**${msg.guild.channels.find(c => c.id === channel).name}**`,
+        text: msg.channel.mention,
+        command: `**\`${settings.prefix}play\`**`
       })
     }).catch(err => {
       if (err instanceof Error) {
@@ -33,10 +31,8 @@ class Summon extends Command {
         return
       }
       responder.error(`{{errors.${err}}}`, {
-        tags: {
-          text: msg.guild.channels.get(music.getBoundChannel(msg.guild.id)).mention,
-          voice: `**${msg.guild.channels.find(c => c.id === channel).name}**`
-        }
+        text: msg.guild.channels.get(music.getBoundChannel(msg.guild.id)).mention,
+        voice: `**${msg.guild.channels.find(c => c.id === channel).name}**`
       })
     })
   }

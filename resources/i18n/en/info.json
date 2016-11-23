@@ -2,5 +2,11 @@
   "info": [
     "👋  Hello! I'm **haru**!",
     "Everyone's favourite idol ✨🎤 and part-time bot! 🤖"
-  ]
+  ],
+  "warn": "Please ensure you have embeds enabled!",
+  "author": "Author",
+  "lib": "Library",
+  "ver": "Version",
+  "src": "Source code",
+  "inv": "Invite me!"
 }

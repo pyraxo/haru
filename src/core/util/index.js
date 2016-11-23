@@ -7,6 +7,7 @@ const padStart = (v, n = 0, c = ' ') => String(v).length >= n ? '' + v : (String
 async function readdirRecursive (...paths) {
   const dir = path.join(...paths)
   let list = []
+  if (!fs.existsSync(dir)) return list
   let files = fs.readdirSync(dir)
   let dirs
 
@@ -31,6 +32,7 @@ module.exports = {
   padStart,
   readdirRecursive,
   Collection: require('./Collection'),
+  Responder: require('./Responder'),
   Locales: require('./Locales'),
   Parser: require('./Parser'),
   Emojis: require('./Emojis'),

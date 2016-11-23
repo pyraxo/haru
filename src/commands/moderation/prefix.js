@@ -21,7 +21,7 @@ class Prefix extends Command {
       guild.prefix = prefix || process.env.CLIENT_PREFIX
       await guild.save()
       responder.success(prefix ? '{{success}}' : '{{revert}}', {
-        tags: { prefix: `**\`${prefix || process.env.CLIENT_PREFIX}\`**` }
+        prefix: `**\`${prefix || process.env.CLIENT_PREFIX}\`**`
       })
     } catch (err) {
       logger.error(`Could not change prefix for ${msg.guild.name} (${msg.guild.id}) - ${err}`)

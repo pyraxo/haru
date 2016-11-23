@@ -13,11 +13,15 @@
     "maxMatches": "Exceeded {{maxMatches}} matches"
   },
   "resolver": {
-    "INSUFFICIENT_ARGS": "Insufficient arguments - Expected at least {{requiredArgs}}, saw {{argsCount}}.",
+    "INSUFFICIENT_ARGS": "Insufficient arguments - Expected at least {{requiredArgs}}, saw {{argsCount}}",
     "CORRECT_USAGE": "Correct usage",
-    "NO_QUERY": "No query supplied",
-    "NO_ARG": "{{arg}} not found",
-    "NO_END_QUOTE": "Missing end quote",
+    "NO_END_QUOTE": "missing end quote",
+    "member": {
+      "NOT_FOUND": "member not found"
+    },
+    "command": {
+      "NOT_FOUND": "command not found"
+    },
     "string": {
       "NOT_STRING": "{{arg}} must be a string",
       "MAX": "{{arg}} length cannot be more than {{max}}",

@@ -7,7 +7,7 @@ module.exports = {
     if (!user) {
       let members = guild.members.filter(m => {
         const name = m.user.username.toLowerCase()
-        const nick = m.nick.toLowerCase()
+        const nick = m.nick ? m.nick.toLowerCase() : name
         const discrim = m.user.discriminator
         return name === content || nick === content ||
         `${name}#${discrim}` === content ||
@@ -20,11 +20,11 @@ module.exports = {
       if (members.length) {
         return Promise.resolve(members)
       } else {
-        return Promise.reject('NO_ARG')
+        return Promise.reject('member.NOT_FOUND')
       }
     } else {
       let member = guild.members.get(user[1])
-      if (!member) return Promise.reject('NO_ARG')
+      if (!member) return Promise.reject('member.NOT_FOUND')
       return Promise.resolve([member])
     }
   }
