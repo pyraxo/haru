@@ -67,7 +67,7 @@ class Command extends Base {
     if (cmd) {
       usage = cmd.usage
       process = cmd.name
-      container.rawArgs = container.rawArgs.slice(this.subcommands ? 0 : 1)
+      container.rawArgs = container.rawArgs.slice(this.subcommand ? 0 : 1)
       container.trigger += ' ' + subcmd
     }
 

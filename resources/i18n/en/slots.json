@@ -1,0 +1,10 @@
+{
+  "insufficient": [
+    "you need {{amount}} more credits!\n",
+    "You can use the command {{command}} to claim free credits every few hours!"
+  ],
+  "won": "{{user}} placed a bet of {{amount}} credits and won:",
+  "lost": "{{user}} placed a bet of {{amount}} credits and lost all of it.",
+  "credits": "credits",
+  "winnings": "Winnings"
+}

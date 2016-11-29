@@ -116,7 +116,7 @@ class Cleverbot extends Module {
     const options = {
       host: 'www.cleverbot.com',
       port: 80,
-      path: '/webservicemin?uc=165&',
+      path: '/webservicemin?uc=321&',
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',

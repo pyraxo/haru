@@ -24,9 +24,9 @@ class LocalCache extends Collection {
     }
   }
 
-  async fetch (key) {
+  async fetch (key, pure = false) {
     let value = this.get(key)
-    if (typeof value === 'undefined' && this.model) {
+    if ((typeof value === 'undefined' && this.model) || pure) {
       try {
         value = await this.model.get(key).run()
       } catch (err) {
