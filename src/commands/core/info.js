@@ -20,11 +20,11 @@ class Info extends Command {
         icon_url: this.client.user.avatarURL
       },
       fields: [
-        { name: this.t('{{author}}', settings.lang), value: '[pyraxo#6400](https://pyraxo.moe)', inline: true },
-        { name: this.t('{{lib}}', settings.lang), value: '[eris / nodeJS](https://github.com/abalabahaha/eris)', inline: true },
-        { name: this.t('{{ver}}', settings.lang), value: '2.0.0', inline: true },
-        { name: this.t('{{src}}', settings.lang), value: '[Bot Base](https://git.io/iris) - Developed for **haru** and [Tatsumaki](https://tatsumaki.xyz)' },
-        { name: this.t('{{inv}}', settings.lang), value: 'https://pyraxo.moe/haru' }
+        { name: responder.t('{{author}}'), value: '[pyraxo#6400](https://pyraxo.moe)', inline: true },
+        { name: responder.t('{{lib}}'), value: '[eris / nodeJS](https://github.com/abalabahaha/eris)', inline: true },
+        { name: responder.t('{{ver}}'), value: '2.0.0', inline: true },
+        { name: responder.t('{{src}}'), value: '[Bot Base](https://git.io/iris) - Developed for **haru** and [Tatsumaki](https://tatsumaki.xyz)' },
+        { name: responder.t('{{inv}}'), value: 'https://pyraxo.moe/haru' }
       ]
     }})
   }

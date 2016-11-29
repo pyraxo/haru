@@ -11,7 +11,9 @@ class Bet extends Command {
         { name: 'amount', type: 'int', optional: false },
         { name: 'member', type: 'member', optional: false }
       ],
-      localeKey: 'companion'
+      options: {
+        localeKey: 'companion'
+      }
     })
   }
 
@@ -37,7 +39,7 @@ class Bet extends Command {
         balance: `**${balance}**`
       })
     }
-    const pet = await data.User.fetchJoin(member.id, { companion: true })
+    const pet = (await data.User.fetchJoin(member.id, { companion: true })).companion
     if (amount < 1) return responder.error('{{errors.plsBetProperly}}')
     try {
       await companions.placeBet(msg.channel.id, member.id, msg.author.id, amount)

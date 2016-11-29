@@ -1,7 +1,7 @@
 const path = require('path')
 const requireAll = require('require-all')
 
-class UsageManager {
+class Resolver {
   constructor (bot) {
     this.bot = bot
     this._resolvers = {}
@@ -13,30 +13,32 @@ class UsageManager {
     }
   }
 
-  load (usage) {
-    if (!Array.isArray(usage)) usage = [usage]
+  load (data) {
+    this.usage = this.verify(data)
+  }
 
-    usage.map(args => {
+  verify (usage) {
+    return (Array.isArray(usage) ? usage : [usage]).map(args => {
       if (!args.name) throw new Error('Argument specified in usage has no name')
       if (!args.types) args.types = [ args.type || 'string' ]
       if (!args.displayName) args.displayName = args.name
+      return args
     })
-    this.minArgs = usage.filter(arg => !arg.optional).length
-    this.usage = usage
   }
 
-  resolve (message, rawArgs, data = {}) {
-    if (!this.usage.length) return Promise.resolve()
+  resolve (message, rawArgs, data = {}, usage = this.usage) {
+    usage = this.verify(usage)
+    if (!usage.length) return Promise.resolve()
 
     const argsCount = rawArgs.length
-    const requiredArgs = this.minArgs
+    const requiredArgs = usage.filter(arg => !arg.optional).length
     const optionalArgs = argsCount - requiredArgs
 
     if (argsCount < requiredArgs) {
       let msg = '{{%resolver.INSUFFICIENT_ARGS}}'
       if (data.prefix && data.command) {
-        msg += `\n**{{%resolver.CORRECT_USAGE}}**: \`${data.prefix}${data.command} ` + (this.usage.length
-        ? this.usage.map(arg => arg.optional ? `[${arg.displayName}]` : `<${arg.displayName}>`).join(' ')
+        msg += `\n\n**{{%resolver.CORRECT_USAGE}}**: \`${data.prefix}${data.command} ` + (usage.length
+        ? usage.map(arg => arg.optional ? `[${arg.displayName}]` : `<${arg.displayName}>`).join(' ')
         : '') + '`'
       }
       return Promise.reject({
@@ -50,7 +52,7 @@ class UsageManager {
     let idx = 0
     let optArgs = 0
     let resolves = []
-    for (const arg of this.usage) {
+    for (const arg of usage) {
       if (arg.optional) {
         if (optionalArgs > optArgs) {
           optArgs++
@@ -73,7 +75,32 @@ class UsageManager {
       }
       idx++
       resolves.push(
-        this.resolveArg(arg, rawArg, message).then(res => {
+        Promise.all(arg.types.map(async type => {
+          const resolver = this._resolvers[type]
+          if (typeof resolver === 'undefined') {
+            return Promise.reject({ err: 'Invalid resolver type' })
+          }
+          try {
+            return Promise.resolve({ result: await resolver.resolve(rawArg, arg, message, this.bot) })
+          } catch (err) {
+            const result = Object.assign(arg, {
+              arg: `**\`${arg.displayName || 'argument'}\`**`,
+              err: err.message ? err.message : `{{%resolver.${err}}}` +
+              (data.prefix && data.command
+              ? `\n\n**{{%resolver.CORRECT_USAGE}}**: \`${data.prefix}${data.command} ` +
+              (usage.length ? usage.map(arg => arg.optional ? `[${arg.displayName}]` : `<${arg.displayName}>`).join(' ') : '') + '`'
+              : '')
+            })
+            return Promise.resolve(result)
+          }
+        })).then(results => {
+          const resolved = results.filter(v => !v.err)
+
+          if (resolved.length) {
+            return resolved[0].result
+          }
+          return Promise.reject(results[0])
+        }).then(res => {
           args[arg.name] = res
           return res
         })
@@ -111,4 +138,4 @@ class UsageManager {
   }
 }
 
-module.exports = UsageManager
+module.exports = Resolver

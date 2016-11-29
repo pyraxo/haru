@@ -6,7 +6,9 @@ class Kill extends Command {
     super(...args, {
       name: 'kill',
       description: 'Kills all processes',
-      adminOnly: true
+      options: {
+        adminOnly: true
+      }
     })
   }
 

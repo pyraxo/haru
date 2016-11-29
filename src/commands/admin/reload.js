@@ -6,7 +6,9 @@ class Reload extends Command {
     super(...args, {
       name: 'reload',
       description: 'Reloads commands, middleware and modules',
-      adminOnly: true,
+      options: {
+        adminOnly: true
+      },
       cooldown: 0,
       usage: [
         { name: 'type', type: 'string', optional: true },

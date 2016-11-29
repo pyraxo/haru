@@ -48,9 +48,8 @@ class Locales {
     if (!string) return string
     return string.split(' ').map(str => (
       str.replace(/\{\{(.+)\}\}/gi, (matched, key) => {
-        const g = key.startsWith('%') ? 'common.' : group + '.'
-        key = key.startsWith('%') ? key.substr(1) : key
-        let val = this.get(`${g}${key}`, locale)
+        const fullKey = key.startsWith('%') ? `common.${key.substr(1)}` : `${group}.${key}`
+        let val = this.get(fullKey, locale) || this.get(`common.${key}`, locale)
         return typeof val === 'string' ? this.shift(val, options) : matched
       })
     )).join(' ')

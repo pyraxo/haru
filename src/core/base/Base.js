@@ -9,7 +9,8 @@ const colours = {
   pink: '#E33C96',
   gold: '#d5a500',
   silver: '#b7b7b7',
-  bronze: '#a17419'
+  bronze: '#a17419',
+  orange: '#c96941'
 }
 
 class Base {
@@ -66,7 +67,7 @@ class Base {
 
   async send (channel, content, options = {}) {
     if (typeof channel === 'string') channel = this.client.getChannel(channel)
-    let { file = {}, lang, delay = 0, deleteDelay = 0, embed = {} } = options
+    let { file = null, lang, delay = 0, deleteDelay = 0, embed = {} } = options
     if (delay) {
       await Promise.delay(delay)
     }
@@ -98,7 +99,8 @@ class Base {
       })
       return replies[0]
     } catch (err) {
-      logger.error(`Error sending message to ${channel.name} (${channel.id}) - ${err}`)
+      logger.error(`Error sending message to ${channel.name} (${channel.id})`)
+      logger.error(err)
     }
   }
 

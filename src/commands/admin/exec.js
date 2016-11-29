@@ -7,7 +7,9 @@ class Exec extends Command {
     super(...args, {
       name: 'exec',
       description: 'Executes a shell command',
-      adminOnly: true
+      options: {
+        adminOnly: true
+      },
     })
   }
 

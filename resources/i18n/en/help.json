@@ -11,5 +11,6 @@
     "`[]` refers to __**optional**__ arguments",
     "`<>` refers to __**required**__ arguments",
     "Omit `<>` or `[]` when invoking a command"
-  ]
+  ],
+  "noDesc": "No description"
 }

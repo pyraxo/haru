@@ -10,7 +10,9 @@ class Prefix extends Command {
       usage: [
         { name: 'prefix', type: 'string', optional: true }
       ],
-      guildOnly: true
+      options: {
+        guildOnly: true
+      }
     })
   }
 

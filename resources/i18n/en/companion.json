@@ -41,7 +41,8 @@
     "betMulti": "you can't bet more than once!",
     "plsBetProperly": "you can't bet less than one credit!",
     "notBetting": "the battle has not entered the betting phase!",
-    "afterBetting": "the betting phase has already concluded for this battle!"
+    "afterBetting": "the betting phase has already concluded for this battle!",
+    "notOnline": "that user is not online yet!"
   },
   "challenge": [
     "you have challenged {{mention}} to a pet battle!\n",

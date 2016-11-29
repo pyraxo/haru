@@ -5,7 +5,9 @@ class Eval extends Command {
     super(...args, {
       name: 'eval',
       description: 'Evaluates an expression',
-      adminOnly: true,
+      options: {
+        adminOnly: true
+      },
       cooldown: 0
     })
   }
@@ -60,7 +62,9 @@ class FullEval extends Command {
     super(...args, {
       name: 'fulleval',
       description: 'Evaluates an expression across processes',
-      adminOnly: true,
+      options: {
+        adminOnly: true
+      },
       cooldown: 0
     })
   }

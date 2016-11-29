@@ -26,7 +26,8 @@ class Commander extends Collection {
       try {
         e.cmd._execute(...args)
       } catch (err) {
-        logger.error(`Error running command ${label}: ${err}`)
+        logger.error(`Error running command ${label}`)
+        logger.error(err)
       }
     }
   }

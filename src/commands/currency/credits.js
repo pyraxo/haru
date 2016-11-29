@@ -1,25 +1,25 @@
 const moment = require('moment')
 const logger = require('winston')
-const { MultiCommand } = require('../../core')
+const { Command } = require('../../core')
 
-class Credits extends MultiCommand {
+class Credits extends Command {
   constructor (...args) {
     super(...args, {
       name: 'credits',
       description: 'Currency system',
       aliases: ['credit'],
-      cooldown: 5
-    })
-
-    this.registerSubcommands({
-      claim: 'claim',
-      give: {
-        usage: [
-          { name: 'member', type: 'member', optional: false },
-          { name: 'amount', type: 'int', optional: false }
-        ]
+      cooldown: 5,
+      usage: [{ name: 'action', displayName: 'give | claim', type: 'string', optional: true }],
+      subcommands: {
+        claim: 'claim',
+        give: {
+          usage: [
+            { name: 'member', type: 'member', optional: false },
+            { name: 'amount', type: 'int', optional: false }
+          ]
+        }
       }
-    }, 'default')
+    })
   }
 
   async topup (data, id, amt) {
@@ -33,9 +33,9 @@ class Credits extends MultiCommand {
     }
   }
 
-  async default ({ msg, data }, responder) {
+  async handle ({ msg, data }, responder) {
     try {
-      let user = await data.User.fetch(msg.author.id)
+      const user = await data.User.fetch(msg.author.id)
       responder.format('emoji:credits').send('{{balance}}', {
         user: msg.author.username,
         balance: `**\`${user.credits}\`**`
@@ -132,10 +132,11 @@ class Claim extends Credits {
     super(...args, {
       name: 'wage',
       description: 'Claim your credits every 8 hours',
-      localeKey: 'credits'
+      aliases: [],
+      usage: [],
+      options: { localeKey: 'credits' },
+      subcommand: 'claim'
     })
-
-    this.registerSubcommand('claim')
   }
 }
 

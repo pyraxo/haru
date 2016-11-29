@@ -1,22 +1,22 @@
 const logger = require('winston')
-const { MultiCommand } = require('../../core')
+const { Command } = require('../../core')
 
-class Companions extends MultiCommand {
+class Companions extends Command {
   constructor (...args) {
     super(...args, {
       name: 'companion',
       description: 'Animal companion system',
+      usage: [{ name: 'action', displayName: 'buy | rename', type: 'string', optional: true }],
       aliases: ['pet'],
-      cooldown: 5
+      cooldown: 5,
+      subcommands: {
+        buy: 'buy',
+        rename: 'rename'
+      }
     })
-
-    this.registerSubcommands({
-      buy: 'buy',
-      rename: 'rename'
-    }, 'default')
   }
 
-  async default ({ msg, data, settings, trigger }, responder) {
+  async handle ({ msg, data, settings, trigger }, responder) {
     const companion = (await data.User.fetchJoin(msg.author.id, { companion: true })).companion
     if (!companion) {
       responder.error('{{noPet}}', { command: `**\`${settings.prefix}${trigger} buy\`**` })
@@ -130,10 +130,11 @@ class PetBuy extends Companions {
     super(...args, {
       name: 'buypet',
       description: 'Purchases your personal companion',
-      localeKey: 'companion'
+      options: { localeKey: 'companion' },
+      aliases: [],
+      usage: [],
+      subcommand: 'buy'
     })
-
-    this.registerSubcommand('buy')
   }
 }
 

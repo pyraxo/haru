@@ -8,9 +8,11 @@ class Battle extends Command {
       description: 'Fight other users\' companions',
       cooldown: 5,
       usage: [
-        { name: 'action', displayName: 'user|accept|reject', types: ['member', 'string'] }
+        { name: 'action', displayName: '@user | accept | reject', types: ['member', 'string'] }
       ],
-      localeKey: 'companion'
+      options: {
+        localeKey: 'companion'
+      }
     })
 
     this.respondTime = 60
@@ -23,12 +25,15 @@ class Battle extends Command {
     if (!companions) return logger.error('Companions module not found')
     const userProfile = await data.User.fetchJoin(msg.author.id, { companion: true })
     if (!userProfile.companion) {
-      responder.error('{{noPet}}', { command: `**\`${settings.prefix}companion buy\`**` })
-      return
+      return responder.error('{{noPet}}', { command: `**\`${settings.prefix}companion buy\`**` })
     }
 
     if (['accept', 'reject', 'cancel'].includes(rawArgs[0])) {
       return this[rawArgs[0]](container, responder, companions)
+    }
+
+    if (args.action[0].member.status !== 'online') {
+      return responder.error('{{errors.notOnline}}')
     }
 
     const opp = args.action[0].user

@@ -1,0 +1,10 @@
+{
+  "noPictures": "the query {{query}} returned no pictures. Try searching something else!",
+  "maxTwo": "you may only search Danbooru with a maximum of two tags!",
+  "score": "Score",
+  "rating": "Rating",
+  "tags": "Tags",
+  "s": "Safe",
+  "q": "Questionable",
+  "e": "Explicit"
+}

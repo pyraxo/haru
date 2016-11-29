@@ -6,7 +6,9 @@ class Ping extends Command {
     super(...args, {
       name: 'ping',
       description: 'Pong!',
-      hidden: true
+      options: {
+        hidden: true
+      }
     })
   }
 

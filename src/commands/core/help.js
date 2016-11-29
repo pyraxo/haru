@@ -6,6 +6,7 @@ class HelpMenu extends Command {
     super(...args, {
       name: 'help',
       description: 'Displays info on commands',
+      cooldown: 1,
       usage: [
         { name: 'command', type: 'command', optional: true }
       ]
@@ -17,9 +18,10 @@ class HelpMenu extends Command {
     if (args.command) {
       const command = args.command.cmd
       const name = command.labels[0]
-      const description = this.i18n.get(`descriptions.${name}`, settings.lang) || command.description
+      let desc = this.i18n.get(`descriptions.${name}`, settings.lang) || this.i18n.get(`${command.localeKey}.description`, settings.lang)
+      if (typeof desc !== 'string') desc = '{{noDesc}}'
       let reply = [
-        `**\`${prefix}${name}\`**  __\`${description}\`__\n`,
+        `**\`${prefix}${name}\`**  __\`${desc}\`__\n`,
         `**{{definitions.usage}}**: ${prefix}${command.labels[0]} ${Object.keys(command.resolver.usage).map(usage => {
           usage = command.resolver.usage[usage]
           return usage.optional ? `[${usage.displayName}]` : `<${usage.displayName}>`
@@ -41,10 +43,11 @@ class HelpMenu extends Command {
     ]
     let maxPad = 10
     commander.unique().forEach(c => {
-      if (c.cmd.labels[0] !== c.label || c.cmd.hidden || c.cmd.adminOnly) return
+      if (c.cmd.labels[0] !== c.label || c.cmd.options.hidden || c.cmd.options.adminOnly) return
       const module = c.group
       const name = c.cmd.labels[0]
-      const desc = c.cmd.description
+      let desc = this.i18n.get(`descriptions.${name}`, settings.lang) || this.i18n.get(`${c.cmd.localeKey}.description`, settings.lang)
+      if (typeof desc !== 'string') desc = '{{noDesc}}'
       if (name.length > maxPad) maxPad = name.length
       if (!Array.isArray(commands[module])) commands[module] = []
       commands[module].push([name, desc])
