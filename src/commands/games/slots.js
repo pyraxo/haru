@@ -58,7 +58,7 @@ class Slots extends Command {
   }
 
   async handle ({ msg, args, data, settings }, responder) {
-    const user = await data.User.fetch(msg.author.id, true)
+    const user = await data.User.fetch(msg.author.id)
     if (args.bet > 1000) args.bet = 1000
     if (user.credits < args.bet) {
       return responder.error('{{insufficient}}', {

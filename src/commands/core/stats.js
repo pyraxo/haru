@@ -6,8 +6,7 @@ class Stats extends Command {
   constructor (...args) {
     super(...args, {
       name: 'stats',
-      description: 'Statistics about me',
-      options: { hidden: true }
+      description: 'Statistics about me'
     })
   }
 

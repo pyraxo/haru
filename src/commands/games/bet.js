@@ -5,7 +5,7 @@ class Bet extends Command {
   constructor (...args) {
     super(...args, {
       name: 'bet',
-      description: 'Places bets on battles',
+      description: 'Places bets during battles',
       cooldown: 5,
       usage: [
         { name: 'amount', type: 'int', optional: false },
