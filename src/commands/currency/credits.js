@@ -17,6 +17,9 @@ class Credits extends Command {
             { name: 'member', type: 'member', optional: false },
             { name: 'amount', type: 'int', optional: false }
           ]
+        },
+        peek: {
+          usage: [{ name: 'user', type: 'member', optional: false }]
         }
       }
     })
@@ -124,6 +127,18 @@ class Credits extends Command {
         logger.error(err)
       })
     })
+  }
+
+  async peek ({ args, data }, responder) {
+    try {
+      const user = await data.User.fetch(args.user[0].id)
+      responder.format('emoji:credits').send('{{balance}}', {
+        user: args.user[0].user.username,
+        balance: `**\`${user.credits}\`**`
+      })
+    } catch (err) {
+      this.logError(err)
+    }
   }
 }
 

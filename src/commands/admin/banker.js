@@ -23,8 +23,7 @@ class Banker extends Command {
             { name: 'user', type: 'member', optional: false },
             { name: 'amount', type: 'int', optional: false, min: -Infinity, max: 0 }
           ]
-        },
-        supercharge: 'supercharge'
+        }        
       }
     })
   }
@@ -55,19 +54,6 @@ class Banker extends Command {
       logger.error(`Could not take credits from ${member.user.username} (${member.id})`)
       logger.error(err)
     }
-  }
-
-  async supercharge ({ args, data, cache }, responder) {
-    // const ids = await cache.client.zrevrangeAsync('credits', 0, 1000)
-    const ids = JSON.parse(require('fs').readFileSync(require('path').join(this.bot.paths.resources, 'creds.json')))
-    for (const id in ids) {
-      const amt = parseInt(ids[id], 10)
-      if (amt < 0) continue
-      const user = await data.User.fetch(id)
-      user.credits += amt
-      await user.save()
-    }
-    return responder.success(`supercharged **${Object.keys(ids).length}** accounts.`)
   }
 }
 
