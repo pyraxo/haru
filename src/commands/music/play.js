@@ -10,7 +10,8 @@ class Play extends Command {
       name: 'play',
       aliases: ['add'],
       description: 'Streams some music',
-      cooldown: 5
+      cooldown: 5,
+      options: { guildOnly: true }
     })
   }
 

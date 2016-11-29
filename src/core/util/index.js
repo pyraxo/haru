@@ -36,5 +36,6 @@ module.exports = {
   Locales: require('./Locales'),
   Parser: require('./Parser'),
   Emojis: require('./Emojis'),
-  LocalCache: require('./LocalCache')
+  LocalCache: require('./LocalCache'),
+  Cache: require('./Cache')
 }

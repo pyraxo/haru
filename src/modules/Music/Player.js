@@ -94,7 +94,7 @@ class Player extends Module {
     this.send(textChannel, `:skip:  |  {{skipping}} **${result.title}**`)
 
     const length = await this.queue.getLength(channel.guild.id)
-    if (!length) {
+    if (length <= 1) {
       this.send(textChannel, ':info:  |  {{queueFinish}}')
       return
     }

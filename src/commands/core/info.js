@@ -15,9 +15,9 @@ class Info extends Command {
       color: 14892182,
       url: 'https://pyraxo.moe/haru',
       author: {
-        name: 'haru',
+        name: 'pyraxo#6400',
         url: 'https://pyraxo.moe/haru',
-        icon_url: this.client.user.avatarURL
+        icon_url: 'https://twitter.com/pyraxo/profile_image?size=original'
       },
       fields: [
         { name: responder.t('{{author}}'), value: '[pyraxo#6400](https://pyraxo.moe)', inline: true },

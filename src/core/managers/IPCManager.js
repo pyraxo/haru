@@ -1,5 +1,6 @@
 const EventEmitter = require('eventemitter3')
 const logger = require('winston')
+const crypto = require('crypto')
 
 class IPCManager extends EventEmitter {
   constructor (shardID = 0, bot) {
@@ -40,15 +41,16 @@ class IPCManager extends EventEmitter {
   }
 
   async awaitResponse (op, d) {
+    const code = crypto.randomBytes(64).toString('hex')
     return new Promise((resolve, reject) => {
       const awaitListener = (msg) => {
         if (!['resp', 'error'].includes(msg.op)) return
         process.removeListener('message', awaitListener)
-        if (msg.op === 'resp') return resolve(msg.d)
+        if (msg.op === 'resp' && msg.code === code) return resolve(msg.d)
         if (msg.op === 'error') return reject(msg.d)
       }
 
-      const payload = { op: op }
+      const payload = { op, code }
       if (d) payload.d = d
 
       process.on('message', awaitListener)

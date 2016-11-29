@@ -201,7 +201,7 @@ class Music extends Module {
 
   async skip (msg, force = false) {
     let channel = this.client.getChannel(msg.member.voiceState.channelID)
-    if (!await this.queue.getLength(msg.guild.id)) return Promise.resolve()
+    if ((await this.queue.getLength(msg.guild.id)) <= 1) return Promise.resolve()
 
     if (!force && channel.members > 2) {
       let vote = this.votes.get(msg.guild.id) || []

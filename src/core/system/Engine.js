@@ -3,14 +3,13 @@ const logger = require('winston')
 const EventEmitter = require('eventemitter3')
 const requireAll = require('require-all')
 
-const Cache = require('./Cache')
 const Bridge = require('./Bridge')
 const Commander = require('./Commander')
 const Router = require('./Router')
 
 const IPC = require('../managers/IPCManager')
 const ModelManager = require('../managers/ModelManager')
-const { Locales, readdirRecursive } = require('../util')
+const { Locales, Cache, readdirRecursive } = require('../util')
 
 class Engine extends EventEmitter {
   constructor (bot) {

@@ -6,7 +6,8 @@ class Summon extends Command {
     super(...args, {
       name: 'summon',
       description: 'Summons me to a voice channel',
-      cooldown: 5
+      cooldown: 5,
+      options: { guildOnly: true }
     })
   }
 

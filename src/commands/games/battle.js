@@ -10,9 +10,7 @@ class Battle extends Command {
       usage: [
         { name: 'action', displayName: '@user | accept | reject', types: ['member', 'string'] }
       ],
-      options: {
-        localeKey: 'companion'
-      }
+      options: { localeKey: 'companion', guildOnly: true }
     })
 
     this.respondTime = 60

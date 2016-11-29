@@ -6,7 +6,8 @@ class Stop extends Command {
       name: 'stop',
       aliases: ['destroy'],
       description: 'Stops currently playing music',
-      cooldown: 5
+      cooldown: 5,
+      options: { guildOnly: true }
     })
   }
 

@@ -17,7 +17,7 @@ class Shard {
     return new Promise((resolve, reject) => {
       const awaitListener = (msg) => {
         if (!['resp', 'error'].includes(msg.op)) return
-        return resolve({ id: this.id, result: msg.d })
+        return resolve({ id: this.id, result: msg.d, code: msg.code })
       }
 
       this.worker.once('message', awaitListener)
@@ -87,8 +87,8 @@ class ShardManager {
     }
 
     Promise.all(promises)
-    .then(results => worker.send({ op: 'resp', d: results }))
-    .catch(err => worker.send({ op: 'error', d: err }))
+    .then(results => worker.send({ op: 'resp', d: results, code: message.code }))
+    .catch(err => worker.send({ op: 'error', d: err, code: message.code }))
   }
 
   broadcast (message) {

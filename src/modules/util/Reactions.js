@@ -6,7 +6,8 @@ class Reactions extends Module {
     super(...args, {
       name: 'reactions',
       events: {
-        messageReactionAdd: 'check'
+        messageReactionAdd: 'check',
+        messageDelete: 'onDelete'
       }
     })
 
@@ -32,6 +33,12 @@ class Reactions extends Module {
       .then(() => this.menus.set(msg.id, { msg, user: userID, emojis, resolve, cleanup }))
       .catch(reject)
     })
+  }
+
+  onDelete (msg) {
+    if (this.menus.has(msg.id)) {
+      this.menus.delete(msg.id)
+    }
   }
 
   check (msg, emoji, userID) {

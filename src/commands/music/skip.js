@@ -5,7 +5,8 @@ class Skip extends Command {
     super(...args, {
       name: 'skip',
       description: 'Skips the current music track',
-      cooldown: 5
+      cooldown: 5,
+      options: { guildOnly: true, localeKey: 'play' }
     })
   }
 
@@ -15,13 +16,18 @@ class Skip extends Command {
     if (music.getBoundChannel(msg.guild.id) !== msg.channel.id) {
       return
     }
+    if (await music.queue.getLength(msg.guild.id) <= 1) {
+      return responder.error('{{errors.emptyQueue}}', {
+        play: `**\`${settings.prefix}play\`**`
+      })
+    }
     const conn = music.getConnection(msg.channel)
     if (!conn) {
-      return responder.error(this.i18n.shift(this.i18n.get('play.errors.notInChannel', settings.lang), {
+      return responder.error('{{errors.notInChannel}}', {
         command: `**\`${settings.prefix}summon\`**`
-      }))
+      })
     }
-    music.skip(msg)
+    return music.skip(msg)
   }
 }
 

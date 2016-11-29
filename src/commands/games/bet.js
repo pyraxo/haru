@@ -12,7 +12,8 @@ class Bet extends Command {
         { name: 'member', type: 'member', optional: false }
       ],
       options: {
-        localeKey: 'companion'
+        localeKey: 'companion',
+        guildOnly: true
       }
     })
   }
