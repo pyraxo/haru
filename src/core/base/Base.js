@@ -67,7 +67,7 @@ class Base {
 
   async send (channel, content, options = {}) {
     if (typeof channel === 'string') channel = this.client.getChannel(channel)
-    let { file = null, lang, delay = 0, deleteDelay = 0, embed = null } = options
+    let { file = null, lang, delay = 0, deleteDelay = 0, embed } = options
     if (delay) {
       await Promise.delay(delay)
     }
