@@ -21,9 +21,9 @@ class Banker extends Command {
           aliases: ['remove'],
           usage: [
             { name: 'user', type: 'member', optional: false },
-            { name: 'amount', type: 'int', optional: false, min: -Infinity, max: 0 }
+            { name: 'amount', type: 'int', optional: false }
           ]
-        }        
+        }
       }
     })
   }
