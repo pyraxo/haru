@@ -36,7 +36,7 @@ class Hate extends Command {
         responder.error('{{%ERROR}}')
         return
       }
-      responder.upload(buf, 'love.png')
+      responder.file('love.png', buf).send()
     })
   }
 }
