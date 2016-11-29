@@ -6,5 +6,6 @@
   "won": "{{user}} placed a bet of {{amount}} credits and won:",
   "lost": "{{user}} placed a bet of {{amount}} credits and lost all of it.",
   "credits": "credits",
-  "winnings": "Winnings"
+  "winnings": "Winnings",
+  "yudodis": "you can't bet less than one credit!"
 }

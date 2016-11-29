@@ -7,7 +7,7 @@ class Slots extends Command {
       description: 'Slot machine command',
       usage: [{ name: 'bet', type: 'int', optional: true, default: 1 }],
       aliases: ['slot'],
-      cooldown: 3
+      cooldown: 5
     })
 
     this.reel = [
@@ -60,7 +60,7 @@ class Slots extends Command {
   async handle ({ msg, args, data, settings }, responder) {
     const user = await data.User.fetch(msg.author.id)
     if (args.bet > 1000) args.bet = 1000
-    if (args.bet < 1) args.bet = 1
+    if (args.bet < 1) return responder.error('{{yudodis}}')
     if (user.credits < args.bet) {
       return responder.error('{{insufficient}}', {
         amount: `**${args.bet - user.credits}**`,
