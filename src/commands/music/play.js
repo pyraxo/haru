@@ -10,6 +10,7 @@ class Play extends Command {
       name: 'play',
       aliases: ['add'],
       description: 'Streams some music',
+      usage: [{ name: 'action', displayName: 'youtube URL | query', optional: true }],
       cooldown: 5,
       options: { guildOnly: true }
     })
