@@ -58,13 +58,16 @@ class Banker extends Command {
   }
 
   async supercharge ({ args, data, cache }, responder) {
-    const ids = await cache.client.zrevrangeAsync('credits', 0, 1000)
-    for (const id of ids) {
+    // const ids = await cache.client.zrevrangeAsync('credits', 0, 1000)
+    const ids = JSON.parse(require('fs').readFileSync(require('path').join(this.bot.paths.resources, 'creds.json')))
+    for (const id in ids) {
+      const amt = parseInt(ids[id], 10)
+      if (amt < 0) continue
       const user = await data.User.fetch(id)
-      user.credits += await cache.client.zscoreAsync('credits', id)
+      user.credits += amt
       await user.save()
     }
-    return responder.success(`supercharged **${ids.length}** accounts.`)
+    return responder.success(`supercharged **${Object.keys(ids).length}** accounts.`)
   }
 }
 
