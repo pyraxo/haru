@@ -68,10 +68,27 @@ class Battle extends Command {
     }
   }
 
-  accept ({ msg, client, settings }, responder, companions) {
+  async accept ({ msg, client, settings, data }, responder, companions) {
     const battle = companions.getBattle(msg.channel)
     if (!battle || battle.p2 !== msg.author.id) return responder.error('{{errors.noIncoming}}')
     if (battle.state !== 1) return responder.error('{{errors.userInBattle}}')
+    try {
+      const p1 = await data.User.fetch(battle.p1)
+      const p2 = await data.User.fetch(battle.p2)
+
+      p1.credits -= this.entryFee
+      p2.credits -= this.entryFee
+
+      await p1.save()
+      await p2.save()
+    } catch (err) {
+      if (err instanceof Error) {
+        logger.error(`Error deducting entry fee - ${err}`)
+        return responder.error('{{%ERROR}}')
+      }
+      return responder.error(`{{errors.${err}}}`)
+    }
+
     companions.updateBattle(msg.channel, 2)
     return responder.format('emoji:success').send('{{acceptChallenge}}', {
       p1: client.users.get(battle.p1).mention,

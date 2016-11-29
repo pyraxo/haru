@@ -223,13 +223,12 @@ class Companions extends Module {
     this.updateBattle(battle.channel, 5)
 
     const winUser = await this.db.User.fetchJoin(battle[winner], { companion: true })
-    winUser.credits += battle.fee
+    winUser.credits += battle.fee * 2
     winUser.companion.xp = (winUser.companion.xp || 0) + ~~(Math.random() * 5) + 2
     winUser.companion.stats.wins += 1
     await winUser.saveAll({ companion: true })
 
     const loseUser = await this.db.User.fetch(battle[loser], { companion: true })
-    loseUser.credits -= battle.fee
     loseUser.companion.xp = (loseUser.companion.xp || 0) + ~~(Math.random() * 3) + 1
     loseUser.companion.stats.losses += 1
     await loseUser.saveAll({ companion: true })
