@@ -64,6 +64,7 @@ class HelpMenu extends Command {
       DM: true,
       prefix: `\`${prefix}\``,
       defaultPrefix: `\`${process.env.CLIENT_PREFIX}\``,
+      server: `**${msg.guild ? msg.guild.name : responder.t('{{pms}}')}**`,
       helpCommand: `\`${prefix}help <command>\``,
       exampleCommand: `\`${prefix}help credits\``
     })
