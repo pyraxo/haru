@@ -16,5 +16,7 @@
   "invalidCode": "you have entered an invalid code! Your credits haven't been transferred.",
   "selfSenderError": "you can't send credits to yourself!",
   "insufficientCredits": "you have insufficient ({{balance}}) credits!",
-  "botUserError": "you can't send credits to bots!"
+  "botUserError": "you can't send credits to bots!",
+  "topTitle": "Wealth Scoreboards",
+  "credits": "credits"
 }

@@ -88,8 +88,12 @@ class Command extends Base {
   }
 
   _execCheck ({ msg, isPrivate, admins }, responder) {
-    const awaitID = msg.channel.id + msg.author.id
+    const isAdmin = admins.includes(msg.author.id)
+    if (this.options.adminOnly && !isAdmin) return false
+    if (this.options.guildOnly && isPrivate) return false
 
+    if (isAdmin) return true
+    const awaitID = msg.channel.id + msg.author.id
     if (this.cooldown > 0) {
       if (!this.timers.has(awaitID)) {
         this.timers.set(awaitID, +moment())
@@ -108,8 +112,6 @@ class Command extends Base {
         }
       }
     }
-    if (this.options.adminOnly && !admins.includes(msg.author.id)) return false
-    if (this.options.guildOnly && isPrivate) return false
     return true
   }
 

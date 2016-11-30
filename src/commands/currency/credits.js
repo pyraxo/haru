@@ -1,6 +1,7 @@
 const moment = require('moment')
 const logger = require('winston')
 const { Command } = require('../../core')
+const { padStart, padEnd } = require('../../core/util')
 
 class Credits extends Command {
   constructor (...args) {
@@ -20,6 +21,10 @@ class Credits extends Command {
         },
         peek: {
           usage: [{ name: 'user', type: 'member', optional: false }]
+        },
+        top: {
+          aliases: ['lb', 'leaderboards'],
+          usage: [{ name: 'page', type: 'int', optional: true, default: 1 }]
         }
       }
     })
@@ -138,6 +143,55 @@ class Credits extends Command {
       })
     } catch (err) {
       this.logError(err)
+    }
+  }
+
+  async top ({ args, db, client }, responder) {
+    try {
+      const res = await db.User.filter({ deleted: false }).orderBy(db.r.desc('credits')).limit(10).execute()
+      const data = await this.bot.engine.ipc.awaitResponse('query', {
+        queries: [{ prop: 'users', query: 'id', input: res.map(u => u.id) }]
+      })
+      const users = data.map(d => d.result[0])
+      let unique = []
+      for (let i = 0; i < users[0].length; i++) {
+        if (users[0][i]) unique.push(users[0][i])
+        else {
+          let idx = 1
+          let usr
+          while (idx < data.length) {
+            usr = users[idx++][i]
+            if (usr) break
+          }
+          unique.push(usr)
+        }
+      }
+
+      let maxName = 16
+      unique.forEach(u => {
+        const str = `${u.username}#${u.discriminator}`
+        maxName = str.length > (maxName + 2) ? str.length + 2 : maxName
+      })
+      let maxCred = 4
+      res.forEach(r => {
+        r = r.credits
+        maxCred = String(r).length > maxCred ? String(r).length + 1 : maxCred
+      })
+
+      return responder.send([
+        '```py',
+        `@ ${responder.t('{{topTitle}}')}\n`,
+        unique.map((u, i) => (
+          padEnd(`[${i + 1}]`, 6) +
+          ` ${padEnd(`${u.username}#${u.discriminator}`, maxName)} >>   ` +
+          `${padStart(res[i].credits, maxCred)} ${responder.t('{{credits}}')}`
+        )).join('\n'),
+        '```'
+      ].join('\n'))
+    } catch (err) {
+      logger.error('Error getting top credits scoreboards')
+      logger.error(err)
+      return responder.error()
     }
   }
 }
