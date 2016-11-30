@@ -32,8 +32,9 @@ class Bet extends Command {
       return responder.error('{{errors.notParticipating}}')
     }
 
-    const balance = await data.User.fetch(msg.author.id)
+    const balance = (await data.User.fetch(msg.author.id)).credits
     let amount = args.amount
+    if (amount > 1000) amount = 1000
     if (balance < amount) {
       return responder.error('{{errors.cantBet}}', {
         amount: `**${amount}**`,
