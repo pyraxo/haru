@@ -56,10 +56,12 @@ class GuildLog extends Module {
   }
 
   newGuild (guild) {
-    if (!this.logChannel) return
     logger.info(`Guild created: ${guild.name} (${guild.id})`)
     logger.info(`${chalk.cyan.bold('U:')} ${guild.members.size} | ${chalk.cyan.bold('S:')} ${guild.shard.id}`)
 
+    this.sendStats()
+
+    if (!this.logChannel) return
     this.send(this.logChannel, '', { embed: {
       author: {
         name: guild.name,
@@ -71,8 +73,6 @@ class GuildLog extends Module {
         text: `Shard ${guild.shard.id}  |  ${moment().format('ddd Do MMM, YYYY [at] hh:mm:ss a')}`
       }
     }})
-
-    this.sendStats()
   }
 
   delGuild (guild) {
@@ -80,6 +80,9 @@ class GuildLog extends Module {
     logger.info(`Guild deleted: ${guild.name} (${guild.id})`)
     logger.info(`${chalk.cyan.bold('U:')} ${guild.members.size} | ${chalk.cyan.bold('S:')} ${guild.shard.id}`)
 
+    this.sendStats()
+
+    if (!this.logChannel) return
     this.send(this.logChannel, '', { embed: {
       author: {
         name: guild.name,
@@ -91,8 +94,6 @@ class GuildLog extends Module {
         text: `Shard ${guild.shard.id}  |  ${moment().format('ddd Do MMM, YYYY [at] hh:mm:ss a')}`
       }
     }})
-
-    this.sendStats()
   }
 }
 
