@@ -21,7 +21,7 @@ class Booru extends Command {
   }
 
   sendImage (responder, stats) {
-    let { uploader, score, tags, url, height, width, icon, rating, id } = stats
+    let { uploader, score, tags = [], url, height, width, icon, rating, id } = stats
     tags = tags.join(' ').replace(/_/g, '\\_').split(' ')
     return responder.format('emoji:search').embed({
       author: { name: uploader, icon_url: icon },
@@ -85,10 +85,12 @@ class Booru extends Command {
       } catch (err) {
         return responder.error('{{noPictures}}', { query: `'**${rawArgs.join(' ')}**'` })
       }
-      if (res.length === 0 && pass >= 3) {
+      if (pid === 1 && res.length === 0) return responder.error('{{noPictures}}', { query: `'**${rawArgs.join(' ')}**'` })
+      if (pass >= 10) return responder.error()
+      if (res.length === 0 && pass >= 2) {
         return this.gelbooru(container, responder, { pid: 1, pass: ++pass })
       }
-      if (res.length >= 50 || (res.length < 50 && pass)) {
+      if (res.length >= 50 || (res.length < 50 && res.length > 0 && pass)) {
         const r = res[~~(Math.random() * res.length)]
         const tags = r.tags.split(' ')
         return this.sendImage(responder, {

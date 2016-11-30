@@ -1,5 +1,4 @@
 const { exec } = require('child_process')
-const util = require('util')
 const { Command } = require('../../core')
 
 class Exec extends Command {
@@ -9,7 +8,7 @@ class Exec extends Command {
       description: 'Executes a shell command',
       options: {
         adminOnly: true
-      },
+      }
     })
   }
 
@@ -22,8 +21,8 @@ class Exec extends Command {
     })
   }
 
-  async handle ({ msg, args, settings }, responder) {
-    const cmd = msg.content.substr(settings.prefix.length).split(' ').slice(1).join(' ')
+  async handle ({ msg, rawArgs, settings }, responder) {
+    const cmd = rawArgs.join(' ')
     let result
     try {
       result = await this.exec(cmd)

@@ -27,10 +27,10 @@ module.exports = {
     }
 
     const chk = msg.content.startsWith(prefix)
-    const trigger = msg.content.substring((chk ? prefix : defPrefix).length).split(' ')[0]
-    container.trigger = trigger.toLowerCase()
+    const rawArgs = msg.content.substring((chk ? prefix : defPrefix).length).split(' ')
+    container.trigger = rawArgs[0].toLowerCase()
     container.isCommand = commander.has(container.trigger)
-    container.rawArgs = msg.content.split(' ').splice(1).filter(v => !!v)
+    container.rawArgs = rawArgs.slice(1).filter(v => !!v)
     return container
   }
 }

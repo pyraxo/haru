@@ -17,6 +17,6 @@
   "selfSenderError": "you can't send credits to yourself!",
   "insufficientCredits": "you have insufficient ({{balance}}) credits!",
   "botUserError": "you can't send credits to bots!",
-  "topTitle": "Wealth Scoreboards",
+  "topTitle": "Discord's Wealthiest Individuals",
   "credits": "credits"
 }

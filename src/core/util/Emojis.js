@@ -17,5 +17,8 @@ module.exports = {
 
   // Companions
   atk: '⚔',
-  def: '🛡'
+  def: '🛡',
+
+  // Choose
+  thinking: '🤔'
 }
