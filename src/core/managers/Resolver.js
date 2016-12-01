@@ -52,28 +52,35 @@ class Resolver {
     let idx = 0
     let optArgs = 0
     let resolves = []
+    let skip = false
     for (const arg of usage) {
-      if (arg.optional) {
-        if (optionalArgs > optArgs) {
-          optArgs++
-        } else {
-          if (arg.default) args[arg.name] = arg.default
-          continue
-        }
-      }
-      let rawArg = rawArgs[idx]
-      if (typeof rawArg !== 'undefined') {
-        if (rawArg.startsWith('"')) {
-          const endQuote = rawArgs.findIndex((str, i) => str.endsWith('"') && i >= idx)
-          if (endQuote > -1) {
-            rawArg = rawArgs.slice(idx, endQuote + 1).join(' ').replace(/"/g, '')
-            idx = endQuote
+      let rawArg
+      if (arg.last) {
+        rawArg = rawArgs.join(' ')
+        skip = true
+      } else {
+        if (arg.optional) {
+          if (optionalArgs > optArgs) {
+            optArgs++
           } else {
-            return Promise.reject('{{%resolver.NO_END_QUOTE}}')
+            if (arg.default) args[arg.name] = arg.default
+            continue
           }
         }
+        rawArg = rawArgs[idx]
+        if (typeof rawArg !== 'undefined') {
+          if (rawArg.startsWith('"')) {
+            const endQuote = rawArgs.findIndex((str, i) => str.endsWith('"') && i >= idx)
+            if (endQuote > -1) {
+              rawArg = rawArgs.slice(idx, endQuote + 1).join(' ').replace(/"/g, '')
+              idx = endQuote
+            } else {
+              return Promise.reject('{{%resolver.NO_END_QUOTE}}')
+            }
+          }
+        }
+        idx++
       }
-      idx++
       resolves.push(
         Promise.all(arg.types.map(async type => {
           const resolver = this._resolvers[type]
@@ -88,7 +95,10 @@ class Resolver {
               err: err.message ? err.message : `{{%resolver.${err}}}` +
               (data.prefix && data.command
               ? `\n\n**{{%resolver.CORRECT_USAGE}}**: \`${data.prefix}${data.command} ` +
-              (usage.length ? usage.map(arg => arg.optional ? `[${arg.displayName}]` : `<${arg.displayName}>`).join(' ') : '') + '`'
+              (usage.length ? usage.map(arg =>
+                skip ? arg.displayName
+                : (arg.optional ? `[${arg.displayName}]` : `<${arg.displayName}>`)
+              ).join(' ') : '') + '`'
               : '')
             })
             return Promise.resolve(result)
@@ -105,6 +115,7 @@ class Resolver {
           return res
         })
       )
+      if (skip) break
     }
     return Promise.all(resolves).then(() => args)
   }

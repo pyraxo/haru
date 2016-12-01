@@ -7,7 +7,7 @@ class Choose extends Command {
       description: 'Allows the bot to choose from the given options',
       aliases: ['pick'],
       usage: [
-        { name: 'choices', displayName: '"choice 1, choice 2, etc"', type: 'list', separator: ', ', min: 2, optional: false }
+        { name: 'choices', displayName: 'choice 1 | choice 2 | etc', type: 'list', separator: ' | ', min: 2, last: true, optional: false }
       ]
     })
   }

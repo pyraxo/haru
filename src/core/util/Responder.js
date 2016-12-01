@@ -120,7 +120,7 @@ class Responder {
         let ans
         try {
           ans = await collector.next()
-          if (ans.content.toLowerCase() === options.cancel) return Promise.reject()
+          if (ans.content.toLowerCase() === cancel) return Promise.reject()
           try {
             return await input.resolve(ans, [ans.cleanContent], data, dialog.input)
           } catch (err) {
@@ -139,10 +139,9 @@ class Responder {
         Object.assign(args, await awaitMessage())
         collector.stop()
       } catch (err) {
-        if (err) {
-          let tags = {}
-          tags[err.reason] = err.arg
-          this.error(`{{%menus.ERRORED}} **{{%collector.${err.reason}}}**`, { err: `**${err.reason}**`, tags })
+        if (typeof err !== 'undefined') {
+          const tags = { [err.reason]: err.arg, err: `**${err.reason}**` }
+          this.error(`{{%menus.ERRORED}} **{{%collector.${err.reason}}}**`, tags)
         } else {
           this.success('{{%menus.EXITED}}')
         }
