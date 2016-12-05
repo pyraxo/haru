@@ -30,7 +30,7 @@ class Battle extends Command {
       return this[rawArgs[0]](container, responder, companions)
     }
 
-    if (args.action[0].status !== 'online') {
+    if (args.action[0].status === 'offline') {
       return responder.error('{{errors.notOnline}}')
     }
 
