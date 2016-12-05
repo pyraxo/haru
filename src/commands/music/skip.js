@@ -20,7 +20,7 @@ class Skip extends Command {
       })
     }
     const chan = music.getBoundChannel(msg.guild.id)
-    if (chan !== msg.channel.id) {
+    if (chan && chan !== msg.channel.id) {
       return responder.error('{{errors.notChannel}}', {
         channel: client.getChannel(chan).mention,
         deleteDelay: 5000

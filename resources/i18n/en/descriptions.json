@@ -21,5 +21,7 @@
   "slots": "Plays the slot machine",
   "stats": "Statistics about me",
   "choose": "Selects a certain choice",
-  "invite": "Displays my invite link"
+  "invite": "Displays my invite link",
+  "stream": "Plays from a supported stream",
+  "queue": "Lists songs in the queue"
 }

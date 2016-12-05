@@ -17,6 +17,8 @@ class GuildLog extends Module {
     })
 
     this.ipc = this.bot.engine.ipc
+    this.data = this.bot.engine.db.data
+    this.db = this.bot.engine.db.models
     this.listeners = new Map()
   }
 
@@ -103,6 +105,11 @@ class GuildLog extends Module {
     this.ipc.send('broadcast', {
       op: 'guildCreate',
       d: { event: 'created', guild: g }
+    })
+
+    this.send(guild.defaultChannel, '{{join}}', {
+      help: `**\`${process.env.CLIENT_PREFIX}help\`**`,
+      about: `**\`${process.env.CLIENT_PREFIX}info\`**`
     })
   }
 

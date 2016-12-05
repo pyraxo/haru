@@ -1,17 +1,17 @@
 const { Command } = require('../../core')
 
-class Stop extends Command {
+class Stream extends Command {
   constructor (...args) {
     super(...args, {
-      name: 'stop',
-      aliases: ['destroy'],
-      description: 'Stops currently playing music',
+      name: 'stream',
+      description: 'Plays from a supported stream',
       cooldown: 5,
+      usage: [{ name: 'station', type: 'string', optional: false, choices: ['listen.moe'] }],
       options: { guildOnly: true, localeKey: 'play' }
     })
   }
 
-  async handle ({ msg, settings, client }, responder) {
+  async handle ({ msg, settings, client, args }, responder) {
     const music = this.bot.engine.modules.get('music')
     if (!music) return
     const conn = music.getConnection(msg.channel)
@@ -29,12 +29,18 @@ class Stop extends Command {
     }
 
     const voice = client.getChannel(conn.channelID)
-    await music.player.stop(voice, true)
-    responder.format('emoji:headphones').send('{{dc}}', {
-      voice: `**${voice.name}**`,
-      text: msg.channel.mention
+    await music.player.stop(voice)
+
+    const station = (s => {
+      switch (s) {
+        case 'listen.moe': return 'http://listen.moe:9999/stream'
+      }
+    })(args.station)
+    await music.player.stream(voice, station)
+    return responder.format('emoji:headphones').send('{{switch}}', {
+      station: '**' + args.station + '**'
     })
   }
 }
 
-module.exports = Stop
+module.exports = Stream

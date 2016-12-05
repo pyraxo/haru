@@ -11,5 +11,6 @@
     "alreadyPlaying": "there is already a song being played! Queue another song with {{command}}.",
     "notChannel": "the current bound text channel is {{channel}}. Please use the music commands there."
   },
-  "dc": "Disconnected from '{{voice}}' and unbound from {{text}}."
+  "dc": "Disconnected from '{{voice}}' and unbound from {{text}}.",
+  "switch": "Switching to streaming mode and playing from {{station}}"
 }

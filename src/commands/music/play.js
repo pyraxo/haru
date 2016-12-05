@@ -52,7 +52,7 @@ class Play extends Command {
       return responder.error('{{errors.notInChannel}}', { command: `**\`${settings.prefix}summon\`**` })
     }
     const chan = music.getBoundChannel(msg.guild.id)
-    if (chan !== msg.channel.id) {
+    if (chan && chan !== msg.channel.id) {
       return responder.error('{{errors.notChannel}}', {
         channel: client.getChannel(chan).mention,
         deleteDelay: 5000
@@ -61,20 +61,23 @@ class Play extends Command {
 
     const voiceChannel = client.getChannel(conn.channelID)
     if (rawArgs.length === 0) {
+      const state = music.states.get(msg.guild.id)
       if (conn.playing) {
         return responder.error('{{errors.alreadyPlaying}}', {
           command: `**\`${settings.prefix}play\`**`
         })
       }
-      try {
-        if (!(await music.queue.getLength(msg.guild.id))) {
-          return responder.format('emoji:info').reply('{{errors.emptyQueue}}', { play: `**\`${settings.prefix}play\`**` })
+      if (typeof state === 'string') {
+        try {
+          if (!await music.queue.getLength(msg.guild.id)) {
+            return responder.format('emoji:info').reply('{{errors.emptyQueue}}', { play: `**\`${settings.prefix}play\`**` })
+          }
+          return music.play(voiceChannel)
+        } catch (err) {
+          logger.error(`Encountered erroring querying queue length for ${msg.guild.id}`)
+          logger.error(err)
+          responder.error('{{%ERROR}}')
         }
-        return music.play(voiceChannel)
-      } catch (err) {
-        logger.error(`Encountered erroring querying queue length for ${msg.guild.id}`)
-        logger.error(err)
-        responder.error('{{%ERROR}}')
       }
     }
     const text = rawArgs.join(' ')

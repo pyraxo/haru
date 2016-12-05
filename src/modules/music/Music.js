@@ -13,6 +13,7 @@ class Music extends Module {
       }
     })
 
+    this.states = new Map()
     this.connections = new Map()
     this.volume = new Map()
     this.redis = this.bot.engine.cache.client
@@ -124,7 +125,6 @@ class Music extends Module {
 
   async queueSong (guildId, voiceChannel, mediaInfo) {
     if (!this.getPlayingState(voiceChannel)) {
-      await this.queue.add(guildId, mediaInfo, true)
       if (mediaInfo.audiourl) {
         try {
           await this.player.play(voiceChannel, mediaInfo)
@@ -183,13 +183,13 @@ class Music extends Module {
     const textChannel = this.getBoundChannel(guildId)
 
     if (!textChannel) return Promise.reject('notInChannel')
-    if (!await this.queue.getLength(guildId)) {
-      this.send(textChannel, ':info:  |  {{queueFinish}}')
-      return this.player.stop(channel)
-    }
     const volume = this.volume.get(guildId) || 2
     if (mediaInfo) {
       return this.player.play(channel, mediaInfo, volume)
+    }
+    if (!await this.queue.getLength(guildId)) {
+      this.send(textChannel, ':info:  |  {{queueFinish}}')
+      return this.player.stop(channel)
     }
 
     const item = await this.queue.shift(guildId)
@@ -208,6 +208,7 @@ class Music extends Module {
     if (this.getPlayingState(channel)) {
       this.player.stop(channel)
     }
+
     return this.player.play(channel, mediaInfo, volume)
   }
 
