@@ -9,9 +9,8 @@ class Info extends Command {
   }
 
   async handle ({ msg, settings }, responder) {
-    const description = this.i18n.get('info.info', settings.lang)
     return responder.format(['emoji:info', 'bold']).send('{{warn}}', { embed: {
-      description,
+      description: responder.t('{{info}}'),
       color: 14892182,
       url: 'https://pyraxo.moe/haru',
       author: {

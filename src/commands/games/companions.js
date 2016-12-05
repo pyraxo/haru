@@ -25,11 +25,11 @@ class Companions extends Command {
     const stats = companion.stats || {}
     responder.embed({
       color: this.colours.blue,
-      author: { name: this.t('{{definitions.info}}', settings.lang), icon_url: msg.author.avatarURL },
+      author: { name: responder.t('{{definitions.info}}'), icon_url: msg.author.avatarURL },
       description: `**\`LVL ${Math.floor(Math.cbrt(companion.xp)) || 0}\`** :${companion.type}:  ${companion.name}`,
       fields: [
-        { name: this.t('{{definitions.wins}}', settings.lang), value: stats.wins || 0, inline: true },
-        { name: this.t('{{definitions.losses}}', settings.lang), value: stats.losses || 0, inline: true }
+        { name: responder.t('{{definitions.wins}}'), value: stats.wins || 0, inline: true },
+        { name: responder.t('{{definitions.losses}}'), value: stats.losses || 0, inline: true }
       ]
     }).send()
   }
@@ -101,7 +101,7 @@ class Companions extends Command {
     user.credits -= companions.prices[0]
     const companion = new db.Companion({
       id: msg.author.id,
-      name: this.t('{{definitions.info2}}', settings.lang, {
+      name: responder.t('{{definitions.info2}}', {
         author: msg.author.username
       }),
       type: choice

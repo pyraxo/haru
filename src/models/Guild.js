@@ -9,18 +9,9 @@ module.exports = function () {
     schema: {
       id: string(),
       permissions: object().schema({
-        roles: object().schema({
-          id: string(),
-          nodes: object()
-        }).default({}),
-        channels: object().schema({
-          id: string(),
-          nodes: object()
-        }).default({}),
-        members: object().schema({
-          id: string(),
-          nodes: object()
-        }).default({})
+        roles: object().default({}),
+        channels: object().default({}),
+        members: object().default({})
       }).default({}),
       deleted: bool().default(false),
       prefix: string().default(process.env.CLIENT_PREFIX),

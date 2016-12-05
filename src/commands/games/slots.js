@@ -1,3 +1,4 @@
+const moment = require('moment')
 const { Command } = require('../../core')
 
 class Slots extends Command {
@@ -21,13 +22,13 @@ class Slots extends Command {
       '🍒 x 2': 5,
       '🍒 x 3': 10,
       '7⃣ x 2': 50,
-      '7⃣ x 3': 150,
+      '7⃣ x 3': 125,
       '🍐 x 3': 20,
       '🍈 x 3': 20,
       '🍇 x 3': 20,
       '🍊 x 3': 20,
       '💎 x 2': 25,
-      '💎 x 3': 200,
+      '💎 x 3': 175,
       '🔔 x 3': 50,
       '🍉 x 3': 20,
       '🇱🇻 x 2': 40,
@@ -58,7 +59,14 @@ class Slots extends Command {
     return wins
   }
 
-  async handle ({ msg, args, data, settings }, responder) {
+  async handle ({ msg, args, data, settings, cache }, responder) {
+    let dailyWins = await cache.client.getAsync(`slots:${msg.author.id}`)
+    if (parseInt(dailyWins, 10) >= 1) {
+      const res = await cache.client.pttlAsync(`slots:${msg.author.id}`)
+      return responder.error('{{dailyLimit}}', {
+        time: `${moment(res + moment()).fromNow(true)}`
+      })
+    }
     const user = await data.User.fetch(msg.author.id)
     if (args.bet > 1000) args.bet = 1000
     if (args.bet < 1) return responder.error('{{yudodis}}')
@@ -75,10 +83,16 @@ class Slots extends Command {
     const winnings = this.checkWinnings(payline, args.bet)
     try {
       user.credits -= args.bet
+      let total = 0
       for (const win of winnings) {
         user.credits += win[1]
+        total += win[1]
       }
       await user.save()
+      await cache.client.multi()
+      .incrby(`slots:${msg.author.id}`, total)
+      .expire(`slots:${msg.author.id}`, 86400)
+      .execAsync()
     } catch (err) {
       return responder.error()
     }

@@ -63,11 +63,10 @@ class Credits extends Command {
           const amt = ~~(Math.random() * 100) + 50
           await this.topup(data, msg.author.id, amt)
           await cache.store(claimID, 1, 28800)
-          responder.format('emoji:credits').reply('{{topup}}', { amount: `**${amt}**` })
-          break
+          return responder.format('emoji:credits').reply('{{topup}}', { amount: `**${amt}**` })
         }
         default: {
-          responder.format('emoji:credits').reply('{{cooldown}}', {
+          return responder.format('emoji:credits').reply('{{cooldown}}', {
             time: `**${moment(res + moment()).fromNow(true)}**`
           })
           break
@@ -170,7 +169,7 @@ class Credits extends Command {
       let maxName = 16
       unique.forEach(u => {
         const str = `${u.username}#${u.discriminator}`
-        maxName = str.length > (maxName + 2) ? str.length + 2 : maxName
+        maxName = str.length > (maxName + 6) ? str.length + 6 : maxName
       })
       let maxCred = 4
       res.forEach(r => {

@@ -7,5 +7,6 @@
   "lost": "{{user}} placed a bet of {{amount}} credits and lost all of it.",
   "credits": "credits",
   "winnings": "Winnings",
-  "yudodis": "you can't bet less than one credit!"
+  "yudodis": "you can't bet less than one credit!",
+  "dailyLimit": "you have reached the daily limit of credits that can be won. Try again in {{time}}."
 }
