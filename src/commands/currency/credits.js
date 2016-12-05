@@ -168,7 +168,7 @@ class Credits extends Command {
       let maxName = 16
       unique.forEach(u => {
         const str = `${u.username}#${u.discriminator}`
-        maxName = str.length > (maxName + 6) ? str.length + 6 : maxName
+        maxName = str.length + 6 > maxName ? str.length + 6 : maxName
       })
       let maxCred = 4
       res.forEach(r => {
