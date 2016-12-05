@@ -17,8 +17,6 @@ class GuildLog extends Module {
     })
 
     this.ipc = this.bot.engine.ipc
-    this.logChannel = this.client.getChannel('249814267786690580')
-
     this.listeners = new Map()
   }
 
@@ -71,8 +69,9 @@ class GuildLog extends Module {
   logGuildEvent ({ event, guild }) {
     this.sendStats()
 
-    if (!this.logChannel) return
-    this.send(this.logChannel, '', { embed: {
+    const logChannel = this.client.getChannel('249814267786690580')
+    if (!logChannel) return
+    this.send(logChannel, '', { embed: {
       author: {
         name: guild.name,
         icon_url: guild.iconURL
