@@ -74,7 +74,7 @@ class Stats extends Command {
         },
         {
           name: responder.t('{{commandsUsed}}'),
-          value: await cache.client.getAsync('cmdUsage'),
+          value: (await cache.client.hgetAsync('usage', 'ALL') || '0'),
           inline: true
         }
       ]

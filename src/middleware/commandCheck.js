@@ -14,8 +14,8 @@ module.exports = {
     `${chalk.bold.blue(msg.cleanContent.replace(/\n/g, ' '))}`)
 
     cache.client.multi()
-    .incr(`cmdUsage:${commander.get(trigger).cmd.labels[0]}`)
-    .incr('cmdUsage')
+    .hincrby('usage', commander.get(trigger).cmd.labels[0], 1)
+    .hincrby('usage', 'ALL', 1)
     .exec()
 
     return container
