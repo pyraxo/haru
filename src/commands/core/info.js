@@ -4,6 +4,7 @@ class Info extends Command {
   constructor (...args) {
     super(...args, {
       name: 'info',
+      aliases: ['about'],
       description: 'Information about me'
     })
   }

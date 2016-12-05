@@ -20,5 +20,6 @@
   "yandere": "Searches the Yandere image board",
   "slots": "Plays the slot machine",
   "stats": "Statistics about me",
-  "choose": "Selects a certain choice"
+  "choose": "Selects a certain choice",
+  "invite": "Displays my invite link"
 }
