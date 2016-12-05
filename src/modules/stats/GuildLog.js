@@ -92,7 +92,7 @@ class GuildLog extends Module {
       icon: guild.icon || null,
       iconURL: guild.iconURL || null,
       ownerID: guild.ownerID || null,
-      shard: guild.shard ? guild.shard.id || null : null
+      shard: guild.shard ? guild.shard.id : null
     }
   }
 
