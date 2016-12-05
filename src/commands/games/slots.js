@@ -76,7 +76,7 @@ class Slots extends Command {
       })
     }
     const user = await data.User.fetch(msg.author.id)
-    if (args.bet > 1000) args.bet = 1000
+    if (args.bet > 10000) args.bet = 10000
     if (args.bet < 1) return responder.error('{{yudodis}}')
     if (user.credits < args.bet) {
       return responder.error('{{insufficient}}', {
@@ -85,7 +85,7 @@ class Slots extends Command {
       })
     }
 
-    const [machine, payline, winnings] = this.doSlots(args.bet, user.credits > 1000000)
+    const [machine, payline, winnings] = this.doSlots(args.bet, args.bet > 3000)
     try {
       user.credits -= args.bet
       let total = 0
