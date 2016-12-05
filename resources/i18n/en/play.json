@@ -8,6 +8,8 @@
     ],
     "tooLong": "that song is too long! Queue one shorter than 90 minutes.",
     "noResults": "the query {{query}} gave no results.",
-    "alreadyPlaying": "there is already a song being played! Queue another song with {{command}}."
-  }
+    "alreadyPlaying": "there is already a song being played! Queue another song with {{command}}.",
+    "notChannel": "the current bound text channel is {{channel}}. Please use the music commands there."
+  },
+  "dc": "Disconnected from '{{voice}}' and unbound from {{text}}."
 }

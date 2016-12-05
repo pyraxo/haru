@@ -46,14 +46,19 @@ class Play extends Command {
   async handle ({ msg, settings, rawArgs, client }, responder) {
     const music = this.bot.engine.modules.get('music')
     const searcher = this.bot.engine.modules.get('music:search')
-    if (music.getBoundChannel(msg.guild.id) !== msg.channel.id) {
-      return
-    }
 
     const conn = music.getConnection(msg.channel)
     if (!conn) {
       return responder.error('{{errors.notInChannel}}', { command: `**\`${settings.prefix}summon\`**` })
     }
+    const chan = music.getBoundChannel(msg.guild.id)
+    if (chan !== msg.channel.id) {
+      return responder.error('{{errors.notChannel}}', {
+        channel: client.getChannel(chan).mention,
+        deleteDelay: 5000
+      })
+    }
+
     const voiceChannel = client.getChannel(conn.channelID)
     if (rawArgs.length === 0) {
       if (conn.playing) {

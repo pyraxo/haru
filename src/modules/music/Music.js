@@ -7,7 +7,10 @@ const { Module } = require('../../core')
 class Music extends Module {
   constructor (...args) {
     super(...args, {
-      name: 'music'
+      name: 'music',
+      events: {
+        voiceChannelLeave: 'voiceDC'
+      }
     })
 
     this.connections = new Map()
@@ -163,6 +166,15 @@ class Music extends Module {
     return this.queueSong(guildId, voiceChannel, mediaInfo)
   }
 
+  async voiceDC (member, channel) {
+    if (!channel.voiceMembers.has(this.client.user.id)) return
+    if (channel.voiceMembers.size === 1 && channel.voiceMembers.has(this.client.user.id)) {
+      const textChannel = this.getBoundChannel(channel.guild.id)
+      this.send(textChannel, ':headphones:  |  {{dc}}')
+      return this.player.stop(channel, true)
+    }
+  }
+
   async play (channel, mediaInfo) {
     if (channel.voiceMembers.size === 1 && channel.voiceMembers.has(this.client.user.id)) {
       return this.player.stop(channel, true)
@@ -173,7 +185,7 @@ class Music extends Module {
     if (!textChannel) return Promise.reject('notInChannel')
     if (!await this.queue.getLength(guildId)) {
       this.send(textChannel, ':info:  |  {{queueFinish}}')
-      return this.player.stop(channel, true)
+      return this.player.stop(channel)
     }
     const volume = this.volume.get(guildId) || 2
     if (mediaInfo) {

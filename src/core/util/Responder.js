@@ -48,7 +48,7 @@ class Responder {
   t (content = '', tags = {}) {
     const cmd = this.command
     const file = cmd.name ? cmd.name.split(':')[0] : (cmd.labels ? cmd.labels[0] : 'common')
-    return cmd.i18n.parse(content, cmd.localeKey || file || null, this.settings, tags)
+    return cmd.i18n.parse(content, cmd.localeKey || file || null, this.settings.lang, tags)
   }
 
   _send (method, response = '', options = {}) {

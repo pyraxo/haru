@@ -13,15 +13,20 @@ class Skip extends Command {
   async handle ({ msg, settings, client }, responder) {
     const music = this.bot.engine.modules.get('music')
     if (!music) return
-    if (music.getBoundChannel(msg.guild.id) !== msg.channel.id) {
-      return
-    }
     const conn = music.getConnection(msg.channel)
     if (!conn) {
       return responder.error('{{errors.notInChannel}}', {
         command: `**\`${settings.prefix}summon\`**`
       })
     }
+    const chan = music.getBoundChannel(msg.guild.id)
+    if (chan !== msg.channel.id) {
+      return responder.error('{{errors.notChannel}}', {
+        channel: client.getChannel(chan).mention,
+        deleteDelay: 5000
+      })
+    }
+
     return music.skip(msg)
   }
 }

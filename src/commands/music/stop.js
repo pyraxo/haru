@@ -7,25 +7,30 @@ class Stop extends Command {
       aliases: ['destroy'],
       description: 'Stops currently playing music',
       cooldown: 5,
-      options: { guildOnly: true }
+      options: { guildOnly: true, localeKey: 'play' }
     })
   }
 
   async handle ({ msg, settings, client }, responder) {
     const music = this.bot.engine.modules.get('music')
     if (!music) return
-    if (music.getBoundChannel(msg.guild.id) !== msg.channel.id) {
-      return
-    }
     const conn = music.getConnection(msg.channel)
     if (!conn) {
-      return responder.error(this.i18n.shift(this.i18n.get('play.errors.notInChannel', settings.lang), {
+      return responder.error('{{errors.notInChannel}}', {
         command: `**\`${settings.prefix}summon\`**`
-      }))
+      })
     }
+    const chan = music.getBoundChannel(msg.guild.id)
+    if (chan !== msg.channel.id) {
+      return responder.error('{{errors.notChannel}}', {
+        channel: client.getChannel(chan).mention,
+        deleteDelay: 5000
+      })
+    }
+
     const voice = client.getChannel(conn.channelID)
     await music.player.stop(voice, true)
-    responder.format('emoji:headphones').send('{{success}}', {
+    responder.format('emoji:headphones').send('{{dc}}', {
       voice: `**${voice.name}**`,
       text: msg.channel.mention
     })

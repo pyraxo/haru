@@ -2,5 +2,6 @@
   "nowPlaying": "Now Playing",
   "skipping": "Skipping",
   "finishedPlaying": "Finished playing",
-  "queueFinish": ["The queue is now empty. Leaving the voice channel."]
+  "queueFinish": "The queue is now empty.",
+  "dc": "Disconnected from voice channel due to inactivity."
 }
