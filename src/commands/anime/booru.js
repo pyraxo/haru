@@ -30,7 +30,7 @@ class Booru extends Command {
         { name: responder.t('{{rating}}'), value: responder.t(`{{${rating}}}`), inline: true },
         {
           name: responder.t('{{tags}}'),
-          value: tags.length > 5 ? tags.slice(0, 5).join(' ') + ` *(and ${tags.length - 5} more)*` : tags
+          value: tags.length > 5 ? tags.slice(0, 5).join(' ') + ` *(and ${tags.length - 5} more)*` : tags.join(' ')
         }
       ],
       image: { url, height, width },
