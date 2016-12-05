@@ -59,6 +59,14 @@ class Slots extends Command {
     return wins
   }
 
+  doSlots (bet, forceLose = false) {
+    const machine = this.generateSlots
+    const payline = [machine[0][1], machine[1][1], machine[2][1]]
+    const winnings = this.checkWinnings(payline, bet)
+    return winnings.length > 0 && forceLose
+    ? this.doSlots(bet, forceLose) : [ machine, payline, winnings ]
+  }
+
   async handle ({ msg, args, data, settings, cache }, responder) {
     let dailyWins = await cache.client.getAsync(`slots:${msg.author.id}`)
     if (parseInt(dailyWins, 10) >= 1000000) {
@@ -77,10 +85,7 @@ class Slots extends Command {
       })
     }
 
-    const machine = this.generateSlots
-    let payline = [machine[0][1], machine[1][1], machine[2][1]]
-
-    const winnings = this.checkWinnings(payline, args.bet)
+    const [machine, payline, winnings] = this.doSlots(args.bet, user.credits > 1000000)
     try {
       user.credits -= args.bet
       let total = 0
