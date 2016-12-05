@@ -56,6 +56,11 @@ class Play extends Command {
     }
     const voiceChannel = client.getChannel(conn.channelID)
     if (rawArgs.length === 0) {
+      if (conn.playing) {
+        return responder.error('{{errors.alreadyPlaying}}', {
+          command: `**\`${settings.prefix}play\`**`
+        })
+      }
       try {
         if (!(await music.queue.getLength(msg.guild.id))) {
           return responder.format('emoji:info').reply('{{errors.emptyQueue}}', { play: `**\`${settings.prefix}play\`**` })

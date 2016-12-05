@@ -168,15 +168,19 @@ class Music extends Module {
       return this.player.stop(channel, true)
     }
     const guildId = channel.guild.id
+    const textChannel = this.getBoundChannel(guildId)
+
+    if (!textChannel) return Promise.reject('notInChannel')
     if (!await this.queue.getLength(guildId)) {
-      return Promise.reject('noSongs')
+      this.send(textChannel, ':info:  |  {{queueFinish}}')
+      return this.player.stop(channel, true)
     }
-    const item = await this.queue.shift(guildId)
     const volume = this.volume.get(guildId) || 2
     if (mediaInfo) {
       return this.player.play(channel, mediaInfo, volume)
     }
 
+    const item = await this.queue.shift(guildId)
     const url = mediaInfo ? mediaInfo.url || item.url : item.url
 
     try {
@@ -201,7 +205,6 @@ class Music extends Module {
 
   async skip (msg, force = false) {
     let channel = this.client.getChannel(msg.member.voiceState.channelID)
-    if ((await this.queue.getLength(msg.guild.id)) <= 1) return Promise.resolve()
 
     if (!force && channel.members > 2) {
       let vote = this.votes.get(msg.guild.id) || []

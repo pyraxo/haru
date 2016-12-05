@@ -2,5 +2,5 @@
   "nowPlaying": "Now Playing",
   "skipping": "Skipping",
   "finishedPlaying": "Finished playing",
-  "queueFinish": "The queue is now empty."
+  "queueFinish": ["The queue is now empty. Leaving the voice channel."]
 }

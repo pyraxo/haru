@@ -16,11 +16,6 @@ class Skip extends Command {
     if (music.getBoundChannel(msg.guild.id) !== msg.channel.id) {
       return
     }
-    if (await music.queue.getLength(msg.guild.id) <= 1) {
-      return responder.error('{{errors.emptyQueue}}', {
-        play: `**\`${settings.prefix}play\`**`
-      })
-    }
     const conn = music.getConnection(msg.channel)
     if (!conn) {
       return responder.error('{{errors.notInChannel}}', {

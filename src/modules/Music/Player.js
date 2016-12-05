@@ -88,16 +88,6 @@ class Player extends Module {
 
   async skip (guildID, channel) {
     await this.stop(channel)
-    let result = await this.queue.shift(guildID)
-    const textChannel = this.manager.getBoundChannel(guildID)
-    if (!textChannel) return
-    this.send(textChannel, `:skip:  |  {{skipping}} **${result.title}**`)
-
-    const length = await this.queue.getLength(channel.guild.id)
-    if (length === 0) {
-      this.send(textChannel, ':info:  |  {{queueFinish}}')
-      return
-    }
     return this.manager.play(channel)
   }
 }
