@@ -16,7 +16,20 @@ class GuildLog extends Module {
       }
     })
 
+    this.ipc = this.bot.engine.ipc
     this.logChannel = this.client.getChannel('249814267786690580')
+
+    this.listeners = new Map()
+  }
+
+  init () {
+    this.listeners.set('guildCreate', this.logGuildEvent.bind(this))
+    this.listeners.set('guildDelete', this.logGuildEvent.bind(this))
+
+    this.ipc.removeAllListeners()
+    for (const [event, listener] of this.listeners.entries()) {
+      this.ipc.on(event, listener)
+    }
   }
 
   sendStats () {
@@ -55,10 +68,7 @@ class GuildLog extends Module {
     }
   }
 
-  newGuild (guild) {
-    logger.info(`Guild created: ${guild.name} (${guild.id})`)
-    logger.info(`${chalk.cyan.bold('U:')} ${guild.members.size} | ${chalk.cyan.bold('S:')} ${guild.shard.id}`)
-
+  logGuildEvent ({ event, guild }) {
     this.sendStats()
 
     if (!this.logChannel) return
@@ -67,33 +77,44 @@ class GuildLog extends Module {
         name: guild.name,
         icon_url: guild.iconURL
       },
-      title: `Guild Created: ${guild.members.size} members`,
-      color: this.getColour('green'),
+      title: `Guild ${event === 'created' ? 'Created' : 'Deleted'}: ${guild.memberCount} members`,
+      color: this.getColour(event === 'created' ? 'green' : 'red'),
       footer: {
-        text: `Shard ${guild.shard.id}  |  ${moment().format('ddd Do MMM, YYYY [at] hh:mm:ss a')}`
+        text: `Shard ${guild.shard}  |  ${moment().format('ddd Do MMM, YYYY [at] hh:mm:ss a')}`
       }
     }})
   }
 
+  parseGuild (guild) {
+    return {
+      id: guild.id,
+      name: guild.name || null,
+      memberCount: guild.memberCount || null,
+      icon: guild.icon || null,
+      iconURL: guild.iconURL || null,
+      ownerID: guild.ownerID || null,
+      shard: guild.shard ? guild.shard.id || null : null
+    }
+  }
+
+  newGuild (guild) {
+    const g = this.parseGuild(guild)
+    logger.info(`Guild created: ${g.name} (${g.id})`)
+    logger.info(`${chalk.cyan.bold('U:')} ${g.memberCount} | ${chalk.cyan.bold('S:')} ${g.shard}`)
+    this.ipc.send('broadcast', {
+      op: 'guildCreate',
+      d: { event: 'created', guild: g }
+    })
+  }
+
   delGuild (guild) {
-    if (!this.logChannel) return
-    logger.info(`Guild deleted: ${guild.name} (${guild.id})`)
-    logger.info(`${chalk.cyan.bold('U:')} ${guild.members.size} | ${chalk.cyan.bold('S:')} ${guild.shard.id}`)
-
-    this.sendStats()
-
-    if (!this.logChannel) return
-    this.send(this.logChannel, '', { embed: {
-      author: {
-        name: guild.name,
-        icon_url: guild.iconURL
-      },
-      title: `Guild Deleted: ${guild.members.size} members`,
-      color: this.getColour('red'),
-      footer: {
-        text: `Shard ${guild.shard.id}  |  ${moment().format('ddd Do MMM, YYYY [at] hh:mm:ss a')}`
-      }
-    }})
+    const g = this.parseGuild(guild)
+    logger.info(`Guild deleted: ${g.name} (${g.id})`)
+    logger.info(`${chalk.cyan.bold('U:')} ${g.memberCount} | ${chalk.cyan.bold('S:')} ${g.shard}`)
+    this.ipc.send('broadcast', {
+      op: 'guildDelete',
+      d: { event: 'deleted', guild: g }
+    })
   }
 }
 

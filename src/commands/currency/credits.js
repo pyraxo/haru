@@ -69,7 +69,6 @@ class Credits extends Command {
           return responder.format('emoji:credits').reply('{{cooldown}}', {
             time: `**${moment(res + moment()).fromNow(true)}**`
           })
-          break
         }
       }
     } catch (err) {
