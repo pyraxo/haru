@@ -59,12 +59,14 @@ class Slots extends Command {
     return wins
   }
 
-  doSlots (bet, forceLose = false) {
+  doSlots (bet, lowerChances = false) {
     const machine = this.generateSlots
     const payline = [machine[0][1], machine[1][1], machine[2][1]]
     const winnings = this.checkWinnings(payline, bet)
-    return winnings.length > 0 && forceLose
-    ? this.doSlots(bet, forceLose) : [ machine, payline, winnings ]
+
+    const reroll = Math.random() >= 0.15
+    return winnings.length > 0 && lowerChances && reroll
+    ? this.doSlots(bet, lowerChances) : [ machine, payline, winnings ]
   }
 
   async handle ({ msg, args, data, settings, cache }, responder) {

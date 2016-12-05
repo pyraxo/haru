@@ -26,8 +26,8 @@ class Skip extends Command {
         deleteDelay: 5000
       })
     }
-
-    return music.skip(msg)
+    const voiceChannel = client.getChannel(conn.channelID)
+    return music.skip(msg.guild.id, voiceChannel, msg.author.id)
   }
 }
 

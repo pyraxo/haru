@@ -216,26 +216,24 @@ class Music extends Module {
     this.volume.set(guild.id, (parseInt(volume, 10) * 2) / 100)
   }
 
-  async skip (msg, force = false) {
-    let channel = this.client.getChannel(msg.member.voiceState.channelID)
-
-    if (!force && channel.members > 2) {
-      let vote = this.votes.get(msg.guild.id) || []
-      if (vote.includes(msg.author.id)) {
+  async skip (guildId, voiceChannel, authorId, force = false) {
+    if (!force && voiceChannel.members > 2) {
+      let vote = this.votes.get(guildId) || []
+      if (vote.includes(authorId)) {
         return Promise.resolve('alreadyVoted')
       }
 
-      vote.push(msg.author.id)
+      vote.push(authorId)
 
-      if ((vote.length / channel.members) < 0.5) {
-        this.votes.set(msg.guild.id, vote)
+      if ((vote.length / voiceChannel.members) < 0.5) {
+        this.votes.set(guildId, vote)
         return Promise.resolve('voteSuccess')
       } else {
-        this.votes.set(msg.guild.id, 0)
+        this.votes.set(guildId, 0)
       }
     }
 
-    return this.player.skip(msg.guild.id, channel)
+    return this.player.skip(guildId, voiceChannel)
   }
 }
 
