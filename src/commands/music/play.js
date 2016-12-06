@@ -61,23 +61,20 @@ class Play extends Command {
 
     const voiceChannel = client.getChannel(conn.channelID)
     if (rawArgs.length === 0) {
-      const state = music.states.get(msg.guild.id)
       if (conn.playing) {
         return responder.error('{{errors.alreadyPlaying}}', {
           command: `**\`${settings.prefix}play\`**`
         })
       }
-      if (typeof state === 'string') {
-        try {
-          if (!await music.queue.getLength(msg.guild.id)) {
-            return responder.format('emoji:info').reply('{{errors.emptyQueue}}', { play: `**\`${settings.prefix}play\`**` })
-          }
-          return music.play(voiceChannel)
-        } catch (err) {
-          logger.error(`Encountered erroring querying queue length for ${msg.guild.id}`)
-          logger.error(err)
-          responder.error('{{%ERROR}}')
+      try {
+        if (!await music.queue.getLength(msg.guild.id)) {
+          return responder.format('emoji:info').reply('{{errors.emptyQueue}}', { play: `**\`${settings.prefix}play\`**` })
         }
+        return music.play(voiceChannel)
+      } catch (err) {
+        logger.error(`Encountered erroring querying queue length for ${msg.guild.id}`)
+        logger.error(err)
+        responder.error('{{%ERROR}}')
       }
     }
     const text = rawArgs.join(' ')

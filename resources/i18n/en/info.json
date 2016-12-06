@@ -12,5 +12,6 @@
   "lib": "Library",
   "ver": "Version",
   "src": "Source code",
-  "inv": "Invite me!"
+  "inv": "Invite me!",
+  "ptr": "Help keep haru running!"
 }
