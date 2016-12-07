@@ -61,7 +61,7 @@ class Play extends Command {
 
     const voiceChannel = client.getChannel(conn.channelID)
     if (rawArgs.length === 0) {
-      if (conn.playing) {
+      if (conn.playing && typeof music.states.get(msg.guild.id) !== 'string') {
         return responder.error('{{errors.alreadyPlaying}}', {
           command: `**\`${settings.prefix}play\`**`
         })

@@ -23,5 +23,8 @@
   "choose": "Selects a certain choice",
   "invite": "Displays my invite link",
   "stream": "Plays from a supported stream",
-  "queue": "Lists songs in the queue"
+  "queue": "Lists songs in the queue",
+  "whois": "Displays information of a member",
+  "channel": "Displays information of a channel",
+  "server": "Displays information of a server"
 }

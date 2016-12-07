@@ -65,24 +65,21 @@ class Player extends Module {
       }
     })
 
-    conn.once('error', async err => {
-      await this.stop(channel)
-      if (err) {
-        logger.error(`Encountered an error while streaming to ${conn.id}`)
-        logger.error(err)
-      }
-      return this.play(channel, mediaInfo, volume)
+    conn.once('error', err => {
+      this.stop(channel).then(() => {
+        if (err) {
+          logger.error(`Encountered an error while streaming to ${conn.id}`)
+          logger.error(err)
+        }
+        return this.play(channel, mediaInfo, volume)
+      })
     })
 
-    conn.once('end', async () => {
+    conn.once('end', () => {
       this.manager.states.delete(channel.guild.id)
       this.send(textChannel, `:stop:  |  {{finishedPlaying}} **${mediaInfo.title}** `)
       if (channel.voiceMembers.size === 1 && channel.voiceMembers.has(this.client.user.id)) {
         return this.stop(channel, true)
-      }
-      if (!await this.queue.getLength(channel.guild.id)) {
-        this.send(textChannel, ':info:  |  {{queueFinish}}')
-        return this.stop(channel)
       }
       return this.manager.play(channel)
     })
@@ -104,8 +101,8 @@ class Player extends Module {
     if (!conn) return
 
     conn.removeAllListeners('end')
-    await Promise.delay(3000)
-    conn.stopPlaying()
+    await Promise.delay(5000)
+    if (conn.playing) conn.stopPlaying()
 
     if (leave) {
       this.client.leaveVoiceChannel(channel.id)

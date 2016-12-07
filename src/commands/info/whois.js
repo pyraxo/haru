@@ -7,9 +7,8 @@ class Whois extends Command {
       name: 'whois',
       aliases: ['uinfo', 'user'],
       description: 'Displays information of a user',
-      usage: [
-        { name: 'member', type: 'member', optional: true }
-      ]
+      usage: [{ name: 'member', type: 'member', optional: true }],
+      options: { guildOnly: true }
     })
   }
 
@@ -27,7 +26,7 @@ class Whois extends Command {
     return responder.embed({
       color: this.colours.blue,
       author: { name: `${member.user.username}#${member.user.discriminator}`, icon_url: member.user.avatarURL },
-      description: member.game ? `${responder.t('{{playing}}')} **${member.game.name}**` : null,
+      description: member.game ? `${responder.t('{{playing}}')} **${member.game.name}**` : undefined,
       thumbnail: { url: member.user.avatarURL },
       fields: [
         { name: 'ID', value: member.id, inline: true },

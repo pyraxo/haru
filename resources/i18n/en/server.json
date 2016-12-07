@@ -1,0 +1,14 @@
+{
+  "shard": "Shard",
+  "defaultChannel": "Default Channel",
+  "region": "Region",
+  "createdOn": "Account Creation",
+  "joinedOn": "Join Date",
+  "roles": "Roles",
+  "members": "Members",
+  "channels": "Channels",
+  "owner": "Owner",
+  "online": "online",
+  "text": "Text",
+  "voice": "Voice"
+}
