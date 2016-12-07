@@ -202,12 +202,7 @@ class Music extends Module {
       return Promise.reject(err)
     }
     if (!mediaInfo) {
-      this.queue.remove(channel.guild.id)
       return this.play(channel)
-    }
-
-    if (this.getPlayingState(channel)) {
-      this.player.stop(channel)
     }
 
     return this.player.play(channel, mediaInfo, volume)

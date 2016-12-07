@@ -65,14 +65,13 @@ class Player extends Module {
       }
     })
 
-    conn.once('error', err => {
-      this.stop(channel).then(() => {
-        this.play(channel, mediaInfo, volume)
-        if (err) {
-          logger.error(`Encountered an error while streaming to ${conn.id}`)
-          logger.error(err)
-        }
-      })
+    conn.once('error', async err => {
+      await this.stop(channel)
+      if (err) {
+        logger.error(`Encountered an error while streaming to ${conn.id}`)
+        logger.error(err)
+      }
+      return this.play(channel, mediaInfo, volume)
     })
 
     conn.once('end', async () => {
@@ -100,11 +99,12 @@ class Player extends Module {
     try {
       conn = await this.manager.getConnection(channel)
     } catch (err) {
-      return Promise.reject(err)
+      throw err
     }
     if (!conn) return
 
     conn.removeAllListeners('end')
+    await Promise.delay(1000)
     conn.stopPlaying()
 
     if (leave) {
