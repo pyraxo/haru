@@ -57,7 +57,7 @@ class Player extends Module {
     conn.play(mediaInfo.audiourl, options)
     this.manager.states.set(channel.guild.id, mediaInfo)
 
-    conn.on('disconnect', err => {
+    conn.once('disconnect', err => {
       this.stop(channel, true)
       if (err) {
         logger.error(`Encountered an error while streaming to ${conn.id}`)
@@ -65,7 +65,7 @@ class Player extends Module {
       }
     })
 
-    conn.on('error', err => {
+    conn.once('error', err => {
       this.stop(channel).then(() => {
         this.play(channel, mediaInfo, volume)
         if (err) {
@@ -104,8 +104,8 @@ class Player extends Module {
     }
     if (!conn) return
 
-    // conn.removeAllListeners('end')
-    if (conn.playing) conn.stopPlaying()
+    conn.removeAllListeners('end')
+    conn.stopPlaying()
 
     if (leave) {
       this.client.leaveVoiceChannel(channel.id)
