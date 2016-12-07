@@ -187,6 +187,7 @@ class Music extends Module {
     if (mediaInfo) {
       return this.player.play(channel, mediaInfo, volume)
     }
+
     if (!await this.queue.getLength(guildId)) {
       this.send(textChannel, ':info:  |  {{queueFinish}}')
       return this.player.stop(channel)
