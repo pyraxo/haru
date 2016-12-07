@@ -1,4 +1,5 @@
 const emojis = require('node-emoji')
+const { padEnd } = require('./Util')
 const emoji = require('./Emojis')
 
 class Responder {
@@ -35,7 +36,7 @@ class Responder {
     responder.responseMethods = this.responseMethods
     responder.formatMethods = this.formatMethods
 
-    const copy = ['_send', 'clean', 'format', 'file', 'embed', 'dialog', 't']
+    const copy = ['_send', 't', 'clean', 'format', 'file', 'embed', 'dialog', 'selection']
     copy.forEach(prop => { responder[prop] = this[prop].bind(responder) })
 
     for (let method in this.responseMethods) {
@@ -104,8 +105,10 @@ class Responder {
     for (const dialog of dialogs) {
       let prompt = dialog.prompt
       const input = this.command.resolver
+      if (Array.isArray(prompt) && prompt.length) {
+        prompt[0] = `**${prompt[0]}**`
+      }
 
-      if (Array.isArray(prompt) && prompt.length) prompt[0] = `**${prompt[0]}**`
       let p1 = await this.send(prompt, options)
       const collector = this.command.bot.engine.bridge.collect({
         channel: message.channel.id,
@@ -125,7 +128,9 @@ class Responder {
             return await input.resolve(ans, [ans.cleanContent], data, dialog.input)
           } catch (err) {
             const tags = Object.assign(err, { cancel: `\`${cancel}\`` })
-            let p2 = await this.format('emoji:fail').send(`${err.message || err}\n\n{{%menus.EXIT}}`, tags)
+            let p2 = await this.format('emoji:fail').send(
+              `${err.err || err.message || err || '{{%menus.ERROR}}'}\n\n{{%menus.EXIT}}`, tags
+            )
             return awaitMessage(p2)
           }
         } catch (o) {
@@ -155,6 +160,31 @@ class Responder {
 
     if (cancelled) return Promise.reject()
     return Promise.resolve(args)
+  }
+
+  async selection (selections = [], options = {}) {
+    if (!selections.length) return
+    if (selections.length === 1) return [selections[0], 0]
+
+    const choices = selections.splice(0, 10)
+    const { title = '{{%menus.SELECTION}}', footer = '{{%menus.INPUT}}', prop } = options
+
+    try {
+      const { reply } = await this.dialog([{
+        prompt: [
+          '```markdown',
+          `### ${title} ###\n`,
+          choices.map((c, i) => `${padEnd(`[${i + 1}]:`, 4)} ${prop ? c[prop] : c}`).join('\n'),
+          selections.length > 10 ? `And ${selections.length - 10} more...\n` : '',
+          Array.isArray(footer) ? footer.join('\n') : '> ' + footer,
+          '```'
+        ].join('\n'),
+        input: { type: 'int', name: 'reply', min: 1, max: choices.length }
+      }], options)
+      return [prop ? selections[prop] : selections[reply - 1], reply - 1]
+    } catch (err) {
+      return []
+    }
   }
 }
 

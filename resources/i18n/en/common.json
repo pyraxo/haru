@@ -5,7 +5,10 @@
   "menus": {
     "EXIT": "Enter {{cancel}} to exit the menu.",
     "ERRORED": "the menu has closed:",
-    "EXITED": "you have exited the menu."
+    "EXITED": "you have exited the menu.",
+    "SELECTION": "Selection Menu",
+    "ERROR": "Unknown Error",
+    "INPUT": "Type the number of your choice into chat."
   },
   "collector": {
     "timeout": "Timeout after {{time}}s",
@@ -37,8 +40,8 @@
     },
     "int": {
       "NOT_INT": "{{arg}} is not an integer",
-      "MAX": "{{arg}} must be <= than {{max}}",
-      "MIN": "{{arg}} must be >= than {{min}}"
+      "MAX": "{{arg}} must be less than or equals to {{max}}",
+      "MIN": "{{arg}} must be more than or equals to {{min}}"
     }
   }
 }

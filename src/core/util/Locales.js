@@ -3,13 +3,17 @@ const Collection = require('./Collection')
 
 class Locales {
   constructor (folderpath) {
-    if (typeof folderpath !== 'string') throw new TypeError('Invalid locale filepath')
     this._folder = folderpath
 
-    this.reload()
+    if (typeof this._folder === 'string') {
+      this.reload()
+    }
   }
 
   reload () {
+    if (typeof this._folder !== 'string') {
+      throw new TypeError('Invalid locale filepath')
+    }
     Object.keys(require.cache).forEach(filepath => {
       if (!filepath.startsWith(this._folder)) return
       delete require.cache[require.resolve(filepath)]

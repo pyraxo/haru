@@ -22,7 +22,9 @@ class Bet extends Command {
     const companions = this.bot.engine.modules.get('companions')
     if (!companions) return logger.error('Companions module not found')
 
-    const member = args.member[0].user
+    const [, idx] = await responder.selection(args.member.map(m => `${m.user.username}#${m.user.discriminator}`))
+    if (!idx) return
+    const member = args.member[idx]
     const battle = companions.getBattle(msg.channel.id)
     if (!battle) return responder.error('{{errors.noBattle}}')
     if (battle.p1 === msg.author.id || battle.p2 === msg.author.id) {
