@@ -104,7 +104,7 @@ class Player extends Module {
     if (!conn) return
 
     conn.removeAllListeners('end')
-    await Promise.delay(1000)
+    await Promise.delay(3000)
     conn.stopPlaying()
 
     if (leave) {
