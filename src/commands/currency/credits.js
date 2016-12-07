@@ -78,7 +78,7 @@ class Credits extends Command {
 
   async give ({ msg, cache, data, args }, responder) {
     const [, idx] = await responder.selection(args.member.map(m => `${m.user.username}#${m.user.discriminator}`))
-    if (!idx) return
+    if (typeof idx !== 'number') return
     const member = args.member[idx]
     if (member.id === msg.author.id) {
       responder.error('{{selfSenderError}}')

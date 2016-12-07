@@ -163,7 +163,7 @@ class Responder {
   }
 
   async selection (selections = [], options = {}) {
-    if (!selections.length) return
+    if (!selections.length) return []
     if (selections.length === 1) return [selections[0], 0]
 
     const choices = selections.splice(0, 10)
