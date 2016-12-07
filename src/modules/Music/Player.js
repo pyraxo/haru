@@ -104,12 +104,14 @@ class Player extends Module {
     }
     if (!conn) return
 
-    conn.removeAllListeners('end')
+    // conn.removeAllListeners('end')
     if (conn.playing) conn.stopPlaying()
 
     if (leave) {
       this.client.leaveVoiceChannel(channel.id)
       this.manager.unbindChannel(channel.guild.id)
+      this.manager.states.delete(channel.guild.id)
+      await this.queue.clear(channel.guild.id)
     }
     return
   }

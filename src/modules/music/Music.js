@@ -229,7 +229,7 @@ class Music extends Module {
         this.votes.set(guildId, vote)
         return Promise.resolve('voteSuccess')
       } else {
-        this.votes.set(guildId, 0)
+        this.votes.delete(guildId)
       }
     }
 
