@@ -9,7 +9,7 @@ class Info extends Command {
     })
   }
 
-  async handle ({ msg, settings, client }, responder) {
+  handle ({ msg, settings, client }, responder) {
     return responder.format(['emoji:info', 'bold']).send('{{warn}}', { embed: {
       description: responder.t('{{info}}'),
       color: 14892182,

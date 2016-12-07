@@ -1,0 +1,11 @@
+{
+  "shared": "Shared Servers",
+  "status": "Status",
+  "nick": "Nickname",
+  "createdOn": "Account Creation",
+  "joinedOn": "Join Date",
+  "roles": "Roles",
+  "none": "None",
+  "playing": "Playing",
+  "more": "and {{num}} more..."
+}

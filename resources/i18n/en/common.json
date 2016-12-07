@@ -8,7 +8,7 @@
     "EXITED": "you have exited the menu.",
     "SELECTION": "Selection Menu",
     "ERROR": "Unknown Error",
-    "INPUT": "Type the number of your choice into chat."
+    "INPUT": "Type the number of your choice into chat or '{{cancel}}' to cancel."
   },
   "collector": {
     "timeout": "Timeout after {{time}}s",
@@ -21,6 +21,9 @@
     "NO_END_QUOTE": "missing end quote",
     "member": {
       "NOT_FOUND": "member not found"
+    },
+    "channel": {
+      "NOT_FOUND": "channel not found"
     },
     "command": {
       "NOT_FOUND": "command not found"

@@ -12,8 +12,6 @@ module.exports = {
         return name === content || nick === content ||
         `${name}#${discrim}` === content ||
         `${nick}#${discrim}` === content ||
-        name.startsWith(content) ||
-        nick.startsWith(content) ||
         name.includes(content) ||
         nick.includes(content)
       })

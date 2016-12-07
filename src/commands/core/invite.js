@@ -9,8 +9,8 @@ class Invite extends Command {
     })
   }
 
-  async handle ({ msg }, responder) {
-    responder.send('{{invite}}', {
+  handle ({ msg }, responder) {
+    return responder.send('{{invite}}', {
       invite: '**https://pyraxo.moe/haru**',
       server: '**<https://discord.gg/bBqpAKw>**'
     })

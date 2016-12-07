@@ -168,6 +168,7 @@ class Responder {
 
     const choices = selections.splice(0, 10)
     const { title = '{{%menus.SELECTION}}', footer = '{{%menus.INPUT}}', prop } = options
+    if (!options.cancel) options.cancel = 'cancel'
 
     try {
       const { reply } = await this.dialog([{
