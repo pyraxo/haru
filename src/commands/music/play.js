@@ -54,7 +54,7 @@ class Play extends Command {
     if (matches) {
       const url = matches[0]
       try {
-        const videoID = await music.validate(matches[2])
+        const videoID = await music.validate(matches[1])
         const info = await music.add(msg.guild.id, voiceChannel, `https://www.youtube.com/watch?v=${videoID}`)
         const length = info.length ? `(${moment.duration(info.length, 'seconds').format('h[h] m[m] s[s]')}) ` : ''
         return responder.format('emoji:success').send(`{{queued}} **${info.title}** ${length}- **${msg.author.mention}**`)

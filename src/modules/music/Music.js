@@ -278,6 +278,7 @@ class Music extends Module {
       const videoID = await this.validate(matches[1])
       const info = await this.add(msg.guild.id, voiceChannel, `https://www.youtube.com/watch?v=${videoID}`)
       const length = info.length ? `(${moment.duration(info.length, 'seconds').format('h[h] m[m] s[s]')}) ` : ''
+      this.deleteMessages([msg])
       return this.send(msg.channel, `:success:  |  {{queued}} **${info.title}** ${length}- **${msg.author.mention}**`)
     } catch (err) {
       if (err instanceof Error) {
