@@ -42,6 +42,14 @@ class Queue extends Command {
       return responder.send(rep)
     } else if (typeof state === 'string') {
       return responder.format('emoji:headphones').send(`**${responder.t('{{nowplaying}}')}**: <${state}>`)
+    } else {
+      const queue = (await cache.client.lrangeAsync(`music:queues:${msg.guild.id}`, 0, 10) || [])
+      if (queue.length) rep.push('**__{{queued}}__**\n')
+      for (let i = 1; i <= queue.length; i++) {
+        const entry = JSON.parse(queue[i - 1])
+        rep.push(`\`${i}.\` ${entry.title}`)
+      }
+      return responder.send(rep)
     }
   }
 }
