@@ -28,7 +28,9 @@ class Skip extends Command {
     }
     const voiceChannel = client.getChannel(conn.channelID)
     return music.skip(msg.guild.id, voiceChannel, msg.author.id)
-    .then(res => responder.success(`{{${res}}}`))
+    .then(res => {
+      if (typeof res === 'string') responder.success(`{{${res}}}`)
+    })
   }
 }
 
