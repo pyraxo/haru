@@ -12,5 +12,7 @@
     "notChannel": "the current bound text channel is {{channel}}. Please use the music commands there."
   },
   "dc": "Disconnected from '{{voice}}' and unbound from {{text}}.",
-  "switch": "Switching to streaming mode and playing from {{station}}"
+  "switch": "Switching to streaming mode and playing from {{station}}",
+  "alreadyVoted": "you have already voted to skip this song!",
+  "voteSuccess": "you have voted to skip the current song!"
 }
