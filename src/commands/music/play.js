@@ -1,4 +1,3 @@
-const http = require('http')
 const logger = require('winston')
 const moment = require('moment')
 
@@ -13,33 +12,6 @@ class Play extends Command {
       usage: [{ name: 'action', displayName: 'youtube URL | query', optional: true }],
       cooldown: 5,
       options: { guildOnly: true }
-    })
-  }
-
-  validate (videoID) {
-    return new Promise((resolve, reject) => {
-      const options = {
-        hostname: 'www.youtube.com',
-        port: 80,
-        path: '/oembed?url=http://www.youtube.com/watch?v=' + escape(videoID) + '&format=json',
-        method: 'HEAD',
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }
-
-      const req = http.request(options, (res) => {
-        if (res.statusCode === '404' || res.statusCode === '302') {
-          reject('notFound')
-        } else {
-          resolve(videoID)
-        }
-        req.on('error', () => {
-          reject('error')
-        })
-      })
-      req.shouldKeepAlive = false
-      req.end()
     })
   }
 
@@ -78,11 +50,11 @@ class Play extends Command {
       }
     }
     const text = rawArgs.join(' ')
-    const matches = text.match(/^https:\/\/(www\.)?youtube\.com\/watch\?v=(\S{11})$/)
+    const matches = text.match(/^http(?:s?):\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-_]*)(&(amp;)?[\w\?‌=]*)?$/)
     if (matches) {
       const url = matches[0]
       try {
-        const videoID = await this.validate(matches[2])
+        const videoID = await music.validate(matches[2])
         const info = await music.add(msg.guild.id, voiceChannel, `https://www.youtube.com/watch?v=${videoID}`)
         const length = info.length ? `(${moment.duration(info.length, 'seconds').format('h[h] m[m] s[s]')}) ` : ''
         return responder.format('emoji:success').send(`{{queued}} **${info.title}** ${length}- **${msg.author.mention}**`)

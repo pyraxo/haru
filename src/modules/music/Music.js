@@ -1,5 +1,7 @@
 const logger = require('winston')
 const crypto = require('crypto')
+const http = require('http')
+const moment = require('moment')
 const ytdl = Promise.promisifyAll(require('ytdl-core'))
 
 const { Module } = require('../../core')
@@ -9,7 +11,8 @@ class Music extends Module {
     super(...args, {
       name: 'music',
       events: {
-        voiceChannelLeave: 'voiceDC'
+        voiceChannelLeave: 'voiceDC',
+        messageCreate: 'checkLink'
       }
     })
 
@@ -230,6 +233,61 @@ class Music extends Module {
     }
 
     return this.player.skip(guildId, voiceChannel)
+  }
+
+  validate (videoID) {
+    return new Promise((resolve, reject) => {
+      const options = {
+        hostname: 'www.youtube.com',
+        port: 80,
+        path: '/oembed?url=http://www.youtube.com/watch?v=' + escape(videoID) + '&format=json',
+        method: 'HEAD',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+
+      const req = http.request(options, (res) => {
+        if (res.statusCode === '404' || res.statusCode === '302') {
+          reject('notFound')
+        } else {
+          resolve(videoID)
+        }
+        req.on('error', () => {
+          reject('error')
+        })
+      })
+      req.shouldKeepAlive = false
+      req.end()
+    })
+  }
+
+  async checkLink (msg) {
+    if (!msg.guild) return
+    const text = this.connections.get(msg.guild.id)
+    if (!text || text !== msg.channel.id) return
+    const conn = this.getConnection(msg.channel)
+    const voiceChannel = this.client.getChannel(conn.channelID)
+    if (!conn) return
+
+    const matches = msg.content.match(/^http(?:s?):\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-_]*)(&(amp;)?[\w\?‌=]*)?$/)
+    if (!matches) return
+
+    const url = matches[0]
+    try {
+      const videoID = await this.validate(matches[1])
+      const info = await this.add(msg.guild.id, voiceChannel, `https://www.youtube.com/watch?v=${videoID}`)
+      const length = info.length ? `(${moment.duration(info.length, 'seconds').format('h[h] m[m] s[s]')}) ` : ''
+      return this.send(msg.channel, `:success:  |  {{queued}} **${info.title}** ${length}- **${msg.author.mention}**`)
+    } catch (err) {
+      if (err instanceof Error) {
+        logger.error(`Error adding ${url} to ${msg.guild.name} (${msg.guild.id})'s queue`)
+        logger.error(err)
+        return this.send(':error:  |  {{%ERROR}}')
+      }
+      const settings = await this.bot.engine.db.data.Guild.fetch(msg.guild.id)
+      return this.send(msg.channel, `:error:  |  {{errors.${err}}}`, { command: `**\`${settings.prefix}summon\`**` })
+    }
   }
 }
 

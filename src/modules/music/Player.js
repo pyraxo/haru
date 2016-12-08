@@ -46,9 +46,7 @@ class Player extends Module {
     const textChannel = this.manager.getBoundChannel(channel.guild.id)
 
     if (!conn || !textChannel) return Promise.reject('notInChannel')
-    if (conn.playing) {
-      conn.stopPlaying()
-    }
+    await this.stop(channel)
 
     const options = mediaInfo.audioformat === 'webm'
     ? { format: 'webm', frameDuration: 20 }

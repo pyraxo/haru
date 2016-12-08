@@ -87,7 +87,7 @@ class Slots extends Command {
       })
     }
 
-    const [machine, payline, winnings] = this.doSlots(args.bet, args.bet > 3000)
+    const [machine, payline, winnings] = this.doSlots(args.bet, args.bet > 1000)
     try {
       user.credits -= args.bet
       let total = 0
