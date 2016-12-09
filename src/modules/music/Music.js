@@ -216,7 +216,7 @@ class Music extends Module {
   }
 
   async skip (guildId, voiceChannel, authorId, force = false) {
-    if (!force && voiceChannel.voiceMembers > 2) {
+    if (!force && voiceChannel.voiceMembers.size > 2) {
       let vote = this.votes.get(guildId) || []
       if (vote.includes(authorId)) {
         return Promise.resolve('alreadyVoted')
@@ -224,7 +224,7 @@ class Music extends Module {
 
       vote.push(authorId)
 
-      if ((vote.length / voiceChannel.voiceMembers - 1) < 0.5) {
+      if ((vote.length / voiceChannel.voiceMembers.filter(m => !m.voiceState.selfDeaf && !m.voiceState.deaf).length - 1) < 0.5) {
         this.votes.set(guildId, vote)
         return Promise.resolve('voteSuccess')
       } else {
