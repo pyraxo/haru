@@ -6,9 +6,7 @@ class Exec extends Command {
     super(...args, {
       name: 'exec',
       description: 'Executes a shell command',
-      options: {
-        adminOnly: true
-      }
+      options: { adminOnly: true }
     })
   }
 
@@ -29,7 +27,7 @@ class Exec extends Command {
     } catch (err) {
       result = err
     }
-    responder.format('code:js').send(result)
+    responder.format('code:js').send(result || 'No result')
   }
 }
 
