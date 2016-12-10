@@ -68,7 +68,7 @@ class GuildLog extends Module {
     }
   }
 
-  logGuildEvent ({ event, guild }) {
+  async logGuildEvent ({ event, guild }) {
     this.sendStats()
 
     const logChannel = this.client.getChannel('249814267786690580')
@@ -84,6 +84,15 @@ class GuildLog extends Module {
         text: `Shard ${guild.shard}  |  ${moment().format('ddd Do MMM, YYYY [at] hh:mm:ss a')}`
       }
     }})
+
+    try {
+      const settings = await this.bot.engine.db.data.Guild.fetch(guild.id)
+      settings.deleted = event === 'deleted'
+      await settings.save()
+    } catch (err) {
+      logger.error(`Could not load settings for ${guild.name} (${guild.id})`)
+      logger.error(err)
+    }
   }
 
   parseGuild (guild) {

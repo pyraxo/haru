@@ -3,7 +3,7 @@ const util = require('./Util')
 module.exports = Object.assign({
   Collection: require('./Collection'),
   Responder: require('./Responder'),
-  Locales: require('./Locales'),
+  Parser: require('./Parser'),
   Parser: require('./Parser'),
   Emojis: require('./Emojis'),
   LocalCache: require('./LocalCache'),

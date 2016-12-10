@@ -9,7 +9,7 @@ const Router = require('./Router')
 
 const IPC = require('../managers/IPCManager')
 const ModelManager = require('../managers/ModelManager')
-const { Locales, Cache, readdirRecursive } = require('../util')
+const { Parser, Cache, readdirRecursive } = require('../util')
 
 class Engine extends EventEmitter {
   constructor (bot) {
@@ -25,7 +25,7 @@ class Engine extends EventEmitter {
     this.commands = new Commander(bot)
     this.modules = new Router(bot.client, bot)
     this.bridge = new Bridge(this.commands)
-    this.i18n = new Locales(path.join(bot.paths.resources, 'i18n'))
+    this.i18n = new Parser(path.join(bot.paths.resources, 'i18n'))
 
     ipc.on('registered', command => this.emit('register:ipc', command))
     db.on('loaded', id => this.emit('register:db', id))
