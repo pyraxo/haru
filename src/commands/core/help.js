@@ -59,14 +59,15 @@ class HelpMenu extends Command {
         commands[mod].map(c => `  ${padEnd(c[0], maxPad)} // ${c[1]}`).join('\n')
       ].join('\n'))
     }
-    reply.push('```**')
+    reply.push('```**', '{{footer}}')
     responder.send(reply.join('\n'), {
       DM: true,
       prefix: `\`${prefix}\``,
       defaultPrefix: `\`${process.env.CLIENT_PREFIX}\``,
       server: `**${msg.guild ? msg.guild.name : responder.t('{{pms}}')}**`,
       helpCommand: `\`${prefix}help <command>\``,
-      exampleCommand: `\`${prefix}help credits\``
+      exampleCommand: `\`${prefix}help credits\``,
+      link: '**<https://discord.gg/bBqpAKw>**'
     })
     .then(m => {
       if (msg.guild) {

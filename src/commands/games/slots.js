@@ -8,7 +8,7 @@ class Slots extends Command {
       description: 'Slot machine command',
       usage: [{ name: 'bet', type: 'int', optional: true, default: 1 }],
       aliases: ['slot'],
-      cooldown: 5
+      cooldown: 6
     })
 
     this.reel = [

@@ -8,6 +8,7 @@
     "aliases": "Aliases",
     "pms": "PMs"
   },
+  "footer": "For support, suggestions and feedback, visit {{link}}",
   "footer_group": [
     "`[]` refers to __**optional**__ arguments",
     "`<>` refers to __**required**__ arguments",

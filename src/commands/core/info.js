@@ -25,7 +25,11 @@ class Info extends Command {
         { name: responder.t('{{ver}}'), value: '2.0.0', inline: true },
         { name: responder.t('{{src}}'), value: '[iris](https://git.io/iris) - Bot base for **haru** and [Tatsumaki](https://tatsumaki.xyz)' },
         { name: responder.t('{{inv}}'), value: 'https://pyraxo.moe/haru', inline: true },
-        { name: responder.t('{{ptr}}'), value: 'https://patreon.com/pyraxo', inline: true }
+        { name: responder.t('{{ptr}}'), value: 'https://patreon.com/pyraxo', inline: true },
+        {
+          name: responder.t('{{support}}'),
+          value: responder.t('{{join}}', { link: '**https://discord.gg/bBqpAKw**' })
+        }
       ]
     }})
   }

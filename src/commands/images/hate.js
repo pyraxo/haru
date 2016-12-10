@@ -10,7 +10,8 @@ class Hate extends Command {
       description: 'I-I hate you!',
       usage: [
         { name: 'text', optional: true }
-      ]
+      ],
+      options: { perms: ['attachFiles'] }
     })
   }
 

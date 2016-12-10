@@ -12,6 +12,8 @@
   "lib": "Library",
   "ver": "Version",
   "src": "Source code",
+  "support": "Customer Support",
+  "join": "For support, suggestions and feedback, visit {{link}}",
   "inv": "Invite me!",
   "ptr": "Help keep haru running!"
 }

@@ -10,7 +10,8 @@ class Love extends Command {
       description: 'I-I love you!',
       usage: [
         { name: 'text', optional: true }
-      ]
+      ],
+      options: { perms: ['attachFiles'] }
     })
   }
 
