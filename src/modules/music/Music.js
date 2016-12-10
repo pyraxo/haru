@@ -6,7 +6,7 @@ const url = require('url')
 const querystring = require('querystring')
 const ytdl = Promise.promisifyAll(require('ytdl-core'))
 
-const { Module } = require('../../core')
+const { Module, Collection } = require('../../core')
 
 class Music extends Module {
   constructor (...args) {
@@ -18,8 +18,8 @@ class Music extends Module {
       }
     })
 
-    this.states = new Map()
-    this.connections = new Map()
+    this.states = new Collection()
+    this.connections = new Collection()
     this.volume = new Map()
     this.redis = this.bot.engine.cache.client
   }
@@ -27,6 +27,20 @@ class Music extends Module {
   init () {
     this.player = this.bot.engine.modules.get('music:player')
     this.queue = this.bot.engine.modules.get('music:queue')
+
+    this._validator = setInterval(() => {
+      for (const gid of this.connections.keys()) {
+        if (!this.client.guilds.has(gid)) {
+          this.connections.delete(gid)
+        }
+      }
+
+      for (const gid of this.states.keys()) {
+        if (!this.client.guilds.has(gid)) {
+          this.states.delete(gid)
+        }
+      }
+    }, 120000)
   }
 
   bindChannel (guildID, textChannelID) {

@@ -29,14 +29,15 @@ class LocalCache extends Collection {
     if ((typeof value === 'undefined' && this.model) || pure) {
       try {
         value = await this.model.get(key).run()
+        this.store(key, value)
       } catch (err) {
         if (err.name === 'DocumentNotFoundError') {
           const Model = this.model
           value = new Model({ id: key })
           await value.save()
+          this.store(key, value)
         }
       }
-      this.store(key, value)
     }
     return value
   }
