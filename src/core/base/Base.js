@@ -67,6 +67,14 @@ class Base {
 
   async send (channel, content, options = {}) {
     if (typeof channel === 'string') channel = this.client.getChannel(channel)
+    if (channel.guild) {
+      const guild = channel.guild
+      if (!this.hasPermissions(guild, this.client.user, 'sendMessages')) {
+        logger.error(`Channel ${channel.name} (${channel.id}) in ${guild.name} (${guild.id}) denies message sending`)
+        return
+      }
+    }
+
     let { file = null, lang, delay = 0, deleteDelay = 0, embed } = options
     if (delay) {
       await Promise.delay(delay)
@@ -88,7 +96,11 @@ class Base {
     try {
       if (!content || !content.length) {
         let msg = await channel.createMessage({ embed, content: '' }, file)
-        if (deleteDelay) setTimeout(() => msg.delete(), deleteDelay)
+        if (deleteDelay) {
+          setTimeout(() => {
+            msg.delete().catch(err => logger.error(`Could not delete message ${msg.id} - ${err}`))
+          }, deleteDelay)
+        }
         return msg
       }
       let replies = await Promise.mapSeries(content, (c, idx) => {

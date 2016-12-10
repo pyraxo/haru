@@ -2,6 +2,8 @@
   "CHECK_PMS": "check your PMs!",
   "ERROR": "an error has occurred! Please try again later.",
   "COOLDOWN": "please cool down! ({{time}} seconds left)",
+  "NO_PERMS": "you need the permission {{perms}} to run this command!",
+  "NO_PERMS_BOT": "I need the permission {{perms}} to run this command!",
   "menus": {
     "EXIT": "Enter {{cancel}} to exit the menu.",
     "ERRORED": "the menu has closed:",
