@@ -7,7 +7,7 @@ class ServerInfo extends Command {
       name: 'server',
       aliases: ['serverinfo'],
       description: 'Displays information of the server',
-      options: { guildOnly: true }
+      options: { guildOnly: true, localeKey: 'infocmd' }
     })
   }
 
@@ -22,28 +22,28 @@ class ServerInfo extends Command {
       thumbnail: { url: guild.iconURL },
       fields: [
         { name: 'ID', value: guild.id, inline: true },
-        { name: responder.t('{{shard}}'), value: guild.shard.id, inline: true },
-        { name: responder.t('{{defaultChannel}}'), value: guild.defaultChannel.mention, inline: true },
-        { name: responder.t('{{region}}'), value: guild.region, inline: true },
-        { name: `${responder.t('{{members}}')} (${guild.memberCount})`, value: `${onlineMembers} ${responder.t('{{online}}')}`, inline: true },
+        { name: responder.t('{{server.shard}}'), value: guild.shard.id, inline: true },
+        { name: responder.t('{{server.defaultChannel}}'), value: guild.defaultChannel.mention, inline: true },
+        { name: responder.t('{{server.region}}'), value: guild.region, inline: true },
+        { name: `${responder.t('{{server.members}}')} (${guild.memberCount})`, value: `${onlineMembers} ${responder.t('{{server.online}}')}`, inline: true },
         {
-          name: `${responder.t('{{channels}}')} (${guild.channels.size})`,
+          name: `${responder.t('{{server.channels}}')} (${guild.channels.size})`,
           value: [
-            `${responder.t('{{text}}')}: **${guild.channels.filter(c => c.type === 0).length}**`,
-            `${responder.t('{{voice}}')}: **${guild.channels.filter(c => c.type !== 0).length}**`
+            `${responder.t('{{server.text}}')}: **${guild.channels.filter(c => c.type === 0).length}**`,
+            `${responder.t('{{server.voice}}')}: **${guild.channels.filter(c => c.type !== 0).length}**`
           ].join('\n'),
           inline: true
         },
         {
-          name: responder.t('{{owner}}'),
+          name: responder.t('{{server.owner}}'),
           value: `**${owner.username}#${owner.discriminator}** (${guild.ownerID})`
         },
         {
-          name: responder.t('{{createdOn}}'),
+          name: responder.t('{{server.createdOn}}'),
           value: moment(new Date(guild.createdAt)).tz(`${settings.tz}`).format('ddd Do MMM, YYYY [at] hh:mm:ss a')
         },
         {
-          name: `${responder.t('{{roles}}')} (${guild.roles.size})`,
+          name: `${responder.t('{{server.roles}}')} (${guild.roles.size})`,
           value: guild.roles.map(r => r.name).join(', ')
         }
 

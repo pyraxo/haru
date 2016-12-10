@@ -7,7 +7,7 @@ class Stream extends Command {
       description: 'Plays from a supported stream',
       cooldown: 5,
       usage: [{ name: 'station', type: 'string', optional: false, choices: ['listen.moe'] }],
-      options: { guildOnly: true, localeKey: 'play' }
+      options: { guildOnly: true, localeKey: 'music' }
     })
   }
 

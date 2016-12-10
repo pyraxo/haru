@@ -11,7 +11,7 @@ class Responder {
       send: (msg, res) => res,
       reply: (msg, res) => `**${msg.author.username}**, ${res}`,
       success: (msg, res) => `${emoji.success}  |  **${msg.author.username}**, ${res}`,
-      error: (msg, res) => `${emoji.fail}  |  **${msg.author.username}**, ` + (res || '{{%ERROR}}')
+      error: (msg, res) => `${emoji.error}  |  **${msg.author.username}**, ` + (res || '{{%ERROR}}')
     }
 
     this.formatMethods = {

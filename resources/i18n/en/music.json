@@ -1,8 +1,27 @@
 {
-  "queued": "Queued",
   "nowPlaying": "Now Playing",
   "skipping": "Skipping",
   "finishedPlaying": "Finished playing",
   "queueFinish": "The queue is now empty.",
-  "dc": "Disconnected from voice channel due to inactivity."
+  "dcInactive": "Disconnected from voice channel due to inactivity.",
+  "queuedMulti": "Queued {{song}} _and {{num}} more_",
+  "queued": "Queued",
+  "errors": {
+    "notInChannel": "bring me into a voice channel with {{command}} first!",
+    "emptyQueue": [
+      "there is nothing in the queue!\n",
+      "Use the {{play}} command to queue a song!"
+    ],
+    "tooLong": "that song is too long! Queue one shorter than 90 minutes.",
+    "noResults": "the query {{query}} gave no results.",
+    "alreadyPlaying": "there is already a song being played! Queue another song with {{command}}.",
+    "notChannel": "the current bound text channel is {{channel}}. Please use the music commands there.",
+    "notFound": "the video you provided could not be found.",
+    "listNotFound": "the playlist you provided could not be found.",
+    "emptyPlaylist": "the playlist you provided has no videos."
+  },
+  "dc": "Disconnected from '{{voice}}' and unbound from {{text}}.",
+  "switch": "Switching to streaming mode and playing from {{station}}",
+  "alreadyVoted": "you have already voted to skip this song!",
+  "voteSuccess": "you have voted to skip the current song!"
 }

@@ -8,7 +8,7 @@ class ChannelInfo extends Command {
       aliases: ['cinfo'],
       description: 'Displays information of a channel',
       usage: [{ name: 'member', type: 'channel', optional: true }],
-      options: { guildOnly: true }
+      options: { guildOnly: true, localeKey: 'infocmd' }
     })
   }
 
@@ -22,12 +22,12 @@ class ChannelInfo extends Command {
 
     return responder.embed({
       color: this.colours.blue,
-      author: { name: responder.t('{{title}}', { channel: '#' + channel.name }), icon_url: msg.guild.iconURL },
+      author: { name: responder.t('{{channel.title}}', { channel: '#' + channel.name }), icon_url: msg.guild.iconURL },
       fields: [
         { name: 'ID', value: channel.id, inline: true },
-        { name: responder.t('{{type}}'), value: responder.t(channel.type === 0 ? '{{text}}' : '{{voice}}'), inline: true },
+        { name: responder.t('{{channel.type}}'), value: responder.t(channel.type === 0 ? '{{channel.text}}' : '{{channel.voice}}'), inline: true },
         {
-          name: responder.t('{{createdOn}}'),
+          name: responder.t('{{channel.createdOn}}'),
           value: moment(new Date(channel.createdAt)).tz(settings.tz).format('ddd Do MMM, YYYY [at] hh:mm:ss a')
         }
       ]

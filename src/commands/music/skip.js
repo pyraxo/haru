@@ -6,7 +6,7 @@ class Skip extends Command {
       name: 'skip',
       description: 'Skips the current music track',
       cooldown: 5,
-      options: { guildOnly: true, localeKey: 'play' }
+      options: { guildOnly: true, localeKey: 'music' }
     })
   }
 

@@ -1,0 +1,34 @@
+{
+  "server": {
+    "shard": "Shard",
+    "defaultChannel": "Default Channel",
+    "region": "Region",
+    "createdOn": "Account Creation",
+    "joinedOn": "Join Date",
+    "roles": "Roles",
+    "members": "Members",
+    "channels": "Channels",
+    "owner": "Owner",
+    "online": "online",
+    "text": "Text",
+    "voice": "Voice"
+  },
+  "whois": {
+    "shared": "Shared Servers",
+    "status": "Status",
+    "nick": "Nickname",
+    "createdOn": "Account Creation",
+    "joinedOn": "Join Date",
+    "roles": "Roles",
+    "none": "None",
+    "playing": "Playing",
+    "more": "and {{num}} more..."
+  },
+  "channel": {
+    "title": "Channel Info for {{channel}}",
+    "type": "Type",
+    "text": "Text",
+    "voice": "Voice",
+    "createdOn": "Creation Date"
+  }
+}

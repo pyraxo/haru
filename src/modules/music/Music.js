@@ -1,7 +1,9 @@
 const logger = require('winston')
 const crypto = require('crypto')
-const http = require('http')
+const https = require('https')
 const moment = require('moment')
+const url = require('url')
+const querystring = require('querystring')
 const ytdl = Promise.promisifyAll(require('ytdl-core'))
 
 const { Module } = require('../../core')
@@ -12,7 +14,7 @@ class Music extends Module {
       name: 'music',
       events: {
         voiceChannelLeave: 'voiceDC',
-        messageCreate: 'checkLink'
+        messageCreate: 'onMessage'
       }
     })
 
@@ -122,7 +124,7 @@ class Music extends Module {
       length: parseInt(info.length_seconds)
     }
     info = fetchAll ? info : formattedInfo
-    // this.redis.setex(key, formattedInfo.expires || 21600, JSON.stringify(formattedInfo))
+    this.redis.setex(key, formattedInfo.expires || 21600, JSON.stringify(formattedInfo))
     return info
   }
 
@@ -147,6 +149,37 @@ class Music extends Module {
     return mediaInfo
   }
 
+  fetchPlaylist (pid) {
+    return new Promise((resolve, reject) => {
+      const req = https.get(
+        'https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=50' +
+        `&playlistId=${pid}&key=${process.env.API_YT}`,
+        res => {
+          let rawData = ''
+          res.on('data', chunk => {
+            rawData += chunk
+          })
+          res.on('end', () => {
+            const result = JSON.parse(rawData)
+            if (result.error) {
+              return Promise.reject(result.error.code === 404 ? 'listNotFound' : 'error')
+            }
+            return resolve(result)
+          })
+        }
+      )
+
+      req.on('error', err => {
+        logger.error('Error encountered while querying playlist')
+        logger.error(err)
+        return reject('error')
+      })
+
+      req.shouldKeepAlive = false
+      req.end()
+    })
+  }
+
   getPlayingState (channel) {
     const conn = this.client.voiceConnections.get(channel.guild.id)
     if (!conn) return false
@@ -169,11 +202,11 @@ class Music extends Module {
     return this.queueSong(guildId, voiceChannel, mediaInfo)
   }
 
-  async voiceDC (member, channel) {
+  voiceDC (member, channel) {
     if (!channel.voiceMembers.has(this.client.user.id)) return
     if (channel.voiceMembers.size === 1 && channel.voiceMembers.has(this.client.user.id)) {
       const textChannel = this.getBoundChannel(channel.guild.id)
-      this.send(textChannel, ':headphones:  |  {{dc}}')
+      this.send(textChannel, ':headphones:  |  {{dcInactive}}')
       return this.player.stop(channel, true)
     }
   }
@@ -239,7 +272,7 @@ class Music extends Module {
     return new Promise((resolve, reject) => {
       const options = {
         hostname: 'www.youtube.com',
-        port: 80,
+        port: 443,
         path: '/oembed?url=http://www.youtube.com/watch?v=' + escape(videoID) + '&format=json',
         method: 'HEAD',
         headers: {
@@ -247,47 +280,110 @@ class Music extends Module {
         }
       }
 
-      const req = http.request(options, (res) => {
-        if (res.statusCode === '404' || res.statusCode === '302') {
+      const req = https.request(options, (res) => {
+        if (res.statusCode === 404 || res.statusCode === 302 || res.statusMessage === 'Not Found') {
           reject('notFound')
         } else {
           resolve(videoID)
         }
-        req.on('error', () => {
-          reject('error')
-        })
+      })
+      req.on('error', () => {
+        reject('error')
       })
       req.shouldKeepAlive = false
       req.end()
     })
   }
 
-  async checkLink (msg) {
+  async getPlaylist (pid) {
+    const key = `music:playlist:${crypto.createHash('sha256').update(pid, 'utf8').digest('hex')}`
+    let info = await this.redis.getAsync(key).catch(() => false)
+    if (info) return JSON.parse(info)
+
+    try {
+      const playlist = await this.fetchPlaylist(pid)
+      if (!playlist.items.length) return Promise.reject('emptyPlaylist')
+      const playlistInfo = {
+        id: playlist.etag.substring(1, playlist.etag.length - 1),
+        results: playlist.pageInfo.totalResults,
+        items: playlist.items.map(i => i.contentDetails.videoId)
+      }
+      this.redis.setex(key, 21600, JSON.stringify(playlistInfo))
+      return playlistInfo
+    } catch (err) {
+      if (typeof err === 'string') {
+        return Promise.reject(err)
+      }
+      logger.error('Error encountered while getting playlist')
+      logger.error(err)
+      return Promise.reject('error')
+    }
+  }
+
+  onMessage (msg) {
     if (!msg.guild) return
+
     const text = this.connections.get(msg.guild.id)
     if (!text || text !== msg.channel.id) return
+
+    if (!this.getConnection(msg.channel)) return
+    if (!this.isLink(msg.content)) return
+
+    return this.checkLink(msg)
+  }
+
+  isLink (text) {
+    const yt = url.parse(text).host
+    return yt && (yt.endsWith('youtube.com') || yt.endsWith('youtu.be'))
+  }
+
+  parseLink (text) {
+    if (!this.isLink(text)) return false
+    const query = querystring.parse(url.parse(text).query)
+    return { v: query.v || null, pid: query.list || null }
+  }
+
+  async checkLink (msg) {
     const conn = this.getConnection(msg.channel)
     const voiceChannel = this.client.getChannel(conn.channelID)
-    if (!conn) return
-
-    const matches = msg.content.match(/^http(?:s?):\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-_]*)(&(amp;)?[\w\?‌=]*)?$/)
-    if (!matches) return
-
-    const url = matches[0]
+    const query = this.parseLink(msg.content)
     try {
-      const videoID = await this.validate(matches[1])
-      const info = await this.add(msg.guild.id, voiceChannel, `https://www.youtube.com/watch?v=${videoID}`)
-      const length = info.length ? `(${moment.duration(info.length, 'seconds').format('h[h] m[m] s[s]')}) ` : ''
-      this.deleteMessages([msg])
-      return this.send(msg.channel, `:success:  |  {{queued}} **${info.title}** ${length}- **${msg.author.mention}**`)
+      if (query.pid) {
+        const playlist = await this.getPlaylist(query.pid)
+        const firstVideo = playlist.items.shift()
+        const info = await this.add(msg.guild.id, voiceChannel, `https://www.youtube.com/watch?v=${firstVideo}`)
+        const length = info.length ? `(${moment.duration(info.length, 'seconds').format('h[h] m[m] s[s]')}) ` : ''
+
+        playlist.items.forEach(async i => {
+          console.log(i)
+          try {
+            await this.add(msg.guild.id, voiceChannel, `https://www.youtube.com/watch?v=${i}`)
+          } catch (err) {
+            await this.send(msg.channel, ':error:  |  {{errors.error}}')
+          }
+        })
+
+        await this.send(msg.channel, `:success:  |  {{queuedMulti}} - **${msg.author.mention}**`, {
+          song: `**${info.title}** ${length}`,
+          num: playlist.results - 1
+        })
+        return this.deleteMessages([msg])
+      } else if (query.v) {
+        const videoID = await this.validate(query.v)
+        const info = await this.add(msg.guild.id, voiceChannel, `https://www.youtube.com/watch?v=${videoID}`)
+        const length = info.length ? `(${moment.duration(info.length, 'seconds').format('h[h] m[m] s[s]')}) ` : ''
+
+        await this.send(msg.channel, `:success:  |  {{queued}} **${info.title}** ${length}- **${msg.author.mention}**`)
+        return this.deleteMessages([msg])
+      }
     } catch (err) {
       if (err instanceof Error) {
-        logger.error(`Error adding ${url} to ${msg.guild.name} (${msg.guild.id})'s queue`)
+        logger.error(`Error adding ${query.v ? 'song ' + query.v : 'playlist ' + query.list} to ${msg.guild.name} (${msg.guild.id})'s queue`)
         logger.error(err)
         return this.send(':error:  |  {{%ERROR}}')
       }
       const settings = await this.bot.engine.db.data.Guild.fetch(msg.guild.id)
-      return this.send(msg.channel, `:error:  |  {{errors.${err}}}`, { command: `**\`${settings.prefix}summon\`**` })
+      return this.send(msg.channel, `:error:  |  **${msg.author.username}**, {{errors.${err}}}`, { command: `**\`${settings.prefix}summon\`**` })
     }
   }
 }

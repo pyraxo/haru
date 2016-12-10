@@ -10,8 +10,8 @@ class Play extends Command {
       aliases: ['add'],
       description: 'Streams some music',
       usage: [{ name: 'action', displayName: 'youtube URL | query', optional: true }],
-      cooldown: 5,
-      options: { guildOnly: true }
+      cooldown: 10,
+      options: { guildOnly: true, localeKey: 'music' }
     })
   }
 
@@ -50,22 +50,8 @@ class Play extends Command {
       }
     }
     const text = rawArgs.join(' ')
-    const matches = text.match(/^http(?:s?):\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-_]*)(&(amp;)?[\w\?‌=]*)?$/)
-    if (matches) {
-      const url = matches[0]
-      try {
-        const videoID = await music.validate(matches[1])
-        const info = await music.add(msg.guild.id, voiceChannel, `https://www.youtube.com/watch?v=${videoID}`)
-        const length = info.length ? `(${moment.duration(info.length, 'seconds').format('h[h] m[m] s[s]')}) ` : ''
-        return responder.format('emoji:success').send(`{{queued}} **${info.title}** ${length}- **${msg.author.mention}**`)
-      } catch (err) {
-        if (err instanceof Error) {
-          logger.error(`Error adding ${url} to ${msg.guild.name} (${msg.guild.id})'s queue`)
-          logger.error(err)
-          return responder.error('{{%ERROR}}')
-        }
-        return responder.error(`{{errors.${err}}}`, { command: `**\`${settings.prefix}summon\`**` })
-      }
+    if (music.isLink(msg.content)) {
+      return music.checkLink(msg)
     }
 
     try {
@@ -73,7 +59,11 @@ class Play extends Command {
       if (!result || !result.items.length) {
         return responder.error('{{errors.noResults}}', { query: `**${text}**` })
       }
-      const info = await music.add(msg.guild.id, voiceChannel, `https://www.youtube.com/watch?v=${result.items[0].id.videoId}`)
+      const [, idx] = await responder.selection(result.items.map(i => i.snippet.title))
+      if (typeof idx !== 'number') return
+      const video = result.items[idx]
+
+      const info = await music.add(msg.guild.id, voiceChannel, `https://www.youtube.com/watch?v=${video.id.videoId}`)
       const length = info.length ? `(${moment.duration(info.length, 'seconds').format('h[h] m[m] s[s]')}) ` : ''
       return responder.format('emoji:success').send(`{{queued}} **${info.title}** ${length}- ${msg.author.mention}`)
     } catch (err) {
