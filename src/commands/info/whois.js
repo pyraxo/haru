@@ -15,9 +15,8 @@ class Whois extends Command {
   async handle ({ msg, args, client, settings }, responder) {
     let member = msg.member
     if (args.member) {
-      const [, idx] = await responder.selection(args.member.map(m => `${m.user.username}#${m.user.discriminator}`))
-      if (typeof idx !== 'number') return
-      member = args.member[idx]
+      member = (await responder.selection(args.member, { mapFunc: m => `${m.user.username}#${m.user.discriminator}` }))[0]
+      if (!member) return
     }
 
     const roleNames = member.roles.map(r => msg.channel.guild.roles.get(r).name)

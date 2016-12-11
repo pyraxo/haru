@@ -59,9 +59,8 @@ class Play extends Command {
       if (!result || !result.items.length) {
         return responder.error('{{errors.noResults}}', { query: `**${text}**` })
       }
-      const [, idx] = await responder.selection(result.items.map(i => i.snippet.title))
-      if (typeof idx !== 'number') return
-      const video = result.items[idx]
+      const [video] = await responder.selection(result.items, { mapFunc: i => i.snippet.title })
+      if (!video) return
 
       const info = await music.add(msg.guild.id, voiceChannel, `https://www.youtube.com/watch?v=${video.id.videoId}`)
       const length = info.length ? `(${moment.duration(info.length, 'seconds').format('h[h] m[m] s[s]')}) ` : ''

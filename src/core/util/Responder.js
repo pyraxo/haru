@@ -166,8 +166,8 @@ class Responder {
     if (!selections.length) return []
     if (selections.length === 1) return [selections[0], 0]
 
-    const choices = selections.splice(0, 10)
-    const { title = '{{%menus.SELECTION}}', footer = '{{%menus.INPUT}}', prop } = options
+    const { title = '{{%menus.SELECTION}}', footer = '{{%menus.INPUT}}', mapFunc } = options
+    const choices = (mapFunc ? selections.map(mapFunc) : selections).splice(0, 10)
     if (!options.cancel) options.cancel = 'cancel'
 
     try {
@@ -175,14 +175,14 @@ class Responder {
         prompt: [
           '```markdown',
           `### ${title} ###\n`,
-          choices.map((c, i) => `${padEnd(`[${i + 1}]:`, 4)} ${prop ? c[prop] : c}`).join('\n'),
+          choices.map((c, i) => `${padEnd(`[${i + 1}]:`, 4)} ${c}`).join('\n'),
           selections.length > 10 ? `And ${selections.length - 10} more...\n` : '',
           Array.isArray(footer) ? footer.join('\n') : '> ' + footer,
           '```'
         ].join('\n'),
         input: { type: 'int', name: 'reply', min: 1, max: choices.length }
       }], options)
-      return [prop ? selections[prop] : selections[reply - 1], reply - 1]
+      return [selections[reply - 1], reply - 1]
     } catch (err) {
       return []
     }

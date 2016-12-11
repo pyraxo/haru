@@ -15,9 +15,8 @@ class ChannelInfo extends Command {
   async handle ({ msg, args, client, settings }, responder) {
     let channel = msg.channel
     if (args.channel) {
-      const [, idx] = await responder.selection(args.channel.map(m => m.name))
-      if (typeof idx !== 'number') return
-      channel = args.channel[idx]
+      channel = (await responder.selection(args.channel, { mapFunc: c => c.name }))[0]
+      if (!channel) return
     }
 
     return responder.embed({
