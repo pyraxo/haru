@@ -6,15 +6,16 @@ const { Command } = require('../../core')
 class Play extends Command {
   constructor (...args) {
     super(...args, {
-      name: 'play',
-      description: 'Streams some music',
+      name: 'search',
+      aliases: ['play'],
+      description: 'Searches Youtube for music',
       usage: [{ name: 'action', displayName: 'youtube URL | query', optional: true }],
       cooldown: 10,
       options: { guildOnly: true, localeKey: 'music' }
     })
   }
 
-  async handle ({ msg, settings, rawArgs, client }, responder) {
+  async handle ({ msg, settings, rawArgs, client, trigger }, responder) {
     const music = this.bot.engine.modules.get('music')
     const searcher = this.bot.engine.modules.get('music:search')
 
@@ -58,7 +59,10 @@ class Play extends Command {
       if (!result || !result.items.length) {
         return responder.error('{{errors.noResults}}', { query: `**${text}**` })
       }
-      const [video] = await responder.selection(result.items, { mapFunc: i => i.snippet.title })
+
+      const video = trigger === 'search'
+      ? (await responder.selection(result.items, { mapFunc: i => i.snippet.title }))[0]
+      : result.items[0]
       if (!video) return
 
       const info = await music.add(msg.guild.id, voiceChannel, `https://www.youtube.com/watch?v=${video.id.videoId}`)

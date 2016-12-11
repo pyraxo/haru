@@ -6,7 +6,7 @@
   "hate": "I-I hate you!",
   "love": "I-I love you!",
   "prefix": "Allows moderators to set a guild's prefix",
-  "play": "Streams some music",
+  "search": "Searches Youtube for music",
   "skip": "Skips the current music track",
   "stop": "Stops currently playing music",
   "summon": "Summons me to a voice channel",
@@ -26,5 +26,6 @@
   "queue": "Lists songs in the queue",
   "whois": "Displays information of a member",
   "channel": "Displays information of a channel",
-  "server": "Displays information of a server"
+  "server": "Displays information of a server",
+  "catgirl": "Fetches a random catgirl"
 }
