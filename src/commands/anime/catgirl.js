@@ -12,7 +12,13 @@ class Catgirl extends Command {
   }
 
   async handle ({ msg, args }, responder) {
-    const req = https.get('https://catgirls.brussell98.tk/api/random', res => {
+    const options = {
+      host: 'catgirls.brussell98.tk',
+      port: 443,
+      path: '/api/random',
+      headers: { 'User-Agent': 'haru v2.1.0' }
+    }
+    const req = https.get(options, res => {
       let data = ''
       res.on('data', chunk => {
         data += chunk
