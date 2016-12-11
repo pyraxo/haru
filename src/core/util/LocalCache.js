@@ -26,18 +26,20 @@ class LocalCache extends Collection {
 
   async fetch (key, pure = false) {
     let value = this.get(key)
-    if ((typeof value === 'undefined' && this.model) || pure) {
+    if (this.model && (typeof value === 'undefined' && this.model) || pure) {
       try {
         value = await this.model.get(key).run()
-        this.store(key, value)
       } catch (err) {
         if (err.name === 'DocumentNotFoundError') {
           const Model = this.model
           value = new Model({ id: key })
           await value.save()
-          this.store(key, value)
+        } else {
+          logger.error(`Could not fetch ${key} from ${this.model.getTableName()}`)
+          logger.error(err)
         }
       }
+      this.store(key, value)
     }
     return value
   }
@@ -45,19 +47,20 @@ class LocalCache extends Collection {
   async fetchJoin (key, options) {
     let value = await this.fetch(key)
     for (let type in options) {
-      if (options[type] === true && typeof value[type] === 'undefined') {
+      if (this.model && (options[type] === true && typeof value[type] === 'undefined')) {
         try {
-          if (!this.model) return
           value = await this.model.get(key).getJoin(options).run()
         } catch (err) {
           if (err.name === 'DocumentNotFoundError') {
             const Model = this.model
             value = new Model({ id: key })
             await value.save()
+          } else {
+            logger.error(`Could not fetch joined ${key} from ${this.model.getTableName()}`)
+            logger.error(err)
           }
         }
         this.store(key, value)
-        return value
       }
     }
     return value

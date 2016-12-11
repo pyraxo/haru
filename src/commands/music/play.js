@@ -7,7 +7,6 @@ class Play extends Command {
   constructor (...args) {
     super(...args, {
       name: 'play',
-      aliases: ['add'],
       description: 'Streams some music',
       usage: [{ name: 'action', displayName: 'youtube URL | query', optional: true }],
       cooldown: 10,

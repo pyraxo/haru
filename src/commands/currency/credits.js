@@ -10,7 +10,7 @@ class Credits extends Command {
       description: 'Currency system',
       aliases: ['credit'],
       cooldown: 5,
-      usage: [{ name: 'action', displayName: 'give | claim', type: 'string', optional: true }],
+      usage: [{ name: 'action', displayName: 'give | claim | peek | top', type: 'string', optional: true }],
       subcommands: {
         claim: 'claim',
         give: {
@@ -134,10 +134,12 @@ class Credits extends Command {
   }
 
   async peek ({ args, data }, responder) {
+    const [member] = await responder.selection(args.member, { mapFunc: m => `${m.user.username}#${m.user.discriminator}` })
+    if (!member) return
     try {
-      const user = await data.User.fetch(args.user[0].id)
+      const user = await data.User.fetch(member.id)
       responder.format('emoji:credits').send('{{balance}}', {
-        user: args.user[0].user.username,
+        user: member.user.username,
         balance: `**\`${user.credits}\`**`
       })
     } catch (err) {
