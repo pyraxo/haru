@@ -1,6 +1,7 @@
 {
   "CHECK_PMS": "check your PMs!",
-  "ERROR": "an error has occurred! Please try again later.",
+  "ERROR": "an error has occurred! Please try again later, or submit a bug report.",
+  "ERROR_FULL": "An error has occurred! Please try again later, or submit a bug report.",
   "COOLDOWN": "please cool down! ({{time}} seconds left)",
   "NO_PERMS": "you need the permission {{perms}} to run this command!",
   "NO_PERMS_BOT": "I need the permission {{perms}} to run this command!",

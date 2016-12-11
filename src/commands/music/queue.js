@@ -7,7 +7,7 @@ class Queue extends Command {
       aliases: ['np', 'nowplaying', 'q'],
       description: 'Displays songs that are in queue',
       cooldown: 5,
-      options: { guildOnly: true }
+      options: { guildOnly: true, localeKey: 'music' }
     })
   }
 
@@ -16,9 +16,19 @@ class Queue extends Command {
     if (!music) return
 
     const conn = music.getConnection(msg.channel)
-    const state = music.states.get(msg.guild.id)
+    const state = music.checkState(msg.guild.id)
     let rep = []
-    if (typeof state === 'object') {
+    if (state === null) {
+      const queue = (await cache.client.lrangeAsync(`music:queues:${msg.guild.id}`, 0, 10) || [])
+      if (queue.length) rep.push('**__{{queuedSongs}}__**\n')
+      for (let i = 1; i <= queue.length; i++) {
+        const entry = JSON.parse(queue[i - 1])
+        rep.push(`\`${i}.\` ${entry.title}`)
+      }
+      return rep.length
+      ? responder.send(rep)
+      : responder.format('emoji:info').reply('{{errors.emptyQueue}}', { play: `**\`${settings.prefix}play\`**` })
+    } else if (typeof state === 'object') {
       if (conn.playing) {
         const playtime = Math.round(conn.current.playTime / 1000)
         const length = state.length
@@ -28,28 +38,22 @@ class Queue extends Command {
         const ls = (length % 60 < 10 ? '0' : '') + length % 60
 
         rep.push(
-          `🎧  **${responder.t('{{nowplaying}}')}**:`,
+          `🎧  **${responder.t('{{nowPlaying}}')}**:`,
           `${state.title}\n`,
           `▶  ${bar.join('')}  ${Math.round(playtime / 60)}:${ps} / ${Math.round(length / 60)}:${ls}\n`
         )
       }
       const queue = (await cache.client.lrangeAsync(`music:queues:${msg.guild.id}`, 0, 10) || [])
-      if (queue.length) rep.push('**__{{queued}}__**\n')
+      if (queue.length) rep.push('**__{{queuedSongs}}__**\n')
       for (let i = 1; i <= queue.length; i++) {
         const entry = JSON.parse(queue[i - 1])
         rep.push(`\`${i}.\` ${entry.title}`)
       }
-      return responder.send(rep)
+      return rep.length
+      ? responder.send(rep)
+      : responder.format('emoji:info').reply('{{errors.emptyQueue}}', { play: `**\`${settings.prefix}play\`**` })
     } else if (typeof state === 'string') {
-      return responder.format('emoji:headphones').send(`**${responder.t('{{nowplaying}}')}**: <${state}>`)
-    } else {
-      const queue = (await cache.client.lrangeAsync(`music:queues:${msg.guild.id}`, 0, 10) || [])
-      if (queue.length) rep.push('**__{{queued}}__**\n')
-      for (let i = 1; i <= queue.length; i++) {
-        const entry = JSON.parse(queue[i - 1])
-        rep.push(`\`${i}.\` ${entry.title}`)
-      }
-      return responder.send(rep)
+      return responder.format('emoji:headphones').send(`**${responder.t('{{nowPlaying}}')}**: <${state}>`)
     }
   }
 }

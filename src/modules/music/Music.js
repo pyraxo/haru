@@ -18,9 +18,6 @@ class Music extends Module {
       }
     })
 
-    this.states = new Collection()
-    this.connections = new Collection()
-    this.volume = new Map()
     this.redis = this.bot.engine.cache.client
   }
 
@@ -28,13 +25,9 @@ class Music extends Module {
     this.player = this.bot.engine.modules.get('music:player')
     this.queue = this.bot.engine.modules.get('music:queue')
 
-    this._validator = setInterval(() => {
-      for (const gid of this.connections.keys()) {
-        if (!this.client.guilds.has(gid)) {
-          this.connections.delete(gid)
-        }
-      }
+    this.states = new Collection()
 
+    this._validator = setInterval(() => {
       for (const gid of this.states.keys()) {
         if (!this.client.guilds.has(gid)) {
           this.states.delete(gid)
@@ -44,15 +37,39 @@ class Music extends Module {
   }
 
   bindChannel (guildID, textChannelID) {
-    this.connections.set(guildID, textChannelID)
+    this.states.set(guildID, {
+      channel: textChannelID,
+      state: null,
+      skip: [],
+      clear: [],
+      shuffle: [],
+      volume: 2
+    })
   }
 
   unbindChannel (guildID) {
-    this.connections.delete(guildID)
+    this.states.delete(guildID)
+  }
+
+  getState (guildID) {
+    return this.states.get(guildID)
+  }
+
+  checkState (guildID) {
+    let state = this.getState(guildID)
+    return state ? state.state : null
+  }
+
+  modifyState (guildID, stateName, value) {
+    let state = this.states.get(guildID)
+    if (typeof state !== 'object') return
+    state[stateName] = value
+    this.states.set(guildID, state)
   }
 
   getBoundChannel (guildID) {
-    return this.connections.get(guildID) || null
+    const connection = this.states.get(guildID)
+    return connection ? connection.channel : null
   }
 
   getConnection (channel) {
@@ -68,7 +85,7 @@ class Music extends Module {
       return Promise.reject('notChannel')
     }
     const guild = textChannel.guild
-    let channel = this.connections.get(guild.id)
+    let channel = this.getBoundChannel(guild)
     if (channel && channel !== textChannel.id) {
       return Promise.reject('alreadyBinded')
     }
@@ -233,7 +250,8 @@ class Music extends Module {
     const textChannel = this.getBoundChannel(guildId)
 
     if (!textChannel) return Promise.reject('notInChannel')
-    const volume = this.volume.get(guildId) || 2
+    const state = this.getState(guildId) || 2
+    const volume = state ? state.volume : 2
     if (mediaInfo) {
       return this.player.play(channel, mediaInfo, volume)
     }
@@ -259,12 +277,13 @@ class Music extends Module {
   }
 
   setVolume (guild, volume) {
-    this.volume.set(guild.id, (parseInt(volume, 10) * 2) / 100)
+    this.modifyState(guild.id, 'volume', (parseInt(volume, 10) * 2) / 100)
   }
 
   async skip (guildId, voiceChannel, authorId, force = false) {
     if (!force && voiceChannel.voiceMembers.size > 2) {
-      let vote = this.votes.get(guildId) || []
+      const state = this.getState(guildId)
+      let vote = state.skip || []
       if (vote.includes(authorId)) {
         return Promise.resolve('alreadyVoted')
       }
@@ -272,26 +291,53 @@ class Music extends Module {
       vote.push(authorId)
 
       if ((vote.length / voiceChannel.voiceMembers.filter(m => !m.voiceState.selfDeaf && !m.voiceState.deaf).length - 1) < 0.5) {
-        this.votes.set(guildId, vote)
+        this.modifyState(guildId, 'skip', vote)
         return Promise.resolve('voteSuccess')
       } else {
-        this.votes.delete(guildId)
+        this.modifyState(guildId, 'skip', [])
       }
     }
 
     return this.player.skip(guildId, voiceChannel)
   }
 
+  async clear (guildId, voiceChannel, authorId, force = false) {
+    if (!force && voiceChannel.voiceMembers.size > 2) {
+      const state = this.getState(guildId)
+      let vote = state.clear || []
+      if (vote.includes(authorId)) {
+        return Promise.resolve('alreadyVoted')
+      }
+
+      vote.push(authorId)
+
+      if ((vote.length / voiceChannel.voiceMembers.filter(m => !m.voiceState.selfDeaf && !m.voiceState.deaf).length - 1) < 0.5) {
+        this.modifyState(guildId, 'clear', vote)
+        return Promise.resolve('voteSuccess')
+      } else {
+        this.modifyState(guildId, 'clear', [])
+      }
+    }
+
+    const textChannel = this.getBoundChannel(guildId)
+    try {
+      await this.queue.clear(guildId)
+      return this.send(textChannel, ':success:  |  {{clearQueue}}')
+    } catch (err) {
+      logger.error(`Could not clear queue for ${guildId}`)
+      logger.error(err)
+
+      return this.send(textChannel, ':error:  |  {{%ERROR_FULL}}')
+    }
+  }
+
   validate (videoID) {
     return new Promise((resolve, reject) => {
       const options = {
         hostname: 'www.youtube.com',
-        port: 443,
         path: '/oembed?url=http://www.youtube.com/watch?v=' + escape(videoID) + '&format=json',
         method: 'HEAD',
-        headers: {
-          'Content-Type': 'application/json'
-        }
+        headers: { 'Content-Type': 'application/json' }
       }
 
       const req = https.request(options, (res) => {
@@ -337,13 +383,13 @@ class Music extends Module {
   onMessage (msg) {
     if (!msg.guild) return
 
-    const text = this.connections.get(msg.guild.id)
+    const text = this.getBoundChannel(msg.guild)
     if (!text || text !== msg.channel.id) return
 
     if (!this.getConnection(msg.channel)) return
     if (!this.isLink(msg.content)) return
 
-    return this.checkLink(msg)
+    return this.checkLink(msg.content, msg)
   }
 
   isLink (text) {
@@ -357,28 +403,49 @@ class Music extends Module {
     return { v: query.v || null, pid: query.list || null }
   }
 
-  async checkLink (msg) {
+  queueMulti (items, msg, voiceChannel) {
+    return new Promise((resolve, reject) => {
+      let first
+      let loop = (i = 0) => {
+        this.add(msg.guild.id, voiceChannel, `https://www.youtube.com/watch?v=${items[i++]}`)
+        .then(() => {
+          if (!first) first = items[i]
+          return i >= items.length
+          ? first ? resolve(first) : resolve()
+          : loop(i)
+        })
+        .catch(err => {
+          this.send(
+            msg.channel,
+            `:error:  |  **${msg.author.username}**, ${
+              err instanceof Error
+              ? `{{errors.errorQueue}}\n\n${err.message}`
+              : `{{errors.${err}}}`
+            }`,
+            { url: `<https://www.youtube.com/watch?v=${items[i]}>` }
+          )
+          return loop(i)
+        })
+      }
+      return loop()
+    })
+  }
+
+  async checkLink (text, msg) {
     const conn = this.getConnection(msg.channel)
     const voiceChannel = this.client.getChannel(conn.channelID)
-    const query = this.parseLink(msg.content)
+    const query = this.parseLink(text)
     try {
       if (query.pid) {
+        const m = await this.send(msg.channel, `:hourglass:  |  **${msg.author.username}**, {{queueProgress}}`)
         const playlist = await this.getPlaylist(query.pid)
-        const firstVideo = playlist.items.shift()
-        const info = await this.add(msg.guild.id, voiceChannel, `https://www.youtube.com/watch?v=${firstVideo}`)
-        const length = info.length ? `(${moment.duration(info.length, 'seconds').format('h[h] m[m] s[s]')}) ` : ''
 
-        playlist.items.forEach(async i => {
-          console.log(i)
-          try {
-            await this.add(msg.guild.id, voiceChannel, `https://www.youtube.com/watch?v=${i}`)
-          } catch (err) {
-            await this.send(msg.channel, ':error:  |  {{errors.error}}')
-          }
-        })
+        const firstVideo = await this.queueMulti(playlist.items, msg, voiceChannel)
+        if (!firstVideo) {
+          return this.edit(m, `:error:  |  **${msg.author.username}**, {{errors.emptyPlaylist}}`)
+        }
 
-        await this.send(msg.channel, `:success:  |  {{queuedMulti}} - **${msg.author.mention}**`, {
-          song: `**${info.title}** ${length}`,
+        await this.edit(m, `:success:  |  {{queuedMulti}} - **${msg.author.mention}**`, {
           num: playlist.results - 1
         })
         return this.deleteMessages([msg])
@@ -392,7 +459,7 @@ class Music extends Module {
       }
     } catch (err) {
       if (err instanceof Error) {
-        logger.error(`Error adding ${query.v ? 'song ' + query.v : 'playlist ' + query.list} to ${msg.guild.name} (${msg.guild.id})'s queue`)
+        logger.error(`Error adding ${query.v ? 'song ' + query.v : 'playlist ' + query.pid} to ${msg.guild.name} (${msg.guild.id})'s queue`)
         logger.error(err)
         return this.send(':error:  |  {{%ERROR}}')
       }

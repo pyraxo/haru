@@ -37,7 +37,7 @@ class Player extends Module {
       })
     })
 
-    this.manager.states.set(channel.guild.id, url)
+    this.manager.modifyState(channel.guild.id, 'state', url)
     return
   }
 
@@ -53,7 +53,7 @@ class Player extends Module {
     : { encoderArgs: ['-af', `volume=${volume}`] }
 
     conn.play(mediaInfo.audiourl, options)
-    this.manager.states.set(channel.guild.id, mediaInfo)
+    this.manager.modifyState(channel.guild.id, 'state', mediaInfo)
 
     conn.once('disconnect', err => {
       this.stop(channel, true)
@@ -74,7 +74,7 @@ class Player extends Module {
     })
 
     conn.once('end', () => {
-      this.manager.states.delete(channel.guild.id)
+      this.manager.modifyState(channel.guild.id, 'state', null)
       this.send(textChannel, `:stop:  |  {{finishedPlaying}} **${mediaInfo.title}** `)
       if (channel.voiceMembers.size === 1 && channel.voiceMembers.has(this.client.user.id)) {
         return this.stop(channel, true)

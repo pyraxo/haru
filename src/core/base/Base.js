@@ -116,6 +116,27 @@ class Base {
     }
   }
 
+  async edit (msg, content, options) {
+    let { lang, delay = 0 } = options
+    if (delay) {
+      await Promise.delay(delay)
+    }
+
+    if (!lang && msg.channel.guild) {
+      lang = (await this.bot.engine.db.data.Guild.fetch(msg.channel.guild.id)).lang
+    } else {
+      lang = 'en'
+    }
+
+    if (Array.isArray(content)) content = content.join('\n')
+    content = this.t(content, lang, options)
+    content = content.replace(/:(\S+):/gi, (matched, name) => {
+      return this.i18n.locate(name, Emojis) || emoji.get(name) || matched
+    })
+
+    return msg.edit(content)
+  }
+
   deleteMessages (msgs) {
     const id = this.client.user.id
     for (let msg of msgs.filter(m => m)) {

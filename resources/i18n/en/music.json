@@ -4,7 +4,8 @@
   "finishedPlaying": "Finished playing",
   "queueFinish": "The queue is now empty.",
   "dcInactive": "Disconnected from voice channel due to inactivity.",
-  "queuedMulti": "Queued {{song}} _and {{num}} more_",
+  "queuedMulti": "Queued {{num}} songs",
+  "clearQueue": "The music queue has been cleared.",
   "queued": "Queued",
   "errors": {
     "notInChannel": "bring me into a voice channel with {{command}} first!",
@@ -18,10 +19,14 @@
     "notChannel": "the current bound text channel is {{channel}}. Please use the music commands there.",
     "notFound": "the video you provided could not be found.",
     "listNotFound": "the playlist you provided could not be found.",
-    "emptyPlaylist": "the playlist you provided has no videos."
+    "emptyPlaylist": "the playlist you provided has no streamable videos.",
+    "errorQueue": "an error occurred while queuing {{url}}."
   },
   "dc": "Disconnected from '{{voice}}' and unbound from {{text}}.",
   "switch": "Switching to streaming mode and playing from {{station}}",
   "alreadyVoted": "you have already voted to skip this song!",
-  "voteSuccess": "you have voted to skip the current song!"
+  "voteSuccess": "you have voted to skip the current song!",
+  "playlist": "Playlist - {{guild}}",
+  "queuedSongs": "Queued Songs",
+  "queueProgress": "queuing playlist, please hold..."
 }

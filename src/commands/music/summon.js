@@ -20,22 +20,23 @@ class Summon extends Command {
       responder.error('{{notInVoice}}')
       return
     }
-    music.connect(channel, msg.channel).then(conn => {
-      responder.format('emoji:headphones').send('{{success}}', {
+    try {
+      await music.connect(channel, msg.channel)
+      return responder.format('emoji:headphones').send('{{success}}', {
         voice: `**${msg.guild.channels.find(c => c.id === channel).name}**`,
         text: msg.channel.mention,
         command: `**\`${settings.prefix}play\`**`
       })
-    }).catch(err => {
+    } catch (err) {
       if (err instanceof Error) {
         logger.error(`Could not join voice channel ${channel} in ${msg.guild.name} (${msg.guild.id}) - ${err}`)
         return
       }
-      responder.error(`{{errors.${err}}}`, {
+      return responder.error(`{{errors.${err}}}`, {
         text: msg.guild.channels.get(music.getBoundChannel(msg.guild.id)).mention,
         voice: `**${msg.guild.channels.find(c => c.id === channel).name}**`
       })
-    })
+    }
   }
 }
 

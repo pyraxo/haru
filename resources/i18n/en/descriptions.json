@@ -27,5 +27,6 @@
   "whois": "Displays information of a member",
   "channel": "Displays information of a channel",
   "server": "Displays information of a server",
-  "catgirl": "Fetches a random catgirl"
+  "catgirl": "Fetches a random catgirl",
+  "clear": "Clears the music queue"
 }

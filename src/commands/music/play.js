@@ -33,7 +33,7 @@ class Play extends Command {
 
     const voiceChannel = client.getChannel(conn.channelID)
     if (rawArgs.length === 0) {
-      if (conn.playing && typeof music.states.get(msg.guild.id) !== 'string') {
+      if (conn.playing && typeof music.checkState(msg.guild.id) !== 'string') {
         return responder.error('{{errors.alreadyPlaying}}', {
           command: `**\`${settings.prefix}play\`**`
         })
@@ -50,8 +50,8 @@ class Play extends Command {
       }
     }
     const text = rawArgs.join(' ')
-    if (music.isLink(msg.content)) {
-      return music.checkLink(msg)
+    if (music.isLink(text)) {
+      return music.checkLink(text, msg)
     }
 
     try {
