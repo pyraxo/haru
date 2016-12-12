@@ -224,7 +224,7 @@ class Music extends Module {
       length: parseInt(info.length_seconds)
     }
     info = fetchAll ? info : formattedInfo
-    this.redis.setex(key, formattedInfo.expires || 21600, JSON.stringify(formattedInfo))
+    this.redis.setex(key, formattedInfo.expires || 600, JSON.stringify(formattedInfo))
     return info
   }
 

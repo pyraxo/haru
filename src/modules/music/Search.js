@@ -60,7 +60,7 @@ class Search extends Module {
       const result = await yt.searchAsync(query, limit)
       if (!result || !result.items) return Promise.resolve()
 
-      this.redis.setex(queryKey, 72 * 60 * 60, JSON.stringify(result))
+      this.redis.setex(queryKey, 24 * 60 * 60, JSON.stringify(result))
       return result
     } catch (err) {
       return Promise.reject(err)
