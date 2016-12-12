@@ -25,7 +25,7 @@ class Lang extends Command {
       let guild = await data.Guild.fetch(msg.guild.id)
       guild.lang = lang
       await guild.save()
-      return responder.success(lang, {
+      return responder.success('{{lang.success}}', {
         lang: `**\`${lang}\`**`
       })
     } catch (err) {
