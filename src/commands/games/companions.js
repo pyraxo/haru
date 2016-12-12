@@ -35,8 +35,8 @@ class Companions extends Command {
     }).send()
   }
 
-  async rename ({ msg, settings, data, db }, responder) {
-    const companions = this.bot.engine.modules.get('companions')
+  async rename ({ msg, settings, data, db, modules }, responder) {
+    const companions = modules.get('companions')
     if (!companions) return logger.error('Companions module not found')
     const user = await data.User.fetchJoin(msg.author.id, { companion: true })
     if (!user.companion) {
@@ -65,8 +65,8 @@ class Companions extends Command {
     })
   }
 
-  async buy ({ msg, settings, data, db }, responder) {
-    const companions = this.bot.engine.modules.get('companions')
+  async buy ({ msg, settings, data, db, modules }, responder) {
+    const companions = modules.get('companions')
     if (!companions) return logger.error('Companions module not found')
     const user = await data.User.fetchJoin(msg.author.id, { companion: true })
     if (user.companion) {
@@ -80,7 +80,7 @@ class Companions extends Command {
       })
       return
     }
-    const reactions = this.bot.engine.modules.get('reactions')
+    const reactions = modules.get('reactions')
     if (!reactions) return
     const message = await responder.format('emoji:info').send('**{{intro}}**', { user: msg.author.username })
     const choice = await reactions.addMenu(message, msg.author.id, Object.keys(companions.pets[0]))

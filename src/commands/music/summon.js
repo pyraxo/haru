@@ -11,8 +11,8 @@ class Summon extends Command {
     })
   }
 
-  async handle ({ msg, settings, client }, responder) {
-    const music = this.bot.engine.modules.get('music')
+  async handle ({ msg, settings, client, modules }, responder) {
+    const music = modules.get('music')
     if (!music) return
     const member = msg.member
     const channel = member.voiceState.channelID

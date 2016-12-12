@@ -18,8 +18,8 @@ class Bet extends Command {
     })
   }
 
-  async handle ({ msg, settings, data, args, rawArgs }, responder) {
-    const companions = this.bot.engine.modules.get('companions')
+  async handle ({ msg, settings, data, args, rawArgs, modules }, responder) {
+    const companions = modules.get('companions')
     if (!companions) return logger.error('Companions module not found')
 
     const [member] = await responder.selection(args.member, { mapFunc: m => `${m.user.username}#${m.user.discriminator}` })

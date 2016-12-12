@@ -15,9 +15,9 @@ class Play extends Command {
     })
   }
 
-  async handle ({ msg, settings, rawArgs, client, trigger }, responder) {
-    const music = this.bot.engine.modules.get('music')
-    const searcher = this.bot.engine.modules.get('music:search')
+  async handle ({ msg, settings, rawArgs, client, trigger, modules }, responder) {
+    const music = modules.get('music')
+    const searcher = modules.get('music:search')
 
     const conn = music.getConnection(msg.channel)
     if (!conn) {

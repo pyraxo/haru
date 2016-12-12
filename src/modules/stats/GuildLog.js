@@ -16,20 +16,13 @@ class GuildLog extends Module {
       }
     })
 
-    this.ipc = this.bot.engine.ipc
-    this.data = this.bot.engine.db.data
-    this.db = this.bot.engine.db.models
     this.listeners = new Map()
+    this.logChannel = '249814267786690580'
   }
 
   init () {
-    this.listeners.set('guildCreate', this.logGuildEvent.bind(this))
-    this.listeners.set('guildDelete', this.logGuildEvent.bind(this))
-
-    this.ipc.removeAllListeners()
-    for (const [event, listener] of this.listeners.entries()) {
-      this.ipc.on(event, listener)
-    }
+    this.data = this.bot.engine.db.data
+    this.portal = this.bot.engine.modules.get('portal')
   }
 
   unload () {
@@ -74,24 +67,6 @@ class GuildLog extends Module {
     }
   }
 
-  async logGuildEvent ({ event, guild }) {
-    this.sendStats()
-
-    const logChannel = this.client.getChannel('249814267786690580')
-    if (!logChannel) return
-    this.send(logChannel, '', { embed: {
-      author: {
-        name: guild.name,
-        icon_url: guild.iconURL
-      },
-      title: `Guild ${event === 'created' ? 'Created' : 'Deleted'}: ${guild.memberCount} members`,
-      color: this.getColour(event === 'created' ? 'green' : 'red'),
-      footer: {
-        text: `Shard ${guild.shard}  |  ${moment().format('ddd Do MMM, YYYY [at] hh:mm:ss a')}`
-      }
-    }})
-  }
-
   parseGuild (guild) {
     return {
       id: guild.id,
@@ -108,18 +83,26 @@ class GuildLog extends Module {
     const g = this.parseGuild(guild)
     logger.info(`Guild created: ${g.name} (${g.id})`)
     logger.info(`${chalk.cyan.bold('U:')} ${g.memberCount} | ${chalk.cyan.bold('S:')} ${g.shard}`)
-    this.ipc.send('broadcast', {
-      op: 'guildCreate',
-      d: { event: 'created', guild: g }
-    })
+
+    this.sendStats()
+    this.tunnel(this.logChannel, '', { embed: {
+      author: {
+        name: guild.name,
+        icon_url: guild.iconURL
+      },
+      title: `Guild Created: ${guild.memberCount} members`,
+      color: this.getColour('green'),
+      footer: {
+        text: `Shard ${guild.shard}  |  ${moment().format('ddd Do MMM, YYYY [at] hh:mm:ss a')}`
+      }
+    }})
 
     this.send(guild.defaultChannel, '{{join}}', {
       help: `**\`${process.env.CLIENT_PREFIX}help\`**`,
       about: `**\`${process.env.CLIENT_PREFIX}info\`**`
     })
-
     try {
-      const settings = await this.bot.engine.db.data.Guild.fetch(guild.id)
+      const settings = await this.data.Guild.fetch(guild.id)
       settings.deleted = false
       await settings.save()
     } catch (err) {
@@ -132,13 +115,22 @@ class GuildLog extends Module {
     const g = this.parseGuild(guild)
     logger.info(`Guild deleted: ${g.name} (${g.id})`)
     logger.info(`${chalk.cyan.bold('U:')} ${g.memberCount} | ${chalk.cyan.bold('S:')} ${g.shard}`)
-    this.ipc.send('broadcast', {
-      op: 'guildDelete',
-      d: { event: 'deleted', guild: g }
-    })
+
+    this.sendStats()
+    this.tunnel(this.logChannel, '', { embed: {
+      author: {
+        name: guild.name,
+        icon_url: guild.iconURL
+      },
+      title: `Guild Deleted: ${guild.memberCount} members`,
+      color: this.getColour('red'),
+      footer: {
+        text: `Shard ${guild.shard}  |  ${moment().format('ddd Do MMM, YYYY [at] hh:mm:ss a')}`
+      }
+    }})
 
     try {
-      const settings = await this.bot.engine.db.data.Guild.fetch(guild.id)
+      const settings = await this.data.Guild.fetch(guild.id)
       settings.deleted = true
       await settings.save()
     } catch (err) {

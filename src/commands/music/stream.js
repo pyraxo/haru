@@ -11,8 +11,8 @@ class Stream extends Command {
     })
   }
 
-  async handle ({ msg, settings, client, args }, responder) {
-    const music = this.bot.engine.modules.get('music')
+  async handle ({ msg, settings, client, args, modules }, responder) {
+    const music = modules.get('music')
     if (!music) return
     const conn = music.getConnection(msg.channel)
     if (!conn) {

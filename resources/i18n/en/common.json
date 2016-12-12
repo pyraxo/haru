@@ -21,15 +21,15 @@
   "resolver": {
     "INSUFFICIENT_ARGS": "Insufficient arguments - Expected at least {{requiredArgs}}, saw {{argsCount}}",
     "CORRECT_USAGE": "Correct usage",
-    "NO_END_QUOTE": "missing end quote",
+    "NO_END_QUOTE": "you have a missing end quote",
     "member": {
-      "NOT_FOUND": "member not found"
+      "NOT_FOUND": "the member could not be found"
     },
     "channel": {
-      "NOT_FOUND": "channel not found"
+      "NOT_FOUND": "the channel could not be found"
     },
     "command": {
-      "NOT_FOUND": "command not found"
+      "NOT_FOUND": "the command could not be found"
     },
     "string": {
       "NOT_STRING": "{{arg}} must be a string",

@@ -18,8 +18,8 @@ class Battle extends Command {
   }
 
   async handle (container, responder) {
-    const { msg, settings, data, args, rawArgs } = container
-    const companions = this.bot.engine.modules.get('companions')
+    const { msg, settings, data, args, rawArgs, modules } = container
+    const companions = modules.get('companions')
     if (!companions) return logger.error('Companions module not found')
     const userProfile = await data.User.fetchJoin(msg.author.id, { companion: true })
     if (!userProfile.companion) {
