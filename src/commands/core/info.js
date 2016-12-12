@@ -5,7 +5,8 @@ class Info extends Command {
     super(...args, {
       name: 'info',
       aliases: ['about'],
-      description: 'Information about me'
+      description: 'Information about me',
+      options: { perms: ['embedLinks'] }
     })
   }
 

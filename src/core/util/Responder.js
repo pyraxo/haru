@@ -36,7 +36,7 @@ class Responder {
     responder.responseMethods = this.responseMethods
     responder.formatMethods = this.formatMethods
 
-    const copy = ['_send', 't', 'clean', 'format', 'file', 'embed', 'dialog', 'selection']
+    const copy = ['_send', 't', 'clean', 'typing', 'format', 'file', 'embed', 'dialog', 'selection']
     copy.forEach(prop => { responder[prop] = this[prop].bind(responder) })
 
     for (let method in this.responseMethods) {
@@ -79,6 +79,10 @@ class Responder {
   clean () {
     delete this._formats
     return this
+  }
+
+  typing () {
+    return this.message.channel.sendTyping()
   }
 
   format (formats) {
@@ -136,7 +140,7 @@ class Responder {
         } catch (o) {
           return Promise.reject(o)
         } finally {
-          this.command.deleteMessages([msg, ans])
+          this.command.deleteMessages(msg, ans)
         }
       }
 

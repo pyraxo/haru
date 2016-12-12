@@ -12,7 +12,8 @@ class Companions extends Command {
       subcommands: {
         buy: 'buy',
         rename: 'rename'
-      }
+      },
+      options: { perms: ['embedLinks'] }
     })
   }
 

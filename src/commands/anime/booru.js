@@ -16,7 +16,8 @@ class Booru extends Command {
         gelbooru: 'gelbooru',
         danbooru: 'danbooru',
         yandere: 'yandere'
-      }
+      },
+      options: { perms: ['embedLinks'] }
     })
   }
 
@@ -153,7 +154,7 @@ class Gelbooru extends Booru {
       description: 'Searches the Gelbooru imageboard',
       usage: [{ name: 'tags', type: 'string', optional: true }],
       aliases: [],
-      options: { localeKey: 'booru' },
+      options: { localeKey: 'booru', perms: ['embedLinks'] },
       subcommand: 'gelbooru'
     })
   }
@@ -166,7 +167,7 @@ class Danbooru extends Booru {
       description: 'Searches the Danbooru imageboard',
       aliases: [],
       usage: [{ name: 'tags', type: 'string', optional: true }],
-      options: { localeKey: 'booru' },
+      options: { localeKey: 'booru', perms: ['embedLinks'] },
       subcommand: 'danbooru'
     })
   }
@@ -179,7 +180,7 @@ class Yandere extends Booru {
       description: 'Searches the Yandere imageboard',
       aliases: [],
       usage: [{ name: 'tags', type: 'string', optional: true }],
-      options: { localeKey: 'booru' },
+      options: { localeKey: 'booru', perms: ['embedLinks'] },
       subcommand: 'yandere'
     })
   }

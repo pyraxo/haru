@@ -90,7 +90,7 @@ class Music extends Module {
       return Promise.reject('alreadyBinded')
     }
     this.bindChannel(guild.id, textChannel.id)
-    if (!this.hasPermissions(guild, this.client.user, 'voiceConnect', 'voiceSpeak')) {
+    if (!this.hasPermissions(textChannel, this.client.user, 'voiceConnect', 'voiceSpeak')) {
       return Promise.reject('noPerms')
     }
     try {
@@ -448,14 +448,14 @@ class Music extends Module {
         await this.edit(m, `:success:  |  {{queuedMulti}} - **${msg.author.mention}**`, {
           num: playlist.results - 1
         })
-        return this.deleteMessages([msg])
+        return this.deleteMessages(msg)
       } else if (query.v) {
         const videoID = await this.validate(query.v)
         const info = await this.add(msg.guild.id, voiceChannel, `https://www.youtube.com/watch?v=${videoID}`)
         const length = info.length ? `(${moment.duration(info.length, 'seconds').format('h[h] m[m] s[s]')}) ` : ''
 
         await this.send(msg.channel, `:success:  |  {{queued}} **${info.title}** ${length}- **${msg.author.mention}**`)
-        return this.deleteMessages([msg])
+        return this.deleteMessages(msg)
       }
     } catch (err) {
       if (err instanceof Error) {

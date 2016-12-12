@@ -52,12 +52,13 @@ class Base {
     return false
   }
 
-  hasPermissions (guild, user, ...perms) {
-    const member = guild.members.get(user.id)
-    for (const perm of perms) {
-      if (!member.permission.has(perm)) return false
-    }
-    return true
+  hasPermissions (channel, user, ...perms) {
+    const member = channel.guild.members.get(user.id)
+
+    if (!perms.every(p => member.permission.has(p))) return false
+    return perms.every(perm => (
+      channel.permissionOverwrites.filter(p => (member.roles.indexOf(p.id) > -1 || p.id === user.id) && p.json[perm] !== false).length
+    ))
   }
 
   t (content = '', lang = 'en', tags = {}) {
@@ -66,25 +67,23 @@ class Base {
   }
 
   async send (channel, content, options = {}) {
-    if (typeof channel === 'string') channel = this.client.getChannel(channel)
+    if (typeof channel === 'string') {
+      channel = this.client.getChannel(channel)
+    }
+    let { file = null, lang, delay = 0, deleteDelay = 0, embed } = options
     if (channel.guild) {
       const guild = channel.guild
-      if (!this.hasPermissions(guild, this.client.user, 'sendMessages')) {
+      if (!this.hasPermissions(channel, this.client.user, 'sendMessages')) {
         logger.error(`Channel ${channel.name} (${channel.id}) in ${guild.name} (${guild.id}) denies message sending`)
-        return
+        return Promise.reject('403_SEND_MSG')
       }
     }
 
-    let { file = null, lang, delay = 0, deleteDelay = 0, embed } = options
     if (delay) {
       await Promise.delay(delay)
     }
 
-    if (!lang && channel.guild) {
-      lang = (await this.bot.engine.db.data.Guild.fetch(channel.guild.id)).lang
-    } else {
-      lang = 'en'
-    }
+    lang = !lang && channel.guild ? (await this.bot.engine.db.data.Guild.fetch(channel.guild.id)).lang : 'en'
 
     if (Array.isArray(content)) content = content.join('\n')
     content = this.t(content, lang, options)
@@ -112,7 +111,7 @@ class Base {
       return replies[0]
     } catch (err) {
       logger.error(`Error sending message to ${channel.name} (${channel.id})`)
-      logger.error(err)
+      throw err
     }
   }
 
@@ -137,7 +136,7 @@ class Base {
     return msg.edit(content)
   }
 
-  deleteMessages (msgs) {
+  deleteMessages (...msgs) {
     const id = this.client.user.id
     for (let msg of msgs.filter(m => m)) {
       if (msg.author.id === id || msg.channel.permissionsOf(id).has('manageMessages')) {

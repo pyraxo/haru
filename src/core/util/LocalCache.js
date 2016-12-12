@@ -15,7 +15,7 @@ class LocalCache extends Collection {
           if (err) return logger.error(err)
           if (doc.isSaved() === false) {
             this.delete(doc.id)
-          } else {
+          } else if (this.has(doc.id)) {
             this.store(doc.id, doc)
           }
         })

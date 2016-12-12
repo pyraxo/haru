@@ -7,7 +7,7 @@ class ServerInfo extends Command {
       name: 'server',
       aliases: ['serverinfo'],
       description: 'Displays information of the server',
-      options: { guildOnly: true, localeKey: 'infocmd' }
+      options: { guildOnly: true, localeKey: 'infocmd', perms: ['embedLinks'] }
     })
   }
 

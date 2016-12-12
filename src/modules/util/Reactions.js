@@ -52,7 +52,7 @@ class Reactions extends Module {
       if (userID === menu.user) {
         menu.resolve(emoji.id ? `${emoji.name}:${emoji.id}` : Emoji.which(emoji.name))
         this.menus.delete(msg.id)
-        if (menu.cleanup) this.deleteMessages([message])
+        if (menu.cleanup) this.deleteMessages(message)
       }
     })
   }

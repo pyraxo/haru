@@ -19,21 +19,11 @@ class Player extends Module {
     let conn = this.manager.getConnection(channel)
     conn.play(url)
 
-    conn.on('disconnect', err => {
-      this.stop(channel, true)
-      if (err) {
-        logger.error(`Encountered an error while streaming to ${conn.id}`)
-        logger.error(err)
-      }
-    })
-
     conn.on('error', err => {
       this.stop(channel).then(() => {
         this.stream(channel, url, volume)
-        if (err) {
-          logger.error(`Encountered an error while streaming to ${conn.id}`)
-          logger.error(err)
-        }
+        logger.error(`Encountered an error while streaming to ${conn.id}`)
+        logger.error(err)
       })
     })
 
@@ -55,20 +45,10 @@ class Player extends Module {
     conn.play(mediaInfo.audiourl, options)
     this.manager.modifyState(channel.guild.id, 'state', mediaInfo)
 
-    conn.once('disconnect', err => {
-      this.stop(channel, true)
-      if (err) {
-        logger.error(`Encountered an error while streaming to ${conn.id}`)
-        logger.error(err)
-      }
-    })
-
     conn.once('error', err => {
       this.stop(channel).then(() => {
-        if (err) {
-          logger.error(`Encountered an error while streaming to ${conn.id}`)
-          logger.error(err)
-        }
+        logger.error(`Encountered an error while streaming to ${conn.id}`)
+        logger.error(err)
         return this.play(channel, mediaInfo, volume)
       })
     })

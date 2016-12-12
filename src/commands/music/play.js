@@ -31,6 +31,8 @@ class Play extends Command {
       })
     }
 
+    await responder.typing()
+
     const voiceChannel = client.getChannel(conn.channelID)
     if (rawArgs.length === 0) {
       if (conn.playing && typeof music.checkState(msg.guild.id) !== 'string') {

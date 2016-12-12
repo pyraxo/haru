@@ -27,6 +27,8 @@ class Hate extends Command {
       '-chan!'
     ].join('\n')
 
+    await responder.typing()
+
     gm(path.join(this.bot.paths.resources, 'images/hate.png'))
     .font(path.join(this.bot.paths.resources, 'fonts/animeace.ttf'), 13.5)
     .gravity('Center')

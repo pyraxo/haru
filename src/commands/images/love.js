@@ -26,6 +26,8 @@ class Love extends Command {
       input.match(/.{1,10}/g).join('-\n')
     ].join('\n')
 
+    await responder.typing()
+
     gm(path.join(this.bot.paths.resources, 'images/love.png'))
     .font(path.join(this.bot.paths.resources, 'fonts/animeace.ttf'), 13.5)
     .gravity('Center')

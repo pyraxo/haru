@@ -138,7 +138,7 @@ class Credits extends Command {
     if (!member) return
     try {
       const user = await data.User.fetch(member.id)
-      responder.format('emoji:credits').send('{{balance}}', {
+      return responder.format('emoji:credits').send('{{balance}}', {
         user: member.user.username,
         balance: `**\`${user.credits}\`**`
       })
