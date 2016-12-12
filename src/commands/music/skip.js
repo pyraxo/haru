@@ -19,6 +19,11 @@ class Skip extends Command {
         command: `**\`${settings.prefix}summon\`**`
       })
     }
+    if (msg.member.voiceState.channelID !== conn.channelID) {
+      return responder.error('{{errors.notInSameVoice}}', {
+        channel: `'**${client.getChannel(conn.channelID).name}**'`
+      })
+    }
     const chan = music.getBoundChannel(msg.guild.id)
     if (chan && chan !== msg.channel.id) {
       return responder.error('{{errors.notChannel}}', {
@@ -29,7 +34,7 @@ class Skip extends Command {
     const voiceChannel = client.getChannel(conn.channelID)
     return music.skip(msg.guild.id, voiceChannel, msg.author.id)
     .then(res => {
-      if (typeof res === 'string') responder.success(`{{${res}}}`)
+      if (typeof res === 'string') return responder.success(`{{${res}}}`)
     })
   }
 }
