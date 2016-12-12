@@ -71,7 +71,7 @@ class HelpMenu extends Command {
     })
     .then(m => {
       if (msg.guild) {
-        responder.format('emoji:inbox').reply('check your PMs!')
+        responder.format('emoji:inbox').reply('{{checkPMs}}')
       }
     })
   }

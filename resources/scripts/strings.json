@@ -214,7 +214,8 @@
         "`<>` refers to __**required**__ arguments",
         "Omit `<>` or `[]` when invoking a command"
       ],
-      "noDesc": "No description"
+      "noDesc": "No description",
+      "checkPMs": "check your PMs!"
     },
     "images": {
       "link": "{{image}} up for grabs!",
@@ -580,7 +581,8 @@
                 "`<>` refere-se a argumentos __**requeridos**__",
                 "Omite `<>` e `[]` quando utilizares comandos"
             ],
-            "noDesc": "Sem descrição"
+            "noDesc": "Sem descrição",
+            "checkPMs": "verifica as tuas mensagens!"
         },
         "images": {
             "link": "{{Image}} a ganhar!",

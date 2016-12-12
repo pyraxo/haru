@@ -14,5 +14,6 @@
     "`<>` refers to __**required**__ arguments",
     "Omit `<>` or `[]` when invoking a command"
   ],
-  "noDesc": "No description"
+  "noDesc": "No description",
+  "checkPMs": "check your PMs!"
 }
