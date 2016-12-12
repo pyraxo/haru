@@ -12,7 +12,7 @@ class Lang extends Command {
         type: 'string',
         optional: false,
         choices: [
-          'en'
+          'en', 'pt'
         ]
       }],
       options: { guildOnly: true, localeKey: 'settings' }
