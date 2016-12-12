@@ -20,7 +20,11 @@
     "notFound": "the video you provided could not be found.",
     "listNotFound": "the playlist you provided could not be found.",
     "emptyPlaylist": "the playlist you provided has no streamable videos.",
-    "errorQueue": "an error occurred while queuing {{url}}."
+    "notInVoice": "you need to be in a voice channel!",
+    "errorQueue": "an error occurred while queuing {{url}}.",
+    "alreadyBinded": "I am already bound to {{text}}! Use commands in that channel.",
+    "noPerms": "I don't have the permissions to `connect` and/or `speak` in {{voice}}!",
+    "error": "something bad happened! Please try again later."
   },
   "dc": "Disconnected from '{{voice}}' and unbound from {{text}}.",
   "switch": "Switching to streaming mode and playing from {{station}}",
@@ -28,5 +32,9 @@
   "voteSuccess": "you have voted to skip the current song!",
   "playlist": "Playlist - {{guild}}",
   "queuedSongs": "Queued Songs",
-  "queueProgress": "queuing playlist, please hold..."
+  "queueProgress": "queuing playlist, please hold...",
+  "joinSuccess": [
+    "Connected to '{{voice}}' and bound to {{text}}.\n",
+    "Use the {{command}} command to start playing songs! "
+  ]
 }

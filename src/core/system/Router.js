@@ -43,9 +43,15 @@ class Router extends Collection {
 
   initAll () {
     this.forEach(module => {
-      if (typeof module.init === 'function') {
-        module.init()
-      }
+      if (typeof module.init === 'function') module.init()
+    })
+  }
+
+  destroy () {
+    this.events = {}
+    this.forEach(module => {
+      if (typeof module.unload === 'function') module.unload()
+      this.delete(module.name)
     })
   }
 }

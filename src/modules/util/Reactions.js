@@ -10,8 +10,14 @@ class Reactions extends Module {
         messageDelete: 'onDelete'
       }
     })
+  }
 
+  init () {
     this.menus = new Collection()
+  }
+
+  unload () {
+    delete this.menus
   }
 
   addMulti (msg, emojis) {

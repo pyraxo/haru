@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path')
+const logger = require('winston')
 
 const { Module, Collection } = require('../../core')
 
@@ -10,7 +11,6 @@ class Companions extends Module {
       localeKey: 'companion'
     })
 
-    this.battles = new Collection()
     this.db = this.bot.engine.db.data
 
     /*
@@ -22,12 +22,28 @@ class Companions extends Module {
     this.outcomes = Array(100).fill(0, 0, 34).fill(1, 34, 89).fill(2, 89)
   }
 
-  async init () {
-    const data = JSON.parse(fs.readFileSync(path.join(this.bot.paths.resources, 'config', 'companions.json')))
-    this.pets = data.companions
-    this.prices = data.prices
+  init () {
+    this.battles = new Collection()
+    fs.readFile(path.join(this.bot.paths.resources, 'config', 'companions.json'), (err, res) => {
+      if (err) {
+        logger.error('Could not read companions configuration')
+        logger.error(err)
+        return
+      }
 
-    setInterval(() => this.checkBattles(), 2000)
+      const data = JSON.parse(fs.readFileSync(path.join(this.bot.paths.resources, 'config', 'companions.json')))
+      this.pets = data.companions
+      this.prices = data.prices
+
+      this._check = setInterval(() => this.checkBattles(), 2000)
+    })
+  }
+
+  unload () {
+    delete this.battles
+    delete this.pets
+    delete this.prices
+    delete this._check
   }
 
   /*

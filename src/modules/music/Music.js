@@ -36,6 +36,12 @@ class Music extends Module {
     }, 120000)
   }
 
+  unload () {
+    delete this.states
+    clearInterval(this._validator)
+    delete this._validator
+  }
+
   bindChannel (guildID, textChannelID) {
     this.states.set(guildID, {
       channel: textChannelID,
@@ -82,7 +88,7 @@ class Music extends Module {
 
   async connect (voiceID, textChannel) {
     if (!voiceID || !textChannel || !textChannel.guild) {
-      return Promise.reject('notChannel')
+      return Promise.reject('notInVoice')
     }
     const guild = textChannel.guild
     let channel = this.getBoundChannel(guild)

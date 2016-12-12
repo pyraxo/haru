@@ -28,6 +28,8 @@ class Stream extends Command {
       })
     }
 
+    await responder.typing()
+
     const voice = client.getChannel(conn.channelID)
     await music.player.stop(voice)
 

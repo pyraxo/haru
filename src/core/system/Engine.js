@@ -106,6 +106,8 @@ class Engine extends EventEmitter {
   }
 
   loadModules (group = '.', file) {
+    this.modules.destroy()
+
     let count = 0
     readdirRecursive(this.paths.modules, group).then(mod => {
       if (typeof file === 'string') mod = mod.filter(m => path.basename(m).startsWith(file))

@@ -57,7 +57,7 @@ class Base {
 
     if (!perms.every(p => member.permission.has(p))) return false
     return perms.every(perm => (
-      channel.permissionOverwrites.filter(p => (member.roles.indexOf(p.id) > -1 || p.id === user.id) && p.json[perm] !== false).length
+      channel.permissionOverwrites.find(p => (member.roles.indexOf(p.id) > -1 || p.id === user.id) && p.json[perm] !== false)
     ))
   }
 

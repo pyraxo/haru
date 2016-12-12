@@ -7,7 +7,7 @@ class Summon extends Command {
       name: 'summon',
       description: 'Summons me to a voice channel',
       cooldown: 5,
-      options: { guildOnly: true }
+      options: { guildOnly: true, localeKey: 'music' }
     })
   }
 
@@ -17,12 +17,13 @@ class Summon extends Command {
     const member = msg.member
     const channel = member.voiceState.channelID
     if (channel === null) {
-      responder.error('{{notInVoice}}')
+      responder.error('{{errors.notInVoice}}')
       return
     }
+
     try {
       await music.connect(channel, msg.channel)
-      return responder.format('emoji:headphones').send('{{success}}', {
+      return responder.format('emoji:headphones').send('{{joinSuccess}}', {
         voice: `**${msg.guild.channels.find(c => c.id === channel).name}**`,
         text: msg.channel.mention,
         command: `**\`${settings.prefix}play\`**`
