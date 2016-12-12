@@ -1,0 +1,357 @@
+{
+  "en": {
+    "booru": {
+      "noPictures": "the query {{query}} returned no pictures. Try searching something else!",
+      "maxTwo": "you may only search Danbooru with a maximum of two tags!",
+      "score": "Score",
+      "rating": "Rating",
+      "tags": "Tags",
+      "s": "Safe",
+      "q": "Questionable",
+      "e": "Explicit"
+    },
+    "choose": {
+      "pick": "I pick {{choice}}"
+    },
+    "common": {
+      "CHECK_PMS": "check your PMs!",
+      "ERROR": "an error has occurred! Please try again later, or submit a bug report.",
+      "ERROR_FULL": "An error has occurred! Please try again later, or submit a bug report.",
+      "COOLDOWN": "please cool down! ({{time}} seconds left)",
+      "NO_PERMS": "you need the permission {{perms}} to run this command!",
+      "NO_PERMS_BOT": "I need the permission {{perms}} to run this command!",
+      "menus": {
+        "EXIT": "Enter {{cancel}} to exit the menu.",
+        "ERRORED": "the menu has closed:",
+        "EXITED": "you have exited the menu.",
+        "SELECTION": "Selection Menu",
+        "ERROR": "Unknown Error",
+        "INPUT": "Type the number of your choice into chat or '{{cancel}}' to cancel."
+      },
+      "collector": {
+        "timeout": "Timeout after {{time}}s",
+        "max": "Exceeded {{max}} tries",
+        "maxMatches": "Exceeded {{maxMatches}} matches"
+      },
+      "resolver": {
+        "INSUFFICIENT_ARGS": "Insufficient arguments - Expected at least {{requiredArgs}}, saw {{argsCount}}",
+        "CORRECT_USAGE": "Correct usage",
+        "NO_END_QUOTE": "missing end quote",
+        "member": {
+          "NOT_FOUND": "member not found"
+        },
+        "channel": {
+          "NOT_FOUND": "channel not found"
+        },
+        "command": {
+          "NOT_FOUND": "command not found"
+        },
+        "string": {
+          "NOT_STRING": "{{arg}} must be a string",
+          "MAX": "{{arg}} length cannot be more than {{max}}",
+          "MIN": "{{arg}} length cannot be less than {{min}}",
+          "ONE_OF": "{{arg}} must be one of the following"
+        },
+        "list": {
+          "MAX": "{{arg}} length cannot contain more than {{max}} items",
+          "MIN": "{{arg}} length cannot contain less than {{min}} items",
+          "MAX_LENGTH": "{{arg}} cannot contain items longer than {{maxLength}}",
+          "MIN_LENGTH": "{{arg}} cannot contain items shorter than {{minLength}}",
+          "DUPES": "{{arg}} cannot contain duplicate values"
+        },
+        "int": {
+          "NOT_INT": "{{arg}} is not an integer",
+          "MAX": "{{arg}} must be less than or equals to {{max}}",
+          "MIN": "{{arg}} must be more than or equals to {{min}}"
+        }
+      }
+    },
+    "companion": {
+      "noPet": "you don't own a companion yet! Use {{command}} to purchase one!",
+      "ownedPet": "you already own a companion!",
+      "cannotAfford": "you need {{amount}} credits but only have {{balance}}!",
+      "intro": "Choose a starter companion, {{user}}!",
+      "dialog": [
+        "**Companion Purchase**\n",
+        "{{author}}, you have selected {{animal}} as your companion.",
+        "Are you certain you'd like to purchase it for {{amount}} credits?\n",
+        "To confirm, please write {{code}}, or anything else to exit."
+      ],
+      "invalidCode": "you have entered an invalid code! The transaction was cancelled.",
+      "error": "an error has occurred! The transaction was cancelled. Try again later.",
+      "result": [
+        "**Companion Purchased**\n",
+        "{{author}}, you have successfully purchased {{animal}} as your companion.",
+        "__Current Balance__: {{balance}} credits\n",
+        "You may rename your companion with the {{command}} command."
+      ],
+      "definitions": {
+        "wins": "Wins",
+        "losses": "Losses",
+        "info": "Companion Info",
+        "info2": "{{author}}'s Companion"
+      },
+      "errors": {
+        "self": "you can't battle yourself!",
+        "noUser": "that user does not exist in my records!",
+        "ongoingBattle": "there is already a battle ongoing in this channel!",
+        "userInBattle": "you are currently in a battle!",
+        "opponentInBattle": "your opponent is currently in a battle!",
+        "noIncoming": "you have no incoming battle requests.",
+        "noOutgoing": "you have not sent any battle requests.",
+        "opponentNoCompanion": "that player does not own a companion!",
+        "cantPlay": "you need {{amount}} credits to play but currently only have {{balance}}!",
+        "cantChallenge": "the player does not have enough credits to play!",
+        "noBattle": "this channel has no ongoing battles!",
+        "notParticipating": "that player is not a participant of this battle!",
+        "isParticipant": "you're a participant of this battle and can't place bets!",
+        "cantBet": "you don't have enough credits ({{balance}}) to bet {{amount}}!",
+        "betMulti": "you can't bet more than once!",
+        "plsBetProperly": "you can't bet less than one credit!",
+        "notBetting": "the battle has not entered the betting phase!",
+        "afterBetting": "the betting phase has already concluded for this battle!",
+        "notOnline": "that user is not online yet!"
+      },
+      "challenge": [
+        "you have challenged {{mention}} to a pet battle!\n",
+        "The player has {{time}} seconds to respond with {{accept}} or {{reject}}, otherwise they automatically forfeit!"
+      ],
+      "bet": "you have placed a bet of {{amount}} credits on {{user}} and his companion {{pet}}!",
+      "timedOut": "{{p2}} failed to respond to {{p1}}'s challenge after {{time}} seconds and has forfeited.",
+      "rejectChallenge": "{{p2}} has rejected {{p1}}'s challenge.",
+      "cancelChallenge": "{{p1}} has cancelled their challenge to {{p2}}.",
+      "acceptChallenge": [
+        "{{p2}} has accepted the challenge from {{p1}}!\n",
+        "The battle will commence in {{time}} seconds!",
+        "Place your bets with {{command}}!"
+      ],
+      "renameDialog": "{{user}}, what would you like to rename your {{pet}} companion to?",
+      "renameSuccess": "you have renamed your {{pet}} companion to {{newName}}!",
+      "script": {
+        "HIT": [
+          "{{p1}} administers a strong hit to {{p2}}, dealing {{dmg}} damage!",
+          "{{p1}} lands a strike on {{p2}}, who suffers {{dmg}} damage!",
+          "{{p2}} suffers a pounding by {{p1}}, who hits for {{dmg}} damage!",
+          "{{p1}} secures a good hit on {{p2}}, delivering {{dmg}} damage!",
+          "{{p1}} delivers a quick {{dmg}} damage to {{p2}}!"
+        ]
+      }
+    },
+    "credits": {
+      "balance": "{{user}}'s account balance is {{balance}} credits.",
+      "topup": "{{amount}} credits have been added to your account.",
+      "cooldown": "your claimable credit refreshes in {{time}}.",
+      "dialog": [
+        "**Credits Transfer**\n",
+        "{{author}}, you are transferring {{amount}} credits to {{user}}\n",
+        "__Current balance__: {{balance}}",
+        "__Balance after transfer__: {{afterAmount}}\n",
+        "To confirm, enter {{code}} to proceed or {{exit}} to quit the menu."
+      ],
+      "confirmation": [
+        "you have transferred {{amount}} credits to {{user}}'s account.\n",
+        "__Updated balance__: {{afterAmount}}"
+      ],
+      "invalidCode": "you have entered an invalid code! Your credits haven't been transferred.",
+      "selfSenderError": "you can't send credits to yourself!",
+      "insufficientCredits": "you have insufficient ({{balance}}) credits!",
+      "botUserError": "you can't send credits to bots!",
+      "topTitle": "Discord's Wealthiest Individuals",
+      "credits": "credits"
+    },
+    "descriptions": {
+      "help": "Displays info on commands",
+      "info": "Information about me",
+      "credits": "Currency system",
+      "wage": "Claim your credits every 8 hours",
+      "hate": "I-I hate you!",
+      "love": "I-I love you!",
+      "prefix": "Allows moderators to set a guild's prefix",
+      "search": "Searches Youtube for music",
+      "skip": "Skips the current music track",
+      "stop": "Stops currently playing music",
+      "summon": "Summons me to a voice channel",
+      "companion": "Animal companion system",
+      "battle": "Fight other users' companions",
+      "buypet": "Purchases your personal companion",
+      "bet": "Places bets during battles",
+      "booru": "Searches an image board",
+      "danbooru": "Searches the Danbooru image board",
+      "gelbooru": "Searches the Gelbooru image board",
+      "yandere": "Searches the Yandere image board",
+      "slots": "Plays the slot machine",
+      "stats": "Statistics about me",
+      "choose": "Selects a certain choice",
+      "invite": "Displays my invite link",
+      "stream": "Plays from a supported stream",
+      "queue": "Lists songs in the queue",
+      "whois": "Displays information of a member",
+      "channel": "Displays information of a channel",
+      "server": "Displays information of a server",
+      "catgirl": "Fetches a random catgirl",
+      "clear": "Clears the music queue"
+    },
+    "guilds": {
+      "join": [
+        "👋  Hello! I'm **haru**! Everyone's favourite idol ✨🎤 and part-time bot! 🤖\n",
+        "You can find a list of my commands by typing {{help}} into chat!",
+        "To learn more about me, use the {{about}} command!"
+      ]
+    },
+    "help": {
+      "header_1": "To run a command, invoke it with {{prefix}} in {{server}}",
+      "header_1_alt": "or the default {{defaultPrefix}}",
+      "header_2": "To get more help on a command, call {{helpCommand}}",
+      "header_3": "For example: {{exampleCommand}}",
+      "definitions": {
+        "usage": "Usage",
+        "aliases": "Aliases",
+        "pms": "PMs"
+      },
+      "footer": "For support, suggestions and feedback, visit {{link}}",
+      "footer_group": [
+        "`[]` refers to __**optional**__ arguments",
+        "`<>` refers to __**required**__ arguments",
+        "Omit `<>` or `[]` when invoking a command"
+      ],
+      "noDesc": "No description"
+    },
+    "images": {
+      "link": "{{image}} up for grabs!",
+      "catgirl": "Catgirl"
+    },
+    "info": {
+      "info": [
+        "👋  Hello! I'm **haru**!",
+        "Everyone's favourite idol ✨🎤 and part-time bot! 🤖"
+      ],
+      "invite": [
+        "Invite me using {{invite}}!",
+        "For suggestions and support, visit my server at {{server}}!"
+      ],
+      "warn": "Please ensure you have embeds enabled!",
+      "author": "Author",
+      "lib": "Library",
+      "ver": "Version",
+      "src": "Source code",
+      "support": "Customer Support",
+      "join": "For support, suggestions and feedback, visit {{link}}",
+      "inv": "Invite me!",
+      "ptr": "Help keep haru running!"
+    },
+    "infocmd": {
+      "server": {
+        "shard": "Shard",
+        "defaultChannel": "Default Channel",
+        "region": "Region",
+        "createdOn": "Account Creation",
+        "joinedOn": "Join Date",
+        "roles": "Roles",
+        "members": "Members",
+        "channels": "Channels",
+        "owner": "Owner",
+        "online": "online",
+        "text": "Text",
+        "voice": "Voice"
+      },
+      "whois": {
+        "shared": "Shared Servers",
+        "status": "Status",
+        "nick": "Nickname",
+        "createdOn": "Account Creation",
+        "joinedOn": "Join Date",
+        "roles": "Roles",
+        "none": "None",
+        "playing": "Playing",
+        "more": "and {{num}} more..."
+      },
+      "channel": {
+        "title": "Channel Info for {{channel}}",
+        "type": "Type",
+        "text": "Text",
+        "voice": "Voice",
+        "createdOn": "Creation Date"
+      }
+    },
+    "music": {
+      "nowPlaying": "Now Playing",
+      "streamInfo": [
+        "{{title}} by {{artist}}",
+        "**Requested By**: {{requestedBy}}"
+      ],
+      "skipping": "Skipping",
+      "finishedPlaying": "Finished playing",
+      "queueFinish": "The queue is now empty.",
+      "dcInactive": "Disconnected from voice channel due to inactivity.",
+      "queuedMulti": "Queued {{num}} songs",
+      "clearQueue": "The music queue has been cleared.",
+      "queued": "Queued",
+      "errors": {
+        "notInChannel": "bring me into a voice channel with {{command}} first!",
+        "emptyQueue": [
+          "there is nothing in the queue!\n",
+          "Use the {{play}} command to queue a song!"
+        ],
+        "tooLong": "that song is too long! Queue one shorter than 90 minutes.",
+        "noResults": "the query {{query}} gave no results.",
+        "alreadyPlaying": "there is already a song being played! Queue another song with {{command}}.",
+        "notChannel": "the current bound text channel is {{channel}}. Please use the music commands there.",
+        "notFound": "the video you provided could not be found.",
+        "listNotFound": "the playlist you provided could not be found.",
+        "emptyPlaylist": "the playlist you provided has no streamable videos.",
+        "notInVoice": "you need to be in a voice channel!",
+        "errorQueue": "an error occurred while queuing {{url}}.",
+        "alreadyBinded": "I am already bound to {{text}}! Use commands in that channel.",
+        "noPerms": "I don't have the permissions to `connect` and/or `speak` in {{voice}}!",
+        "error": "something bad happened! Please try again later.",
+        "notInSameVoice": "you need to be in the voice channel {{channel}}!"
+      },
+      "dc": "Disconnected from '{{voice}}' and unbound from {{text}}.",
+      "switch": "Switching to streaming mode and playing from {{station}}",
+      "alreadyVoted": "you have already voted to skip this song!",
+      "voteSuccess": "you have voted to skip the current song!",
+      "playlist": "Playlist - {{guild}}",
+      "queuedSongs": "Queued Songs",
+      "queueProgress": "queuing playlist, please hold...",
+      "joinSuccess": [
+        "Connected to '{{voice}}' and bound to {{text}}.\n",
+        "Use the {{command}} command to start playing songs! "
+      ]
+    },
+    "settings": {
+      "prefix": {
+        "success": "successfully changed this guild's prefix to {{prefix}}",
+        "revert": "reverted this guild's prefix back to {{prefix}}"
+      },
+      "lang": {
+        "success": "successfully changed this guild's language to {{lang}}"
+      }
+    },
+    "slots": {
+      "insufficient": [
+        "you need {{amount}} more credits!\n",
+        "You can use the command {{command}} to claim free credits every few hours!"
+      ],
+      "won": "{{user}} placed a bet of {{amount}} credits and won:",
+      "lost": "{{user}} placed a bet of {{amount}} credits and lost all of it.",
+      "credits": "credits",
+      "winnings": "Winnings",
+      "yudodis": "you can't bet less than one credit!",
+      "dailyLimit": "you have reached the daily limit of credits that can be won. Try again in {{time}}."
+    },
+    "stats": {
+      "users": "Users",
+      "unique": "unique",
+      "online": "online",
+      "guilds": "Guilds",
+      "channels": "Channels",
+      "text": "text",
+      "voice": "voice",
+      "total": "total",
+      "uptime": "Uptime",
+      "memoryUsage": "Memory Usage",
+      "commandsUsed": "Commands Used",
+      "server": "Studio 777 (Support Server)"
+    }
+  }
+}

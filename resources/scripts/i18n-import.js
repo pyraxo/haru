@@ -8,7 +8,7 @@ for (const lang in data) {
 	const LANGPATH = path.join(__dirname, '..', 'i18n', lang)
 	for (const key in data[lang]) {
 		const FILEPATH = path.join(LANGPATH, key + '.json')
-		fs.writeFileSync(FILEPATH, data[lang][key], null, 2)
+		fs.writeFileSync(FILEPATH, JSON.stringify(data[lang][key], null, 2))
 		console.log('wrote to ' + FILEPATH)
 	}
 }

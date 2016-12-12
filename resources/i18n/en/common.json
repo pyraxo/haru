@@ -41,7 +41,7 @@
       "MAX": "{{arg}} length cannot contain more than {{max}} items",
       "MIN": "{{arg}} length cannot contain less than {{min}} items",
       "MAX_LENGTH": "{{arg}} cannot contain items longer than {{maxLength}}",
-      "MIN_LENGTH": "{{arg}} cannot contain items longer than {{minLength}}",
+      "MIN_LENGTH": "{{arg}} cannot contain items shorter than {{minLength}}",
       "DUPES": "{{arg}} cannot contain duplicate values"
     },
     "int": {

@@ -37,7 +37,8 @@ node_modules
 .env
 
 # Databases / Storage
-resources/avatars
+resources/i18n
+!resources/i18n/en
 .cache
 build
 
