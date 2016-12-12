@@ -1,5 +1,9 @@
 {
   "nowPlaying": "Now Playing",
+  "streamInfo": [
+    "{{title}} by {{artist}}",
+    "**Requested By**: {{requestedBy}}"
+  ],
   "skipping": "Skipping",
   "finishedPlaying": "Finished playing",
   "queueFinish": "The queue is now empty.",

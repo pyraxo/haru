@@ -40,10 +40,11 @@ class Companions extends Module {
   }
 
   unload () {
+    clearTimeout(this._check)
+    delete this._check
     delete this.battles
     delete this.pets
     delete this.prices
-    delete this._check
   }
 
   /*

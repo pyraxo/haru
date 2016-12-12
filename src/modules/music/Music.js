@@ -5,6 +5,7 @@ const moment = require('moment')
 const url = require('url')
 const querystring = require('querystring')
 const ytdl = Promise.promisifyAll(require('ytdl-core'))
+const WebSocket = require('ws')
 
 const { Module, Collection } = require('../../core')
 
@@ -19,6 +20,13 @@ class Music extends Module {
     })
 
     this.redis = this.bot.engine.cache.client
+
+    this.streams = {
+      'listen.moe': {
+        socket: 'https://listen.moe/api/socket',
+        url: 'http://listen.moe:9999/stream'
+      }
+    }
   }
 
   init () {
@@ -34,12 +42,58 @@ class Music extends Module {
         }
       }
     }, 120000)
+
+    this.connectWS()
+  }
+
+  connectWS () {
+    this._ws = {}
+    this.streamInfo = {}
+    for (const streamName in this.streams) {
+      const stream = this.streams[streamName]
+      let ws = this._ws[streamName] = new WebSocket(stream.socket)
+      ws.on('message', data => {
+        try {
+          if (data) {
+            const info = JSON.parse(data)
+            this.streamInfo[stream.url] = (s => {
+              switch (s) {
+                case 'listen.moe': return {
+                  title: info.song_name,
+                  artist: info.artist_name,
+                  requestedBy: info.requested_by
+                }
+                default: return
+              }
+            })(streamName)
+          }
+        } catch (err) {
+          logger.error(`Error parsing ${stream.socket} message: ${err}`)
+        }
+      })
+      ws.on('error', err => {
+        if (err) {
+          logger.error(`Error occurred with ${stream.socket}`)
+          logger.error(err)
+        }
+      })
+      ws.on('close', () => {
+        logger.error(`Reopening closed ${stream.socket} socket`)
+        setTimeout(this.connectWS.bind(this), 2500)
+      })
+    }
   }
 
   unload () {
     delete this.states
     clearInterval(this._validator)
     delete this._validator
+
+    for (let ws in this._ws) {
+      this._ws[ws].removeAllListeners()
+    }
+    delete this.streamInfo
+    delete this._ws
   }
 
   bindChannel (guildID, textChannelID) {
@@ -84,6 +138,15 @@ class Music extends Module {
       return this.client.voiceConnections.get(channel.guild.id) || null
     }
     return null
+  }
+
+  getPlaying (guildID) {
+    let state = this.checkState(guildID)
+    return state
+    ? typeof state === 'string'
+    ? this.streamInfo[state] || null
+    : state
+    : null
   }
 
   async connect (voiceID, textChannel) {

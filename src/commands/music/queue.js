@@ -53,7 +53,12 @@ class Queue extends Command {
       ? responder.send(rep)
       : responder.format('emoji:info').reply('{{errors.emptyQueue}}', { play: `**\`${settings.prefix}play\`**` })
     } else if (typeof state === 'string') {
-      return responder.format('emoji:headphones').send(`**${responder.t('{{nowPlaying}}')}**: <${state}>`)
+      const info = music.getPlaying(msg.guild.id)
+      return responder.format('emoji:headphones').send('**{{nowPlaying}}**:\n{{streamInfo}}', {
+        title: `"**${info.title}**"`,
+        artist: info.artist,
+        requestedBy: info.requestedBy
+      })
     }
   }
 }

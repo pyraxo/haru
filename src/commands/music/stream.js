@@ -33,11 +33,7 @@ class Stream extends Command {
     const voice = client.getChannel(conn.channelID)
     await music.player.stop(voice)
 
-    const station = (s => {
-      switch (s) {
-        case 'listen.moe': return 'http://listen.moe:9999/stream'
-      }
-    })(args.station)
+    const station = music.streams[args.station].url
     await music.player.stream(voice, station)
     return responder.format('emoji:headphones').send('{{switch}}', {
       station: '**' + args.station + '**'
