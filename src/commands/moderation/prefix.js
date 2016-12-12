@@ -8,7 +8,7 @@ class Prefix extends Command {
       description: 'Allows moderators to set a guild\'s prefix',
       aliases: ['setprefix'],
       usage: [{ name: 'prefix', type: 'string', optional: true }],
-      options: { guildOnly: true }
+      options: { guildOnly: true, localeKey: 'settings' }
     })
   }
 
@@ -18,12 +18,12 @@ class Prefix extends Command {
       let guild = await data.Guild.fetch(msg.guild.id)
       guild.prefix = prefix || process.env.CLIENT_PREFIX
       await guild.save()
-      return responder.success(prefix ? '{{success}}' : '{{revert}}', {
+      return responder.success(prefix ? '{{prefix.success}}' : '{{prefix.revert}}', {
         prefix: `**\`${prefix || process.env.CLIENT_PREFIX}\`**`
       })
     } catch (err) {
       logger.error(`Could not change prefix for ${msg.guild.name} (${msg.guild.id}) - ${err}`)
-      return responder.error('{{%ERROR}}')
+      return responder.error()
     }
   }
 }
