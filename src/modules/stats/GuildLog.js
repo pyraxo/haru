@@ -90,15 +90,6 @@ class GuildLog extends Module {
         text: `Shard ${guild.shard}  |  ${moment().format('ddd Do MMM, YYYY [at] hh:mm:ss a')}`
       }
     }})
-
-    try {
-      const settings = await this.bot.engine.db.data.Guild.fetch(guild.id)
-      settings.deleted = event === 'deleted'
-      await settings.save()
-    } catch (err) {
-      logger.error(`Could not load settings for ${guild.name} (${guild.id})`)
-      logger.error(err)
-    }
   }
 
   parseGuild (guild) {
@@ -113,7 +104,7 @@ class GuildLog extends Module {
     }
   }
 
-  newGuild (guild) {
+  async newGuild (guild) {
     const g = this.parseGuild(guild)
     logger.info(`Guild created: ${g.name} (${g.id})`)
     logger.info(`${chalk.cyan.bold('U:')} ${g.memberCount} | ${chalk.cyan.bold('S:')} ${g.shard}`)
@@ -126,9 +117,18 @@ class GuildLog extends Module {
       help: `**\`${process.env.CLIENT_PREFIX}help\`**`,
       about: `**\`${process.env.CLIENT_PREFIX}info\`**`
     })
+
+    try {
+      const settings = await this.bot.engine.db.data.Guild.fetch(guild.id)
+      settings.deleted = false
+      await settings.save()
+    } catch (err) {
+      logger.error(`Could not load settings for ${guild.name} (${guild.id})`)
+      logger.error(err)
+    }
   }
 
-  delGuild (guild) {
+  async delGuild (guild) {
     const g = this.parseGuild(guild)
     logger.info(`Guild deleted: ${g.name} (${g.id})`)
     logger.info(`${chalk.cyan.bold('U:')} ${g.memberCount} | ${chalk.cyan.bold('S:')} ${g.shard}`)
@@ -136,6 +136,15 @@ class GuildLog extends Module {
       op: 'guildDelete',
       d: { event: 'deleted', guild: g }
     })
+
+    try {
+      const settings = await this.bot.engine.db.data.Guild.fetch(guild.id)
+      settings.deleted = true
+      await settings.save()
+    } catch (err) {
+      logger.error(`Could not load settings for ${guild.name} (${guild.id})`)
+      logger.error(err)
+    }
   }
 }
 
