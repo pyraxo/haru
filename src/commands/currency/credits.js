@@ -134,7 +134,7 @@ class Credits extends Command {
   }
 
   async peek ({ args, data }, responder) {
-    const [member] = await responder.selection(args.member, { mapFunc: m => `${m.user.username}#${m.user.discriminator}` })
+    const [member] = await responder.selection(args.user, { mapFunc: m => `${m.user.username}#${m.user.discriminator}` })
     if (!member) return
     try {
       const user = await data.User.fetch(member.id)
