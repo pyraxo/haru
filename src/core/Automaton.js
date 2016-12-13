@@ -50,7 +50,6 @@ class Automaton extends EventEmitter {
       firstShardID: this.firstShardID,
       lastShardID: this.lastShardID,
       maxShards: this.maxShards,
-      seedVoiceConnections: true,
       disableEvents: {
         TYPING_START: true,
         MESSAGE_UPDATE: true,

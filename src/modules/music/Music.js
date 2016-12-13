@@ -484,12 +484,13 @@ class Music extends Module {
       let first
       const loop = (i = 0) => {
         const item = items[i++]
+        if (i >= items.length) {
+          return resolve(first)
+        }
         return this.add(msg.guild.id, voiceChannel, `https://www.youtube.com/watch?v=${item}`)
         .then(() => {
           if (!first) first = item
-          return i >= items.length
-          ? first ? resolve(first) : resolve()
-          : loop(i)
+          return loop(i)
         })
         .catch(err => {
           this.send(
