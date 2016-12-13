@@ -724,5 +724,372 @@
                 "success": "o idioma deste servidor foi mudado com sucesso para {{lang}}"
             }
         }
+    },
+    "nl": {
+        "booru": {
+            "noPictures": "de opdracht {{query}} heeft geen resultaten opgeleverd. Probeer iets anders!",
+            "maxTwo": "je mag maar met maximaal twee tags op Gelbooru zoeken!",
+            "score": "Score",
+            "rating": "Beoordeling",
+            "tags": "Tags",
+            "s": "Veilig",
+            "q": "Twijfelachtig",
+            "e": "Expliciet"
+        },
+        "choose": {
+            "pick": "Ik kies {{choice}}"
+        },
+        "common": {
+            "CHECK_PMS": "check je inbox!",
+            "ERROR": "er is een fout opgetreden! Probeer later nog eens, of rapporteer een bug.",
+            "ERROR_FULL": "Er is een fout opgetreden! Probeer later nog eens, of rapporteer een bug.",
+            "COOLDOWN": "rustig aan! ({{time}} seconden nog)",
+            "NO_PERMS": "je hebt de toestemming {{perms}} nodig om dit commando uit te voeren!",
+            "NO_PERMS_BOT": "Ik heb de toestemming {{perms}} nodig om dit commando uit te voeren!",
+            "menus": {
+                "EXIT": "Typ {{cancel}} om het menu te verlaten.",
+                "ERRORED": "het menu is gesloten:",
+                "EXITED": "je hebt het menu verlaten.",
+                "SELECTION": "Selectiemenu",
+                "ERROR": "Onbekende Fout",
+                "INPUT": "Typ het door jou gekozen nummer in de chat of typ '{{cancel}}' om af te breken."
+            },
+            "collector": {
+                "timeout": "Time-out na {{time}}s",
+                "max": "{{max}} pogingen overschreden",
+                "maxMatches": "{{maxMatches}} wedstrijden overschreden"
+            },
+            "resolver": {
+                "INSUFFICIENT_ARGS": "Onvoldoende argumenten - Verwachtte minstens {{requiredArgs}}, zag {{argsCount}}",
+                "CORRECT_USAGE": "Juiste gebruik",
+                "NO_END_QUOTE": "je bent een apostrof vergeten op het einde!",
+                "member": {
+                    "NOT_FOUND": "gebruiker niet gevonden"
+                },
+                "channel": {
+                    "NOT_FOUND": "kanaal niet gevonden"
+                },
+                "command": {
+                    "NOT_FOUND": "het commando kon niet worden gevonden"
+                },
+                "string": {
+                    "NOT_STRING": "{{arg}} moet een zin zijn",
+                    "MAX": "{{arg}} lengte kan niet meer zijn dan {{max}}",
+                    "MIN": "{{arg}} kan niet minder zijn dan {{min}}",
+                    "ONE_OF": "{{arg}} moet één van de volgende zijn"
+                },
+                "list": {
+                    "MAX": "{{arg}} lengte kan niet meer dan {{max}} onderdelen bevatten",
+                    "MIN": "{{arg}} lengte kan niet minder dan {{min}} onderdelen bevatten",
+                    "MAX_LENGTH": "{{arg}} kan geen onderdelen langer dan {{maxLength}} bevatten",
+                    "MIN_LENGTH": "{{arg}} kan geen onderdelen korter dan {{minLength}} bevatten",
+                    "DUPES": "{{arg}} kan geen dubbele waarden bevatten"
+                },
+                "int": {
+                    "NOT_INT": "{{arg}} is geen heel getal",
+                    "MAX": "{{arg}} moet minder zijn of gelijk staan aan {{max}}",
+                    "MIN": "{{arg}} moet meer zijn of gelijk staan aan {{max}}"
+                }
+            }
+        },
+        "companion": {
+            "noPet": "je hebt nog geen maatje! Gebruik {{command}} om er een te kopen!",
+            "ownedPet": "je hebt al een maatje!",
+            "cannotAfford": "je hebt {{amount}} credits nodig maar je hebt er maar {{balance}}!",
+            "intro": "Kies een begin-maatje, {{user}}!",
+            "dialog": [
+                "**Maatjes-Koop**",
+                "",
+                "{{author}}, je hebt {{animal}} geselecteerd als je maatje.",
+                "Weet je zeker dat je die wil kopen voor {{amount}} credits?",
+                "",
+                "Om akkoord te gaan, typ {{code}}. Typ iets anders om af te breken."
+            ],
+            "invalidCode": "je hebt een ongeldige code ingevoerd! De transactie is afgebroken.",
+            "error": "er is een fout opgetreden! De transactie is afgebroken. Probeer het later opnieuw.",
+            "result": [
+                "**Maatje Gekocht**",
+                "",
+                "{{author}}, je hebt met succes {{animal}} als je maatje gekocht.",
+                "__Huidige Balans__: {{balance}} credits",
+                "",
+                "Je kan je maatje hernoemen met het {{command}} commando."
+            ],
+            "definitions": {
+                "wins": "Overwinningen",
+                "losses": "Verliezen",
+                "info": "Maatjes-Info",
+                "info2": "{{author}}'s Maatje"
+            },
+            "errors": {
+                "self": "je kan niet tegen jezelf vechten!",
+                "noUser": "die gebruiker bestaat niet in mijn geheugen!",
+                "ongoingBattle": "er vindt al een gevecht plaats in dit kanaal!",
+                "userInBattle": "je zit momenteel in een gevecht!",
+                "opponentInBattle": "je tegenstander zit momenteel in een gevecht!",
+                "noIncoming": "je hebt geen binnenkomende gevechtsaanvragen.",
+                "noOutgoing": "je hebt geen gevechtsaanvragen verzonden",
+                "opponentNoCompanion": "die speler bezit geen maarje!",
+                "cantPlay": "je hebt {{amount}} credits nodig om te spelen maar hebt er maar {{balance}}!",
+                "cantChallenge": "de speler heeft niet genoeg credits om te spelen!",
+                "noBattle": "in dit kanaal vinden geen gevechten plaats!",
+                "notParticipating": "die speler is geen deelnemer van dit gevecht!",
+                "isParticipant": "je bent een deelnemer van dit gevecht en kan niet bieden!",
+                "cantBet": "je hebt niet genoeg credits ({{balance}}) om {{amount}} te bieden!",
+                "betMulti": "je kan niet meer dan één keer bieden!",
+                "plsBetProperly": "je kan niet minder dan één credit bieden!",
+                "notBetting": "het gevecht heeft de biedfase niet ingetreden!",
+                "afterBetting": "de biedfase is al gesloten voor dit gevecht!",
+                "notOnline": "die gebruiker is nog niet online!"
+            },
+            "challenge": [
+                "je hebt {{mention}} uitgedaagd voor een maatjes-gevecht!",
+                "",
+                "De speler heeft {{time}} seconden om te antwoorden met {{accept}} of {{reject}}, anders geven ze automatisch op!"
+            ],
+            "bet": "je hebt een bod geplaatst van {{amount}} credits op {{user}} en zijn maatje {{pet}}!",
+            "timedOut": "{{p2}} heeft niet gereageerd op {{p1}}'s uitdaging na {{time}} seconden en heeft opgegeven.",
+            "rejectChallenge": "{{p2}} heeft {{p1}}'s uitdaging afgewezen.",
+            "cancelChallenge": "{{p1}} heeft zijn uitdaging naar {{p2}} stopgezet.",
+            "acceptChallenge": [
+                "{{p2}} heeft de uitdaging van {{p1}} geaccepteerd!"
+            ],
+            "renameDialog": "{{user}}, waarnaar wil je je {{pet}} maatje hernoemen?",
+            "renameSuccess": "je hebt je {{pet}} maatje succesvol hernoemd naar {{newName}}!",
+            "script": {
+                "HIT": [
+                    "{{p1}} geeft een harde klap aan {{p2}}, het doet {{dmg}} schade!",
+                    "{{p1}} raakt {{p2}} met een slag, die lijdt {{dmg}} schade!",
+                    "{{p2}} wordt in mekaar geslagen door {{p1}}, die {{dmg}} schade toedient!",
+                    "{{p1}} zorgt voor een goede vuist op {{p2}}, het doet {{dmg}} schade!",
+                    "{{p1}} geeft een snelle {{dmg}} schade aan {{p2}}!"
+                ]
+            }
+        },
+        "credits": {
+            "balance": "{{user}}'s account-balans is {{balance}} credits.",
+            "topup": "{{amount}} credits zijn aan je account toegevoegd.",
+            "cooldown": "je claimbare credits verversen in {{time}}.",
+            "dialog": [
+                "**Credit-Overdracht**",
+                "",
+                "{{author}}, je staat op het punt {{amount}} credits naar {{user}} over te schrijven",
+                "",
+                "__Huidige Balans__: {{balance}}",
+                "__Balans na transactie__: {{afterAmount}}",
+                "",
+                "Om te bevestigen, typ {{code}} om door te gaan of {{exit}} om het menu te verlaten."
+            ],
+            "confirmation": [
+                "je hebt {{amount}} credits overgeschreven naar {{user}}'s account.",
+                "",
+                "__Geüpdatete Balans__: {{afterAmount}}"
+            ],
+            "invalidCode": "je hebt een ongeldige code ingevoerd! Je credits zijn niet overgeschreven.",
+            "selfSenderError": "je kan geen credits naar jezelf overschrijven!",
+            "insufficientCredits": "je hebt onvoldoende ({{balance}}) credits!",
+            "botUserError": "je kan geen credits naar bots overschrijven!",
+            "topTitle": "Discord's Rijkste Personen",
+            "credits": "credits"
+        },
+        "descriptions": {
+            "help": "Geeft info over commando's weer",
+            "info": "Informatie over mij",
+            "credits": "Valuta-Systeem",
+            "wage": "Claim je credits elke 8 uur",
+            "hate": "I-ik haat je!",
+            "love": "I-ik houd van je!",
+            "prefix": "Staat toe dat beheerders het voorvoegsel van de gilde instellen",
+            "search": "Zoekt op Youtube naar muziek",
+            "skip": "Slaat het huidige lied over",
+            "stop": "Stopt met muziek spelen",
+            "summon": "Laat mij in een stemkanaal komen",
+            "companion": "Dieren-maatjes systeem",
+            "battle": "Vecht tegen andere gebruikers' maatjes",
+            "buypet": "Koop je eigen maatje",
+            "bet": "Bied tijdens gevechten",
+            "booru": "Doorzoekt een plaatjes-bord",
+            "danbooru": "Doorzoekt het Danbooru plaatjes-bord",
+            "gelbooru": "Doorzoekt het Gelbooru plaatjes-bord ",
+            "yandere": "Doorzoekt het Yandere plaatjes-bord ",
+            "slots": "Speelt op de gokautomaat",
+            "stats": "Statistieken over mij",
+            "choose": "Selecteert een bepaalde keuze",
+            "invite": "Geeft mijn uitnodigings-link weer",
+            "stream": "Speelt af van een ondersteunde stream",
+            "queue": "Zet liedjes in de rij",
+            "whois": "Geeft informatie over een gebruiker weer",
+            "channel": "Geeft informatie over een kanaal weer",
+            "server": "Geeft informatie over een server weer",
+            "catgirl": "Trekt een willekeurig kattenmeisje",
+            "clear": "Verwijdert de muziek-rij"
+        },
+        "guilds": {
+            "join": [
+                "👋  Hallo! Ik ben **haru**! Iedereen's favoriete idool ✨🎤 en part-time bot! 🤖",
+                "",
+                "Je kan een lijst met mijn commando's vinden door {{help}} in de chat te typen!",
+                "Om meer over mij te leren, gebruik je het {{about}} commando!"
+            ]
+        },
+        "help": {
+            "header_1": "Om een commando uit te voeren, moet je het oproepen met {{prefix}} in {{server}}",
+            "header_1_alt": "of de standaard {{defaultPrefix}}",
+            "header_2": "Om meer hulp te krijgen over een commando, typ {{helpCommand}}",
+            "header_3": "Bijvoorbeeld: {{exampleCommand}}",
+            "definitions": {
+                "usage": "Gebruik",
+                "aliases": "Aliassen",
+                "pms": "Persoonlijke Berichten"
+            },
+            "footer": "Voor hulp, suggesties en feedback, bezoek {{link}}",
+            "footer_group": [
+                "`[]` verwijst naar __**optionele**__ argumenten",
+                "`<>` verwijst naar __**nodige**__ argumenten",
+                "Laat `<>` of `[]` weg bij het oproepen van een commando"
+            ],
+            "noDesc": "Geen beschrijving",
+            "checkPMs": "check je inbox!"
+        },
+        "images": {
+            "link": "{{image}} voor het pakken!",
+            "catgirl": "Kattenmeisje"
+        },
+        "info": {
+            "info": [
+                "👋  Hallo! Ik ben **haru**!",
+                "Iedereen's favoriete idool ✨🎤 en part-time bot! 🤖"
+            ],
+            "invite": [
+                "Nodig me uit met {{invite}}!",
+                "Voor suggesties en hulp, ga naar mijn server in {{server}}!"
+            ],
+            "warn": "Maak alsjeblieft zeker dat je insluitingen aan hebt staan!",
+            "author": "Auteur",
+            "lib": "Bibliotheek",
+            "ver": "Versie",
+            "src": "Broncode",
+            "support": "Klantenhulp",
+            "join": "Voor hulp, suggesties en feedback, bezoek {{link}}",
+            "inv": "Nodig me uit!",
+            "ptr": "Help haru overeind te houden!"
+        },
+        "infocmd": {
+            "server": {
+                "shard": "Shard",
+                "defaultChannel": "Standaard Kanaal",
+                "region": "Regio",
+                "createdOn": "Account Creatie",
+                "joinedOn": "Dag van Toetreden",
+                "roles": "Rollen",
+                "members": "Gebruikers",
+                "channels": "Kanalen",
+                "owner": "Bezitter",
+                "online": "online",
+                "text": "Tekst",
+                "voice": "Stem"
+            },
+            "whois": {
+                "shared": "Gedeelde Servers",
+                "status": "Status",
+                "nick": "Bijnaam",
+                "createdOn": "Account Creatie",
+                "joinedOn": "Datum van Toetreden",
+                "roles": "Rollen",
+                "none": "Geen",
+                "playing": "Aan het spelen",
+                "more": "en {{num}} meer..."
+            },
+            "channel": {
+                "title": "Kanaalinfo van {{channel}}",
+                "type": "Type",
+                "text": "Tekst",
+                "voice": "Stem",
+                "createdOn": "Datum van Creatie"
+            }
+        },
+        "music": {
+            "nowPlaying": "Aan het Spelen",
+            "skipping": "Aan het overslaan",
+            "finishedPlaying": "Klaar met spelen",
+            "queueFinish": "De rij is nu leeg",
+            "dcInactive": "Ontbonden van stemkanaal naar aanleiding van inactiviteit.",
+            "queuedMulti": "{{num}} liedjes in de rij",
+            "clearQueue": "De muziek-rij is leeggemaakt.",
+            "queued": "In de rij gezet",
+            "errors": {
+                "notInChannel": "breng me eerst in een stemkanaal met {{command}}!",
+                "emptyQueue": [
+                    "er is niets in de rij!",
+                    "",
+                    "Gebruik het {{play}} commando om een lied in de rij te zetten!"
+                ],
+                "tooLong": "dat lied is te lang! Zet er een korter dan 90 minuten in de rij.",
+                "noResults": "de zoekopdracht {{query}} leverde geen resultaten op.",
+                "alreadyPlaying": "er wordt al een lied gespeeld! Zet een ander lied in de rij met {{command}}.",
+                "notChannel": "het huidige gebonden kanaal is {{channel}}. Gebruik de muziek-commando's alsjeblieft daar.",
+                "notFound": "de gegeven video kon niet worden gevonden.",
+                "listNotFound": "de gegeven playlist kon niet worden gevonden.",
+                "emptyPlaylist": "de gegeven playlist heeft geen afspeelbare video's.",
+                "notInVoice": "je moet in een stemkanaal zitten!",
+                "errorQueue": "Er is een fout opgetreden bij het in de rij zetten van {{url}}.",
+                "alreadyBinded": "Ik ben al gebonden aan {{text}}! Gebruik commando's in dat kanaal.",
+                "noPerms": "Ik heb niet de toestemmingen om te `verbinden` en/of te `spreken` in {{voice}}!",
+                "error": "iets verkeerds is gebeurd! Probeer later nog eens.",
+                "notInSameVoice": "je moet in het stemkanaal {{channel}} zitten!"
+            },
+            "dc": "Ontbonden van '{{voice}}' en van {{text}}.",
+            "switch": "Aan het veranderen naar streaming-modus en aan het spelen van {{station}}",
+            "alreadyVoted": "je hebt al gestemd om dit lied over te slaan!",
+            "voteSuccess": "je hebt gestemd om het huidige lied over te slaan!",
+            "playlist": "Playlist - {{guild}}",
+            "queuedSongs": "Liedjes in de Rij",
+            "queueProgress": "playlist in de rij aan het zetten, even geduld...",
+            "joinSuccess": [
+                "Verbonden met '{{voice}}' en gebonden aan {{text}}.",
+                "",
+                "Gebruik het {{command}} commando om liedjes af te spelen!"
+            ],
+            "streamInfo": [
+                "{{title}} door {{artist}}",
+                "**Aangevraagd Door**: {{requestedBy}}"
+            ]
+        },
+        "slots": {
+            "insufficient": [
+                "je hebt nog {{amount}} credits nodig!",
+                "",
+                "Je kan het commando {{command}} gebruiken om gratis credits elke paar uur te claimen!"
+            ],
+            "won": "{{user}} plaatste een bod van {{amount}} credits en won:",
+            "lost": "{{user}} plaatste een bod van {{amount}} en verloor alles.",
+            "credits": "credits",
+            "winnings": "Winst",
+            "yudodis": "je kan niet minder dan één credit bieden!",
+            "dailyLimit": "je hebt de dagelijkse limiet van te-winnen credits bereikt. Probeer opnieuw in {{time}}."
+        },
+        "stats": {
+            "users": "Gebruikers",
+            "unique": "uniek",
+            "online": "online",
+            "guilds": "Gildes",
+            "channels": "Kanalen",
+            "text": "tekst",
+            "voice": "stem",
+            "total": "totaal",
+            "uptime": "Tijd Online",
+            "memoryUsage": "Geheugen-Gebruik",
+            "commandsUsed": "Commando's Gebruikt",
+            "server": "Studio 777 (Hulp Server)"
+        },
+        "settings": {
+            "prefix": {
+                "success": "met succes het voorvoegsel van deze gilde veranderd naar {{prefix}}",
+                "revert": "deze gilde's voorvoegsel teruggedraaid naar {{prefix}}"
+            },
+            "lang": {
+                "success": "met succes de taal van deze gilde verandert naar {{lang}}"
+            }
+        }
     }
 }

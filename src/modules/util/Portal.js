@@ -30,7 +30,6 @@ class Portal extends Module {
 
   unload () {
     this.ipc.removeAllListeners()
-    delete this.ipc
     delete this.listeners
     delete this.portals
   }

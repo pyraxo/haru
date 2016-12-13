@@ -220,11 +220,10 @@ class Music extends Module {
       audiourl: bestaudio.url,
       audioformat: bestaudio._format,
       audiotype: bestaudio.itag,
-      expires: info.expires ? Date.now() - info.expires - 300 : null,
       length: parseInt(info.length_seconds)
     }
     info = fetchAll ? info : formattedInfo
-    this.redis.setex(key, formattedInfo.expires || 600, JSON.stringify(formattedInfo))
+    this.redis.setex(key, 18000, JSON.stringify(formattedInfo))
     return info
   }
 
@@ -359,7 +358,7 @@ class Music extends Module {
 
       vote.push(authorId)
 
-      if ((vote.length / voiceChannel.voiceMembers.filter(m => !m.voiceState.selfDeaf && !m.voiceState.deaf).length - 1) < 0.5) {
+      if ((vote.length / voiceChannel.voiceMembers.filter(m => !m.voiceState.selfDeaf && !m.voiceState.deaf).length - 1) < 0.4) {
         this.modifyState(guildId, 'skip', vote)
         return Promise.resolve('voteSuccess')
       } else {
@@ -380,7 +379,7 @@ class Music extends Module {
 
       vote.push(authorId)
 
-      if ((vote.length / voiceChannel.voiceMembers.filter(m => !m.voiceState.selfDeaf && !m.voiceState.deaf).length - 1) < 0.5) {
+      if ((vote.length / voiceChannel.voiceMembers.filter(m => !m.voiceState.selfDeaf && !m.voiceState.deaf).length - 1) < 0.4) {
         this.modifyState(guildId, 'clear', vote)
         return Promise.resolve('voteSuccess')
       } else {

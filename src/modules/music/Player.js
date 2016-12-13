@@ -55,6 +55,8 @@ class Player extends Module {
 
     conn.once('end', () => {
       this.manager.modifyState(channel.guild.id, 'state', null)
+      this.manager.modifyState(channel.guild.id, 'skip', [])
+      this.manager.modifyState(channel.guild.id, 'clear', [])
       this.send(textChannel, `:stop:  |  {{finishedPlaying}} **${mediaInfo.title}** `)
       if (channel.voiceMembers.size === 1 && channel.voiceMembers.has(this.client.user.id)) {
         return this.stop(channel, true)
@@ -100,7 +102,7 @@ class Player extends Module {
       return
     }
     const result = await this.queue.shift(guildID)
-    if (textChannel) this.send(textChannel, `:skip:  |  {{skipping}} **${this.manager.states.get(guildID).title}**`)
+    if (textChannel) this.send(textChannel, `:skip:  |  {{skipping}} **${this.manager.getPlaying(guildID).title}**`)
     return this.manager.play(channel, result)
   }
 }
