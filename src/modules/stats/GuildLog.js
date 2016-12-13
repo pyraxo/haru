@@ -26,7 +26,6 @@ class GuildLog extends Module {
   }
 
   unload () {
-    this.ipc.removeAllListeners()
     delete this.listeners
   }
 

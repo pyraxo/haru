@@ -16,7 +16,7 @@ class Credits extends Command {
         give: {
           usage: [
             { name: 'member', type: 'member', optional: false },
-            { name: 'amount', type: 'int', optional: false }
+            { name: 'amount', type: 'int', optional: false, min: 1 }
           ]
         },
         peek: {
