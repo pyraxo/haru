@@ -1,3 +1,4 @@
+const logger = require('winston')
 const { Command } = require('../../core')
 
 class Skip extends Command {
@@ -6,11 +7,12 @@ class Skip extends Command {
       name: 'skip',
       description: 'Skips the current music track',
       cooldown: 5,
-      options: { guildOnly: true, localeKey: 'music' }
+      options: { guildOnly: true, localeKey: 'music' },
+      usage: [{ name: 'id', type: 'int', optional: true, min: 1 }]
     })
   }
 
-  async handle ({ msg, settings, client, modules }, responder) {
+  async handle ({ msg, settings, client, modules, args }, responder) {
     const music = modules.get('music')
     if (!music) return
     const conn = music.getConnection(msg.channel)
@@ -30,6 +32,19 @@ class Skip extends Command {
         channel: client.getChannel(chan).mention,
         deleteDelay: 5000
       })
+    }
+    if (args.id) {
+      try {
+        const video = await music.queue.remove(msg.guild.id, args.id - 1)
+        if (!video) {
+          return responder.error('{{errors.skipNotFound}}')
+        }
+        return responder.success('{{skipSuccess}}', { song: `**${video.title}**` })
+      } catch (err) {
+        logger.error(`Error skipping video ${args.id - 1} for ${msg.guild.name} (${msg.guild.name})`)
+        logger.error(err)
+        return responder.error()
+      }
     }
     const voiceChannel = client.getChannel(conn.channelID)
     return music.skip(msg.guild.id, voiceChannel, msg.author.id)

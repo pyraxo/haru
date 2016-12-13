@@ -85,11 +85,22 @@ class Music extends Module {
   }
 
   unload () {
+    for (const [guildID, state] of this.states.entries()) {
+      let conn = this.client.voiceConnections.get(guildID)
+      if (!conn) continue
+      conn.removeAllListeners()
+      conn.stopPlaying()
+      conn.disconnect()
+      if (state.channel) {
+        this.send(state.channel, ':info:  |  {{terminated}}')
+      }
+    }
+
     delete this.states
     clearInterval(this._validator)
     delete this._validator
 
-    for (let ws in this._ws) {
+    for (const ws in this._ws) {
       this._ws[ws].removeAllListeners()
     }
     delete this.streamInfo
@@ -134,10 +145,7 @@ class Music extends Module {
 
   getConnection (channel) {
     if (!channel || !channel.guild) return null
-    if (this.client.voiceConnections) {
-      return this.client.voiceConnections.get(channel.guild.id) || null
-    }
-    return null
+    return this.client.voiceConnections.get(channel.guild.id) || null
   }
 
   getPlaying (guildID) {

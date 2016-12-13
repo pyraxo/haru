@@ -1,3 +1,4 @@
+const logger = require('winston')
 const { Module } = require('../../core')
 
 class Queue extends Module {
@@ -14,8 +15,11 @@ class Queue extends Module {
     return this.redis[`${prepend ? 'lpush' : 'rpush'}Async`](`music:queues:${guildID}`, video)
   }
 
-  remove (guildID, index = 0) {
-    return this.redis.lrangeAsync(`music:queues:${guildID}`, index, index + 1)
+  async remove (guildID, index = 0, count = 1) {
+    const info = await this.getSongs(guildID, index)
+    const res = await this.redis.lremAsync(`music:queues:${guildID}`, count, info)
+    if (res) return JSON.parse(info)
+    return null
   }
 
   async shift (guildID) {
@@ -32,6 +36,10 @@ class Queue extends Module {
 
   isRepeat (guildID) {
     return this.redis.sismemberAsync('music:repeats', guildID)
+  }
+
+  async getSongs (guildID, start = 0, stop = start) {
+    return JSON.parse(await this.redis.lrangeAsync(`music:queues:${guildID}`, start, stop))
   }
 }
 
