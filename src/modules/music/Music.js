@@ -313,7 +313,7 @@ class Music extends Module {
     if (!channel.voiceMembers.has(this.client.user.id)) return
     if (channel.voiceMembers.size === 1 && channel.voiceMembers.has(this.client.user.id)) {
       const textChannel = this.getBoundChannel(channel.guild.id)
-      this.send(textChannel, ':headphones:  |  {{dcInactive}}')
+      if (textChannel) this.send(textChannel, ':headphones:  |  {{dcInactive}}')
       return this.player.stop(channel, true)
     }
   }
