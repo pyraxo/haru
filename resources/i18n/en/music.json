@@ -41,5 +41,7 @@
   "joinSuccess": [
     "Connected to '{{voice}}' and bound to {{text}}.\n",
     "Use the {{command}} command to start playing songs! "
-  ]
+  ],
+  "repeatOn": "you have enabled repeat mode. All finished songs will be re-added to the back of the queue.",
+  "repeatOff": "you have disabled repeat mode. All finished songs will not be re-added."
 }

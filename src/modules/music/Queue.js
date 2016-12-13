@@ -29,6 +29,10 @@ class Queue extends Module {
   getLength (guildID) {
     return this.redis.llenAsync(`music:queues:${guildID}`)
   }
+
+  isRepeat (guildID) {
+    return this.redis.sismemberAsync('music:repeats', guildID)
+  }
 }
 
 module.exports = Queue

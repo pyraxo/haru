@@ -19,6 +19,8 @@ class Player extends Module {
     let conn = this.manager.getConnection(channel)
     conn.play(url)
 
+    logger.info(`Playing ${url} in ${channel.guild.name} (${channel.guild.id})`)
+
     conn.on('error', err => {
       this.stop(channel).then(() => {
         this.stream(channel, url, volume)
@@ -45,6 +47,8 @@ class Player extends Module {
     conn.play(mediaInfo.audiourl, options)
     this.manager.modifyState(channel.guild.id, 'state', mediaInfo)
 
+    logger.info(`Playing ${mediaInfo.title} in ${channel.guild.name} (${channel.guild.id})`)
+
     conn.once('error', err => {
       this.stop(channel).then(() => {
         logger.error(`Encountered an error while streaming to ${conn.id}`)
@@ -61,7 +65,13 @@ class Player extends Module {
       if (channel.voiceMembers.size === 1 && channel.voiceMembers.has(this.client.user.id)) {
         return this.stop(channel, true)
       }
-      return this.manager.play(channel)
+
+      return this.queue.isRepeat(channel.guild.id).then(async res => {
+        if (res) {
+          await this.queue.add(channel.guild.id, mediaInfo)
+        }
+        return this.manager.play(channel)
+      })
     })
 
     return this.send(textChannel, [

@@ -111,6 +111,10 @@ class Base {
       return replies[0]
     } catch (err) {
       logger.error(`Error sending message to ${channel.name} (${channel.id})`)
+      if (err.response) {
+        logger.error(JSON.parse(err.response).message)
+        return
+      }
       throw err
     }
   }
