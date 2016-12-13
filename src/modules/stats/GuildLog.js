@@ -83,7 +83,7 @@ class GuildLog extends Module {
     logger.info(`${chalk.cyan.bold('U:')} ${g.memberCount} | ${chalk.cyan.bold('S:')} ${g.shard}`)
 
     this.sendStats()
-    this.tunnel(this.logChannel, '', { embed: {
+    this.portal.tunnel(this.logChannel, '', { embed: {
       author: {
         name: guild.name,
         icon_url: guild.iconURL
@@ -115,7 +115,7 @@ class GuildLog extends Module {
     logger.info(`${chalk.cyan.bold('U:')} ${g.memberCount} | ${chalk.cyan.bold('S:')} ${g.shard}`)
 
     this.sendStats()
-    this.tunnel(this.logChannel, '', { embed: {
+    this.portal.tunnel(this.logChannel, '', { embed: {
       author: {
         name: guild.name,
         icon_url: guild.iconURL
