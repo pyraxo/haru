@@ -92,8 +92,8 @@ class LocalCache extends Collection {
   }
 
   clearTimer (key) {
-    if (!this.timers.has(key)) return
     const timer = this.timers.get(key)
+    if (!timer) return
     clearTimeout(timer.timer)
   }
 

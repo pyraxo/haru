@@ -479,13 +479,14 @@ class Music extends Module {
     return { v: query.v || null, pid: query.list || null }
   }
 
-  queueMulti (items, msg, voiceChannel) {
+  queueMulti (items, msg, voiceChannel, prefix) {
     return new Promise((resolve, reject) => {
       let first
-      let loop = (i = 0) => {
-        this.add(msg.guild.id, voiceChannel, `https://www.youtube.com/watch?v=${items[i++]}`)
+      const loop = (i = 0) => {
+        const item = items[i++]
+        return this.add(msg.guild.id, voiceChannel, `https://www.youtube.com/watch?v=${item}`)
         .then(() => {
-          if (!first) first = items[i]
+          if (!first) first = item
           return i >= items.length
           ? first ? resolve(first) : resolve()
           : loop(i)
@@ -498,7 +499,10 @@ class Music extends Module {
               ? `{{errors.errorQueue}}\n\n${err.message}`
               : `{{errors.${err}}}`
             }`,
-            { url: `<https://www.youtube.com/watch?v=${items[i]}>` }
+            {
+              url: `<https://www.youtube.com/watch?v=${item}>`,
+              command: `**\`${prefix}summon\`**`
+            }
           )
           return loop(i)
         })
@@ -511,12 +515,13 @@ class Music extends Module {
     const conn = this.getConnection(msg.channel)
     const voiceChannel = this.client.getChannel(conn.channelID)
     const query = this.parseLink(text)
+    const settings = await this.bot.engine.db.data.Guild.fetch(msg.guild.id)
     try {
       if (query.pid) {
         const m = await this.send(msg.channel, `:hourglass:  |  **${msg.author.username}**, {{queueProgress}}`)
         const playlist = await this.getPlaylist(query.pid)
 
-        const firstVideo = await this.queueMulti(playlist.items, msg, voiceChannel)
+        const firstVideo = await this.queueMulti(playlist.items, msg, voiceChannel, settings.prefix)
         if (!firstVideo) {
           return this.edit(m, `:error:  |  **${msg.author.username}**, {{errors.emptyPlaylist}}`)
         }
@@ -537,9 +542,8 @@ class Music extends Module {
       if (err instanceof Error) {
         logger.error(`Error adding ${query.v ? 'song ' + query.v : 'playlist ' + query.pid} to ${msg.guild.name} (${msg.guild.id})'s queue`)
         logger.error(err)
-        return this.send(':error:  |  {{%ERROR}}')
+        return this.send(msg.channel, ':error:  |  {{%ERROR}}')
       }
-      const settings = await this.bot.engine.db.data.Guild.fetch(msg.guild.id)
       return this.send(msg.channel, `:error:  |  **${msg.author.username}**, {{errors.${err}}}`, { command: `**\`${settings.prefix}summon\`**` })
     }
   }
