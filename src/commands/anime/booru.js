@@ -80,7 +80,7 @@ class Booru extends Command {
     const { rawArgs } = container
     const query = rawArgs.join('+')
     try {
-      let res = await request.get(`http://gelbooru.com/index.php?page=dapi&s=post&q=index&json=1&tags=${query}&pid=${pid}`)
+      let res = await request.get(`http://gelbooru.com/index.php?page=dapi&s=post&q=index&json=1&tags=${query}${pid ? `&pid=${pid}` : ''}`)
       try {
         res = JSON.parse(res.text)
       } catch (err) {
@@ -89,7 +89,7 @@ class Booru extends Command {
       if (pid === 1 && res.length === 0) return responder.error('{{noPictures}}', { query: `'**${rawArgs.join(' ')}**'` })
       if (pass >= 10) return responder.error()
       if (res.length === 0 && pass >= 2) {
-        return this.gelbooru(container, responder, { pid: 1, pass: ++pass })
+        return this.gelbooru(container, responder, { pid: 0, pass: ++pass })
       }
       if (res.length >= 50 || (res.length < 50 && res.length > 0 && pass)) {
         const r = res[~~(Math.random() * res.length)]
