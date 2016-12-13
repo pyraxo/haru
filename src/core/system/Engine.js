@@ -7,7 +7,7 @@ const Bridge = require('./Bridge')
 const Commander = require('./Commander')
 const Router = require('./Router')
 
-const IPC = require('../managers/IPCManager')
+const IPC = require('../managers/Transmitter')
 const ModelManager = require('../managers/ModelManager')
 const { Parser, Cache, readdirRecursive } = require('../util')
 

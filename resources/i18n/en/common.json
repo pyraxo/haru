@@ -11,7 +11,8 @@
     "EXITED": "you have exited the menu.",
     "SELECTION": "Selection Menu",
     "ERROR": "Unknown Error",
-    "INPUT": "Type the number of your choice into chat or '{{cancel}}' to cancel."
+    "INPUT": "Type the number of your choice into chat or '{{cancel}}' to cancel.",
+    "MORE_RESULTS": "And {{num}} more..."
   },
   "collector": {
     "timeout": "Timeout after {{time}}s",

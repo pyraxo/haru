@@ -2,7 +2,7 @@ const EventEmitter = require('eventemitter3')
 const logger = require('winston')
 const crypto = require('crypto')
 
-class IPCManager extends EventEmitter {
+class Transmitter extends EventEmitter {
   constructor (shardID = 0, bot) {
     super()
 
@@ -70,4 +70,4 @@ class IPCManager extends EventEmitter {
   }
 }
 
-module.exports = IPCManager
+module.exports = Transmitter

@@ -180,12 +180,12 @@ class Responder {
           '```markdown',
           `### ${title} ###\n`,
           choices.map((c, i) => `${padEnd(`[${i + 1}]:`, 4)} ${c}`).join('\n'),
-          selections.length > 10 ? `And ${selections.length - 10} more...\n` : '',
+          selections.length > 10 ? '{{%menus.MORE_RESULTS}}\n' : '',
           Array.isArray(footer) ? footer.join('\n') : '> ' + footer,
           '```'
         ].join('\n'),
         input: { type: 'int', name: 'reply', min: 1, max: choices.length }
-      }], options)
+      }], Object.apply(options, { num: selections.length - 10 }))
       return [selections[reply - 1], reply - 1]
     } catch (err) {
       return []
