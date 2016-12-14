@@ -19,7 +19,7 @@ class Base {
       throw new Error('Must extend abstract Base')
     }
 
-    this.client = bot
+    this.bot = bot
     this.i18n = bot.engine.i18n
 
     this.colours = {}
@@ -67,14 +67,14 @@ class Base {
 
   async send (channel, content, options = {}) {
     if (typeof channel === 'string') {
-      channel = this.client.getChannel(channel)
+      channel = this.bot.getChannel(channel)
     }
     if (!channel) return null
 
     let { file = null, lang, delay = 0, deleteDelay = 0, embed } = options
     if (channel.guild) {
       const guild = channel.guild
-      if (!this.hasPermissions(channel, this.client.user, 'sendMessages')) {
+      if (!this.hasPermissions(channel, this.bot.user, 'sendMessages')) {
         logger.error(`Channel ${channel.name} (${channel.id}) in ${guild.name} (${guild.id}) denies message sending`)
         return Promise.reject('403_SEND_MSG')
       }
@@ -84,7 +84,7 @@ class Base {
       await Promise.delay(delay)
     }
 
-    lang = !lang && channel.guild ? (await this.client.engine.db.data.Guild.fetch(channel.guild.id)).lang : 'en'
+    lang = !lang && channel.guild ? (await this.bot.engine.db.data.Guild.fetch(channel.guild.id)).lang : 'en'
 
     if (Array.isArray(content)) content = content.join('\n')
     content = this.t(content, lang, options)
@@ -127,7 +127,7 @@ class Base {
     }
 
     if (!lang && msg.channel.guild) {
-      lang = (await this.client.engine.db.data.Guild.fetch(msg.channel.guild.id)).lang
+      lang = (await this.bot.engine.db.data.Guild.fetch(msg.channel.guild.id)).lang
     } else {
       lang = 'en'
     }
@@ -142,7 +142,7 @@ class Base {
   }
 
   deleteMessages (...msgs) {
-    const id = this.client.user.id
+    const id = this.bot.user.id
     for (let msg of msgs.filter(m => m)) {
       if (msg.author.id === id || msg.channel.permissionsOf(id).has('manageMessages')) {
         msg.delete()

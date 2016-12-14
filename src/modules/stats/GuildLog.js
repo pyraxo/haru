@@ -21,8 +21,8 @@ class GuildLog extends Module {
   }
 
   init () {
-    this.data = this.client.engine.db.data
-    this.portal = this.client.engine.modules.get('portal')
+    this.data = this.bot.engine.db.data
+    this.portal = this.bot.engine.modules.get('portal')
   }
 
   unload () {
@@ -38,7 +38,7 @@ class GuildLog extends Module {
         key: process.env.API_CARBONITEX,
         shard_id: process.env.BASE_SHARD_ID,
         shard_count: process.env.CLIENT_PROCESSES,
-        servercount: this.client.guilds.size
+        servercount: this.bot.guilds.size
       })
       .end((err, res) => {
         if (err) return logger.error(`Could not update Carbon statistics: ${err}`)
@@ -49,11 +49,11 @@ class GuildLog extends Module {
 
     if (process.env.API_DBOTS) {
       request
-      .post(`https://bots.discord.pw/api/bots/${this.client.user.id}/stats`)
+      .post(`https://bots.discord.pw/api/bots/${this.bot.user.id}/stats`)
       .send({
         shard_id: process.env.BASE_SHARD_ID,
         shard_count: process.env.CLIENT_PROCESSES,
-        server_count: this.client.guilds.size
+        server_count: this.bot.guilds.size
       })
       .set('Authorization', process.env.API_DBOTS)
       .set('Content-Type', 'application/json')

@@ -74,7 +74,7 @@ class FullEval extends Command {
   async handle (container, responder) {
     const { msg } = container
     const content = msg.content.split(' ').slice(1).join(' ')
-    this.client.engine.ipc.awaitResponse('evaluate', { content })
+    this.bot.engine.ipc.awaitResponse('evaluate', { content })
     .then(data => responder.format('code:js').send(data.map(d => {
       const r = d.result || null
       return [

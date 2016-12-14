@@ -13,7 +13,7 @@ class Kill extends Command {
   }
 
   handle (container, responder) {
-    return this.client.engine.ipc.awaitResponse('kill')
+    return this.bot.engine.ipc.awaitResponse('kill')
     .then(data => responder.format('code:js').send(data.map(d => util.inspect(d)).join('\n')))
     .catch(err => responder.format('code:js').send(err))
   }

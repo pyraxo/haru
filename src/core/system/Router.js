@@ -4,12 +4,12 @@ const { Collection } = require('../util')
 class Router extends Collection {
   constructor (client) {
     super()
-    this.client = client
+    this.bot = client
     this.events = {}
   }
 
   attach (group, Module) {
-    const module = new Module(this.client)
+    const module = new Module(this.bot)
     this.set(module.name, module)
     for (const event in module.events) {
       if (typeof this.events[event] === 'undefined') {
@@ -28,7 +28,7 @@ class Router extends Collection {
   }
 
   register (event) {
-    this.client.on(event, (...args) => {
+    this.bot.on(event, (...args) => {
       const events = this.events[event] || {}
       for (const name in events) {
         const module = this.get(name)

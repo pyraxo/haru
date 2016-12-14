@@ -30,8 +30,8 @@ class Hate extends Command {
 
     await responder.typing()
 
-    gm(path.join(this.client.paths.resources, 'images/hate.png'))
-    .font(path.join(this.client.paths.resources, 'fonts/animeace.ttf'), 13.5)
+    gm(path.join(this.bot.paths.resources, 'images/hate.png'))
+    .font(path.join(this.bot.paths.resources, 'fonts/animeace.ttf'), 13.5)
     .gravity('Center')
     .drawText(-67, 32, text)
     .toBuffer('PNG', (err, buf) => {

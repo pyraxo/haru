@@ -11,8 +11,8 @@ class Player extends Module {
   }
 
   init () {
-    this.manager = this.client.engine.modules.get('music')
-    this.queue = this.client.engine.modules.get('music:queue')
+    this.manager = this.bot.engine.modules.get('music')
+    this.queue = this.bot.engine.modules.get('music:queue')
   }
 
   async stream (channel, url, volume = 2) {
@@ -62,7 +62,7 @@ class Player extends Module {
       this.manager.modifyState(channel.guild.id, 'skip', [])
       this.manager.modifyState(channel.guild.id, 'clear', [])
       this.send(textChannel, `:stop:  |  {{finishedPlaying}} **${mediaInfo.title}** `)
-      if (channel.voiceMembers.size === 1 && channel.voiceMembers.has(this.client.user.id)) {
+      if (channel.voiceMembers.size === 1 && channel.voiceMembers.has(this.bot.user.id)) {
         return this.stop(channel, true)
       }
 
@@ -95,7 +95,7 @@ class Player extends Module {
     if (conn.playing) conn.stopPlaying()
 
     if (leave) {
-      this.client.leaveVoiceChannel(channel.id)
+      this.bot.leaveVoiceChannel(channel.id)
       this.manager.unbindChannel(channel.guild.id)
       this.manager.states.delete(channel.guild.id)
       await this.queue.clear(channel.guild.id)

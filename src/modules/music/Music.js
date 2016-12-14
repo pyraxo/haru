@@ -19,7 +19,7 @@ class Music extends Module {
       }
     })
 
-    this.redis = this.client.engine.cache.client
+    this.redis = this.bot.engine.cache.client
 
     this.streams = {
       'listen.moe': {
@@ -30,14 +30,14 @@ class Music extends Module {
   }
 
   init () {
-    this.player = this.client.engine.modules.get('music:player')
-    this.queue = this.client.engine.modules.get('music:queue')
+    this.player = this.bot.engine.modules.get('music:player')
+    this.queue = this.bot.engine.modules.get('music:queue')
 
     this.states = new Collection()
 
     this._validator = setInterval(() => {
       for (const gid of this.states.keys()) {
-        if (!this.client.guilds.has(gid)) {
+        if (!this.bot.guilds.has(gid)) {
           this.states.delete(gid)
         }
       }
@@ -86,7 +86,7 @@ class Music extends Module {
 
   unload () {
     for (const [guildID, state] of this.states.entries()) {
-      let conn = this.client.voiceConnections.get(guildID)
+      let conn = this.bot.voiceConnections.get(guildID)
       if (!conn) continue
       conn.removeAllListeners()
       conn.stopPlaying()
@@ -145,7 +145,7 @@ class Music extends Module {
 
   getConnection (channel) {
     if (!channel || !channel.guild) return null
-    return this.client.voiceConnections.get(channel.guild.id) || null
+    return this.bot.voiceConnections.get(channel.guild.id) || null
   }
 
   getPlaying (guildID) {
@@ -167,11 +167,11 @@ class Music extends Module {
       return Promise.reject('alreadyBinded')
     }
     this.bindChannel(guild.id, textChannel.id)
-    if (!this.hasPermissions(textChannel, this.client.user, 'voiceConnect', 'voiceSpeak')) {
+    if (!this.hasPermissions(textChannel, this.bot.user, 'voiceConnect', 'voiceSpeak')) {
       return Promise.reject('noPerms')
     }
     try {
-      return await this.client.joinVoiceChannel(voiceID)
+      return await this.bot.joinVoiceChannel(voiceID)
     } catch (err) {
       logger.error(`Could not join voice channel ${voiceID} in ${guild.name} (${guild.id}) - ${err}`)
       return Promise.reject('error')
@@ -251,7 +251,7 @@ class Music extends Module {
   }
 
   getPlayingState (channel) {
-    const conn = this.client.voiceConnections.get(channel.guild.id)
+    const conn = this.bot.voiceConnections.get(channel.guild.id)
     if (!conn) return false
     return conn.playing
   }
@@ -273,8 +273,8 @@ class Music extends Module {
   }
 
   voiceDC (member, channel) {
-    if (!channel.voiceMembers.has(this.client.user.id)) return
-    if (channel.voiceMembers.size === 1 && channel.voiceMembers.has(this.client.user.id)) {
+    if (!channel.voiceMembers.has(this.bot.user.id)) return
+    if (channel.voiceMembers.size === 1 && channel.voiceMembers.has(this.bot.user.id)) {
       const textChannel = this.getBoundChannel(channel.guild.id)
       this.send(textChannel, ':headphones:  |  {{dcInactive}}')
       return this.player.stop(channel, true)
@@ -282,7 +282,7 @@ class Music extends Module {
   }
 
   async play (channel, mediaInfo) {
-    if (channel.voiceMembers.size === 1 && channel.voiceMembers.has(this.client.user.id)) {
+    if (channel.voiceMembers.size === 1 && channel.voiceMembers.has(this.bot.user.id)) {
       return this.player.stop(channel, true)
     }
     const guildId = channel.guild.id
@@ -484,9 +484,9 @@ class Music extends Module {
 
   async checkLink (text, msg) {
     const conn = this.getConnection(msg.channel)
-    const voiceChannel = this.client.getChannel(conn.channelID)
+    const voiceChannel = this.bot.getChannel(conn.channelID)
     const query = this.parseLink(text)
-    const settings = await this.client.engine.db.data.Guild.fetch(msg.guild.id)
+    const settings = await this.bot.engine.db.data.Guild.fetch(msg.guild.id)
     try {
       if (query.pid) {
         const m = await this.send(msg.channel, `:hourglass:  |  **${msg.author.username}**, {{queueProgress}}`)

@@ -11,7 +11,7 @@ class Companions extends Module {
       localeKey: 'companion'
     })
 
-    this.db = this.client.engine.db.data
+    this.db = this.bot.engine.db.data
 
     /*
       Outcomes:
@@ -24,14 +24,14 @@ class Companions extends Module {
 
   init () {
     this.battles = new Collection()
-    fs.readFile(path.join(this.client.paths.resources, 'config', 'companions.json'), (err, res) => {
+    fs.readFile(path.join(this.bot.paths.resources, 'config', 'companions.json'), (err, res) => {
       if (err) {
         logger.error('Could not read companions configuration')
         logger.error(err)
         return
       }
 
-      const data = JSON.parse(fs.readFileSync(path.join(this.client.paths.resources, 'config', 'companions.json')))
+      const data = JSON.parse(fs.readFileSync(path.join(this.bot.paths.resources, 'config', 'companions.json')))
       this.pets = data.companions
       this.prices = data.prices
 
@@ -72,8 +72,8 @@ class Companions extends Module {
       bets: { p1: {}, p2: {} },
       timer: setTimeout(() => {
         this.send(channel.id, ':rooster:  |  {{timedOut}}', {
-          p1: this.client.users.get(p1.id).mention,
-          p2: this.client.users.get(p2.id).mention,
+          p1: this.bot.users.get(p1.id).mention,
+          p2: this.bot.users.get(p2.id).mention,
           time: `**${time}**`
         })
         this.battles.delete(channel.id)
@@ -140,7 +140,7 @@ class Companions extends Module {
     battle._stats = {
       p1: {
         name: p1.name,
-        owner: this.client.users.get(battle.p1).mention,
+        owner: this.bot.users.get(battle.p1).mention,
         maxHp: p1.hp || 10,
         hp: p1.hp || 10,
         crit: p1.crit || 1,
@@ -149,7 +149,7 @@ class Companions extends Module {
       },
       p2: {
         name: p2.name,
-        owner: this.client.users.get(battle.p2).mention,
+        owner: this.bot.users.get(battle.p2).mention,
         maxHp: p2.hp || 10,
         hp: p2.hp || 10,
         crit: p2.crit || 1,
@@ -278,11 +278,11 @@ class Companions extends Module {
       await this.send(battle.channel, [
         winners.length
         ? ':moneybag:  **Winning Bets**:\n' +
-        winners.map(b => this.client.users.get(b[0]).username + ` -- **${b[1]} credits**`).join('\n')
+        winners.map(b => this.bot.users.get(b[0]).username + ` -- **${b[1]} credits**`).join('\n')
         : '',
         losers.length
         ? '\n:money_with_wings:  **Losing Bets**:\n' +
-        losers.map(b => this.client.users.get(b[0]).username + ` -- **${b[1]} credits**`).join('\n')
+        losers.map(b => this.bot.users.get(b[0]).username + ` -- **${b[1]} credits**`).join('\n')
         : ''
       ].join('\n'))
     }

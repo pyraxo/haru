@@ -29,8 +29,8 @@ class Love extends Command {
 
     await responder.typing()
 
-    gm(path.join(this.client.paths.resources, 'images/love.png'))
-    .font(path.join(this.client.paths.resources, 'fonts/animeace.ttf'), 13.5)
+    gm(path.join(this.bot.paths.resources, 'images/love.png'))
+    .font(path.join(this.bot.paths.resources, 'fonts/animeace.ttf'), 13.5)
     .gravity('Center')
     .drawText(-188, -20, text)
     .toBuffer('PNG', (err, buf) => {

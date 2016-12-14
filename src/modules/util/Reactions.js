@@ -50,9 +50,9 @@ class Reactions extends Module {
   check (msg, emoji, userID) {
     const menu = this.menus.get(msg.id)
     if (!menu) return
-    this.client.getMessage(msg.channel.id, msg.id).then(message => {
+    this.bot.getMessage(msg.channel.id, msg.id).then(message => {
       const emCheck = !menu.emojis.includes(emoji.id ? `${emoji.name}:${emoji.id}` : Emoji.which(emoji.name))
-      if (emCheck || (userID !== menu.user && userID !== this.client.user.id)) {
+      if (emCheck || (userID !== menu.user && userID !== this.bot.user.id)) {
         return message.removeReaction(emoji.id ? `${emoji.name}:${emoji.id}` : emoji.name, userID)
       }
       if (userID === menu.user) {
