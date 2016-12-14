@@ -168,6 +168,7 @@ class Credits extends Command {
         }
       }
 
+      unique = unique.filter(u => u)
       let maxName = 16
       unique.forEach(u => {
         const str = `${u.username}#${u.discriminator}`
