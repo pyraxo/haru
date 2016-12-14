@@ -88,9 +88,9 @@ class Base {
 
     if (Array.isArray(content)) content = content.join('\n')
     content = this.t(content, lang, options)
-    content = content.replace(/:(\S+):/gi, (matched, name) => {
-      return this.i18n.locate(name, Emojis) || emoji.get(name) || matched
-    })
+    content = content.replace(/:(\S+):/gi, (matched, name) => (
+      this.i18n.locate(name, Emojis) || emoji.get(name) || matched
+    ))
     content = content.match(/(.|[\r\n]){1,2000}/g)
 
     try {

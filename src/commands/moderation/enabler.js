@@ -22,7 +22,7 @@ class Enabler extends Command {
   }
 
   async handle ({ msg, args, data, settings, trigger }, responder) {
-    const enable = trigger === 'enable'
+    const enable = trigger === 'enable' || trigger === 'allow'
 
     const cmd = args.command ? args.command.cmd.permissionNode : '*'
     const ctx = args.context

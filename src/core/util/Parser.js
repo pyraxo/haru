@@ -23,7 +23,7 @@ class Parser {
   }
 
   locate (fullkey, obj) {
-    const val = fullkey.split('.').reduce((o, i) => o[i] || {}, obj)
+    const val = fullkey.split('.').reduce((o, i) => o === null ? o : o[i] || null, obj)
     return Array.isArray(val) ? val.join('\n') : val
   }
 
