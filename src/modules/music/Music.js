@@ -1,9 +1,9 @@
 const logger = require('winston')
 const crypto = require('crypto')
-const https = require('https')
 const moment = require('moment')
 const url = require('url')
 const querystring = require('querystring')
+const request = require('superagent')
 const ytdl = Promise.promisifyAll(require('ytdl-core'))
 const WebSocket = require('ws')
 
@@ -19,7 +19,7 @@ class Music extends Module {
       }
     })
 
-    this.redis = this.bot.engine.cache.client
+    this.redis = this.client.engine.cache.client
 
     this.streams = {
       'listen.moe': {
@@ -30,8 +30,8 @@ class Music extends Module {
   }
 
   init () {
-    this.player = this.bot.engine.modules.get('music:player')
-    this.queue = this.bot.engine.modules.get('music:queue')
+    this.player = this.client.engine.modules.get('music:player')
+    this.queue = this.client.engine.modules.get('music:queue')
 
     this.states = new Collection()
 
@@ -214,12 +214,6 @@ class Music extends Module {
     info.url = `https://www.youtube.com/watch?v=${info.video_id}`
 
     const bestaudio = this.getBestAudio(info)
-    if (bestaudio.url) {
-      const match = new RegExp('&expire=([0-9]+)').exec(bestaudio.url)
-      if (match && match.length) {
-        info.expires = parseInt(match[1]) - 900
-      }
-    }
     const formattedInfo = {
       video_id: info.video_id,
       title: info.title,
@@ -256,37 +250,6 @@ class Music extends Module {
     return mediaInfo
   }
 
-  fetchPlaylist (pid) {
-    return new Promise((resolve, reject) => {
-      const req = https.get(
-        'https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=50' +
-        `&playlistId=${pid}&key=${process.env.API_YT}`,
-        res => {
-          let rawData = ''
-          res.on('data', chunk => {
-            rawData += chunk
-          })
-          res.on('end', () => {
-            const result = JSON.parse(rawData)
-            if (result.error) {
-              return Promise.reject(result.error.code === 404 ? 'listNotFound' : 'error')
-            }
-            return resolve(result)
-          })
-        }
-      )
-
-      req.on('error', err => {
-        logger.error('Error encountered while querying playlist')
-        logger.error(err)
-        return reject('error')
-      })
-
-      req.shouldKeepAlive = false
-      req.end()
-    })
-  }
-
   getPlayingState (channel) {
     const conn = this.client.voiceConnections.get(channel.guild.id)
     if (!conn) return false
@@ -313,7 +276,7 @@ class Music extends Module {
     if (!channel.voiceMembers.has(this.client.user.id)) return
     if (channel.voiceMembers.size === 1 && channel.voiceMembers.has(this.client.user.id)) {
       const textChannel = this.getBoundChannel(channel.guild.id)
-      if (textChannel) this.send(textChannel, ':headphones:  |  {{dcInactive}}')
+      this.send(textChannel, ':headphones:  |  {{dcInactive}}')
       return this.player.stop(channel, true)
     }
   }
@@ -407,28 +370,35 @@ class Music extends Module {
     }
   }
 
-  validate (videoID) {
-    return new Promise((resolve, reject) => {
-      const options = {
-        hostname: 'www.youtube.com',
-        path: '/oembed?url=http://www.youtube.com/watch?v=' + escape(videoID) + '&format=json',
-        method: 'HEAD',
-        headers: { 'Content-Type': 'application/json' }
-      }
+  async validate (videoID) {
+    try {
+      const res = await request.head(
+        `https://www.youtube.com/oembed?url=http://www.youtube.com/watch?v=${escape(videoID)}&format=json`
+      )
+      return res.statusCode === 404 || res.statusMessage === 'Not Found'
+      ? res.body
+      : res.error ? Promise.reject('error') : Promise.reject('notFound')
+    } catch (err) {
+      logger.error('Error encountered while validating video ' + videoID)
+      logger.error(err)
+      return Promise.reject('error')
+    }
+  }
 
-      const req = https.request(options, (res) => {
-        if (res.statusCode === 404 || res.statusCode === 302 || res.statusMessage === 'Not Found') {
-          reject('notFound')
-        } else {
-          resolve(videoID)
-        }
-      })
-      req.on('error', () => {
-        reject('error')
-      })
-      req.shouldKeepAlive = false
-      req.end()
-    })
+  async fetchPlaylist (pid) {
+    try {
+      const res = await request.get(
+        'https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=50' +
+        `&playlistId=${pid}&key=${process.env.API_YT}`
+      )
+      return res.statusCode === 404 || res.statusMessage === 'Not Found'
+      ? res.body
+      : res.error ? Promise.reject('error') : Promise.reject('notFound')
+    } catch (err) {
+      logger.error('Error encountered while querying playlist ' + pid)
+      logger.error(err)
+      return Promise.reject('error')
+    }
   }
 
   async getPlaylist (pid) {
@@ -516,7 +486,7 @@ class Music extends Module {
     const conn = this.getConnection(msg.channel)
     const voiceChannel = this.client.getChannel(conn.channelID)
     const query = this.parseLink(text)
-    const settings = await this.bot.engine.db.data.Guild.fetch(msg.guild.id)
+    const settings = await this.client.engine.db.data.Guild.fetch(msg.guild.id)
     try {
       if (query.pid) {
         const m = await this.send(msg.channel, `:hourglass:  |  **${msg.author.username}**, {{queueProgress}}`)

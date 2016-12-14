@@ -1,11 +1,19 @@
 const chalk = require('chalk')
 const logger = require('winston')
 
+const { Permitter } = require('../core')
+
 module.exports = {
   priority: 100,
-  process: async container => {
-    const { msg, isPrivate, isCommand, cache, commander, trigger } = container
-    if (!isCommand) return
+  process: container => {
+    const { msg, isPrivate, isCommand, cache, commander, trigger, settings, admins } = container
+    if (!isCommand) return Promise.resolve()
+    const cmd = commander.get(trigger).cmd
+    if (!admins.includes(msg.author.id) || cmd.options.modOnly) {
+      const isAllowed = Permitter.verifyMessage(cmd.permissionNode, msg, settings.permissions)
+      if (!isAllowed) return Promise.resolve()
+    }
+
     logger.info(`${chalk.bold.magenta(
       !isPrivate
       ? msg.guild.name
@@ -18,6 +26,6 @@ module.exports = {
     .hincrby('usage', 'ALL', 1)
     .exec()
 
-    return container
+    return Promise.resolve(container)
   }
 }

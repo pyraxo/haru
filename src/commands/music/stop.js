@@ -20,6 +20,11 @@ class Stop extends Command {
         command: `**\`${settings.prefix}summon\`**`
       })
     }
+    if (msg.member.voiceState.channelID !== conn.channelID) {
+      return responder.error('{{errors.notInSameVoice}}', {
+        channel: `'**${client.getChannel(conn.channelID).name}**'`
+      })
+    }
     const chan = music.getBoundChannel(msg.guild.id)
     if (chan && chan !== msg.channel.id) {
       return responder.error('{{errors.notChannel}}', {

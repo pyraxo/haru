@@ -6,12 +6,13 @@ const Resolver = require('../managers/Resolver')
 const Base = require('./Base')
 
 class Command extends Base {
-  constructor (bot, ...args) {
+  constructor (bot, group, ...args) {
     super(bot)
     if (this.constructor === Command) {
       throw new Error('Cannot instantiate abstract Command')
     }
 
+    this.group = group
     this.resolver = new Resolver(bot)
     this.responder = new Responder(this)
     this.subcommands = new Collection()
@@ -40,6 +41,9 @@ class Command extends Base {
     }
     this.cooldown = cooldown
     this.options = options
+    if (this.options.modOnly) {
+      this.options.permissions = (this.options.permissions || []).concat(['manageGuild'])
+    }
 
     this.usage = usage
     this.localeKey = options.localeKey
@@ -89,34 +93,22 @@ class Command extends Base {
 
   _execCheck ({ msg, isPrivate, admins, client }, responder) {
     const isAdmin = admins.includes(msg.author.id)
-    if (this.options.adminOnly === true && !isAdmin) return false
-    if (this.options.guildOnly === true && isPrivate) return false
+    const { adminOnly, guildOnly, permissions = [], botPerms = [] } = this.options
+    if (adminOnly === true && !isAdmin) return false
+    if (guildOnly === true && isPrivate) return false
 
-    if (Array.isArray(this.options.permissions) && this.options.permissions.length) {
-      const perms = this.options.permissions
-      let missingPerms = []
-      for (const perm of perms) {
-        if (!msg.member.permission.has(perm)) {
-          missingPerms.push(perm)
-        }
-      }
-      return responder.error('{{%NO_PERMS}}', {
-        perms: missingPerms.map(p => `\`${p}\``).join(', ')
+    if (permissions.length && !this.hasPermissions(msg.channel, msg.author, ...permissions)) {
+      responder.error('{{%NO_PERMS}}', {
+        perms: permissions.map(p => `\`${p}\``).join(', ')
       })
+      return false
     }
 
-    if (Array.isArray(this.options.botPerms) && this.options.botPerms.length) {
-      const perms = this.options.botPerms
-      const member = msg.guild.members.get(client.user.id)
-      let missingPerms = []
-      for (const perm of perms) {
-        if (!member.permission.has(perm)) {
-          missingPerms.push(perm)
-        }
-      }
-      return responder.error('{{%NO_PERMS_BOT}}', {
-        perms: missingPerms.map(p => `\`${p}\``).join(', ')
+    if (botPerms.length && !this.hasPermissions(msg.channel, client.user, ...botPerms)) {
+      responder.error('{{%NO_PERMS_BOT}}', {
+        perms: botPerms.map(p => `\`${p}\``).join(', ')
       })
+      return false
     }
 
     if (isAdmin) return true
@@ -146,6 +138,10 @@ class Command extends Base {
 
   logError (err) {
     logger.error(`Error running ${this.labels[0]} command: ${err}`)
+  }
+
+  get permissionNode () {
+    return `${this.group}.${this.labels[0]}`
   }
 }
 

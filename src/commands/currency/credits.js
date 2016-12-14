@@ -150,7 +150,7 @@ class Credits extends Command {
   async top ({ args, db, client }, responder) {
     try {
       const res = await db.User.filter({ deleted: false }).orderBy(db.r.desc('credits')).limit(10).execute()
-      const data = await this.bot.engine.ipc.awaitResponse('query', {
+      const data = await this.client.engine.ipc.awaitResponse('query', {
         queries: [{ prop: 'users', query: 'id', input: res.map(u => u.id) }]
       })
       const users = data.map(d => d.result[0])

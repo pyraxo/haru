@@ -7,7 +7,7 @@ class Catgirl extends Command {
     super(...args, {
       name: 'catgirl',
       description: 'Fetches a random catgirl',
-      options: { perms: ['embedLinks'], localeKey: 'images' }
+      options: { botPerms: ['embedLinks'], localeKey: 'images' }
     })
   }
 

@@ -11,9 +11,9 @@ class Portal extends Module {
       }
     })
 
-    this.ipc = this.bot.engine.ipc
-    this.data = this.bot.engine.db.data
-    this.db = this.bot.engine.db.models
+    this.ipc = this.client.engine.ipc
+    this.data = this.client.engine.db.data
+    this.db = this.client.engine.db.models
     this.listeners = new Map()
   }
 
@@ -53,7 +53,7 @@ class Portal extends Module {
     this.portals.delete(dest)
   }
 
-  receive ({ channelID, content, options }) {
+  receive ({ channelID, content, options } = {}) {
     const channel = this.client.getChannel(channelID)
     if (!channel) return
     return this.send(channel, content, options)

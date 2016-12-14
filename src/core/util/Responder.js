@@ -131,9 +131,9 @@ class Responder {
           try {
             return await input.resolve(ans, [ans.cleanContent], data, dialog.input)
           } catch (err) {
-            const tags = Object.assign(err, { cancel: `\`${cancel}\`` })
-            let p2 = await this.format('emoji:fail').send(
-              `${err.err || err.message || err || '{{%menus.ERROR}}'}\n\n{{%menus.EXIT}}`, tags
+            let p2 = await this.format('emoji:error').send(
+              `${err.err || err.message || err || '{{%menus.ERROR}}'}\n\n{{%menus.EXIT}}`,
+              Object.assign(err, { cancel: `\`${cancel}\`` })
             )
             return awaitMessage(p2)
           }
@@ -149,8 +149,9 @@ class Responder {
         collector.stop()
       } catch (err) {
         if (typeof err !== 'undefined') {
-          const tags = { [err.reason]: err.arg, err: `**${err.reason}**` }
-          this.error(`{{%menus.ERRORED}} **{{%collector.${err.reason}}}**`, tags)
+          this.error(`{{%menus.ERRORED}} **{{%collector.${err.reason}}}**`, {
+            [err.reason]: err.arg, err: `**${err.reason}**`
+          })
         } else {
           this.success('{{%menus.EXITED}}')
         }
@@ -168,11 +169,11 @@ class Responder {
 
   async selection (selections = [], options = {}) {
     if (!selections.length) return []
+    if (!Array.isArray(selections)) return [selections, 0]
     if (selections.length === 1) return [selections[0], 0]
 
     const { title = '{{%menus.SELECTION}}', footer = '{{%menus.INPUT}}', mapFunc } = options
     const choices = (mapFunc ? selections.map(mapFunc) : selections).splice(0, 10)
-    if (!options.cancel) options.cancel = 'cancel'
 
     try {
       const { reply } = await this.dialog([{
@@ -185,7 +186,9 @@ class Responder {
           '```'
         ].join('\n'),
         input: { type: 'int', name: 'reply', min: 1, max: choices.length }
-      }], Object.apply(options, { num: selections.length - 10 }))
+      }], Object.assign(options, {
+        num: selections.length - 10, cancel: options.cancel || 'cancel'
+      }))
       return [selections[reply - 1], reply - 1]
     } catch (err) {
       return []

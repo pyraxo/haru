@@ -15,7 +15,7 @@ class Engine extends EventEmitter {
   constructor (bot) {
     super()
 
-    this.client = bot.client
+    this.bot = bot
     this.paths = bot.paths
 
     let ipc = this.ipc = new IPC(bot.shardIDs, bot)
@@ -23,7 +23,7 @@ class Engine extends EventEmitter {
     let cache = this.cache = new Cache()
 
     this.commands = new Commander(bot)
-    this.modules = new Router(bot.client, bot)
+    this.modules = new Router(bot)
     this.bridge = new Bridge(this.commands)
     this.i18n = new Parser(path.join(bot.paths.resources, 'i18n'))
 
@@ -36,14 +36,14 @@ class Engine extends EventEmitter {
     this.loadAll()
 
     const admins = process.env.ADMIN_IDS.split(', ')
-    this.client.on('messageCreate', msg => {
-      if (msg.author.id === this.client.id || msg.author.bot) return
+    this.bot.on('messageCreate', msg => {
+      if (msg.author.id === this.bot.user.id || msg.author.bot) return
       this.bridge.handle({
         msg,
         admins,
         commander: this.commands,
         modules: this.modules,
-        client: this.client,
+        client: this.bot,
         cache: this.cache,
         db: this.db.models,
         data: this.db.data

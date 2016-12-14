@@ -7,13 +7,13 @@ class Stats extends Command {
     super(...args, {
       name: 'stats',
       description: 'Statistics about me',
-      options: { perms: ['embedLinks'] }
+      options: { botPerms: ['embedLinks'] }
     })
   }
 
   async handle ({ msg, settings, client, cache }, responder) {
     try {
-      var results = await this.bot.engine.ipc.awaitResponse('stats')
+      var results = await this.client.engine.ipc.awaitResponse('stats')
     } catch (err) {
       logger.error('Could not fetch stats')
       logger.error(err)

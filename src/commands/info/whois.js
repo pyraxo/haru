@@ -8,7 +8,7 @@ class Whois extends Command {
       aliases: ['uinfo', 'user'],
       description: 'Displays information of a user',
       usage: [{ name: 'member', type: 'member', optional: true }],
-      options: { guildOnly: true, localeKey: 'infocmd', perms: ['embedLinks'] }
+      options: { guildOnly: true, localeKey: 'infocmd', botPerms: ['embedLinks'] }
     })
   }
 

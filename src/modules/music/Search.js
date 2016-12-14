@@ -11,7 +11,7 @@ class Search extends Module {
       name: 'music:search'
     })
 
-    this.redis = this.bot.engine.cache.client
+    this.redis = this.client.engine.cache.client
 
     if (!process.env.API_YT) throw new Error('Missing Youtube API key')
     yt.setKey(process.env.API_YT)

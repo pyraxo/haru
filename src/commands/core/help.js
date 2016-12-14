@@ -19,7 +19,7 @@ class HelpMenu extends Command {
       const command = args.command.cmd
       const name = command.labels[0]
       let desc = this.i18n.get(`descriptions.${name}`, settings.lang) || this.i18n.get(`${command.localeKey}.description`, settings.lang)
-      if (typeof desc !== 'string') desc = '{{noDesc}}'
+      if (typeof desc !== 'string') desc = command.description || '{{noDesc}}'
       let reply = [
         `**\`${prefix}${name}\`**  __\`${desc}\`__\n`,
         `**{{definitions.usage}}**: ${prefix}${command.labels[0]} ${Object.keys(command.resolver.usage).map(usage => {

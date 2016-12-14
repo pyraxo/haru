@@ -13,7 +13,7 @@ class Companions extends Command {
         buy: 'buy',
         rename: 'rename'
       },
-      options: { perms: ['embedLinks'] }
+      options: { botPerms: ['embedLinks'] }
     })
   }
 

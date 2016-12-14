@@ -21,8 +21,8 @@ class GuildLog extends Module {
   }
 
   init () {
-    this.data = this.bot.engine.db.data
-    this.portal = this.bot.engine.modules.get('portal')
+    this.data = this.client.engine.db.data
+    this.portal = this.client.engine.modules.get('portal')
   }
 
   unload () {
@@ -65,22 +65,9 @@ class GuildLog extends Module {
     }
   }
 
-  parseGuild (guild) {
-    return {
-      id: guild.id,
-      name: guild.name || null,
-      memberCount: guild.memberCount || null,
-      icon: guild.icon || null,
-      iconURL: guild.iconURL || null,
-      ownerID: guild.ownerID || null,
-      shard: guild.shard ? guild.shard.id : null
-    }
-  }
-
   async newGuild (guild) {
-    const g = this.parseGuild(guild)
-    logger.info(`Guild created: ${g.name} (${g.id})`)
-    logger.info(`${chalk.cyan.bold('U:')} ${g.memberCount} | ${chalk.cyan.bold('S:')} ${g.shard}`)
+    logger.info(`Guild created: ${guild.name} (${guild.id})`)
+    logger.info(`${chalk.cyan.bold('U:')} ${guild.memberCount} | ${chalk.cyan.bold('S:')} ${guild.shard.id}`)
 
     this.sendStats()
     this.portal.tunnel(this.logChannel, '', { embed: {
@@ -91,7 +78,7 @@ class GuildLog extends Module {
       title: `Guild Created: ${guild.memberCount} members`,
       color: this.getColour('green'),
       footer: {
-        text: `Shard ${guild.shard}  |  ${moment().format('ddd Do MMM, YYYY [at] hh:mm:ss a')}`
+        text: `Shard ${guild.shard.id}  |  ${moment().format('ddd Do MMM, YYYY [at] hh:mm:ss a')}`
       }
     }})
 
@@ -110,9 +97,8 @@ class GuildLog extends Module {
   }
 
   async delGuild (guild) {
-    const g = this.parseGuild(guild)
-    logger.info(`Guild deleted: ${g.name} (${g.id})`)
-    logger.info(`${chalk.cyan.bold('U:')} ${g.memberCount} | ${chalk.cyan.bold('S:')} ${g.shard}`)
+    logger.info(`Guild deleted: ${guild.name} (${guild.id})`)
+    logger.info(`${chalk.cyan.bold('U:')} ${guild.memberCount} | ${chalk.cyan.bold('S:')} ${guild.shard.id}`)
 
     this.sendStats()
     this.portal.tunnel(this.logChannel, '', { embed: {
@@ -123,7 +109,7 @@ class GuildLog extends Module {
       title: `Guild Deleted: ${guild.memberCount} members`,
       color: this.getColour('red'),
       footer: {
-        text: `Shard ${guild.shard}  |  ${moment().format('ddd Do MMM, YYYY [at] hh:mm:ss a')}`
+        text: `Shard ${guild.shard.id}  |  ${moment().format('ddd Do MMM, YYYY [at] hh:mm:ss a')}`
       }
     }})
 

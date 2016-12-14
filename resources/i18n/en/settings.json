@@ -5,5 +5,13 @@
   },
   "lang": {
     "success": "successfully changed this guild's language to {{lang}}"
+  },
+  "enabler": {
+    "success": "successfully {{action}} {{command}} for {{context}}",
+    "actions": {
+      "enable": "enabled",
+      "disable": "disabled",
+      "revert": "reverted"
+    }
   }
 }

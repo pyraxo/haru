@@ -7,22 +7,20 @@ class Prefix extends Command {
       name: 'prefix',
       description: 'Allows moderators to set a guild\'s prefix',
       aliases: ['setprefix'],
-      usage: [{ name: 'prefix', type: 'string', optional: true }],
-      options: { guildOnly: true, localeKey: 'settings' }
+      usage: [{ name: 'prefix', type: 'string', optional: true, default: process.env.CLIENT_PREFIX }],
+      options: { guildOnly: true, localeKey: 'settings', permissions: ['manageGuild'] }
     })
   }
 
-  async handle ({ msg, args, data }, responder) {
-    const prefix = args.prefix
+  async handle ({ msg, args, data, settings }, responder) {
     try {
-      let guild = await data.Guild.fetch(msg.guild.id)
-      guild.prefix = prefix || process.env.CLIENT_PREFIX
-      await guild.save()
-      return responder.success(prefix ? '{{prefix.success}}' : '{{prefix.revert}}', {
-        prefix: `**\`${prefix || process.env.CLIENT_PREFIX}\`**`
+      settings.prefix = args.prefix
+      await settings.save()
+      return responder.success(args.prefix ? '{{prefix.success}}' : '{{prefix.revert}}', {
+        prefix: `**\`${args.prefix}\`**`
       })
     } catch (err) {
-      logger.error(`Could not change prefix for ${msg.guild.name} (${msg.guild.id}) - ${err}`)
+      logger.error(`Could not change prefix to '${args.prefix}' for ${msg.guild.name} (${msg.guild.id}) - ${err}`)
       return responder.error()
     }
   }

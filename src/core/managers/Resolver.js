@@ -5,6 +5,10 @@ class Resolver {
   constructor (bot) {
     this.bot = bot
     this._resolvers = {}
+    this.loadResolvers()
+  }
+
+  loadResolvers () {
     const resolvers = requireAll(path.join(__dirname, 'resolvers'))
     for (let resolver in resolvers) {
       resolver = resolvers[resolver]
@@ -56,7 +60,7 @@ class Resolver {
     for (const arg of usage) {
       let rawArg
       if (arg.last) {
-        rawArg = rawArgs.join(' ')
+        rawArg = rawArgs.slice(idx).join(' ')
         skip = true
       } else {
         if (arg.optional) {
@@ -82,70 +86,38 @@ class Resolver {
         idx++
       }
       resolves.push(
-        Promise.all(arg.types.map(async type => {
+        Promise.all(arg.types.map(type => {
           const resolver = this._resolvers[type]
           if (typeof resolver === 'undefined') {
             return Promise.reject({ err: 'Invalid resolver type' })
           }
-          try {
-            return Promise.resolve({ result: await resolver.resolve(rawArg, arg, message, this.bot) })
-          } catch (err) {
-            const result = Object.assign(arg, {
-              arg: `**\`${arg.displayName || 'argument'}\`**`,
-              err: err.message ? err.message : `{{%resolver.${err}}}` +
-              (data.prefix && data.command
-              ? `\n\n**{{%resolver.CORRECT_USAGE}}**: \`${data.prefix}${data.command} ` +
-              (usage.length ? usage.map(arg =>
-                skip ? arg.displayName
-                : (arg.optional ? `[${arg.displayName}]` : `<${arg.displayName}>`)
-              ).join(' ') : '') + '`'
-              : '')
-            })
-            return Promise.resolve(result)
-          }
-        })).then(results => {
+          return resolver.resolve(rawArg, arg, message, this.bot)
+          .catch(err => Object.assign(arg, {
+            arg: `**\`${arg.name || 'argument'}\`**`,
+            err: err.message ? err.message : `{{%resolver.${err}}}` +
+            (data.prefix && data.command
+            ? `\n\n**{{%resolver.CORRECT_USAGE}}**: \`${data.prefix}${data.command} ` +
+            (usage.length ? usage.map(arg =>
+              skip ? arg.displayName
+              : (arg.optional ? `[${arg.displayName}]` : `<${arg.displayName}>`)
+            ).join(' ') : '') + '`'
+            : '')
+          }))
+        }))
+        .then(results => {
           const resolved = results.filter(v => !v.err)
 
           if (resolved.length) {
-            return resolved[0].result
+            const res = resolved.reduce((p, c) => p.concat(c), [])
+            args[arg.name] = res.length < 2 ? res[0] : res
+            return res
           }
           return Promise.reject(results[0])
-        }).then(res => {
-          args[arg.name] = res
-          return res
         })
       )
       if (skip) break
     }
     return Promise.all(resolves).then(() => args)
-  }
-
-  resolveArg (arg, rawArg, msg) {
-    return Promise.all(arg.types.map(type => this.execResolve(type, rawArg, arg, msg)))
-    .then(results => {
-      const resolved = results.filter(v => !v.err)
-
-      if (resolved.length) {
-        return resolved[0].result
-      }
-      return Promise.reject(results[0])
-    })
-  }
-
-  async execResolve (type, content, arg, msg) {
-    const resolver = this._resolvers[type]
-    if (typeof resolver === 'undefined') {
-      return Promise.reject({ err: 'Invalid resolver type' })
-    }
-    try {
-      return Promise.resolve({ result: await resolver.resolve(content, arg, msg, this.bot) })
-    } catch (err) {
-      const result = Object.assign(arg, {
-        arg: `**\`${arg.displayName || 'argument'}\`**`,
-        err: err.message ? err.message : `{{%resolver.${err}}}`
-      })
-      return Promise.resolve(result)
-    }
   }
 }
 

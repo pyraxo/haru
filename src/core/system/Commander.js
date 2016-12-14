@@ -8,7 +8,7 @@ class Commander extends Collection {
   }
 
   attach (group, Command) {
-    const command = new Command(this.bot)
+    const command = new Command(this.bot, group)
     for (let label of command.labels) {
       if (this.has(label)) throw new Error(`Duplicate command: ${label}`)
       this.set(label.toLowerCase(), { cmd: command, group, label })

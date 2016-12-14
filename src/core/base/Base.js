@@ -19,8 +19,7 @@ class Base {
       throw new Error('Must extend abstract Base')
     }
 
-    this.bot = bot
-    this.client = bot.client
+    this.client = bot
     this.i18n = bot.engine.i18n
 
     this.colours = {}
@@ -57,7 +56,7 @@ class Base {
 
     if (!perms.every(p => member.permission.has(p))) return false
     return perms.every(perm => (
-      channel.permissionOverwrites.find(p => (member.roles.indexOf(p.id) > -1 || p.id === user.id) && p.json[perm] !== false) || true
+      !channel.permissionOverwrites.find(p => (member.roles.includes(p.id) || p.id === user.id) && p.json[perm] === false)
     ))
   }
 
@@ -70,6 +69,8 @@ class Base {
     if (typeof channel === 'string') {
       channel = this.client.getChannel(channel)
     }
+    if (!channel) return null
+
     let { file = null, lang, delay = 0, deleteDelay = 0, embed } = options
     if (channel.guild) {
       const guild = channel.guild
@@ -83,7 +84,7 @@ class Base {
       await Promise.delay(delay)
     }
 
-    lang = !lang && channel.guild ? (await this.bot.engine.db.data.Guild.fetch(channel.guild.id)).lang : 'en'
+    lang = !lang && channel.guild ? (await this.client.engine.db.data.Guild.fetch(channel.guild.id)).lang : 'en'
 
     if (Array.isArray(content)) content = content.join('\n')
     content = this.t(content, lang, options)
@@ -126,7 +127,7 @@ class Base {
     }
 
     if (!lang && msg.channel.guild) {
-      lang = (await this.bot.engine.db.data.Guild.fetch(msg.channel.guild.id)).lang
+      lang = (await this.client.engine.db.data.Guild.fetch(msg.channel.guild.id)).lang
     } else {
       lang = 'en'
     }

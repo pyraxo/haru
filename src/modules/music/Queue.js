@@ -7,7 +7,7 @@ class Queue extends Module {
       name: 'music:queue'
     })
 
-    this.redis = this.bot.engine.cache.client
+    this.redis = this.client.engine.cache.client
   }
 
   add (guildID, video, prepend = false) {

@@ -8,7 +8,7 @@ class ChannelInfo extends Command {
       aliases: ['cinfo'],
       description: 'Displays information of a channel',
       usage: [{ name: 'member', type: 'channel', optional: true }],
-      options: { guildOnly: true, localeKey: 'infocmd', perms: ['embedLinks'] }
+      options: { guildOnly: true, localeKey: 'infocmd', botPerms: ['embedLinks'] }
     })
   }
 

@@ -15,21 +15,19 @@ class Lang extends Command {
           'en', 'pt', 'nl'
         ]
       }],
-      options: { guildOnly: true, localeKey: 'settings' }
+      options: { guildOnly: true, localeKey: 'settings', permissions: ['manageGuild'] }
     })
   }
 
-  async handle ({ msg, args, data }, responder) {
-    const lang = args.lang
+  async handle ({ msg, args, data, settings }, responder) {
     try {
-      let guild = await data.Guild.fetch(msg.guild.id)
-      guild.lang = lang
-      await guild.save()
+      settings.lang = args.lang
+      await settings.save()
       return responder.success('{{lang.success}}', {
-        lang: `**\`${lang}\`**`
+        lang: `**\`${args.lang}\`**`
       })
     } catch (err) {
-      logger.error(`Could not change language for ${msg.guild.name} (${msg.guild.id}) - ${err}`)
+      logger.error(`Could not change language to '${settings.lang}' for ${msg.guild.name} (${msg.guild.id}) - ${err}`)
       return responder.error()
     }
   }

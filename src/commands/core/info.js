@@ -6,7 +6,7 @@ class Info extends Command {
       name: 'info',
       aliases: ['about'],
       description: 'Information about me',
-      options: { perms: ['embedLinks'] }
+      options: { botPerms: ['embedLinks'] }
     })
   }
 

@@ -11,7 +11,7 @@ class Companions extends Module {
       localeKey: 'companion'
     })
 
-    this.db = this.bot.engine.db.data
+    this.db = this.client.engine.db.data
 
     /*
       Outcomes:
@@ -24,14 +24,14 @@ class Companions extends Module {
 
   init () {
     this.battles = new Collection()
-    fs.readFile(path.join(this.bot.paths.resources, 'config', 'companions.json'), (err, res) => {
+    fs.readFile(path.join(this.client.paths.resources, 'config', 'companions.json'), (err, res) => {
       if (err) {
         logger.error('Could not read companions configuration')
         logger.error(err)
         return
       }
 
-      const data = JSON.parse(fs.readFileSync(path.join(this.bot.paths.resources, 'config', 'companions.json')))
+      const data = JSON.parse(fs.readFileSync(path.join(this.client.paths.resources, 'config', 'companions.json')))
       this.pets = data.companions
       this.prices = data.prices
 

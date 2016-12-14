@@ -23,15 +23,8 @@ class Parser {
   }
 
   locate (fullkey, obj) {
-    let keys = fullkey.split('.')
-    let val = obj[keys.shift()]
-    if (!val) return null
-    for (let key of keys) {
-      if (!val[key]) return val
-      val = val[key]
-      if (Array.isArray(val)) return val.join('\n')
-    }
-    return val || null
+    const val = fullkey.split('.').reduce((o, i) => o[i] || {}, obj)
+    return Array.isArray(val) ? val.join('\n') : val
   }
 
   get (key = 'common', locale = 'en') {

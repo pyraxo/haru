@@ -18,7 +18,7 @@ class Contact extends Command {
     const portal = modules.get('portal')
     if (!portal) return
 
-    const text = args.text.split(' ').slice(1).join(' ')
+    const text = args.text
 
     switch (args.type) {
       case 'report': {

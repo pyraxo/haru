@@ -1,11 +1,12 @@
 module.exports = {
   type: 'member',
-  resolve: (content, arg, msg) => {
+  resolve: (content, { bot = false }, msg) => {
     const guild = msg.guild
     content = String(content).toLowerCase()
     let user = content.match(/^<@!?(\d{17,18})>$/) || content.match(/^(\d{17,18})$/)
     if (!user) {
       let members = guild.members.filter(m => {
+        if (!bot && m.user.bot) return
         const name = m.user.username.toLowerCase()
         const nick = m.nick ? m.nick.toLowerCase() : name
         const discrim = m.user.discriminator

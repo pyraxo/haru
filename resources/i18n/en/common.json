@@ -32,6 +32,9 @@
     "command": {
       "NOT_FOUND": "the command could not be found"
     },
+    "role": {
+      "NOT_FOUND": "the role could not be found"
+    },
     "string": {
       "NOT_STRING": "{{arg}} must be a string",
       "MAX": "{{arg}} length cannot be more than {{max}}",

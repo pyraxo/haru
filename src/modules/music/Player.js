@@ -11,8 +11,8 @@ class Player extends Module {
   }
 
   init () {
-    this.manager = this.bot.engine.modules.get('music')
-    this.queue = this.bot.engine.modules.get('music:queue')
+    this.manager = this.client.engine.modules.get('music')
+    this.queue = this.client.engine.modules.get('music:queue')
   }
 
   async stream (channel, url, volume = 2) {
@@ -112,7 +112,7 @@ class Player extends Module {
       return
     }
     const result = await this.queue.shift(guildID)
-    if (textChannel) this.send(textChannel, `:skip:  |  {{skipping}} **${this.manager.getPlaying(guildID).title}**`)
+    this.send(textChannel, `:skip:  |  {{skipping}} **${this.manager.getPlaying(guildID).title}**`)
     return this.manager.play(channel, result)
   }
 }

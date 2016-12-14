@@ -8,11 +8,7 @@ module.exports = function () {
     tableName: 'Guild',
     schema: {
       id: string(),
-      permissions: object().schema({
-        roles: object().default({}),
-        channels: object().default({}),
-        members: object().default({})
-      }).default({}),
+      permissions: object().default({}),
       deleted: bool().default(false),
       prefix: string().default(process.env.CLIENT_PREFIX),
       lang: string().default('en'),
