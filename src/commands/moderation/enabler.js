@@ -74,7 +74,8 @@ class Disabler extends Enabler {
       description: 'Disable a command for a channel, user or role',
       usage: [
         { name: 'command', type: 'command', optional: false },
-        { name: 'context', types: ['member', 'channel', 'role'], optional: true, voice: false }
+        { name: 'context', types: ['member', 'channel', 'role'], optional: true, voice: false },
+        { name: 'isGuild', displayName: '--server', type: 'string', optional: true, choices: ['--server'] }
       ],
       options: { guildOnly: true, localeKey: 'settings', modOnly: true }
     })
@@ -87,7 +88,7 @@ class Allow extends Enabler {
       name: 'allow',
       description: 'Allows channels, users or roles to use commands again',
       usage: [
-        { name: 'context', types: ['member', 'channel', 'role'], optional: false, voice: false },
+        { name: 'context', types: ['member', 'channel', 'role'], optional: true, voice: false },
         { name: 'command', type: 'command', optional: true }
       ],
       options: { guildOnly: true, localeKey: 'settings', modOnly: true }
@@ -101,7 +102,7 @@ class Ignore extends Enabler {
       name: 'ignore',
       description: 'Prevents channels, users or roles from using commands',
       usage: [
-        { name: 'context', types: ['member', 'channel', 'role'], optional: false, voice: false },
+        { name: 'context', types: ['member', 'channel', 'role'], optional: true, voice: false },
         { name: 'command', type: 'command', optional: true }
       ],
       options: { guildOnly: true, localeKey: 'settings', modOnly: true }
