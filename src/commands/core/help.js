@@ -34,33 +34,43 @@ class HelpMenu extends Command {
       responder.send(reply.join('\n'))
       return
     }
-    let commands = {}
-    let reply = [
-      `{{header_1}} ${prefix === process.env.CLIENT_PREFIX ? '' : '{{header_1_alt}}'}`,
-      '{{header_2}}',
-      '{{header_3}}',
-      '**```glsl'
-    ]
+
     let maxPad = 10
-    commander.unique().forEach(c => {
-      if (c.cmd.labels[0] !== c.label || c.cmd.options.hidden || c.cmd.options.adminOnly) return
+    const commands = commander.unique().reduce((obj, c) => {
+      if (c.cmd.labels[0] !== c.label || c.cmd.options.hidden || c.cmd.options.adminOnly) return obj
       const module = c.group
       const name = c.cmd.labels[0]
-      let desc = this.i18n.get(`descriptions.${name}`, settings.lang) || this.i18n.get(`${c.cmd.localeKey}.description`, settings.lang)
+
+      let desc = this.i18n.get(`descriptions.${name}`, settings.lang) ||
+      this.i18n.get(`${c.cmd.localeKey}.description`, settings.lang)
       if (typeof desc !== 'string') desc = '{{noDesc}}'
+
       if (name.length > maxPad) maxPad = name.length
-      if (!Array.isArray(commands[module])) commands[module] = []
-      commands[module].push([name, desc])
-    })
-    for (let mod in commands) {
-      if (commands[mod].length === 0) continue
-      reply.push([
+      if (!Array.isArray(obj[module])) obj[module] = []
+      obj[module].push([name, desc])
+      return obj
+    }, {})
+
+    let toSend = []
+    for (const mod in commands) {
+      if (!commands[mod].length) continue
+      toSend.push([
         `# ${mod}:`,
         commands[mod].map(c => `  ${padEnd(c[0], maxPad)} // ${c[1]}`).join('\n')
       ].join('\n'))
+      if (toSend.length >= 10) {
+        await responder.send(['**```glsl'].concat(toSend, '```**'), { DM: true })
+        toSend = []
+      }
     }
-    reply.push('```**', '{{footer}}')
-    responder.send(reply.join('\n'), {
+    if (toSend.length) await responder.send(['**```glsl'].concat(toSend, '```**'), { DM: true })
+
+    return responder.send([
+      `{{header_1}} ${prefix === process.env.CLIENT_PREFIX ? '' : '{{header_1_alt}}'}`,
+      '{{header_2}}',
+      '{{header_3}}',
+      '{{footer}}'
+    ], {
       DM: true,
       prefix: `\`${prefix}\``,
       defaultPrefix: `\`${process.env.CLIENT_PREFIX}\``,
