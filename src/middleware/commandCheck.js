@@ -9,7 +9,7 @@ module.exports = {
     const { msg, isPrivate, isCommand, cache, commander, trigger, settings, admins } = container
     if (!isCommand) return Promise.resolve()
     const cmd = commander.get(trigger).cmd
-    if (!admins.includes(msg.author.id) || !cmd.options.modOnly) {
+    if (!admins.includes(msg.author.id) || !(cmd.options.modOnly || cmd.options.adminOnly)) {
       const isAllowed = Permitter.verifyMessage(cmd.permissionNode, msg, settings.permissions)
       if (!isAllowed) return Promise.resolve()
     }
