@@ -23,6 +23,7 @@ class Enabler extends Command {
 
   async handle ({ msg, args, data, settings, trigger }, responder) {
     const enable = trigger === 'enable' || trigger === 'allow'
+    const isGuild = args.isGuild || trigger === 'ignore' || trigger === 'allow'
 
     const cmd = args.command ? args.command.cmd.permissionNode : '*'
     const ctx = args.context
@@ -39,8 +40,7 @@ class Enabler extends Command {
     : msg.channel
     if (!ctx) return
     const type = this.getType(ctx)
-    const node = `${type === 'channels' && !(args.isGuild || trigger === 'ignore' || trigger === 'allow')
-    ? ctx.id : `${args.isGuild ? '*' : msg.channel.id}.${ctx.id}`}.${cmd}`
+    const node = `${type === 'channels' && !(isGuild) ? ctx.id : `${isGuild ? '*' : msg.channel.id}.${ctx.id}`}.${cmd}`
 
     try {
       settings.permissions = Permitter[enable ? 'allow' : 'deny'](node, settings.permissions, ctx.id, type)
