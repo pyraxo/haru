@@ -39,7 +39,8 @@ class Enabler extends Command {
     : msg.channel
     if (!ctx) return
     const type = this.getType(ctx)
-    const node = `${type === 'channels' && !args.isGuild ? ctx.id : `${args.isGuild ? '*' : msg.channel.id}.${ctx.id}`}.${cmd}`
+    const node = `${type === 'channels' && !(args.isGuild || trigger === 'ignore' || trigger === 'allow')
+    ? ctx.id : `${args.isGuild ? '*' : msg.channel.id}.${ctx.id}`}.${cmd}`
 
     try {
       settings.permissions = Permitter[enable ? 'allow' : 'deny'](node, settings.permissions, ctx.id, type)
