@@ -2,9 +2,9 @@ const logger = require('winston')
 const { Collection } = require('../util')
 
 class Router extends Collection {
-  constructor (client) {
+  constructor (bot) {
     super()
-    this.bot = client
+    this.bot = bot
     this.events = {}
   }
 

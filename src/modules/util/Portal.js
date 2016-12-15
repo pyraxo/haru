@@ -1,5 +1,3 @@
-const logger = require('winston')
-
 const { Module, Collection } = require('../../core')
 
 class Portal extends Module {

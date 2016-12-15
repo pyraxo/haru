@@ -1,13 +1,11 @@
 module.exports = async function stats (msg, bot) {
-  const client = bot.engine.client
-
-  const guildArr = [...client.guilds.values()]
+  const guildArr = [...bot.guilds.values()]
   try {
     process.send({
       op: 'resp',
       d: {
-        u: client.users.size,
-        g: client.guilds.size,
+        u: bot.users.size,
+        g: bot.guilds.size,
         tc: guildArr.reduce((p, c) => {
           p += c.channels.filter(ch => ch.type === 0).length
           return p
