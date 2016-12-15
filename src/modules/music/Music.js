@@ -376,8 +376,8 @@ class Music extends Module {
         `https://www.youtube.com/oembed?url=http://www.youtube.com/watch?v=${escape(videoID)}&format=json`
       )
       return res.statusCode === 404 || res.statusMessage === 'Not Found'
-      ? res.body
-      : res.error ? Promise.reject('error') : Promise.reject('notFound')
+      ? res.error ? Promise.reject('error') : Promise.reject('notFound')
+      : res.body
     } catch (err) {
       logger.error('Error encountered while validating video ' + videoID)
       logger.error(err)
@@ -392,8 +392,8 @@ class Music extends Module {
         `&playlistId=${pid}&key=${process.env.API_YT}`
       )
       return res.statusCode === 404 || res.statusMessage === 'Not Found'
-      ? res.body
-      : res.error ? Promise.reject('error') : Promise.reject('notFound')
+      ? res.error ? Promise.reject('error') : Promise.reject('notFound')
+      : res.body
     } catch (err) {
       logger.error('Error encountered while querying playlist ' + pid)
       logger.error(err)
