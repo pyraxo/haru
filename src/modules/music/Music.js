@@ -377,7 +377,7 @@ class Music extends Module {
       )
       return res.statusCode === 404 || res.statusMessage === 'Not Found'
       ? res.error ? Promise.reject('error') : Promise.reject('notFound')
-      : res.body
+      : videoID
     } catch (err) {
       logger.error('Error encountered while validating video ' + videoID)
       logger.error(err)
@@ -445,8 +445,9 @@ class Music extends Module {
 
   parseLink (text) {
     if (!this.isLink(text)) return false
-    const query = querystring.parse(url.parse(text).query)
-    return { v: query.v || null, pid: query.list || null }
+    const yt = url.parse(text)
+    const query = querystring.parse(yt.query)
+    return { v: (yt.host.endsWith('youtu.be') ? yt.path.replace('/', '') : query.v) || null, pid: query.list || null }
   }
 
   queueMulti (items, msg, voiceChannel, prefix) {
@@ -513,7 +514,7 @@ class Music extends Module {
       if (err instanceof Error) {
         logger.error(`Error adding ${query.v ? 'song ' + query.v : 'playlist ' + query.pid} to ${msg.guild.name} (${msg.guild.id})'s queue`)
         logger.error(err)
-        return this.send(msg.channel, ':error:  |  {{%ERROR}}')
+        return this.send(msg.channel, `:error:  |  **${msg.author.username}**, {{%ERROR}}`)
       }
       return this.send(msg.channel, `:error:  |  **${msg.author.username}**, {{errors.${err}}}`, { command: `**\`${settings.prefix}summon\`**` })
     }
