@@ -41,7 +41,7 @@ class Enabler extends Command {
     if (!ctx) return
     const type = this.getType(ctx)
 
-    const node = (isGuild ? '*.' : '') +
+    const node = (isGuild && type !== 'channels' ? '*.' : '') +
     (type === 'channels' ? (ctx.id + '.') : '') +
     (type !== 'channels' ? (ctx.id + '.') : '') + cmd
 
