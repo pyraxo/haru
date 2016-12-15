@@ -67,7 +67,7 @@ class Responder {
       response = this.formatMethods[format[0]](response, format[1])
     }
 
-    const promise = (options.DM ? this.command.client.getDMChannel(message.author.id) : Promise.resolve(message.channel))
+    const promise = (options.DM ? this.command.bot.getDMChannel(message.author.id) : Promise.resolve(message.channel))
     .then(channel => this.command.send(channel, response, options))
 
     delete this._formats
