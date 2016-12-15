@@ -108,10 +108,13 @@ class Resolver {
           const resolved = results.filter(v => !v.err)
 
           if (resolved.length) {
-            const res = resolved.reduce((p, c) => p.concat(c), [])
-            args[arg.name] = res.length < 2 ? res[0] : res
+            const res = resolved.length === 1
+            ? resolved[0]
+            : resolved.reduce((p, c) => p.concat(c), [])
+            args[arg.name] = res
             return res
           }
+
           return Promise.reject(results[0])
         })
       )

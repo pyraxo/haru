@@ -34,5 +34,6 @@
   "disable": "Disable commands for a channel, user or role",
   "lang": "Allows moderators to set a guild's language",
   "allow": "Allows channels, users or roles to use commands",
-  "ignore": "Prevents channels, users or roles from using commands"
+  "ignore": "Prevents channels, users or roles from using commands",
+  "purge": "Bulk delete messages from a channel"
 }

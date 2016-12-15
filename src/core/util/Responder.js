@@ -168,8 +168,8 @@ class Responder {
   }
 
   async selection (selections = [], options = {}) {
-    if (!selections.length) return []
     if (!Array.isArray(selections)) return [selections, 0]
+    if (!selections.length) return []
     if (selections.length === 1) return [selections[0], 0]
 
     const { title = '{{%menus.SELECTION}}', footer = '{{%menus.INPUT}}', mapFunc } = options

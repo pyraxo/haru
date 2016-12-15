@@ -16,17 +16,12 @@ class GuildLog extends Module {
       }
     })
 
-    this.listeners = new Map()
     this.logChannel = '249814267786690580'
   }
 
   init () {
     this.data = this.bot.engine.db.data
     this.portal = this.bot.engine.modules.get('portal')
-  }
-
-  unload () {
-    delete this.listeners
   }
 
   sendStats () {

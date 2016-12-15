@@ -19,43 +19,42 @@ const Permitter = {
   },
 
   hasWildcard (obj) {
-    return typeof obj === 'object' && obj !== null ? Permitter.isBoolean(obj['*']) : false
+    return obj !== null && '*' in obj ? Permitter.isBoolean(obj['*']) : false
   },
 
   verifyMessage (node, msg, perms = {}, defVal = true) {
     let res = Permitter.check(`${msg.channel.id}.${msg.author.id}.${node}`, perms)
     if (Permitter.isBoolean(res)) return res
-    if (Permitter.hasWildcard(res)) return res['*']
 
     for (const perm of msg.member.roles.map(r => `${msg.channel.id}.${r}.${node}`)) {
-      if (Permitter.isBoolean(perm)) return perm
-      if (Permitter.hasWildcard(perm)) return perm['*']
+      res = Permitter.check(perm, perms)
+      if (Permitter.isBoolean(res)) return res
     }
 
     res = Permitter.check(`*.${msg.author.id}.${node}`, perms)
     if (Permitter.isBoolean(res)) return res
-    if (Permitter.hasWildcard(res)) return res['*']
 
     for (const perm of msg.member.roles.map(r => `*.${r}.${node}`)) {
-      if (Permitter.isBoolean(perm)) return perm
-      if (Permitter.hasWildcard(perm)) return perm['*']
+      res = Permitter.check(perm, perms)
+      if (Permitter.isBoolean(res)) return res
     }
 
     res = Permitter.check(`${msg.channel.id}.${node}`, perms)
     if (Permitter.isBoolean(res)) return res
-    if (Permitter.hasWildcard(res)) return res['*']
 
     res = Permitter.check(`*.*.${node}`, perms)
     if (Permitter.isBoolean(res)) return res
-    if (Permitter.hasWildcard(res)) return res['*']
 
     return defVal
   },
 
   check (node, perms = {}) {
-    const res = node.split('.').reduce((obj, idx) => (
-      Permitter.isBoolean(obj) ? obj : idx in obj ? obj[idx] : Permitter.isBoolean(obj['*']) ? obj['*'] : {}
-    ), perms)
+    const res = node.split('.').reduce((obj, idx) => {
+      if (obj === null || Permitter.isBoolean(obj)) return obj
+      if (idx in obj) return obj[idx]
+      else if ('*' in obj) return obj['*']
+      return null
+    }, perms)
     if (res === true || res === false) return res
     return null
   },
@@ -74,6 +73,7 @@ const Permitter = {
 
     nodes.reduce((o, c, i) => {
       if (i >= last) {
+        if (typeof o['*'] === 'undefined') o['*'] = null
         if (o[c] === true || o[c] === false && o[c] !== val) {
           o[c] = null
         } else {
