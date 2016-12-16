@@ -1,6 +1,6 @@
 class Bridge {
-  constructor (manager) {
-    this.manager = manager
+  constructor (commander) {
+    this.commander = commander
     this.tasks = []
     this.collectors = []
   }
@@ -66,26 +66,28 @@ class Bridge {
     this.tasks = []
   }
 
-  handle (container, idx = 0) {
+  async handle (container) {
     const { msg } = container
-    return new Promise((resolve, reject) => {
-      for (let collector of this.collectors) {
-        let res = collector.passMessage(msg)
-        if (res) return
+    for (let collector of this.collectors) {
+      const collected = collector.passMessage(msg)
+      if (collected) return
+    }
+    for (const task of this.tasks) {
+      try {
+        const result = await task(container)
+        if (!result) return Promise.reject()
+        container = result
+      } catch (err) {
+        throw err
       }
-      if (idx === this.tasks.length) {
-        try {
-          this.manager.execute(container.trigger, container)
-        } catch (err) {
-          return reject(err)
-        }
-        return resolve(container)
-      }
-      this.tasks[idx++](container).then(c => {
-        if (!c) return reject()
-        return this.handle(c, idx).then(resolve).catch(reject)
-      }).catch(reject)
-    })
+    }
+    try {
+      if (!container.trigger) return Promise.reject()
+      this.commander.execute(container.trigger, container)
+    } catch (err) {
+      throw err
+    }
+    return container
   }
 }
 
