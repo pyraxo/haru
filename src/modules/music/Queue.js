@@ -18,7 +18,7 @@ class Queue extends Module {
   async remove (guildID, index = 0, count = 1) {
     const info = await this.getSongs(guildID, index)
     const res = await this.redis.lremAsync(`music:queues:${guildID}`, count, info)
-    if (res) return JSON.parse(info)
+    if (res) return JSON.parse(info[0])
     return null
   }
 
@@ -39,7 +39,7 @@ class Queue extends Module {
   }
 
   async getSongs (guildID, start = 0, stop = start) {
-    return JSON.parse(await this.redis.lrangeAsync(`music:queues:${guildID}`, start, stop))
+    return await this.redis.lrangeAsync(`music:queues:${guildID}`, start, stop)
   }
 }
 
