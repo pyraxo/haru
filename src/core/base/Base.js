@@ -52,6 +52,7 @@ class Base {
   }
 
   hasPermissions (channel, user, ...perms) {
+    if (!channel.guild) return true
     const member = channel.guild.members.get(user.id)
 
     if (!perms.every(p => member.permission.has(p))) return false
