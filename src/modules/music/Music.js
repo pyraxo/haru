@@ -49,6 +49,7 @@ class Music extends Module {
   connectWS () {
     this._ws = {}
     this.streamInfo = {}
+    this._maxReconnects = 10
     for (const streamName in this.streams) {
       const stream = this.streams[streamName]
       let ws = this._ws[streamName] = new WebSocket(stream.socket)
@@ -77,8 +78,11 @@ class Music extends Module {
           logger.error(err)
         }
       })
+      let connects = 0
       ws.on('close', () => {
+        if (connects >= this._maxReconnects) return
         logger.error(`Reopening closed ${stream.socket} socket`)
+        connects++
         setTimeout(this.connectWS.bind(this), 2500)
       })
     }
