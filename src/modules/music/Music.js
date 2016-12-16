@@ -83,7 +83,7 @@ class Music extends Module {
         if (this._connects >= this._maxReconnects) return
         logger.error(`Reopening closed ${stream.socket} socket`)
         this._connects++
-        setTimeout(this.connectWS.bind(this), 2500)
+        setTimeout(this.connectWS, 2500)
       })
     }
   }
