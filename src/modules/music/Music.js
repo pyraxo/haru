@@ -78,11 +78,11 @@ class Music extends Module {
           logger.error(err)
         }
       })
-      let connects = 0
+      this._connects = 0
       ws.on('close', () => {
-        if (connects >= this._maxReconnects) return
+        if (this._connects >= this._maxReconnects) return
         logger.error(`Reopening closed ${stream.socket} socket`)
-        connects++
+        this._connects++
         setTimeout(this.connectWS.bind(this), 2500)
       })
     }
