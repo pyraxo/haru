@@ -17,7 +17,7 @@ class Queue extends Module {
 
   async remove (guildID, index = 0, count = 1) {
     const info = await this.getSongs(guildID, index)
-    const res = await this.redis.lremAsync(`music:queues:${guildID}`, count, info)
+    const res = await this.redis.lremAsync(`music:queues:${guildID}`, count, info[0])
     if (res) return JSON.parse(info[0])
     return null
   }
