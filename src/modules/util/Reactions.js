@@ -32,9 +32,9 @@ class Reactions extends Module {
     })
   }
 
-  addMenu (msg, userID, emojis = [], cleanup = true) {
+  addMenu (msg, userID, list = [], cleanup = true) {
     return new Promise((resolve, reject) => {
-      emojis = emojis.filter(e => Emojis[e] || Emoji.get(e) || e.split(':').length === 2)
+      let emojis = list.filter(e => Emojis[e] || Emoji.get(e) || e.split(':').length === 2)
       this.addMulti(msg, emojis.map(e => Emojis[e] || Emoji.get(e)))
       .then(() => this.menus.set(msg.id, { msg, user: userID, emojis, resolve, cleanup }))
       .catch(reject)

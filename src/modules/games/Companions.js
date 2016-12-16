@@ -31,10 +31,7 @@ class Companions extends Module {
         return
       }
 
-      const data = JSON.parse(fs.readFileSync(path.join(this.bot.paths.resources, 'config', 'companions.json')))
-      this.pets = data.companions
-      this.prices = data.prices
-
+      this._data = JSON.parse(fs.readFileSync(path.join(this.bot.paths.resources, 'config', 'companions.json')))
       this._check = setInterval(() => this.checkBattles(), 2000)
     })
   }
@@ -43,8 +40,15 @@ class Companions extends Module {
     clearTimeout(this._check)
     delete this._check
     delete this.battles
-    delete this.pets
-    delete this.prices
+    delete this._data
+  }
+
+  get pets () {
+    return this._data.pets
+  }
+
+  get prices () {
+    return this._data.prices
   }
 
   /*

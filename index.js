@@ -17,26 +17,11 @@ require('moment-duration-format')
 const processShards = parseInt(process.env.CLIENT_SHARDS_PER_PROCESS, 10)
 const firstShardID = parseInt(process.env.BASE_SHARD_ID, 10) * processShards
 const lastShardID = firstShardID + processShards - 1
-const debugMode = process.env.CLIENT_DEBUG === 'true'
 
-winston.remove(winston.transports.Console)
-winston.add(winston.transports.Console, {
-  level: debugMode ? 'silly' : 'verbose',
-  colorize: true,
-  label: process.env.BASE_SHARD_ID
-  ? processShards > 1
-    ? `S ${firstShardID}-${lastShardID}`
-    : `S ${process.env.SHARD_ID}`
-  : 'MASTER',
-  timestamp: function () {
-    return moment().format('YYYY-MM-DD hh:mm:ss a')
-  }
-})
-winston.add(winston.transports.DailyRotateFile, {
-  level: debugMode ? 'silly' : 'verbose',
+const debugMode = process.env.CLIENT_DEBUG === 'true'
+const fileOptions = {
   colorize: false,
   datePattern: '.yyyy-MM-dd',
-  filename: path.join(__dirname, 'logs/application.log'),
   prepend: true,
   json: false,
   formatter: function ({ level, message = '', meta = {}, formatter, depth, colorize }) {
@@ -46,8 +31,32 @@ winston.add(winston.transports.DailyRotateFile, {
     : ''
     return `${timestamp} ${level.toUpperCase()} ${chalk.stripColor(message)} ${obj}`
   }
+}
+
+winston.configure({
+  transports: [
+    new (winston.transports.Console)({
+      level: debugMode ? 'silly' : 'verbose',
+      colorize: true,
+      label: process.env.BASE_SHARD_ID
+      ? processShards > 1
+        ? `S ${firstShardID}-${lastShardID}`
+        : `S ${process.env.SHARD_ID}`
+      : 'MASTER',
+      timestamp: () => `[${chalk.cyan(moment().format('HH:mm:ss'))}]`
+    }),
+    new (winston.transports.DailyRotateFile)(Object.assign(fileOptions, {
+      name: 'info-file',
+      filename: path.join(__dirname, 'logs/info.log'),
+      level: 'info'
+    })),
+    new (winston.transports.DailyRotateFile)(Object.assign(fileOptions, {
+      name: 'error-file',
+      filename: path.join(__dirname, 'logs/error.log'),
+      level: 'error'
+    }))
+  ]
 })
-winston.cli()
 
 process.on('unhandledRejection', (reason, promise) => {
   if (typeof reason === 'undefined') return

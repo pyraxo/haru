@@ -69,13 +69,12 @@ class Music extends Module {
             })(streamName)
           }
         } catch (err) {
-          logger.error(`Error parsing ${stream.socket} message: ${err}`)
+          logger.error(`Error parsing ${stream.socket} message - ${err}`)
         }
       })
       ws.on('error', err => {
         if (err) {
-          logger.error(`Error occurred with ${stream.socket}`)
-          logger.error(err)
+          logger.error(`Error occurred with ${stream.socket} - ${err}`)
         }
       })
       this._connects = 0

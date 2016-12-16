@@ -42,7 +42,7 @@ class Command extends Base {
     this.cooldown = cooldown
     this.options = options
     if (this.options.modOnly) {
-      this.options.permissions = (this.options.permissions || []).concat(['manageGuild'])
+      this.options.permissions = (this.options.permissions || []).concat('manageGuild')
     }
 
     this.usage = usage

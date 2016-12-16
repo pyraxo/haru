@@ -124,9 +124,8 @@ class Responder {
       })
 
       const awaitMessage = async (msg) => {
-        let ans
         try {
-          ans = await collector.next()
+          var ans = await collector.next()
           if (ans.content.toLowerCase() === cancel) return Promise.reject()
           try {
             return await input.resolve(ans, [ans.cleanContent], data, dialog.input)
