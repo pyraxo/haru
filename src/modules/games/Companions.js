@@ -44,7 +44,7 @@ class Companions extends Module {
   }
 
   get pets () {
-    return this._data.pets
+    return this._data.companions
   }
 
   get prices () {
@@ -180,7 +180,7 @@ class Companions extends Module {
 
       const res = this.outcomes[~~(Math.random() * 100)]
       if (!stats[attacker] || !stats[receiver]) return
-      if (battle._turn < 0) battle._actions.push(':information_source:  **Match begins!**')
+      if (battle._turn < 0) battle._actions.push(':info:  **Match begins!**')
       battle._turn = turn
 
       const crit = stats[attacker].crit

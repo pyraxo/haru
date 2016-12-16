@@ -83,6 +83,7 @@ class Command extends Base {
     }, usage).then((args = {}) => {
       container.args = args
       this[process](container, responder).catch(err => {
+        if (!err) return
         logger.error(`Rejection from ${this.labels[0]}`)
         logger.error(err)
       })

@@ -1,6 +1,6 @@
-const emojis = require('node-emoji')
+const emoji = require('node-emoji')
 const { padEnd } = require('./Util')
-const emoji = require('./Emojis')
+const customEmoji = require('./Emojis')
 
 class Responder {
   constructor (command) {
@@ -10,8 +10,8 @@ class Responder {
     this.responseMethods = {
       send: (msg, res) => res,
       reply: (msg, res) => `**${msg.author.username}**, ${res}`,
-      success: (msg, res) => `${emoji.success}  |  **${msg.author.username}**, ${res}`,
-      error: (msg, res) => `${emoji.error}  |  **${msg.author.username}**, ` + (res || '{{%ERROR}}')
+      success: (msg, res) => `${customEmoji.success}  |  **${msg.author.username}**, ${res}`,
+      error: (msg, res) => `${customEmoji.error}  |  **${msg.author.username}**, ` + (res || '{{%ERROR}}')
     }
 
     this.formatMethods = {
@@ -21,7 +21,7 @@ class Responder {
       strikethrough: (res) => `~~${res}~~`,
       inlineCode: (res) => `\`${res}\``,
       code: (res, type = '') => `\`\`\`${type}\n${res}\n\`\`\``,
-      emoji: (res, type) => `${this.i18n.locate(type, emoji) || emojis.get(type) || emoji.success}  |  ${res}`
+      emoji: (res, type) => `${this.i18n.locate(type, customEmoji) || emoji.get(type) || customEmoji.success}  |  ${res}`
     }
   }
 
@@ -49,7 +49,10 @@ class Responder {
   t (content = '', tags = {}) {
     const cmd = this.command
     const file = cmd.name ? cmd.name.split(':')[0] : (cmd.labels ? cmd.labels[0] : 'common')
-    return cmd.i18n.parse(content, cmd.localeKey || file || null, this.settings.lang, tags)
+    const res = cmd.i18n.parse(content, cmd.localeKey || file || null, this.settings.lang, tags)
+    return res.replace(/:(\S+):/gi, (matched, name) => (
+      cmd.i18n.locate(name, customEmoji) || emoji.get(name) || matched
+    ))
   }
 
   _send (method, response = '', options = {}) {
@@ -130,7 +133,7 @@ class Responder {
           try {
             return await input.resolve(ans, [ans.cleanContent], data, dialog.input)
           } catch (err) {
-            let p2 = await this.format('emoji:error').send(
+            const p2 = await this.format('emoji:error').send(
               `${err.err || err.message || err || '{{%menus.ERROR}}'}\n\n{{%menus.EXIT}}`,
               Object.assign(err, { cancel: `\`${cancel}\`` })
             )

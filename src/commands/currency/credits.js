@@ -99,7 +99,7 @@ class Credits extends Command {
 
     const code = ~~(Math.random() * 8999) + 1000
 
-    responder.format('emoji:atm').dialog([{
+    return responder.format('emoji:atm').dialog([{
       prompt: '{{dialog}}',
       input: { type: 'string', name: 'code' }
     }], {

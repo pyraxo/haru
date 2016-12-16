@@ -1,5 +1,5 @@
 const logger = require('winston')
-const { Command } = require('../../core')
+const { Command, padEnd } = require('../../core')
 
 class Companions extends Command {
   constructor (...args) {
@@ -80,10 +80,66 @@ class Companions extends Command {
       })
       return
     }
+
+    const pets = Object.keys(companions.pets[0])
     const reactions = modules.get('reactions')
     if (!reactions) return
-    const message = await responder.format('emoji:info').send('**{{intro}}**', { user: msg.author.username })
-    const choice = await reactions.addMenu(message, msg.author.id, Object.keys(companions.pets[0]))
+    const input = this.resolver
+
+    const message = await responder.format('emoji:info').send([
+      '**{{intro}}**',
+      '```markdown',
+      pets.map((c, i) => `${padEnd(`[${i + 1}]:`, 4)} :${c}:`).join('\n'),
+      '> {{%menus.INPUT}}',
+      '```'
+    ], { user: msg.author.username, cancel: 'cancel' })
+    const collector = this.bot.engine.bridge.collect({
+      channel: msg.channel.id,
+      author: msg.author.id,
+      time: 30
+    })
+    const awaitMessage = async (msg) => {
+      try {
+        var ans = await collector.next()
+        if (ans.content.toLowerCase() === 'cancel') return Promise.resolve()
+        try {
+          return await input.resolve(ans, [ans.cleanContent], {}, {
+            type: 'int', name: 'reply', min: 1, max: pets.length
+          })
+        } catch (err) {
+          const re = await this.format('emoji:error').send(
+            `${err.err || err.message || err || '{{%menus.ERROR}}'}\n\n{{%menus.EXIT}}`,
+            Object.assign(err, { cancel: '`cancel`' })
+          )
+          return awaitMessage(re)
+        }
+      } catch (err) {
+        return Promise.reject(err)
+      } finally {
+        this.deleteMessages(msg, ans)
+      }
+    }
+
+    try {
+      var choice = await Promise.race([
+        awaitMessage(message),
+        reactions.addMenu(message, msg.author.id, pets)
+      ])
+    } catch (err) {
+      if (typeof err !== 'undefined') {
+        return responder.error(`{{%menus.ERRORED}} **{{%collector.${err.reason}}}**`, {
+          [err.reason]: err.arg, err: `**${err.reason}**`
+        })
+      } else {
+        return responder.success('{{%menus.EXITED}}')
+      }
+    } finally {
+      collector.stop()
+      reactions.menus.delete(message.id)
+    }
+
+    if (!choice) return responder.success('{{%menus.EXITED}}')
+    choice = choice.reply ? pets[choice.reply - 1] : choice
 
     const code = ~~(Math.random() * 8999) + 1000
     const arg = await responder.format('emoji:info').dialog([{
@@ -96,8 +152,7 @@ class Companions extends Command {
       code: `**\`${code}\`**`
     })
     if (parseInt(arg.code, 10) !== code) {
-      responder.error('{{invalidCode}}')
-      return
+      return responder.error('{{invalidCode}}')
     }
     user.credits -= companions.prices[0]
     const companion = new db.Companion({
