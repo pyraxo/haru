@@ -23,7 +23,7 @@ class Music extends Module {
 
     this.streams = {
       'listen.moe': {
-        socket: 'https://listen.moe/api/socket',
+        socket: 'https://listen.moe/api/v2/socket',
         url: 'http://listen.moe:9999/stream'
       }
     }
