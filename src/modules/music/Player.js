@@ -22,11 +22,21 @@ class Player extends Module {
     logger.info(`Playing ${url} in ${channel.guild.name} (${channel.guild.id})`)
 
     conn.on('error', err => {
-      this.stop(channel).then(() => {
-        this.stream(channel, url, volume)
-        logger.error(`Encountered an error while streaming to ${conn.id}`)
-        logger.error(err)
-      })
+      if (err) {
+        this.stop(channel).then(() => {
+          const textChannel = this.manager.getBoundChannel(channel.guild.id)
+          this.send(textChannel, ':stop:  |  {{errors.error}}')
+          this.stream(channel, url, volume)
+          logger.error(`Encountered an error while playing stream to ${conn.id}`)
+          logger.error(err)
+        })
+      }
+    })
+
+    conn.once('end', () => {
+      const textChannel = this.manager.getBoundChannel(channel.guild.id)
+      this.send(textChannel, `:stop:  |  {{finishedPlaying}} **${url}**`)
+      this.stop(channel)
     })
 
     this.manager.modifyState(channel.guild.id, 'state', url)
@@ -50,11 +60,13 @@ class Player extends Module {
     logger.info(`Playing ${mediaInfo.title} in ${channel.guild.name} (${channel.guild.id})`)
 
     conn.once('error', err => {
-      this.stop(channel).then(() => {
-        logger.error(`Encountered an error while streaming to ${conn.id}`)
-        logger.error(err)
-        return this.play(channel, mediaInfo, volume)
-      })
+      if (err) {
+        this.stop(channel).then(() => {
+          logger.error(`Encountered an error while streaming to ${conn.id}`)
+          logger.error(err)
+          return this.play(channel, mediaInfo, volume)
+        })
+      }
     })
 
     conn.once('end', () => {
