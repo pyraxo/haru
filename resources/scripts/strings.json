@@ -10,9 +10,6 @@
       "q": "Twijfelachtig",
       "e": "Expliciet"
     },
-    "choose": {
-      "pick": "Ik kies {{choice}}"
-    },
     "common": {
       "CHECK_PMS": "check je inbox!",
       "ERROR": "er is een fout opgetreden! Probeer later nog eens, of rapporteer een bug.",
@@ -67,8 +64,13 @@
         },
         "role": {
           "NOT_FOUND": "de rol kon niet worden gevonde"
+        },
+        "group": {
+          "NOT_FOUND": "de commando-groep kon niet worden gevonden"
         }
-      }
+      },
+      "NO_PMS": "Sorry, maar ik wil graag meer toeschouwers. (Dit commando kan niet gebruikt worden in PM's!)",
+      "ENABLE_EMBEDS": "Zorg alsjeblieft dat je insluitingen aan hebt staan!"
     },
     "companion": {
       "noPet": "je hebt nog geen maatje! Gebruik {{command}} om er een te kopen!",
@@ -206,7 +208,12 @@
       "disable": "Zet commando's uit voor een kanaal, gebruiker of rol",
       "lang": "Staat beheerders toe om een gilde's taal in te stellen",
       "allow": "Staat kanalen, gebruikers of rollen toe om commando's te gebruiken",
-      "ignore": "Staat kanalen, gebruikers of rollen niet toe om commando's te gebruiken"
+      "ignore": "Staat kanalen, gebruikers of rollen niet toe om commando's te gebruiken",
+      "purge": "Verwijder berichten in groepen van een kanaal",
+      "repeat": "Zet herhalingsmodus aan, waar beëindigde liedjes opnieuw in de rij worden gezet",
+      "8ball": "Stelt een vraag aan de 8ball",
+      "dice": "Rolt dobbelstenen met standaard instelwijze",
+      "coin": "Tost munten"
     },
     "guilds": {
       "join": [
@@ -389,8 +396,53 @@
         "actions": {
           "enable": "aangezet",
           "disable": "uitgezet",
-          "revert": "reverted"
+          "revert": "omgedraaid"
         }
+      }
+    },
+    "purge": {
+      "success": "met succes {{num}} berichten opgeschoond",
+      "filterSuccess": "{{num}} berichten opgeschoond met de volgende criteria: {{criteria}}"
+    },
+    "misc": {
+      "choose": {
+        "pick": "Ik kies {{choice}}"
+      },
+      "8ball": {
+        "question": "{{user}} vroeg",
+        "response": "{{8ball}} zegt",
+        "answer_1": "Het is zeker",
+        "answer_2": "Het is beslist zo",
+        "answer_3": "Zonder twijfel",
+        "answer_4": "Ja, sowieso",
+        "answer_5": "Je mag erop vertrouwen",
+        "answer_6": "Vanaf hoe ik het zie, ja",
+        "answer_7": "Hoogstwaarschijnlijk",
+        "answer_8": "Goede vooruitzichten",
+        "answer_9": "Ja",
+        "answer_10": "De tekenen wijzen op ja",
+        "answer_11": "Vaag antwoord, probeer opnieuw",
+        "answer_12": "Vraag later opnieuw",
+        "answer_13": "Dat kan ik je beter niet nu vertellen",
+        "answer_14": "Dat kan ik nu niet voorspellen",
+        "answer_15": "Concentreer en vraag opnieuw",
+        "answer_16": "Verwacht het maar niet",
+        "answer_17": "Mijn antwoord is nee",
+        "answer_18": "Mijn bronnen zeggen nee",
+        "answer_19": "Slechte vooruitzichten",
+        "answer_20": "Erg twijfelachtig"
+      },
+      "dice": {
+        "result": "Resultaat: {{result}}",
+        "invalid": "Ongeldige dobbelsteen-instelling - {{text}}"
+      },
+      "coin": {
+        "result": "je toste {{heads}} kop en {{tails}} munt!",
+        "heads": "je toste een **kop**!",
+        "tails": "je toste een **munt**!"
+      },
+      "urban": {
+        "noResults": "de zoekopdracht {{query}} gaf geen resultaten."
       }
     }
   },
@@ -404,9 +456,6 @@
       "s": "Seguro",
       "q": "Questionável",
       "e": "Explícito"
-    },
-    "choose": {
-      "pick": "Eu escolho {{choice}}"
     },
     "common": {
       "CHECK_PMS": "verifica as tuas mensagens privadas!",
@@ -462,8 +511,13 @@
         },
         "role": {
           "NOT_FOUND": "o role não foi encontrado"
+        },
+        "group": {
+          "NOT_FOUND": "the command group could not be found"
         }
-      }
+      },
+      "NO_PMS": "Sorry, but I prefer a larger audience. (This command can't be run in PMs!)",
+      "ENABLE_EMBEDS": "Please ensure that you have embeds enabled!"
     },
     "companion": {
       "noPet": "ainda não és dono de um companheiro! Usa {{command}} para comprar um!",
@@ -604,7 +658,12 @@
       "disable": "Desativa comandos para um canal, utilizador ou role",
       "lang": "Permite aos moderadores mudar a linguagem do servidor",
       "allow": "Permite a canais, utilizadores ou roles usarem comandos",
-      "ignore": "Bloqueia canais, utilizadores ou roles de usarem comandos"
+      "ignore": "Bloqueia canais, utilizadores ou roles de usarem comandos",
+      "purge": "Bulk delete messages from a channel",
+      "repeat": "Toggles repeat mode, where finished songs get re-added in the queue",
+      "8ball": "Asks the 8ball a question",
+      "dice": "Rolls some dice, using dice notation",
+      "coin": "Flips coins"
     },
     "guilds": {
       "join": [
@@ -787,8 +846,53 @@
         "actions": {
           "enable": "ativaste",
           "disable": "desativaste",
-          "revert": "reverted"
+          "revert": "reverteste"
         }
+      }
+    },
+    "purge": {
+      "success": "successfully purged {{num}} messages",
+      "filterSuccess": "purged {{num}} messages matching the following criteria: {{criteria}}"
+    },
+    "misc": {
+      "choose": {
+        "pick": "I pick {{choice}}"
+      },
+      "8ball": {
+        "question": "{{user}} asked",
+        "response": "{{8ball}} says",
+        "answer_1": "It is certain",
+        "answer_2": "It is decidedly so",
+        "answer_3": "Without a doubt",
+        "answer_4": "Yes, definitely",
+        "answer_5": "You may rely on it",
+        "answer_6": "As I see it, yes",
+        "answer_7": "Most likely",
+        "answer_8": "Outlook good",
+        "answer_9": "Yes",
+        "answer_10": "Signs point to yes",
+        "answer_11": "Reply hazy try again",
+        "answer_12": "Ask again later",
+        "answer_13": "Better not tell you now",
+        "answer_14": "Cannot predict now",
+        "answer_15": "Concentrate and ask again",
+        "answer_16": "Don't count on it",
+        "answer_17": "My reply is no",
+        "answer_18": "My sources say no",
+        "answer_19": "Outlook not so good",
+        "answer_20": "Very doubtful"
+      },
+      "dice": {
+        "result": "Result: {{result}}",
+        "invalid": "Invalid dice notation - {{text}}"
+      },
+      "coin": {
+        "result": "you tossed {{heads}} heads and {{tails}} tails!",
+        "heads": "you tossed a **heads**!",
+        "tails": "you tossed a **tails**!"
+      },
+      "urban": {
+        "noResults": "the query {{query}} gave no results."
       }
     }
   },
@@ -803,9 +907,6 @@
       "q": "Questionable",
       "e": "Explicit"
     },
-    "choose": {
-      "pick": "I pick {{choice}}"
-    },
     "common": {
       "CHECK_PMS": "check your PMs!",
       "ERROR": "an error has occurred! Please try again later, or submit a bug report.",
@@ -813,6 +914,8 @@
       "COOLDOWN": "please cool down! ({{time}} seconds left)",
       "NO_PERMS": "you need the permission {{perms}} to run this command!",
       "NO_PERMS_BOT": "I need the permission {{perms}} to run this command!",
+      "NO_PMS": "Sorry, but I prefer a larger audience. (This command can't be run in PMs!)",
+      "ENABLE_EMBEDS": "Please ensure that you have embeds enabled!",
       "menus": {
         "EXIT": "Enter {{cancel}} to exit the menu.",
         "ERRORED": "the menu has closed:",
@@ -839,6 +942,9 @@
         },
         "command": {
           "NOT_FOUND": "the command could not be found"
+        },
+        "group": {
+          "NOT_FOUND": "the command group could not be found"
         },
         "role": {
           "NOT_FOUND": "the role could not be found"
@@ -992,7 +1098,12 @@
       "disable": "Disable commands for a channel, user or role",
       "lang": "Allows moderators to set a guild's language",
       "allow": "Allows channels, users or roles to use commands",
-      "ignore": "Prevents channels, users or roles from using commands"
+      "ignore": "Prevents channels, users or roles from using commands",
+      "purge": "Bulk delete messages from a channel",
+      "repeat": "Toggles repeat mode, where finished songs get re-added in the queue",
+      "8ball": "Asks the 8ball a question",
+      "dice": "Rolls some dice, using dice notation",
+      "coin": "Flips coins"
     },
     "guilds": {
       "join": [
@@ -1077,6 +1188,47 @@
         "createdOn": "Creation Date"
       }
     },
+    "misc": {
+      "choose": {
+        "pick": "I pick {{choice}}"
+      },
+      "8ball": {
+        "question": "{{user}} asked",
+        "response": "{{8ball}} says",
+        "answer_1": "It is certain",
+        "answer_2": "It is decidedly so",
+        "answer_3": "Without a doubt",
+        "answer_4": "Yes, definitely",
+        "answer_5": "You may rely on it",
+        "answer_6": "As I see it, yes",
+        "answer_7": "Most likely",
+        "answer_8": "Outlook good",
+        "answer_9": "Yes",
+        "answer_10": "Signs point to yes",
+        "answer_11": "Reply hazy try again",
+        "answer_12": "Ask again later",
+        "answer_13": "Better not tell you now",
+        "answer_14": "Cannot predict now",
+        "answer_15": "Concentrate and ask again",
+        "answer_16": "Don't count on it",
+        "answer_17": "My reply is no",
+        "answer_18": "My sources say no",
+        "answer_19": "Outlook not so good",
+        "answer_20": "Very doubtful"
+      },
+      "dice": {
+        "result": "Result: {{result}}",
+        "invalid": "Invalid dice notation - {{text}}"
+      },
+      "coin": {
+        "result": "you tossed {{heads}} heads and {{tails}} tails!",
+        "heads": "you tossed a **heads**!",
+        "tails": "you tossed a **tails**!"
+      },
+      "urban": {
+        "noResults": "the query {{query}} gave no results."
+      }
+    },
     "music": {
       "nowPlaying": "Now Playing",
       "streamInfo": [
@@ -1130,6 +1282,10 @@
         "The current queue has been saved in the database.",
         "We apologise for any inconvenience caused."
       ]
+    },
+    "purge": {
+      "success": "successfully purged {{num}} messages",
+      "filterSuccess": "purged {{num}} messages matching the following criteria: {{criteria}}"
     },
     "settings": {
       "prefix": {
