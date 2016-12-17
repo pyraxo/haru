@@ -20,16 +20,15 @@ class Reactions extends Module {
     delete this.menus
   }
 
-  addMulti (msg, emojis) {
-    return new Promise((resolve, reject) => {
-      (function loop (i) {
-        msg.addReaction(emojis[i]).then(() => {
-          i++
-          if (i !== emojis.length) return loop(i)
-          return resolve()
-        }).catch(reject)
-      })(0)
-    })
+  async addMulti (msg, emojis) {
+    try {
+      for (const emoji of emojis) {
+        await msg.addReaction(emoji)
+      }
+      return
+    } catch (err) {
+      throw err
+    }
   }
 
   addMenu (msg, userID, list = [], cleanup = true) {
