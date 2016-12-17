@@ -1,0 +1,4 @@
+{
+  "success" : "successfully purged {{num}} messages",
+  "filterSuccess": "purged {{num}} messages matching the following criteria: {{criteria}}"
+}

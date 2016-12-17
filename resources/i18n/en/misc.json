@@ -1,0 +1,38 @@
+{
+  "choose": {
+    "pick": "I pick {{choice}}"
+  },
+  "8ball": {
+    "question": "{{user}} asked",
+    "response": "{{8ball}} says",
+    "answer_1" : "It is certain",
+		"answer_2" : "It is decidedly so",
+		"answer_3" : "Without a doubt",
+		"answer_4" : "Yes, definitely",
+		"answer_5" : "You may rely on it",
+		"answer_6" : "As I see it, yes",
+		"answer_7" : "Most likely",
+		"answer_8" : "Outlook good",
+		"answer_9" : "Yes",
+		"answer_10" : "Signs point to yes",
+		"answer_11" : "Reply hazy try again",
+		"answer_12" : "Ask again later",
+		"answer_13" : "Better not tell you now",
+		"answer_14" : "Cannot predict now",
+		"answer_15" : "Concentrate and ask again",
+		"answer_16" : "Don't count on it",
+		"answer_17" : "My reply is no",
+		"answer_18" : "My sources say no",
+		"answer_19" : "Outlook not so good",
+		"answer_20" : "Very doubtful"
+  },
+  "dice": {
+    "result": "Result: {{result}}",
+    "invalid": "Invalid dice notation - {{text}}"
+  },
+  "coin": {
+    "result": "you tossed {{heads}} heads and {{tails}} tails!",
+    "heads": "you tossed a **heads**!",
+    "tails": "you tossed a **tails**!"
+  }
+}
