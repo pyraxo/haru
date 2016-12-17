@@ -34,5 +34,8 @@
     "result": "you tossed {{heads}} heads and {{tails}} tails!",
     "heads": "you tossed a **heads**!",
     "tails": "you tossed a **tails**!"
+  },
+  "urban": {
+    "noResults": "the query {{query}} gave no results."
   }
 }
