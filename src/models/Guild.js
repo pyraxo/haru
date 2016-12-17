@@ -15,6 +15,6 @@ module.exports = function () {
       tz: string().default('utc')
     },
     cache: true,
-    expiry: 10
+    expiry: 300 * 1000
   }
 }
