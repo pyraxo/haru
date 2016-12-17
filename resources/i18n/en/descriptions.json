@@ -35,5 +35,7 @@
   "lang": "Allows moderators to set a guild's language",
   "allow": "Allows channels, users or roles to use commands",
   "ignore": "Prevents channels, users or roles from using commands",
-  "purge": "Bulk delete messages from a channel"
+  "purge": "Bulk delete messages from a channel",
+  "repeat": "Toggles repeat mode, where finished songs get re-added in the queue",
+  "8ball": "Asks the 8ball a question"
 }

@@ -8,12 +8,13 @@ class Choose extends Command {
       aliases: ['pick'],
       usage: [
         { name: 'choices', displayName: 'choice 1 | choice 2 | etc', type: 'list', separator: ' | ', min: 2, last: true, optional: false }
-      ]
+      ],
+      options: { localeKey: 'misc' }
     })
   }
 
   handle ({ msg, args }, responder) {
-    return responder.format('emoji:thinking').reply('{{pick}}', {
+    return responder.format('emoji:thinking').reply('{{choose.pick}}', {
       choice: `**${args.choices[~~(Math.random() * args.choices.length)]}**!`
     })
   }
