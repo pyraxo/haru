@@ -53,7 +53,9 @@ class Command extends Base {
       const name = subcommands[command].name || command
       for (const alias of [name].concat(subcommands[command].aliases || [])) {
         this.subcommands.set(alias, {
-          usage: subcommands[command].usage || [], name
+          name,
+          usage: subcommands[command].usage || [],
+          options: subcommands[command].options || {}
         })
       }
     }
@@ -75,7 +77,7 @@ class Command extends Base {
       container.trigger += ' ' + subcmd
     }
 
-    if (!this._execCheck(container, responder)) return
+    if (!this._execCheck(container, responder, cmd)) return
 
     this.resolver.resolve(container.msg, container.rawArgs, {
       prefix: container.settings.prefix,
@@ -94,11 +96,18 @@ class Command extends Base {
     })
   }
 
-  _execCheck ({ msg, isPrivate, admins, client }, responder) {
+  _execCheck ({ msg, isPrivate, admins, client }, responder, subcmd) {
     const isAdmin = admins.includes(msg.author.id)
-    const { adminOnly, guildOnly, permissions = [], botPerms = [] } = this.options
-    if (adminOnly === true && !isAdmin) return false
-    if (guildOnly === true && isPrivate) return false
+    const { adminOnly, guildOnly, permissions = [], botPerms = [] } = subcmd ? subcmd.options : this.options
+
+    if (adminOnly === true && !isAdmin) {
+      return false
+    }
+
+    if (guildOnly === true && isPrivate) {
+      responder.error('{{%NO_PMS}}')
+      return false
+    }
 
     if (permissions.length && !this.hasPermissions(msg.channel, msg.author, ...permissions)) {
       responder.error('{{%NO_PERMS}}', {
