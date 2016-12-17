@@ -58,7 +58,7 @@ class HelpMenu extends Command {
         `# ${mod}:`,
         commands[mod].map(c => `  ${padEnd(c[0], maxPad)} // ${c[1]}`).join('\n')
       ].join('\n'))
-      if (toSend.length >= 10) {
+      if (toSend.length >= 5) {
         await responder.send(['**```glsl'].concat(toSend, '```**'), { DM: true })
         toSend = []
       }
