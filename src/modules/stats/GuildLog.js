@@ -60,7 +60,7 @@ class GuildLog extends Module {
     }
   }
 
-  async newGuild (guild) {
+  newGuild (guild) {
     logger.info(`Guild created: ${guild.name} (${guild.id})`)
     logger.info(`${chalk.cyan.bold('U:')} ${guild.memberCount} | ${chalk.cyan.bold('S:')} ${guild.shard.id}`)
 
@@ -81,17 +81,19 @@ class GuildLog extends Module {
       help: `**\`${process.env.CLIENT_PREFIX}help\`**`,
       about: `**\`${process.env.CLIENT_PREFIX}info\`**`
     })
-    try {
-      const settings = await this.data.Guild.fetch(guild.id)
-      settings.deleted = false
-      await settings.save()
-    } catch (err) {
-      logger.error(`Could not load settings for ${guild.name} (${guild.id})`)
-      logger.error(err)
-    }
+
+    setTimeout(() => (
+      this.data.Guild.fetch(guild.id).then(settings => {
+        settings.deleted = false
+        return settings.save()
+      }).catch(err => {
+        logger.error(`Could not load settings for ${guild.name} (${guild.id})`)
+        logger.error(err)
+      })
+    ), 2000)
   }
 
-  async delGuild (guild) {
+  delGuild (guild) {
     logger.info(`Guild deleted: ${guild.name} (${guild.id})`)
     logger.info(`${chalk.cyan.bold('U:')} ${guild.memberCount} | ${chalk.cyan.bold('S:')} ${guild.shard.id}`)
 
@@ -108,14 +110,15 @@ class GuildLog extends Module {
       }
     }})
 
-    try {
-      const settings = await this.data.Guild.fetch(guild.id)
-      settings.deleted = true
-      await settings.save()
-    } catch (err) {
-      logger.error(`Could not load settings for ${guild.name} (${guild.id})`)
-      logger.error(err)
-    }
+    setTimeout(() => (
+      this.data.Guild.fetch(guild.id).then(settings => {
+        settings.deleted = true
+        return settings.save()
+      }).catch(err => {
+        logger.error(`Could not load settings for ${guild.name} (${guild.id})`)
+        logger.error(err)
+      })
+    ), 2000)
   }
 }
 
