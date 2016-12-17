@@ -122,6 +122,12 @@ class Resolver {
     }
     return Promise.all(resolves).then(() => args)
   }
+
+  wrongUsage (usage, { prefix, command }) {
+    return `**{{%resolver.CORRECT_USAGE}}**: \`${prefix}${command} ` + (usage.length
+    ? usage.map(arg => arg.optional ? `[${arg.displayName}]` : `<${arg.displayName}>`).join(' ')
+    : '') + '`'
+  }
 }
 
 module.exports = Resolver
