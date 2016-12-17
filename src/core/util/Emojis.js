@@ -10,7 +10,6 @@ module.exports = {
   credits: '💳',
 
   // Music
-  headphones: '🎧',
   skip: '⏩',
   play: '▶',
   stop: '⏹',
@@ -19,6 +18,5 @@ module.exports = {
   atk: '⚔',
   def: '🛡',
 
-  // Choose
-  thinking: '🤔'
+  dice: '🎲'
 }
