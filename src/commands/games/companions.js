@@ -107,7 +107,7 @@ class Companions extends Command {
             type: 'int', name: 'reply', min: 1, max: pets.length
           })
         } catch (err) {
-          const re = await this.format('emoji:error').send(
+          const re = await responder.format('emoji:error').send(
             `${err.err || err.message || err || '{{%menus.ERROR}}'}\n\n{{%menus.EXIT}}`,
             Object.assign(err, { cancel: '`cancel`' })
           )

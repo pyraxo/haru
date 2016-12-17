@@ -145,6 +145,7 @@ class Base {
   deleteMessages (...msgs) {
     const id = this.bot.user.id
     for (let msg of msgs.filter(m => m)) {
+      if (!msg.guild) continue
       if (msg.author.id === id || msg.channel.permissionsOf(id).has('manageMessages')) {
         msg.delete()
       }
