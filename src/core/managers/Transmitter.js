@@ -58,8 +58,8 @@ class Transmitter extends EventEmitter {
 
       setTimeout(() => {
         process.removeListener('message', awaitListener)
-        return reject('IPC timed out after 2000ms')
-      }, 2000)
+        return reject('IPC timed out after 5000ms')
+      }, 5000)
     })
   }
 

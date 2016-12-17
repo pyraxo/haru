@@ -25,8 +25,8 @@ class Shard {
 
       setTimeout(() => {
         this.worker.removeListener('message', awaitListener)
-        return reject('IPC request timed out.')
-      }, 1000)
+        return reject('IPC request timed out after 5000ms')
+      }, 5000)
     })
   }
 }
