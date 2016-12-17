@@ -1,4 +1,4 @@
-module.exports = async function stats (msg, bot) {
+module.exports = function stats (msg, bot) {
   const guildArr = [...bot.guilds.values()]
   try {
     process.send({

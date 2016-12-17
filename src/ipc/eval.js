@@ -1,6 +1,6 @@
 const util = require('util')
 
-module.exports = async function evaluate (msg, bot) {
+module.exports = function evaluate (msg, bot) {
   const content = msg.d ? msg.d.content || true : true
   let resp
   try {

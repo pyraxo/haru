@@ -13,5 +13,6 @@
       "disable": "disabled",
       "revert": "reverted"
     }
-  }
+  },
+  "changelog": "Most Recent Changelogs"
 }

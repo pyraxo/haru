@@ -1,4 +1,4 @@
-module.exports = async function query (msg, bot) {
+module.exports = function query (msg, bot) {
   const queries = msg.d.queries
   try {
     const resp = queries.map(q => q.input.map(i => bot[q.prop].find(p => p[q.query] === i) || null))
