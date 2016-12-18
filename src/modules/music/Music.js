@@ -502,7 +502,7 @@ class Music extends Module {
         }
 
         await this.edit(m, `:success:  |  {{queuedMulti}} - **${msg.author.mention}**`, {
-          num: playlist.results - 1
+          num: playlist.results > 50 ? 50 : playlist.results - 1
         })
         return this.deleteMessages(msg)
       } else if (query.v) {
