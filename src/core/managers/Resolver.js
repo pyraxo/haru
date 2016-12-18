@@ -1,5 +1,5 @@
 const path = require('path')
-const requireAll = require('require-all')
+const { readdirRecursive } = require('../util')
 
 class Resolver {
   constructor (bot) {
@@ -9,12 +9,13 @@ class Resolver {
   }
 
   loadResolvers () {
-    const resolvers = requireAll(path.join(__dirname, 'resolvers'))
-    for (let resolver in resolvers) {
-      resolver = resolvers[resolver]
-      if (!resolver.resolve || !resolver.type) continue
-      this._resolvers[resolver.type] = resolver
-    }
+    readdirRecursive(path.join(__dirname, 'resolvers')).then(resolvers => {
+      for (let resolver in resolvers) {
+        resolver = resolvers[resolver]
+        if (!resolver.resolve || !resolver.type) continue
+        this._resolvers[resolver.type] = resolver
+      }
+    })
   }
 
   load (data) {
