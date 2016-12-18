@@ -124,7 +124,7 @@ class Command extends Base {
     }
 
     if (isAdmin) return true
-    const awaitID = msg.channel.id + msg.author.id
+    const awaitID = msg.author.id
     if (this.cooldown > 0) {
       if (!this.timers.has(awaitID)) {
         this.timers.set(awaitID, +moment())
