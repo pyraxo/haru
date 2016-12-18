@@ -70,14 +70,14 @@ class Base {
     if (typeof channel === 'string') {
       channel = this.bot.getChannel(channel)
     }
-    if (!channel) return null
+    if (!channel) return
 
     let { file = null, lang, delay = 0, deleteDelay = 0, embed } = options
     if (channel.guild) {
       const guild = channel.guild
       if (!this.hasPermissions(channel, this.bot.user, 'sendMessages')) {
         logger.error(`Channel ${channel.name} (${channel.id}) in ${guild.name} (${guild.id}) denies message sending`)
-        return Promise.reject('403_SEND_MSG')
+        return
       }
     }
 

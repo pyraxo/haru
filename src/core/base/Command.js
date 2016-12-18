@@ -105,7 +105,7 @@ class Command extends Base {
     }
 
     if (guildOnly === true && isPrivate) {
-      responder.error('{{%NO_PMS}}')
+      responder.format('emoji:error').send('{{%NO_PMS}}')
       return false
     }
 

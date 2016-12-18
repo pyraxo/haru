@@ -17,10 +17,12 @@ class Credits extends Command {
           usage: [
             { name: 'member', type: 'member', optional: false },
             { name: 'amount', type: 'int', optional: false, min: 1 }
-          ]
+          ],
+          options: { guildOnly: true }
         },
         peek: {
-          usage: [{ name: 'user', type: 'member', optional: false }]
+          usage: [{ name: 'user', type: 'member', optional: false }],
+          options: { guildOnly: true }
         },
         top: {
           aliases: ['lb', 'leaderboards'],
