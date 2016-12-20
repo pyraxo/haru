@@ -14,7 +14,7 @@ class Music extends Module {
     super(...args, {
       name: 'music',
       events: {
-        voiceChannelLeave: 'voiceDC',
+        // voiceChannelLeave: 'voiceDC',
         messageCreate: 'onMessage'
       }
     })

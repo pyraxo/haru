@@ -17,6 +17,7 @@ class Player extends Module {
 
   async stream (channel, url, volume = 2) {
     let conn = this.manager.getConnection(channel)
+    await this.stop(channel)
     conn.play(url)
 
     logger.info(`Playing ${url} in ${channel.guild.name} (${channel.guild.id})`)
