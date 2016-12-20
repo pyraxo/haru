@@ -10,6 +10,7 @@ class Resolver {
 
   loadResolvers () {
     readdirRecursive(path.join(__dirname, 'resolvers')).then(resolvers => {
+      resolvers = resolvers.map(r => require(r))
       for (let resolver in resolvers) {
         resolver = resolvers[resolver]
         if (!resolver.resolve || !resolver.type) continue
