@@ -18,6 +18,11 @@ class Player extends Module {
   async stream (channel, url, volume = 2) {
     let conn = this.manager.getConnection(channel)
     await this.stop(channel)
+
+    await Promise.delay(1000)
+
+    this.manager.modifyState(channel.guild.id, 'skip', [])
+    this.manager.modifyState(channel.guild.id, 'clear', [])
     conn.play(url)
 
     logger.info(`Playing ${url} in ${channel.guild.name} (${channel.guild.id})`)
@@ -55,6 +60,11 @@ class Player extends Module {
     ? { format: 'webm', frameDuration: 20 }
     : { encoderArgs: ['-af', `volume=${volume}`] }
 
+    await Promise.delay(1000)
+
+    this.manager.modifyState(channel.guild.id, 'skip', [])
+    this.manager.modifyState(channel.guild.id, 'clear', [])
+
     conn.play(mediaInfo.audiourl, options)
     this.manager.modifyState(channel.guild.id, 'state', mediaInfo)
 
@@ -72,8 +82,6 @@ class Player extends Module {
 
     conn.once('end', () => {
       this.manager.modifyState(channel.guild.id, 'state', null)
-      this.manager.modifyState(channel.guild.id, 'skip', [])
-      this.manager.modifyState(channel.guild.id, 'clear', [])
       this.send(textChannel, `:stop:  |  {{finishedPlaying}} **${mediaInfo.title}** `)
       if (channel.voiceMembers.size === 1 && channel.voiceMembers.has(this.bot.user.id)) {
         return this.stop(channel, true)

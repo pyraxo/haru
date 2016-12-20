@@ -327,14 +327,14 @@ class Music extends Module {
       const state = this.getState(guildId)
       let vote = state.skip || []
       if (vote.includes(authorId)) {
-        return Promise.resolve('alreadyVoted')
+        return Promise.resolve('votedSkip')
       }
 
       vote.push(authorId)
 
       if ((vote.length / voiceChannel.voiceMembers.filter(m => !m.voiceState.selfDeaf && !m.voiceState.deaf).length - 1) < 0.4) {
         this.modifyState(guildId, 'skip', vote)
-        return Promise.resolve('voteSuccess')
+        return Promise.resolve('voteSkipSuccess')
       } else {
         this.modifyState(guildId, 'skip', [])
       }
@@ -348,14 +348,14 @@ class Music extends Module {
       const state = this.getState(guildId)
       let vote = state.clear || []
       if (vote.includes(authorId)) {
-        return Promise.resolve('alreadyVoted')
+        return Promise.resolve('votedClear')
       }
 
       vote.push(authorId)
 
       if ((vote.length / voiceChannel.voiceMembers.filter(m => !m.voiceState.selfDeaf && !m.voiceState.deaf).length - 1) < 0.4) {
         this.modifyState(guildId, 'clear', vote)
-        return Promise.resolve('voteSuccess')
+        return Promise.resolve('voteClearSuccess')
       } else {
         this.modifyState(guildId, 'clear', [])
       }

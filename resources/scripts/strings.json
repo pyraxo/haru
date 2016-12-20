@@ -332,8 +332,6 @@
       },
       "dc": "Ontbonden van '{{voice}}' en van {{text}}.",
       "switch": "Aan het veranderen naar streaming-modus en aan het spelen van {{station}}",
-      "alreadyVoted": "je hebt al gestemd om dit lied over te slaan!",
-      "voteSuccess": "je hebt gestemd om het huidige lied over te slaan!",
       "playlist": "Playlist - {{guild}}",
       "queuedSongs": "Liedjes in de Rij",
       "queueProgress": "playlist in de rij aan het zetten, even geduld...",
@@ -354,7 +352,11 @@
         "",
         "De huidige rij is opgeslagen in de database.",
         "Sorry voor enig ongemak veroorzaakt."
-      ]
+      ],
+      "votedSkip": "je hebt al gestemd om dit liedje over te slaan!",
+      "voteSkipSuccess": "je hebt gestemd om dit liedje over te slaan!",
+      "votedClear": "je hebt al gestemd om de rij leeg te maken!",
+      "voteClearSuccess": "je hebt gestemd om de huidige rij leeg te maken!"
     },
     "slots": {
       "insufficient": [
@@ -398,7 +400,8 @@
           "disable": "uitgezet",
           "revert": "omgedraaid"
         }
-      }
+      },
+      "changelog": "Meest Recente Wijzigingen"
     },
     "purge": {
       "success": "met succes {{num}} berichten opgeschoond",
@@ -782,8 +785,6 @@
       },
       "dc": "Desconectei de '{{voice}}' e esqueci {{text}}.",
       "switch": "A mudar para o modo de streaming e a reproduzir a partir de {{station}}",
-      "alreadyVoted": "já votaste para saltar esta música!",
-      "voteSuccess": "votaste para saltar esta música!",
       "playlist": "Lista de Musicas - {{guild}}",
       "queuedSongs": "Musicas em espera",
       "queueProgress": "a adicionar playlist, por favor espera...",
@@ -804,7 +805,11 @@
         "",
         "A lista de reprodução atual foi salva na base de dados.",
         "Pedimos desculpas por qualquer inconveniente causado."
-      ]
+      ],
+      "votedSkip": "you have already voted to skip this song!",
+      "voteSkipSuccess": "you have voted to skip the current song!",
+      "votedClear": "you have already voted to clear the queue!",
+      "voteClearSuccess": "you have voted to clear the current queue!"
     },
     "slots": {
       "insufficient": [
@@ -848,7 +853,8 @@
           "disable": "desativaste",
           "revert": "reverteste"
         }
-      }
+      },
+      "changelog": "Most Recent Changelogs"
     },
     "purge": {
       "success": "successfully purged {{num}} messages",
@@ -1259,14 +1265,16 @@
         "errorQueue": "an error occurred while queuing {{url}}.",
         "alreadyBinded": "I am already bound to {{text}}! Use commands in that channel.",
         "noPerms": "I don't have the permissions to `connect` and/or `speak` in {{voice}}!",
-        "error": "something bad happened! Please try again later.",
+        "error": "something bad happened! Please try again later, or submit a bug report.",
         "notInSameVoice": "you need to be in the voice channel {{channel}}!",
         "skipNotFound": "the video specified could not be found."
       },
       "dc": "Disconnected from '{{voice}}' and unbound from {{text}}.",
       "switch": "Switching to streaming mode and playing from {{station}}",
-      "alreadyVoted": "you have already voted to skip this song!",
-      "voteSuccess": "you have voted to skip the current song!",
+      "votedSkip": "you have already voted to skip this song!",
+      "voteSkipSuccess": "you have voted to skip the current song!",
+      "votedClear": "you have already voted to clear the queue!",
+      "voteClearSuccess": "you have voted to clear the current queue!",
       "playlist": "Playlist - {{guild}}",
       "queuedSongs": "Queued Songs",
       "queueProgress": "queuing playlist, please hold...",
@@ -1302,7 +1310,8 @@
           "disable": "disabled",
           "revert": "reverted"
         }
-      }
+      },
+      "changelog": "Most Recent Changelogs"
     },
     "slots": {
       "insufficient": [
