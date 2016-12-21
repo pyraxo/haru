@@ -98,7 +98,8 @@ class Command extends Base {
 
   _execCheck ({ msg, isPrivate, admins, client }, responder, subcmd) {
     const isAdmin = admins.includes(msg.author.id)
-    const { adminOnly, guildOnly, permissions = [], botPerms = [] } = subcmd ? subcmd.options : this.options
+    const { guildOnly, permissions = [], botPerms = [] } = subcmd ? subcmd.options : this.options
+    const adminOnly = (subcmd && subcmd.options.adminOnly) || this.options.adminOnly
 
     if (adminOnly === true && !isAdmin) {
       return false
