@@ -12,7 +12,8 @@ module.exports = function () {
       deleted: bool().default(false),
       prefix: string().default(process.env.CLIENT_PREFIX),
       lang: string().default('en'),
-      tz: string().default('utc')
+      tz: string().default('utc'),
+      events: object().default({})
     },
     cache: true,
     expiry: 300 * 1000

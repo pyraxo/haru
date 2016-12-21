@@ -39,5 +39,8 @@
   "repeat": "Toggles repeat mode, where finished songs get re-added in the queue",
   "8ball": "Asks the 8ball a question",
   "dice": "Rolls some dice, using dice notation",
-  "coin": "Flips coins"
+  "coin": "Flips coins",
+  "subscribe": "Subscribes a channel to an event",
+  "unsubscribe": "Unsubscribes a channel from an event",
+  "timezone": "Allows moderators to set a guild's timezone"
 }

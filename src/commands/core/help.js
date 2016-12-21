@@ -24,7 +24,7 @@ class HelpMenu extends Command {
         `**\`${prefix}${name}\`**  __\`${desc}\`__\n`,
         `**{{definitions.usage}}**: ${prefix}${command.labels[0]} ${Object.keys(command.resolver.usage).map(usage => {
           usage = command.resolver.usage[usage]
-          return usage.optional ? `[${usage.displayName}]` : `<${usage.displayName}>`
+          return usage.last ? usage.displayName : usage.optional ? `[${usage.displayName}]` : `<${usage.displayName}>`
         }).join(' ')}`
       ]
       if (command.labels.length > 1) {

@@ -21,14 +21,12 @@ class Eval extends Command {
     if (success) {
       title = isPromise ? 'Promise resolved' : 'Success'
       color = this.colours.green
+    } else if (success === null && isPromise) {
+      title = 'Promise resolving'
+      color = this.colours.blue
     } else {
-      if (success === null && isPromise) {
-        title = 'Promise resolving'
-        color = this.colours.blue
-      } else {
-        title = isPromise ? 'Promise rejected' : 'Error'
-        color = this.colours.red
-      }
+      title = isPromise ? 'Promise rejected' : 'Error'
+      color = this.colours.red
     }
     embed.title = title
     embed.color = color
@@ -39,7 +37,7 @@ class Eval extends Command {
     const { rawArgs } = container
     let resp
     try {
-      resp = eval(rawArgs.join(' '))
+      resp = eval(rawArgs.join(' ')) // eslint-disable-line
     } catch (err) {
       resp = err
     }

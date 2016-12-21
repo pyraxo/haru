@@ -55,7 +55,7 @@ class Credits extends Command {
     }
   }
 
-  async claim ({ msg, cache, data }, responder) {
+  async claim ({ msg, cache, data, settings }, responder) {
     const claimID = 'claims:' + msg.author.id
     try {
       let res = await cache.client.pttlAsync(claimID)
@@ -69,7 +69,7 @@ class Credits extends Command {
         }
         default: {
           return responder.format('emoji:credits').reply('{{cooldown}}', {
-            time: `**${moment(res + moment()).fromNow(true)}**`
+            time: `**${moment(res + moment()).locale(settings.lang).fromNow(true)}**`
           })
         }
       }

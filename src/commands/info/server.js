@@ -40,7 +40,7 @@ class ServerInfo extends Command {
         },
         {
           name: responder.t('{{server.createdOn}}'),
-          value: moment(new Date(guild.createdAt)).tz(`${settings.tz}`).format('ddd Do MMM, YYYY [at] hh:mm:ss a')
+          value: moment(guild.createdAt).locale(settings.lang).tz(`${settings.tz}`).format('ddd Do MMM, YYYY [at] hh:mm:ss a')
         },
         {
           name: `${responder.t('{{server.roles}}')} (${guild.roles.size})`,

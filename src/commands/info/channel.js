@@ -27,7 +27,7 @@ class ChannelInfo extends Command {
         { name: responder.t('{{channel.type}}'), value: responder.t(channel.type === 0 ? '{{channel.text}}' : '{{channel.voice}}'), inline: true },
         {
           name: responder.t('{{channel.createdOn}}'),
-          value: moment(new Date(channel.createdAt)).tz(settings.tz).format('ddd Do MMM, YYYY [at] hh:mm:ss a')
+          value: moment(channel.createdAt).locale(settings.lang).tz(settings.tz).format('ddd Do MMM, YYYY [at] hh:mm:ss a')
         }
       ]
     }).send()

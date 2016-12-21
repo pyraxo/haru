@@ -1,6 +1,6 @@
 module.exports = {
   type: 'list',
-  resolve: (content, { separator = ', ', maxLength = Infinity, minLength = 0, max = Infinity, min = 0, unique = false }) => {
+  resolve: (content, { separator = ', ', maxLength = Infinity, minLength = 0, max = Infinity, min = 1, unique = false }) => {
     const list = content.split(separator)
     const num = list.length
     if (num > max) {

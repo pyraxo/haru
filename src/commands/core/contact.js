@@ -1,5 +1,4 @@
-const logger = require('winston')
-const moment = require('moment-timezone')
+const moment = require('moment')
 const { Command } = require('../../core')
 
 class Contact extends Command {
@@ -29,7 +28,7 @@ class Contact extends Command {
             icon_url: msg.author.avatarURL
           },
           footer: {
-            text: moment(new Date()).tz(settings.tz).format('ddd Do MMM, YYYY [at] hh:mm:ss a')
+            text: moment().locale(settings.lang).format('ddd Do MMM, YYYY [at] hh:mm:ss a')
           }
         }})
       }
@@ -41,7 +40,7 @@ class Contact extends Command {
             icon_url: msg.author.avatarURL
           },
           footer: {
-            text: moment(new Date()).tz(settings.tz).format('ddd Do MMM, YYYY [at] hh:mm:ss a')
+            text: moment().locale(settings.lang).format('ddd Do MMM, YYYY [at] hh:mm:ss a')
           }
         }})
       }

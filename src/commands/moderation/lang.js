@@ -6,7 +6,7 @@ class Lang extends Command {
     super(...args, {
       name: 'lang',
       description: 'Allows moderators to set a guild\'s language',
-      aliases: ['setlang'],
+      aliases: ['locale'],
       usage: [{
         name: 'lang',
         type: 'string',
@@ -27,7 +27,7 @@ class Lang extends Command {
         lang: `**\`${args.lang}\`**`
       })
     } catch (err) {
-      logger.error(`Could not change language to '${settings.lang}' for ${msg.guild.name} (${msg.guild.id}) - ${err}`)
+      logger.error(`Could not change language to '${args.lang}' for ${msg.guild.name} (${msg.guild.id}) - ${err}`)
       return responder.error()
     }
   }

@@ -45,12 +45,12 @@ class Whois extends Command {
         },
         {
           name: responder.t('{{whois.createdOn}}'),
-          value: moment(new Date(member.user.createdAt)).tz(settings.tz).format('ddd Do MMM, YYYY [at] hh:mm:ss a'),
+          value: moment(member.user.createdAt).locale(settings.lang).tz(settings.tz).format('ddd Do MMM, YYYY [at] hh:mm:ss a'),
           inline: false
         },
         {
           name: responder.t('{{whois.joinedOn}}'),
-          value: moment(new Date(member.joinedAt)).tz(settings.tz).format('ddd Do MMM, YYYY [at] hh:mm:ss a'),
+          value: moment(member.joinedAt).locale(settings.lang).tz(settings.tz).format('ddd Do MMM, YYYY [at] hh:mm:ss a'),
           inline: false
         }
       ]

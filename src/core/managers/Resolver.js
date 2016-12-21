@@ -44,7 +44,7 @@ class Resolver {
       let msg = '{{%resolver.INSUFFICIENT_ARGS}}'
       if (data.prefix && data.command) {
         msg += `\n\n**{{%resolver.CORRECT_USAGE}}**: \`${data.prefix}${data.command} ` + (usage.length
-        ? usage.map(arg => arg.optional ? `[${arg.displayName}]` : `<${arg.displayName}>`).join(' ')
+        ? usage.map(arg => args.last ? arg.displayName : arg.optional ? `[${arg.displayName}]` : `<${arg.displayName}>`).join(' ')
         : '') + '`'
       }
       return Promise.reject({
@@ -58,12 +58,10 @@ class Resolver {
     let idx = 0
     let optArgs = 0
     let resolves = []
-    let skip = false
     for (const arg of usage) {
       let rawArg
       if (arg.last) {
         rawArg = rawArgs.slice(idx).join(' ')
-        skip = true
       } else {
         if (arg.optional) {
           if (optionalArgs > optArgs) {
@@ -100,7 +98,7 @@ class Resolver {
             (data.prefix && data.command
             ? `\n\n**{{%resolver.CORRECT_USAGE}}**: \`${data.prefix}${data.command} ` +
             (usage.length ? usage.map(arg =>
-              skip ? arg.displayName
+              arg.last ? arg.displayName
               : (arg.optional ? `[${arg.displayName}]` : `<${arg.displayName}>`)
             ).join(' ') : '') + '`'
             : '')
@@ -120,14 +118,14 @@ class Resolver {
           return Promise.reject(results[0])
         })
       )
-      if (skip) break
+      if (arg.last) break
     }
     return Promise.all(resolves).then(() => args)
   }
 
   wrongUsage (usage, { prefix, command }) {
     return `**{{%resolver.CORRECT_USAGE}}**: \`${prefix}${command} ` + (usage.length
-    ? usage.map(arg => arg.optional ? `[${arg.displayName}]` : `<${arg.displayName}>`).join(' ')
+    ? usage.map(arg => arg.last ? arg.displayName : arg.optional ? `[${arg.displayName}]` : `<${arg.displayName}>`).join(' ')
     : '') + '`'
   }
 }

@@ -6,6 +6,13 @@
   "lang": {
     "success": "successfully changed this guild's language to {{lang}}"
   },
+  "tz": {
+    "success": "successfully changed this guild's timezone to {{tz}}",
+    "notFound": [
+      "the timezone '{{tz}}' is invalid.\n",
+      "Visit {{link}} for a list of valid timezone codes."
+    ]
+  },
   "enabler": {
     "success": "successfully {{action}} {{command}} for {{context}}",
     "actions": {
@@ -14,5 +21,15 @@
       "revert": "reverted"
     }
   },
-  "changelog": "Most Recent Changelogs"
+  "changelog": "Most Recent Changelogs",
+  "subscribe": {
+    "eventNotFound": [
+      "the event {{event}} could not be found.\n",
+      "These are the supporting events: {{events}}"
+    ],
+    "notSubscribed": "{{channel}} is not subscribed to any events.",
+    "subSuccess": "successfully subscribed {{channel}} to {{events}}.",
+    "unsubSuccess": "successfully unsubscribed {{channel}} from {{events}}.",
+    "list": "{{channel}} is subscribed to {{events}}."
+  }
 }

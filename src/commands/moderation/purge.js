@@ -13,7 +13,9 @@ class Purge extends Command {
           displayName: 'keyword | bots | @user | embeds | files | links | images | commands',
           type: 'list',
           separator: ' | ',
-          optional: true
+          optional: true,
+          last: true,
+          unique: true
         }
       ],
       options: { guildOnly: true, permissions: ['manageGuild'] }
