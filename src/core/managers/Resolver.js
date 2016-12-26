@@ -44,7 +44,7 @@ class Resolver {
       let msg = '{{%resolver.INSUFFICIENT_ARGS}}'
       if (data.prefix && data.command) {
         msg += `\n\n**{{%resolver.CORRECT_USAGE}}**: \`${data.prefix}${data.command} ` + (usage.length
-        ? usage.map(arg => args.last ? arg.displayName : arg.optional ? `[${arg.displayName}]` : `<${arg.displayName}>`).join(' ')
+        ? usage.map(arg => arg.last ? arg.displayName : arg.optional ? `[${arg.displayName}]` : `<${arg.displayName}>`).join(' ')
         : '') + '`'
       }
       return Promise.reject({
