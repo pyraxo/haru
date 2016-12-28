@@ -90,7 +90,7 @@ class GuildLog extends Module {
         logger.error(`Could not load settings for ${guild.name} (${guild.id})`)
         logger.error(err)
       })
-    ), 2000)
+    ), 1000 * parseInt(process.env.BASE_SHARD_ID))
   }
 
   delGuild (guild) {
@@ -118,7 +118,7 @@ class GuildLog extends Module {
         logger.error(`Could not load settings for ${guild.name} (${guild.id})`)
         logger.error(err)
       })
-    ), 2000)
+    ), 1000 * parseInt(process.env.BASE_SHARD_ID))
   }
 }
 

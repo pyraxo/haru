@@ -17,14 +17,20 @@ class Summon extends Command {
     const member = msg.member
     const channel = member.voiceState.channelID
     if (channel === null) {
-      responder.error('{{errors.notInVoice}}')
-      return
+      return responder.error('{{errors.notInVoice}}')
+    }
+    const vc = msg.guild.channels.get(channel)
+
+    if (!this.hasPermissions(vc, this.bot.user, 'voiceConnect')) {
+      return responder.error('{{errors.noPerms}}', {
+        voice: `**${vc.name}**`
+      })
     }
 
     try {
       await music.connect(channel, msg.channel)
       return responder.format('emoji:headphones').send('{{joinSuccess}}', {
-        voice: `**${msg.guild.channels.find(c => c.id === channel).name}**`,
+        voice: `**${vc.name}**`,
         text: msg.channel.mention,
         command: `**\`${settings.prefix}play\`**`
       })
@@ -35,7 +41,7 @@ class Summon extends Command {
       }
       return responder.error(`{{errors.${err}}}`, {
         text: msg.guild.channels.get(music.getBoundChannel(msg.guild.id)).mention,
-        voice: `**${msg.guild.channels.find(c => c.id === channel).name}**`
+        voice: `**${vc.name}**`
       })
     }
   }
