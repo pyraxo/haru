@@ -254,6 +254,7 @@ class Music extends Module {
   }
 
   getPlayingState (channel) {
+    if (!channel || !channel.guild) return false
     const conn = this.bot.voiceConnections.get(channel.guild.id)
     if (!conn) return false
     return conn.playing
@@ -332,7 +333,7 @@ class Music extends Module {
 
       vote.push(authorId)
 
-      if ((vote.length / voiceChannel.voiceMembers.filter(m => !m.voiceState.selfDeaf && !m.voiceState.deaf).length - 1) < 0.4) {
+      if ((vote.length / voiceChannel.voiceMembers.filter(m => !m.voiceState.selfDeaf && !m.voiceState.deaf).length) < 0.4) {
         this.modifyState(guildId, 'skip', vote)
         return Promise.resolve('voteSkipSuccess')
       } else {
