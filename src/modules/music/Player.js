@@ -65,11 +65,6 @@ class Player extends Module {
     this.manager.modifyState(channel.guild.id, 'skip', [])
     this.manager.modifyState(channel.guild.id, 'clear', [])
 
-    conn.play(mediaInfo.audiourl, options)
-    this.manager.modifyState(channel.guild.id, 'state', mediaInfo)
-
-    logger.info(`Playing ${mediaInfo.title} in ${channel.guild.name} (${channel.guild.id})`)
-
     conn.once('error', err => {
       if (err) {
         this.stop(channel).then(() => {
@@ -95,6 +90,11 @@ class Player extends Module {
       })
     })
 
+    conn.play(mediaInfo.audiourl, options)
+    this.manager.modifyState(channel.guild.id, 'state', mediaInfo)
+
+    logger.info(`Playing ${mediaInfo.title} in ${channel.guild.name} (${channel.guild.id})`)
+
     return this.send(textChannel, [
       `:play:  |  {{nowPlaying}}: **${mediaInfo.title}** ` +
       (mediaInfo.length ? `(${moment.duration(mediaInfo.length, 'seconds').format('h[h] m[m] s[s]')})` : ''),
@@ -111,6 +111,7 @@ class Player extends Module {
     }
     if (!conn) return
 
+    conn.removeAllListeners('error')
     conn.removeAllListeners('end')
     await Promise.delay(5000)
     if (conn.playing) conn.stopPlaying()
