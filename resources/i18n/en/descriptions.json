@@ -42,5 +42,6 @@
   "coin": "Flips coins",
   "subscribe": "Subscribes a channel to an event",
   "unsubscribe": "Unsubscribes a channel from an event",
-  "timezone": "Allows moderators to set a guild's timezone"
+  "timezone": "Allows moderators to set a guild's timezone",
+  "urban": "Searches Urban Dictionary for meanings"
 }

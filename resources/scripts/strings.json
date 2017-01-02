@@ -214,9 +214,10 @@
       "8ball": "Stelt een vraag aan de 8ball",
       "dice": "Rolt dobbelstenen met standaard instelwijze",
       "coin": "Tost munten",
-      "subscribe": "Subscribes a channel to an event",
-      "unsubscribe": "Unsubscribes a channel from an event",
-      "timezone": "Allows moderators to set a guild's timezone"
+      "subscribe": "Koppelt een evenement aan een kanaal",
+      "unsubscribe": "Ontkoppelt een evenement van een kanaal",
+      "timezone": "Staat beheerders toe om een gilde's tijdzone in te stellen",
+      "urban": "Searches Urban Dictionary for meanings"
     },
     "guilds": {
       "join": [
@@ -329,7 +330,7 @@
         "errorQueue": "Er is een fout opgetreden bij het in de rij zetten van {{url}}.",
         "alreadyBinded": "Ik ben al gebonden aan {{text}}! Gebruik commando's in dat kanaal.",
         "noPerms": "Ik heb niet de toestemmingen om te `verbinden` en/of te `spreken` in {{voice}}!",
-        "error": "iets verkeerds is gebeurd! Probeer later nog eens.",
+        "error": "er is iets verkeerd gegaan! Probeer later nog eens, of rapporteer een bug.",
         "notInSameVoice": "je moet in het stemkanaal {{channel}} zitten!",
         "skipNotFound": "de video kon niet worden gevonden."
       },
@@ -406,23 +407,23 @@
       },
       "changelog": "Meest Recente Wijzigingen",
       "tz": {
-        "success": "successfully changed this guild's timezone to {{tz}}",
+        "success": "met succes deze gilde's tijdzone veranderd naar {{tz}}",
         "notFound": [
-          "the timezone '{{tz}}' is invalid.",
+          "de tijdzone '{{tz}}' is ongeldig.",
           "",
-          "Visit {{link}} for a list of valid timezone codes."
+          "Bezoek {{link}} voor een lijst met geldige tijdzone-codes."
         ]
       },
       "subscribe": {
         "eventNotFound": [
-          "the event {{event}} could not be found.",
+          "het evenement {{event}} kon niet worden gevonden.",
           "",
-          "These are the supporting events: {{events}}"
+          "Dit zijn de deelnemende evenementen: {{events}}"
         ],
-        "notSubscribed": "{{channel}} is not subscribed to any events.",
-        "subSuccess": "successfully subscribed {{channel}} to {{events}}.",
-        "unsubSuccess": "successfully unsubscribed {{channel}} from {{events}}.",
-        "list": "{{channel}} is subscribed to {{events}}."
+        "notSubscribed": "geen evenement is gekoppeld aan {{channel}}.",
+        "subSuccess": "met succes {{events}} aan {{channel}} gekoppeld.",
+        "unsubSuccess": "met succes {{events}} van {{channel}} ontkoppeld.",
+        "list": "{{events}} is/zijn gekoppeld aan {{channel}}."
       }
     },
     "purge": {
@@ -1156,7 +1157,8 @@
       "coin": "Flips coins",
       "subscribe": "Subscribes a channel to an event",
       "unsubscribe": "Unsubscribes a channel from an event",
-      "timezone": "Allows moderators to set a guild's timezone"
+      "timezone": "Allows moderators to set a guild's timezone",
+      "urban": "Searches Urban Dictionary for meanings"
     },
     "guilds": {
       "join": [
