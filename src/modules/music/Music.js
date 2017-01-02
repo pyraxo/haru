@@ -92,7 +92,7 @@ class Music extends Module {
       let conn = this.bot.voiceConnections.get(guildID)
       if (!conn) continue
       conn.removeAllListeners()
-      conn.stopPlaying()
+      if (conn.playing) conn.stopPlaying()
       conn.disconnect()
       if (state.channel) {
         this.send(state.channel, ':info:  |  {{terminated}}')
