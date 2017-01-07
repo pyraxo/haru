@@ -42,7 +42,7 @@ class Subscribe extends Command {
       })
     }
     const events = ['ban', 'kick', 'join', 'leave', 'nick', 'roles']
-    const unknownEvent = args.event.find(e => events.indexOf(e) < 0)
+    const unknownEvent = args.event.find(e => !events.includes(e))
     if (unknownEvent) {
       return responder.error('{{subscribe.eventNotFound}}', {
         event: `**\`${unknownEvent}\`**`,

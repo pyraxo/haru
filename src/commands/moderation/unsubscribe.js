@@ -22,7 +22,7 @@ class Unsubscribe extends Command {
 
   async handle ({ msg, args, client, settings }, responder) {
     const events = ['ban', 'kick', 'join', 'leave', 'nick', 'roles']
-    const unknownEvent = args.event.find(e => events.indexOf(e) < 0)
+    const unknownEvent = args.event.find(e => !events.includes(e))
     if (unknownEvent) {
       return responder.error('{{subscribe.eventNotFound}}', {
         event: `**\`${unknownEvent}\`**`,
@@ -36,7 +36,7 @@ class Unsubscribe extends Command {
       if (!settings.events[event]) {
         settings.events[event] = []
       }
-      settings.events[event].splice(settings.events[event].indexOf(event))
+      settings.events[event].splice(settings.events[event].indexOf(event), 1)
     }
     try {
       await settings.save()
