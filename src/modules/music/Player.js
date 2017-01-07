@@ -60,7 +60,7 @@ class Player extends Module {
     ? { format: 'webm', frameDuration: 20 }
     : { encoderArgs: ['-af', `volume=${volume}`] }
 
-    await Promise.delay(1000)
+    await Promise.delay(2000)
 
     this.manager.modifyState(channel.guild.id, 'skip', [])
     this.manager.modifyState(channel.guild.id, 'clear', [])
@@ -82,12 +82,11 @@ class Player extends Module {
         return this.stop(channel, true)
       }
 
-      return this.queue.isRepeat(channel.guild.id).then(async res => {
-        if (res) {
-          await this.queue.add(channel.guild.id, mediaInfo)
-        }
-        return this.manager.play(channel)
-      })
+      return this.queue.isRepeat(channel.guild.id).then(res =>
+        (res ? this.queue.add(channel.guild.id, mediaInfo) : Promise.resolve()).then(() =>
+          this.manager.play(channel)
+        )
+      )
     })
 
     conn.play(mediaInfo.audiourl, options)
@@ -113,7 +112,7 @@ class Player extends Module {
 
     conn.removeAllListeners('error')
     conn.removeAllListeners('end')
-    await Promise.delay(5000)
+    await Promise.delay(2000)
     if (conn.playing) conn.stopPlaying()
 
     if (leave) {
