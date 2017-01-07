@@ -85,7 +85,7 @@ class GuildLog extends Module {
     setTimeout(() => (
       this.data.Guild.fetch(guild.id).then(settings => {
         settings.deleted = false
-        return settings.save()
+        return settings.save().catch(logger.error)
       }).catch(err => {
         logger.error(`Could not load settings for ${guild.name} (${guild.id})`)
         logger.error(err)
@@ -113,7 +113,7 @@ class GuildLog extends Module {
     setTimeout(() => (
       this.data.Guild.fetch(guild.id).then(settings => {
         settings.deleted = true
-        return settings.save()
+        return settings.save().catch(logger.error)
       }).catch(err => {
         logger.error(`Could not load settings for ${guild.name} (${guild.id})`)
         logger.error(err)
