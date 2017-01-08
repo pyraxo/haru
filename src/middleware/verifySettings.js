@@ -11,8 +11,9 @@ module.exports = {
       let settings = await data.Guild.fetch(msg.guild.id)
       if (!settings) {
         settings = new db.Guild({ id: msg.guild.id })
-        await settings.save()
       }
+      settings.deleted = false
+      await settings.save()
       container.settings = settings
       return container
     } catch (err) {

@@ -81,16 +81,6 @@ class GuildLog extends Module {
       help: `**\`${process.env.CLIENT_PREFIX}help\`**`,
       about: `**\`${process.env.CLIENT_PREFIX}info\`**`
     })
-
-    setTimeout(() => (
-      this.data.Guild.fetch(guild.id).then(settings => {
-        settings.deleted = false
-        return settings.save().catch(logger.error)
-      }).catch(err => {
-        logger.error(`Could not load settings for ${guild.name} (${guild.id})`)
-        logger.error(err)
-      })
-    ), 1000 * parseInt(process.env.BASE_SHARD_ID))
   }
 
   delGuild (guild) {
@@ -110,15 +100,13 @@ class GuildLog extends Module {
       }
     }})
 
-    setTimeout(() => (
-      this.data.Guild.fetch(guild.id).then(settings => {
-        settings.deleted = true
-        return settings.save().catch(logger.error)
-      }).catch(err => {
-        logger.error(`Could not load settings for ${guild.name} (${guild.id})`)
-        logger.error(err)
-      })
-    ), 1000 * parseInt(process.env.BASE_SHARD_ID))
+    this.data.Guild.fetch(guild.id).then(settings => {
+      settings.deleted = true
+      return settings.save()
+    }).catch(err => {
+      logger.error(`Could not load settings for ${guild.name} (${guild.id})`)
+      logger.error(err)
+    })
   }
 }
 
