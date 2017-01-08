@@ -50,6 +50,10 @@ class Player extends Module {
   }
 
   async play (channel, mediaInfo, volume = 2) {
+    if (!channel || !channel.guild) {
+      const err = new Error(`${!channel ? 'Channel' : 'Guild'} is undefined for some reason`)
+      return Promise.reject(err)
+    }
     let conn = this.manager.getConnection(channel)
     const textChannel = this.manager.getBoundChannel(channel.guild.id)
 
