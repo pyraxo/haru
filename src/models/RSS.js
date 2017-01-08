@@ -9,7 +9,7 @@ module.exports = function () {
       url: string()
     },
     relations: {
-      belongsTo: ['Guild', 'rss', 'id', 'id']
+      hasAndBelongsToMany: ['Guild', 'guilds', 'id', 'id']
     }
   }
 }

@@ -18,7 +18,7 @@ module.exports = function () {
     cache: true,
     expiry: 300 * 1000,
     relations: {
-      hasMany: ['RSS', 'rss', 'id', 'id']
+      hasAndBelongsToMany: ['RSS', 'rss', 'id', 'id']
     }
   }
 }
