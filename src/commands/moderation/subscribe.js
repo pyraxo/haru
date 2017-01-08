@@ -9,8 +9,8 @@ class Subscribe extends Command {
       description: 'Subscribes a channel to an event',
       usage: [{
         name: 'event',
-        displayName: 'list | <events>',
-        separator: ' | ',
+        displayName: 'list | <event 1>, [event 2]...',
+        separator: ', ',
         type: 'list',
         optional: false,
         last: true,

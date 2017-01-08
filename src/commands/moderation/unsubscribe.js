@@ -9,8 +9,8 @@ class Unsubscribe extends Command {
       description: 'Unsubscribes a channel from an event',
       usage: [{
         name: 'event',
-        displayName: '<events>',
-        separator: ' | ',
+        displayName: '<event 1>, [event 2]...',
+        separator: ', ',
         type: 'list',
         optional: false,
         last: true,
