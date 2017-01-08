@@ -8,16 +8,15 @@ class Timezone extends Command {
       name: 'timezone',
       description: 'Allows moderators to set a guild\'s timezone',
       aliases: ['tz'],
-      usage: [{
-        name: 'tz',
-        type: 'string',
-        optional: false
-      }],
+      usage: [{ name: 'tz', type: 'string', optional: true }],
       options: { guildOnly: true, localeKey: 'settings', permissions: ['manageGuild'] }
     })
   }
 
   async handle ({ msg, args, data, settings }, responder) {
+    if (!args.tz) {
+      return responder.format('emoji:info').reply('{{tz.current}}', { tz: `**${settings.tz}**` })
+    }
     if (moment.tz.names().indexOf(args.tz) < 0) {
       return responder.error('{{tz.notFound}}', {
         tz: `**\`${args.tz}\`**`,

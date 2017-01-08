@@ -7,12 +7,15 @@ class Prefix extends Command {
       name: 'prefix',
       description: 'Allows moderators to set a guild\'s prefix',
       aliases: ['setprefix'],
-      usage: [{ name: 'prefix', type: 'string', optional: true, default: process.env.CLIENT_PREFIX }],
+      usage: [{ name: 'prefix', type: 'string', optional: true }],
       options: { guildOnly: true, localeKey: 'settings', permissions: ['manageGuild'] }
     })
   }
 
   async handle ({ msg, args, data, settings }, responder) {
+    if (!args.prefix) {
+      return responder.format('emoji:info').reply('{{prefix.current}}', { tz: `**${settings.prefix}**` })
+    }
     try {
       settings.prefix = args.prefix
       await settings.save()

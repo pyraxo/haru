@@ -1,7 +1,8 @@
 {
   "prefix": {
     "success": "successfully changed this guild's prefix to {{prefix}}",
-    "revert": "reverted this guild's prefix back to {{prefix}}"
+    "revert": "reverted this guild's prefix back to {{prefix}}",
+    "current": "the current prefix for this server is: {{prefix}}"
   },
   "lang": {
     "success": "successfully changed this guild's language to {{lang}}"
@@ -11,7 +12,8 @@
     "notFound": [
       "the timezone '{{tz}}' is invalid.\n",
       "Visit {{link}} for a list of valid timezone codes."
-    ]
+    ],
+    "current": "the current timezone for this server is: {{tz}}"
   },
   "enabler": {
     "success": "successfully {{action}} {{command}} for {{context}}",
