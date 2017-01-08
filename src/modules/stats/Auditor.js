@@ -86,6 +86,29 @@ class Auditor extends Module {
     })
   }
 
+  userUpdate (user, oldUser) {
+    const guilds = this.bot.guilds.find(g => g.members.has(user.id))
+    Promise.all(guilds.map(g => 
+      this.data.Guild.fetch(g.id).then(settings => {
+        if (user.username !== oldUser.username) {
+          return this.onNameChange(user, oldUser, settings)
+        }
+      })
+    ))
+  }
+
+  onNameChange (user, oldUser, settings) {
+    if (typeof settings.events !== 'object') return
+    if (!settings.events['name']) return
+    for (const id of settings.events['name']) {
+      return this.send(id, '', { embed: {
+        color: this.colours.silver,
+        description: `👤  **${oldUser.username}** is now ${user.username}. (ID: ${user.id})`,
+        footer: { text: moment().locale(settings.lang).tz(settings.tz).format('ddd Do MMM, YYYY [at] hh:mm:ss a') }
+      }})
+    }
+  }
+
   onNickChange (member, oldMember, settings) {
     const user = member.user
     if (!settings.events['nick']) return
@@ -93,19 +116,13 @@ class Auditor extends Module {
       if (!member.nick) {
         return this.send(id, '', { embed: {
           color: this.colours.silver,
-          description: [
-            `👤  **Nickname Removed**:  ${user.username}#${user.discriminator} (ID: ${user.id})\n`,
-            `**${oldMember.nick || member.username}** has removed their nickname.`
-          ].join('\n'),
+          description: `👤  **${oldMember.nick || member.username}** has removed their nickname. (ID: ${user.id})`,
           footer: { text: moment().locale(settings.lang).tz(settings.tz).format('ddd Do MMM, YYYY [at] hh:mm:ss a') }
         }})
       } else {
         return this.send(id, '', { embed: {
           color: this.colours.silver,
-          description: [
-            `👤  **Nickname Changed**:  ${user.username}#${user.discriminator} (ID: ${user.id})\n`,
-            `**${oldMember.nick || member.username}** is now **${member.nick}**.`
-          ].join('\n'),
+          description: `👤  **${oldMember.nick || member.username}**'s nickname is now **${member.nick}**. (ID: ${user.id})`,
           footer: { text: moment().locale(settings.lang).tz(settings.tz).format('ddd Do MMM, YYYY [at] hh:mm:ss a') }
         }})
       }
