@@ -101,7 +101,7 @@ class Auditor extends Module {
     if (typeof settings.events !== 'object') return
     if (!settings.events['name']) return
     for (const id of settings.events['name']) {
-      return this.send(id, '', { embed: {
+      this.send(id, '', { embed: {
         color: this.colours.silver,
         description: `👤  **${oldUser.username}** is now ${user.username}. (ID: ${user.id})`,
         footer: { text: moment().locale(settings.lang).tz(settings.tz).format('ddd Do MMM, YYYY [at] hh:mm:ss a') }
@@ -114,13 +114,13 @@ class Auditor extends Module {
     if (!settings.events['nick']) return
     for (const id of settings.events['nick']) {
       if (!member.nick) {
-        return this.send(id, '', { embed: {
+        this.send(id, '', { embed: {
           color: this.colours.silver,
           description: `👤  **${oldMember.nick || member.username}** has removed their nickname. (ID: ${user.id})`,
           footer: { text: moment().locale(settings.lang).tz(settings.tz).format('ddd Do MMM, YYYY [at] hh:mm:ss a') }
         }})
       } else {
-        return this.send(id, '', { embed: {
+        this.send(id, '', { embed: {
           color: this.colours.silver,
           description: `👤  **${oldMember.nick || member.username}**'s nickname is now **${member.nick}**. (ID: ${user.id})`,
           footer: { text: moment().locale(settings.lang).tz(settings.tz).format('ddd Do MMM, YYYY [at] hh:mm:ss a') }
@@ -135,14 +135,14 @@ class Auditor extends Module {
     for (const id of settings.events['roles']) {
       if (member.roles.length > oldMember.roles.length) {
         const role = member.guild.roles.get(member.roles.find(r => oldMember.roles.indexOf(r) < 0)).name
-        return this.send(id, '', { embed: {
+        this.send(id, '', { embed: {
           color: this.colours.orange,
           description: `🔑  **Role Assigned**: __${role}__ to ${user.username}#${user.discriminator}`,
           footer: { text: moment().locale(settings.lang).tz(settings.tz).format('ddd Do MMM, YYYY [at] hh:mm:ss a') }
         }})
       } else {
         const role = member.guild.roles.get(oldMember.roles.find(r => member.roles.indexOf(r) < 0)).name
-        return this.send(id, '', { embed: {
+        this.send(id, '', { embed: {
           color: this.colours.orange,
           description: `🔑  **Role Removed**: __${role}__ to ${user.username}#${user.discriminator}`,
           footer: { text: moment().locale(settings.lang).tz(settings.tz).format('ddd Do MMM, YYYY [at] hh:mm:ss a') }
