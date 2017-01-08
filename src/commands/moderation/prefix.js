@@ -14,7 +14,7 @@ class Prefix extends Command {
 
   async handle ({ msg, args, data, settings }, responder) {
     if (!args.prefix) {
-      return responder.format('emoji:info').reply('{{prefix.current}}', { tz: `**${settings.prefix}**` })
+      return responder.format('emoji:info').reply('{{prefix.current}}', { prefix: `**${settings.prefix}**` })
     }
     try {
       settings.prefix = args.prefix
