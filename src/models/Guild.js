@@ -16,9 +16,6 @@ module.exports = function () {
       events: object().default({})
     },
     cache: true,
-    expiry: 300 * 1000,
-    relations: {
-      hasAndBelongsToMany: ['RSS', 'rss', 'id', 'id']
-    }
+    expiry: 300 * 1000
   }
 }

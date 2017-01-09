@@ -6,6 +6,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node --harmony_async_await index.js",
+    "prod": "node index.js",
     "lint": "standard --fix",
     "gendocs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose"
   },
@@ -29,6 +30,7 @@
     "entities": "^1.1.1",
     "eris": "github:abalabahaha/eris#dev",
     "eventemitter3": "^2.0.1",
+    "feedparser": "^2.0.0",
     "gm": "^1.23.0",
     "longjohn": "^0.2.11",
     "moment": "^2.13.0",
