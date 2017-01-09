@@ -99,7 +99,6 @@ class Music extends Module {
       }
     }
 
-    delete this.states
     clearInterval(this._validator)
     delete this._validator
 
@@ -207,11 +206,7 @@ class Music extends Module {
     let info = await this.redis.getAsync(key).catch(() => false)
     if (info) return JSON.parse(info)
 
-    try {
-      info = await ytdl.getInfoAsync(url)
-    } catch (err) {
-      return Promise.reject(err)
-    }
+    info = await ytdl.getInfoAsync(url)
 
     if (!info || !info.video_id) return Promise.reject('noVideoFound')
     info.url = `https://www.youtube.com/watch?v=${info.video_id}`
@@ -235,18 +230,10 @@ class Music extends Module {
   async queueSong (guildId, voiceChannel, mediaInfo) {
     if (!this.getPlayingState(voiceChannel)) {
       if (mediaInfo.audiourl) {
-        try {
-          await this.player.play(voiceChannel, mediaInfo)
-          return mediaInfo
-        } catch (err) {
-          return Promise.reject(err)
-        }
+        await this.player.play(voiceChannel, mediaInfo)
+        return mediaInfo
       }
-      try {
-        await this.play(voiceChannel)
-      } catch (err) {
-        return Promise.reject(err)
-      }
+      await this.play(voiceChannel)
       return mediaInfo
     }
     await this.queue.add(guildId, mediaInfo)
@@ -264,12 +251,7 @@ class Music extends Module {
     if (typeof url === 'object') url = url.url
     if (typeof url !== 'string') return Promise.reject('invalidURL')
     url = url.replace('/<|>/g', '')
-    let mediaInfo
-    try {
-      mediaInfo = await this.getInfo(url)
-    } catch (err) {
-      return Promise.reject(err)
-    }
+    let mediaInfo = await this.getInfo(url)
     if (mediaInfo && mediaInfo.length && mediaInfo.length > 5400) {
       return Promise.reject('tooLong')
     }

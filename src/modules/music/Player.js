@@ -71,10 +71,11 @@ class Player extends Module {
 
     conn.once('error', err => {
       if (err) {
-        this.stop(channel).then(() => {
+        this.stop(channel, true).then(() => {
           logger.error(`Encountered an error while streaming to ${conn.id}`)
           logger.error(err)
-          return this.play(channel, mediaInfo, volume)
+          // return this.play(channel, mediaInfo, volume)
+          return this.send(textChannel, '{{errors.connError}}', { err: `**${err.message || 'Stream error'}**` })
         })
       }
     })
@@ -93,6 +94,15 @@ class Player extends Module {
       )
     })
 
+    let tries = 0
+    while (!conn.ready && ++tries < 5) {
+      await Promise.delay(1000)
+    }
+    if (!conn.ready) {
+      logger.info(`Voice connection not ready after 5 tries - ${channel.guild.name} (${channel.guild.id})`)
+      await this.stop(channel, true)
+      return this.send(textChannel, '{{errors.notReadyYet}}')
+    }
     conn.play(mediaInfo.audiourl, options)
     this.manager.modifyState(channel.guild.id, 'state', mediaInfo)
 

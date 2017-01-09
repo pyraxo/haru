@@ -30,7 +30,9 @@
     "noPerms": "I don't have the permissions to `connect` and/or `speak` in {{voice}}!",
     "error": "something bad happened! Please try again later, or submit a bug report.",
     "notInSameVoice": "you need to be in the voice channel {{channel}}!",
-    "skipNotFound": "the video specified could not be found."
+    "skipNotFound": "the video specified could not be found.",
+    "notReadyYet": "The connection was not ready after 5 tries. Disconnected from voice channel.",
+    "connError": "A Discord error occurred while streaming to the channel: {{err}}\n"
   },
   "dc": "Disconnected from '{{voice}}' and unbound from {{text}}.",
   "switch": "Switching to streaming mode and playing from {{station}}",
