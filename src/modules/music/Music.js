@@ -367,7 +367,7 @@ class Music extends Module {
     } catch (err) {
       logger.error('Error encountered while validating video ' + videoID)
       logger.error(err)
-      return Promise.reject('error')
+      return Promise.reject(err)
     }
   }
 
@@ -500,7 +500,7 @@ class Music extends Module {
       if (err instanceof Error) {
         logger.error(`Error adding ${query.v ? 'song ' + query.v : 'playlist ' + query.pid} to ${msg.guild.name} (${msg.guild.id})'s queue`)
         logger.error(err)
-        return this.send(msg.channel, `:error:  |  **${msg.author.username}**, {{%ERROR}}`)
+        return this.send(msg.channel, `:error:  |  **${msg.author.username}**, {{%ERROR}}\n\n${err}`)
       }
       return this.send(msg.channel, `:error:  |  **${msg.author.username}**, {{errors.${err}}}`, { command: `**\`${settings.prefix}summon\`**` })
     }
