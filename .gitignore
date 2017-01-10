@@ -38,6 +38,7 @@ node_modules
 
 # Databases / Storage
 resources/i18n/*
+resources/audio/*
 !resources/i18n/en
 .cache
 build

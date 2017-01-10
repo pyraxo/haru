@@ -6,6 +6,8 @@ const querystring = require('querystring')
 const request = require('superagent')
 const ytdl = Promise.promisifyAll(require('ytdl-core'))
 const WebSocket = require('ws')
+const path = require('path')
+const fs = require('fs')
 
 const { Module, Collection } = require('../../core')
 
@@ -14,7 +16,7 @@ class Music extends Module {
     super(...args, {
       name: 'music',
       events: {
-        // voiceChannelLeave: 'voiceDC',
+        voiceChannelLeave: 'voiceDC',
         messageCreate: 'onMessage'
       }
     })
@@ -189,6 +191,31 @@ class Music extends Module {
     return bestaudio
   }
 
+  downloadURL (vidUrl, file) {
+    const filepath = path.join(this.bot.paths.resources, 'audio', file)
+    return new Promise((resolve, reject) => {
+      const stream = fs.createWriteStream(filepath)
+      stream.on('finish', () => {
+        stream.close()
+        resolve(filepath)
+      }).on('error', err => {
+        fs.unlink(filepath)
+        reject(err)
+      })
+      request.get(vidUrl).pipe(stream)
+    })
+  }
+
+  hash (str) {
+    return crypto.createHash('sha256').update(str, 'utf8').digest('hex')
+  }
+
+  getFile (format, url) {
+    const hash = this.hash(url) + (format === 'webm' ? '.webm' : '.flv')
+    const filepath = path.join(this.bot.paths.resources, 'audio', hash)
+    return fs.existsSync(filepath) ? filepath : null
+  }
+
   getBestAudio (mediaInfo) {
     let formats = mediaInfo.formats.filter(f => [249, 250, 251].includes(parseInt(f.itag)))
     if (formats && formats.length) {
@@ -202,7 +229,7 @@ class Music extends Module {
   }
 
   async getInfo (url, fetchAll = false) {
-    const key = `music:info:${crypto.createHash('sha256').update(url, 'utf8').digest('hex')}`
+    const key = `music:info:${this.hash(url)}`
     let info = await this.redis.getAsync(key).catch(() => false)
     if (info) return JSON.parse(info)
 
@@ -222,8 +249,16 @@ class Music extends Module {
       audiotype: bestaudio.itag,
       length: parseInt(info.length_seconds)
     }
+
     info = fetchAll ? info : formattedInfo
     // this.redis.setex(key, 18000, JSON.stringify(formattedInfo))
+    await this.downloadURL(
+      formattedInfo.audiourl,
+      this.hash(info.url) + (formattedInfo.audioformat === 'webm' ? '.webm' : '.flv')
+    ).catch(err => {
+      logger.error(err)
+      return false
+    })
     return info
   }
 
@@ -388,7 +423,7 @@ class Music extends Module {
   }
 
   async getPlaylist (pid) {
-    const key = `music:playlist:${crypto.createHash('sha256').update(pid, 'utf8').digest('hex')}`
+    const key = `music:playlist:${this.hash(pid)}`
     let info = await this.redis.getAsync(key).catch(() => false)
     if (info) return JSON.parse(info)
 

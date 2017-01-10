@@ -103,7 +103,8 @@ class Player extends Module {
       await this.stop(channel, true)
       return this.send(textChannel, '{{errors.notReadyYet}}')
     }
-    conn.play(mediaInfo.audiourl, options)
+    const filepath = this.manager.getFile(mediaInfo.audioformat, mediaInfo.url)
+    conn.play(filepath || mediaInfo.audiourl, options)
     this.manager.modifyState(channel.guild.id, 'state', mediaInfo)
 
     logger.info(`Playing ${mediaInfo.title} in ${channel.guild.name} (${channel.guild.id})`)
