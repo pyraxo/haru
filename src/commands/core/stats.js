@@ -70,7 +70,7 @@ class Stats extends Command {
         },
         {
           name: responder.t('{{memoryUsage}}'),
-          value: (process.memoryUsage().rss / 1000000).toFixed(2) + ' MB',
+          value: (process.memoryUsage().heapUsed / 1000000).toFixed(2) + ' MB',
           inline: true
         },
         {
