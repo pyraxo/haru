@@ -210,8 +210,6 @@
             "enable": "Activează comenzi pentru un canal, utilizator sau rol",
             "disable": "Dezactivează comenzi pentru un canal, utilizator sau rol",
             "lang": "Se poate schimba limba pe acest server",
-            "allow": "Permite utilizarea comenzilor pentru canale, roluri sau utilizatori",
-            "ignore": "Nu permite utilizarea comenzilor pentru canale, roluri sau utilizatori",
             "purge": "Şterge multe mesaje dintr-un canal",
             "repeat": "Schimbă modul de repetare, în acest mod melodiile sunt adăugate la sfârşitul listei",
             "8ball": "Întreabă 8ball ceva",
@@ -220,7 +218,8 @@
             "subscribe": "Urmăreşte notificări într-un canal",
             "unsubscribe": "Nu vei mai urmări notificări în acest canal",
             "timezone": "Lasă moderatorii să schimbe fusul orar al serverului",
-            "urban": "Caută răspunsuri pe Urban Dictionary"
+            "urban": "Caută răspunsuri pe Urban Dictionary",
+            "reset": "Resets all permission settings in a server"
         },
         "guilds": {
             "join": [
@@ -431,6 +430,9 @@
                 "subSuccess": "{{events}} sunt activate cu succes în {{channel}}.",
                 "unsubSuccess": "{{events}} sunt dezactivate cu succes în {{channel}}.",
                 "list": "{{channel}} urmăreşte notificări pentru {{events}}."
+            },
+            "reset": {
+                "success": "reset all permission settings in the server."
             }
         },
         "purge": {
@@ -476,6 +478,49 @@
             },
             "urban": {
                 "noResults": "căutarea {{query}} nu a dat nici un rezultat."
+            }
+        },
+        "rss": {
+            "success": "added feed for {{channel}} with {{included}} included tags and {{excluded}} excluded tags: {{url}}",
+            "error": "could not validate {{url}}. Please check if it's a valid RSS feed.",
+            "rssDialog": "RSS Menu",
+            "rssDelFooter": "Enter the number of the RSS feed you would like to remove, or {{cancel}} to exit.",
+            "urlDialog": [
+                "**RSS - Feed URL**",
+                "",
+                "{{author}}, please enter the URL of the RSS feed you would like to add.",
+                "Otherwise, enter {{exit}} to exit."
+            ],
+            "includedTagsDialog": [
+                "**RSS - Included Tags**",
+                "",
+                "{{author}}, please enter a list of included tags, separated by commas. For example: `films, science`",
+                "Otherwise, enter {{skip}} to skip, or {{exit}} to exit."
+            ],
+            "excludedTagsDialog": [
+                "**RSS - Excluded Tags**",
+                "",
+                "{{author}}, please enter a list of excluded tags, separated by commas. For example: `anime, religion`",
+                "Otherwise, enter {{skip}} to skip, or {{exit}} to exit."
+            ],
+            "subscribedTo": "{{channel}} is subscribed to the following RSS feeds:",
+            "notSubscribed": "{{channel}} is not subscribed to any feed. Use {{command}} to add a new feed.",
+            "subscribedFeeds": "Subscribed Feeds for {{channel}}",
+            "noFeedFound": "there was no feed found with that name or URL.",
+            "removedFeed": "removed RSS entry: {{feed}}",
+            "confirmClear": [
+                "**Clear all RSS feeds**",
+                "",
+                "{{author}}, are you sure you want to clear all RSS feeds?",
+                "Enter {{confirm}} to confirm, or anything else to exit."
+            ],
+            "notCleared": "no RSS feeds were removed.",
+            "cleared": "{{count}} RSS feeds were removed from this channel.",
+            "action": {
+                "add": "Add an RSS feed to the channel",
+                "remove": "Remove an RSS feed from the channel",
+                "list": "List all RSS feeds added in this channel",
+                "clear": "Clears all RSS feeds added in this channel"
             }
         }
     }

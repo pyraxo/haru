@@ -34,13 +34,7 @@ class RSS extends Command {
   handle (container, responder) {
     return responder.selection(['add', 'remove', 'list', 'clear'], {
       title: '{{rssDialog}}',
-      mapFunc: ch => {
-        switch (ch) {
-          case 'add': return 'Add an RSS feed to the channel'
-          case 'remove': return 'Remove an RSS feed from the channel'
-          case 'list': return 'List all RSS feeds added by this channel'
-        }
-      }
+      mapFunc: ch => responder.t(`{{action.${ch}}}`)
     }).then(arg => arg.length ? this[arg[0]](container, responder) : false)
   }
 

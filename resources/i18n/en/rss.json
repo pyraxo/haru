@@ -29,5 +29,11 @@
     "Enter {{confirm}} to confirm, or anything else to exit."
   ],
   "notCleared": "no RSS feeds were removed.",
-  "cleared": "{{count}} RSS feeds were removed from this channel."
+  "cleared": "{{count}} RSS feeds were removed from this channel.",
+  "action": {
+    "add": "Add an RSS feed to the channel",
+    "remove": "Remove an RSS feed from the channel",
+    "list": "List all RSS feeds added in this channel",
+    "clear": "Clears all RSS feeds added in this channel"
+  }
 }

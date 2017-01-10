@@ -27,7 +27,7 @@
         "MORE_RESULTS": "En {{num}} meer..."
       },
       "collector": {
-        "timeout": "Time-out na {{time}}s",
+        "timeout": "Time-out na {{timeout}}s",
         "max": "{{max}} pogingen overschreden",
         "maxMatches": "{{maxMatches}} wedstrijden overschreden"
       },
@@ -207,8 +207,6 @@
       "enable": "Zet commando's aan voor een kanaal, gebruiker of rol",
       "disable": "Zet commando's uit voor een kanaal, gebruiker of rol",
       "lang": "Staat beheerders toe om een gilde's taal in te stellen",
-      "allow": "Staat kanalen, gebruikers of rollen toe om commando's te gebruiken",
-      "ignore": "Staat kanalen, gebruikers of rollen niet toe om commando's te gebruiken",
       "purge": "Verwijder berichten in groepen van een kanaal",
       "repeat": "Zet herhalingsmodus aan, waar beëindigde liedjes opnieuw in de rij worden gezet",
       "8ball": "Stelt een vraag aan de 8ball",
@@ -217,7 +215,8 @@
       "subscribe": "Koppelt een evenement aan een kanaal",
       "unsubscribe": "Ontkoppelt een evenement van een kanaal",
       "timezone": "Staat beheerders toe om een gilde's tijdzone in te stellen",
-      "urban": "Doorzoekt Urban Dictionary voor betekenissen"
+      "urban": "Doorzoekt Urban Dictionary voor betekenissen",
+      "reset": "Reset alle permissie-instellingen in een server"
     },
     "guilds": {
       "join": [
@@ -428,6 +427,9 @@
         "subSuccess": "met succes {{events}} aan {{channel}} gekoppeld.",
         "unsubSuccess": "met succes {{events}} van {{channel}} ontkoppeld.",
         "list": "{{events}} is/zijn gekoppeld aan {{channel}}."
+      },
+      "reset": {
+        "success": "Reset alle permissie-instellingen in de server"
       }
     },
     "purge": {
@@ -473,6 +475,49 @@
       },
       "urban": {
         "noResults": "de zoekopdracht {{query}} gaf geen resultaten."
+      }
+    },
+    "rss": {
+      "success": "added feed for {{channel}} with {{included}} included tags and {{excluded}} excluded tags: {{url}}",
+      "error": "could not validate {{url}}. Please check if it's a valid RSS feed.",
+      "rssDialog": "RSS Menu",
+      "rssDelFooter": "Enter the number of the RSS feed you would like to remove, or {{cancel}} to exit.",
+      "urlDialog": [
+        "**RSS - Feed URL**",
+        "",
+        "{{author}}, please enter the URL of the RSS feed you would like to add.",
+        "Otherwise, enter {{exit}} to exit."
+      ],
+      "includedTagsDialog": [
+        "**RSS - Included Tags**",
+        "",
+        "{{author}}, please enter a list of included tags, separated by commas. For example: `films, science`",
+        "Otherwise, enter {{skip}} to skip, or {{exit}} to exit."
+      ],
+      "excludedTagsDialog": [
+        "**RSS - Excluded Tags**",
+        "",
+        "{{author}}, please enter a list of excluded tags, separated by commas. For example: `anime, religion`",
+        "Otherwise, enter {{skip}} to skip, or {{exit}} to exit."
+      ],
+      "subscribedTo": "{{channel}} is subscribed to the following RSS feeds:",
+      "notSubscribed": "{{channel}} is not subscribed to any feed. Use {{command}} to add a new feed.",
+      "subscribedFeeds": "Subscribed Feeds for {{channel}}",
+      "noFeedFound": "there was no feed found with that name or URL.",
+      "removedFeed": "removed RSS entry: {{feed}}",
+      "confirmClear": [
+        "**Clear all RSS feeds**",
+        "",
+        "{{author}}, are you sure you want to clear all RSS feeds?",
+        "Enter {{confirm}} to confirm, or anything else to exit."
+      ],
+      "notCleared": "no RSS feeds were removed.",
+      "cleared": "{{count}} RSS feeds were removed from this channel.",
+      "action": {
+        "add": "Add an RSS feed to the channel",
+        "remove": "Remove an RSS feed from the channel",
+        "list": "List all RSS feeds added in this channel",
+        "clear": "Clears all RSS feeds added in this channel"
       }
     }
   },
@@ -687,8 +732,6 @@
       "enable": "Ativa comandos para um canal, utilizador ou role",
       "disable": "Desativa comandos para um canal, utilizador ou role",
       "lang": "Permite aos moderadores mudar a linguagem do servidor",
-      "allow": "Permite a canais, utilizadores ou roles usarem comandos",
-      "ignore": "Bloqueia canais, utilizadores ou roles de usarem comandos",
       "purge": "Bulk delete messages from a channel",
       "repeat": "Toggles repeat mode, where finished songs get re-added in the queue",
       "8ball": "Asks the 8ball a question",
@@ -697,7 +740,8 @@
       "subscribe": "Subscribes a channel to an event",
       "unsubscribe": "Unsubscribes a channel from an event",
       "timezone": "Allows moderators to set a guild's timezone",
-      "urban": "Searches Urban Dictionary for meanings"
+      "urban": "Searches Urban Dictionary for meanings",
+      "reset": "Resets all permission settings in a server"
     },
     "guilds": {
       "join": [
@@ -908,6 +952,9 @@
         "subSuccess": "successfully subscribed {{channel}} to {{events}}.",
         "unsubSuccess": "successfully unsubscribed {{channel}} from {{events}}.",
         "list": "{{channel}} is subscribed to {{events}}."
+      },
+      "reset": {
+        "success": "reset all permission settings in the server."
       }
     },
     "purge": {
@@ -953,6 +1000,49 @@
       },
       "urban": {
         "noResults": "the query {{query}} gave no results."
+      }
+    },
+    "rss": {
+      "success": "added feed for {{channel}} with {{included}} included tags and {{excluded}} excluded tags: {{url}}",
+      "error": "could not validate {{url}}. Please check if it's a valid RSS feed.",
+      "rssDialog": "RSS Menu",
+      "rssDelFooter": "Enter the number of the RSS feed you would like to remove, or {{cancel}} to exit.",
+      "urlDialog": [
+        "**RSS - Feed URL**",
+        "",
+        "{{author}}, please enter the URL of the RSS feed you would like to add.",
+        "Otherwise, enter {{exit}} to exit."
+      ],
+      "includedTagsDialog": [
+        "**RSS - Included Tags**",
+        "",
+        "{{author}}, please enter a list of included tags, separated by commas. For example: `films, science`",
+        "Otherwise, enter {{skip}} to skip, or {{exit}} to exit."
+      ],
+      "excludedTagsDialog": [
+        "**RSS - Excluded Tags**",
+        "",
+        "{{author}}, please enter a list of excluded tags, separated by commas. For example: `anime, religion`",
+        "Otherwise, enter {{skip}} to skip, or {{exit}} to exit."
+      ],
+      "subscribedTo": "{{channel}} is subscribed to the following RSS feeds:",
+      "notSubscribed": "{{channel}} is not subscribed to any feed. Use {{command}} to add a new feed.",
+      "subscribedFeeds": "Subscribed Feeds for {{channel}}",
+      "noFeedFound": "there was no feed found with that name or URL.",
+      "removedFeed": "removed RSS entry: {{feed}}",
+      "confirmClear": [
+        "**Clear all RSS feeds**",
+        "",
+        "{{author}}, are you sure you want to clear all RSS feeds?",
+        "Enter {{confirm}} to confirm, or anything else to exit."
+      ],
+      "notCleared": "no RSS feeds were removed.",
+      "cleared": "{{count}} RSS feeds were removed from this channel.",
+      "action": {
+        "add": "Add an RSS feed to the channel",
+        "remove": "Remove an RSS feed from the channel",
+        "list": "List all RSS feeds added in this channel",
+        "clear": "Clears all RSS feeds added in this channel"
       }
     }
   },
@@ -1167,8 +1257,6 @@
       "enable": "Activează comenzi pentru un canal, utilizator sau rol",
       "disable": "Dezactivează comenzi pentru un canal, utilizator sau rol",
       "lang": "Se poate schimba limba pe acest server",
-      "allow": "Permite utilizarea comenzilor pentru canale, roluri sau utilizatori",
-      "ignore": "Nu permite utilizarea comenzilor pentru canale, roluri sau utilizatori",
       "purge": "Şterge multe mesaje dintr-un canal",
       "repeat": "Schimbă modul de repetare, în acest mod melodiile sunt adăugate la sfârşitul listei",
       "8ball": "Întreabă 8ball ceva",
@@ -1177,7 +1265,8 @@
       "subscribe": "Urmăreşte notificări într-un canal",
       "unsubscribe": "Nu vei mai urmări notificări în acest canal",
       "timezone": "Lasă moderatorii să schimbe fusul orar al serverului",
-      "urban": "Caută răspunsuri pe Urban Dictionary"
+      "urban": "Caută răspunsuri pe Urban Dictionary",
+      "reset": "Resets all permission settings in a server"
     },
     "guilds": {
       "join": [
@@ -1388,6 +1477,9 @@
         "subSuccess": "{{events}} sunt activate cu succes în {{channel}}.",
         "unsubSuccess": "{{events}} sunt dezactivate cu succes în {{channel}}.",
         "list": "{{channel}} urmăreşte notificări pentru {{events}}."
+      },
+      "reset": {
+        "success": "reset all permission settings in the server."
       }
     },
     "purge": {
@@ -1434,6 +1526,49 @@
       "urban": {
         "noResults": "căutarea {{query}} nu a dat nici un rezultat."
       }
+    },
+    "rss": {
+      "success": "added feed for {{channel}} with {{included}} included tags and {{excluded}} excluded tags: {{url}}",
+      "error": "could not validate {{url}}. Please check if it's a valid RSS feed.",
+      "rssDialog": "RSS Menu",
+      "rssDelFooter": "Enter the number of the RSS feed you would like to remove, or {{cancel}} to exit.",
+      "urlDialog": [
+        "**RSS - Feed URL**",
+        "",
+        "{{author}}, please enter the URL of the RSS feed you would like to add.",
+        "Otherwise, enter {{exit}} to exit."
+      ],
+      "includedTagsDialog": [
+        "**RSS - Included Tags**",
+        "",
+        "{{author}}, please enter a list of included tags, separated by commas. For example: `films, science`",
+        "Otherwise, enter {{skip}} to skip, or {{exit}} to exit."
+      ],
+      "excludedTagsDialog": [
+        "**RSS - Excluded Tags**",
+        "",
+        "{{author}}, please enter a list of excluded tags, separated by commas. For example: `anime, religion`",
+        "Otherwise, enter {{skip}} to skip, or {{exit}} to exit."
+      ],
+      "subscribedTo": "{{channel}} is subscribed to the following RSS feeds:",
+      "notSubscribed": "{{channel}} is not subscribed to any feed. Use {{command}} to add a new feed.",
+      "subscribedFeeds": "Subscribed Feeds for {{channel}}",
+      "noFeedFound": "there was no feed found with that name or URL.",
+      "removedFeed": "removed RSS entry: {{feed}}",
+      "confirmClear": [
+        "**Clear all RSS feeds**",
+        "",
+        "{{author}}, are you sure you want to clear all RSS feeds?",
+        "Enter {{confirm}} to confirm, or anything else to exit."
+      ],
+      "notCleared": "no RSS feeds were removed.",
+      "cleared": "{{count}} RSS feeds were removed from this channel.",
+      "action": {
+        "add": "Add an RSS feed to the channel",
+        "remove": "Remove an RSS feed from the channel",
+        "list": "List all RSS feeds added in this channel",
+        "clear": "Clears all RSS feeds added in this channel"
+      }
     }
   },
   "en": {
@@ -1466,7 +1601,7 @@
         "MORE_RESULTS": "And {{num}} more..."
       },
       "collector": {
-        "timeout": "Timeout after {{time}}s",
+        "timeout": "Timeout after {{timeout}}s",
         "max": "Exceeded {{max}} tries",
         "maxMatches": "Exceeded {{maxMatches}} matches"
       },
@@ -1833,6 +1968,45 @@
     "purge": {
       "success": "successfully purged {{num}} messages",
       "filterSuccess": "purged {{num}} messages matching the following criteria: {{criteria}}"
+    },
+    "rss": {
+      "success": "added feed for {{channel}} with {{included}} included tags and {{excluded}} excluded tags: {{url}}",
+      "error": "could not validate {{url}}. Please check if it's a valid RSS feed.",
+      "rssDialog": "RSS Menu",
+      "rssDelFooter": "Enter the number of the RSS feed you would like to remove, or {{cancel}} to exit.",
+      "urlDialog": [
+        "**RSS - Feed URL**\n",
+        "{{author}}, please enter the URL of the RSS feed you would like to add.",
+        "Otherwise, enter {{exit}} to exit."
+      ],
+      "includedTagsDialog": [
+        "**RSS - Included Tags**\n",
+        "{{author}}, please enter a list of included tags, separated by commas. For example: `films, science`",
+        "Otherwise, enter {{skip}} to skip, or {{exit}} to exit."
+      ],
+      "excludedTagsDialog": [
+        "**RSS - Excluded Tags**\n",
+        "{{author}}, please enter a list of excluded tags, separated by commas. For example: `anime, religion`",
+        "Otherwise, enter {{skip}} to skip, or {{exit}} to exit."
+      ],
+      "subscribedTo": "{{channel}} is subscribed to the following RSS feeds:",
+      "notSubscribed": "{{channel}} is not subscribed to any feed. Use {{command}} to add a new feed.",
+      "subscribedFeeds": "Subscribed Feeds for {{channel}}",
+      "noFeedFound": "there was no feed found with that name or URL.",
+      "removedFeed": "removed RSS entry: {{feed}}",
+      "confirmClear": [
+        "**Clear all RSS feeds**\n",
+        "{{author}}, are you sure you want to clear all RSS feeds?",
+        "Enter {{confirm}} to confirm, or anything else to exit."
+      ],
+      "notCleared": "no RSS feeds were removed.",
+      "cleared": "{{count}} RSS feeds were removed from this channel.",
+      "action": {
+        "add": "Add an RSS feed to the channel",
+        "remove": "Remove an RSS feed from the channel",
+        "list": "List all RSS feeds added in this channel",
+        "clear": "Clears all RSS feeds added in this channel"
+      }
     },
     "settings": {
       "prefix": {
