@@ -7,7 +7,7 @@ module.exports = {
     if (!role) {
       let roles = guild.roles.filter(r => {
         const name = r.name.toLowerCase()
-        return name === content || name.includes(content) && name === '@everyone' ? includeEveryone : true
+        return (name === content || name.includes(content)) && (name === '@everyone' ? includeEveryone : true)
       })
       if (roles.length) {
         return Promise.resolve(roles)
