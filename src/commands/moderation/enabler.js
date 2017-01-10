@@ -7,9 +7,8 @@ class Enabler extends Command {
       name: 'enable',
       description: 'Enable a command for a channel, user or role',
       usage: [
-        { name: 'command', displayName: 'command', type: 'command', optional: false },
         { name: 'context', types: ['member', 'channel', 'role'], optional: true, voice: false },
-        { name: 'isGuild', displayName: '--server', type: 'string', optional: true, choices: ['--server'] }
+        { name: 'command', displayName: 'command', type: 'command', optional: true }
       ],
       options: { guildOnly: true, localeKey: 'settings', modOnly: true }
     })
@@ -22,8 +21,7 @@ class Enabler extends Command {
   }
 
   async handle ({ msg, args, data, settings, trigger }, responder) {
-    const enable = trigger === 'enable' || trigger === 'allow'
-    const isGuild = args.isGuild || trigger === 'ignore' || trigger === 'allow'
+    const enable = trigger === 'enable'
 
     const cmd = args.command ? args.command.cmd.permissionNode : '*'
     const ctx = args.context
@@ -32,17 +30,19 @@ class Enabler extends Command {
       switch (this.getType(o)) {
         case 'channels': return '#' + o.name
         case 'members': return `${o.user.username}#${o.user.discriminator}`
-        case 'roles': return '@' + o.name
+        case 'roles': return o.name === '@everyone' ? 'everyone' : '@' + o.name
       } },
       cancel: 'cancel'
     }))[0]
     : args.context
     : msg.channel
+
     if (!ctx) return
     const type = this.getType(ctx)
-
-    const node = (isGuild && type !== 'channels' ? '*.' : ctx.id + '.') +
-    (type !== 'channels' ? ctx.id + '.' : '*.') + cmd
+    const everyone = type === 'roles' && ctx.name === '@everyone'
+    
+    ctx.id = everyone ? '*' : ctx.id
+    const node = `${type === 'channels' ? ctx.id : '*'}.${type !== 'channels' ? ctx.id : '*'}.${cmd}`
 
     try {
       settings.permissions = Permitter[enable ? 'allow' : 'deny'](node, settings.permissions, ctx.id, type)
@@ -59,7 +59,7 @@ class Enabler extends Command {
           switch (type) {
             case 'channels': return `**#${ctx.name}**`
             case 'members': return `**${ctx.user.username}**#${ctx.user.discriminator}`
-            case 'roles': return `**@${ctx.name}**`
+            case 'roles': return `**${everyone ? '' : '@'}${ctx.name}**`
           }
         })(type)
       })
@@ -76,21 +76,6 @@ class Disabler extends Enabler {
       name: 'disable',
       description: 'Disable a command for a channel, user or role',
       usage: [
-        { name: 'command', type: 'command', optional: false },
-        { name: 'context', types: ['member', 'channel', 'role'], optional: true, voice: false },
-        { name: 'isGuild', displayName: '--server', type: 'string', optional: true, choices: ['--server'] }
-      ],
-      options: { guildOnly: true, localeKey: 'settings', modOnly: true }
-    })
-  }
-}
-
-class Allow extends Enabler {
-  constructor (...args) {
-    super(...args, {
-      name: 'allow',
-      description: 'Allows channels, users or roles to use commands again',
-      usage: [
         { name: 'context', types: ['member', 'channel', 'role'], optional: true, voice: false },
         { name: 'command', type: 'command', optional: true }
       ],
@@ -99,18 +84,19 @@ class Allow extends Enabler {
   }
 }
 
-class Ignore extends Enabler {
+class Resetter extends Command {
   constructor (...args) {
     super(...args, {
-      name: 'ignore',
-      description: 'Prevents channels, users or roles from using commands',
-      usage: [
-        { name: 'context', types: ['member', 'channel', 'role'], optional: true, voice: false },
-        { name: 'command', type: 'command', optional: true }
-      ],
+      name: 'reset',
+      description: 'Resets all permissions in the server',
       options: { guildOnly: true, localeKey: 'settings', modOnly: true }
     })
   }
+
+  handle ({ msg, settings }, responder) {
+    settings.permissions = {}
+    return settings.save().then(() => responder.success('{{reset.success}}'), () => responder.error())
+  }
 }
 
-module.exports = [ Enabler, Disabler, Ignore, Allow ]
+module.exports = [ Enabler, Disabler, Resetter ]

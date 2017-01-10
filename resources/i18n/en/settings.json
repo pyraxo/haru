@@ -33,5 +33,8 @@
     "subSuccess": "successfully subscribed {{channel}} to {{events}}.",
     "unsubSuccess": "successfully unsubscribed {{channel}} from {{events}}.",
     "list": "{{channel}} is subscribed to {{events}}."
+  },
+  "reset": {
+    "success": "reset all permission settings in the server."
   }
 }

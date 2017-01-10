@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node --harmony_async_await index.js",
-    "prod": "node index.js",
+    "prod": "gulp && node index.js",
     "lint": "standard --fix",
     "gendocs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose"
   },
