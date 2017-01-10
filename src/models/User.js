@@ -16,8 +16,7 @@ module.exports = function () {
       description: string().default('A simple wandering soul'),
       inventory: array().default([])
     },
-    cache: true,
-    expiry: 300 * 1000,
+    expiry: 300,
     relations: {
       hasOne: ['Companion', 'companion', 'id', 'id']
     }

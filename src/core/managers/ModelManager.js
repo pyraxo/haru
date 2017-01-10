@@ -24,7 +24,7 @@ class ModelManager extends EventEmitter {
   }
 
   load (model) {
-    const { tableName, schema, options = {}, cache = false, expiry } = model
+    const { tableName, schema, options = {}, expiry } = model
     if (typeof tableName !== 'string') {
       this.emit('error', TypeError('Model found with invalid name'))
       return
@@ -46,8 +46,8 @@ class ModelManager extends EventEmitter {
     const Model = this.thinky.createModel(modelID, schema, options)
 
     this.models[modelID] = Model
-    if (cache) {
-      this.data[modelID] = new LocalCache(Model, model, expiry)
+    if (expiry) {
+      this.data[modelID] = new LocalCache(Model, expiry)
     }
     this.emit('loaded', modelID)
   }

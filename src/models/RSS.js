@@ -10,6 +10,7 @@ module.exports = function () {
       id: string(),
       lastUpdated: number().default(0),
       channels: array().default([])
-    }
+    },
+    expiry: 300
   }
 }

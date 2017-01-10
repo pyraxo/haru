@@ -15,7 +15,6 @@ module.exports = function () {
       tz: string().default('utc'),
       events: object().default({})
     },
-    cache: true,
-    expiry: 300 * 1000
+    expiry: 300
   }
 }
