@@ -400,26 +400,19 @@ class Music extends Module {
       ? res.error ? Promise.reject('error') : Promise.reject('notFound')
       : videoID
     } catch (err) {
-      logger.error('Error encountered while validating video ' + videoID)
-      logger.error(err)
+      logger.error(`Error encountered while validating video ${videoID} -`, err)
       return Promise.reject(err)
     }
   }
 
   async fetchPlaylist (pid) {
-    try {
-      const res = await request.get(
-        'https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=50' +
-        `&playlistId=${pid}&key=${process.env.API_YT}`
-      )
-      return res.statusCode === 404 || res.statusMessage === 'Not Found'
-      ? res.error ? Promise.reject('error') : Promise.reject('notFound')
-      : res.body
-    } catch (err) {
-      logger.error('Error encountered while querying playlist ' + pid)
-      logger.error(err)
-      return Promise.reject('error')
-    }
+    const res = await request.get(
+      'https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=50' +
+      `&playlistId=${pid}&key=${process.env.API_YT}` 
+    )
+    return res.statusCode === 404 || res.statusMessage === 'Not Found'
+    ? res.error ? Promise.reject('error') : Promise.reject('notFound')
+    : res.body
   }
 
   async getPlaylist (pid) {
@@ -438,12 +431,10 @@ class Music extends Module {
       this.redis.setex(key, 21600, JSON.stringify(playlistInfo))
       return playlistInfo
     } catch (err) {
-      if (typeof err === 'string') {
-        return Promise.reject(err)
+      if (err instanceof Error) {
+        logger.error(`Error encountered while querying playlist ${pid} -`, err)
       }
-      logger.error('Error encountered while getting playlist')
-      logger.error(err)
-      return Promise.reject('error')
+      throw err
     }
   }
 
