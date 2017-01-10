@@ -1,7 +1,8 @@
 module.exports = {
   priority: 5,
   process: async container => {
-    const { client, msg, isPrivate, data, db } = container
+    const { client, msg, data, db } = container
+    const isPrivate = container.isPrivate = !msg.guild
     try {
       if (isPrivate) {
         const channel = await client.getDMChannel(msg.author.id)

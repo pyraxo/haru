@@ -82,16 +82,18 @@ class Command extends Base {
     this.resolver.resolve(container.msg, container.rawArgs, {
       prefix: container.settings.prefix,
       command: container.trigger
-    }, usage)
-    .then((args = {}) => {
+    }, usage).then((args = {}) => {
       container.args = args
-      this[process](container, responder).catch(err => {
-        if (!err) return
-        logger.error(`Rejection from ${this.labels[0]}`)
-        logger.error(err)
-      })
-    })
-    .catch(err => {
+      const proc = this[process](container, responder)
+      
+      if (proc && proc.then) {
+        proc.catch(err => {
+          if (!err) return
+          logger.error(`Rejection from ${this.labels[0]}`)
+          logger.error(err)
+        })
+      }
+    }, err => {
       return responder.error(err.message || err.err || err, err)
     })
   }
