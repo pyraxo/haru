@@ -54,8 +54,10 @@ class RSS extends Command {
         meta = await this.validate(arg.url)
       }
     } catch (err) {
-      logger.error(`Could not validate ${args.url} -`, err)
-      return responder.error('{{error}}', { url: `**${args.url}**` })
+      if (err) {
+        logger.error(`Could not validate ${args.url} -`, err)
+        return responder.error('{{error}}', { url: `**${args.url}**` })
+      }
     }
 
     const url = meta.xmlurl
