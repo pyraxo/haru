@@ -59,6 +59,7 @@ class RSS extends Command {
         return responder.error('{{error}}', { url: `**${args.url}**` })
       }
     }
+    if (!meta) return
 
     const url = meta.xmlurl
     const arg = await responder.dialog([{
