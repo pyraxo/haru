@@ -43,6 +43,7 @@
     "superagent": "^2.2.0",
     "superagent-xml2jsparser": "^0.1.1",
     "thinky": "^2.3.7",
+    "to-markdown": "^3.0.3",
     "utf-8-validate": "^2.0.0",
     "winston": "^2.3.0",
     "winston-cluster": "0.0.4",
