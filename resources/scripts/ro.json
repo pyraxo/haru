@@ -1,0 +1,482 @@
+{
+    "en": {
+        "booru": {
+            "noPictures": "căutarea {{query}} nu a returnat nici o imagine. Încearcă să cauţi altceva!",
+            "maxTwo": "poţi căuta maxim două etichete pe Danbooru!",
+            "score": "Scor",
+            "rating": "Evaluare",
+            "tags": "Etichete",
+            "s": "Sigur",
+            "q": "Discutabil",
+            "e": "Explicit"
+        },
+        "common": {
+            "CHECK_PMS": "verifică-ţi PM-urile",
+            "ERROR": "am detectat o eroare! Te rog să încerci mai târziu sau sa raportezi acest bug!",
+            "ERROR_FULL": "Am detectat o eroare! Te rog să încerci mai târziu sau sa raportezi acest bug.",
+            "COOLDOWN": "viteza in care utilizezi comenzile e prea mare.({{time}} secunde rămase până la deblocarea comenzii)",
+            "NO_PERMS": "ai nevoie de permisiunea {{perms}} să foloseşti această comandă!",
+            "NO_PERMS_BOT": "Am nevoie de permisiunea {{perms}} pentru a folosi această comandă!",
+            "menus": {
+                "EXIT": "Tastaţi {{cancel}} pentru a ieşi din meniu.",
+                "ERRORED": "meniul a fost închis:",
+                "EXITED": "ai ieşit din meniu.",
+                "SELECTION": "Meniu de selectare",
+                "ERROR": "Eroare necunoscută",
+                "INPUT": "Tastaţi numărul ales în chat sau '{{cancel}}' pentru a anula.",
+                "MORE_RESULTS": "Plus mai {{num}}..."
+            },
+            "collector": {
+                "timeout": "Pauză după {{time}}s",
+                "max": "Ai depășit numărul maxim de încercări {{max}}",
+                "maxMatches": "Depăşit {{maxMatches}} meciuri"
+            },
+            "resolver": {
+                "INSUFFICIENT_ARGS": "Argumente insuficiente - Am aşteptat cel puţin {{requiredArgs}}, am văzut {{argsCount}}",
+                "CORRECT_USAGE": "Utilizare corectă",
+                "NO_END_QUOTE": "ai o ghilimea lipsă la sfârşit",
+                "member": {
+                    "NOT_FOUND": "acel membru nu a fost găsit"
+                },
+                "channel": {
+                    "NOT_FOUND": "acel canal nu a fost găsit"
+                },
+                "command": {
+                    "NOT_FOUND": "acea comandă nu a fost găsită"
+                },
+                "string": {
+                    "NOT_STRING": "{{arg}} trebuie să fie un string",
+                    "MAX": "lungimea lui {{arg}} nu poate fii mai mare ca {{max}}",
+                    "MIN": "lungimea lui {{arg}} nu poate fii mai mică ca {{min}}",
+                    "ONE_OF": "{{arg}} trebuie să fie una din următoarele"
+                },
+                "list": {
+                    "MAX": "lungimea lui {{arg}} nu poate conţine mai mult ca {{max}} articole",
+                    "MIN": "lungimea lui {{arg}} nu poate conţine mai puţin de {{min}} articole",
+                    "MAX_LENGTH": "{{arg}} nu poate conţine articole mai lungi ca {{maxLength}}",
+                    "MIN_LENGTH": "{{arg}} nu poate conţine articole mai scurte ca  {{minLength}}",
+                    "DUPES": "{{arg}} nu poate conţine valori duplicate"
+                },
+                "int": {
+                    "NOT_INT": "{{arg}} nu este un întreg",
+                    "MAX": "{{arg}} trebuie să fie mai mic decât sau egal cu {{max}}",
+                    "MIN": "{{arg}} trebuie să fie mai mare decât sau egal cu {{min}}"
+                },
+                "role": {
+                    "NOT_FOUND": "rolul nu a fost găsit"
+                },
+                "group": {
+                    "NOT_FOUND": "grupul de comenzi nu a fost găsit"
+                }
+            },
+            "NO_PMS": "Scuze, dar prefer să mă vadă mai mulţi fani. (Această comandă nu poate fii folosită în PM!)",
+            "ENABLE_EMBEDS": "Te rog fii sigur că ai embeds activat!"
+        },
+        "companion": {
+            "noPet": "nu deţineţi un companion încă! Foloseşte {{command}} să cumpăraţi unul!",
+            "ownedPet": "deja ai un companion!",
+            "cannotAfford": "ai nevoie de {{amount}} credite, tu ai doar {{balance}}!",
+            "intro": "Alege un companion de start, {{user}}!",
+            "dialog": [
+                "**Cumpărare Companion**",
+                "",
+                "{{author}}, ai selectat {{animal}} să fie însoţitorul tău.",
+                "Eşti sigur că vrei să îl cumperi cu {{amount}} credite?",
+                "",
+                "Pentru a confirma, te rog tastează {{code}}, sau orice altceva să ieşiţi."
+            ],
+            "invalidCode": "ai tastat un cod invalid! Tranzacţia s-a terminat.",
+            "error": "o eroare a apărut! Tranzacţia s-a terminat. Încearcă dinou mai târziu.",
+            "result": [
+                "**Companion Cumpărat**",
+                "",
+                "{{author}}, ai cumpărat cu succes {{animal}} ca însoţitorul tău.",
+                "__Balanţă Curentă__: {{balance}} credite",
+                "",
+                "Poţi să îţi renumeşti însoţitorul cu comanda {{command}} ."
+            ],
+            "definitions": {
+                "wins": "Câştigă",
+                "losses": "Pierde",
+                "info": "Info Companion",
+                "info2": "{{author}}'s Companion"
+            },
+            "errors": {
+                "self": "nu te poţi bate cu tine!",
+                "noUser": "utilizatorul acela nu există în arhiva mea!",
+                "ongoingBattle": "există deja o bătălie în curs de desfăşurare în acest canal!",
+                "userInBattle": "în momentul de faţă eşti în bătălie!",
+                "opponentInBattle": "oponentul este într-o bătălie curentă!",
+                "noIncoming": "nu ai primit nici o cerere de luptă.",
+                "noOutgoing": "nu ai trimis nici o cerere de luptă.",
+                "opponentNoCompanion": "acel jucător nu deţine un companion!",
+                "cantPlay": "aveţi nevoie de {{amount}} credite să jucaţi, în modul curent aveţi doar {{balance}}!",
+                "cantChallenge": "utilizatorul nu are destule credite să joace!",
+                "noBattle": "acest canal nu are nici o luptă în curs de desfăşurare!",
+                "notParticipating": "acel jucator nu este participant în bătălia curentă!",
+                "isParticipant": "sunteţi un participant în această bătălie, nu puteţi pune pariuri!",
+                "cantBet": "nu ai destule credite ({{balance}}) să pariezi {{amount}}!",
+                "betMulti": "nu poţi paria de mai multe ori!",
+                "plsBetProperly": "nu poţi paria mai puţin de un credit!",
+                "notBetting": "bătălia nu a intrat în etapa de pariuri!",
+                "afterBetting": "etapa de pariuri s-a terminat pentru această bătălie!",
+                "notOnline": "acel utilizator nu este online încă!"
+            },
+            "challenge": [
+                "aţi provocat pe {{mention}} la o luptă cu animale!",
+                "",
+                "Jucătorul are {{time}} secunde să răspundă cu {{accept}} sau {{reject}}, altfel o să se dea bătut automat!"
+            ],
+            "bet": "ai plasat un pariu de {{amount}} credite pe {{user}} şi însoţitorul său {{pet}}!",
+            "timedOut": "{{p2}} nu a răspuns la provocarea lui {{p1}} după {{time}} secunde şi s-a dat bătut.",
+            "rejectChallenge": "{{p2}} a refuzat provocarea lui {{p1}}.",
+            "cancelChallenge": "{{p1}} a anulat provocarea trimisă lui {{p2}}.",
+            "acceptChallenge": [
+                "{{p2}} a acceptat provocarea lui {{p1}}!",
+                "",
+                "Bătălia v-a începe în {{time}} secunde!",
+                "Puneţi pariuri cu {{command}}!"
+            ],
+            "renameDialog": "{{user}}, cum doriţi să vă renumiţi însoţitorul {{pet}}?",
+            "renameSuccess": "aţi renumit însoţitorul {{pet}} în {{newName}}!",
+            "script": {
+                "HIT": [
+                    "{{p1}} l-a lovit pe {{p2}} cu o lovitură puternică pentru {{dmg}} viaţă!",
+                    "{{p1}} i-a dat una la {{p2}}, care pierde {{dmg}} viaţă!",
+                    "{{p2}} e zdrobit de {{p1}}, care loveşte cu {{dmg}} damage!",
+                    "{{p1}} îl loveşte bine pe {{p2}}, dând jos viaţa sa cu {{dmg}}!",
+                    "{{p1}} dă o lovitură rapidă lui {{p2}} pentru {{dmg}} damage!"
+                ]
+            }
+        },
+        "credits": {
+            "balance": "{{user}}, ai {{balance}}  credite",
+            "topup": "ţi-au fost adăugate {{amount}} credite",
+            "cooldown": "îți poți lua creditele moca în {{time}}",
+            "dialog": [
+                "**Transfer Credite**",
+                "",
+                "{{author}}, transferi {{amount}} credite la {{user}}",
+                "",
+                "__Acum ai__: {{balance}} credite",
+                "__Credite după transfer__: {{afterAmount}}",
+                "",
+                "Pentru a confirma, tastaţi {{code}} pentru a continua sau {{exit}} să ieşiţi din meniu."
+            ],
+            "confirmation": [
+                "ai transferat {{amount}} credite în contul lui {{user}}.",
+                "",
+                "__Credite __: {{afterAmount}}"
+            ],
+            "invalidCode": "aţi introdus un cod invalid! Creditele tale nu au fost transferate.",
+            "selfSenderError": "nu poţi să îți dai credite!",
+            "insufficientCredits": "nu ai suficiente credite! ({{balance}})",
+            "botUserError": "nu poţi da credite unui bot!",
+            "topTitle": "Topul Bogătanilor",
+            "credits": "credite"
+        },
+        "descriptions": {
+            "help": "Îți arată informaţiile comenzilor",
+            "info": "Informații despre mine",
+            "credits": "Sistem monetar",
+            "wage": "Ia-ți creditele la fiecare 8 ore",
+            "hate": "Te u-urăsc!",
+            "love": "Te iu-iubesc!",
+            "prefix": "Permite moderatorilor să seteze un prefix pentru server",
+            "search": "Caută pe Youtube muzică",
+            "skip": "Merge la următoarea melodie",
+            "stop": "Opreşte muzica",
+            "summon": "Mă face să intru într-un canal cu voce",
+            "companion": "Animale de companie",
+            "battle": "Luptă-te cu alţi utilizatori folosind animalele de companie",
+            "buypet": "Cumperi un animal de companie",
+            "bet": "Pui pariuri pe bătălii",
+            "booru": "Caută un site pentru imagini",
+            "danbooru": "Caută imagini pe Danbooru",
+            "gelbooru": "Caută imagini pe Gelbooru",
+            "yandere": "Caută imagini pe Yandere",
+            "slots": "Joci sloturi",
+            "stats": "Statistici despre mine",
+            "choose": "Alege o opţiune",
+            "invite": "Arată link-ul de invitaţii",
+            "stream": "Pune muzică de pe un link de radio",
+            "queue": "Arată muzica din listă",
+            "whois": "Arată informaţii despre un utilizator",
+            "channel": "Arată informaţii despre un canal",
+            "server": "Arată informaţii despre un server",
+            "catgirl": "Îţi dă o imagine cu o fată pisică",
+            "clear": "Curăţă lista de muzică",
+            "contact": "Raportează probleme sau solicită noi opţiuni ori comenzi",
+            "enable": "Activează comenzi pentru un canal, utilizator sau rol",
+            "disable": "Dezactivează comenzi pentru un canal, utilizator sau rol",
+            "lang": "Se poate schimba limba pe acest server",
+            "allow": "Permite utilizarea comenzilor pentru canale, roluri sau utilizatori",
+            "ignore": "Nu permite utilizarea comenzilor pentru canale, roluri sau utilizatori",
+            "purge": "Şterge multe mesaje dintr-un canal",
+            "repeat": "Schimbă modul de repetare, în acest mod melodiile sunt adăugate la sfârşitul listei",
+            "8ball": "Întreabă 8ball ceva",
+            "dice": "Aruncă nişte zaruri",
+            "coin": "Întoarce monede",
+            "subscribe": "Urmăreşte notificări într-un canal",
+            "unsubscribe": "Nu vei mai urmări notificări în acest canal",
+            "timezone": "Lasă moderatorii să schimbe fusul orar al serverului",
+            "urban": "Caută răspunsuri pe Urban Dictionary"
+        },
+        "guilds": {
+            "join": [
+                "👋  Ceau! Sunt **haru**! Idolul tău favorit ✨🎤 şi un robot dorit de toată lumea! 🤖",
+                "",
+                "Poţi găsi o listă cu toate comenzile mele tastând {{help}} în chat!",
+                "Să ştii mai multe despre mine, foloseşte comanda {{about}}!"
+            ]
+        },
+        "help": {
+            "header_1": "Pentru a utiliza o comandă, foloseşte-o cu {{prefix}} în {{server}}",
+            "header_1_alt": "sau prefixul normal {{defaultPrefix}}",
+            "header_2": "Pentru a vedea mai multe informaţii despre o comandă, foloseşte {{helpCommand}}",
+            "header_3": "Exemplu: {{exampleCommand}}",
+            "definitions": {
+                "usage": "Folosire",
+                "aliases": "Alias-uri",
+                "pms": "PMs"
+            },
+            "footer": "Pentru ajutor, sugestii sau alte probleme, vizitaţi {{link}}",
+            "footer_group": [
+                "`[]` se referă la cuvinte __**opţionale**__",
+                "`<>` se referă la cuvinte __**necesare**__",
+                "Nu puneţi `<>` sau `[]` când tastaţi o comandă"
+            ],
+            "noDesc": "Nici o descriere",
+            "checkPMs": "uită-te în PM!"
+        },
+        "images": {
+            "link": "{{image}} gata de luat!",
+            "catgirl": "Fată pisică"
+        },
+        "info": {
+            "info": [
+                "👋  Ceau! Sunt **haru**!",
+                "Idolul tău favorit ✨🎤 şi un robot dorit de toată lumea! 🤖"
+            ],
+            "invite": [
+                "Invită-mă folosind {{invite}}!",
+                "Pentru sugestii şi ajutor, visită serverul cu {{server}}!"
+            ],
+            "warn": "Te rog fii sigur că ai embeds activat!",
+            "author": "Autor",
+            "lib": "Library",
+            "ver": "Versiune",
+            "src": "Sursă cod",
+            "support": "Relaţii clienţi",
+            "join": "Pentru ajutor, sugestii sau alte probleme, visitează {{link}}",
+            "inv": "Invită-mă!",
+            "ptr": "Ajută la menţinerea lui haru!"
+        },
+        "infocmd": {
+            "server": {
+                "shard": "Shard",
+                "defaultChannel": "Default Channel",
+                "region": "Regiune",
+                "createdOn": "Crearea Contului",
+                "joinedOn": "Data Intrării",
+                "roles": "Roluri",
+                "members": "Membrii",
+                "channels": "Canale",
+                "owner": "Stăpân",
+                "online": "online",
+                "text": "Text",
+                "voice": "Voce"
+            },
+            "whois": {
+                "shared": "Shared Servers",
+                "status": "Stare",
+                "nick": "Poreclă",
+                "createdOn": "Creare Cont",
+                "joinedOn": "Dată Intrare",
+                "roles": "Roluri",
+                "none": "Nimica",
+                "playing": "Joacă",
+                "more": "plus alte {{num}}..."
+            },
+            "channel": {
+                "title": "Informaţii canal pentru {{channel}}",
+                "type": "Tip",
+                "text": "Text",
+                "voice": "Voce",
+                "createdOn": "Data Creare"
+            }
+        },
+        "music": {
+            "nowPlaying": "Acum joacă",
+            "skipping": "Trece peste",
+            "finishedPlaying": "A terminat de jucat",
+            "queueFinish": "Lista este goală acum.",
+            "dcInactive": "Am ieşit din canalul de voce din cauza inactivităţii.",
+            "queuedMulti": "Am pus {{num}} melodii",
+            "clearQueue": "Lista de melodii a fost curăţată.",
+            "queued": "Urmează după",
+            "errors": {
+                "notInChannel": "pune-mă să intru într-un canal cu voce cu comanda {{command}}!",
+                "emptyQueue": [
+                    "nu este nimica în listă!",
+                    "",
+                    "Foloseşte comanda {{play}} pentru a pune muzică!"
+                ],
+                "tooLong": "melodia aceasta este prea lungă! Pune una sub 90 minute.",
+                "noResults": "căutarea pentru {{query}} nu a dat rezultat.",
+                "alreadyPlaying": "este deja o melodie jucată aici! Pune altă melodie în listă cu {{command}}.",
+                "notChannel": "canalul curent unde poţi căuta melodii este {{channel}}. Te rog foloseşte comenzile acolo.",
+                "notFound": "videoclipul care ai vrut să îl pui nu a fost găsit.",
+                "listNotFound": "lista de melodii care ai încercat să o pui nu a fost găsită.",
+                "emptyPlaylist": "lista de melodii care ai încercat să o pui nu are nici o melodie validă.",
+                "notInVoice": "trebuie să fii într-un canal de voce!",
+                "errorQueue": "o eroare a apărut pentru {{url}}.",
+                "alreadyBinded": "Sunt deja legat de {{text}}! Foloseşte comenzi în acel canal.",
+                "noPerms": "Am nevoie de permisiunea `connect` şi/sau `speak` pentru a mă conecta în {{voice}}!",
+                "error": "ceva s-a întâmplat! Te rog încearcă mai târziu sau raportează problema.",
+                "notInSameVoice": "trebuie să fii în canalul de voce numit {{channel}}!",
+                "skipNotFound": "videoclipul cerut nu a putut fii găsit.",
+                "notReadyYet": "The connection was not ready after 5 tries. Disconnected from voice channel.",
+                "connError": "A Discord error occurred while streaming to the channel: {{err}}\n"
+            },
+            "dc": "Am părăsit '{{voice}}' şi nu o să mai primesc comenzi pentru muzică în {{text}}.",
+            "switch": "Mă schimb în modul de radio şi joc {{station}}",
+            "playlist": "Listă de melodii - {{guild}}",
+            "queuedSongs": "Melodii Memorate",
+            "queueProgress": "pun lista de melodii, te rog aşteaptă...",
+            "joinSuccess": [
+                "Conectat în '{{voice}}' şi o să iau comenzi pentru muzică în {{text}}.",
+                "",
+                "Foloseşte comanda {{command}} să asculţi melodii! "
+            ],
+            "streamInfo": [
+                "{{title}} by {{artist}}",
+                "**Cerută de**: {{requestedBy}}"
+            ],
+            "repeatOn": "ai activat opţiunea pentru repetarea melodiei. Toate melodiile terminate vor fi adăugate dinou.",
+            "repeatOff": "ai dezactivat repetarea melodiilor. Melodiile terminate nu o să mai fie adăugate.",
+            "skipSuccess": "Melodia {{song}} a fost ştearsă din listă.",
+            "terminated": [
+                "Se restartează bot-ul, toate conecţiunile au fost terminate.",
+                "",
+                "Lista curentă de melodii a fost salvată în arhivă.",
+                "Ne cerem scuze."
+            ],
+            "votedSkip": "ai votat să treci peste această melodie o dată!",
+            "voteSkipSuccess": "ai votat să treci peste această melodie!",
+            "votedClear": "ai votat deja să cureţi lista de melodii!",
+            "voteClearSuccess": "ai votat să cureţi lista de melodii!"
+        },
+        "slots": {
+            "insufficient": [
+                "mai ai nevoie de {{amount}} credite!",
+                "",
+                "Poţi folosi comanda {{command}} să îţi primeşti creditele într-un interval de cateva ore!"
+            ],
+            "won": "{{user}} a pariat {{amount}} credite şi a câştigat:",
+            "lost": "{{user}} a pariat {{amount}} credite şi le-a pierdut pe toate.",
+            "credits": "credite",
+            "winnings": "Câştiguri",
+            "yudodis": "nu poţi paria mai puţin de 1 credit!",
+            "dailyLimit": "ai ajuns limita de câştiguri pe zi. Încearcă dinou în {{time}}."
+        },
+        "stats": {
+            "users": "Utilizatori",
+            "unique": "original",
+            "online": "online",
+            "guilds": "Servere",
+            "channels": "Canale",
+            "text": "text",
+            "voice": "voce",
+            "total": "total",
+            "uptime": "Uptime",
+            "memoryUsage": "Memorie Folosită",
+            "commandsUsed": "Comenzi Folosite",
+            "server": "Studio 777 (Server pentru ajutor)"
+        },
+        "settings": {
+            "prefix": {
+                "success": "prefixul serverului s-a schimbat în {{prefix}}",
+                "revert": "prefixul serverului este dinou {{prefix}}",
+                "current": "the current prefix for this server is: {{prefix}}"
+            },
+            "lang": {
+                "success": "aţi schimbat cu succes limba vorbită în acest server {{lang}}"
+            },
+            "enabler": {
+                "success": "{{command}} a fost cu succes {{action}} pentru {{context}}",
+                "actions": {
+                    "enable": "activat",
+                    "disable": "dezactivat",
+                    "revert": "întors"
+                }
+            },
+            "changelog": "Schimbări Recente",
+            "tz": {
+                "success": "fusul orar pentru acest server s-a schimbat cu succes în {{tz}}",
+                "notFound": [
+                    "fusul orar '{{tz}}' nu este valid.",
+                    "",
+                    "Vizitează {{link}} pentru o listă validă."
+                ],
+                "current": "the current timezone for this server is: {{tz}}"
+            },
+            "subscribe": {
+                "eventNotFound": [
+                    "{{event}} nu este o opţiune validă.",
+                    "",
+                    "Poţi vedea notificări pentru următoarele: {{events}}"
+                ],
+                "notSubscribed": "{{channel}} nu are nici o opţiune pentru notificaţii activă.",
+                "subSuccess": "{{events}} sunt activate cu succes în {{channel}}.",
+                "unsubSuccess": "{{events}} sunt dezactivate cu succes în {{channel}}.",
+                "list": "{{channel}} urmăreşte notificări pentru {{events}}."
+            }
+        },
+        "purge": {
+            "success": "am şters cu succes {{num}} mesaje din canal",
+            "filterSuccess": "am şters {{num}} mesaje care au conţinut: {{criteria}}"
+        },
+        "misc": {
+            "choose": {
+                "pick": "Eu aleg {{choice}}"
+            },
+            "8ball": {
+                "question": "{{user}} a întrebat",
+                "response": "{{8ball}} a răspuns",
+                "answer_1": "Este sigur",
+                "answer_2": "Este decis aşa",
+                "answer_3": "Fără îndoială",
+                "answer_4": "Cel mai sigur",
+                "answer_5": "Te poţi baza pe asta",
+                "answer_6": "Da, aşa o văd eu",
+                "answer_7": "Foarte sigur",
+                "answer_8": "Arată bine",
+                "answer_9": "Da",
+                "answer_10": "Semnul arată da",
+                "answer_11": "Raspuns neclar, încearcă dinou",
+                "answer_12": "Întreabă dinou mai târziu",
+                "answer_13": "E mai bine să nu îţi spun acum",
+                "answer_14": "No pot prezice acuma",
+                "answer_15": "Concentrează-te şi întreabă dinou",
+                "answer_16": "Nu te baza pe asta",
+                "answer_17": "Răspunsul meu este nu",
+                "answer_18": "Sursele mele spun nu",
+                "answer_19": "Nu arată aşa de bine",
+                "answer_20": "Foarte nesigur"
+            },
+            "dice": {
+                "result": "Rezultat: {{result}}",
+                "invalid": "Nu ai aruncat bine cu zarul - {{text}}"
+            },
+            "coin": {
+                "result": "ai întors {{heads}} capete şi {{tails}} pajure!",
+                "heads": "ai întors **cap**!",
+                "tails": "ai întors **pajură**!"
+            },
+            "urban": {
+                "noResults": "căutarea {{query}} nu a dat nici un rezultat."
+            }
+        }
+    }
+}
