@@ -24,11 +24,6 @@ class Bridge {
       _listening: false,
       _ended: false
     }
-    if (time) {
-      setTimeout(() => {
-        collector._ended = { reason: 'timeout', arg: time, collected: collector.collected }
-      }, time * 1000)
-    }
     collector.stop = () => {
       collector._listening = false
       this.collectors.splice(this.collectors.indexOf(collector), 1)
@@ -36,10 +31,16 @@ class Bridge {
     collector.next = () => {
       return new Promise((resolve, reject) => {
         collector._resolve = resolve
+        if (time) {
+          collector._timer = setTimeout(() => {
+            reject({ reason: 'timeout', arg: time, collected: collector.collected })
+          }, time * 1000)
+        }
         if (collector._ended) {
           collector.stop()
           reject(collector._ended)
         }
+        
         collector._listening = true
       })
     }
@@ -56,6 +57,7 @@ class Bridge {
         collector._ended = { reason: 'max', arg: tries }
       }
       collector._resolve(msg)
+      clearTimeout(collector._timer)
       return true
     }
     this.collectors.push(collector)
