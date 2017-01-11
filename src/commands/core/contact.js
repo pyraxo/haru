@@ -7,7 +7,7 @@ class Contact extends Command {
       name: 'contact',
       description: 'Report bugs, request features or leave feedback',
       usage: [
-        { name: 'type', type: 'string', choices: ['report', 'request'], optional: false },
+        { name: 'type', displayName: 'report | request', type: 'string', choices: ['report', 'request'], optional: false },
         { name: 'text', last: true }
       ]
     })
