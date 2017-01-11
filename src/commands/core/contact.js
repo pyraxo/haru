@@ -7,7 +7,13 @@ class Contact extends Command {
       name: 'contact',
       description: 'Report bugs, request features or leave feedback',
       usage: [
-        { name: 'type', displayName: 'report | request', type: 'string', choices: ['report', 'request'], optional: false },
+        {
+          name: 'type',
+          displayName: 'report | request | feedback',
+          type: 'string',
+          choices: ['report', 'request', 'feedback'],
+          optional: false
+        },
         { name: 'text', last: true }
       ]
     })
@@ -18,33 +24,34 @@ class Contact extends Command {
     if (!portal) return
 
     const text = args.text
+    let channelID = '253516403124994049'
+    let title = 'Feedback'
 
     switch (args.type) {
       case 'report': {
-        return portal.tunnel('255971654910476288', '', { embed: {
-          description: '**Bug Report**\n' + text,
-          author: {
-            name: `${msg.author.username}#${msg.author.discriminator}`,
-            icon_url: msg.author.avatarURL
-          },
-          footer: {
-            text: moment().locale(settings.lang).format('ddd Do MMM, YYYY [at] hh:mm:ss a')
-          }
-        }})
+        channelID = '255971654910476288'
+        title = 'Bug Report'
+        break
       }
       case 'request': {
-        return portal.tunnel('253516431092613130', '', { embed: {
-          description: '**Suggestion**\n' + text,
-          author: {
-            name: `${msg.author.username}#${msg.author.discriminator}`,
-            icon_url: msg.author.avatarURL
-          },
-          footer: {
-            text: moment().locale(settings.lang).format('ddd Do MMM, YYYY [at] hh:mm:ss a')
-          }
-        }})
+        channelID = '253516431092613130'
+        title = 'Suggestion'
+        break
       }
     }
+
+    portal.tunnel(channelID, '', { embed: {
+      description: `**${title}**\n` + text,
+      author: {
+        name: `${msg.author.username}#${msg.author.discriminator}`,
+        icon_url: msg.author.avatarURL
+      },
+      footer: {
+        text: moment().locale(settings.lang).format('ddd Do MMM, YYYY [at] hh:mm:ss a')
+      }
+    }})
+
+    return responder.success('your feedback has been sent. Thank you for your time!')
   }
 }
 
