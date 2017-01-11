@@ -3,7 +3,7 @@ const Feedparser = require('feedparser')
 const request = require('superagent')
 const { Command } = require('../../core')
 
-const options = { guildOnly: true, permissions: ['manageGuild'], botPerms: ['embedLinks'] }
+const options = { guildOnly: true, botPerms: ['embedLinks'] }
 
 class RSS extends Command {
   constructor (...args) {
