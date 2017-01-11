@@ -39,10 +39,12 @@ class RSS extends Command {
   }
 
   async add ({ msg, args, client, settings, data, modules }, responder) {
+    let url
     let meta
     try {
       if (args.url) {
         meta = await this.validate(args.url)
+        url = args.url
       } else {
         const arg = await responder.format('emoji:newspaper').dialog([{
           prompt: '{{urlDialog}}',
@@ -52,6 +54,7 @@ class RSS extends Command {
           exit: '**`cancel`**'
         })
         meta = await this.validate(arg.url)
+        url = arg.url
       }
     } catch (err) {
       if (err) {
@@ -61,7 +64,6 @@ class RSS extends Command {
     }
     if (!meta) return
 
-    const url = meta.xmlurl
     const arg = await responder.dialog([{
       prompt: '📰  |  {{includedTagsDialog}}',
       input: { type: 'list', name: 'includedTags', separator: ', ' }
