@@ -77,8 +77,8 @@ class RSS extends Module {
             }
           }
           channels++
-          let desc = toMarkdown(article.summary || article.description)
-          // desc = desc.length > 300 ? desc.substr(0, 300) + '...' : desc
+          let desc = article.summary || article.description
+          // desc = desc && desc.length > 300 ? desc.substr(0, 300) + '...' : desc
 
           portal.tunnel(entry.channel, '', { embed: {
             author: {
@@ -87,7 +87,7 @@ class RSS extends Module {
             },
             description: [
               `📰  |  **${article.title}**\n`,
-              desc,
+              desc ? toMarkdown(desc) : '',
               `\n**View the article [here](${article.link}).**\n\0`,
             ].join('\n'),
             image: { url: article.image.url },
