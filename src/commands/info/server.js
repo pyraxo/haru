@@ -12,7 +12,7 @@ class ServerInfo extends Command {
   }
 
   handle ({ msg, args, client, settings }, responder) {
-    const guild = msg.guild
+    const guild = msg.channel.guild
     const onlineMembers = guild.members.filter(member => member.status !== 'offline').length
     const owner = guild.members.get(guild.ownerID).user
 

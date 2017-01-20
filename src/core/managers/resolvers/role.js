@@ -1,7 +1,7 @@
 module.exports = {
   type: 'role',
   resolve: (content, { includeEveryone = true }, msg) => {
-    const guild = msg.guild
+    const guild = msg.channel.guild
     content = String(content).toLowerCase()
     let role = content.match(/^<@&(\d{17,18})>$/)
     if (!role) {

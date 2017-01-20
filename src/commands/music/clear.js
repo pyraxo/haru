@@ -19,7 +19,7 @@ class Clear extends Command {
         command: `**\`${settings.prefix}summon\`**`
       })
     }
-    const chan = music.getBoundChannel(msg.guild.id)
+    const chan = music.getBoundChannel(msg.channel.guild.id)
     if (chan && chan !== msg.channel.id) {
       return responder.error('{{errors.notChannel}}', {
         channel: client.getChannel(chan).mention,
@@ -27,7 +27,7 @@ class Clear extends Command {
       })
     }
     const voiceChannel = client.getChannel(conn.channelID)
-    return music.clear(msg.guild.id, voiceChannel, msg.author.id)
+    return music.clear(msg.channel.guild.id, voiceChannel, msg.author.id)
     .then(res => {
       if (typeof res === 'string') responder.success(`{{${res}}}`)
     })

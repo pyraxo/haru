@@ -17,7 +17,7 @@ class Love extends Command {
 
   async handle ({ msg, args }, responder) {
     let input = args.text ? args.text.replace(/<@!*(\d{17,18})>/gi, (matched, id) => {
-      let member = msg.guild.members.get(id)
+      let member = msg.channel.guild.members.get(id)
       return member ? member.nick || member.user.username : matched
     }) : msg.author.username
     if (input.length > 300) input = input.substring(0, 300) + '...'

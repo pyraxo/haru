@@ -19,7 +19,7 @@ class Summon extends Command {
     if (channel === null) {
       return responder.error('{{errors.notInVoice}}')
     }
-    const vc = msg.guild.channels.get(channel)
+    const vc = msg.channel.guild.channels.get(channel)
 
     if (!this.hasPermissions(vc, this.bot.user, 'voiceConnect')) {
       return responder.error('{{errors.noPerms}}', {
@@ -36,11 +36,11 @@ class Summon extends Command {
       })
     } catch (err) {
       if (err instanceof Error) {
-        logger.error(`Could not join voice channel ${channel} in ${msg.guild.name} (${msg.guild.id}) - ${err}`)
+        logger.error(`Could not join voice channel ${channel} in ${msg.channel.guild.name} (${msg.channel.guild.id}) - ${err}`)
         return
       }
       return responder.error(`{{errors.${err}}}`, {
-        text: msg.guild.channels.get(music.getBoundChannel(msg.guild.id)).mention,
+        text: msg.channel.guild.channels.get(music.getBoundChannel(msg.channel.guild.id)).mention,
         voice: `**${vc.name}**`
       })
     }

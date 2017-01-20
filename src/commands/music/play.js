@@ -23,7 +23,7 @@ class Play extends Command {
     if (!conn) {
       return responder.error('{{errors.notInChannel}}', { command: `**\`${settings.prefix}summon\`**` })
     }
-    const chan = music.getBoundChannel(msg.guild.id)
+    const chan = music.getBoundChannel(msg.channel.guild.id)
     if (chan && chan !== msg.channel.id) {
       return responder.error('{{errors.notChannel}}', {
         channel: client.getChannel(chan).mention,
@@ -35,18 +35,18 @@ class Play extends Command {
 
     const voiceChannel = client.getChannel(conn.channelID)
     if (rawArgs.length === 0) {
-      if (conn.playing && typeof music.checkState(msg.guild.id) !== 'string') {
+      if (conn.playing && typeof music.checkState(msg.channel.guild.id) !== 'string') {
         return responder.error('{{errors.alreadyPlaying}}', {
           command: `**\`${settings.prefix}play\`**`
         })
       }
       try {
-        if (!await music.queue.getLength(msg.guild.id)) {
+        if (!await music.queue.getLength(msg.channel.guild.id)) {
           return responder.format('emoji:info').reply('{{errors.emptyQueue}}', { play: `**\`${settings.prefix}play\`**` })
         }
         return music.play(voiceChannel)
       } catch (err) {
-        logger.error(`Encountered erroring querying queue length for ${msg.guild.id}`)
+        logger.error(`Encountered erroring querying queue length for ${msg.channel.guild.id}`)
         logger.error(err)
         responder.error('{{%ERROR}}')
       }
@@ -67,12 +67,12 @@ class Play extends Command {
       : result.items[0]
       if (!video) return
 
-      const info = await music.add(msg.guild.id, voiceChannel, `https://www.youtube.com/watch?v=${video.id.videoId}`)
+      const info = await music.add(msg.channel.guild.id, voiceChannel, `https://www.youtube.com/watch?v=${video.id.videoId}`)
       const length = info.length ? `(${moment.duration(info.length, 'seconds').format('h[h] m[m] s[s]')}) ` : ''
       return responder.format('emoji:success').send(`{{queued}} **${info.title}** ${length}- ${msg.author.mention}`)
     } catch (err) {
       if (err instanceof Error) {
-        logger.error(`Error adding query ${text} to ${msg.guild.name} (${msg.guild.id})'s queue`)
+        logger.error(`Error adding query ${text} to ${msg.channel.guild.name} (${msg.channel.guild.id})'s queue`)
         logger.error(err)
         return responder.error('{{%ERROR}}')
       }

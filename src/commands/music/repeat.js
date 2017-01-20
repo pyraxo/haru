@@ -20,7 +20,7 @@ class Repeat extends Command {
         command: `**\`${settings.prefix}summon\`**`
       })
     }
-    const chan = music.getBoundChannel(msg.guild.id)
+    const chan = music.getBoundChannel(msg.channel.guild.id)
     if (chan && chan !== msg.channel.id) {
       return responder.error('{{errors.notChannel}}', {
         channel: client.getChannel(chan).mention,
@@ -29,12 +29,12 @@ class Repeat extends Command {
     }
 
     try {
-      const isRepeat = await music.queue.isRepeat(msg.guild.id)
-      await cache.client[isRepeat ? 'srem' : 'sadd']('music:repeats', msg.guild.id)
+      const isRepeat = await music.queue.isRepeat(msg.channel.guild.id)
+      await cache.client[isRepeat ? 'srem' : 'sadd']('music:repeats', msg.channel.guild.id)
 
       return responder.success(`{{repeat${isRepeat ? 'Off' : 'On'}}}`)
     } catch (err) {
-      logger.error(`Error toggling repeat for ${msg.guild.name} (${msg.guild.id})`)
+      logger.error(`Error toggling repeat for ${msg.channel.guild.name} (${msg.channel.guild.id})`)
       logger.error(err)
       return responder.error()
     }

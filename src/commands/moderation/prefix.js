@@ -23,7 +23,7 @@ class Prefix extends Command {
         prefix: `**\`${args.prefix}\`**`
       })
     } catch (err) {
-      logger.error(`Could not change prefix to '${args.prefix}' for ${msg.guild.name} (${msg.guild.id}) - ${err}`)
+      logger.error(`Could not change prefix to '${args.prefix}' for ${msg.channel.guild.name} (${msg.channel.guild.id}) - ${err}`)
       return responder.error()
     }
   }

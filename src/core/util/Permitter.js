@@ -23,7 +23,7 @@ const Permitter = {
   },
 
   verifyMessage (node, msg, perms = {}, defVal = true) {
-    if (!msg.guild) return true
+    if (!msg.channel.guild) return true
     let res = Permitter.check(`${msg.channel.id}.${msg.author.id}.${node}`, perms)
     if (Permitter.isBoolean(res)) return res
 

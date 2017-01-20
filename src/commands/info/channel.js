@@ -21,7 +21,7 @@ class ChannelInfo extends Command {
 
     return responder.embed({
       color: this.colours.blue,
-      author: { name: responder.t('{{channel.title}}', { channel: '#' + channel.name }), icon_url: msg.guild.iconURL },
+      author: { name: responder.t('{{channel.title}}', { channel: '#' + channel.name }), icon_url: msg.channel.guild.iconURL },
       fields: [
         { name: 'ID', value: channel.id, inline: true },
         { name: responder.t('{{channel.type}}'), value: responder.t(channel.type === 0 ? '{{channel.text}}' : '{{channel.voice}}'), inline: true },

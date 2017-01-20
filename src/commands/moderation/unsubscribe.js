@@ -45,7 +45,7 @@ class Unsubscribe extends Command {
         events: args.event.map(e => `**\`${e}\`**`).join(', ')
       })
     } catch (err) {
-      logger.error(`Error saving unsubscribed events for #${msg.channel.name} (${msg.channel.id}) in ${msg.guild.name} (${msg.guild.id})`)
+      logger.error(`Error saving unsubscribed events for #${msg.channel.name} (${msg.channel.id}) in ${msg.channel.guild.name} (${msg.channel.guild.id})`)
       logger.error(err)
       return responder.error()
     }

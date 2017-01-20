@@ -64,7 +64,7 @@ class Enabler extends Command {
         })(type)
       })
     } catch (err) {
-      logger.error(`Could not ${trigger} ${cmd} for ${msg.guild.name} (${msg.guild.id}) - ${err}`)
+      logger.error(`Could not ${trigger} ${cmd} for ${msg.channel.guild.name} (${msg.channel.guild.id}) - ${err}`)
       return responder.error()
     }
   }

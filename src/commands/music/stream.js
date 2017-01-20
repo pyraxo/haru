@@ -20,7 +20,7 @@ class Stream extends Command {
         command: `**\`${settings.prefix}summon\`**`
       })
     }
-    const chan = music.getBoundChannel(msg.guild.id)
+    const chan = music.getBoundChannel(msg.channel.guild.id)
     if (chan && chan !== msg.channel.id) {
       return responder.error('{{errors.notChannel}}', {
         channel: client.getChannel(chan).mention,

@@ -439,9 +439,9 @@ class Music extends Module {
   }
 
   onMessage (msg) {
-    if (!msg.guild) return
+    if (!msg.channel.guild) return
 
-    const text = this.getBoundChannel(msg.guild)
+    const text = this.getBoundChannel(msg.channel.guild)
     if (!text || text !== msg.channel.id) return
 
     if (!this.getConnection(msg.channel)) return
@@ -470,7 +470,7 @@ class Music extends Module {
         if (i >= items.length) {
           return resolve(first)
         }
-        return this.add(msg.guild.id, voiceChannel, `https://www.youtube.com/watch?v=${item}`)
+        return this.add(msg.channel.guild.id, voiceChannel, `https://www.youtube.com/watch?v=${item}`)
         .then(() => {
           if (!first) first = item
           return loop(i)
@@ -499,7 +499,7 @@ class Music extends Module {
     const conn = this.getConnection(msg.channel)
     const voiceChannel = this.bot.getChannel(conn.channelID)
     const query = this.parseLink(text)
-    const settings = await this.bot.engine.db.data.Guild.fetch(msg.guild.id)
+    const settings = await this.bot.engine.db.data.Guild.fetch(msg.channel.guild.id)
     try {
       if (query.pid) {
         const m = await this.send(msg.channel, `:hourglass:  |  **${msg.author.username}**, {{queueProgress}}`)
@@ -516,7 +516,7 @@ class Music extends Module {
         return this.deleteMessages(msg)
       } else if (query.v) {
         const videoID = await this.validate(query.v)
-        const info = await this.add(msg.guild.id, voiceChannel, `https://www.youtube.com/watch?v=${videoID}`)
+        const info = await this.add(msg.channel.guild.id, voiceChannel, `https://www.youtube.com/watch?v=${videoID}`)
         const length = info.length ? `(${moment.duration(info.length, 'seconds').format('h[h] m[m] s[s]')}) ` : ''
 
         await this.send(msg.channel, `:success:  |  {{queued}} **${info.title}** ${length}- **${msg.author.mention}**`)
@@ -524,7 +524,7 @@ class Music extends Module {
       }
     } catch (err) {
       if (err instanceof Error) {
-        logger.error(`Error adding ${query.v ? 'song ' + query.v : 'playlist ' + query.pid} to ${msg.guild.name} (${msg.guild.id})'s queue`)
+        logger.error(`Error adding ${query.v ? 'song ' + query.v : 'playlist ' + query.pid} to ${msg.channel.guild.name} (${msg.channel.guild.id})'s queue`)
         logger.error(err)
         return this.send(msg.channel, `:error:  |  **${msg.author.username}**, {{%ERROR}}\n\n${err}`)
       }

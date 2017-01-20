@@ -74,13 +74,13 @@ class HelpMenu extends Command {
       DM: true,
       prefix: `\`${prefix}\``,
       defaultPrefix: `\`${process.env.CLIENT_PREFIX}\``,
-      server: `**${msg.guild ? msg.guild.name : responder.t('{{pms}}')}**`,
+      server: `**${msg.channel.guild ? msg.channel.guild.name : responder.t('{{pms}}')}**`,
       helpCommand: `\`${prefix}help <command>\``,
       exampleCommand: `\`${prefix}help credits\``,
       link: '**<https://discord.gg/bBqpAKw>**'
     })
     .then(m => {
-      if (msg.guild) {
+      if (msg.channel.guild) {
         responder.format('emoji:inbox').reply('{{checkPMs}}')
       }
     })
