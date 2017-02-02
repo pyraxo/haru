@@ -18,8 +18,10 @@ class HelpMenu extends Command {
     if (args.command) {
       const command = args.command.cmd
       const name = command.labels[0]
-      let desc = this.i18n.get(`descriptions.${name}`, settings.lang) || this.i18n.get(`${command.localeKey}.description`, settings.lang)
+      let desc = this.i18n.get(`descriptions.${name}`, settings.lang) ||
+      this.i18n.get(`${command.localeKey}.description`, settings.lang)
       if (typeof desc !== 'string') desc = command.description || '{{noDesc}}'
+
       let reply = [
         `**\`${prefix}${name}\`**  __\`${desc}\`__\n`,
         `**{{definitions.usage}}**: ${prefix}${command.labels[0]} ${Object.keys(command.resolver.usage).map(usage => {
@@ -29,6 +31,13 @@ class HelpMenu extends Command {
       ]
       if (command.labels.length > 1) {
         reply.push(`\n**{{definitions.aliases}}**: \`${command.labels.slice(1).join(' ')}\``)
+      }
+      if (command._help) {
+        for (const key in command._help) {
+          let val = command._help[key]
+          val = val instanceof Array ? val.join(', ') : val
+          reply.push(`\n**${this.i18n.get(`${command.localeKey}.${key}`, settings.lang) || key}**: ${command._help[key]}`)
+        }
       }
       reply.push('\n{{footer_group}}')
       responder.send(reply.join('\n'))
@@ -43,7 +52,7 @@ class HelpMenu extends Command {
 
       let desc = this.i18n.get(`descriptions.${name}`, settings.lang) ||
       this.i18n.get(`${c.cmd.localeKey}.description`, settings.lang)
-      if (typeof desc !== 'string') desc = '{{noDesc}}'
+      if (typeof desc !== 'string') desc = c.cmd.description || '{{noDesc}}'
 
       if (name.length > maxPad) maxPad = name.length
       if (!Array.isArray(obj[module])) obj[module] = []
