@@ -100,7 +100,7 @@ class Booru extends Command {
           rating: r.rating,
           tags,
           icon: 'http://gelbooru.com/favicon.png',
-          url: r.file_url,
+          url: 'https:' + r.file_url,
           height: r.height,
           width: r.width,
           id: r.id,
