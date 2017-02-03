@@ -11,6 +11,10 @@ class Stream extends Command {
     })
   }
 
+  get _help () {
+    return { stations: ['listen.moe'] }
+  }
+
   async handle ({ msg, settings, client, args, modules }, responder) {
     const music = modules.get('music')
     if (!music) return

@@ -104,12 +104,12 @@ class Base {
         }
         return msg
       }
-      let replies = await Promise.mapSeries(content, (c, idx) => {
-        return channel.createMessage(!idx ? { embed, content: c } : c, !idx ? file : null).then(msg => {
+      let replies = await Promise.mapSeries(content, (c, idx) =>
+        channel.createMessage(!idx ? { embed, content: c } : c, !idx ? file : null).then(msg => {
           if (deleteDelay) setTimeout(() => msg.delete(), deleteDelay)
           return msg
         })
-      })
+      )
       return replies[0]
     } catch (err) {
       logger.error(`Error sending message to ${channel.name} (${channel.id})`)

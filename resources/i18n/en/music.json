@@ -54,5 +54,6 @@
     "The bot is being restarted, all voice connections have been terminated.\n",
     "The current queue has been saved in the database.",
     "We apologise for any inconvenience caused."
-  ]
+  ],
+  "stations": "Stations"
 }

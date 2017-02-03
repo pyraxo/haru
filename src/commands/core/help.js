@@ -19,8 +19,8 @@ class HelpMenu extends Command {
       const command = args.command.cmd
       const name = command.labels[0]
       let desc = this.i18n.get(`descriptions.${name}`, settings.lang) ||
-      this.i18n.get(`${command.localeKey}.description`, settings.lang)
-      if (typeof desc !== 'string') desc = command.description || '{{noDesc}}'
+      this.i18n.get(`${command.localeKey}.description`, settings.lang) ||
+      command.description || '{{noDesc}}'
 
       let reply = [
         `**\`${prefix}${name}\`**  __\`${desc}\`__\n`,
@@ -51,8 +51,8 @@ class HelpMenu extends Command {
       const name = c.cmd.labels[0]
 
       let desc = this.i18n.get(`descriptions.${name}`, settings.lang) ||
-      this.i18n.get(`${c.cmd.localeKey}.description`, settings.lang)
-      if (typeof desc !== 'string') desc = c.cmd.description || '{{noDesc}}'
+      this.i18n.get(`${c.cmd.localeKey}.description`, settings.lang) ||
+      c.cmd.description || '{{noDesc}}'
 
       if (name.length > maxPad) maxPad = name.length
       if (!Array.isArray(obj[module])) obj[module] = []

@@ -30,11 +30,13 @@ class Command extends Base {
     usage = [],
     options = {},
     subcommands = {},
-    subcommand
+    subcommand,
+    description
   } = {}) {
     this.labels = typeof name === 'string'
     ? [name].concat(aliases)
     : (Array.isArray(aliases) && aliases.length > 0 ? aliases : [])
+    this.description = description
 
     if (this.labels.length === 0) {
       throw new Error(`${this.constructor.name} command is not named`)
