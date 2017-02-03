@@ -36,5 +36,37 @@
   },
   "reset": {
     "success": "reset all permission settings in the server."
+  },
+  "welcome": {
+    "dialog": "Welcome Messages",
+    "action": {
+      "set": "Set the welcome message",
+      "get": "Get the current welcome message",
+      "enable": "Use this channel to send welcome messages"
+    },
+    "get": "Current Welcome Message:",
+    "setDialog": [
+      "{{author}}, please enter the new welcome message.",
+      "Supported tags: {{tags}}",
+      "To use a tag, surround it with `{{}}`. E.g. `{{guild}}`"
+    ],
+    "success": "the new welcome message is:",
+    "enabled": "now sending welcome messages in {{channel}}"
+  },
+  "goodbye": {
+    "dialog": "Goodbye Messages",
+    "action": {
+      "set": "Set the goodbye message",
+      "get": "Get the current goodbye message",
+      "enable": "Use this channel to send goodbye messages"
+    },
+    "get": "Current Goodbye Message:",
+    "setDialog": [
+      "{{author}}, please enter the new goodbye message.",
+      "Supported tags: {{tags}}",
+      "To use a tag, surround it with `{{}}`. E.g. `{{guild}}`"
+    ],
+    "success": "the new goodbye message is:",
+    "enabled": "now sending goodbye messages in {{channel}}"
   }
 }

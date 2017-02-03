@@ -42,5 +42,7 @@
   "subscribe": "Subscribes a channel to an event",
   "unsubscribe": "Unsubscribes a channel from an event",
   "timezone": "Allows moderators to set a guild's timezone",
-  "urban": "Searches Urban Dictionary for meanings"
+  "urban": "Searches Urban Dictionary for meanings",
+  "welcome": "Allows moderators to send welcome messages",
+  "goodbye": "Allows moderators to send goodbye messages"
 }
