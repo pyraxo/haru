@@ -5,6 +5,7 @@ class Eval extends Command {
     super(...args, {
       name: 'eval',
       description: 'Evaluates an expression',
+      usage: [{ name: 'code', type: 'string', optional: false, last: true }],
       options: {
         adminOnly: true
       },
@@ -13,40 +14,58 @@ class Eval extends Command {
   }
 
   createEmbed (success = true, isPromise = false, result) {
-    let embed = {
-      description: String(result ? result.content || result.message || result : 'null')
-    }
     let title
     let color
-    if (success) {
-      title = isPromise ? 'Promise resolved' : 'Success'
-      color = this.colours.green
-    } else if (success === null && isPromise) {
-      title = 'Promise resolving'
-      color = this.colours.blue
+    let message
+    if (isPromise) {
+      switch (success) {
+        case true: {
+          title = 'Promise resolved'
+          message = String(result || 'undefined')
+          color = this.colours.green
+          break
+        }
+        case false: {
+          title = 'Promise rejected'
+          message = result.message
+          color = this.colours.red
+          break
+        }
+        default: {
+          title = 'Promise'
+          message = 'Promise pending'
+          color = this.colours.blue
+          break
+        }
+      }
     } else {
-      title = isPromise ? 'Promise rejected' : 'Error'
-      color = this.colours.red
+      if (success) {
+        title = 'Success'
+        message = String(result)
+        color = this.colours.green
+      } else {
+        title = 'Error'
+        message = result.message
+        color = this.colours.red
+      }
     }
-    embed.title = title
-    embed.color = color
-    return embed
+    return { title, color, description: message }
   }
 
   async handle (container, responder) {
-    const { rawArgs } = container
+    const { client } = container
     let resp
     try {
-      resp = eval(rawArgs.join(' ')) // eslint-disable-line
+      resp = eval(container.args.code) // eslint-disable-line
     } catch (err) {
       resp = err
     }
 
     const success = !(resp instanceof Error)
-    const isPromise = typeof resp === 'function' && (resp.then ? resp.then : false)
+    const isPromise = resp && !!(resp.then)
 
     const message = await responder.embed(
-      this.createEmbed(isPromise ? null : success, isPromise, (resp && resp.message) ? resp.message : resp)
+      this.createEmbed(isPromise ? null : success, isPromise, resp)
     ).send()
 
     if (!isPromise) return

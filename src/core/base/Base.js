@@ -85,7 +85,7 @@ class Base {
       await Promise.delay(delay)
     }
 
-    lang = !lang && channel.guild ? (await this.bot.engine.db.data.Guild.fetch(channel.guild.id)).lang : 'en'
+    lang = (!lang && channel.guild) ? (await this.bot.engine.db.data.Guild.fetch(channel.guild.id)).lang : 'en'
 
     if (Array.isArray(content)) content = content.join('\n')
     content = this.t(content, lang, options)
@@ -114,7 +114,7 @@ class Base {
     } catch (err) {
       logger.error(`Error sending message to ${channel.name} (${channel.id})`)
       if (err.response) {
-        logger.error(JSON.parse(err.response).message)
+        logger.error(err.response)
         return
       }
       throw err
