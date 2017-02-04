@@ -43,9 +43,11 @@ class Welcome extends Command {
         settings.welcome.msg.replace('`', '\\`'),
         '```'
       ]), err => {
-      logger.error(`Error setting welcome message for ${msg.channel.guild.name} (${msg.channel.guild.id}) -`, err)
-      return responder.error()
-    })
+        if (typeof err === 'undefined') return
+        logger.error(`Error setting welcome message for ${msg.channel.guild.name} (${msg.channel.guild.id}) -`, err)
+        return responder.error()
+      }
+    )
   }
 
   async get ({ settings }, responder) {
