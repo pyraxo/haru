@@ -31,11 +31,14 @@ class Reactions extends Module {
     }
   }
 
-  addMenu (msg, userID, list = [], cleanup = true) {
+  addMenu (msg, userID, list = [], { cleanup = true, timeout = 0 } = {}) {
     return new Promise((resolve, reject) => {
-      let emojis = list.filter(e => Emojis[e] || Emoji.get(e) || e.split(':').length === 2)
-      this.addMulti(msg, emojis.map(e => Emojis[e] || Emoji.get(e)))
-      .then(() => this.menus.set(msg.id, { msg, user: userID, emojis, resolve, cleanup }))
+      let emojis = list.map(e => Emojis[e] || Emoji.get(e)[0] !== ':' ? Emoji.get(e) : e)
+      this.addMulti(msg, emojis)
+      .then(() => {
+        this.menus.set(msg.id, { msg, user: userID, emojis, resolve, cleanup })
+        if (timeout) setTimeout(() => this.menus.delete(msg.id), timeout)
+      })
       .catch(reject)
     })
   }
@@ -50,7 +53,11 @@ class Reactions extends Module {
     const menu = this.menus.get(msg.id)
     if (!menu) return
     this.bot.getMessage(msg.channel.id, msg.id).then(message => {
-      const emCheck = !menu.emojis.includes(emoji.id ? `${emoji.name}:${emoji.id}` : Emoji.which(emoji.name))
+      const emCheck = !menu.emojis.includes(
+        emoji.id ? `${emoji.name}:${emoji.id}` : Emoji.get(emoji.name)[0] !== ':'
+        ? Emoji.get(emoji.name)
+        : emoji.name
+      )
       if (emCheck || (userID !== menu.user && userID !== this.bot.user.id)) {
         return message.removeReaction(emoji.id ? `${emoji.name}:${emoji.id}` : emoji.name, userID)
       }

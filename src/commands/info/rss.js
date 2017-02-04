@@ -97,7 +97,9 @@ class RSS extends Command {
     })
   }
 
-  list ({ msg, db, trigger, settings, args }, responder) {
+  list (container, responder, page = 0) {
+    const pagination = (page < 0 ? 0 : page) * 10
+    const { msg, db, trigger, settings, args, modules } = container
     return db.RSS.filter(feed => feed('channels')('channel').contains(msg.channel.id)).run().then(feeds => {
       if (!feeds.length) {
         return responder.format('emoji:newspaper').reply('{{notSubscribed}}', {
@@ -105,13 +107,24 @@ class RSS extends Command {
           command: `**\`${settings.prefix}${trigger}\`**`
         })
       }
+      feeds = feeds.slice(pagination, pagination + 10)
+
       return responder.format('emoji:newspaper').embed({
         description: [
           `**${responder.t('{{subscribedFeeds}}', { channel: '#' + msg.channel.name })}**\n`,
           feeds.map((f, i) => `\`[${i+1}]\` [${f.name}](${f.id})`).join('\n')
         ].join('\n'),
         color: this.colours.blue
-      }).reply('{{subscribedTo}}', { channel: `**#${msg.channel.name}**` })
+      }).reply('{{subscribedTo}}', { channel: `**#${msg.channel.name}**` }).then(m => {
+        if (pagination + 10 > feeds.length) return
+        let emotes = []
+        if (pagination) emotes.push('⬅')
+        if (pagination + 10 <= feeds.length) emotes.push('➡')
+        const reactions = modules.get('reactions')
+        return reactions && reactions.addMenu(m, msg.author.id, emotes, { timeout: 10000 }).then(r =>
+          this.list(container, responder, r === 'arrow_left' ? --page : ++page)
+        )
+      })
     })
   }
 
