@@ -67,7 +67,7 @@ class Manga extends Command {
 				},
         {
 					name: responder.t('{{genres}}'),
-					value: data.genres.join(', '),
+					value: data.genres.join(', ') || '?',
 					inline: true
 				},
         {

@@ -80,12 +80,13 @@ class Anime extends Command {
 				},
         {
 					name: responder.t('{{genres}}'),
-					value: data.genres.join(', '),
+					value: data.genres.join(', ') || '?',
 					inline: true
 				},
         {
           name: responder.t('{{synopsis}}'),
-          value: data.description ? data.description.replace(/\\n/g, '\n').replace(/<br>|\\r/g, '').substring(0, 1000) : '{{noDesc}}'
+          value: data.description
+          ? data.description.replace(/\\n/g, '\n').replace(/<br>|\\r/g, '').substring(0, 1000) : responder.t('{{noDesc}}')
         }
       ],
       footer: {
