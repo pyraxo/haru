@@ -17,7 +17,7 @@ class Manga extends Command {
       options: { botPerms: ['embedLinks'], localeKey: 'anime' }
     })
 
-    nani.init('pyraxo-3vex3', 'XBrVJIxKyatrHhlFcx')
+    nani.init(process.env.API_ANILIST_CLIENT, process.env.API_ANILIST_SECRET)
   }
 
   async handle ({ msg, args }, responder) {

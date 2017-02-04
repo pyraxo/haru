@@ -24,7 +24,7 @@ class Anime extends Command {
       options: { botPerms: ['embedLinks'] }
     })
 
-    nani.init('pyraxo-3vex3', 'XBrVJIxKyatrHhlFcx')
+    nani.init(process.env.API_ANILIST_CLIENT, process.env.API_ANILIST_SECRET)
   }
 
   parseSeason (season) {
