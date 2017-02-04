@@ -127,6 +127,7 @@ class Companions extends Command {
       ])
     } catch (err) {
       if (typeof err !== 'undefined') {
+        if (!err.reason) return responder.error()
         return responder.error(`{{%menus.ERRORED}} **{{%collector.${err.reason}}}**`, {
           [err.reason]: err.arg, err: `**${err.reason}**`
         })
