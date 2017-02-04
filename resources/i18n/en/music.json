@@ -55,5 +55,6 @@
     "The current queue has been saved in the database.",
     "We apologise for any inconvenience caused."
   ],
-  "stations": "Stations"
+  "stations": "Stations",
+  "shuffled": "shuffled {{num}} entries in the queue."
 }

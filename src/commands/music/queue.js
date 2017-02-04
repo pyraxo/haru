@@ -23,7 +23,7 @@ class Queue extends Command {
       if (queue.length) rep.push('**__{{queuedSongs}}__**\n')
       for (let i = 1; i <= queue.length; i++) {
         const entry = JSON.parse(queue[i - 1])
-        rep.push(`\`${i}.\` ${entry.title}`)
+        rep.push(`\`${i}.\` ${entry.title.replace(/\*/g, '\\*')}`)
       }
       return rep.length
       ? responder.send(rep)
