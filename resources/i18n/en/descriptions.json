@@ -47,5 +47,7 @@
   "goodbye": "Allows moderators to send goodbye messages",
   "anime": "Gets information on an anime",
   "manga": "Gets information on a manga",
-  "soundcloud": "Searches songs from Soundcloud"
+  "soundcloud": "Searches songs from Soundcloud",
+  "ban": "Bans a server member",
+  "kick": "Kicks a server member"
 }
