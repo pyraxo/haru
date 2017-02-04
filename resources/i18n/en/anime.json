@@ -1,0 +1,23 @@
+{
+  "noResults": "no results found. Please check your search query.",
+  "synopsis": "Synopsis",
+  "type": "Type",
+  "episodes": "Episodes",
+  "status": "Status",
+  "genres": "Genres",
+  "season": "Season",
+  "score": "Score",
+  "noDesc": "No description",
+  "airing": "Airing on {{start}}",
+  "aired": "Aired from {{start}} to {{end}}",
+  "publishing": "Publishing on {{start}}",
+  "published": "Published from {{start}} to {{end}}",
+  "seasons": {
+    "winter": "Winter",
+    "spring": "Spring",
+    "summer": "Summer",
+    "fall": "Fall"
+  },
+  "volumes": "Volumes",
+  "chapters": "Chapters"
+}
