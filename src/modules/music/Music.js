@@ -217,11 +217,11 @@ class Music extends Module {
   }
 
   getBestAudio (mediaInfo) {
-    let formats = mediaInfo.formats.filter(f => [249, 250, 251].includes(parseInt(f.itag)))
+    let formats = mediaInfo.formats.filter(f => [249, 250, 251].includes(parseInt(f.itag, 10)))
     if (formats && formats.length) {
       return this.getFormatUrl('webm', formats)
     }
-    formats = mediaInfo.formats.filter(f => [141, 140, 139].includes(parseInt(f.itag)))
+    formats = mediaInfo.formats.filter(f => [141, 140, 139].includes(parseInt(f.itag, 10)))
     if (!formats || !formats.length) {
       formats = mediaInfo.formats.filter(f => f.container === 'mp4')
     }
@@ -247,7 +247,8 @@ class Music extends Module {
       audiourl: bestaudio.url,
       audioformat: bestaudio._format,
       audiotype: bestaudio.itag,
-      length: parseInt(info.length_seconds)
+      length: parseInt(info.length_seconds, 10),
+      type: 'yt'
     }
 
     info = fetchAll ? info : formattedInfo
@@ -324,13 +325,17 @@ class Music extends Module {
     const item = await this.queue.shift(guildId)
     const url = mediaInfo ? mediaInfo.url || item.url : item.url
 
-    try {
-      mediaInfo = await this.getInfo(url)
-    } catch (err) {
-      return Promise.reject(err)
-    }
-    if (!mediaInfo) {
-      return this.play(channel)
+    if (!item.type || item.type === 'yt') {
+      try {
+        mediaInfo = await this.getInfo(url)
+      } catch (err) {
+        return Promise.reject(err)
+      }
+      if (!mediaInfo) {
+        return this.play(channel)
+      }
+    } else {
+      mediaInfo = item
     }
 
     return this.player.play(channel, mediaInfo, volume)
@@ -529,6 +534,38 @@ class Music extends Module {
         return this.send(msg.channel, `:error:  |  **${msg.author.username}**, {{%ERROR}}\n\n${err}`)
       }
       return this.send(msg.channel, `:error:  |  **${msg.author.username}**, {{errors.${err}}}`, { command: `**\`${settings.prefix}summon\`**` })
+    }
+  }
+
+  async querySC (query) {
+    const q = query.split(' ').join('_')
+    const info = (await request.get(`https://api.soundcloud.com/tracks/?client_id=${process.env.API_SOUNDCLOUD}&q=${q}`)).body[0]
+    const audio = await request.get(`https://api.soundcloud.com/tracks/${info.id}/stream?client_id=${process.env.API_SOUNDCLOUD}`)
+    return {
+      video_id: info.id,
+      title: info.title,
+      thumbnail_url: info.artwork_url,
+      url: info.uri,
+      audiourl: audio.request.url,
+      audioformat: 'mp3',
+      audiotype: null,
+      length: Math.floor(info.duration / 1000),
+      type: 'sc'
+    }
+  }
+
+  async addSoundcloud (query, msg) {
+    const conn = this.getConnection(msg.channel)
+    const voiceChannel = this.bot.getChannel(conn.channelID)
+    try {
+      const settings = await this.bot.engine.db.data.Guild.fetch(msg.channel.guild.id)
+      const info = await this.queueSong(msg.channel.guild.id, voiceChannel, await this.querySC(query))
+      const length = info.length ? `(${moment.duration(info.length, 'seconds').format('h[h] m[m] s[s]')}) ` : ''
+
+      return this.send(msg.channel, `:success:  |  {{queued}} **${info.title}** ${length}- **${msg.author.mention}**`)
+    } catch (err) {
+      logger.error(`Error querying SC with ${query} -`, err)
+      return this.send(msg.channel, `:error:  |  **${msg.author.username}**, {{%ERROR}}\n\n${err}`)
     }
   }
 }

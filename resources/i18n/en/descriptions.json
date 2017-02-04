@@ -46,5 +46,6 @@
   "welcome": "Allows moderators to send welcome messages",
   "goodbye": "Allows moderators to send goodbye messages",
   "anime": "Gets information on an anime",
-  "manga": "Gets information on a manga"
+  "manga": "Gets information on a manga",
+  "soundcloud": "Searches songs from Soundcloud"
 }
