@@ -72,7 +72,7 @@ class RSS extends Module {
           const included = entry.includedTags || []
           const excluded = entry.excludedTags || []
           for (const tag of categories) {
-            if ((included.length && !included.includes(tag)) || (excluded.length && excluded.includes(tags))) {
+            if ((included.length && !included.includes(tag)) || (excluded.length && excluded.includes(tag))) {
               return
             }
           }
