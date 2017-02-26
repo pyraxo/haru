@@ -62,7 +62,7 @@ class Credits extends Command {
       switch (res) {
         case -1:
         case -2: {
-          const amt = ~~(Math.random() * 100) + 50
+          const amt = ~~(Math.random() * 1000) + 1000
           await this.topup(data, msg.author.id, amt)
           await cache.store(claimID, 1, 28800)
           return responder.format('emoji:credits').reply('{{topup}}', { amount: `**${amt}**` })
