@@ -219,7 +219,14 @@
             "unsubscribe": "Nu vei mai urmări notificări în acest canal",
             "timezone": "Lasă moderatorii să schimbe fusul orar al serverului",
             "urban": "Caută răspunsuri pe Urban Dictionary",
-            "reset": "Resets all permission settings in a server"
+            "reset": "Resetează toate setările de permisiuni din server",
+            "welcome": "Allows moderators to send welcome messages",
+            "goodbye": "Allows moderators to send goodbye messages",
+            "anime": "Gets information on an anime",
+            "manga": "Gets information on a manga",
+            "soundcloud": "Searches songs from Soundcloud",
+            "ban": "Bans a server member",
+            "kick": "Kicks a server member"
         },
         "guilds": {
             "join": [
@@ -227,7 +234,32 @@
                 "",
                 "Poţi găsi o listă cu toate comenzile mele tastând {{help}} în chat!",
                 "Să ştii mai multe despre mine, foloseşte comanda {{about}}!"
-            ]
+            ],
+            "ban": {
+                "self": "you can't ban yourself!",
+                "msg": "you have swung the banhammer on {{member}}. May the Goddesses have mercy.",
+                "dialog": [
+                    "Swinging the Banhammer",
+                    "",
+                    "{{user}}, you are about to swing the banhammer on {{member}}.",
+                    "To confirm, enter {{quote}} or {{exit}} to quit the menu."
+                ],
+                "exit": "the member has **not** been banned.",
+                "exitError": "something wrong happened, so the member has **not** been banned."
+            },
+            "kick": {
+                "self": "you can't kick yourself!",
+                "msg": "{{member}} has been kicked. That felt good.",
+                "dialog": [
+                    "Kicking Someone?!",
+                    "",
+                    "{{user}}, you are about to kick {{member}}.",
+                    "To confirm, enter {{quote}} or {{exit}} to quit the menu."
+                ],
+                "exit": "the member has **not** been kicked.",
+                "exitError": "something wrong happened, so the member has **not** been kicked."
+            },
+            "reason": "Reason"
         },
         "help": {
             "header_1": "Pentru a utiliza o comandă, foloseşte-o cu {{prefix}} în {{server}}",
@@ -335,8 +367,8 @@
                 "error": "ceva s-a întâmplat! Te rog încearcă mai târziu sau raportează problema.",
                 "notInSameVoice": "trebuie să fii în canalul de voce numit {{channel}}!",
                 "skipNotFound": "videoclipul cerut nu a putut fii găsit.",
-                "notReadyYet": "The connection was not ready after 5 tries. Disconnected from voice channel.",
-                "connError": "A Discord error occurred while streaming to the channel: {{err}}\n"
+                "notReadyYet": "Conexiunea nu a fost gata după 5 încercări.M-am deconectat de la canalul de voce",
+                "connError": "O eroare de la Discord a intervenit în timp ce transmite am în canal: {{err}}"
             },
             "dc": "Am părăsit '{{voice}}' şi nu o să mai primesc comenzi pentru muzică în {{text}}.",
             "switch": "Mă schimb în modul de radio şi joc {{station}}",
@@ -364,7 +396,9 @@
             "votedSkip": "ai votat să treci peste această melodie o dată!",
             "voteSkipSuccess": "ai votat să treci peste această melodie!",
             "votedClear": "ai votat deja să cureţi lista de melodii!",
-            "voteClearSuccess": "ai votat să cureţi lista de melodii!"
+            "voteClearSuccess": "ai votat să cureţi lista de melodii!",
+            "stations": "Stations",
+            "shuffled": "shuffled {{num}} entries in the queue."
         },
         "slots": {
             "insufficient": [
@@ -397,7 +431,7 @@
             "prefix": {
                 "success": "prefixul serverului s-a schimbat în {{prefix}}",
                 "revert": "prefixul serverului este dinou {{prefix}}",
-                "current": "the current prefix for this server is: {{prefix}}"
+                "current": "prefixul pentru acest server este: {{prefix}}"
             },
             "lang": {
                 "success": "aţi schimbat cu succes limba vorbită în acest server {{lang}}"
@@ -418,7 +452,7 @@
                     "",
                     "Vizitează {{link}} pentru o listă validă."
                 ],
-                "current": "the current timezone for this server is: {{tz}}"
+                "current": "fusul orar pentru acest server e: {{tz}}"
             },
             "subscribe": {
                 "eventNotFound": [
@@ -432,7 +466,39 @@
                 "list": "{{channel}} urmăreşte notificări pentru {{events}}."
             },
             "reset": {
-                "success": "reset all permission settings in the server."
+                "success": "am resetat permisiunile setărilor în server"
+            },
+            "welcome": {
+                "dialog": "Welcome Messages",
+                "action": {
+                    "set": "Set the welcome message",
+                    "get": "Get the current welcome message",
+                    "enable": "Use this channel to send welcome messages"
+                },
+                "get": "Current Welcome Message:",
+                "setDialog": [
+                    "{{author}}, please enter the new welcome message.",
+                    "Supported tags: {{tags}}",
+                    "To use a tag, surround it with `{{}}`. E.g. `{{guild}}`"
+                ],
+                "success": "the new welcome message is:",
+                "enabled": "now sending welcome messages in {{channel}}"
+            },
+            "goodbye": {
+                "dialog": "Goodbye Messages",
+                "action": {
+                    "set": "Set the goodbye message",
+                    "get": "Get the current goodbye message",
+                    "enable": "Use this channel to send goodbye messages"
+                },
+                "get": "Current Goodbye Message:",
+                "setDialog": [
+                    "{{author}}, please enter the new goodbye message.",
+                    "Supported tags: {{tags}}",
+                    "To use a tag, surround it with `{{}}`. E.g. `{{guild}}`"
+                ],
+                "success": "the new goodbye message is:",
+                "enabled": "now sending goodbye messages in {{channel}}"
             }
         },
         "purge": {
@@ -481,9 +547,9 @@
             }
         },
         "rss": {
-            "success": "added feed for {{channel}} with {{included}} included tags and {{excluded}} excluded tags: {{url}}",
-            "error": "could not validate {{url}}. Please check if it's a valid RSS feed.",
-            "rssDialog": "RSS Menu",
+            "success": "am adăugat feedul ot {{channel}} cu {{include}} târgurile incluse si {{excluded}} târgurile excluse: {{url}}",
+            "error": "nu am putut valida, {{url}}. Te rugăm sa verifici dacă e un RSS valid",
+            "rssDialog": "Meniu RSS",
             "rssDelFooter": "Enter the number of the RSS feed you would like to remove, or {{cancel}} to exit.",
             "urlDialog": [
                 "**RSS - Feed URL**",
@@ -522,6 +588,29 @@
                 "list": "List all RSS feeds added in this channel",
                 "clear": "Clears all RSS feeds added in this channel"
             }
+        },
+        "anime": {
+            "noResults": "no results found. Please check your search query.",
+            "synopsis": "Synopsis",
+            "type": "Type",
+            "episodes": "Episodes",
+            "status": "Status",
+            "genres": "Genres",
+            "season": "Season",
+            "score": "Score",
+            "noDesc": "No description",
+            "airing": "Airing on {{start}}",
+            "aired": "Aired from {{start}} to {{end}}",
+            "publishing": "Publishing on {{start}}",
+            "published": "Published from {{start}} to {{end}}",
+            "seasons": {
+                "winter": "Winter",
+                "spring": "Spring",
+                "summer": "Summer",
+                "fall": "Fall"
+            },
+            "volumes": "Volumes",
+            "chapters": "Chapters"
         }
     }
 }

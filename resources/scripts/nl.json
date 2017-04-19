@@ -216,7 +216,14 @@
             "unsubscribe": "Ontkoppelt een evenement van een kanaal",
             "timezone": "Staat beheerders toe om een gilde's tijdzone in te stellen",
             "urban": "Doorzoekt Urban Dictionary voor betekenissen",
-            "reset": "Reset alle permissie-instellingen in een server"
+            "reset": "Reset alle permissie-instellingen in een server",
+            "welcome": "Staat toe dat beheerders welkomstberichten kunnen versturen",
+            "goodbye": "Staat toe dat beheerders verlatingsberichten kunnen sturen",
+            "anime": "Krijgt informatie over een anime",
+            "manga": "Krijgt informatie over een manga",
+            "soundcloud": "Zoek liedjes van Soundcloud",
+            "ban": "Verbant een servergebruiker",
+            "kick": "Kickt een servergebruiker"
         },
         "guilds": {
             "join": [
@@ -224,7 +231,32 @@
                 "",
                 "Je kan een lijst met mijn commando's vinden door {{help}} in de chat te typen!",
                 "Om meer over mij te leren, gebruik je het {{about}} commando!"
-            ]
+            ],
+            "ban": {
+                "self": "je kan jezelf niet verbannen!",
+                "msg": "je hebt de banhammer neer laten komen op {{member}}. Moge de Godinnen vergevingsgezind zijn.",
+                "dialog": [
+                    "Banhammer neer laten komen",
+                    "",
+                    "{{user}}, je staat op het punt om de banhammer neer te laten komen op {{member}}.",
+                    "Om goed te keuren, voer {{quote}} in, of voer {{exit}} in om het menu te verlaten."
+                ],
+                "exit": "de gebruiker is **niet** verbannen.",
+                "exitError": "er is iets fout gegaan, dus de gebruiker is **niet** verbannen."
+            },
+            "kick": {
+                "self": "je kan jezelf niet kicken!",
+                "msg": "{{member}} is gekickt. Dat voelde goed.",
+                "dialog": [
+                    "Iemand kicken?!",
+                    "",
+                    "{{user}}, je staat op het punt om {{member}} te kicken.",
+                    "Om goed te keuren, voer {{quote}} in, of voer {{exit}} in om het menu te verlaten."
+                ],
+                "exit": "de gebruiker is **niet** gekickt.",
+                "exitError": "er is iets fout gegaan, dus de gebruiker is **niet** gekickt."
+            },
+            "reason": "Reden"
         },
         "help": {
             "header_1": "Om een commando uit te voeren, moet je het oproepen met {{prefix}} in {{server}}",
@@ -361,7 +393,9 @@
             "votedSkip": "je hebt al gestemd om dit liedje over te slaan!",
             "voteSkipSuccess": "je hebt gestemd om dit liedje over te slaan!",
             "votedClear": "je hebt al gestemd om de rij leeg te maken!",
-            "voteClearSuccess": "je hebt gestemd om de huidige rij leeg te maken!"
+            "voteClearSuccess": "je hebt gestemd om de huidige rij leeg te maken!",
+            "stations": "Kanalen",
+            "shuffled": "{{num}} nummers gehusseld in de rij."
         },
         "slots": {
             "insufficient": [
@@ -430,6 +464,38 @@
             },
             "reset": {
                 "success": "Reset alle permissie-instellingen in de server"
+            },
+            "welcome": {
+                "dialog": "Welkomstberichten",
+                "action": {
+                    "set": "Stel het welkomstbericht in",
+                    "get": "Zie het huidige welkomstbericht",
+                    "enable": "Gebruik dit kanaal om welkomstberichten te versturen"
+                },
+                "get": "Huidig Welkomstbericht:",
+                "setDialog": [
+                    "{{author}}, voer het nieuwe welkomstbericht in.",
+                    "Ondersteunde tags: {{tags}}",
+                    "Om een tag te gebruiken, omring het met `{{}}`. E.g. `{{guild}}`"
+                ],
+                "success": "het nieuwe welkomstbericht is:",
+                "enabled": "welkomstberichten nu aan het versturen in {{channel}}"
+            },
+            "goodbye": {
+                "dialog": "Verlatingsberichten",
+                "action": {
+                    "set": "Stel het verlatingsbericht in",
+                    "get": "Zie het huidige verlatingsbericht",
+                    "enable": "Gebruik dit kanaal om verlatingsberichten te versturen"
+                },
+                "get": "Huidig Verlatingsbericht",
+                "setDialog": [
+                    "{{author}}, voer het nieuwe verlatingsbericht in.",
+                    "Ondersteunde tags: {{tags}}",
+                    "Om een tag te gebruiken, omring het met `{{}}`. E.g. `{{guild}}`"
+                ],
+                "success": "het nieuwe verlatingsbericht is:",
+                "enabled": "verlatingsberichten nu aan het versturen in {{channel}}"
             }
         },
         "purge": {
@@ -478,47 +544,70 @@
             }
         },
         "rss": {
-            "success": "added feed for {{channel}} with {{included}} included tags and {{excluded}} excluded tags: {{url}}",
-            "error": "could not validate {{url}}. Please check if it's a valid RSS feed.",
+            "success": "feed toegevoegd voor {{channel}} met {{included}} ingesloten tags en {{excluded}} uitgesloten tags: {{url}}",
+            "error": "kon {{url}} niet bevestigen. Check of het een geldige RSS feed is.",
             "rssDialog": "RSS Menu",
-            "rssDelFooter": "Enter the number of the RSS feed you would like to remove, or {{cancel}} to exit.",
+            "rssDelFooter": "Voer het nummer van de RSS feed die je wil verwijderen in, of {{cancel}} of om dit menu te verlaten.",
             "urlDialog": [
                 "**RSS - Feed URL**",
                 "",
-                "{{author}}, please enter the URL of the RSS feed you would like to add.",
-                "Otherwise, enter {{exit}} to exit."
+                "{{author}}, voer de URL van de RSS feed die je wil toevoegen in.",
+                "Anders, typ {{exit}} om dit menu te verlaten."
             ],
             "includedTagsDialog": [
-                "**RSS - Included Tags**",
+                "**RSS - Ingesloten Tags**",
                 "",
-                "{{author}}, please enter a list of included tags, separated by commas. For example: `films, science`",
-                "Otherwise, enter {{skip}} to skip, or {{exit}} to exit."
+                "{{author}}, voer een lijst met met ingesloten tags in, gescheiden door komma's. Bijvoorbeeld: `films, science`",
+                "Anders, typ {{skip}} om dit onderdeel over te slaan, of {{exit}} om dit menu te verlaten."
             ],
             "excludedTagsDialog": [
-                "**RSS - Excluded Tags**",
+                "**RSS - Uitgesloten Tags**",
                 "",
-                "{{author}}, please enter a list of excluded tags, separated by commas. For example: `anime, religion`",
-                "Otherwise, enter {{skip}} to skip, or {{exit}} to exit."
+                "{{author}}, voer een lijst met uitgesloten tags in, gescheiden door komma's. Bijvoorbeeld: `anime, religion`",
+                "Anders, typ {{skip}} om dit onderdeel over te slaan, of {{exit}} om dit menu te verlaten."
             ],
-            "subscribedTo": "{{channel}} is subscribed to the following RSS feeds:",
-            "notSubscribed": "{{channel}} is not subscribed to any feed. Use {{command}} to add a new feed.",
-            "subscribedFeeds": "Subscribed Feeds for {{channel}}",
-            "noFeedFound": "there was no feed found with that name or URL.",
-            "removedFeed": "removed RSS entry: {{feed}}",
+            "subscribedTo": "{{channel}} is geabonneerd op de volgende RSS feeds:",
+            "notSubscribed": "{{channel}} is niet geabonneerd op een feed. Gebruik {{command}} om een nieuwe feed toe te voegen.",
+            "subscribedFeeds": "Geabonneerde Feeds voor {{channel}}",
+            "noFeedFound": "er is geen feed gevonden met die naam of URL.",
+            "removedFeed": "RSS abonnement verwijderd: {{feed}}",
             "confirmClear": [
-                "**Clear all RSS feeds**",
+                "**Verwijder alle RSS feeds**",
                 "",
-                "{{author}}, are you sure you want to clear all RSS feeds?",
-                "Enter {{confirm}} to confirm, or anything else to exit."
+                "{{author}}, weet je zeker dat je alle RSS feeds wil verwijderen?",
+                "Typ {{confirm}} om akkoord te gaan, of iets anders om dit menu te verlaten."
             ],
-            "notCleared": "no RSS feeds were removed.",
-            "cleared": "{{count}} RSS feeds were removed from this channel.",
+            "notCleared": "er zijn geen RSS feeds verwijderd.",
+            "cleared": "{{count}} RSS feeds zijn verwijderd van dit kanaal.",
             "action": {
-                "add": "Add an RSS feed to the channel",
-                "remove": "Remove an RSS feed from the channel",
-                "list": "List all RSS feeds added in this channel",
-                "clear": "Clears all RSS feeds added in this channel"
+                "add": "Voeg een RSS feed toe aan het kanaal",
+                "remove": "Verwijder een RSS feed van een kanaal",
+                "list": "Zet alle RSS feeds toegevoegd in dit kanaal op een rijtje",
+                "clear": "Verwijdert alle RSS feeds toegevoegd in dit kanaal"
             }
+        },
+        "anime": {
+            "noResults": "geen resultaten gevonden. Check je zoekopdracht.",
+            "synopsis": "Overzicht",
+            "type": "Type",
+            "episodes": "Afleveringen",
+            "status": "Status",
+            "genres": "Genres",
+            "season": "Seizoen",
+            "score": "Score",
+            "noDesc": "Geen beschrijving",
+            "airing": "Wordt uitgezonden op {{start}}",
+            "aired": "Uitgezonden van {{start}} tot {{end}}",
+            "publishing": "Wordt gepubliceerd op {{start}}",
+            "published": "Werd gepubliceerd van {{start}} tot {{end}}",
+            "seasons": {
+                "winter": "Winter",
+                "spring": "Lente",
+                "summer": "Zomer",
+                "fall": "Herfst"
+            },
+            "volumes": "Volumes",
+            "chapters": "Hoofdstukken"
         }
     }
 }

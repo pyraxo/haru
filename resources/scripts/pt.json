@@ -219,7 +219,14 @@
             "unsubscribe": "Unsubscribes a channel from an event",
             "timezone": "Allows moderators to set a guild's timezone",
             "urban": "Searches Urban Dictionary for meanings",
-            "reset": "Resets all permission settings in a server"
+            "reset": "Resets all permission settings in a server",
+            "welcome": "Allows moderators to send welcome messages",
+            "goodbye": "Allows moderators to send goodbye messages",
+            "anime": "Gets information on an anime",
+            "manga": "Gets information on a manga",
+            "soundcloud": "Searches songs from Soundcloud",
+            "ban": "Bans a server member",
+            "kick": "Kicks a server member"
         },
         "guilds": {
             "join": [
@@ -227,7 +234,32 @@
                 "",
                 "Podes encontrar uma lista dos meus comandos escrevendo {{help}} no chat!",
                 "Para aprender mais sobre mim, usa {{about}}! "
-            ]
+            ],
+            "ban": {
+                "self": "you can't ban yourself!",
+                "msg": "you have swung the banhammer on {{member}}. May the Goddesses have mercy.",
+                "dialog": [
+                    "Swinging the Banhammer",
+                    "",
+                    "{{user}}, you are about to swing the banhammer on {{member}}.",
+                    "To confirm, enter {{quote}} or {{exit}} to quit the menu."
+                ],
+                "exit": "the member has **not** been banned.",
+                "exitError": "something wrong happened, so the member has **not** been banned."
+            },
+            "kick": {
+                "self": "you can't kick yourself!",
+                "msg": "{{member}} has been kicked. That felt good.",
+                "dialog": [
+                    "Kicking Someone?!",
+                    "",
+                    "{{user}}, you are about to kick {{member}}.",
+                    "To confirm, enter {{quote}} or {{exit}} to quit the menu."
+                ],
+                "exit": "the member has **not** been kicked.",
+                "exitError": "something wrong happened, so the member has **not** been kicked."
+            },
+            "reason": "Reason"
         },
         "help": {
             "header_1": "Para executar um comando, usa o prefixo {{prefix}} em {{server}}",
@@ -332,7 +364,7 @@
                 "errorQueue": "ocurreu um erro enquanto adicionava {{url}} á lista.",
                 "alreadyBinded": "Eu já estou vinculado a {{text}}. Usa os comandos de música nesse canal.",
                 "noPerms": "Eu não tenho permissões para `connect` e/ou `speak` em {{voice}}!",
-                "error": "algo de mau aconteceu! Por favor tenta novamente mais tarde.",
+                "error": "Algo ruim aconteceu! Tente novamente mais tarde ou envie um relatório de bugs.",
                 "notInSameVoice": "precisas de estar no canal de voz {{channel}}!",
                 "skipNotFound": "não foi possível encontrar o vídeo especificado.",
                 "notReadyYet": "The connection was not ready after 5 tries. Disconnected from voice channel.",
@@ -364,7 +396,9 @@
             "votedSkip": "you have already voted to skip this song!",
             "voteSkipSuccess": "you have voted to skip the current song!",
             "votedClear": "you have already voted to clear the queue!",
-            "voteClearSuccess": "you have voted to clear the current queue!"
+            "voteClearSuccess": "you have voted to clear the current queue!",
+            "stations": "Stations",
+            "shuffled": "shuffled {{num}} entries in the queue."
         },
         "slots": {
             "insufficient": [
@@ -433,6 +467,38 @@
             },
             "reset": {
                 "success": "reset all permission settings in the server."
+            },
+            "welcome": {
+                "dialog": "Welcome Messages",
+                "action": {
+                    "set": "Set the welcome message",
+                    "get": "Get the current welcome message",
+                    "enable": "Use this channel to send welcome messages"
+                },
+                "get": "Current Welcome Message:",
+                "setDialog": [
+                    "{{author}}, please enter the new welcome message.",
+                    "Supported tags: {{tags}}",
+                    "To use a tag, surround it with `{{}}`. E.g. `{{guild}}`"
+                ],
+                "success": "the new welcome message is:",
+                "enabled": "now sending welcome messages in {{channel}}"
+            },
+            "goodbye": {
+                "dialog": "Goodbye Messages",
+                "action": {
+                    "set": "Set the goodbye message",
+                    "get": "Get the current goodbye message",
+                    "enable": "Use this channel to send goodbye messages"
+                },
+                "get": "Current Goodbye Message:",
+                "setDialog": [
+                    "{{author}}, please enter the new goodbye message.",
+                    "Supported tags: {{tags}}",
+                    "To use a tag, surround it with `{{}}`. E.g. `{{guild}}`"
+                ],
+                "success": "the new goodbye message is:",
+                "enabled": "now sending goodbye messages in {{channel}}"
             }
         },
         "purge": {
@@ -522,6 +588,29 @@
                 "list": "List all RSS feeds added in this channel",
                 "clear": "Clears all RSS feeds added in this channel"
             }
+        },
+        "anime": {
+            "noResults": "no results found. Please check your search query.",
+            "synopsis": "Synopsis",
+            "type": "Type",
+            "episodes": "Episodes",
+            "status": "Status",
+            "genres": "Genres",
+            "season": "Season",
+            "score": "Score",
+            "noDesc": "No description",
+            "airing": "Airing on {{start}}",
+            "aired": "Aired from {{start}} to {{end}}",
+            "publishing": "Publishing on {{start}}",
+            "published": "Published from {{start}} to {{end}}",
+            "seasons": {
+                "winter": "Winter",
+                "spring": "Spring",
+                "summer": "Summer",
+                "fall": "Fall"
+            },
+            "volumes": "Volumes",
+            "chapters": "Chapters"
         }
     }
 }

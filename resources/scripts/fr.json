@@ -1,0 +1,612 @@
+{
+    "en": {
+        "booru": {
+            "noPictures": "la requête {{query}} n'a retourné aucune image. Essaie de chercher quelque chose d'autre !",
+            "maxTwo": "tu ne peux rechercher sur Danbooru qu'avec un maximum de deux tags !",
+            "score": "Score",
+            "rating": "Classification",
+            "tags": "Tags",
+            "s": "Sûr",
+            "q": "Douteux",
+            "e": "Explicite"
+        },
+        "common": {
+            "CHECK_PMS": "regarde tes messages privés !",
+            "ERROR": "une erreur est survenue ! Réessaie plus tard, ou envoie un rapport de bug.",
+            "ERROR_FULL": "Une erreur est survenue ! Réessaie plus tard, ou envoie un rapport de bug.",
+            "COOLDOWN": "du calme! ({{time}} seconde restante)",
+            "NO_PERMS": "tu as besoin d'avoir la permission {{perms}} pour exécuter cette commande !",
+            "NO_PERMS_BOT": "J'ai besoin de la permission {{perms}} pour exécuter cette commande !",
+            "menus": {
+                "EXIT": "Entre {{cancel}} pour quitter le menu.",
+                "ERRORED": "le menu s'est fermé :",
+                "EXITED": "tu as quitté le menu.",
+                "SELECTION": "Menu de sélection",
+                "ERROR": "Erreur inconnue",
+                "INPUT": "Tape le numéro de ton choix dans le chat ou \"{{cancel}}\" pour annuler.",
+                "MORE_RESULTS": "Et {{num}} de plus..."
+            },
+            "collector": {
+                "timeout": "Expiration après {{timeout}}s",
+                "max": "Tu as dépassé le nombre maximum d'essais ({{max}})",
+                "maxMatches": "Nombre de matches maximum ({{maxMatches}}) dépassé."
+            },
+            "resolver": {
+                "INSUFFICIENT_ARGS": "Il n'y a pas assez d'arguments - Au moins {{requiredArgs}} était(ent) attendu(s), regarde {{argsCount}}",
+                "CORRECT_USAGE": "Usage correct",
+                "NO_END_QUOTE": "il te manque une fin de citation",
+                "member": {
+                    "NOT_FOUND": "cet utilisateur n'a pas été trouvé"
+                },
+                "channel": {
+                    "NOT_FOUND": "ce channel n'a pas été trouvé"
+                },
+                "command": {
+                    "NOT_FOUND": "la commande n'a pas été trouvée."
+                },
+                "string": {
+                    "NOT_STRING": "{{arg}} doit être une chaîne de caractères",
+                    "MAX": "{{arg}} ne doit pas dépasser {{max}}",
+                    "MIN": "la longueur de {{arg}} ne peut être inférieure à {{min}}",
+                    "ONE_OF": "{{arg}} doit être un des arguments suivants"
+                },
+                "list": {
+                    "MAX": "{{arg}} ne peut contenir plus de {{max}} objets",
+                    "MIN": "{{arg}} ne peut contenir moins de {{min}} objets",
+                    "MAX_LENGTH": "{{arg}} ne peut contenir des objets ayant plus de {{maxLength}}",
+                    "MIN_LENGTH": "{{arg}} ne peut contenir des objets ayant plus de {{minLength}}",
+                    "DUPES": "{{arg}} ne peut pas contenir deux valeurs identiques"
+                },
+                "int": {
+                    "NOT_INT": "{{arg}} n'est pas un entier",
+                    "MAX": "{{arg}} doit être inférieur ou égal à {{max}}",
+                    "MIN": "{{arg}} doit être supérieur ou égal à {{min}}"
+                },
+                "role": {
+                    "NOT_FOUND": "le rôle n'a pu être trouvé"
+                },
+                "group": {
+                    "NOT_FOUND": "le groupe de commande n'a pas pu être trouvé"
+                }
+            },
+            "NO_PMS": "Tu ne peux pas utiliser cette commande dans les messages privés !",
+            "ENABLE_EMBEDS": "Vérifie que la permission \"Intégrer les liens\" est activée"
+        },
+        "companion": {
+            "noPet": "tu ne possèdes pas de compagnon ! Utilise {{command}} pour en acheter un !",
+            "ownedPet": "tu possèdes déjà un compagnon !",
+            "cannotAfford": "tu as besoin de {{amount}} crédits mais tu n'en as que {{balance}} !",
+            "intro": "Choisis ton compagnon de départ, {{user}} !",
+            "dialog": [
+                "**Achat de compagnon**",
+                "",
+                "{{author}}, tu as sélectionné {{animal}} pour être ton compagnon.",
+                "Es-tu certain de vouloir l'acheter pour {{amount}} crédits ?",
+                "",
+                "Pour confirmer, écris {{code}} dans le chat, ou n'importe quoi d'autre pour annuler."
+            ],
+            "invalidCode": "tu as entré un code invalide ! La transaction a été annulée.",
+            "error": "une erreur est survenue ! La transaction a été annulée. Réessaie plus tard.",
+            "result": [
+                "**Compagnon acheté**",
+                "",
+                "{{author}}, tu as acheté avec succès le compagnon {{animal}}.",
+                "__Solde Actuel__ : {{balance}} crédits",
+                "",
+                "Tu peux renommer ton compagnon avec la commande {{command}}."
+            ],
+            "definitions": {
+                "wins": "Victoires",
+                "losses": "Défaites",
+                "info": "Informations sur le compagnon",
+                "info2": "Le compagnon de {{author}}"
+            },
+            "errors": {
+                "self": "tu ne peux pas faire de bataille avec toi-même !",
+                "noUser": "cet utilisateur est introuvable !",
+                "ongoingBattle": "il y a déjà une bataille en cours dans ce channel !",
+                "userInBattle": "tu est déjà dans une bataille !",
+                "opponentInBattle": "ton adversaire est déjà dans une bataille !",
+                "noIncoming": "tu n'as pas de demande de bataille.",
+                "noOutgoing": "tu n'as envoyé aucune demande de bataille.",
+                "opponentNoCompanion": "ce joueur ne possède pas de compagnon !",
+                "cantPlay": "tu as besoin de {{amount}} crédits pour jouer mais tu n'en n'a que {{balance}} actuellement !",
+                "cantChallenge": "le joueur n'a pas assez de crédits pour jouer !",
+                "noBattle": "ce channel n'a pas de bataille en cours !",
+                "notParticipating": "ce joueur ne participe pas à cette bataille !",
+                "isParticipant": "tu participes à cette bataille donc tu ne peux pas placer de pari !",
+                "cantBet": "tu n'as pas assez de crédits ({balance}}) pour parier {{amount}} !",
+                "betMulti": "tu ne peux pas parier plus d'une fois !",
+                "plsBetProperly": "tu ne peux pas parier moins d'un crédit !",
+                "notBetting": "la bataille n'est pas encore dans la phase de pari !",
+                "afterBetting": "la phase de pari pour cette bataille est déjà terminée !",
+                "notOnline": "cet utilisateur n'est pas connecté !"
+            },
+            "challenge": [
+                "tu as défié {{mention}} à une bataille de compagnon !",
+                "",
+                "Le joueur a {{time}} secondes pour répondre avec {{accept}} ou {{reject}}, sinon ils déclareront forfait automatiquement!"
+            ],
+            "bet": "tu as placé un pari de {{amount}} crédits sur {{user}} et son compagnon {{pet}} !",
+            "timedOut": "{{p2}} n'a pas répondu au défi de {{p1}} après {{time}} secondes et a par conséquent déclaré forfait.",
+            "rejectChallenge": "{{p2}} a refusé le défi de {{p1}}.",
+            "cancelChallenge": "{{p1}} a annulé sa demande de défi envers {{p2}}.",
+            "acceptChallenge": [
+                "{{p2}} a accepté le défi de {{p1}} ! ",
+                "",
+                "La bataille va commencer dans {{time}} secondes !",
+                "Vous pouvez placer vos paris avec {{command}} !"
+            ],
+            "renameDialog": "{{user}}, quel nouveau nom veux-tu donner à ton compagnon {{pet}} ?",
+            "renameSuccess": "tu as renommé ton compagnon {{pet}} en {{newName}} !",
+            "script": {
+                "HIT": [
+                    "{{p1}} frappe violemment {{p2}}, lui faisant {{dmg}} point(s) de dommage!",
+                    "{{p1}} porte un coup à {{p2}}, ce dernier souffre de {{dmg}} point(s) de dommage!",
+                    "{{p2}} subit une déculottée de la part de {{p1}}, qui lui enlève {{dmg}} point(s) de vie!",
+                    "{{p1}} donne un bon coup à {{p2}},  lui faisant {{dmg}} point(s) de dégât!",
+                    "{{p1}} distribue rapidement {{dmg}} point(s) de dommage a {{p2}}!"
+                ]
+            }
+        },
+        "credits": {
+            "balance": "le solde du compte de {{user}} est de {{balance}} crédits.",
+            "topup": "{{amount}} crédits ont été ajoutés sur ton compte.",
+            "cooldown": "tu peux réclamer tes crédits dans {{time}}.",
+            "dialog": [
+                "**Transfert De Crédit**",
+                "",
+                "{{author}}, tu vas transférer {{amount}} crédits à {{user}}",
+                "",
+                "__Solde Actuelle__: {{balance}}",
+                "__Solde après le transfert__ : {{afterAmount}}",
+                "",
+                "Pour confirmer, entre {{code}} dans le chat ou {{exit}} pour quitter le menu."
+            ],
+            "confirmation": [
+                "tu as transféré {{amount}} crédits sur le compte de {{user}}.",
+                "",
+                "__Nouvelle solde__ : {{afterAmount}}"
+            ],
+            "invalidCode": "tu as entré un code invalide! Tes crédits n'ont pas été transférés.",
+            "selfSenderError": "tu ne peux pas envoyer de crédit a toi-même !",
+            "insufficientCredits": "tu n'as pas assez ({{balance}}) de crédits !",
+            "botUserError": "tu ne peux pas envoyer de crédit aux bots !",
+            "topTitle": "Les individus les plus riches de Discord",
+            "credits": "crédits"
+        },
+        "descriptions": {
+            "help": "Montre des informations sur les commandes",
+            "info": "Renseignements supplémentaires à mon sujet",
+            "credits": "Système monétaire",
+            "wage": "Réclame tes crédits toutes les 8 heures",
+            "hate": "Je...Je te déteste !",
+            "love": "Je...Je t'aime !",
+            "prefix": "Autorise les modérateurs à mettre un préfixe propre au serveur",
+            "search": "Cherche sur YouTube pour trouver de la musique",
+            "skip": "Passe la musique actuelle",
+            "stop": "Met en pause la musique jouée actuellement",
+            "summon": "Me fait venir dans un channel vocal",
+            "companion": "Système d'animal de compagnie",
+            "battle": "Sert à te battre contre les compagnons des autres utilisateurs",
+            "buypet": "Sert à acheter ton propre compagnon",
+            "bet": "Place des paris durant les batailles",
+            "booru": "Effectue une recherche sur des sites de partage d'images (Imageboard)",
+            "danbooru": "Effectue une recherche sur Danbooru (Imageboard)",
+            "gelbooru": "Effectue une recherche sur Gelbooru (Imageboard)",
+            "yandere": "Effectue une recherche sur Yandere (Imageboard)",
+            "slots": "Joue à la machine à sous",
+            "stats": "Des statistiques à mon propos",
+            "choose": "Sélectionne un choix",
+            "invite": "Affiche mon lien d'invitation",
+            "stream": "Joue de la musique à partir des flux supportés",
+            "queue": "Liste des musiques dans la file d'attente",
+            "whois": "Montre des informations à propos d'un autre utilisateur",
+            "channel": "Montre des informations sur un channel",
+            "server": "Montre des informations sur un serveur",
+            "catgirl": "Cherche des catgirls au hasard",
+            "clear": "Vide la file d'attente des musiques",
+            "contact": "Fais un rapport de bug, demande une fonctionnalité ou laisse tes remarques sur le bot",
+            "enable": "Active une commande pour un channel, un utilisateur ou un rôle",
+            "disable": "Désactive une commande pour un channel, un utilisateur ou un rôle",
+            "lang": "Autorise les modérateurs à choisir un langage pour le serveur",
+            "purge": "Supprime des messages en masse dans un channel",
+            "repeat": "Active le mode \"repeat\", où les musiques finies sont ré-ajoutées à la file d'attente.",
+            "8ball": "Pose une question à la Boule Magique Numéro 8 (8ball)",
+            "dice": "Lance des dés",
+            "coin": "Fait des pile ou face",
+            "subscribe": "Abonne un channel à un événement",
+            "unsubscribe": "Désabonne un channel à un événement",
+            "timezone": "Autorise les modérateurs à définir un fuseau horaire pour le serveur",
+            "urban": "Cherche sur Urban Dictionary",
+            "reset": "Remet a zéro tous les paramètres concernant les permissions sur un serveur",
+            "welcome": "Autorise les modérateurs à envoyer des messages de bienvenue",
+            "goodbye": "Autorise les modérateurs à envoyer des messages d'au revoir",
+            "anime": "Obtient des informations sur un anime",
+            "manga": "Obtient des informations sur un manga",
+            "soundcloud": "Recherche des musiques sur Soundcloud",
+            "ban": "Bannit un membre du serveur",
+            "kick": "Kick un membre du serveur"
+        },
+        "guilds": {
+            "join": [
+                "👋  Salut ! Je suis **haru** ! L'idole favorite de tous ✨🎤 et bot à temps partiel ! 🤖",
+                "",
+                "Vous pouvez trouver une liste de mes commandes en tapant {{help}} dans le chat !",
+                "Pour en savoir plus sur moi, vous pouvez utiliser la commande {{about}} !"
+            ],
+            "ban": {
+                "self": "tu ne peux pas te bannir !",
+                "msg": "tu as balancé un bon coup de Banhammer sur {{member}}. Que les Dieux aient pitié de lui.",
+                "dialog": [
+                    "{{user}}, tu es sur le point de balancer un coup de banhammer sur {{member}}.",
+                    "Pour confirmer, entre {{quote}} ou {{exit}} pour quitter le menu."
+                ],
+                "exit": "l'utilisateur n'a **pas** été banni.",
+                "exitError": "une erreur est survenue, l'utilisateur n'a **pas** été banni."
+            },
+            "kick": {
+                "self": "tu ne peux pas te kicker!",
+                "msg": "{{member}} a été kické. Ça m'a vraiment fait plaisir.",
+                "dialog": [
+                    "{{user}}, tu es sur le point de kicker {{member}}.",
+                    "Pour confirmer, entre {{quote}} ou {{exit}} pour quitter le menu."
+                ],
+                "exit": "l'utilisateur n'a **pas** été kické.",
+                "exitError": "une erreur est survenue, l'utilisateur n'a **pas** été kické."
+            },
+            "reason": "Raison"
+        },
+        "help": {
+            "header_1": "Pour exécuter une commande, invoque-la avec {{prefix}} dans {{server}}",
+            "header_1_alt": "ou le préfixe par défaut {{defaultPrefix}}",
+            "header_2": "Pour savoir comment se servir d'une commande, utilise {{helpCommand}}",
+            "header_3": "Par exemple : {{exampleCommand}}",
+            "definitions": {
+                "usage": "Usage",
+                "aliases": "Alias",
+                "pms": "Messages privés"
+            },
+            "footer": "Pour recevoir de l'aide ou pour envoyer des suggestions, visite {{link}}",
+            "footer_group": [
+                "`[]` fait référence à des arguments __**optionnel**__",
+                "`<>` fait référence à des arguments __**requis**__",
+                "Ne mets pas `<>` ou `[]` quand tu invoques une commande"
+            ],
+            "noDesc": "Pas de description",
+            "checkPMs": "regarde tes Messages Privés!"
+        },
+        "images": {
+            "link": "voila ton image ! {{image}}",
+            "catgirl": "Catgirl"
+        },
+        "info": {
+            "info": [
+                "👋  Salut ! Je suis **haru** ! ",
+                "L'idole favorite de tous ✨🎤 et bot à temps partiel ! 🤖"
+            ],
+            "invite": [
+                "Invite-moi en utilisant {{invite}} !",
+                "Si tu as des suggestions ou que tu as besoin d'aide, tu peux venir sur mon serveur : {{server}} !"
+            ],
+            "warn": "Assure-toi que la permission \"Intégrer des liens\" est activée!",
+            "author": "Auteur",
+            "lib": "Library",
+            "ver": "Version",
+            "src": "Code source",
+            "support": "Service client",
+            "join": "Pour recevoir de l'aide ou pour envoyer des suggestions, visite {{link}} ",
+            "inv": "Invite-moi !",
+            "ptr": "Supporte haru financièrement!"
+        },
+        "infocmd": {
+            "server": {
+                "shard": "Shard",
+                "defaultChannel": "Channel par défaut",
+                "region": "Région",
+                "createdOn": "Date de création du compte",
+                "joinedOn": "Date d'arrivée sur le serveur",
+                "roles": "Rôles",
+                "members": "Membres",
+                "channels": "Channels",
+                "owner": "Propriétaire",
+                "online": "connecté",
+                "text": "Textuels",
+                "voice": "Vocaux"
+            },
+            "whois": {
+                "shared": "Serveurs en commun",
+                "status": "Statut",
+                "nick": "Surnom",
+                "createdOn": "Date de création du compte",
+                "joinedOn": "Date d'arrivée sur le serveur",
+                "roles": "Rôles",
+                "none": "Aucun",
+                "playing": "Joue à",
+                "more": "et {{num}} de plus..."
+            },
+            "channel": {
+                "title": "Informations sur {{channel}}",
+                "type": "Type",
+                "text": "Channel textuel",
+                "voice": "Channel vocal",
+                "createdOn": "Date de création"
+            }
+        },
+        "music": {
+            "nowPlaying": "En train de lire",
+            "skipping": "En train de passer",
+            "finishedPlaying": "A fini de lire la musique",
+            "queueFinish": "La file d'attente est maintenant vide.",
+            "dcInactive": "Déconnecté du channel vocal pour cause d’inactivité.",
+            "queuedMulti": "{{num}} musiques mises dans la file d'attente",
+            "clearQueue": "La file d'attente a été vidée.",
+            "queued": "Mis dans la file d'attente",
+            "errors": {
+                "notInChannel": "Emmène-moi d'abord dans un channel vocal avec {{command}} !",
+                "emptyQueue": [
+                    "il n'y a pas de musique dans la file d'attente !",
+                    "",
+                    "Utilise la commande {{play}} pour ajouter une musique a la file d'attente !"
+                ],
+                "tooLong": "cette musique est trop longue ! Seules les musiques de moins de 90 minutes sont acceptées.",
+                "noResults": "la requête {{query}} n'a pas donné de résultat.",
+                "alreadyPlaying": "une musique est déjà en train d’être jouée ! Mets-en une dans la file d'attente avec {{command}}.",
+                "notChannel": "je suis lié au channel {{channel}} pour le moment. Utilise les commandes pour la musique dans ce channel.",
+                "notFound": "la vidéo que tu as indiquée n'a pas été trouvée.",
+                "listNotFound": "la playlist que tu as indiquée n'a pas été trouvée.",
+                "emptyPlaylist": "la playlist que tu as indiquée ne contient pas de vidéo streamable.",
+                "notInVoice": "tu as besoin d’être dans un channel vocal !",
+                "errorQueue": "une erreur est survenue pendant que la musique était en train d’être mis dans la file d'attente {{url}}.",
+                "alreadyBinded": "Je suis déjà lié à {{text}}! Utilise les commandes dans ce channel.",
+                "noPerms": "Je n'ai pas les permissions `Se connecter` et/ou `Parler` dans {{voice}}!",
+                "error": "une erreur est survenue! Réessaie plus tard ou envoie un rapport de bug.",
+                "notInSameVoice": "tu as besoin d’être dans le channel vocal {{channel}} !",
+                "skipNotFound": "la vidéo spécifiée n'a pas pu être trouvée.",
+                "notReadyYet": "La connexion n'était pas prête après 5 essais. Je me suis déconnecté du channel vocal.",
+                "connError": "Une erreur venant de Discord est survenue pendant le streaming vers le channel vocal : {{err}}\n"
+            },
+            "dc": "déconnecté de `{{voice}}` et non lié de {{text}} pour les commandes.",
+            "switch": "Je passe en mode streaming et je lis de la musique depuis {{station}}",
+            "playlist": "Playlist - {{guild}}",
+            "queuedSongs": "Musiques mises dans la file d'attente",
+            "queueProgress": "je mets la playlist dans la file d'attente, patiente un peu s'il te plaît...",
+            "joinSuccess": [
+                "Je suis connecté à '{{voice}}' et je suis lié au channel {{text}}.",
+                "",
+                "Utilise la commande {{command}} pour commencer à jouer de la musique !"
+            ],
+            "streamInfo": [
+                "{{title}} par {{artist}}",
+                "**Demandé Par**: {{requestedBy}}"
+            ],
+            "repeatOn": "tu as activé le mode \"repeat\". Toutes les musiques finies vont être ré-ajoutées à la fin de la file d'attente.",
+            "repeatOff": "tu as désactivé le mode \"repeat\". Toute les musiques finies ne seront pas ré-ajoutées.",
+            "skipSuccess": "La musique {{song}} a été enlevée de la file d'attente.",
+            "terminated": [
+                "Haru est en train d’être redémarrée, toutes les communications ont été interrompues.",
+                "",
+                "La file d'attente a été sauvegardée dans la base de données.",
+                "Nous nous excusons pour toute gêne occasionnée."
+            ],
+            "votedSkip": "tu as déjà voté pour passer cette musique !",
+            "voteSkipSuccess": "tu as voté pour passer la musique actuelle !",
+            "votedClear": "tu as déjà voté pour vider la file d'attente !",
+            "voteClearSuccess": "tu as voté pour vider la file d'attente actuelle !",
+            "stations": "Stations",
+            "shuffled": "mélangé {{num}} musiques dans la file d'attente."
+        },
+        "slots": {
+            "insufficient": [
+                "tu as besoin de {{amount}} crédits supplémentaire !",
+                "",
+                "Tu peux utiliser la commande {{command}} pour réclamer des crédits gratuits de temps en temps !"
+            ],
+            "won": "{{user}} a placé une mise de {{amount}} crédits et a gagné :",
+            "lost": "{{user}} a placé une mise de {{amount}} crédits et a tout perdu.",
+            "credits": "crédits",
+            "winnings": "Victoires",
+            "yudodis": "tu ne peux pas parier moins d'un crédit !",
+            "dailyLimit": "tu as atteint la limite quotidienne de crédits pouvant être gagnés. Réessaie dans {{time}}"
+        },
+        "stats": {
+            "users": "Utilisateurs",
+            "unique": "unique",
+            "online": "connecté",
+            "guilds": "Serveurs",
+            "channels": "Channels",
+            "text": "textuels",
+            "voice": "vocaux",
+            "total": "total",
+            "uptime": "Durée de fonctionnement",
+            "memoryUsage": "Mémoire Utilisée",
+            "commandsUsed": "Commandes Utilisées",
+            "server": "Studio 777 (Serveur de support)"
+        },
+        "settings": {
+            "prefix": {
+                "success": "tu as changé avec succès le préfixe du serveur en {{prefix}}",
+                "revert": "revenu à l'ancien préfixe du serveur ({{prefix}})",
+                "current": "le préfixe actuel pour ce serveur est : {{prefix}}"
+            },
+            "lang": {
+                "success": "tu as changé avec succès la langue de ce serveur en {{lang}}"
+            },
+            "enabler": {
+                "success": "{{action}} {{command}} pour {{context}} avec succès",
+                "actions": {
+                    "enable": "activé",
+                    "disable": "désactivé",
+                    "revert": "repassé à"
+                }
+            },
+            "changelog": "Les changelogs les plus récents",
+            "tz": {
+                "success": "tu as changé le fuseau horaire de ce serveur en {{tz}}",
+                "notFound": [
+                    "le fuseau horaire \"{{tz}}\" est invalide.",
+                    "",
+                    "Va sur {{link}} pour avoir une liste de tout les fuseaux horaires valides."
+                ],
+                "current": "le fuseau horaire actuel pour ce serveur est : {{tz}}"
+            },
+            "subscribe": {
+                "eventNotFound": [
+                    "l’événement {{event}} n'a pas pu être trouvé. ",
+                    "",
+                    "Voici une liste des événements supportés : {{events}}"
+                ],
+                "notSubscribed": "{{channel}} n'est abonné à aucun événement.",
+                "subSuccess": "tu as abonné avec succès {{channel}} à {{events}}.",
+                "unsubSuccess": "tu as désabonné avec succès {{channel}} à {{events}}.",
+                "list": "{{channel}} est abonné à {{events}}."
+            },
+            "reset": {
+                "success": "Remet a zéro tout les paramètres concernant les permissions dans le serveur."
+            },
+            "welcome": {
+                "dialog": "Messages de bienvenue",
+                "action": {
+                    "set": "Définir le message de bienvenue",
+                    "get": "Obtenir le message de bienvenue actuel",
+                    "enable": "Utilise ce channel pour envoyer des messages de bienvenue"
+                },
+                "get": "Message de bienvenue actuel :",
+                "setDialog": [
+                    "{{author}}, entre le nouveau message de bienvenue.",
+                    "Tags supportés : {{tags}}",
+                    "Pour utiliser un tag enveloppe-le avec `{{}}`. Exemple : `{{guild}}`"
+                ],
+                "success": "le nouveau message de bienvenue est :",
+                "enabled": "dès maintenant, envoie des messages de bienvenue dans {{channel}}"
+            },
+            "goodbye": {
+                "dialog": "Messages d'au revoir",
+                "action": {
+                    "set": "Définir le message d'au revoir",
+                    "get": "Obtenir le message d'au revoir actuel",
+                    "enable": "Utilise ce channel pour envoyer les messages d'au revoir"
+                },
+                "get": "Message d'au revoir actuel :",
+                "setDialog": [
+                    "{{author}}, entre le nouveau message d'au revoir.",
+                    "Tags supportés : {{tags}}",
+                    "Pour utiliser un tag enveloppe-le avec `{{}}`. Exemple : `{{guild}}`"
+                ],
+                "success": "le nouveau message d'au revoir est :",
+                "enabled": "dès maintenant, envoie des messages d'au revoir dans {{channel}}"
+            }
+        },
+        "purge": {
+            "success": "supprimé {{num}} messages avec succès",
+            "filterSuccess": "supprimé {{num}} messages qui répondait au critère : {{criteria}}"
+        },
+        "misc": {
+            "choose": {
+                "pick": "Je choisis {{choice}}"
+            },
+            "8ball": {
+                "question": "{{user}} a demandé",
+                "response": "{{8ball}} dit",
+                "answer_1": "C'est certain",
+                "answer_2": "C'est vraiment ça",
+                "answer_3": "Sans doute",
+                "answer_4": "Oui, définitivement",
+                "answer_5": "Tu peux compter là-dessus",
+                "answer_6": "A ce que je vois, oui",
+                "answer_7": "Très certainement",
+                "answer_8": "Les perspectives ont l'air bonnes",
+                "answer_9": "Oui",
+                "answer_10": "Les signes montrent que oui",
+                "answer_11": "La réponse est trouble, essaie encore",
+                "answer_12": "Redemande plus tard",
+                "answer_13": "C'est mieux que tu ne saches pas pour le moment",
+                "answer_14": "Je ne peux le prédire pour le moment",
+                "answer_15": "Concentre-toi et demande encore",
+                "answer_16": "N'y pense même pas",
+                "answer_17": "Ma réponse est non",
+                "answer_18": "Mes sources me disent que non",
+                "answer_19": "Les perspectives n'ont pas l'air d'être très bonnes",
+                "answer_20": "C'est très douteux"
+            },
+            "dice": {
+                "result": "Résultat : {{result}}",
+                "invalid": "Notation incorrecte - {{text}}"
+            },
+            "coin": {
+                "result": "tu as obtenu {{heads}} fois face et {{tails}} fois pile.",
+                "heads": "la pièce est tombée sur **face** !",
+                "tails": "la piece est tombée sur **pile** !"
+            },
+            "urban": {
+                "noResults": "la recherche {{query}} n'a donné aucun résultat."
+            }
+        },
+        "rss": {
+            "success": "flux RSS ajouté pour {{channel}} avec {{included}} comme tags inclus et {{excluded}} comme tags exclus : {{url}}",
+            "error": "je n'ai pas pu valider {{url}}. Vérifie que ce soit un flux RSS valide.",
+            "rssDialog": "Menu RSS",
+            "rssDelFooter": "Entre le numéro du flux RSS que tu veux supprimer, ou marque {{cancel}} pour quitter.",
+            "urlDialog": [
+                "**RSS - Feed URL**",
+                "",
+                "{{author}}, entre l'URL du flux RSS que tu aimerais ajouter.",
+                "Autrement, entre {{exit}} pour quitter."
+            ],
+            "includedTagsDialog": [
+                "**RSS - Tags Inclus**",
+                "",
+                "{{author}}, entre une liste de tags à inclure, séparés par des virgules. Par exemple : `Films, science, Bob l'éponge`",
+                "Autrement, entre {{skip}} pour passer, ou {{exit}} pour quitter."
+            ],
+            "excludedTagsDialog": [
+                "**RSS - Tags Exclus**",
+                "",
+                "{{author}}, entre une liste de tags a exclure, séparés par des virgules. Par exemple : `Kirito, anime, religion`",
+                "Autrement, entre {{skip}} pour passer, ou {{exit}} pour quitter."
+            ],
+            "subscribedTo": "{{channel}} est abonné aux flux RSS suivants :",
+            "notSubscribed": "{{channel}} n'est abonné à aucun flux RSS. Utilise {{command}} pour ajouter un nouveau flux RSS.",
+            "subscribedFeeds": "Flux RSS abonnés pour {{channel}}",
+            "noFeedFound": "aucun flux RSS n'a été trouvé avec ce nom ou cette URL.",
+            "removedFeed": "supprimé flux RSS : {{feed}}",
+            "confirmClear": [
+                "**Supprimer tous les flux RSS**",
+                "",
+                "{{author}}, es-tu sûr de vouloir supprimer tous les flux RSS ?",
+                "Entre {{confirm}} pour confirmer, ou n'importe quoi d'autre pour quitter."
+            ],
+            "notCleared": "aucun flux RSS n'a été supprimé.",
+            "cleared": "{{count}} flux RSS on été supprimés de ce channel.",
+            "action": {
+                "add": "Ajouter un flux RSS au channel",
+                "remove": "Enlever un flux RSS du channel",
+                "list": "Lister tous les flux RSS ajouté à ce channel",
+                "clear": "Supprime tous les flux RSS ajoutés à ce channel"
+            }
+        },
+        "anime": {
+            "noResults": "aucun résultat trouvé. Vérifie que ta requête est correcte.",
+            "synopsis": "Synopsis",
+            "type": "Type",
+            "episodes": "Episodes",
+            "status": "Statut",
+            "genres": "Genres",
+            "season": "Saison",
+            "score": "Score",
+            "noDesc": "Pas de description",
+            "airing": "Diffusion à partir du {{start}}",
+            "aired": "Diffusé du {{start}} au {{end}}",
+            "publishing": "Publication à partir du {{start}}",
+            "published": "Publié du {{start}} au {{end}}",
+            "seasons": {
+                "winter": "Hiver",
+                "spring": "Printemps",
+                "summer": "Été",
+                "fall": "Automne"
+            },
+            "volumes": "Tomes",
+            "chapters": "Chapitres"
+        }
+    }
+}

@@ -1,0 +1,616 @@
+{
+    "en": {
+        "booru": {
+            "noPictures": "Die Suchanfrage {{query}} ergab keine Bilder. Versuche etwas anderes zu suchen!",
+            "maxTwo": "Du kannst Danbooru nur mit maximal zwei Schlagwörtern durchsuchen!",
+            "score": "Auswertung",
+            "rating": "Bewertung",
+            "tags": "Schlagwörter",
+            "s": "Sicher",
+            "q": "Fragwürdig",
+            "e": "Explizit"
+        },
+        "common": {
+            "CHECK_PMS": "Check deine PNs!",
+            "ERROR": "Ein Fehler ist aufgetreten! Bitte versuche es später nochmal oder reiche einen Fehlerbericht ein.",
+            "ERROR_FULL": "Ein Fehler ist aufgetreten! Bitte versuche es später nochmal oder reiche einen Fehlerbericht ein.",
+            "COOLDOWN": "Bitte beruhige dich! ({{time}} Sekunden übrig)",
+            "NO_PERMS": "Du brauchst die Zulassung {{perms}} um diesen Befehl auszuführen!",
+            "NO_PERMS_BOT": "Ich brauche die Zulassung {{perms}} um diesen Befehl auszuführen!",
+            "menus": {
+                "EXIT": "Gib {{cancel}} ein, um das Menü zu verlassen.",
+                "ERRORED": "Das Menü wurde geschlossen:",
+                "EXITED": "Du hast das Menü verlassen.",
+                "SELECTION": "Auswahl-Menü",
+                "ERROR": "Unbekannter Fehler",
+                "INPUT": "Schreibe die Nummer deiner Wahl in den Chat oder '{{cancel}}' um abzubrechen.",
+                "MORE_RESULTS": "Und {{num}} mehr..."
+            },
+            "collector": {
+                "timeout": "Auszeit nach {{timeout}}s",
+                "max": "{{max}} Versuche überschritten",
+                "maxMatches": "{{maxMatches}} Übereinstimmungen überschritten"
+            },
+            "resolver": {
+                "INSUFFICIENT_ARGS": "Ungenügende Argumente - Erwartete mindestens {{requiredArgs}}, sah {{argsCount}}",
+                "CORRECT_USAGE": "Korrekte Benutzung",
+                "NO_END_QUOTE": "Dir fehlt ein Anführungszeichen",
+                "member": {
+                    "NOT_FOUND": "Das Mitglied konnte nicht gefunden werden"
+                },
+                "channel": {
+                    "NOT_FOUND": "Der Kanal konnte nicht gefunden werden"
+                },
+                "command": {
+                    "NOT_FOUND": "Der Befehl konnte nicht gefunden werden"
+                },
+                "string": {
+                    "NOT_STRING": "{{arg}} muss eine Zeichenkette sein",
+                    "MAX": "{{arg}} Länge kann nicht mehr sein als {{max}}",
+                    "MIN": "{{arg}} Länge kann nicht weniger sein als {{min}}",
+                    "ONE_OF": "{{arg}} muss eins der Folgenden sein"
+                },
+                "list": {
+                    "MAX": "{{arg}} Länge kann nicht mehr als {{max}} Sachen beinhalten",
+                    "MIN": "{{arg}} Länge kann nicht weniger als {{min}} Sachen beinhalten",
+                    "MAX_LENGTH": "{{arg}} kann keine Sachen länger als {{maxLength}} enthalten",
+                    "MIN_LENGTH": "{{arg}} kann keine Sachen kürzer als {{minLength}} enthalten",
+                    "DUPES": "{{arg}} kann nicht doppelte Werte beinhalten"
+                },
+                "int": {
+                    "NOT_INT": "{{arg}} ist keine ganze Zahl",
+                    "MAX": "{{arg}} muss kleiner oder gleich {{max}} sein",
+                    "MIN": "{{arg}} muss größer oder gleich {{min}} sein"
+                },
+                "role": {
+                    "NOT_FOUND": "Die Rolle konnte nicht gefunden werden"
+                },
+                "group": {
+                    "NOT_FOUND": "Die Befehlsgruppe konnte nicht gefunden werden"
+                }
+            },
+            "NO_PMS": "Sorry, aber ich hab lieber ein größeres Publikum. (Dieser Befehl kann nicht in PNs ausgeführt werden!)",
+            "ENABLE_EMBEDS": "Bitte stelle sicher, dass du Einbettungen aktiviert hast!"
+        },
+        "companion": {
+            "noPet": "Du besitzt noch keinen Begleiter! Benutze {{command}} um einen zu kaufen!",
+            "ownedPet": "Du hast bereits einen Begleiter!",
+            "cannotAfford": "Du brauchst {{amount}} Credits, hast jedoch nur {{balance}}!",
+            "intro": "Wähle einen Starter-Begleiter, {{user}}!",
+            "dialog": [
+                "**Begleiter Kauf**",
+                "",
+                "{{author}}, du hast {{animal}} als Begleiter ausgewählt.",
+                "Bist du dir sicher, dass du es für {{amount}} Credits kaufen möchtest?",
+                "",
+                "Um zu bestätigen, schreibe bitte {{code}} oder irgendetwas anderes um abzubrechen."
+            ],
+            "invalidCode": "Du hast einen ungültigen Code eingegeben! Die Überweisung wurde abgebrochen.",
+            "error": "Ein Fehler ist aufgetreten! Die Überweisung wurde abgebrochen. Versuche es später nochmal.",
+            "result": [
+                "**Begleiter Kauf**",
+                "",
+                "{{author}}, du hast erfolgreich {{animal}} als deinen Begleiter erworben.",
+                "__Momentaner Kontostand__: {{balance}} Credits",
+                "",
+                "Du kannst deinen Begleiter mit dem {{command}} Befehl umbenennen."
+            ],
+            "definitions": {
+                "wins": "Siege",
+                "losses": "Niederlagen",
+                "info": "Begleiter Info",
+                "info2": "{{author}}'s Begleiter"
+            },
+            "errors": {
+                "self": "Du kannst dich nicht selbst bekämpfen!",
+                "noUser": "Der Benutzer existiert nicht in meinen Aufzeichnungen!",
+                "ongoingBattle": "Es ist bereits ein laufender Kampf in diesem Kanal!",
+                "userInBattle": "Du bist derzeit in einem Kampf!",
+                "opponentInBattle": "Dein Gegner ist derzeit in einem Kampf!",
+                "noIncoming": "Du hast keine einkommenden Kampfanfragen.",
+                "noOutgoing": "Du hast keine Kampfanfragen versendet.",
+                "opponentNoCompanion": "Der Spieler besitzt keinen Begleiter!",
+                "cantPlay": "Du brauchst {{amount}} Credits um zu spielen, hast jedoch momentan nur {{balance}}!",
+                "cantChallenge": "Der Spieler hat nicht genügend Credits um zu spielen!",
+                "noBattle": "Dieser Kanal hat keine laufenden Kämpfe!",
+                "notParticipating": "Der Spieler ist kein Teilnehmer an diesem Kampf!",
+                "isParticipant": "Du bist ein Teilnehmer an diesem Kampf und kannst keine Wetten abschließen!",
+                "cantBet": "Du hast nicht genügend Credits ({{balance}}) um {{amount}} zu setzten!",
+                "betMulti": "Du kannst nicht häufiger als ein Mal wetten!",
+                "plsBetProperly": "Du kannst nicht weniger als einen Credit setzten!",
+                "notBetting": "Der Kampf ist nicht in die Wettphase eingetreten!",
+                "afterBetting": "Die Wettphase wurde für diesen Kampf bereits abgeschlossen!",
+                "notOnline": "Der Benutzer ist noch nicht online!"
+            },
+            "challenge": [
+                "Du hast {{mention}} zu einem Haustier-Kampf herausgefordert!",
+                "",
+                "Der Spieler hat {{time}} Sekunden Zeit um mit {{accept}} oder {{reject}} zu antworten, ansonsten hat er automatisch aufgegeben."
+            ],
+            "bet": "Du hast eine Wette von {{amount}} Credits auf {{user}} mit seinem Begleiter {{pet}} gesetzt!",
+            "timedOut": "{{p2}} misslingte die Antwort auf {{p1}}'s Herausforderung nach {{time}} Sekunden und hat aufgegeben.",
+            "rejectChallenge": "{{p2}} hat {{p1}}'s Herausforderung abgelehnt.",
+            "cancelChallenge": "{{p1}} hat die Herausforderung an {{p2}} abgebrochen.",
+            "acceptChallenge": [
+                "{{p2}} hat die Herausforderung von {{p1}} angenommen!",
+                "",
+                "Der Kampf wird in {{time}} Sekunden stattfinden!",
+                "Setzt eure Wetten mit {{command}}!"
+            ],
+            "renameDialog": "{{user}}, zu was würdest du gerne deinen {{pet}} Begleiter umbenennen?",
+            "renameSuccess": "Du hast deinen {{pet}} Begleiter zu {{newName}} umbenannt!",
+            "script": {
+                "HIT": [
+                    "{{p1}} erteilte {{p2}} einen starken Schlag, der {{dmg}} Schaden zuteilt!",
+                    "{{p1}} landet einen Treffer auf {{p2}}, der {{dmg}} Schaden erleidet!",
+                    "{{p2}} erleidet eine Tracht Prügel von {{p1}}, der {{dmg}} Schaden einschlägt!",
+                    "{{p1}} sichert einen guten Treffer an {{p2}}, der {{dmg}} Schaden überbringt!",
+                    "{{p1}} überbringt schnellen {{dmg}} Schaden an {{p2}}!"
+                ]
+            }
+        },
+        "credits": {
+            "balance": "{{user}}'s Kontostand ist {{balance}} Credits.",
+            "topup": "{{amount}} Credits wurden deinem Konto hinzugefügt.",
+            "cooldown": "Deine beanspruchbaren Credits frischen sich in {{time}} auf.",
+            "dialog": [
+                "**Credits Überweisung**",
+                "",
+                "{{author}}, du überweist {{amount}} Credits zu {{user}}",
+                "",
+                "__Momentaner Kontostand__: {{balance}}",
+                "__Kontostand nach Überweisung__: {{afterAmount}}",
+                "",
+                "Um zu bestätigen, schreibe {{code}} um fortzufahren oder {{exit}} um das Menü abzubrechen."
+            ],
+            "confirmation": [
+                "Du hast {{amount}} Credits auf {{user}}'s Konto überwiesen.",
+                "",
+                "__Aktualisierter Kontostand__: {{afterAmount}}"
+            ],
+            "invalidCode": "Du hast einen ungültigen Code eingegeben! Deine Credits wurden nicht überwiesen.",
+            "selfSenderError": "Du kannst keine Credits an dich selbst senden!",
+            "insufficientCredits": "Du hast nicht ausreichend ({{balance}}) Credits!",
+            "botUserError": "Du kannst keine Credits an Bots senden!",
+            "topTitle": "Discord's wohlhabendsten Personen",
+            "credits": "Credits"
+        },
+        "descriptions": {
+            "help": "Zeigt Informationen von Befehlen an",
+            "info": "Informationen über mich",
+            "credits": "Währungssystem",
+            "wage": "Beanspruche deine Credits alle 8 Stunden",
+            "hate": "I-Ich hasse dich!",
+            "love": "I-Ich liebe dich!",
+            "prefix": "Erlaubt Moderatoren ein Guilden-Präfix zu setzen",
+            "search": "Durchsucht YouTube für Musik",
+            "skip": "Überspringt den aktuellen Musik-Track",
+            "stop": "Stoppt aktuell spielende Musik",
+            "summon": "Beschwört mich in den Sprachkanal",
+            "companion": "Tier-Begleiter System",
+            "battle": "Bekämpfe die Begleiter anderer User",
+            "buypet": "Kaufe deinen persönlichen Begleiter",
+            "bet": "Setzt Wetten während Kämpfen",
+            "booru": "Durchsucht ein Imageboard",
+            "danbooru": "Durchsucht das Danbooru Imageboard",
+            "gelbooru": "Durchsucht das Gelbooru Imageboard",
+            "yandere": "Durchsucht das Yandere Imageboard",
+            "slots": "Spielt den Spielautomaten",
+            "stats": "Statistiken über mich",
+            "choose": "Wählt eine bestimmte Entscheidung",
+            "invite": "Zeigt meinen Einladungslink an",
+            "stream": "Spielt von einem unterstützten Stream",
+            "queue": "Zählt Lieder in der Warteschlange auf",
+            "whois": "Zeigt Informationen von einem Mitglied",
+            "channel": "Zeigt Informationen von einem Kanal",
+            "server": "Zeigt Informationen von einem Server",
+            "catgirl": "Holt ein zufälliged Catgirl herbei",
+            "clear": "Leert die Musik-Warteschlange",
+            "contact": "Berichte Fehler, frage Features an oder hinterlasse Feedback",
+            "enable": "Aktiviere Befehle für einen Kanal, Benutzer oder Rolle",
+            "disable": "Deaktiviere Befehle für einen Kanal, Benutzer oder Rolle",
+            "lang": "Erlaubt Moderatoren die Sprache einer Guilde festzulegen",
+            "purge": "Löscht eine Menge an Nachrichten von einem Kanal",
+            "repeat": "Schaltet den Wiederhol-Modus um, bei dem fertige Lieder wieder in die Warteschlange hinzugefügt werden",
+            "8ball": "Frag den 8-Ball eine Frage",
+            "dice": "Wirft Würfel, benutzt Würfel-Bezeichnungen",
+            "coin": "Wirft eine Münze",
+            "subscribe": "Meldet einen Kanal zu einem Event an",
+            "unsubscribe": "Meldet einen Kanal von einem Event ab",
+            "timezone": "Erlaubt Moderatoren die Zeitzone einer Guilde festzulegen",
+            "urban": "Durchsucht das Urban Dictionary für Bedeutungen",
+            "reset": "Setzt alle Berechtigungen in einem Server zurück",
+            "welcome": "Erlaubt Moderatoren, eine Willkommens-Nachricht zu schicken",
+            "goodbye": "Erlaubt Moderatoren eine Verabschiedungs-Nachricht zu schicken",
+            "anime": "Bekomme Informationen zu einem Anime",
+            "manga": "Bekomme Informationen zu einem Manga",
+            "soundcloud": "Sucht Lieder von SoundCloud",
+            "ban": "Bannt ein Server-Mitglied",
+            "kick": "Kickt ein Server-Mitglied"
+        },
+        "guilds": {
+            "join": [
+                "👋  Hallo! Ich bin **haru**! Jedermanns liebstes Idol ✨🎤 und Teilzeit-Bot! 🤖",
+                "",
+                "Du kannst eine Liste meiner Befehle finden, in dem du {{help}} in den chat schreibst!",
+                "Um mehr über mich zu lernen, benutz den {{about}} command!"
+            ],
+            "ban": {
+                "self": "Du kannst dich nicht selbst bannen!",
+                "msg": "Du hast den Bannhammer auf {{member}} geschlagen. Lasst die Göttinnen Erbarmen haben.",
+                "dialog": [
+                    "Schwinge den Banhammer",
+                    "",
+                    "{{user}}, du bist dabei, den Banhammer auf {{member}} zu schwingen.",
+                    "Um zu bestätigen, gib {{quote}} ein oder {{exit}} um das Menü zu verlassen."
+                ],
+                "exit": "Das Mitglied wurde **nicht** gebannt.",
+                "exitError": "Etwas ist falsch geraten, also wurde das Mitglied **nicht** gebannt."
+            },
+            "kick": {
+                "self": "Du kannst dich nicht selbst kicken!",
+                "msg": "{{member}} wurde gekickt. Das fühlte sich gut an.",
+                "dialog": [
+                    "Jemanden kicken?",
+                    "",
+                    "{{user}}, du bist gerade dabei {{member}} zu kicken.",
+                    "Um zu bestätigen, gib {{quote}} ein oder {{exit}}, um das Menü zu verlassen."
+                ],
+                "exit": "Das Mitglied wurde **nicht** gekickt.",
+                "exitError": "Etwas ist falsch geraten, also wurde das Mitglied **nicht** gekickt."
+            },
+            "reason": "Begründung"
+        },
+        "help": {
+            "header_1": "Um einen Befehl auszuführen, rufe es auf mit {{prefix}} in {{server}}",
+            "header_1_alt": "oder dem voreingestellten {{defaultPrefix}}",
+            "header_2": "Um mehr Hilfe mit den Befehlen zu bekommen, ruf {{helpCommand}}",
+            "header_3": "Zum Beispiel: {{exampleCommand}}",
+            "definitions": {
+                "usage": "Benutzung",
+                "aliases": "Pseudonyme",
+                "pms": "PNs"
+            },
+            "footer": "Für Support, Vorschlägen und Feedback, besuche {{link}}",
+            "footer_group": [
+                "'[]' bezieht sich auf __**optionale**__ Parameter",
+                "'<>' bezieht sich auf __**benötigte**__ Parameter",
+                "Lasse '<>' oder '[]' aus, wenn du einen Befehl aufrufst"
+            ],
+            "noDesc": "Keine Beschreibung",
+            "checkPMs": "Kontrolliere deine PNs!"
+        },
+        "images": {
+            "link": "{{image}} ist zu haben!",
+            "catgirl": "Catgirl"
+        },
+        "info": {
+            "info": [
+                "👋  Hallo! Ich bin **haru**!",
+                "Jedermanns liebstes Idol ✨🎤 und Teilzeit-Bot! 🤖 "
+            ],
+            "invite": [
+                "Lad mich ein mit {{invite}}!",
+                "Für Vorschläge und Support, besuche meinen Server unter {{server}}!"
+            ],
+            "warn": "Bitte stelle sicher, dass du Einbettungen aktiviert hast!",
+            "author": "Autor",
+            "lib": "Bücherei",
+            "ver": "Version",
+            "src": "Quellcode",
+            "support": "Kundenbetreuung",
+            "join": "Für Support, Vorschläge und Feedback, besuche {{link}}",
+            "inv": "Lade mich ein!",
+            "ptr": "Hilf, haru am Laufen zu halten!"
+        },
+        "infocmd": {
+            "server": {
+                "shard": "Bruchstücke",
+                "defaultChannel": "Voreingestellter Kanal",
+                "region": "Region",
+                "createdOn": "Account-Erstellung",
+                "joinedOn": "Eintrittsdatum",
+                "roles": "Rollen",
+                "members": "Mitglieder",
+                "channels": "Kanäle",
+                "owner": "Eigentümer",
+                "online": "online",
+                "text": "Text",
+                "voice": "Stimme"
+            },
+            "whois": {
+                "shared": "Gemeinsame Server",
+                "status": "Status",
+                "nick": "Spitzname",
+                "createdOn": "Account-Erstellung",
+                "joinedOn": "Eintrittsdatum",
+                "roles": "Rollen",
+                "none": "Nichts",
+                "playing": "Spielt",
+                "more": "und {{num}} mehr..."
+            },
+            "channel": {
+                "title": "Kanal-Info für {{channel}}",
+                "type": "Typ",
+                "text": "Text",
+                "voice": "Stimme",
+                "createdOn": "Erstellungsdatum"
+            }
+        },
+        "music": {
+            "nowPlaying": "Jetzt spielt",
+            "skipping": "Überspringen",
+            "finishedPlaying": "Fertig gespielt",
+            "queueFinish": "Die Warteschlange ist jetzt leer.",
+            "dcInactive": "Die Verbindung zum Sprachkanal wurde wegen Inaktivität getrennt.",
+            "queuedMulti": "{{num}} Lieder eingereiht",
+            "clearQueue": "Die Musik-Warteschlange wurde geleert.",
+            "queued": "Eingereiht",
+            "errors": {
+                "notInChannel": "Hol mich zuerst in den Sprachkanal mit {{command]}}!",
+                "emptyQueue": [
+                    "Es ist nichts in der Warteschlange!",
+                    "",
+                    "Benutze den {{play}} Befehl um ein Lied einzureihen!"
+                ],
+                "tooLong": "Das Lied ist zu lang! Reihe eins ein, das kürzer ist als 90 Minuten.",
+                "noResults": "Die Suchanfrage {{query}} ergab keine Ergebnisse.",
+                "alreadyPlaying": "Es wird bereits ein Lied gespielt! Reihe ein weiteres Lied ein mit {{command}}.",
+                "notChannel": "Der momentan gebundene Textkanal ist {{channel}}. Bitte benutze Musik-Befehle dort.",
+                "notFound": "Das Video, das du angegeben hast, konnte nicht gefunden werden.",
+                "listNotFound": "Die Playlist, die du angegeben hast, konnte nicht gefunden werden.",
+                "emptyPlaylist": "Die Playlist, die du angegeben hast, hat keine stream-möglichen Videos.",
+                "notInVoice": "Du musst in einem Sprachkanal sein!",
+                "errorQueue": "Ein Fehler ist aufgetreten beim einreihen von {{url}}.",
+                "alreadyBinded": "Ich bin bereits an {{text}} gebunden! Benutze Befehle in dem Kanal.",
+                "noPerms": "Ich habe nicht die Berechtigung zum \"verbinden\" und/oder \"sprechen\" in {{voice}}!",
+                "error": "Etwas ist schief gelaufen! Bitte versuche es später nochmal oder sende einen Fehlerbericht ein.",
+                "notInSameVoice": "Du musst im Sprachkanal {{channel}} sein!",
+                "skipNotFound": "Das angegebene Video konnte nicht gefunden werden.",
+                "notReadyYet": "Die Verbindung war noch nicht bereit nach 5 Versuchen. Verbindung zum Sprachkanal getrennt.",
+                "connError": "Ein Discord Fehler ist aufgetreten während zum Kanal gestreamt wurde: {{err]]"
+            },
+            "dc": "Von '{{voice}}' getrennt und von {{text}} losgebunden.",
+            "switch": "Wechsle zum Streaming Modus und spiele von {{station}}",
+            "playlist": "Playlist - {{guild}}",
+            "queuedSongs": "Eingereihte Lieder",
+            "queueProgress": "Playlist wird eingereiht, bitte warte...",
+            "joinSuccess": [
+                "Verbunden mit '{{voice}}' gebunden an {{text}}.",
+                "",
+                "Benutze den {{command}} Befehl um anzufangen, Lieder zu spielen!"
+            ],
+            "streamInfo": [
+                "{{titel}} von {{artist}}",
+                "**Angefragt von**: {{requestedBy}}"
+            ],
+            "repeatOn": "Du hast den Wiederholmodus aktiviert. Alle fertigen Lieder werden wieder zum Ende der Warteschlange hinzugefügt.",
+            "repeatOff": "Du hast den Widerholmodus deaktiviert. Alle fertigen Lieder werden nicht wieder hinzugefügt.",
+            "skipSuccess": "Entfernte {{song}} von der Warteschlange.",
+            "terminated": [
+                "Der Bot wird neugestartet, alle Sprach-Verbindungen wurden beendet.",
+                "",
+                "Die aktuelle Warteschlange wurde in der Datenbank gespeichert.",
+                "Wir entschuldigen uns für alle verursachen Unannehmlichkeiten."
+            ],
+            "votedSkip": "Du hast bereits gestimmt dieses Lied zu überspringen!",
+            "voteSkipSuccess": "Du hast gestimmt, das aktuelle Lied zu überspringen!",
+            "votedClear": "Du hast bereits gestimmt, die Warteschlange zu leeren!",
+            "voteClearSuccess": "Du hast gestimmt, die aktuelle Warteschlange zu leeren.",
+            "stations": "Sender",
+            "shuffled": "Mischt {{num}} Einträge in der Warteschlange."
+        },
+        "slots": {
+            "insufficient": [
+                "Du brauchst {{amount}} mehr Credits!",
+                "",
+                "Du kannst den Befehl {{command}} benutzen, um alle paar Stunde freie Credits zu beanspruchen."
+            ],
+            "won": "{{user}} hat eine Wette von {{amount}} Credits gesetzt und gewann:",
+            "lost": "{{user}} hat eine Wette von {{amount}} Credits gesetzt und alles verloren.",
+            "credits": "Credits",
+            "winnings": "Gewinne",
+            "yudodis": "Du kannst nicht weniger als einen Credit setzten!",
+            "dailyLimit": "Du hast das tägliche Limit der zu gewinnenden Credits erreicht. Versuche es nochmal in {{time}}."
+        },
+        "stats": {
+            "users": "Benutzer",
+            "unique": "einzigartig",
+            "online": "online",
+            "guilds": "Guilden",
+            "channels": "Kanäle",
+            "text": "Text",
+            "voice": "Stimme",
+            "total": "insgesamt",
+            "uptime": "Betriebszeit",
+            "memoryUsage": "Speichernutzung",
+            "commandsUsed": "Befehle benutzt",
+            "server": "Studio 777 (Support Server)"
+        },
+        "settings": {
+            "prefix": {
+                "success": "Erfolgreich das Präfix dieser Guilde zu {{prefix}} geändert",
+                "revert": "Kehrte das Präfix dieser Guilde zurück zu {{prefix}}",
+                "current": "Das aktuelle Präfix für diesen Server ist: {{prefix}}"
+            },
+            "lang": {
+                "success": "Erfolgreich die Sprache dieser Guilde zu {{lang}} geändert"
+            },
+            "enabler": {
+                "success": "erfolgreich {{action}} {{command}} für {{conext}}",
+                "actions": {
+                    "enable": "aktiviert",
+                    "disable": "deaktiviert",
+                    "revert": "umgekehrt"
+                }
+            },
+            "changelog": "Jüngste Changelogs",
+            "tz": {
+                "success": "Erfolgreich die Zeitzone dieser Guilde zu {{tz}} geändert",
+                "notFound": [
+                    "Die Zeitzone '{{tz}}' ist ungültig.",
+                    "",
+                    "Besuche {{link}} für eine Liste der gültigen Zeitzonen."
+                ],
+                "current": "Die momentane Zeitzone für diesen Server ist: {{tz}}"
+            },
+            "subscribe": {
+                "eventNotFound": [
+                    "Das Ereignis {{event}} konnte nicht gefunden werden.",
+                    "",
+                    "Dies sind die unterstützten Ereignisse: {{events}}"
+                ],
+                "notSubscribed": "{{channel}} ist zu keinem Event angemeldet.",
+                "subSuccess": "Erfolgreich {{channel}} zu {{events}} angemeldet.",
+                "unsubSuccess": "Erfolgreich {{channel}} von {{events}} abgemeldet.",
+                "list": "{{channel}} ist zu {{events}} angemedet."
+            },
+            "reset": {
+                "success": "Setzte alle Berechtigungen in dem Server zurück."
+            },
+            "welcome": {
+                "dialog": "Willkommens-Nachrichten",
+                "action": {
+                    "set": "Lege die Willkommens-Nachricht fest",
+                    "get": "Bekomm die aktuelle Willkommens-Nachricht",
+                    "enable": "Benutze diesen Kanal um Willkommens-Nachrichten zu schicken"
+                },
+                "get": "Aktuelle Willkommens-Nachricht:",
+                "setDialog": [
+                    "{{author}}, bitte gib die neue Willkommens-Nachricht ein.",
+                    "Unterstützte Tags: {{tags}}",
+                    "Um einen Tag zu benutzen, umgebe es mit '{{}}'. Z.B. '{{guild}}'"
+                ],
+                "success": "Die neue Willkommens-Nachricht ist:",
+                "enabled": "Schicke nun Willkommens-Nachrichten in {{channel}}"
+            },
+            "goodbye": {
+                "dialog": "Verabschiedungs-Nachrichten",
+                "action": {
+                    "set": "Lege die Verabschiedungs-Nachricht fest",
+                    "get": "Bekomm die aktuelle Verabschiedungs-Nachricht",
+                    "enable": "Benutze diesen Kanal, um Verabschiedungs-Nachrichten zu schicken"
+                },
+                "get": "Aktuelle Verabschiedungs-Nachricht:",
+                "setDialog": [
+                    "{{authoer}}, bitte gib die neue Verabschiedungs-Nachricht ein.",
+                    "Unterstützte Tags: {{tags}}",
+                    "Um einen Tag zu benutzen, umgebe es mit '{{}}'. Z.B. '{{guild}}'"
+                ],
+                "success": "Die neue Verabschiedungs-Nachricht ist:",
+                "enabled": "Schicke nun Verabschiedungs-Nachrichten in {{channel}}"
+            }
+        },
+        "purge": {
+            "success": "Erfolgreich {{num}} Nachrichten gelöscht",
+            "filterSuccess": "Löschte {{num}} Nachrichten, die den folgenden Kriterien entsprachen: {{criteria}}"
+        },
+        "misc": {
+            "choose": {
+                "pick": "Ich wähle {{choice}}"
+            },
+            "8ball": {
+                "question": "{{user}} fragte",
+                "response": "{{8ball}} sagt",
+                "answer_1": "Es steht fest",
+                "answer_2": "Es ist zweifelsohne so",
+                "answer_3": "Ohne Zweifel",
+                "answer_4": "Ja, auf jeden Fall",
+                "answer_5": "Du darfst dich darauf verlassen",
+                "answer_6": "Wie ich es sehe, ja",
+                "answer_7": "Sehr wahrscheinlich",
+                "answer_8": "Sieht gut aus",
+                "answer_9": "Ja",
+                "answer_10": "Zeichen weisen auf ja hin",
+                "answer_11": "Antwort vage, versuch nochmal",
+                "answer_12": "Frag später nochmal",
+                "answer_13": "Sagt man dir jetzt lieber nicht",
+                "answer_14": "Kann jetzt nicht hervorgesehen werden",
+                "answer_15": "Konzentriere und frag nochmal",
+                "answer_16": "Verlass dich nicht drauf",
+                "answer_17": "Meine Antwort ist nein",
+                "answer_18": "Meine Quellen sagen nein",
+                "answer_19": "Sieht nicht gut aus",
+                "answer_20": "Sehr fraglich"
+            },
+            "dice": {
+                "result": "Ergebnis: {{result}}",
+                "invalid": "Ungültige Würfel-Bezeichnung - {{text}}"
+            },
+            "coin": {
+                "result": "Du hast {{heads}} mal Kopf und {{tail}} mal Zahl geworfen!",
+                "heads": "Du hast **Kopf** geworfen!",
+                "tails": "Du hast **Zahl** geworfen!"
+            },
+            "urban": {
+                "noResults": "Die Suchanfrage {{query}} ergab keine Ergebnisse."
+            }
+        },
+        "rss": {
+            "success": "Fügte Feed für {{channel}} hinzu mit {{included}} eingeschlossenen Tags und {{excluded}} ausgeschlossenen Tags: {{url}}",
+            "error": "Konnte {{url}} nicht entwerten. Bitte überprüfe, ob es ein gültiger RSS-Feed ist.",
+            "rssDialog": "RSS Menü",
+            "rssDelFooter": "Gib die Nummer des RSS-Feeds ein, das du gerne entfernen möchtest, oder {{cancel}} um abzubrechen.",
+            "urlDialog": [
+                "**RSS - Feed URL**",
+                "",
+                "{{author}}, bitte gebe die URL des hinzuzufügenden RSS-Feeds ein.",
+                "Ansonsten, gib {{exit}} ein um abzubrechen."
+            ],
+            "includedTagsDialog": [
+                "**RSS - Eingeschlossene Tags**",
+                "",
+                "{{author}}, bitte gebe eine Liste von eingeschlossenen Tags ein, die mit Kommata getrennt sind. Zum Beispiel: 'Filme, Wissenschaft'",
+                "Ansonsten, gib {{skip}} zum überspringen oder {{exit}} zum abbrechen an."
+            ],
+            "excludedTagsDialog": [
+                "**RSS - Ausgeschlossene Tags**",
+                "",
+                "{{author}}, bitte gebe eine Liste von ausgeschlossenen Tags ein, die mit Kommata getrennt sind. Zum Beispiel: 'Anime, Religion'",
+                "Ansonsten, gib {{skip}} zum überspringen oder {{exit}} zum abbrechen an."
+            ],
+            "subscribedTo": "{{channel}} hat folgende RSS-Feeds abonniert:",
+            "notSubscribed": "{{channel}} hat keine Feeds abonniert. Benutze {{command}} um einen neuen Feed hinzuzufügen.",
+            "subscribedFeeds": "Abonnierte Feeds für {{channel}}",
+            "noFeedFound": "Es wurde kein Feed gefunden mit dem Namen oder URL.",
+            "removedFeed": "Entfernte RSS-Eintrag: {{feed}}",
+            "confirmClear": [
+                "**Alle RSS-Feeds klären*",
+                "",
+                "{{author}}, bist du dir sicher, dass du alle RSS-Feeds leeren möchtest?",
+                "Gib {{confirm}} ein, um zu bestätigen, oder irgendetwas anderes um abzubrechen."
+            ],
+            "notCleared": "Keine RSS-Feeds wurden entfernt.",
+            "cleared": "{{count}} RSS-Feeds wurden von diesem Kanal entfernt.",
+            "action": {
+                "add": "Füge ein RSS-Feed zu einem Kanal hinzu",
+                "remove": "Entferne ein RSS-Feed von einem Kanal",
+                "list": "Zählt alle in diesen Kanal hinzugefügten RSS-Feeds auf",
+                "clear": "Leert alle in diesen Kanal hinzugefügten RSS-Feeds"
+            }
+        },
+        "anime": {
+            "noResults": "Keine Ergebnisse gefunden. Bitte überprüfe deine Suchanfrage.",
+            "synopsis": "Zusammenfassung",
+            "type": "Typ",
+            "episodes": "Episoden",
+            "status": "Status",
+            "genres": "Genre",
+            "season": "Staffel",
+            "score": "Bewertung",
+            "noDesc": "Keine Beschreibung",
+            "airing": "Wird ausgestrahlt am {{start}}",
+            "aired": "Ausgestrahlt von {{start}} bis {{end}}",
+            "publishing": "Wird veröffentlicht an {{start}}",
+            "published": "Veröffentlicht von {{start}} bis {{end}}",
+            "seasons": {
+                "winter": "Winter",
+                "spring": "Frühling",
+                "summer": "Sommer",
+                "fall": "Herbst"
+            },
+            "volumes": "Bände",
+            "chapters": "Kapitel"
+        }
+    }
+}
