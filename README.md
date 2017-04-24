@@ -12,8 +12,6 @@
   </p>
 </div>
 
-**Built upon:** [iris](https://github.com/pyraxo/iris), the better Discord bot base
-
 **haru** is an idol, bringing joy to people's lives. when not performing, she works part-time as a bot.
 
 ### Requirements

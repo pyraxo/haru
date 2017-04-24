@@ -274,7 +274,7 @@ class Companions extends Module {
       const bet = battle.bets[loser][id]
       losers.push([id, bet])
       const user = await this.db.User.fetch(id)
-      user.credits += bet
+      user.credits -= bet
       await user.save()
     }
 
