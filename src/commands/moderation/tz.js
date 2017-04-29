@@ -20,7 +20,7 @@ class Timezone extends Command {
     if (moment.tz.names().indexOf(args.tz) < 0) {
       return responder.error('{{tz.notFound}}', {
         tz: `**\`${args.tz}\`**`,
-        link: '**<http://frid.li/timezones>**'
+        link: '**<https://awau.moe/haru-timezones>**'
       })
     }
     try {
