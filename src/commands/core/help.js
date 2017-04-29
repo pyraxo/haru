@@ -86,7 +86,7 @@ class HelpMenu extends Command {
       server: `**${msg.channel.guild ? msg.channel.guild.name : responder.t('{{pms}}')}**`,
       helpCommand: `\`${prefix}help <command>\``,
       exampleCommand: `\`${prefix}help credits\``,
-      link: '**<https://discord.gg/bBqpAKw>**'
+      link: '**<https://discord.gg/vYMRRZF>**'
     })
     .then(m => {
       if (msg.channel.guild) {

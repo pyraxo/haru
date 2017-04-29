@@ -12,7 +12,7 @@ class Invite extends Command {
   handle ({ msg }, responder) {
     return responder.send('{{invite}}', {
       invite: '**https://pyraxo.moe/haru**',
-      server: '**<https://discord.gg/bBqpAKw>**'
+      server: '**<https://discord.gg/vYMRRZF>**'
     })
   }
 }

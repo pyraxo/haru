@@ -37,7 +37,7 @@ class Stats extends Command {
         icon_url: 'https://twitter.com/pyraxo/profile_image?size=original'
       },
       description: [
-        `**[${responder.t('{{server}}')}](https://discord.gg/bBqpAKw)**`
+        `**[${responder.t('{{server}}')}](https://discord.gg/vYMRRZF)**`
       ].join('\n'),
       color: this.colours.pink,
       fields: [
