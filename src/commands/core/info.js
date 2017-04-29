@@ -29,7 +29,7 @@ class Info extends Command {
         { name: responder.t('{{ptr}}'), value: 'https://patreon.com/pyraxo', inline: true },
         {
           name: responder.t('{{support}}'),
-          value: responder.t('{{join}}', { link: '**https://discord.gg/bBqpAKw**' })
+          value: responder.t('{{join}}', { link: '**https://discord.gg/vYMRRZF**' })
         }
       ]
     }})
