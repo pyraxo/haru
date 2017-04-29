@@ -45,7 +45,7 @@ class Companions extends Command {
     }
     const arg = await responder.format('emoji:pencil2').dialog([{
       prompt: '{{renameDialog}}',
-      input: { type: 'string', name: 'newName', max: 20 }
+      input: { type: 'string', name: 'newName', max: 100 }
     }], {
       pet: `:${user.companion.type}: "**${user.companion.name}**"`,
       user: `**${msg.author.username}**`
