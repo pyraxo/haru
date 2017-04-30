@@ -18,3 +18,4 @@
 To install **haru** on your computer, refer to the [installation guide](INSTALLATION.md).
 
 ### Contributing
+To contribute to the project, refer to the [contributing guide](CONTRIBUTING.md).
