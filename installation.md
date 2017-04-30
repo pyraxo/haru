@@ -16,12 +16,15 @@ In this little guide we're assuming you're either on Ubuntu or Debian. Though th
 $ git clone https://github.com/pyraxo/natsu
 $ cd natsu
 $ sudo npm i gulp -g
+$ gulp
 ```
-Once this is done we will need to make some configurations before being able to start the bot.
+When this is done we will need to configure
 
 ### Configuration
 
-In the natsu directory create a new `.env` file from `.env.example` and edit the values as desired.
+First, create a logs directory in natsu: `mkdir logs`.
+
+Then, create a new `.env` file from `.env.example` and edit the values as desired.
 For Redis and Rethinkdb you can use these values:
 ```
 REDIS_HOST=localhost
@@ -39,11 +42,11 @@ If you leave the API keys empty you will have an error message logged in the con
 
 ### Start Redis
 
-Open another console and start Redis with the following command: `redis-server`. Now just leave this console open.
+Open another console and start Redis with the following command: `redis-server`. Now just leave this console open. In your main console write `redis-cli ping` if it returns `PONG`, it means everything is working fine.
 
 ### Start Rethinkdb
 
-In your main console write `rethinkdb --daemon`. It should start Rethinkdb. You can make sure that it is running by writing `curl localhost:8080` in your console, if you get some html back it means Rethinkdb is running.
+In your main console write `rethinkdb --daemon`. It should start Rethinkdb. You can check that it is running by writing `curl localhost:8080` in your console, if you get some HTML back it means Rethinkdb is running.
 
 ### Start the bot
 
