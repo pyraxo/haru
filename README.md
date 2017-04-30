@@ -15,5 +15,6 @@
 **haru** is an idol, bringing joy to people's lives. when not performing, she works part-time as a bot.
 
 ### Installation
+To install **haru** on your computer, refer to the [installation guide](installation.md).
 
-To install **haru** on your computer read the [installation.md](installation.md).
+### Contributing
