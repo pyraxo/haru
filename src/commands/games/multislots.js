@@ -8,7 +8,10 @@ class Multislots extends Command {
       description: 'Multi-line slot machine command',
       usage: [{ name: 'bet', type: 'int', optional: true, default: 1 }],
       aliases: ['multislot'],
-      cooldown: 6
+      cooldown: 6,
+      options: {
+        localeKey: 'slots'
+      }
     })
 
     this.reel = [
