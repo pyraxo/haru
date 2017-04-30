@@ -129,7 +129,7 @@ class Multislots extends Command {
       '**__   S   L   O   T   S   __**',
       `> ${payline1.join(' ')} <`,
       `> ${payline2.join(' ')} <`,
-      `> ${payline3.join(' ')} <`,
+      `> ${payline3.join(' ')} <\n`,
       winnings.length
       ? `{{won}}\n\n${winnings.map(w => `${w[0]}: **${w[1]} {{credits}}**`).join('\n')}`
       : '{{lost}}'
