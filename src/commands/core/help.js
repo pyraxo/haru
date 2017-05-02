@@ -6,6 +6,7 @@ class HelpMenu extends Command {
     super(...args, {
       name: 'help',
       description: 'Displays info on commands',
+      aliases: ['h'],
       cooldown: 1,
       usage: [
         { name: 'command', type: 'command', optional: true }

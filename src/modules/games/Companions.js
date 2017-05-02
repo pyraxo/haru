@@ -276,6 +276,8 @@ class Companions extends Module {
       const user = await this.db.User.fetch(id)
       user.credits -= bet
       await user.save()
+      winUser.credits += Math.ceil(bet / 2)
+      await winUser.save()
     }
 
     if (winners.length || losers.length) {
