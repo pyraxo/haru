@@ -14,22 +14,8 @@
 
 **haru** is an idol, bringing joy to people's lives. when not performing, she works part-time as a bot.
 
-### Requirements
-* Redis
-* Rethinkdb
-* **Node.js 7+**
-
-A firm grasp of **ES6 + async/await** syntax is recommended.
-
 ### Installation
-```bash
-$ git clone https://github.com/pyraxo/natsu
-$ cd natsu
-$ npm i
-$ npm start
-```
+To install **haru** on your computer, refer to the [installation guide](INSTALLATION.md).
 
-### Configuration
-Create a new `.env` file from `.env.example` and edit the values as desired. Follow `.env` instructions [here](https://www.npmjs.com/package/dotenv-safe)
-
-As the bot base uses the [Eris](https://github.com/abalabahaha/Eris) library, please refer to the docs [here](https://abal.moe/ErisDev/docs.html).
+### Contributing
+To contribute to the project, refer to the [contributing guide](CONTRIBUTING.md).
