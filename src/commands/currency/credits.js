@@ -169,7 +169,6 @@ class Credits extends Command {
           unique.push(usr)
         }
       }
-logger.info(args)
       unique = unique.filter(u => u)
       let maxName = 16
       unique.forEach(u => {
