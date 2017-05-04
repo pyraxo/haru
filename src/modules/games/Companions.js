@@ -189,21 +189,22 @@ class Companions extends Module {
 
       const crit = stats[attacker].crit
       const multiplier = Array(100).fill(2, 0, crit).fill(1, crit)[~~(Math.random() * 100)]
-      const actionnum = Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+      const damagenum = Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+      const actionnum = Math.floor(Math.random() * (4 - 1 + 1)) + 1;
       switch (res) {
         case 0: {
-          battle._actions.push(`:dash:  **${stats[receiver].name}** dodged an attack`)
+          battle._actions.push(`:dash: **${responder.t(`{{script.DODGE_${actionnum}}}`, {p1: stats[attacker].name, p2: stats[receiver].name}) }**`)
           break
         }
         case 1: {
           const dmg = (stats[attacker].atk * multiplier)
-          battle._actions.push(`${multiplier > 1 ? ':anger:' : ':punch:'}  **${responder.t(`{{script.HIT_${actionnum}}}`, {p1: stats[attacker].name, p2: stats[receiver].name, dmg: dmg}) }**`)
+          battle._actions.push(`${multiplier > 1 ? ':anger:' : ':punch:'}  **${responder.t(`{{script.HIT_${damagenum}}}`, {p1: stats[attacker].name, p2: stats[receiver].name, dmg: dmg}) }**`)
           battle._stats[receiver].hp -= dmg
           break
         }
         case 2: {
           const heal = (1 * multiplier)
-          battle._actions.push(`:sparkles:  **${stats[attacker].name}** healed for **${heal}** HP`)
+          battle._actions.push(`:sparkles:  **${responder.t(`{{script.HEAL_${actionnum}}}`, {p1: stats[attacker].name, heal: heal}) }**`)
           battle._stats[attacker].hp += heal
           break
         }
