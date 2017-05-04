@@ -189,6 +189,7 @@ class Companions extends Module {
 
       const crit = stats[attacker].crit
       const multiplier = Array(100).fill(2, 0, crit).fill(1, crit)[~~(Math.random() * 100)]
+      const actionnum = Math.floor(Math.random() * (6 - 1 + 1)) + 1;
       switch (res) {
         case 0: {
           battle._actions.push(`:dash:  **${stats[receiver].name}** dodged an attack`)
@@ -196,7 +197,7 @@ class Companions extends Module {
         }
         case 1: {
           const dmg = (stats[attacker].atk * multiplier)
-          battle._actions.push(`${multiplier > 1 ? ':anger:' : ':punch:'}  **${responder.t('{{script.HIT_${1}}}') }**`)
+          battle._actions.push(`${multiplier > 1 ? ':anger:' : ':punch:'}  **${responder.t(`{{script.HIT_${actionnum}}}`, {p1: stats[attacker].name, p2: stats[receiver].name, dmg: dmg}) }**`)
           battle._stats[receiver].hp -= dmg
           break
         }
