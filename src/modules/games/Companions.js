@@ -61,7 +61,7 @@ class Companions extends Module {
     5 --> BATTLE END
   */
 
-  initBattle (p1, p2, channel, time = 60, fee = 1000) {
+  initBattle (p1, p2, channel, settings, responder, time = 60, fee = 1000) {
     if (this.battles.has(channel.id)) return Promise.reject('ongoingBattle')
     if (this.battles.find(b => b.p1 === p1.id || b.p2 === p1.id)) {
       return Promise.reject('userInBattle')
@@ -72,6 +72,8 @@ class Companions extends Module {
       p1: p1.id,
       p2: p2.id,
       channel: channel.id,
+      responder: responder,
+      settings: settings,
       state: 1,
       bets: { p1: {}, p2: {} },
       timer: setTimeout(() => {
@@ -174,6 +176,8 @@ class Companions extends Module {
       if (stats.p1.hp <= 0) return this.endBattle(battle, false)
       if (stats.p2.hp <= 0) return this.endBattle(battle, true)
 
+      const responder = battle.responder
+      const settings = battle.settings
       const turn = battle._turn < 0 ? ~~(Math.random() * 2) : battle._turn % 2 + 1
       const attacker = 'p' + turn
       const receiver = 'p' + (turn % 2 + 1)
@@ -185,20 +189,22 @@ class Companions extends Module {
 
       const crit = stats[attacker].crit
       const multiplier = Array(100).fill(2, 0, crit).fill(1, crit)[~~(Math.random() * 100)]
+      const damagenum = Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+      const actionnum = Math.floor(Math.random() * (4 - 1 + 1)) + 1;
       switch (res) {
         case 0: {
-          battle._actions.push(`:dash:  **${stats[receiver].name}** dodged an attack`)
+          battle._actions.push(`:dash: **${responder.t(`{{script.DODGE_${actionnum}}}`, {p1: stats[attacker].name, p2: stats[receiver].name}) }**`)
           break
         }
         case 1: {
           const dmg = (stats[attacker].atk * multiplier)
-          battle._actions.push(`${multiplier > 1 ? ':anger:' : ':punch:'}  **${stats[attacker].name}** dealt **${dmg}** damage to **${stats[receiver].name}**`)
+          battle._actions.push(`${multiplier > 1 ? ':anger:' : ':punch:'}  **${responder.t(`{{script.HIT_${damagenum}}}`, {p1: stats[attacker].name, p2: stats[receiver].name, dmg: dmg}) }**`)
           battle._stats[receiver].hp -= dmg
           break
         }
         case 2: {
           const heal = (1 * multiplier)
-          battle._actions.push(`:sparkles:  **${stats[attacker].name}** healed for **${heal}** HP`)
+          battle._actions.push(`:sparkles:  **${responder.t(`{{script.HEAL_${actionnum}}}`, {p1: stats[attacker].name, heal: heal}) }**`)
           battle._stats[attacker].hp += heal
           break
         }

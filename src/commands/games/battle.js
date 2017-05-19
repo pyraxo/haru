@@ -52,7 +52,7 @@ class Battle extends Command {
     if (oppProfile.credits < this.entryFee) return responder.error('{{errors.cantChallenge}}')
 
     try {
-      await companions.initBattle(msg.author, opp, msg.channel, this.respondTime, this.entryFee)
+      await companions.initBattle(msg.author, opp, msg.channel, settings, responder, this.respondTime, this.entryFee)
       return responder.format('emoji:atk').reply('{{challenge}}', {
         mention: opp.mention,
         time: `**${this.respondTime}**`,
