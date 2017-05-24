@@ -45,7 +45,8 @@ class Booru extends Command {
     }).send(`**ID ${id}**`)
   }
 
-  async danbooru ({ rawArgs }, responder) {
+  async danbooru ({ msg, rawArgs }, responder) {
+    if (msg.channel.nsfw === false) return responder.error('{{wrongChannel}}')
     if (rawArgs.length > 2) return responder.error('{{maxTwo}}')
     const query = rawArgs.join('+') + (rawArgs.length === 1 ? '+order:random' : '')
     let res
@@ -77,7 +78,8 @@ class Booru extends Command {
   }
 
   async gelbooru (container, responder, { pid = ~~(Math.random() * 500), pass = 0 } = {}) {
-    const { rawArgs } = container
+    const { msg, rawArgs } = container
+    if (msg.channel.nsfw === false) return responder.error('{{wrongChannel}}')
     const query = rawArgs.join('+')
     try {
       let res = await request.get(`http://gelbooru.com/index.php?page=dapi&s=post&q=index&json=1&tags=${query}${pid ? `&pid=${pid}` : ''}`)
@@ -116,7 +118,8 @@ class Booru extends Command {
     }
   }
 
-  async yandere ({ rawArgs, args }, responder) {
+  async yandere ({ msg, rawArgs, args }, responder) {
+    if (msg.channel.nsfw === false) return responder.error('{{wrongChannel}}')
     const query = rawArgs.join('+')
     let res
     try {
