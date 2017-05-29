@@ -10,7 +10,7 @@ class Purge extends Command {
         { name: 'amount', type: 'int', optional: false },
         {
           name: 'options',
-          displayName: 'keyword | bots | @user | embeds | files | links | images | commands',
+          displayName: 'keyword | bots | @user | embeds | files | links | images | commands | unpinned',
           type: 'list',
           separator: ' | ',
           optional: true,
@@ -24,6 +24,7 @@ class Purge extends Command {
 
   createFilter (val, settings) {
     switch (val) {
+      case 'unpinned': return (msg) => !msg.pinned
       case 'bots': return (msg) => msg.author.bot
       case 'embeds': return (msg) => msg.embeds.length
       case 'files': return (msg) => msg.attachments.length
@@ -64,7 +65,7 @@ class Purge extends Command {
             const user = client.users.get(isMember[1])
             return `\`@${user ? user.username : 'user'}\``
           }
-          if (!['bots', 'embeds', 'files', 'images', 'links', 'commands'].includes(v)) {
+          if (!['bots', 'embeds', 'files', 'images', 'links', 'commands', 'unpinned'].includes(v)) {
             return `\`keyword "${v}"\``
           }
           return `\`${v}\``

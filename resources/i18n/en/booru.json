@@ -1,6 +1,7 @@
 {
   "noPictures": "the query {{query}} returned no pictures. Try searching something else!",
   "maxTwo": "you may only search Danbooru with a maximum of two tags!",
+  "wrongChannel": "you can only use this command in DM's or a NSFW channel!",
   "score": "Score",
   "rating": "Rating",
   "tags": "Tags",
