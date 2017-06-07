@@ -193,7 +193,7 @@ class Companions extends Module {
       const actionnum = Math.floor(Math.random() * (4 - 1 + 1)) + 1;
       switch (res) {
         case 0: {
-          battle._actions.push(`:dash:  **${responder.t(`{{script.DODGE_${actionnum}}}`, {p1: stats[attacker].name, p2: stats[receiver].name}) }**`)
+          battle._actions.push(`:dash: **${responder.t(`{{script.DODGE_${actionnum}}}`, {p1: stats[receiver].name, p2: stats[attacker].name}) }**`)
           break
         }
         case 1: {
