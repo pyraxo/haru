@@ -105,7 +105,7 @@
                 "self": "tu ne peux pas faire de bataille avec toi-même !",
                 "noUser": "cet utilisateur est introuvable !",
                 "ongoingBattle": "il y a déjà une bataille en cours dans ce channel !",
-                "userInBattle": "tu est déjà dans une bataille !",
+                "userInBattle": "tu es déjà dans une bataille !",
                 "opponentInBattle": "ton adversaire est déjà dans une bataille !",
                 "noIncoming": "tu n'as pas de demande de bataille.",
                 "noOutgoing": "tu n'as envoyé aucune demande de bataille.",
@@ -146,7 +146,21 @@
                     "{{p2}} subit une déculottée de la part de {{p1}}, qui lui enlève {{dmg}} point(s) de vie!",
                     "{{p1}} donne un bon coup à {{p2}},  lui faisant {{dmg}} point(s) de dégât!",
                     "{{p1}} distribue rapidement {{dmg}} point(s) de dommage a {{p2}}!"
-                ]
+                ],
+                "DODGE_3": "{{p1}} barely avoids {{p2}}'s attack!",
+                "DODGE_4": "{{p2}}'s attack passes by {{p1}}!",
+                "HIT_1": "{{p1}} administers a strong hit to {{p2}}, dealing {{dmg}} damage!",
+                "HIT_2": "{{p1}} smacks {{p2}} around, causing {{dmg}} damage!",
+                "HIT_3": "{{p1}} lands a strike on {{p2}}, who suffers {{dmg}} damage!",
+                "HIT_4": "{{p2}} suffers a pounding by {{p1}}, who hits for {{dmg}} damage!",
+                "HIT_5": "{{p1}} secures a good hit on {{p2}}, delivering {{dmg}} damage!",
+                "HIT_6": "{{p1}} delivers a quick {{dmg}} damage to {{p2}}!",
+                "HEAL_1": "{{p1}} eats some medicine, raising his health by {{heal}}!",
+                "HEAL_2": "{{p1}} uses a bandaid, healing by {{heal}} health!",
+                "HEAL_3": "A wild fairy appeared, healing {{p1}} for {{heal}} health!",
+                "HEAL_4": "{{p1}} discovers a magical paste, increasing his health by {{heal}}!",
+                "DODGE_1": "{{p1}} manages to dodge {{p2}}'s attack!",
+                "DODGE_2": "{{p2}}'s attack narrowly misses {{p1}}!"
             }
         },
         "credits": {
@@ -226,7 +240,8 @@
             "manga": "Obtient des informations sur un manga",
             "soundcloud": "Recherche des musiques sur Soundcloud",
             "ban": "Bannit un membre du serveur",
-            "kick": "Kick un membre du serveur"
+            "kick": "Kick un membre du serveur",
+            "multislots": "Plays the slot machine with all 3 rows"
         },
         "guilds": {
             "join": [
