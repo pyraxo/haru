@@ -19,7 +19,9 @@ class Autorole extends Command {
       return responder.format('emoji:info').reply('{{autorole.current}}', { role: `**${settings.autorole}**` })
     }
     try {
-      settings.autorole = args.role
+      console.log(args.role);
+      console.log(args.role.id);
+      settings.autorole = args.role.id
       await settings.save()
       return responder.success('{{autorole.success}}', {
         role: `**\`${args.role}\`**`
