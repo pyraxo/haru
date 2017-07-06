@@ -16,6 +16,10 @@ class Autorole extends Command {
 
   async handle ({ msg, args, data, settings }, responder) {
     if (!args.role) {
+      console.log(settings.autorole.name === null)
+      if (settings.autorole.name === null) {
+        return responder.format('emoji:info').reply('{{autorole.none}}')
+      }
       return responder.format('emoji:info').reply('{{autorole.current}}', { role: `**${settings.autorole.name}**` })
     }
     try {
