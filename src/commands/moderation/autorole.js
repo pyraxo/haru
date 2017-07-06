@@ -16,15 +16,17 @@ class Autorole extends Command {
 
   async handle ({ msg, args, data, settings }, responder) {
     if (!args.role) {
-      return responder.format('emoji:info').reply('{{autorole.current}}', { role: `**${settings.autorole}**` })
+      return responder.format('emoji:info').reply('{{autorole.current}}', { role: `**${settings.autorole.name}**` })
     }
     try {
       console.log(args.role);
       console.log(args.role[0].id);
-      settings.autorole = args.role[0].id
+      console.log(args.role[0].name);
+      settings.autorole.id = args.role[0].id
+      settings.autorole.name = args.role[0].name
       await settings.save()
       return responder.success('{{autorole.success}}', {
-        role: `**\`${args.role}\`**`
+        role: `**\`${args.role[0].name}\`**`
       })
     } catch (err) {
       logger.error(`Could not ${cmd} for ${msg.channel.guild.name} (${msg.channel.guild.id}) - ${err}`)
