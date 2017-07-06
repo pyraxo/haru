@@ -20,8 +20,8 @@ class Autorole extends Command {
     }
     try {
       console.log(args.role);
-      console.log(args.role.id);
-      settings.autorole = args.role.id
+      console.log(args.role[0].id);
+      settings.autorole = args.role[0].id
       await settings.save()
       return responder.success('{{autorole.success}}', {
         role: `**\`${args.role}\`**`
