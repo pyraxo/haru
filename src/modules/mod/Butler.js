@@ -45,6 +45,7 @@ class Butler extends Module {
         }))
       )
     ).catch(err => logger.error('Error sending welcome message -', err))
+    member.addRole(settings.autorole, 'Added role on user join -Haru').catch(err => logger.error('Error setting role -', err))
   }
 
   onLeave (guild, member) {
