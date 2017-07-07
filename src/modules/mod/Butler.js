@@ -46,8 +46,8 @@ class Butler extends Module {
       )
     ).catch(err => logger.error('Error sending welcome message -', err))
     this.db.Guild.fetch(guild.id).then(settings =>
-      typeof settings.autorole === 'string' &&
-      member.addRole(settings.autorole, 'Added role on user join -Haru')
+      typeof settings.autorole.id === 'string' &&
+      member.addRole(settings.autorole.id, 'Added role on user join -Haru')
     ).catch(err => logger.error('Error setting role -', err))
   }
 
