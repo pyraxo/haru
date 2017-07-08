@@ -25,10 +25,11 @@ class Autorole extends Command {
 
   async handle ({ msg, data, settings }, responder) {
     try {
-      if (settings.autorole.name === null) {
+      if (settings.autorole === null) {
         return responder.format('emoji:info').reply('{{autorole.none}}')
       }
-      return responder.format('emoji:info').reply('{{autorole.current}}', { role: `**${settings.autorole.name}**` })
+      let role = msg.channel.guild.roles.get(settings.autorole).name
+      return responder.format('emoji:info').reply('{{autorole.current}}', { role: `**${role}**` })
     } catch (err) {
       logger.error(`Could not ${cmd} for ${msg.channel.guild.name} (${msg.channel.guild.id}) - ${err}`)
       return responder.error()
@@ -37,8 +38,7 @@ class Autorole extends Command {
 
   async add ({ msg, args, data, settings }, responder) {
     try {
-      settings.autorole.id = args.role[0].id
-      settings.autorole.name = args.role[0].name
+      settings.autorole = args.role[0].id
       await settings.save()
       return responder.success('{{autorole.success}}', {
         role: `**\`${args.role[0].name}\`**`
@@ -51,8 +51,7 @@ class Autorole extends Command {
 
   async remove ({ msg, data, settings }, responder) {
     try {
-      settings.autorole.id = null
-      settings.autorole.name = null
+      settings.autorole = null
       await settings.save()
       return responder.success('{{autorole.none}}')
     } catch (err) {
@@ -60,7 +59,7 @@ class Autorole extends Command {
       return responder.error()
     }
   }
-  
+
 }
 
 module.exports = Autorole
