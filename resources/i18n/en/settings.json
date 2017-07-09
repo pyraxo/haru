@@ -68,5 +68,10 @@
     ],
     "success": "the new goodbye message is:",
     "enabled": "now sending goodbye messages in {{channel}}"
+  },
+  "autorole": {
+  "success": "Successfully configured {{role}} as this server autorole",
+  "none": "There is no autorole on this server",
+  "current": "The current autorole for this server is {{role}}"
   }
 }
