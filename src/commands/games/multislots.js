@@ -21,7 +21,7 @@ class Multislots extends Command {
     ]
 
     this.wins = {
-      '🍒 x 1': .75, // From 7 to .75
+      '🍒 x 1': .75,
       '🍒 x 2': 2,
       '🍒 x 3': 5,
       '7⃣ x 2': 25,
@@ -76,8 +76,11 @@ class Multislots extends Command {
       const v3 = `${r3} x ${res3[r3]}`
       if (this.wins[v3]) wins.push([v3, this.wins[v3] * amt])
     }
-    console.log(wins[1])
-    Math.ceil(wins[1]) // Rounds the amount of $ displayed
+    console.log(wins)
+    if (wins != undefined){
+      Math.floor(wins[0][1])
+      console.log(wins[0][1])
+    }
     console.log(wins)
     return wins
   }
@@ -117,8 +120,8 @@ class Multislots extends Command {
       user.credits -= args.bet
       let total = 0
       for (const win of winnings) {
-        user.credits += Math.ceil(win[1]) // Round the amount of $ the player is getting in the end
-        total += Math.ceil(win[1]) // Same with the total of $ won
+        user.credits += Math.ceil(win[1])
+        total += Math.ceil(win[1])
       }
       await user.save()
       await cache.client.multi()
