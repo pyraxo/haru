@@ -21,7 +21,6 @@ class Multislots extends Command {
     ]
 
     this.wins = {
-      '🍒 x 1': .75,
       '🍒 x 2': 2,
       '🍒 x 3': 5,
       '7⃣ x 2': 25,
@@ -76,12 +75,6 @@ class Multislots extends Command {
       const v3 = `${r3} x ${res3[r3]}`
       if (this.wins[v3]) wins.push([v3, this.wins[v3] * amt])
     }
-    console.log(wins)
-    if (wins != undefined){
-      Math.floor(wins[0][1])
-      console.log(wins[0][1])
-    }
-    console.log(wins)
     return wins
   }
 
