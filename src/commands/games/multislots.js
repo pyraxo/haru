@@ -113,8 +113,8 @@ class Multislots extends Command {
       user.credits -= args.bet
       let total = 0
       for (const win of winnings) {
-        user.credits += Math.ceil(win[1])
-        total += Math.ceil(win[1])
+        user.credits += win[1]
+        total += win[1]
       }
       await user.save()
       await cache.client.multi()
