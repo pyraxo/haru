@@ -1,20 +1,20 @@
 {
     "en": {
         "booru": {
-            "noPictures": "de opdracht {{query}} heeft geen resultaten opgeleverd. Probeer iets anders!",
-            "maxTwo": "je mag maar met maximaal twee tags op Gelbooru zoeken!",
+            "noPictures": "de zoekopdracht {{query}} heeft geen resultaten opgeleverd. Probeer iets anders!",
+            "maxTwo": "je mag Danbooru maar met maximaal twee tags opzoeken!",
             "score": "Score",
             "rating": "Beoordeling",
             "tags": "Tags",
             "s": "Veilig",
             "q": "Twijfelachtig",
-            "e": "Expliciet"
+            "e": "uitdrukkelijk"
         },
         "common": {
-            "CHECK_PMS": "check je inbox!",
+            "CHECK_PMS": "check je berichten!",
             "ERROR": "er is een fout opgetreden! Probeer later nog eens, of rapporteer een bug.",
             "ERROR_FULL": "Er is een fout opgetreden! Probeer later nog eens, of rapporteer een bug.",
-            "COOLDOWN": "rustig aan! ({{time}} seconden nog)",
+            "COOLDOWN": "rustig aan! (nog {{time}} seconden)",
             "NO_PERMS": "je hebt de toestemming {{perms}} nodig om dit commando uit te voeren!",
             "NO_PERMS_BOT": "Ik heb de toestemming {{perms}} nodig om dit commando uit te voeren!",
             "menus": {
@@ -34,7 +34,7 @@
             "resolver": {
                 "INSUFFICIENT_ARGS": "Onvoldoende argumenten - Verwachtte minstens {{requiredArgs}}, zag {{argsCount}}",
                 "CORRECT_USAGE": "Juiste gebruik",
-                "NO_END_QUOTE": "je bent een apostrof vergeten op het einde!",
+                "NO_END_QUOTE": "je bent een aanhalingsteken op het einde vergeten!",
                 "member": {
                     "NOT_FOUND": "de gebruiker kon niet worden gevonden"
                 },
@@ -45,7 +45,7 @@
                     "NOT_FOUND": "het commando kon niet worden gevonden"
                 },
                 "string": {
-                    "NOT_STRING": "{{arg}} moet een zin zijn",
+                    "NOT_STRING": "{{arg}} moet een string zijn",
                     "MAX": "{{arg}} lengte kan niet meer zijn dan {{max}}",
                     "MIN": "{{arg}} kan niet minder zijn dan {{min}}",
                     "ONE_OF": "{{arg}} moet één van de volgende zijn"
@@ -59,23 +59,23 @@
                 },
                 "int": {
                     "NOT_INT": "{{arg}} is geen heel getal",
-                    "MAX": "{{arg}} moet minder zijn of gelijk staan aan {{max}}",
-                    "MIN": "{{arg}} moet meer zijn of gelijk staan aan {{max}}"
+                    "MAX": "{{arg}} moet minder dan of gelijk aan {{max}} zijn",
+                    "MIN": "{{arg}} moet meer of gelijk zijn aan {{max}}"
                 },
                 "role": {
-                    "NOT_FOUND": "de rol kon niet worden gevonde"
+                    "NOT_FOUND": "de rol kon niet worden gevonden"
                 },
                 "group": {
                     "NOT_FOUND": "de commando-groep kon niet worden gevonden"
                 }
             },
-            "NO_PMS": "Sorry, maar ik wil graag meer toeschouwers. (Dit commando kan niet gebruikt worden in PM's!)",
+            "NO_PMS": "Sorry, maar ik wil graag meer toeschouwers. (Dit commando kan niet gebruikt worden in berichten!)",
             "ENABLE_EMBEDS": "Zorg alsjeblieft dat je insluitingen aan hebt staan!"
         },
         "companion": {
             "noPet": "je hebt nog geen maatje! Gebruik {{command}} om er een te kopen!",
             "ownedPet": "je hebt al een maatje!",
-            "cannotAfford": "je hebt {{amount}} credits nodig maar je hebt er maar {{balance}}!",
+            "cannotAfford": "je hebt {{amount}} credits nodig, maar je hebt er maar {{balance}}!",
             "intro": "Kies een begin-maatje, {{user}}!",
             "dialog": [
                 "**Maatjes-Koop**",
@@ -109,8 +109,8 @@
                 "opponentInBattle": "je tegenstander zit momenteel in een gevecht!",
                 "noIncoming": "je hebt geen binnenkomende gevechtsaanvragen.",
                 "noOutgoing": "je hebt geen gevechtsaanvragen verzonden",
-                "opponentNoCompanion": "die speler bezit geen maarje!",
-                "cantPlay": "je hebt {{amount}} credits nodig om te spelen maar hebt er maar {{balance}}!",
+                "opponentNoCompanion": "die speler bezit geen maatje!",
+                "cantPlay": "je hebt {{amount}} credits nodig om te spelen, maar hebt er maar {{balance}}!",
                 "cantChallenge": "de speler heeft niet genoeg credits om te spelen!",
                 "noBattle": "in dit kanaal vinden geen gevechten plaats!",
                 "notParticipating": "die speler is geen deelnemer van dit gevecht!",
@@ -132,28 +132,45 @@
             "rejectChallenge": "{{p2}} heeft {{p1}}'s uitdaging afgewezen.",
             "cancelChallenge": "{{p1}} heeft zijn uitdaging naar {{p2}} stopgezet.",
             "acceptChallenge": [
-                "{{p2}} heeft de uitdaging van {{p1}} geaccepteerd!"
+                "{{p2}} heeft de uitdaging van {{p1}} geaccepteerd!",
+                "",
+                "Het gevecht zal over {{time}} seconden beginnen!",
+                "Bied met {{command}}!"
             ],
             "renameDialog": "{{user}}, waarnaar wil je je {{pet}} maatje hernoemen?",
             "renameSuccess": "je hebt je {{pet}} maatje succesvol hernoemd naar {{newName}}!",
             "script": {
                 "HIT": [
-                    "{{p1}} geeft een harde klap aan {{p2}}, het doet {{dmg}} schade!",
-                    "{{p1}} raakt {{p2}} met een slag, die lijdt {{dmg}} schade!",
-                    "{{p2}} wordt in mekaar geslagen door {{p1}}, die {{dmg}} schade toedient!",
-                    "{{p1}} zorgt voor een goede vuist op {{p2}}, het doet {{dmg}} schade!",
+                    "{{p1}} geeft een harde klap aan {{p2}}, wat {{dmg}} schade doet!",
+                    "{{p1}} raakt {{p2}}, wie {{dmg}} schade oploopt!",
+                    "{{p2}} wordt in elkaar geslagen door {{p1}}, wie {{dmg}} schade aanricht!",
+                    "{{p1}} zorgt voor een goede vuist op {{p2}}, wat {{dmg}} schade doet!",
                     "{{p1}} geeft een snelle {{dmg}} schade aan {{p2}}!"
-                ]
+                ],
+                "DODGE_3": "{{p1}} ontwijkt {{p2}}'s aanval nauwelijks!",
+                "DODGE_4": "{{p2}}'s aanval gaat langs {{p1}}!",
+                "HIT_1": "{{p1}} geeft {{p2}} een forse klap, met {{dmg}} schade",
+                "HIT_2": "{{p1}} smakt {{p2}} rond, wat {{dmg}} schade veroorzaakt!",
+                "HIT_3": "{{p1}} slaat {{p2}}, wie {{dmg}} schade oploopt!",
+                "HIT_4": "{{p2}} krijgt een klap van {{p1}}, wie {{dmg}} schade aanricht!",
+                "HIT_5": "{{p1}} raakt {{p2}} hard, wat {{dmg}} schade aanricht!",
+                "HIT_6": "{{p1}} richt snel {{dmg}} schade aan {{p2}} aan!",
+                "HEAL_1": "{{p1}} neemt wat medicijnen, waardoor hij {{heal}} leven erbij krijgt!",
+                "HEAL_2": "{{p1}} gebruikt een pleister, waardoor hij {{heal}} leven erbij krijgt!",
+                "HEAL_3": "Een wilde fee verschijnt, die {{p1}} {{heal}} leven geeft!",
+                "HEAL_4": "{{p1}} ontdekt een magische pasta, die hem {{heal}} levens geeft!",
+                "DODGE_1": "{{p1}} ontwijkt {{p2}}'s aanval!",
+                "DODGE_2": "{{p2}}'s aanval mist {{p1}} ternauwernood!"
             }
         },
         "credits": {
             "balance": "{{user}}'s account-balans is {{balance}} credits.",
             "topup": "{{amount}} credits zijn aan je account toegevoegd.",
-            "cooldown": "je claimbare credits verversen in {{time}}.",
+            "cooldown": "je verkrijgbare credit ververst in {{time}}.",
             "dialog": [
                 "**Credit-Overdracht**",
                 "",
-                "{{author}}, je staat op het punt {{amount}} credits naar {{user}} over te schrijven",
+                "{{author}}, je staat op het punt om {{amount}} credits naar {{user}} over te schrijven",
                 "",
                 "__Huidige Balans__: {{balance}}",
                 "__Balans na transactie__: {{afterAmount}}",
@@ -183,16 +200,16 @@
             "search": "Zoekt op Youtube naar muziek",
             "skip": "Slaat het huidige lied over",
             "stop": "Stopt met muziek spelen",
-            "summon": "Laat mij in een stemkanaal komen",
+            "summon": "Brengt mij naar een spraakkanaal",
             "companion": "Dieren-maatjes systeem",
-            "battle": "Vecht tegen andere gebruikers' maatjes",
-            "buypet": "Koop je eigen maatje",
-            "bet": "Bied tijdens gevechten",
+            "battle": "Vecht tegen maatjes van andere gebruikers",
+            "buypet": "Koopt je eigen maatje",
+            "bet": "Biedt tijdens gevechten",
             "booru": "Doorzoekt een plaatjes-bord",
             "danbooru": "Doorzoekt het Danbooru plaatjes-bord",
-            "gelbooru": "Doorzoekt het Gelbooru plaatjes-bord ",
-            "yandere": "Doorzoekt het Yandere plaatjes-bord ",
-            "slots": "Speel op de gokautomaat",
+            "gelbooru": "Doorzoekt het Gelbooru plaatjes-bord",
+            "yandere": "Doorzoekt het Yandere plaatjes-bord",
+            "slots": "Speelt op het gokautomaat",
             "stats": "Statistieken over mij",
             "choose": "Kiest een bepaalde keuze",
             "invite": "Geeft mijn uitnodigings-link weer",
@@ -201,29 +218,30 @@
             "whois": "Geeft informatie over een gebruiker weer",
             "channel": "Geeft informatie over een kanaal weer",
             "server": "Geeft informatie over een server weer",
-            "catgirl": "Post een willekeurig kattenmeisje",
-            "clear": "Verwijdert de muziek-rij",
+            "catgirl": "Haalt een willekeurig kattenmeisje",
+            "clear": "Leegt de muziek-rij",
             "contact": "Rapporteer bugs, vraag features aan of laat feedback achter",
             "enable": "Zet commando's aan voor een kanaal, gebruiker of rol",
             "disable": "Zet commando's uit voor een kanaal, gebruiker of rol",
             "lang": "Staat beheerders toe om een gilde's taal in te stellen",
-            "purge": "Verwijder berichten in groepen van een kanaal",
+            "purge": "Verwijder groepen berichten van een kanaal",
             "repeat": "Zet herhalingsmodus aan, waar beëindigde liedjes opnieuw in de rij worden gezet",
             "8ball": "Stelt een vraag aan de 8ball",
             "dice": "Rolt dobbelstenen met standaard instelwijze",
             "coin": "Tost munten",
             "subscribe": "Koppelt een evenement aan een kanaal",
             "unsubscribe": "Ontkoppelt een evenement van een kanaal",
-            "timezone": "Staat beheerders toe om een gilde's tijdzone in te stellen",
+            "timezone": "Staat beheerders toe om de tijdzone van een gilde in te stellen",
             "urban": "Doorzoekt Urban Dictionary voor betekenissen",
             "reset": "Reset alle permissie-instellingen in een server",
             "welcome": "Staat toe dat beheerders welkomstberichten kunnen versturen",
             "goodbye": "Staat toe dat beheerders verlatingsberichten kunnen sturen",
             "anime": "Krijgt informatie over een anime",
             "manga": "Krijgt informatie over een manga",
-            "soundcloud": "Zoek liedjes van Soundcloud",
-            "ban": "Verbant een servergebruiker",
-            "kick": "Kickt een servergebruiker"
+            "soundcloud": "Zoekt liedjes van Soundcloud",
+            "ban": "Bant een serverlid",
+            "kick": "Kickt een serverlid",
+            "multislots": "Speelt het gokautomaat met alle 3 rijen"
         },
         "guilds": {
             "join": [
@@ -233,13 +251,13 @@
                 "Om meer over mij te leren, gebruik je het {{about}} commando!"
             ],
             "ban": {
-                "self": "je kan jezelf niet verbannen!",
+                "self": "je kan jezelf niet bannen!",
                 "msg": "je hebt de banhammer neer laten komen op {{member}}. Moge de Godinnen vergevingsgezind zijn.",
                 "dialog": [
                     "Banhammer neer laten komen",
                     "",
                     "{{user}}, je staat op het punt om de banhammer neer te laten komen op {{member}}.",
-                    "Om goed te keuren, voer {{quote}} in, of voer {{exit}} in om het menu te verlaten."
+                    "Om te bevestigen, voer {{quote}} in, of voer {{exit}} in om het menu te verlaten."
                 ],
                 "exit": "de gebruiker is **niet** verbannen.",
                 "exitError": "er is iets fout gegaan, dus de gebruiker is **niet** verbannen."
@@ -251,7 +269,7 @@
                     "Iemand kicken?!",
                     "",
                     "{{user}}, je staat op het punt om {{member}} te kicken.",
-                    "Om goed te keuren, voer {{quote}} in, of voer {{exit}} in om het menu te verlaten."
+                    "Om te bevestigen, voer {{quote}} in, of voer {{exit}} in om het menu te verlaten."
                 ],
                 "exit": "de gebruiker is **niet** gekickt.",
                 "exitError": "er is iets fout gegaan, dus de gebruiker is **niet** gekickt."
@@ -275,7 +293,7 @@
                 "Laat `<>` of `[]` weg bij het oproepen van een commando"
             ],
             "noDesc": "Geen beschrijving",
-            "checkPMs": "check je inbox!"
+            "checkPMs": "check je berichten!"
         },
         "images": {
             "link": "{{image}} voor het pakken!",
@@ -288,7 +306,7 @@
             ],
             "invite": [
                 "Nodig me uit met {{invite}}!",
-                "Voor suggesties en hulp, ga naar mijn server in {{server}}!"
+                "Voor suggesties en hulp, bezoek mijn server in {{server}}!"
             ],
             "warn": "Maak alsjeblieft zeker dat je insluitingen aan hebt staan!",
             "author": "Auteur",
@@ -302,7 +320,7 @@
         },
         "infocmd": {
             "server": {
-                "shard": "Shard",
+                "shard": "Scherf",
                 "defaultChannel": "Standaard Kanaal",
                 "region": "Regio",
                 "createdOn": "Account Creatie",
@@ -310,7 +328,7 @@
                 "roles": "Rollen",
                 "members": "Gebruikers",
                 "channels": "Kanalen",
-                "owner": "Bezitter",
+                "owner": "Eigenaar",
                 "online": "online",
                 "text": "Tekst",
                 "voice": "Stem"
@@ -335,11 +353,11 @@
             }
         },
         "music": {
-            "nowPlaying": "Aan het Spelen",
-            "skipping": "Aan het overslaan",
+            "nowPlaying": "Nu aan het Spelen",
+            "skipping": "Aan het Overslaan",
             "finishedPlaying": "Klaar met spelen",
             "queueFinish": "De rij is nu leeg",
-            "dcInactive": "Ontbonden van stemkanaal naar aanleiding van inactiviteit.",
+            "dcInactive": "Verbinding verloren van stemkanaal door inactiviteit.",
             "queuedMulti": "{{num}} liedjes in de rij",
             "clearQueue": "De muziek-rij is leeggemaakt.",
             "queued": "In de rij gezet",
@@ -359,8 +377,8 @@
                 "emptyPlaylist": "de gegeven playlist heeft geen afspeelbare video's.",
                 "notInVoice": "je moet in een stemkanaal zitten!",
                 "errorQueue": "Er is een fout opgetreden bij het in de rij zetten van {{url}}.",
-                "alreadyBinded": "Ik ben al gebonden aan {{text}}! Gebruik commando's in dat kanaal.",
-                "noPerms": "Ik heb niet de toestemmingen om te `verbinden` en/of te `spreken` in {{voice}}!",
+                "alreadyBinded": "Ik ben al aan {{text}} gebonden! Gebruik commando's in dat kanaal.",
+                "noPerms": "Ik heb geen toestemming om te `verbinden` en/of te `praten` in {{voice}}!",
                 "error": "er is iets verkeerd gegaan! Probeer later nog eens, of rapporteer een bug.",
                 "notInSameVoice": "je moet in het stemkanaal {{channel}} zitten!",
                 "skipNotFound": "de video kon niet worden gevonden.",
@@ -375,7 +393,7 @@
             "joinSuccess": [
                 "Verbonden met '{{voice}}' en gebonden aan {{text}}.",
                 "",
-                "Gebruik het {{command}} commando om liedjes af te spelen!"
+                "Gebruik het {{command}} commando om liedjes af te spelen! "
             ],
             "streamInfo": [
                 "{{title}} door {{artist}}",
@@ -388,7 +406,7 @@
                 "De bot wordt herstart, en alle stemconnecties zijn afgesloten.",
                 "",
                 "De huidige rij is opgeslagen in de database.",
-                "Sorry voor enig ongemak veroorzaakt."
+                "Sorry voor enig veroorzaakt ongemak."
             ],
             "votedSkip": "je hebt al gestemd om dit liedje over te slaan!",
             "voteSkipSuccess": "je hebt gestemd om dit liedje over te slaan!",
@@ -443,7 +461,7 @@
             },
             "changelog": "Meest Recente Wijzigingen",
             "tz": {
-                "success": "met succes deze gilde's tijdzone veranderd naar {{tz}}",
+                "success": "met succes de tijdzone van deze gilde veranderd naar {{tz}}",
                 "notFound": [
                     "de tijdzone '{{tz}}' is ongeldig.",
                     "",
@@ -455,7 +473,7 @@
                 "eventNotFound": [
                     "het evenement {{event}} kon niet worden gevonden.",
                     "",
-                    "Dit zijn de deelnemende evenementen: {{events}}"
+                    "Dit zijn de ondersteunde evenementen: {{events}}"
                 ],
                 "notSubscribed": "geen evenement is gekoppeld aan {{channel}}.",
                 "subSuccess": "met succes {{events}} aan {{channel}} gekoppeld.",
@@ -474,12 +492,12 @@
                 },
                 "get": "Huidig Welkomstbericht:",
                 "setDialog": [
-                    "{{author}}, voer het nieuwe welkomstbericht in.",
+                    "{{author}}, voer alstublieft het nieuwe welkomstbericht in.",
                     "Ondersteunde tags: {{tags}}",
-                    "Om een tag te gebruiken, omring het met `{{}}`. E.g. `{{guild}}`"
+                    "Om een tag te gebruiken, omring het met `{{}}`. Bijv. `{{guild}}`"
                 ],
                 "success": "het nieuwe welkomstbericht is:",
-                "enabled": "welkomstberichten nu aan het versturen in {{channel}}"
+                "enabled": "nu welkomstberichten aan het versturen in {{channel}}"
             },
             "goodbye": {
                 "dialog": "Verlatingsberichten",
@@ -490,12 +508,12 @@
                 },
                 "get": "Huidig Verlatingsbericht",
                 "setDialog": [
-                    "{{author}}, voer het nieuwe verlatingsbericht in.",
+                    "{{author}}, voer alstublieft het nieuwe verlatingsbericht in.",
                     "Ondersteunde tags: {{tags}}",
-                    "Om een tag te gebruiken, omring het met `{{}}`. E.g. `{{guild}}`"
+                    "Om een tag te gebruiken, omring het met `{{}}`. Bijv. `{{guild}}`"
                 ],
                 "success": "het nieuwe verlatingsbericht is:",
-                "enabled": "verlatingsberichten nu aan het versturen in {{channel}}"
+                "enabled": "nu verlatingsberichten aan het versturen in {{channel}}"
             }
         },
         "purge": {
@@ -514,17 +532,17 @@
                 "answer_3": "Zonder twijfel",
                 "answer_4": "Ja, sowieso",
                 "answer_5": "Je mag erop vertrouwen",
-                "answer_6": "Vanaf hoe ik het zie, ja",
+                "answer_6": "van waar ik het zie, ja",
                 "answer_7": "Hoogstwaarschijnlijk",
                 "answer_8": "Goede vooruitzichten",
                 "answer_9": "Ja",
-                "answer_10": "De tekenen wijzen op ja",
+                "answer_10": "De tekens wijzen op ja",
                 "answer_11": "Vaag antwoord, probeer opnieuw",
                 "answer_12": "Vraag later opnieuw",
-                "answer_13": "Dat kan ik je beter niet nu vertellen",
+                "answer_13": "Dat kan ik je nu beter niet vertellen",
                 "answer_14": "Dat kan ik nu niet voorspellen",
-                "answer_15": "Concentreer en vraag opnieuw",
-                "answer_16": "Verwacht het maar niet",
+                "answer_15": "Concentreer je en vraag opnieuw",
+                "answer_16": "Reken er maar niet op",
                 "answer_17": "Mijn antwoord is nee",
                 "answer_18": "Mijn bronnen zeggen nee",
                 "answer_19": "Slechte vooruitzichten",
@@ -544,45 +562,45 @@
             }
         },
         "rss": {
-            "success": "feed toegevoegd voor {{channel}} met {{included}} ingesloten tags en {{excluded}} uitgesloten tags: {{url}}",
+            "success": "feed toegevoegd voor {{channel}} met {{included}} inbegrepen tags en {{excluded}} niet inbegrepen tags: {{url}}",
             "error": "kon {{url}} niet bevestigen. Check of het een geldige RSS feed is.",
             "rssDialog": "RSS Menu",
-            "rssDelFooter": "Voer het nummer van de RSS feed die je wil verwijderen in, of {{cancel}} of om dit menu te verlaten.",
+            "rssDelFooter": "Voer het nummer van de RSS feed in die je wil verwijderen, of {{cancel}} om te verlaten.",
             "urlDialog": [
                 "**RSS - Feed URL**",
                 "",
                 "{{author}}, voer de URL van de RSS feed die je wil toevoegen in.",
-                "Anders, typ {{exit}} om dit menu te verlaten."
+                "Anders, typ {{exit}} om te verlaten."
             ],
             "includedTagsDialog": [
                 "**RSS - Ingesloten Tags**",
                 "",
-                "{{author}}, voer een lijst met met ingesloten tags in, gescheiden door komma's. Bijvoorbeeld: `films, science`",
-                "Anders, typ {{skip}} om dit onderdeel over te slaan, of {{exit}} om dit menu te verlaten."
+                "{{author}}, voer een lijst met met inbegrepen tags in, gescheiden door komma's. Bijvoorbeeld: `films, science`",
+                "Anders, typ {{skip}} om over te slaan, of {{exit}} om te verlaten."
             ],
             "excludedTagsDialog": [
                 "**RSS - Uitgesloten Tags**",
                 "",
-                "{{author}}, voer een lijst met uitgesloten tags in, gescheiden door komma's. Bijvoorbeeld: `anime, religion`",
-                "Anders, typ {{skip}} om dit onderdeel over te slaan, of {{exit}} om dit menu te verlaten."
+                "{{author}}, voer een lijst met niet inbegrepen tags in, gescheiden door komma's. Bijvoorbeeld: `anime, religion`",
+                "Anders, typ {{skip}} om over te slaan, of {{exit}} om te verlaten."
             ],
-            "subscribedTo": "{{channel}} is geabonneerd op de volgende RSS feeds:",
-            "notSubscribed": "{{channel}} is niet geabonneerd op een feed. Gebruik {{command}} om een nieuwe feed toe te voegen.",
-            "subscribedFeeds": "Geabonneerde Feeds voor {{channel}}",
+            "subscribedTo": "{{channel}} is verbonden met de volgende RSS feeds:",
+            "notSubscribed": "{{channel}} is niet met een feed verbonden. Gebruik {{command}} om een nieuwe feed toe te voegen.",
+            "subscribedFeeds": "Verbonden Feeds voor {{channel}}",
             "noFeedFound": "er is geen feed gevonden met die naam of URL.",
             "removedFeed": "RSS abonnement verwijderd: {{feed}}",
             "confirmClear": [
                 "**Verwijder alle RSS feeds**",
                 "",
                 "{{author}}, weet je zeker dat je alle RSS feeds wil verwijderen?",
-                "Typ {{confirm}} om akkoord te gaan, of iets anders om dit menu te verlaten."
+                "Typ {{confirm}} om akkoord te gaan, of iets anders om te verlaten."
             ],
             "notCleared": "er zijn geen RSS feeds verwijderd.",
             "cleared": "{{count}} RSS feeds zijn verwijderd van dit kanaal.",
             "action": {
                 "add": "Voeg een RSS feed toe aan het kanaal",
                 "remove": "Verwijder een RSS feed van een kanaal",
-                "list": "Zet alle RSS feeds toegevoegd in dit kanaal op een rijtje",
+                "list": "Zet alle in dit kanaal toegevoegde RSS feeds op een rijtje",
                 "clear": "Verwijdert alle RSS feeds toegevoegd in dit kanaal"
             }
         },
@@ -599,7 +617,7 @@
             "airing": "Wordt uitgezonden op {{start}}",
             "aired": "Uitgezonden van {{start}} tot {{end}}",
             "publishing": "Wordt gepubliceerd op {{start}}",
-            "published": "Werd gepubliceerd van {{start}} tot {{end}}",
+            "published": "Gepubliceerd van {{start}} tot {{end}}",
             "seasons": {
                 "winter": "Winter",
                 "spring": "Lente",

@@ -6,11 +6,15 @@ class Companions extends Command {
     super(...args, {
       name: 'companion',
       description: 'Animal companion system',
-      usage: [{ name: 'action', displayName: 'buy | rename', type: 'string', optional: true }],
+      usage: [{ name: 'action', displayName: 'buy | rename | peek', type: 'string', optional: true }],
       aliases: ['pet'],
       cooldown: 5,
       subcommands: {
         buy: 'buy',
+        peek: {
+          usage: [{ name: 'user', type: 'member', optional: false }],
+          options: { guildOnly: true }
+        },
         rename: 'rename'
       },
       options: { botPerms: ['embedLinks'] }
@@ -27,6 +31,27 @@ class Companions extends Command {
     responder.embed({
       color: this.colours.blue,
       author: { name: responder.t('{{definitions.info}}'), icon_url: msg.author.avatarURL },
+      description: `**\`LVL ${Math.floor(Math.cbrt(companion.xp)) || 0}\`** :${companion.type}:  ${companion.name}`,
+      fields: [
+        { name: responder.t('{{definitions.wins}}'), value: stats.wins || 0, inline: true },
+        { name: responder.t('{{definitions.losses}}'), value: stats.losses || 0, inline: true }
+      ]
+    }).send()
+  }
+
+  async peek ({ args, data }, responder) {
+    const [member] = await responder.selection(args.user, { mapFunc: m => `${m.user.username}#${m.user.discriminator}` })
+    if (!member) return
+    const user = await data.User.fetch(member.id)
+    const companion = (await data.User.fetchJoin(member.user.id, { companion: true })).companion
+    if (!companion) {
+      responder.error('{{errors.opponentNoCompanion}}')
+      return
+    }
+    const stats = companion.stats || {}
+    responder.embed({
+      color: this.colours.blue,
+      author: { name: responder.t('{{definitions.info}}'), icon_url: member.user.avatarURL },
       description: `**\`LVL ${Math.floor(Math.cbrt(companion.xp)) || 0}\`** :${companion.type}:  ${companion.name}`,
       fields: [
         { name: responder.t('{{definitions.wins}}'), value: stats.wins || 0, inline: true },

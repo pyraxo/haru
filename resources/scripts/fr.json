@@ -105,7 +105,7 @@
                 "self": "tu ne peux pas faire de bataille avec toi-même !",
                 "noUser": "cet utilisateur est introuvable !",
                 "ongoingBattle": "il y a déjà une bataille en cours dans ce channel !",
-                "userInBattle": "tu est déjà dans une bataille !",
+                "userInBattle": "tu es déjà dans une bataille !",
                 "opponentInBattle": "ton adversaire est déjà dans une bataille !",
                 "noIncoming": "tu n'as pas de demande de bataille.",
                 "noOutgoing": "tu n'as envoyé aucune demande de bataille.",
@@ -146,7 +146,21 @@
                     "{{p2}} subit une déculottée de la part de {{p1}}, qui lui enlève {{dmg}} point(s) de vie!",
                     "{{p1}} donne un bon coup à {{p2}},  lui faisant {{dmg}} point(s) de dégât!",
                     "{{p1}} distribue rapidement {{dmg}} point(s) de dommage a {{p2}}!"
-                ]
+                ],
+                "DODGE_3": "{{p1}} évite de justesse l'attaque de {{p2}} !",
+                "DODGE_4": "L'attaque de {{p2}} passe juste à côté de {{p1}} !",
+                "HIT_1": "{{p1}} donne un bon coup à {{p2}}, lui administrant {{dmg}} de dommage !",
+                "HIT_2": "{{p1}} claque {{p2}}, lui causant {{dmg}} de dommage !",
+                "HIT_3": "{{p1}} porte un coup à {{p2}}, qui subit {{dmg}} de dommage !",
+                "HIT_4": "{{p2}} se fait exploser par {{p1}}, ce dernier lui inflige {{dmg}} de dommage !",
+                "HIT_5": "{{p1}} sécurise un bon coup sur {{p2}}, ce qui lui inflige {{dmg}} de dommage !",
+                "HIT_6": "{{p1}} délivre un coup rapide administrant {{dmg}} de dommage à {{p2}} !",
+                "HEAL_1": "{{p1}} prend une potion, montant ainsi sa vie de {{heal}} !",
+                "HEAL_2": "{{p1}} utilise un pansement, ce qui lui fait récupérer {{heal}} de vie !",
+                "HEAL_3": "Une fée sauvage apparaît et fait récupérer {{heal}} de vie a {{p1}} !",
+                "HEAL_4": "{{p1}} découvre une mixture bizarre, il la boit et sa vie augmente de {{heal}} !",
+                "DODGE_1": "{{p1}} réussi à éviter l'attaque de {{p2}} !",
+                "DODGE_2": "L'attaque de {{p2}} loupe de peu {{p1}} !"
             }
         },
         "credits": {
@@ -211,7 +225,7 @@
             "disable": "Désactive une commande pour un channel, un utilisateur ou un rôle",
             "lang": "Autorise les modérateurs à choisir un langage pour le serveur",
             "purge": "Supprime des messages en masse dans un channel",
-            "repeat": "Active le mode \"repeat\", où les musiques finies sont ré-ajoutées à la file d'attente.",
+            "repeat": "Active le mode \"repeat\", pour répéter les musiques finies",
             "8ball": "Pose une question à la Boule Magique Numéro 8 (8ball)",
             "dice": "Lance des dés",
             "coin": "Fait des pile ou face",
@@ -226,7 +240,8 @@
             "manga": "Obtient des informations sur un manga",
             "soundcloud": "Recherche des musiques sur Soundcloud",
             "ban": "Bannit un membre du serveur",
-            "kick": "Kick un membre du serveur"
+            "kick": "Kick un membre du serveur",
+            "multislots": "Joue a la machine à sous sur les trois rangées "
         },
         "guilds": {
             "join": [
@@ -295,7 +310,7 @@
             "ver": "Version",
             "src": "Code source",
             "support": "Service client",
-            "join": "Pour recevoir de l'aide ou pour envoyer des suggestions, visite {{link}} ",
+            "join": "Pour recevoir de l'aide ou pour envoyer des suggestions, visite {{link}}",
             "inv": "Invite-moi !",
             "ptr": "Supporte haru financièrement!"
         },

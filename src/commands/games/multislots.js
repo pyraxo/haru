@@ -21,7 +21,6 @@ class Multislots extends Command {
     ]
 
     this.wins = {
-      '🍒 x 1': 1,
       '🍒 x 2': 2,
       '🍒 x 3': 5,
       '7⃣ x 2': 25,
@@ -86,9 +85,9 @@ class Multislots extends Command {
     const payline3 = [machine[0][2], machine[1][2], machine[2][2]]
     const winnings = this.checkWinnings(payline1, payline2, payline3, bet)
 
-    const reroll = Math.random() >= 0.15
-    return winnings.length > 0 && lowerChances && reroll
-    ? this.doSlots(bet, lowerChances) : [ machine, payline1, payline2, payline3, winnings ]
+    return (amount > 10000000 && winnings.length > 0) ||
+    (winnings.length > 0 && Math.random() >= 0.15)
+    ? this.doSlots(bet, amount) : [ machine, payline1, payline2, payline3, winnings ]
   }
 
   async handle ({ msg, args, data, settings, cache }, responder) {
@@ -109,7 +108,7 @@ class Multislots extends Command {
       })
     }
 
-    const [machine, payline1, payline2, payline3, winnings] = this.doSlots(args.bet, args.bet > 1000)
+    const [machine, payline1, payline2, payline3, winnings] = this.doSlots(args.bet, user.credits)
     try {
       user.credits -= args.bet
       let total = 0
@@ -129,7 +128,7 @@ class Multislots extends Command {
       '**__   S   L   O   T   S   __**',
       `> ${payline1.join(' ')} <`,
       `> ${payline2.join(' ')} <`,
-      `> ${payline3.join(' ')} <`,
+      `> ${payline3.join(' ')} <\n`,
       winnings.length
       ? `{{won}}\n\n${winnings.map(w => `${w[0]}: **${w[1]} {{credits}}**`).join('\n')}`
       : '{{lost}}'

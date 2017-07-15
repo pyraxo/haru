@@ -1,0 +1,630 @@
+{
+    "en": {
+        "booru": {
+            "noPictures": "这次搜索{{query}}没有图片结果。请尝试搜索其他内容。",
+            "maxTwo": "在用 Danbooru 搜索时，您最多添加两个标签。",
+            "score": "匹配分数",
+            "rating": "评级",
+            "tags": "标签",
+            "s": "安全",
+            "q": "质疑",
+            "e": "限制级"
+        },
+        "common": {
+            "CHECK_PMS": "检查您的 PM！",
+            "ERROR": "发生错误！请稍后重试或提交错误报告。",
+            "ERROR_FULL": "发生错误！请稍后重试或提交错误报告。 ",
+            "COOLDOWN": "请等待{{time}}秒后再尝试操作！",
+            "NO_PERMS": "您需要{{perms}}权限或许可才能运行这条命令。",
+            "NO_PERMS_BOT": "我需要{{perms}}权限才能运行这条命令！",
+            "menus": {
+                "EXIT": "按下{{cancel}}以返回菜单。",
+                "ERRORED": "以下菜单已关闭：",
+                "EXITED": "您已退出菜单。",
+                "SELECTION": "选项菜单",
+                "ERROR": "未知错误",
+                "INPUT": "在聊天窗中输入您选择项的代码，或者输入'{{cancel}}'来取消。",
+                "MORE_RESULTS": "和其他{{num}}个结果。"
+            },
+            "collector": {
+                "timeout": "在{{timeout}}秒后将超时",
+                "max": "超出最大尝试次数（{{max}}次）",
+                "maxMatches": "超过{{maxMatches}}个匹配项。"
+            },
+            "resolver": {
+                "INSUFFICIENT_ARGS": "语法错误: 需要输入{{requiredArgs}}  {{argsCount",
+                "CORRECT_USAGE": "正确用法",
+                "NO_END_QUOTE": "您漏了一个终止记号",
+                "member": {
+                    "NOT_FOUND": "无法找到这位成员"
+                },
+                "channel": {
+                    "NOT_FOUND": "无法找到这个频道"
+                },
+                "command": {
+                    "NOT_FOUND": "无法找到这个命令"
+                },
+                "string": {
+                    "NOT_STRING": "{{arg}}必须为字符串",
+                    "MAX": "{{arg}}不可以超过{{max}}个字符",
+                    "MIN": "{{arg}}不可以少于{{min}}个字符",
+                    "ONE_OF": "{{arg}}必须为以下中的一项"
+                },
+                "list": {
+                    "MAX": "{{arg}}的长度不能包含大于{{max}}项",
+                    "MIN": "{{arg}}的长度不能包含少于{{min}}项",
+                    "MAX_LENGTH": "{{arg}}不能包含超过{{maxLength}}个字符的项目",
+                    "MIN_LENGTH": "{{arg}}不能包含少于{{minLength}}个字符的项目",
+                    "DUPES": "{{arg}}不能包含重复项"
+                },
+                "int": {
+                    "NOT_INT": "{{arg}}不是整数",
+                    "MAX": "{{arg}}不能超过{{max}}",
+                    "MIN": "{{arg}}必须大于或等于{{min}}"
+                },
+                "role": {
+                    "NOT_FOUND": "无法找到指定角色"
+                },
+                "group": {
+                    "NOT_FOUND": "命令组无法找到"
+                }
+            },
+            "NO_PMS": "抱歉，不过我喜欢有更多围观者。（该指令不能再个人消息中执行！）",
+            "ENABLE_EMBEDS": "请确认您已启用嵌入功能！"
+        },
+        "companion": {
+            "noPet": "您还没有宠物！使用{{command}}来购买一个！",
+            "ownedPet": "您已经拥有了一只宠物！",
+            "cannotAfford": "你需要{{amount}}个金币，但您只有{{balance}}个！",
+            "intro": "{{user}}，请选择初始宠物！",
+            "dialog": [
+                "**购买宠物**",
+                "",
+                "{{author}}，您选择了宠物{{animal}}。",
+                "您确定要花{{amount}}个金币购买宠物吗？",
+                "",
+                "如果确定，请发送{{code}}。发送任何其他内容将会返取消。"
+            ],
+            "invalidCode": "您键入了取消购买的内容，购买已经取消。",
+            "error": "购买出错！交易已被取消，金币不会被扣除。请稍后再试。",
+            "result": [
+                "**购买宠物成功**",
+                "",
+                "{{author}}，您已成功购买了宠物{{animal}}。",
+                "__现有金币__：{{balance}}",
+                "",
+                "您可以通过使用{{command}}命令来重命名自己的宠物。"
+            ],
+            "definitions": {
+                "wins": "胜利场数",
+                "losses": "失败场数",
+                "info": "宠物详情",
+                "info2": "{{author}}的宠物"
+            },
+            "errors": {
+                "self": "您不能挑战自己！",
+                "noUser": "该用户不存在！",
+                "ongoingBattle": "在此频道上已经有一场比赛了。不能在一个频道同时举办两场比赛或以上。",
+                "userInBattle": "您正在战斗中！",
+                "opponentInBattle": "您的对手正在战斗中！",
+                "noIncoming": "您目前没有收到挑战书。",
+                "noOutgoing": "您没有发出任何挑战书。",
+                "opponentNoCompanion": "这位用户没有宠物，无法对战！",
+                "cantPlay": "您需要{{amount}}个金币来开始游戏，但是您只有{{balance}}个金币。",
+                "cantChallenge": "这位用户没有足够的金币来进行对战。",
+                "noBattle": "这个频道没有正在进行的对战！",
+                "notParticipating": "该玩家不是战斗的参与者！",
+                "isParticipant": "您是战斗的参与者，不能下注！",
+                "cantBet": "您没有足够的金币！您目前有{{balance}}个金币，但是下注需要{{amount}}。",
+                "betMulti": "您不能重复下注！",
+                "plsBetProperly": "至少需要下注1金币。",
+                "notBetting": "战斗尚未进入下注阶段！",
+                "afterBetting": "这场战斗的下注阶段已经结束！",
+                "notOnline": "这位用户处于离线状态！"
+            },
+            "challenge": [
+                "您向{{mention}}发起了挑战！",
+                "",
+                "这位玩家有{{time}}秒来{{accept}}或{{reject}}。如果玩家没有响应，本场挑战将作废。"
+            ],
+            "bet": "您为{{user}}和他的宠物{{pet}}下注了 {{amount}}个金币！",
+            "timedOut": "由于在{{time}}秒内，{{p2}}未能响应{{p1}}的挑战，所以本场挑战作废。",
+            "rejectChallenge": "{{p2}}拒绝了{{p1}}的挑战。",
+            "cancelChallenge": "{{p1}}取消了对{{p2}}的挑战",
+            "acceptChallenge": [
+                "{{p2}}接受了{{p1}}的挑战！",
+                "",
+                "战斗将在{{time}}秒后打响！现在可以进行下注！"
+            ],
+            "renameDialog": "{{user}}，您想把您的{{pet}}改名为……？",
+            "renameSuccess": "您成功重命名了您的宠物{{pet}}！它现在的名字是{{newName}}！",
+            "script": {
+                "HIT": [
+                    "{{p1}}对{{p2}}发动了一次重击，造成了{{dmg}}伤害！",
+                    "{{p1}}对{{p2}}横冲直撞，造成了{{dmg}}伤害！",
+                    "{{p2}}被{{p1}}击中，失去了{{dmg}}血量！",
+                    "{{p1}}命中{{p2}}，造成了{{dmg}}伤害！",
+                    "{{p1}}对{{p2}}迅速形成攻击，造成{{dmg}}伤害！"
+                ],
+                "DODGE_3": "{{p1}}闪避了{{p2}}的攻击！",
+                "DODGE_4": "{{p2}}的攻击被{{p1}}闪避了！",
+                "HIT_1": "{{p1}}对{{p2}}进行了重击，造成{{dmg}}伤害！",
+                "HIT_2": "{{p1}}砸中了{{p2}}，造成{{dmg}}伤害！",
+                "HIT_3": "{{p1}}跳起来冲向{{p2}}，造成{{dmg}}伤害！",
+                "HIT_4": "{{p2}}被{{p1}}正面砸中！失去{{dmg}}生命！",
+                "HIT_5": "{{p1}}保守地对{{p2}}进行了攻击，造成{{dmg}}伤害！",
+                "HIT_6": "忽地，{{p1}}冲出去，打向{{p2}}，造成{{dmg}}伤害！",
+                "HEAL_1": "{{p1}}服用回血药，HP+{{heal}}",
+                "HEAL_2": "{{p1}}使用了绷带，治愈了{{heal}}点生命！",
+                "HEAL_3": "仙女降临！对{{p1}}治愈了{{heal}}点生命！",
+                "HEAL_4": "{{p1}}发现了神秘的药膏，提升了它{{heal}}点生命！",
+                "DODGE_1": "{{p1}}成功闪避了{{p2}}的攻击！",
+                "DODGE_2": "{{p2}}的攻击居然没有命中{{p1}}！"
+            }
+        },
+        "credits": {
+            "balance": "{{user}}的现有金币数为：{{balance}}",
+            "topup": "您获得了{{amount}}个金币。",
+            "cooldown": "请在{{time}}后再前来领取金币奖励。",
+            "dialog": [
+                "**金币赠送**",
+                "",
+                "{{author}}，您正在尝试赠送{{user}}金币。赠送数额为：{{amount}}。",
+                "",
+                "__现有金币数__：{{balance}}",
+                "__赠送后的金币数__：{{afterAmount}}",
+                "",
+                "输入{{code}}来确认赠送操作，输入{{exit}}取消赠送操作。"
+            ],
+            "confirmation": [
+                "您成功向{{user}}赠送了{{amount}}个金币！",
+                "",
+                "__您现有金币__：{{afterAmount}}"
+            ],
+            "invalidCode": "您输入了错误的代码！赠送操作已被取消。",
+            "selfSenderError": "您不能给自己赠送金币！",
+            "insufficientCredits": "您的金币数（{{balance}}）不足！",
+            "botUserError": "不允许向机器人赠送金币！",
+            "topTitle": "Discord 全服富翁排行",
+            "credits": "金币"
+        },
+        "descriptions": {
+            "help": "显示命令的详细信息",
+            "info": "关于我",
+            "credits": "货币系统",
+            "wage": "每8小时领取一次金币",
+            "hate": "我…我讨厌你！(I-I hate you!)",
+            "love": "我…我喜欢你！(I-I love you!)",
+            "prefix": "允许服务器所有者设置服务器前缀",
+            "search": "在 Youtube 上搜索音乐",
+            "skip": "跳过当前音乐",
+            "stop": "停止当前音乐",
+            "summon": "让我加入语音频道",
+            "companion": "宠物系统",
+            "battle": "挑战其他用户的宠物",
+            "buypet": "购买您自己的宠物",
+            "bet": "在战斗过程中下注",
+            "booru": "搜索图片",
+            "danbooru": "在 Danbooru 中搜索图片",
+            "gelbooru": "在 Gelbooru 中搜索图片",
+            "yandere": "在 Yandere 中搜索图片",
+            "slots": "转动老虎机",
+            "stats": "关于我的数据",
+            "choose": "请选择一项",
+            "invite": "显示我的邀请链接",
+            "stream": "在支持的直播频道上的游戏",
+            "queue": "查看播放列表中的音乐",
+            "whois": "显示有关一位成员的信息",
+            "channel": "显示某频道的信息",
+            "server": "显示某服务器的信息",
+            "catgirl": "随机搜索女仆",
+            "clear": "清空播放列表",
+            "contact": "报告错误、请求新功能 或 发送反馈",
+            "enable": "对频道、用户或角色启用某些命令",
+            "disable": "对频道、用户或角色禁用某些命令",
+            "lang": "允许管理员（辅助管理员）设置服务器语言",
+            "purge": "从频道中删除消息",
+            "repeat": "启用/禁用重复模式（在重复模式中，已经播放完毕的音乐会被再次添加到播放列表末端）",
+            "8ball": "向 8ball 问了一个问题",
+            "dice": "掷骰子，请使用骰子指令语法",
+            "coin": "抛硬币",
+            "subscribe": "将一个频道加入一个事件中",
+            "unsubscribe": "将一个频道与一件事件分离",
+            "timezone": "允许管理员设置服务器时区",
+            "urban": "在词典中搜索释义",
+            "reset": "重置服务器中的所有权限设置",
+            "welcome": "允许管理员发送欢迎信息",
+            "goodbye": "允许管理员发送送别信息",
+            "anime": "获取有关一部动漫的信息",
+            "manga": "获得有关一部漫画的信息",
+            "soundcloud": "从Soundcloud中搜索音乐",
+            "ban": "禁言",
+            "kick": "踢出",
+            "multislots": "对老虎机的三排都执行选中"
+        },
+        "guilds": {
+            "join": [
+                "👋  Hello！我是**haru**，一位全名偶像 ✨🎤 和见习机器人！",
+                "",
+                "在聊天窗口中输入{{help}}可以得到我的所有支持命令的列表！",
+                "使用{{about}}，您可以更懂我~！"
+            ],
+            "ban": {
+                "self": "您不能对自己禁言！",
+                "msg": "您已将禁言之锤砸向{{member}}！祝他/她好运。",
+                "dialog": [
+                    "禁言",
+                    "",
+                    "{{user}}，您确定想要使{{member}}禁言吗？",
+                    "输入{{quote}}确认。输入{{exit}}取消。"
+                ],
+                "exit": "这名成员**没有**被禁言。",
+                "exitError": "出错！这位成员**没有**被禁言。"
+            },
+            "kick": {
+                "self": "您不能踢出自己！",
+                "msg": "{{member}}已被踢出，真爽。",
+                "dialog": [
+                    "踢出成员？！",
+                    "",
+                    "{{user}}，您确定想要踢出{{member}}吗？",
+                    "输入{{quote}}确认。输入{{exit}}取消。"
+                ],
+                "exit": "该成员**没有**被踢出。",
+                "exitError": "出错！该成员**没有**被踢出。"
+            },
+            "reason": "原因"
+        },
+        "help": {
+            "header_1": "在{{server}}中，使用{{prefix}}前缀来运行命令。",
+            "header_1_alt": "或者使用默认的{{defaultPrefix}}",
+            "header_2": "获取一个命令的更多帮助，请使用{{helpCommand}}",
+            "header_3": "比如：{{exampleCommand}}",
+            "definitions": {
+                "usage": "使用方法",
+                "aliases": "别名",
+                "pms": "个人消息"
+            },
+            "footer": "帮助与支持、建议与反馈，请访问{{link}}",
+            "footer_group": [
+                "`[]` 指代 __**可选的**__ 元素",
+                "`<>` 指代 __**必须的**__ 元素",
+                "使用命令时请勿输入`<>` or `[]`。"
+            ],
+            "noDesc": "无详细信息",
+            "checkPMs": "检查您的个人消息！"
+        },
+        "images": {
+            "link": "{{image}}再此！",
+            "catgirl": "女仆"
+        },
+        "info": {
+            "info": [
+                "👋  Hello！我是**haru**，一位全名偶像 ✨🎤 和见习机器人！"
+            ],
+            "invite": [
+                "使用{{invite}}来邀请我！",
+                "支持、帮助和建议，请前往我的服务器：{{server}}"
+            ],
+            "warn": "请确认已启用嵌入式详情功能！",
+            "author": "作者",
+            "lib": "目录",
+            "ver": "版本",
+            "src": "源码",
+            "support": "顾客支持与帮助",
+            "join": "支持与帮助、建议，请访问{{link}}",
+            "inv": "邀请我吧！",
+            "ptr": "帮助让 haru 继续运转！"
+        },
+        "infocmd": {
+            "server": {
+                "shard": "分片",
+                "defaultChannel": "默认频道",
+                "region": "区域",
+                "createdOn": "创建账户",
+                "joinedOn": "加入日期",
+                "roles": "角色",
+                "members": "成员",
+                "channels": "频道",
+                "owner": "拥有者",
+                "online": "在线",
+                "text": "文本",
+                "voice": "语音"
+            },
+            "whois": {
+                "shared": "共享的服务器",
+                "status": "状态",
+                "nick": "昵称",
+                "createdOn": "创建账号",
+                "joinedOn": "加入日期",
+                "roles": "角色",
+                "none": "无",
+                "playing": "正在玩",
+                "more": "和{{num}}个其他结果。"
+            },
+            "channel": {
+                "title": "{{channel}}的频道详情",
+                "type": "输入",
+                "text": "文本",
+                "voice": "语音",
+                "createdOn": "创建日期"
+            }
+        },
+        "music": {
+            "nowPlaying": "正在播放",
+            "skipping": "跳过",
+            "finishedPlaying": "结束播放",
+            "queueFinish": "播放队列已空。",
+            "dcInactive": "由于长时间无响应，已退出语音频道。",
+            "queuedMulti": "队列中有{{num}}首音乐",
+            "clearQueue": "播放队列已清空。",
+            "queued": "已加入队列",
+            "errors": {
+                "notInChannel": "请先使用{{command}}来让我加入语音频道！",
+                "emptyQueue": [
+                    "队列中没有音乐！",
+                    "",
+                    "使用{{play}}命令来添加音乐到队列中！"
+                ],
+                "tooLong": "该音乐太长！请选用小于90分钟的音乐。",
+                "noResults": "您的请求{{query}}没有返回任何结果。",
+                "alreadyPlaying": "已经有一首音乐正在播放！使用{{command}}命令来把另一首音乐加入队列。",
+                "notChannel": "当前允许发送音乐命令的频道是{{channel}}。\n请前往此频道使用音乐命令。",
+                "notFound": "您所提供的视频消失了！",
+                "listNotFound": "您所提供的播放列表消失了！",
+                "emptyPlaylist": "您所提供的播放列表没有可直播的视频。",
+                "notInVoice": "您必须加入一个语音频道。",
+                "errorQueue": "在添加{{url}}到播放队列时出现错误。",
+                "alreadyBinded": "我只能接受{{text}}频道中的命令！请在此频道输入命令。",
+                "noPerms": "在{{voice}}频道中，我没有`连接`或`说话`的权限！",
+                "error": "出现未知错误！请再次尝试，或举报该错误。",
+                "notInSameVoice": "您必须加入语音频道{{channel}}！",
+                "skipNotFound": "指出的视频不存在。",
+                "notReadyYet": "5次连接尝试均失败了。\n已从语音频道中退出。",
+                "connError": "在频道中播放内容时出现Discord系统错误：{{err}}"
+            },
+            "dc": "已退出{{voice}}，停止接受{{text}}中的命令。",
+            "switch": "已切换到直播模式，正在从{{station}}播放",
+            "playlist": "播放列表——{{guild}}",
+            "queuedSongs": "播放队列",
+            "queueProgress": "正在处理播放队列，请稍后……",
+            "joinSuccess": [
+                "已连接到“{{voice}}”语音频道。",
+                "已获得“{{text}}”频道的读取信息权限。",
+                "",
+                "使用{{command}}命令来开始播放音乐！"
+            ],
+            "streamInfo": [
+                "{{title}} - {{artist}}",
+                "**请求者**：{{requestedBy}}"
+            ],
+            "repeatOn": "您已开启循环模式。所有播放完毕的音乐会自动添加到播放列表的底部。",
+            "repeatOff": "您取消了列表循环，所有播放完毕的音乐不会再加入播放列表。",
+            "skipSuccess": "已从播放列表中移除了{{song}}。",
+            "terminated": [
+                "我被重启了，所以所有的语音频道都中断了。",
+                "",
+                "当前的播放列表已经在数据库中保存了。",
+                "为带来的不便表示歉意。"
+            ],
+            "votedSkip": "您已经选择了跳过这首音乐！",
+            "voteSkipSuccess": "您已经选择了跳过当前音乐！",
+            "votedClear": "您已经选择了清空播放列表！",
+            "voteClearSuccess": "您已经选择了清空播放列表！",
+            "stations": "站点",
+            "shuffled": "已从播放队列中调换了{{num}}首歌的顺序。"
+        },
+        "slots": {
+            "insufficient": [
+                "您还需要{{amount}}个金币！",
+                "",
+                "您可使用{{command}}命令，每隔数小时可免费获取金币！"
+            ],
+            "won": "{{user}}下注了{{amount}}金币，并赢得了：",
+            "lost": "{{user}}下注了{{amount}}个金币，全数失去。",
+            "credits": "金币",
+            "winnings": "胜场",
+            "yudodis": "您不能下注1金币以下！",
+            "dailyLimit": "您已经获得了每日允许赢得的最大金币数。请在{{time}}后再试。"
+        },
+        "stats": {
+            "users": "用户",
+            "unique": "独特",
+            "online": "在线",
+            "guilds": "在线",
+            "channels": "频道",
+            "text": "文本",
+            "voice": "语音",
+            "total": "总计",
+            "uptime": "在线时间",
+            "memoryUsage": "占用存储空间",
+            "commandsUsed": "已使用命令",
+            "server": "777工作室（帮助与支持服务器）"
+        },
+        "settings": {
+            "prefix": {
+                "success": "成功修改当前服务器前缀为{{prefix}}",
+                "revert": "撤销前缀修改，当前的前缀是{{prefix}}",
+                "current": "当前服务器的前缀是{{prefix}}。"
+            },
+            "lang": {
+                "success": "成功切换服务器语言为{{lang}}"
+            },
+            "enabler": {
+                "success": "操作成功：{{action}}{{command}}（{{context}}情况下）",
+                "actions": {
+                    "enable": "已启用",
+                    "disable": "已禁用",
+                    "revert": "已撤销"
+                }
+            },
+            "changelog": "最新更新日志",
+            "tz": {
+                "success": "成功修改了服务器时区为{{tz}}",
+                "notFound": [
+                    "时区{{tz}}输入有误。",
+                    "",
+                    "前往{{link}}来找到所有时区代号的列表。"
+                ],
+                "current": "当前服务器的时区是{{tz}}"
+            },
+            "subscribe": {
+                "eventNotFound": [
+                    "事件{{event}}不存在。",
+                    "",
+                    "以下是支持的事件列表：{{events}}"
+                ],
+                "notSubscribed": "{{channel}}暂未参与任何事件。",
+                "subSuccess": "成功使{{channel}}加入{{events}}",
+                "unsubSuccess": "成功将{{channel}}与{{events}}分离。",
+                "list": "{{channel}}已参与{{events}}。"
+            },
+            "reset": {
+                "success": "成功重置了服务器的所有权限设置。"
+            },
+            "welcome": {
+                "dialog": "欢迎信息",
+                "action": {
+                    "set": "设置欢迎信息",
+                    "get": "获取当前欢迎信息",
+                    "enable": "使用这个频道发送欢迎消息"
+                },
+                "get": "当前欢迎信息：",
+                "setDialog": [
+                    "{{author}}，请输入新的欢迎信息。",
+                    "支持标签：{{tags}}",
+                    "在标签名称周围加`{{}}`以使用标签。比如`{{guild}}`"
+                ],
+                "success": "新的欢迎信息是：",
+                "enabled": "现在将在{{channel}}中发送欢迎信息"
+            },
+            "goodbye": {
+                "dialog": "送别消息",
+                "action": {
+                    "set": "设置送别消息",
+                    "get": "获取当前的送别消息",
+                    "enable": "使用这个频道发送送别消息"
+                },
+                "get": "当前送别消息：",
+                "setDialog": [
+                    "{{author}}，请输入新的送别信息。",
+                    "支持标签：{{tags}}",
+                    "在标签名称周围加`{{}}`以使用标签。比如`{{guild}}`"
+                ],
+                "success": "新的送别信息是：",
+                "enabled": "现在将在{{channel}}中发送送别信息"
+            }
+        },
+        "purge": {
+            "success": "成功清除{{num}}条消息",
+            "filterSuccess": "根据{{criteria}}条件，清除了{{num}}条消息"
+        },
+        "misc": {
+            "choose": {
+                "pick": "我选择{{choice}}"
+            },
+            "8ball": {
+                "question": "{{user}}问道",
+                "response": "{{8ball}}回复",
+                "answer_1": "肯定是这样",
+                "answer_2": "应该是这样",
+                "answer_3": "毫无疑问",
+                "answer_4": "是，肯定是",
+                "answer_5": "相信我，是的",
+                "answer_6": "我看来应该是正确的",
+                "answer_7": "很可能",
+                "answer_8": "觉得可行",
+                "answer_9": "是",
+                "answer_10": "我觉得是肯定的",
+                "answer_11": "回复有些模糊，没有听清，请稍后再试",
+                "answer_12": "稍后再来问我吧",
+                "answer_13": "现在不急着告诉你",
+                "answer_14": "现在无法预测喔",
+                "answer_15": "请集中注意力，然后再问一次吧",
+                "answer_16": "不，别指望了",
+                "answer_17": "我的答案是否定的",
+                "answer_18": "我觉得不行",
+                "answer_19": "我觉得这事没什么前景",
+                "answer_20": "很值得怀疑"
+            },
+            "dice": {
+                "result": "结果：{{result}}",
+                "invalid": "无效的骰子语法：{{text}}"
+            },
+            "coin": {
+                "result": "您抛出了{{heads}}次正面，{{tails}}次反面！",
+                "heads": "硬币抛出了**正面**！",
+                "tails": "硬币抛出了**反面**！"
+            },
+            "urban": {
+                "noResults": "请求{{query}}没有结果。"
+            }
+        },
+        "rss": {
+            "success": "为{{channel}}频道添加了feed，包括了以下标签：{{included}}；{{excluded}}以下标签：{{url}}",
+            "error": "无法验证以下url：{{url}}，请检查这个链接处是否存在有效的RSS feed。",
+            "rssDialog": "RSS 列表",
+            "rssDelFooter": "输入您想删去的RSS feed，或者输入{{cancel}}来取消删除操作。",
+            "urlDialog": [
+                "**RSS 之 Feed 所在链接**",
+                "",
+                "{{author}}，请输入您想添加的 RSS feed 所在的链接。",
+                "输入{{exit}}来取消添加。"
+            ],
+            "includedTagsDialog": [
+                "**RSS 之 包含标签**",
+                "",
+                "{{author}}，请输入包括标签的列表。不同标签名称请用逗号（英文标点逗号）分隔。例如：`电影,科技`",
+                "输入{{skip}}可以跳过这一项操作，因为这项操作不是必需的。输入{{exit}}取消所有添加 RSS feed 的步骤。"
+            ],
+            "excludedTagsDialog": [
+                "**RSS 之 除外标签**",
+                "",
+                "{{author}}，请输入除外标签的列表。不同标签名称请用逗号（英文标点逗号）分隔。例如：`动漫,宗教`",
+                "输入{{skip}}可以跳过这一项操作，因为这项操作不是必需的。输入{{exit}}取消所有添加 RSS feed 的步骤。"
+            ],
+            "subscribedTo": "{{channel}}现在接收如下 RSS 推送：",
+            "notSubscribed": "{{channel}}尚未设置接收任何推送。使用{{command}}来添加新的推送源。",
+            "subscribedFeeds": "成功为{{chhannel}}频道添加推送",
+            "noFeedFound": "在该URL下没有找到任何符合条件的推送。",
+            "removedFeed": "删除了以下RSS：{{feed}}",
+            "confirmClear": [
+                "**即将删除所有的RSS推送**",
+                "",
+                "{{author}}，您确定要删除所有RSS推送？",
+                "键入{{confirm}}来确认，键入任何其他内容将取消这步操作。"
+            ],
+            "notCleared": "没有删除RSS推送。",
+            "cleared": "{{count}}个RSS推送已被删除！",
+            "action": {
+                "add": "在频道中添加一个RSS推送",
+                "remove": "在频道中删除一个RSS推送",
+                "list": "取得当前频道中所有RSS推送的列表",
+                "clear": "清除该频道中所有RSS推送"
+            }
+        },
+        "anime": {
+            "noResults": "没有找到结果。请检查您的搜索内容。",
+            "synopsis": "摘要",
+            "type": "分类",
+            "episodes": "集数",
+            "status": "状态",
+            "genres": "风格",
+            "season": "季数",
+            "score": "分数",
+            "noDesc": "无简介",
+            "airing": "将在{{start}}开始播放",
+            "aired": "已在{{start}}到{{end}}执行播放",
+            "publishing": "从{{start}}开始发布",
+            "published": "已将{{start}}到{{end}}发布",
+            "seasons": {
+                "winter": "冬季",
+                "spring": "春季",
+                "summer": "夏季",
+                "fall": "秋季"
+            },
+            "volumes": "卷数",
+            "chapters": "章节"
+        }
+    }
+}

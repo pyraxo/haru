@@ -19,6 +19,7 @@ module.exports = function () {
         pm: bool().default(false),
         msg: string().default('Welcome {{user}} to {{guild}}!'),
       }).required().default({}),
+      autorole: string().allowNull(true).default(null),
       goodbye: object().schema({
         chan: string().allowNull(true).default(null),
         msg: string().default('User {{user}} has left us.')
