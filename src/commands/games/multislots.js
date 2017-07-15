@@ -85,9 +85,9 @@ class Multislots extends Command {
     const payline3 = [machine[0][2], machine[1][2], machine[2][2]]
     const winnings = this.checkWinnings(payline1, payline2, payline3, bet)
 
-    const reroll = Math.random() >= 0.15
-    return winnings.length > 0 && lowerChances && reroll
-    ? this.doSlots(bet, lowerChances) : [ machine, payline1, payline2, payline3, winnings ]
+    return (amount > 10000000 && winnings.length > 0) ||
+    (winnings.length > 0 && Math.random() >= 0.15)
+    ? this.doSlots(bet, amount) : [ machine, payline1, payline2, payline3, winnings ]
   }
 
   async handle ({ msg, args, data, settings, cache }, responder) {
@@ -108,7 +108,7 @@ class Multislots extends Command {
       })
     }
 
-    const [machine, payline1, payline2, payline3, winnings] = this.doSlots(args.bet, args.bet > 1000)
+    const [machine, payline1, payline2, payline3, winnings] = this.doSlots(args.bet, user.credits)
     try {
       user.credits -= args.bet
       let total = 0

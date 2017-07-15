@@ -60,14 +60,14 @@ class Slots extends Command {
     return wins
   }
 
-  doSlots (bet, lowerChances = false) {
+  doSlots (bet, amount) {
     const machine = this.generateSlots
     const payline = [machine[0][1], machine[1][1], machine[2][1]]
     const winnings = this.checkWinnings(payline, bet)
-
-    const reroll = Math.random() >= 0.15
-    return winnings.length > 0 && lowerChances && reroll
-    ? this.doSlots(bet, lowerChances) : [ machine, payline, winnings ]
+    
+    return (amount > 10000000 && winnings.length > 0) ||
+    (winnings.length > 0 && Math.random() >= 0.15)
+    ? this.doSlots(bet, amount) : [ machine, payline, winnings ]
   }
 
   async handle ({ msg, args, data, settings, cache }, responder) {
@@ -88,7 +88,7 @@ class Slots extends Command {
       })
     }
 
-    const [machine, payline, winnings] = this.doSlots(args.bet, args.bet > 1000)
+    const [machine, payline, winnings] = this.doSlots(args.bet, user.credits)
     try {
       user.credits -= args.bet
       let total = 0
