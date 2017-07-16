@@ -78,7 +78,7 @@ class Multislots extends Command {
     return wins
   }
 
-  doSlots (bet, lowerChances = false) {
+  doSlots (bet, amount) {
     const machine = this.generateSlots
     const payline1 = [machine[0][0], machine[1][0], machine[2][0]]
     const payline2 = [machine[0][1], machine[1][1], machine[2][1]]
