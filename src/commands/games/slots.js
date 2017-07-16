@@ -65,8 +65,9 @@ class Slots extends Command {
     const payline = [machine[0][1], machine[1][1], machine[2][1]]
     const winnings = this.checkWinnings(payline, bet)
     
-    return (amount > 10000000 && winnings.length > 0) ||
-    (winnings.length > 0 && Math.random() >= 0.15)
+    const roll = Math.random()
+    return (amount > 10000000 && winnings.length > 0 && roll >= 0.01) ||
+    (winnings.length > 0 && roll >= 0.15)
     ? this.doSlots(bet, amount) : [ machine, payline, winnings ]
   }
 
