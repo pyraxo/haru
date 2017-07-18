@@ -85,8 +85,9 @@ class Multislots extends Command {
     const payline3 = [machine[0][2], machine[1][2], machine[2][2]]
     const winnings = this.checkWinnings(payline1, payline2, payline3, bet)
 
-    return (amount > 10000000 && winnings.length > 0) ||
-    (winnings.length > 0 && Math.random() >= 0.15)
+    const rando = Math.random()
+    return (amount > 10000000 && winnings.length > 0 && rando >= 0.05) ||
+    (winnings.length > 0 && rando >= 0.15)
     ? this.doSlots(bet, amount) : [ machine, payline1, payline2, payline3, winnings ]
   }
 
