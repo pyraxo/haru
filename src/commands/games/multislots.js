@@ -136,7 +136,7 @@ class Multislots extends Command {
       : '{{lost}}'
     ], {
       user: `**${msg.author.username}**`,
-      amount: `**${args.bet}**`
+      amount: `**${args.bet} **x3`
     })
   }
 }
