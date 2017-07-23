@@ -55,7 +55,7 @@ class Slots extends Command {
     }, {})
     for (const r in res) {
       const v = `${r} x ${res[r]}`
-      if (this.wins[v]) wins.push([v, this.wins[v] * amt])
+      if (this.wins[v]) wins.push([v, this.wins[v] * amt, this.wins[v]])
     }
     return wins
   }
@@ -66,8 +66,8 @@ class Slots extends Command {
     const winnings = this.checkWinnings(payline, bet)
     
     const rando = Math.random()
-    return (amount > 10000000 && winnings.length > 0 && rando >= 0.05) ||
-    (winnings.length > 0 && rando >= 0.15)
+    return !winnings.length ? [ machine, payline, winnings ]
+    : random >= (0.8 / winnings[0][2])
     ? this.doSlots(bet, amount) : [ machine, payline, winnings ]
   }
 
