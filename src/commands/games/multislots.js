@@ -24,7 +24,7 @@ class Multislots extends Command {
       '🍒 x 2': 2,
       '🍒 x 3': 5,
       '7⃣ x 2': 25,
-      '7⃣ x 3': 75,
+      '7⃣ x 3': 60,
       '🍐 x 3': 10,
       '🍈 x 3': 10,
       '🍇 x 3': 10,
@@ -86,32 +86,32 @@ class Multislots extends Command {
     const winnings = this.checkWinnings(payline1, payline2, payline3, bet)
 
     const rando = Math.random()
-    return (amount > 10000000 && winnings.length && rando >= 0.15) ||
-    (winnings.length && rando >= 0.25)
+    return (amount > 10000000 && winnings.length && rando >= 0.3) ||
+    (winnings.length && rando >= 0.5)
     ? this.doSlots(bet, amount) : [ machine, payline1, payline2, payline3, winnings ]
   }
 
   async handle ({ msg, args, data, settings, cache }, responder) {
     let dailyWins = await cache.client.getAsync(`slots:${msg.author.id}`)
-    if (parseInt(dailyWins, 10) >= 1000000) {
+    if (parseInt(dailyWins, 10) >= 750000) {
       const res = await cache.client.pttlAsync(`slots:${msg.author.id}`)
       return responder.error('{{dailyLimit}}', {
         time: `${moment(res + moment()).fromNow(true)}`
       })
     }
     const user = await data.User.fetch(msg.author.id)
-    if (args.bet > 10000) args.bet = 10000
+    if (args.bet > 5000) args.bet = 5000
     if (args.bet < 1) return responder.error('{{yudodis}}')
-    if (user.credits < args.bet) {
+    if (user.credits < args.bet * 3) {
       return responder.error('{{insufficient}}', {
-        amount: `**${args.bet - user.credits}**`,
+        amount: `**${args.bet * 3 - user.credits}**`,
         command: `**\`${settings.prefix}wage\`**`
       })
     }
 
     const [machine, payline1, payline2, payline3, winnings] = this.doSlots(args.bet, user.credits)
     try {
-      user.credits -= args.bet
+      user.credits -= args.bet * 3
       let total = 0
       for (const win of winnings) {
         user.credits += win[1]
