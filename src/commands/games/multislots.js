@@ -21,6 +21,7 @@ class Multislots extends Command {
     ]
 
     this.wins = {
+      '🍒 x 1': 1,
       '🍒 x 2': 2,
       '🍒 x 3': 5,
       '7⃣ x 2': 25,
