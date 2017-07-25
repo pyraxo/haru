@@ -6,7 +6,7 @@ class Auditor extends Module {
     super(...args, {
       name: 'guilds:settings',
       events: {
-        haruMemberBanned: 'onBan',
+        guildBanAdd: 'onBan',
         haruMemberKicked: 'onKick',
         guildMemberUpdate: 'memberUpdate',
         guildMemberAdd: 'onJoin',
@@ -47,15 +47,14 @@ class Auditor extends Module {
     })
   }
 
-  onBan (guild, user, reason) {
+  onBan (guild, user) {
     this.data.Guild.fetch(guild.id).then(settings => {
       if (typeof settings.events !== 'object') return
       if (!settings.events.hasOwnProperty('ban')) return
       for (const id of settings.events['ban']) {
         this.send(id, '', { embed: {
           color: this.colours.red,
-          description: `🔨  **Member Banned**:  ${user.username}#${user.discriminator} (ID: ${user.id})` +
-          (reason ? `\n\n**Reason**: ${reason}` : ''),
+          description: `🔨  **Member Banned**:  ${user.username}#${user.discriminator} (ID: ${user.id})`,
           footer: { text: moment().locale(settings.lang).tz(settings.tz).format('ddd Do MMM, YYYY [at] hh:mm:ss a') }
         }})
       }
@@ -91,7 +90,7 @@ class Auditor extends Module {
 
   userUpdate (user, oldUser) {
     const guilds = this.bot.guilds.find(g => g.members.has(user.id))
-    Promise.all(guilds.map(g => 
+    Promise.all(guilds.map(g =>
       this.data.Guild.fetch(g.id).then(settings => {
         if (user.username !== oldUser.username) {
           return this.onNameChange(user, oldUser, settings)
