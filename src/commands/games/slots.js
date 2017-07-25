@@ -67,7 +67,7 @@ class Slots extends Command {
     
     const rando = Math.random()
     return !winnings.length ? [ machine, payline, winnings ]
-    : random >= (0.8 / winnings[0][2])
+    : rando >= (0.8 / winnings[0][2])
     ? this.doSlots(bet, amount) : [ machine, payline, winnings ]
   }
 
