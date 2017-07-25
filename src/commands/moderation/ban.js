@@ -43,7 +43,6 @@ class Ban extends Command {
     }
     try {
       await msg.channel.guild.banMember(member.id)
-      client.emit('haruMemberBanned', msg.channel.guild, member.user, args.reason)
       return responder.format('emoji:hammer').reply('{{ban.msg}}', {
         member: `**${member.user.username}#${member.user.discriminator}**`,
         deleteDelay: 5000
