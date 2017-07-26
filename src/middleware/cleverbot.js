@@ -18,9 +18,9 @@ module.exports = {
       return container
     }
 
-    const cleverbot = modules.get('cleverbot')
+    const cleverbot = modules.get('cleverio')
     if (!cleverbot) return
-    // await cleverbot.respond(msg.cleanContent.split(' ').slice(1).join(' '), msg.channel)
+    await cleverbot.respond(msg.cleanContent.split(' ').slice(1).join(' '), msg.channel)
 
     logger.info(`${chalk.bold.magenta(
       !isPrivate
