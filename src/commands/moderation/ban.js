@@ -45,9 +45,9 @@ class Ban extends Command {
       const channel = await this.bot.getDMChannel(member.id)
       await this.send(channel, [
         `🔨  |  You have been banned from **\`${msg.channel.guild.name}\`**\n`,
-        `**Reason**: ${reply}`
+        `**Reason**: ${args.reason}`
       ].join('\n'))
-      await msg.channel.guild.banMember(member.id)
+      await msg.channel.guild.banMember(member.id, 0, args.reason)
       client.emit('haruMemberBanned', msg.channel.guild, member.user, args.reason)
       return responder.format('emoji:hammer').reply('{{ban.msg}}', {
         member: `**${member.user.username}#${member.user.discriminator}**`,
