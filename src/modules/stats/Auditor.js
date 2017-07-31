@@ -6,7 +6,7 @@ class Auditor extends Module {
     super(...args, {
       name: 'guilds:settings',
       events: {
-        guildBanAdd: 'onBan',
+        haruMemberBanned: 'onBan',
         haruMemberKicked: 'onKick',
         guildMemberUpdate: 'memberUpdate',
         guildMemberAdd: 'onJoin',
@@ -47,14 +47,15 @@ class Auditor extends Module {
     })
   }
 
-  onBan (guild, user) {
+  onBan (guild, user, reason) {
     this.data.Guild.fetch(guild.id).then(settings => {
       if (typeof settings.events !== 'object') return
       if (!settings.events.hasOwnProperty('ban')) return
       for (const id of settings.events['ban']) {
         this.send(id, '', { embed: {
           color: this.colours.red,
-          description: `🔨  **Member Banned**:  ${user.username}#${user.discriminator} (ID: ${user.id})`,
+          description: `🔨  **Member Banned**:  ${user.username}#${user.discriminator} (ID: ${user.id})` +
+          (reason ? `\n\n**Reason**: ${reason}` : ''),
           footer: { text: moment().locale(settings.lang).tz(settings.tz).format('ddd Do MMM, YYYY [at] hh:mm:ss a') }
         }})
       }
