@@ -93,7 +93,7 @@ class Multislots extends Command {
 
   async handle ({ msg, args, data, settings, cache }, responder) {
     let dailyWins = await cache.client.getAsync(`slots:${msg.author.id}`)
-    if (parseInt(dailyWins, 10) >= 750000) {
+    if (parseInt(dailyWins, 10) >= 1000000) {
       const res = await cache.client.pttlAsync(`slots:${msg.author.id}`)
       return responder.error('{{dailyLimit}}', {
         time: `${moment(res + moment()).fromNow(true)}`

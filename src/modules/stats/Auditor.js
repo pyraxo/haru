@@ -91,7 +91,7 @@ class Auditor extends Module {
 
   userUpdate (user, oldUser) {
     const guilds = this.bot.guilds.find(g => g.members.has(user.id))
-    Promise.all(guilds.map(g => 
+    Promise.all(guilds.map(g =>
       this.data.Guild.fetch(g.id).then(settings => {
         if (user.username !== oldUser.username) {
           return this.onNameChange(user, oldUser, settings)

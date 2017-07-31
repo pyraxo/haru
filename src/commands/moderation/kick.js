@@ -44,7 +44,7 @@ class Kick extends Command {
     try {
       const channel = await this.bot.getDMChannel(user.id)
       await this.send(channel, [
-        `👢  |  You have been kicked from **\`${guild.name}\`**\n`,
+        `👢  |  You have been kicked from **\`${msg.channel.guild.name}\`**\n`,
         `**Reason**: ${reason}`
       ].join('\n'))
       await msg.channel.guild.kickMember(member.id)
@@ -54,6 +54,7 @@ class Kick extends Command {
         deleteDelay: 5000
       })
     } catch (err) {
+      logger.error(err)
       return responder.error('{{kick.exitError}}')
     }
   }
