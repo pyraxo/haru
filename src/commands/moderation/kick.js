@@ -42,7 +42,7 @@ class Kick extends Command {
       return responder.error('{{kick.exit}}')
     }
     try {
-      const channel = await this.bot.getDMChannel(user.id)
+      const channel = await this.bot.getDMChannel(member.id)
       await this.send(channel, [
         `👢  |  You have been kicked from **\`${msg.channel.guild.name}\`**\n`,
         `**Reason**: ${reason}`

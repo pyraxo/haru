@@ -42,7 +42,7 @@ class Ban extends Command {
       return responder.error('{{ban.exit}}')
     }
     try {
-      const channel = await this.bot.getDMChannel(user.id)
+      const channel = await this.bot.getDMChannel(member.id)
       await this.send(channel, [
         `🔨  |  You have been banned from **\`${msg.channel.guild.name}\`**\n`,
         `**Reason**: ${reason}`
