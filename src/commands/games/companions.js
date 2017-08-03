@@ -34,7 +34,10 @@ class Companions extends Command {
       description: `**\`LVL ${Math.floor(Math.cbrt(companion.xp)) || 0}\`** :${companion.type}:  ${companion.name}`,
       fields: [
         { name: responder.t('{{definitions.wins}}'), value: stats.wins || 0, inline: true },
-        { name: responder.t('{{definitions.losses}}'), value: stats.losses || 0, inline: true }
+        { name: responder.t('{{definitions.losses}}'), value: stats.losses || 0, inline: true },
+        { name: responder.t('{{definitions.stats}}'), value: null, inline: false},
+        { name: responder.t('{{definitions.mood}}'), value: stats.mood, inline: true},
+        { name: responder.t('{{definitions.hunger}}'), value: stats.food, inline: true}
       ]
     }).send()
   }
@@ -55,7 +58,10 @@ class Companions extends Command {
       description: `**\`LVL ${Math.floor(Math.cbrt(companion.xp)) || 0}\`** :${companion.type}:  ${companion.name}`,
       fields: [
         { name: responder.t('{{definitions.wins}}'), value: stats.wins || 0, inline: true },
-        { name: responder.t('{{definitions.losses}}'), value: stats.losses || 0, inline: true }
+        { name: responder.t('{{definitions.losses}}'), value: stats.losses || 0, inline: true },
+        { name: responder.t('{{definitions.stats}}') },
+        { name: responder.t('{{definitions.mood}}'), value: stats.mood, inline: true},
+        { name: responder.t('{{definitions.hunger}}'), value: stats.food, inline: true}
       ]
     }).send()
   }

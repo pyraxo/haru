@@ -19,6 +19,9 @@ module.exports = function () {
       hp: number().default(10),
       crit: number().default(1),
       atk: number().default(1),
+      heal: number().default(1),
+      mood: number().default(10),
+      hunger: number().default(10),
       inventory: array().default([])
     },
     relations: {
