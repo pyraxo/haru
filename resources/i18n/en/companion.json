@@ -21,7 +21,9 @@
     "wins": "Wins",
     "losses": "Losses",
     "info": "Companion Info",
-    "info2": "{{author}}'s Companion"
+    "info2": "{{author}}'s Companion",
+    "mood": "Mood",
+    "hunger": "Food"
   },
   "errors": {
     "self": "you can't battle yourself!",

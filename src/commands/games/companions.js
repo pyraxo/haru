@@ -35,9 +35,8 @@ class Companions extends Command {
       fields: [
         { name: responder.t('{{definitions.wins}}'), value: stats.wins || 0, inline: true },
         { name: responder.t('{{definitions.losses}}'), value: stats.losses || 0, inline: true },
-        { name: responder.t('{{definitions.stats}}'), value: null, inline: false},
-        { name: responder.t('{{definitions.mood}}'), value: stats.mood, inline: true},
-        { name: responder.t('{{definitions.hunger}}'), value: stats.food, inline: true}
+        { name: responder.t('{{definitions.mood}}'), value: companion.mood || 10, inline: true},
+        { name: responder.t('{{definitions.hunger}}'), value: companion.hunger || 10, inline: true}
       ]
     }).send()
   }
@@ -59,9 +58,8 @@ class Companions extends Command {
       fields: [
         { name: responder.t('{{definitions.wins}}'), value: stats.wins || 0, inline: true },
         { name: responder.t('{{definitions.losses}}'), value: stats.losses || 0, inline: true },
-        { name: responder.t('{{definitions.stats}}') },
-        { name: responder.t('{{definitions.mood}}'), value: stats.mood, inline: true},
-        { name: responder.t('{{definitions.hunger}}'), value: stats.food, inline: true}
+        { name: responder.t('{{definitions.mood}}'), value: companion.mood || 10, inline: true},
+        { name: responder.t('{{definitions.hunger}}'), value: companion.hunger || 10, inline: true}
       ]
     }).send()
   }

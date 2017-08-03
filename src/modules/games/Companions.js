@@ -257,10 +257,16 @@ class Companions extends Module {
     winUser.credits += battle.fee * 2
     winUser.companion.xp = (winUser.companion.xp || 0) + ~~(Math.random() * 5) + 2
     winUser.companion.stats.wins += 1
+    winUser.companion.hunger -= 1
+    if (winUser.companion.mood < 10) {
+      winUser.companion.mood += 1
+    }
 
     const loseUser = await this.db.User.fetch(battle[loser], { companion: true })
     loseUser.companion.xp = (loseUser.companion.xp || 0) + ~~(Math.random() * 3) + 1
     loseUser.companion.stats.losses += 1
+    loseUser.companion.hunger -= 1
+    loseUser.companion.mood -= 1
     await loseUser.saveAll({ companion: true })
 
     await this.send(battle.channel, [
