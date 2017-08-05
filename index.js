@@ -18,7 +18,6 @@ const processShards = parseInt(process.env.CLIENT_SHARDS_PER_PROCESS, 10)
 const firstShardID = parseInt(process.env.BASE_SHARD_ID, 10) * processShards
 const lastShardID = firstShardID + processShards - 1
 
-const debugMode = process.env.CLIENT_DEBUG === 'true'
 const fileOptions = {
   colorize: false,
   datePattern: '.yyyy-MM-dd',
@@ -36,7 +35,7 @@ const fileOptions = {
 winston.configure({
   transports: [
     new (winston.transports.Console)({
-      level: debugMode ? 'silly' : 'verbose',
+      level: 'silly',
       colorize: true,
       label: process.env.BASE_SHARD_ID
       ? processShards > 1
@@ -63,9 +62,4 @@ process.on('unhandledRejection', (reason, promise) => {
   winston.error(`Unhandled rejection: ${reason} - ${util.inspect(promise)}`)
 })
 
-if (debugMode) {
-  winston.debug('Running in debug mode')
-  require('./src')
-} else {
-  require('./build')
-}
+require('./src')
