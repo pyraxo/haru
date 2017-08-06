@@ -6,7 +6,7 @@ class Companions extends Command {
     super(...args, {
       name: 'companion',
       description: 'Animal companion system',
-      usage: [{ name: 'action', displayName: 'buy | rename | peek', type: 'string', optional: true }],
+      usage: [{ name: 'action', displayName: 'buy | rename | peek | feed', type: 'string', optional: true }],
       aliases: ['pet'],
       cooldown: 5,
       subcommands: {
@@ -15,7 +15,10 @@ class Companions extends Command {
           usage: [{ name: 'user', type: 'member', optional: false }],
           options: { guildOnly: true }
         },
-        rename: 'rename'
+        rename: 'rename',
+        feed: {
+          usage: [{ name: 'amount', type: 'int', optional: true }]
+        }
       },
       options: { botPerms: ['embedLinks'] }
     })
@@ -39,6 +42,43 @@ class Companions extends Command {
         { name: responder.t('{{definitions.hunger}}'), value: companion.hunger || 10, inline: true}
       ]
     }).send()
+  }
+
+  async feed ({ msg, args, data }, responder) {
+    const companion = (await data.User.fetchJoin(msg.author.id, { companion: true })).companion
+    if (!companion) {
+      responder.error('{{noPet}}', { command: `**\`${settings.prefix}${trigger} buy\`**` })
+      return
+    }
+    const amount = args.amount || 1
+    if ((companion.hunger + amount) > 10) {
+      responder.error('{{tooHungry}}', {amount: `**${amount}**`})
+      return
+    }
+    const code = ~~(Math.random() * 8999) + 1000
+    const arg = await responder.format('emoji:info').dialog([{
+      prompt: '{{food}}',
+      input: { type: 'string', name: 'code' }
+    }], {
+      author: `**${msg.author.username}**`,
+      animal: `:${companion.type}:`,
+      amount: `**${amount}**`,
+      code: `**\`${code}\`**`
+    })
+    if (parseInt(arg.code, 10) !== code) {
+      return responder.error('{{invalidCode}}')
+    }
+    if ((companion.mood + amount) > 10) {
+      companion.mood = 10
+    } else {
+      companion.mood += amount
+    }
+    companion.hunger += amount
+    responder.format('emoji:success').send('{{petFed}}', {
+      author: `**${msg.author.username}**`,
+      animal: `:${companion.type}:`,
+      amount: `**${amount}**`
+    })
   }
 
   async peek ({ args, data }, responder) {
@@ -224,4 +264,17 @@ class PetBuy extends Companions {
   }
 }
 
-module.exports = [ Companions, PetBuy ]
+class PetFeed extends Companions {
+  constructor (...args) {
+    super(...args, {
+      name: 'feedpet',
+      description: 'Feeds your personal companion',
+      options: { localeKey: 'companion' },
+      aliases: [],
+      usage: [{ name: 'amount', type: 'int', optional: true }],
+      subcommand: 'feed'
+    })
+  }
+}
+
+module.exports = [ Companions, PetBuy, PetFeed ]

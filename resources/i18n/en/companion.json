@@ -9,6 +9,12 @@
     "Are you certain you'd like to purchase it for {{amount}} credits?\n",
     "To confirm, please write {{code}}, or anything else to exit."
   ],
+  "food": [
+    "{{author}}, are you sure you'd like to feed your {{animal}} for {{amount}} food?\n",
+    "To confirm, please write {{code}}, or anything else to exit."
+  ],
+  "petFed": "{{author}}, you have just fed your {{animal}}, restoring their **hunger** and **mood** by {{amount}}",
+  "tooHungry": "Your companion is too full to feed it {{amount}} food!",
   "invalidCode": "you have entered an invalid code! The transaction was cancelled.",
   "error": "an error has occurred! The transaction was cancelled. Try again later.",
   "result": [
