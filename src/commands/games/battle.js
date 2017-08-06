@@ -48,11 +48,11 @@ class Battle extends Command {
       })
     }
 
-    if (userProfile.companion.hunger === 0) {
+    if (userProfile.companion.hunger < 1) {
       return responder.error('{{errors.hungry}}')
     }
 
-    if (userProfile.companion.mood === 0) {
+    if (userProfile.companion.mood < 1) {
       return responder.error('{{errors.moody}}')
     }
 

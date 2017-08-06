@@ -15,6 +15,7 @@
   ],
   "petFed": "{{author}}, you have just fed your {{animal}}, restoring their **hunger** and **mood** by {{amount}}",
   "tooHungry": "Your companion is too full to feed it {{amount}} food!",
+  "noFood": "You have no food in your inventory to feed your {{animal}}!",
   "invalidCode": "you have entered an invalid code! The transaction was cancelled.",
   "error": "an error has occurred! The transaction was cancelled. Try again later.",
   "result": [
