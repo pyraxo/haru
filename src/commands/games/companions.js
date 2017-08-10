@@ -45,6 +45,7 @@ class Companions extends Command {
   }
 
   async feed ({ msg, args, data }, responder) {
+    const user = await data.User.fetch(msg.author.id)
     const companion = (await data.User.fetchJoin(msg.author.id, { companion: true })).companion
     if (!companion) {
       responder.error('{{noPet}}', { command: `**\`${settings.prefix}${trigger} buy\`**` })
@@ -54,6 +55,12 @@ class Companions extends Command {
     if ((companion.hunger + amount) > 10) {
       responder.error('{{tooHungry}}', {amount: `**${amount}**`})
       return
+    }
+    console.log(user.inventory)
+    var userInvArray = user.inventory
+    var userInv = userInvArray.values()
+    for (let value of userInv) {
+      console.log(value)
     }
     const code = ~~(Math.random() * 8999) + 1000
     const arg = await responder.format('emoji:info').dialog([{

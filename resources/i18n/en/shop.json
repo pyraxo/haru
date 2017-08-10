@@ -1,0 +1,11 @@
+{
+  "buyDialog": "Items for purchase",
+  "sellDialog": "Items for sale",
+  "menu": {
+    "food": "Bag of generic pet food. Raises food by 1"
+  },
+  "purchase": [
+    "{{author}}, are you sure you'd like to purchase {{selection}}?\n",
+    "To confirm, please write {{code}}, or anything else to exit."
+  ]
+}
