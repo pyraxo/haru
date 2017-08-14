@@ -56,11 +56,13 @@ class Companions extends Command {
       responder.error('{{tooHungry}}', {amount: `**${amount}**`})
       return
     }
-    console.log(user.inventory)
-    var userInvArray = user.inventory
-    var userInv = userInvArray.values()
-    for (let value of userInv) {
-      console.log(value)
+    if (user.petfood < amount) {
+      responder.error('{{notEnoughFood}}', {
+        amount: `**${amount}**`,
+        inv: `**${user.petfood}**`,
+        animal: `:${companion.type}:`
+      })
+      return
     }
     const code = ~~(Math.random() * 8999) + 1000
     const arg = await responder.format('emoji:info').dialog([{
@@ -81,6 +83,13 @@ class Companions extends Command {
       companion.mood += amount
     }
     companion.hunger += amount
+    try {
+      await user.saveAll()
+      await data.User.update(user.id, user)
+    } catch (err) {
+      logger.error(`Could not save after companion feeding: ${err}`)
+      return responder.error('{{error}}')
+    }
     responder.format('emoji:success').send('{{petFed}}', {
       author: `**${msg.author.username}**`,
       animal: `:${companion.type}:`,

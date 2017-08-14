@@ -2,10 +2,22 @@
   "buyDialog": "Items for purchase",
   "sellDialog": "Items for sale",
   "menu": {
-    "food": "Bag of generic pet food. Raises food by 1"
+    "food": "Bag of generic pet food. Raises food by 1",
+    "checkInv": "Check your current inventory"
   },
+  "howMuch": "{{author}}, how many {{selection}} would you like to buy?",
   "purchase": [
-    "{{author}}, are you sure you'd like to purchase {{selection}}?\n",
+    "{{author}}, are you sure you'd like to purchase {{amount}} {{selection}}?\n",
     "To confirm, please write {{code}}, or anything else to exit."
-  ]
+  ],
+  "result": [
+    "**Food Purchased**\n",
+    "{{author}}, you have successfully purchased {{amount}} {{selection}}.",
+    "__Current Balance__: {{balance}} credits\n"
+  ],
+  "error": "an error has occurred! The transaction was cancelled. Try again later.",
+  "info": "Current Inventory",
+  "amounts": {
+    "petFood": "Pet food"
+  }
 }
