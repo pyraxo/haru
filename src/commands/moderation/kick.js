@@ -42,7 +42,6 @@ class Kick extends Command {
       return responder.error('{{kick.exit}}')
     }
     try {
-      await msg.channel.guild.kickMember(member.id)
       client.emit('haruMemberKicked', msg.channel.guild, member.user, args.reason)
       return responder.format('emoji:boot').reply('{{kick.msg}}', {
         member: `**${member.user.username}#${member.user.discriminator}**`,

@@ -42,7 +42,6 @@ class Ban extends Command {
       return responder.error('{{ban.exit}}')
     }
     try {
-      await msg.channel.guild.banMember(member.id)
       return responder.format('emoji:hammer').reply('{{ban.msg}}', {
         member: `**${member.user.username}#${member.user.discriminator}**`,
         deleteDelay: 5000
