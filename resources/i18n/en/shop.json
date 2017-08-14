@@ -16,6 +16,7 @@
     "__Current Balance__: {{balance}} credits\n"
   ],
   "error": "an error has occurred! The transaction was cancelled. Try again later.",
+  "cannotAfford": "I'm sorry, you need {{ammount}} credits to buy that but you only have {{balance}}",
   "info": "Current Inventory",
   "amounts": {
     "petFood": "Pet food"
