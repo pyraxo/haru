@@ -630,25 +630,26 @@
   },
   "de": {
     "booru": {
-      "noPictures": "Die Suchanfrage {{query}} ergab keine Bilder. Versuche etwas anderes zu suchen!",
-      "maxTwo": "Du kannst Danbooru nur mit maximal zwei Schlagwörtern durchsuchen!",
+      "noPictures": "die Suchanfrage {{query}} ergab keine Bilder. Versuche etwas anderes zu suchen!",
+      "maxTwo": "du kannst Danbooru nur mit maximal zwei Schlagwörtern durchsuchen!",
       "score": "Auswertung",
       "rating": "Bewertung",
       "tags": "Schlagwörter",
       "s": "Sicher",
       "q": "Fragwürdig",
-      "e": "Explizit"
+      "e": "Explizit",
+      "wrongChannel": "du kannst diesen Befehl nur in PM's oder in einem NSFW Kanal nutzen."
     },
     "common": {
-      "CHECK_PMS": "Check deine PNs!",
-      "ERROR": "Ein Fehler ist aufgetreten! Bitte versuche es später nochmal oder reiche einen Fehlerbericht ein.",
-      "ERROR_FULL": "Ein Fehler ist aufgetreten! Bitte versuche es später nochmal oder reiche einen Fehlerbericht ein.",
-      "COOLDOWN": "Bitte beruhige dich! ({{time}} Sekunden übrig)",
-      "NO_PERMS": "Du brauchst die Zulassung {{perms}} um diesen Befehl auszuführen!",
-      "NO_PERMS_BOT": "Ich brauche die Zulassung {{perms}} um diesen Befehl auszuführen!",
+      "CHECK_PMS": "check deine PNs!",
+      "ERROR": "ein Fehler ist aufgetreten! Bitte versuche es später nochmal oder reiche einen Fehlerbericht ein.",
+      "ERROR_FULL": "ein Fehler ist aufgetreten! Bitte versuche es später nochmal oder reiche einen Fehlerbericht ein.",
+      "COOLDOWN": "bitte beruhige dich! ({{time}} Sekunden übrig)",
+      "NO_PERMS": "du brauchst die Berechtigung {{perms}} um diesen Befehl auszuführen!",
+      "NO_PERMS_BOT": "Ich brauche die Berechtigung {{perms}} um diesen Befehl auszuführen!",
       "menus": {
         "EXIT": "Gib {{cancel}} ein, um das Menü zu verlassen.",
-        "ERRORED": "Das Menü wurde geschlossen:",
+        "ERRORED": "das Menü wurde geschlossen:",
         "EXITED": "Du hast das Menü verlassen.",
         "SELECTION": "Auswahl-Menü",
         "ERROR": "Unbekannter Fehler",
@@ -776,20 +777,20 @@
           "{{p1}} sichert einen guten Treffer an {{p2}}, der {{dmg}} Schaden überbringt!",
           "{{p1}} überbringt schnellen {{dmg}} Schaden an {{p2}}!"
         ],
-        "DODGE_3": "{{p1}} barely avoids {{p2}}'s attack!",
-        "DODGE_4": "{{p2}}'s attack passes by {{p1}}!",
-        "HIT_1": "{{p1}} administers a strong hit to {{p2}}, dealing {{dmg}} damage!",
-        "HIT_2": "{{p1}} smacks {{p2}} around, causing {{dmg}} damage!",
-        "HIT_3": "{{p1}} lands a strike on {{p2}}, who suffers {{dmg}} damage!",
-        "HIT_4": "{{p2}} suffers a pounding by {{p1}}, who hits for {{dmg}} damage!",
-        "HIT_5": "{{p1}} secures a good hit on {{p2}}, delivering {{dmg}} damage!",
-        "HIT_6": "{{p1}} delivers a quick {{dmg}} damage to {{p2}}!",
-        "HEAL_1": "{{p1}} eats some medicine, raising his health by {{heal}}!",
-        "HEAL_2": "{{p1}} uses a bandaid, healing by {{heal}} health!",
-        "HEAL_3": "A wild fairy appeared, healing {{p1}} for {{heal}} health!",
-        "HEAL_4": "{{p1}} discovers a magical paste, increasing his health by {{heal}}!",
-        "DODGE_1": "{{p1}} manages to dodge {{p2}}'s attack!",
-        "DODGE_2": "{{p2}}'s attack narrowly misses {{p1}}!"
+        "DODGE_3": "{{p1}} konnte {{p2}}s Attacke nur knapp ausweichen!",
+        "DODGE_4": "{{p2}}s Attacke verfehlt {{p1}}!",
+        "HIT_1": "{{p1}} fügt {{p2}} mit einem starken Schlag {{dmg}} Schaden zu!",
+        "HIT_2": "{{p1}} schlägt {{p2}} herum und fügt ihm {{dmg}} Schaden zu!",
+        "HIT_3": "{{p1}} landet einen Treffer auf {{p2}}, welcher {{dmg}} Schaden zufügt!",
+        "HIT_4": "{{p2}} bekommt {{p1}}s Stampfer zu spüren, welcher {{dmg}} Schaden zufügt!",
+        "HIT_5": "{{p1}} konnte einen guten Treffer auf {{p2}} landen und somit {{dmg}} Schaden austeilen!",
+        "HIT_6": "{{p1}} fügt {{p2}} schnelle {{dmg}} Schadenspunkte zu!",
+        "HEAL_1": "{{p1}} schluckt ein wenig Medizin, die seine Gesundheit um {{heal}} wiederherstellt!",
+        "HEAL_2": "{{p1}} holt sich ein Pflaster und stellt seine Gesundheit um {{heal}} wieder her!",
+        "HEAL_3": "Eine wilde Fee erscheint und stellt {{p1}}s Gesundheit um {{heal}} her!",
+        "HEAL_4": "{{p1}} entdeckt eine magische Paste, die seine Gesundheit um {{heal}} wiederherstellt.",
+        "DODGE_1": "{{p1}} konnte {{p2}}s Attacke ausweichen!",
+        "DODGE_2": "{{p2}}s Attacke geht knapp an {{p1}} vorbei!"
       }
     },
     "credits": {
@@ -870,7 +871,7 @@
       "soundcloud": "Sucht Lieder von SoundCloud",
       "ban": "Bannt ein Server-Mitglied",
       "kick": "Kickt ein Server-Mitglied",
-      "multislots": "Plays the slot machine with all 3 rows"
+      "multislots": "Spielt den Spielautomaten mit allen drei Reihen"
     },
     "guilds": {
       "join": [
@@ -926,7 +927,8 @@
     },
     "images": {
       "link": "{{image}} ist zu haben!",
-      "catgirl": "Catgirl"
+      "catgirl": "Catgirl",
+      "wrongChannel": "du kannst diesen Befehl nur in PM's oder in einem NSFW Kanal nutzen."
     },
     "info": {
       "info": [
@@ -1143,6 +1145,11 @@
         ],
         "success": "Die neue Verabschiedungs-Nachricht ist:",
         "enabled": "Schicke nun Verabschiedungs-Nachrichten in {{channel}}"
+      },
+      "autorole": {
+        "success": "{{role}} wurde erfolgreich als Autorolle konfiguriert.",
+        "none": "Es gibt keine Autorollen auf diesem Server",
+        "current": "Die aktuelle Autorolle für diesen Server ist {{role}}"
       }
     },
     "purge": {
@@ -1259,27 +1266,28 @@
   },
   "es": {
     "booru": {
-      "noPictures": "¡La búsqueda {{query}} regresó sin fotos. Trata de buscar algo diferente!",
-      "maxTwo": "¡Solo puedes buscar Danbooru con lo máximo de dos descripciones!",
-      "score": "Puntos",
-      "rating": "Calificación",
+      "noPictures": "la búsqueda {{query}} regresó sin fotos. ¡Trata de buscar algo diferente!",
+      "maxTwo": "¡sólo puedes buscar Danbooru con un máximo de dos etiquetas!",
+      "score": "Puntuación",
+      "rating": "Clasificación",
       "tags": "Etiquetas",
       "s": "Seguro",
       "q": "Cuestionable",
-      "e": "Explícito"
+      "e": "Explícito",
+      "wrongChannel": "¡sólo puedes usar este comando en MP o en un canal NSFW!"
     },
     "common": {
-      "CHECK_PMS": "¡Mira tus MP!",
-      "ERROR": "¡Un error ha ocurrido! Por favor inténtalo más tarde o envía un reporte.",
-      "ERROR_FULL": "¡un error ha ocurrido! Por favor inténtalo más tarde o envía un reporte.",
-      "COOLDOWN": "¡Porfavor cálmate! (Espera {{time}} segundos)",
-      "NO_PERMS": "¡Necesitas el permiso {{perms}} para utilizar este comando!",
-      "NO_PERMS_BOT": "¡Necesito el permiso {{perms}} para utilizar este comando!",
+      "CHECK_PMS": "¡revisa tus MPs!",
+      "ERROR": "¡un error ha ocurrido! Por favor inténtalo más tarde o envía un reporte.",
+      "ERROR_FULL": "¡Un error ha ocurrido! Por favor inténtalo más tarde o envía un reporte.",
+      "COOLDOWN": "¡por favor calma! ({{time}} segundos restantes)",
+      "NO_PERMS": "¡necesitas el permiso {{perms}} para utilizar este comando!",
+      "NO_PERMS_BOT": "¡necesito el permiso {{perms}} para utilizar este comando!",
       "menus": {
-        "EXIT": "Escribe {{cancel}} salir del menú.",
-        "ERRORED": "El menú se ha cerrado.",
-        "EXITED": "Tú has salido del menú.",
-        "SELECTION": "Selección de menú.",
+        "EXIT": "Escribe {{cancel}} para salir del menú.",
+        "ERRORED": "el menú ha cerrado:",
+        "EXITED": "has salido del menú.",
+        "SELECTION": "Selección de menú",
         "ERROR": "Error desconocido.",
         "INPUT": "Pon el número que tú quieras o '{{cancel}}' para cancelar.",
         "MORE_RESULTS": "Y {{num}} more..."
@@ -1292,19 +1300,19 @@
       "resolver": {
         "INSUFFICIENT_ARGS": "Argumentos insuficientes - Se necesita al menos de {{requiredArgs}}, solo se ha visto {{argsCount}}",
         "CORRECT_USAGE": "Uso correcto",
-        "NO_END_QUOTE": "Tú no tienes la finalización. (Not 100% finish)",
+        "NO_END_QUOTE": "le falta las citas finales",
         "member": {
-          "NOT_FOUND": "El miembro no se pudo encontrar"
+          "NOT_FOUND": "el miembro no se pudo encontrar"
         },
         "channel": {
-          "NOT_FOUND": "El canal no se pudo encontrar"
+          "NOT_FOUND": "el canal no se pudo encontrar"
         },
         "command": {
-          "NOT_FOUND": "El comando no se pudo encontrar"
+          "NOT_FOUND": "el comando no se pudo encontrar"
         },
         "string": {
           "NOT_STRING": "{{arg}} debe ser una frase",
-          "MAX": "{{arg}} tamaño no puede ser más de {{Max}}",
+          "MAX": "{{arg}} tamaño no puede ser más de {{max}}",
           "MIN": "{{arg}} tamaño no puede ser menos de {{min}}",
           "ONE_OF": "{{arg}} tiene que ser uno de los siguientes"
         },
@@ -1317,7 +1325,7 @@
         },
         "int": {
           "NOT_INT": "{{arg}} debe ser un integral",
-          "MAX": "{{arg}} tiene que ser menos o lo mismo de {{Max}}",
+          "MAX": "{{arg}} tiene que ser menos o lo mismo de {{max}}",
           "MIN": "{{arg}} tiene que ser más de o igual a {{min}}"
         },
         "role": {
@@ -1331,10 +1339,10 @@
       "ENABLE_EMBEDS": "¡Por favor asegúrate de tener tus incrustaciones activadas!"
     },
     "companion": {
-      "noPet": "¡Tú no tienes un compañero! ¡Usa {{command}} para comprar uno!",
-      "ownedPet": "¡Tu ya tienes un compañero!",
-      "cannotAfford": "Tu necesitas {{amount}} créditos, pero solo tienes {{balance}} créditos!",
-      "intro": "Escoge un compañero de inicio {{user}}",
+      "noPet": "¡tú no tienes un compañero! ¡Usa {{command}} para comprar uno!",
+      "ownedPet": "¡tú ya tienes un compañero!",
+      "cannotAfford": "¡tú necesitas {{amount}} créditos, pero solo tienes {{balance}} créditos!",
+      "intro": "¡Escoge un compañero de inicio, {{user}}!",
       "dialog": [
         "**Adquisición de compañero**",
         "",
@@ -1343,10 +1351,10 @@
         "",
         "Para confirmar, escribe {{code}}, u otra cosa para salir."
       ],
-      "invalidCode": "¡Has introducido un código inválido! La transacción ha sido cancelada. ",
-      "error": "¡Ha ocurrido un error! La transacción se ha cancelado. Inténtalo otra vez más tarde.",
+      "invalidCode": "¡has introducido un código inválido! La transacción ha sido cancelada. ",
+      "error": "¡ha ocurrido un error! La transacción se ha cancelado. Inténtalo otra vez más tarde.",
       "result": [
-        "*Compañero comprado*",
+        "**Compañero comprado**",
         "",
         "{{author}}, has comprado exitosamente a {{animal}} como tu compañero.",
         "__Dinero actual__: {{balance}} créditos",
@@ -1355,38 +1363,38 @@
         ""
       ],
       "definitions": {
-        "wins": "Vencidas",
+        "wins": "Ganadas",
         "losses": "Perdidas",
         "info": "Información del compañero.",
         "info2": "Compañero de {{author}}"
       },
       "errors": {
-        "self": "¡No puedes pelear contigo mismo!",
-        "noUser": "¡Ese usuario no existe en mis registros!",
-        "ongoingBattle": "¡Ya hay una batalla iniciada en este canal!",
-        "userInBattle": "¡Estás en una batalla!",
-        "opponentInBattle": "¡Tu oponente está en una batalla en estos momentos!",
-        "noIncoming": "No tienes peticiones de batalla.",
-        "noOutgoing": "No has enviado ninguna petición de batalla.",
-        "opponentNoCompanion": "¡Ese jugador no posee un compañero!",
-        "cantPlay": "¡Necesitas {{amount}} de créditos para jugar, pero sólo tienes {{balance}}!",
-        "cantChallenge": "¡El jugador no tiene los suficientes créditos para jugar!",
-        "noBattle": "¡Este canal no tiene batallas empezadas!",
-        "notParticipating": "¡Ese jugador no es un participante en esta batalla!",
-        "isParticipant": "¡Eres un participante de la batalla y no puedes apostar!",
-        "cantBet": "¡No tienes los suficientes créditos {{balance}} para apostar {{amount}}!",
-        "betMulti": "¡No puedes apostar más de una vez!",
-        "plsBetProperly": "¡No puedes apostar menos de un crédito!",
-        "notBetting": "¡La batalla no ha entrado en la fase de apuestas!",
-        "afterBetting": "¡La fase de apuestas ya ha terminado para esta batalla!",
-        "notOnline": "¡Ese usuario no está conectado todavía!"
+        "self": "¡no puedes pelear contigo mismo!",
+        "noUser": "¡ese usuario no existe en mis registros!",
+        "ongoingBattle": "¡ya hay una batalla iniciada en este canal!",
+        "userInBattle": "¡estás en una batalla!",
+        "opponentInBattle": "¡tu oponente está en una batalla en estos momentos!",
+        "noIncoming": "no tienes peticiones de batalla.",
+        "noOutgoing": "no has enviado ninguna petición de batalla.",
+        "opponentNoCompanion": "¡ese jugador no posee un compañero!",
+        "cantPlay": "¡necesitas {{amount}} de créditos para jugar, pero sólo tienes {{balance}}!",
+        "cantChallenge": "¡el jugador no tiene los suficientes créditos para jugar!",
+        "noBattle": "¡este canal no tiene batallas empezadas!",
+        "notParticipating": "¡ese jugador no es un participante en esta batalla!",
+        "isParticipant": "¡eres un participante de la batalla y no puedes apostar!",
+        "cantBet": "¡no tienes los suficientes créditos {{balance}} para apostar {{amount}}!",
+        "betMulti": "¡no puedes apostar más de una vez!",
+        "plsBetProperly": "¡no puedes apostar menos de un crédito!",
+        "notBetting": "¡la batalla no ha entrado en la fase de apuestas!",
+        "afterBetting": "¡la fase de apuestas ya ha terminado para esta batalla!",
+        "notOnline": "¡ese usuario no está conectado todavía!"
       },
       "challenge": [
-        "¡Has desafiado a {{mention}} a una batalla de mascotas!",
+        "¡has desafiado a {{mention}} a una batalla de mascotas!",
         "",
         "¡El jugador tiene {{time}} segundos para responder con {{accept}}} o {{reject}}, de no ser así se perderá automáticamente!"
       ],
-      "bet": "¡Has apostado {{amount}} créditos por {{user}}y su compañero {{pet}}!",
+      "bet": "¡has apostado {{amount}} créditos por {{user}}y su compañero {{pet}}!",
       "timedOut": "{{p2}} falló al responder el desafío de {{p1}} después de {{time}} segundos y se ha perdido.",
       "rejectChallenge": "{{p2}} ha rechazado el desafío de {{p1}}.\n",
       "cancelChallenge": "{{p1}} ha cancelado su desafío para {{p2}}.",
@@ -1397,7 +1405,7 @@
         "¡Apostad con {{command}}!"
       ],
       "renameDialog": "{{user}}, ¿cómo quieres renombrar a tu compañero {{pet}}?",
-      "renameSuccess": "¡Has renombrado a tu compañero {{pet}} a {{newName}}!",
+      "renameSuccess": "¡has renombrado a tu compañero {{pet}} a {{newName}}!",
       "script": {
         "HIT": [
           "¡{{p1}} le da un golpe fuerte a {{p2}}, haciendo {{dmg}} daño!",
@@ -1425,7 +1433,7 @@
     "credits": {
       "balance": "El balance de la cuenta de {{user}} es de {{balance}} créditos.",
       "topup": "{{amount}} créditos han sido ingresados a tu cuenta.",
-      "cooldown": "Tus créditos reclamables se renovarán en {{time}}.",
+      "cooldown": "tus créditos reclamables se renovarán en {{time}}.",
       "dialog": [
         "**Transferencia de créditos**",
         "",
@@ -1437,14 +1445,14 @@
         "Para confirmar, introduce {{code}} para proceder o {{exit}} para salir del menú."
       ],
       "confirmation": [
-        "Has transferido {{amount}} créditos a la cuenta de {user}}.",
+        "has transferido {{amount}} créditos a la cuenta de {user}}.",
         "",
         "_Balance actualizado__: {{afterAmount}}"
       ],
-      "invalidCode": "¡Has introducido un código inválido! Tus créditos no se han transferido.",
-      "selfSenderError": "¡No te puedes enviar créditos a ti mismo!",
-      "insufficientCredits": "¡No tienes suficientes ({{balance}}) créditos!",
-      "botUserError": "¡No le puedes enviar créditos a bots!",
+      "invalidCode": "¡has introducido un código inválido! Tus créditos no se han transferido.",
+      "selfSenderError": "¡no te puedes enviar créditos a ti mismo!",
+      "insufficientCredits": "¡no tienes suficientes ({{balance}}) créditos!",
+      "botUserError": "¡no le puedes enviar créditos a bots!",
       "topTitle": "Los individuos más ricos de Discord",
       "credits": "créditos"
     },
@@ -1453,8 +1461,8 @@
       "info": "Información sobre mí",
       "credits": "Sistema de moneda",
       "wage": "Pide tus créditos cada 8 horas",
-      "hate": "Te-¡Te odio!",
-      "love": "Te- ¡Te quiero!",
+      "hate": "¡Te-Te odio!",
+      "love": "¡Te-Te quiero!",
       "prefix": "Permitir a los moderadores poner un prefijo del gremio.",
       "search": "Buscar música en Youtube",
       "skip": "Saltar la pista actual",
@@ -1511,15 +1519,15 @@
       ],
       "ban": {
         "self": "¡no te puedes expulsar a ti mismo!",
-        "msg": "has usado el banhammer sobre {{member}}. Que las Diosas sean misericordiosas.",
+        "msg": "has usado el banhammer sobre {{member}}. Quizás las Diosas tengan piedad.",
         "dialog": [
           "Moviendo el Banhammer",
           "",
           "{{user}}, estás a punto de usar el banhammer sobre {{member}}.",
           "Para confirmar, introduce {{quote}} o {{exit}} para salir del menú."
         ],
-        "exit": "el miembro **no** ha sido expulsado",
-        "exitError": "algo raro ha pasado, así que el miembro **no** ha sido expulsado"
+        "exit": "el miembro **no** ha sido expulsado.",
+        "exitError": "algo raro ha pasado, así que el miembro **no** ha sido expulsado."
       },
       "kick": {
         "self": "¡no te puedes echar a ti mismo!",
@@ -1557,12 +1565,13 @@
     },
     "images": {
       "link": "{{imagen}} ¡arriba!",
-      "catgirl": "Niña-gato"
+      "catgirl": "Niña-gato",
+      "wrongChannel": "¡sólo puedes usar este comando en MP o en un canal NSFW!"
     },
     "info": {
       "info": [
         "👋   ¡Hola! ¡Soy **haru**!",
-        "La ídolo favorita de todos ✨🎤 y bot a tiempo parcial! 🤖"
+        "¡La ídolo favorita de todos ✨🎤 y bot a tiempo parcial! 🤖"
       ],
       "invite": [
         "¡Invítame usando {{invite}}!",
@@ -1666,12 +1675,12 @@
         "La lista actual se ha guardado en nuestra base de datos.",
         "Lo sentimos por cualquier inconveniencia causada."
       ],
-      "votedSkip": "¡ya has votado para saltar la canción\"",
+      "votedSkip": "¡ya has votado para saltar la canción!\n",
       "voteSkipSuccess": "¡has votado para saltar la canción!",
       "votedClear": "¡ya has votado para vaciar la cola!",
       "voteClearSuccess": "¡has votado para vaciar la cola!",
       "stations": "Estaciones",
-      "shuffled": "barajado {{num}} entradas en la cola"
+      "shuffled": "barajado {{num}} entradas en la cola."
     },
     "slots": {
       "insufficient": [
@@ -1745,7 +1754,7 @@
         "dialog": "Mensajes de Bienvenida",
         "action": {
           "set": "Escribir un mensaje de bienvenida",
-          "get": "Vet el mensaje de bienvenida actual",
+          "get": "Ver el mensaje de bienvenida actual",
           "enable": "Usar este canal para enviar mensajes de bienvenida"
         },
         "get": "Mensaje de bienvenida actual:",
@@ -1772,6 +1781,11 @@
         ],
         "success": "el nuevo mensaje de despedida es:",
         "enabled": "enviando mensajes de despedida en {{channel}}"
+      },
+      "autorole": {
+        "success": "Configurado con éxito que el autorol de este servidor sea {{role}}",
+        "none": "No hay autorol en este servidor",
+        "current": "El autorol actual para este servidor es {{role}}"
       }
     },
     "purge": {
@@ -1889,20 +1903,21 @@
   },
   "fr": {
     "booru": {
-      "noPictures": "la requête {{query}} n'a retourné aucune image. Essaie de chercher quelque chose d'autre !",
+      "noPictures": "la requête {{query}} n'a rendue aucune image. Essaie de chercher quelque chose d'autre !\n",
       "maxTwo": "tu ne peux rechercher sur Danbooru qu'avec un maximum de deux tags !",
       "score": "Score",
       "rating": "Classification",
       "tags": "Tags",
       "s": "Sûr",
       "q": "Douteux",
-      "e": "Explicite"
+      "e": "Explicite",
+      "wrongChannel": "tu peux utiliser cette commande uniquement dans les MP ou dans un salon NSFW."
     },
     "common": {
       "CHECK_PMS": "regarde tes messages privés !",
       "ERROR": "une erreur est survenue ! Réessaie plus tard, ou envoie un rapport de bug.",
       "ERROR_FULL": "Une erreur est survenue ! Réessaie plus tard, ou envoie un rapport de bug.",
-      "COOLDOWN": "du calme! ({{time}} seconde restante)",
+      "COOLDOWN": "s'il te plait calme toi! ({{time}} secondes restantes)",
       "NO_PERMS": "tu as besoin d'avoir la permission {{perms}} pour exécuter cette commande !",
       "NO_PERMS_BOT": "J'ai besoin de la permission {{perms}} pour exécuter cette commande !",
       "menus": {
@@ -1920,7 +1935,7 @@
         "maxMatches": "Nombre de matches maximum ({{maxMatches}}) dépassé."
       },
       "resolver": {
-        "INSUFFICIENT_ARGS": "Il n'y a pas assez d'arguments - Au moins {{requiredArgs}} était(ent) attendu(s), regarde {{argsCount}}",
+        "INSUFFICIENT_ARGS": "Il n'y a pas assez d'arguments - Au moins {{requiredArgs}} était(ent) attendu(s), en a vu {{argsCount}}",
         "CORRECT_USAGE": "Usage correct",
         "NO_END_QUOTE": "il te manque une fin de citation",
         "member": {
@@ -2181,7 +2196,8 @@
     },
     "images": {
       "link": "voila ton image ! {{image}}",
-      "catgirl": "Catgirl"
+      "catgirl": "Catgirl",
+      "wrongChannel": "tu peux utiliser cette commande uniquement dans les MP ou dans un salon NSFW."
     },
     "info": {
       "info": [
@@ -2398,6 +2414,11 @@
         ],
         "success": "le nouveau message d'au revoir est :",
         "enabled": "dès maintenant, envoie des messages d'au revoir dans {{channel}}"
+      },
+      "autorole": {
+        "success": "{{role}} configuré avec succès en tant que rôle automatique de ce serveur.",
+        "none": "Il n'y a pas de rôle automatique sur ce serveur.",
+        "current": "Le rôle automatique actuel pour ce serveur est {{role}}"
       }
     },
     "purge": {
@@ -3143,13 +3164,14 @@
   "nl": {
     "booru": {
       "noPictures": "de zoekopdracht {{query}} heeft geen resultaten opgeleverd. Probeer iets anders!",
-      "maxTwo": "je mag Danbooru maar met maximaal twee tags opzoeken!",
+      "maxTwo": "je mag maar met maximaal 2 tags Danbooru doorzoeken!\n",
       "score": "Score",
       "rating": "Beoordeling",
       "tags": "Tags",
       "s": "Veilig",
       "q": "Twijfelachtig",
-      "e": "uitdrukkelijk"
+      "e": "18+ (onveilig)",
+      "wrongChannel": "je kan dit commando alleen in DM's of een NSFW (18+) channel gebruiken!"
     },
     "common": {
       "CHECK_PMS": "check je berichten!",
@@ -3438,7 +3460,8 @@
     },
     "images": {
       "link": "{{image}} voor het pakken!",
-      "catgirl": "Kattenmeisje"
+      "catgirl": "Kattenmeisje",
+      "wrongChannel": "je kan dit commando alleen in DM's of een NSFW (18+) channel gebruiken!"
     },
     "info": {
       "info": [
@@ -3655,6 +3678,11 @@
         ],
         "success": "het nieuwe verlatingsbericht is:",
         "enabled": "nu verlatingsberichten aan het versturen in {{channel}}"
+      },
+      "autorole": {
+        "success": "Met succes de auto-rol van de server ingesteld as {{role}}",
+        "none": "Er is geen auto-rol in deze server",
+        "current": "De huidige auto-rol voor deze server is {{role}}"
       }
     },
     "purge": {
@@ -5027,6 +5055,644 @@
       "chapters": "Chapters"
     }
   },
+  "ru": {
+    "booru": {
+      "noPictures": "Поиск по {{query}} не дал результатов. Попробуйте написать что-нибудь другое!",
+      "maxTwo": "Вы можете искать Danbooru максимум с двумя тегами!",
+      "score": "Счёт",
+      "rating": "Рейтинг",
+      "tags": "Теги",
+      "s": "Безопасно",
+      "q": "Под вопросом",
+      "e": "Значить",
+      "wrongChannel": "you can only use this command in DM's or a NSFW channel!"
+    },
+    "common": {
+      "CHECK_PMS": "Проверьте свои PMs!",
+      "ERROR": "Произошла ошибка! Повторите попытку позже или отправьте отчет об ошибке.",
+      "ERROR_FULL": "Произошла ошибка! Повторите попытку позже или отправьте отчет об ошибке.",
+      "COOLDOWN": "Пожалуйста, остыньте! (Осталось {{time}} секунд(ы))",
+      "NO_PERMS": "Вам нужно разрешение {{perms}} для запуска этой команды!",
+      "NO_PERMS_BOT": "Мне нужно разрешение {{perms}} для запуска этой команды!",
+      "menus": {
+        "EXIT": "Введите {{cancel}} для выхода из меню.",
+        "ERRORED": "Меню закрылось:",
+        "EXITED": "Вы вышли из меню.",
+        "SELECTION": "Меню выбора",
+        "ERROR": "Неизвестная ошибка",
+        "INPUT": "Наберите номер своего выбора в чате или «{{cancel}}», чтобы отменить.",
+        "MORE_RESULTS": "And {{num}} more..."
+      },
+      "collector": {
+        "timeout": "Перерыв закончится через {{timeout}} секунд(ы)",
+        "max": "Превышены {{max}} попытки",
+        "maxMatches": "Превышены {{maxMatches}} совпадений"
+      },
+      "resolver": {
+        "INSUFFICIENT_ARGS": "Недостаточно аргументов - ожидается по крайней мере {{requiredArgs}}, получено {{argsCount}}",
+        "CORRECT_USAGE": "Правильное использование",
+        "NO_END_QUOTE": "У вас отсутствует end quote",
+        "member": {
+          "NOT_FOUND": "Не удалось найти участника"
+        },
+        "channel": {
+          "NOT_FOUND": "Канал не может быть найден"
+        },
+        "command": {
+          "NOT_FOUND": "Не удалось найти команду"
+        },
+        "string": {
+          "NOT_STRING": "{{arg}} Должна быть последовательность символов",
+          "MAX": "Длина {{arg}} не может быть больше {{max}}",
+          "MIN": "Длина {{arg}} не может быть меньше {{min}}",
+          "ONE_OF": "{{Arg}} должен быть одним из следующих"
+        },
+        "list": {
+          "MAX": "Длина {{arg}} не может содержать более {{max}} элементов",
+          "MIN": "Длина {{arg}} не может содержать менее {{min}} элементов",
+          "MAX_LENGTH": "{{arg}} не может содержать элементы больше {{maxLength}}",
+          "MIN_LENGTH": "{{arg}} не может содержать элементы короче {{minLength}}",
+          "DUPES": "{{arg}} не может содержать повторяющиеся значения"
+        },
+        "int": {
+          "NOT_INT": "{{arg}} не является целым числом",
+          "MAX": "{{arg}} должен быть меньше или равен {{max}}",
+          "MIN": "{{arg}} должен быть больше или равен {{min}}"
+        },
+        "role": {
+          "NOT_FOUND": "the role could not be found"
+        },
+        "group": {
+          "NOT_FOUND": "the command group could not be found"
+        }
+      },
+      "NO_PMS": "Sorry, but I prefer a larger audience. (This command can't be run in PMs!)",
+      "ENABLE_EMBEDS": "Please ensure that you have embeds enabled!"
+    },
+    "companion": {
+      "noPet": "У вас еще нет компаньона! Используйте {{command}}, чтобы купить его!",
+      "ownedPet": "У вас уже есть компаньон!",
+      "cannotAfford": "Вам потребуется {{amount}} кредитов, но у вас есть только {{balance}}!",
+      "intro": "Выберите стартового компаньона, {{user}}!",
+      "dialog": [
+        "**Покупка компаньона**",
+        "",
+        "{{author}}, вы выбрали {{animal}} в качестве своего компаньона.",
+        "Вы уверены что хотите его приобрести за {{amount}} кредитов(/а)?",
+        "",
+        "Чтобы подтвердить, напишите {{code}} или что-нибудь еще чтобы выйти."
+      ],
+      "invalidCode": "Вы ввели неверный код! Транзакция отменена.",
+      "error": "Произошла ошибка! Транзакция отменена. Попробуйте позже.",
+      "result": [
+        "**Покупка компаньона**",
+        "",
+        "{{author}}, вы успешно приобрели {{animal}} в качестве своего компаньона.",
+        "__Текущий баланс__: {{balance}} кредитов(/а)",
+        "",
+        "Вы можете переименовать своего компаньона командой {{command}}."
+      ],
+      "definitions": {
+        "wins": "Выигрыши",
+        "losses": "Проигрыши",
+        "info": "Информация о компаньоне",
+        "info2": "Компаньон {{author}}"
+      },
+      "errors": {
+        "self": "Вы не можете драться с самим собой!",
+        "noUser": "Этот пользователь не существует в моих записях!",
+        "ongoingBattle": "В этом канале уже идет сражение!",
+        "userInBattle": "Вы в настоящее время сражаетесь!",
+        "opponentInBattle": "Ваш противник в настоящее время сражается!",
+        "noIncoming": "У вас нет входящих запросов на битву.",
+        "noOutgoing": "Вы не отправили никаких запросов на битву.",
+        "opponentNoCompanion": "Этот игрок не не имеет компаньона!",
+        "cantPlay": "Вам нужно {{amount}} кредитов для игры, но у вас есть только {{balance}}!",
+        "cantChallenge": "У игрока недостаточно кредитов чтобы играть!\n",
+        "noBattle": "Этот канал не имеет продолжающихся сражений!",
+        "notParticipating": "Этот игрок не является участником этого сражения!",
+        "isParticipant": "Вы участник этой битвы и не можете делать ставки!",
+        "cantBet": "У вас недостаточно кредитов ({{balance}}), чтобы сделать ставку {{amount}}!",
+        "betMulti": "Вы не можете ставить больше одного раза!",
+        "plsBetProperly": "Вы не можете поставить менее одного кредита!",
+        "notBetting": "Битва не вошла в стадию ставок!",
+        "afterBetting": "Фаза ставок уже закончена для этой битвы!",
+        "notOnline": "Этот пользователь еще не в сети!"
+      },
+      "challenge": [
+        "Вы бросили вызов {{mention}} в бой домашних животных!",
+        "",
+        "У игрока есть {{time}} секунд чтобы реагировать с {{accept}} или {{reject}}. В противном случае они автоматически лишаются!  ",
+        "",
+        ""
+      ],
+      "bet": "Вы разместили ставку {{amount}} кредитов на {{user}} и его компаньона {{pet}}!",
+      "timedOut": "{{p2}} не смог оттреагировать на вызов {{p1}} после {{time}} секунд и oн аннулирован.",
+      "rejectChallenge": "{{p2}} отклонил вызов {{p1}}.",
+      "cancelChallenge": "{{P1}} отменил свой вызов {{p2}}.",
+      "acceptChallenge": [
+        "{{P2}} принял вызов от {{p1}}!",
+        "",
+        "Сражение начнется через {{time}} секунд!",
+        "Делайте ставки с помощью {{command}}!"
+      ],
+      "renameDialog": "{{user}}, какое новое имя хотите дать своему питомцу {{pet}}?",
+      "renameSuccess": "Вы переименовали своего компаньона {{pet}} в {{newName}}!",
+      "script": {
+        "HIT": [
+          "{{p1}} administers a strong hit to {{p2}}, dealing {{dmg}} damage!",
+          "{{p1}} lands a strike on {{p2}}, who suffers {{dmg}} damage!",
+          "{{p2}} suffers a pounding by {{p1}}, who hits for {{dmg}} damage!",
+          "{{p1}} secures a good hit on {{p2}}, delivering {{dmg}} damage!",
+          "{{p1}} delivers a quick {{dmg}} damage to {{p2}}!"
+        ],
+        "DODGE_3": "{{p1}} barely avoids {{p2}}'s attack!",
+        "DODGE_4": "{{p2}}'s attack passes by {{p1}}!",
+        "HIT_1": "{{p1}} administers a strong hit to {{p2}}, dealing {{dmg}} damage!",
+        "HIT_2": "{{p1}} smacks {{p2}} around, causing {{dmg}} damage!",
+        "HIT_3": "{{p1}} lands a strike on {{p2}}, who suffers {{dmg}} damage!",
+        "HIT_4": "{{p2}} suffers a pounding by {{p1}}, who hits for {{dmg}} damage!",
+        "HIT_5": "{{p1}} secures a good hit on {{p2}}, delivering {{dmg}} damage!",
+        "HIT_6": "{{p1}} delivers a quick {{dmg}} damage to {{p2}}!",
+        "HEAL_1": "{{p1}} eats some medicine, raising his health by {{heal}}!",
+        "HEAL_2": "{{p1}} uses a bandaid, healing by {{heal}} health!",
+        "HEAL_3": "A wild fairy appeared, healing {{p1}} for {{heal}} health!",
+        "HEAL_4": "{{p1}} discovers a magical paste, increasing his health by {{heal}}!",
+        "DODGE_1": "{{p1}} manages to dodge {{p2}}'s attack!",
+        "DODGE_2": "{{p2}}'s attack narrowly misses {{p1}}!"
+      }
+    },
+    "credits": {
+      "balance": "{{user}}'s account balance is {{balance}} credits.",
+      "topup": "В ваш аккаунт добавлены кредиты {{amount}}.",
+      "cooldown": "your claimable credit refreshes in {{time}}.",
+      "dialog": [
+        "**Credits Transfer**",
+        "",
+        "{{author}}, you are transferring {{amount}} credits to {{user}}",
+        "",
+        "__Current balance__: {{balance}}",
+        "__Balance after transfer__: {{afterAmount}}",
+        "",
+        "To confirm, enter {{code}} to proceed or {{exit}} to quit the menu."
+      ],
+      "confirmation": [
+        "you have transferred {{amount}} credits to {{user}}'s account.",
+        "",
+        "__Updated balance__: {{afterAmount}}"
+      ],
+      "invalidCode": "you have entered an invalid code! Your credits haven't been transferred.",
+      "selfSenderError": "Вы не можете отправить кредиты себе!",
+      "insufficientCredits": "you have insufficient ({{balance}}) credits!",
+      "botUserError": "Вы не можете отправлять кредиты ботам!",
+      "topTitle": "Самые богатые люди Discord",
+      "credits": "кредиты"
+    },
+    "descriptions": {
+      "help": "Displays info on commands",
+      "info": "Информация про меня",
+      "credits": "Currency system",
+      "wage": "Забирайте свои кредиты каждые 8 часов",
+      "hate": "Я ... я тебя ненавижу!",
+      "love": "Я ... я люблю тебя!",
+      "prefix": "Позволяет модераторам задавать префикс гильдии",
+      "search": "Поиск Youtube для музыки",
+      "skip": "Пропускает текущую музыкальную дорожку",
+      "stop": "Останавливает воспроизведение музыки",
+      "summon": "Вызов меня на голосовой канал",
+      "companion": "Animal companion system",
+      "battle": "Fight other users' companions",
+      "buypet": "Покупка вашего персонального компаньона",
+      "bet": "Делает ставки во время сражений",
+      "booru": "Searches an image board",
+      "danbooru": "Searches the Danbooru image board",
+      "gelbooru": "Searches the Gelbooru image board",
+      "yandere": "Searches the Yandere image board",
+      "slots": "Plays the slot machine",
+      "stats": "Statistics about me",
+      "choose": "Selects a certain choice",
+      "invite": "Displays my invite link",
+      "stream": "Plays from a supported stream",
+      "queue": "Lists songs in the queue",
+      "whois": "Displays information of a member",
+      "channel": "Displays information of a channel",
+      "server": "Displays information of a server",
+      "catgirl": "Fetches a random catgirl",
+      "clear": "Clears the music queue",
+      "contact": "Report bugs, request features or leave feedback",
+      "enable": "Enable commands for a channel, user or role",
+      "disable": "Disable commands for a channel, user or role",
+      "lang": "Allows moderators to set a guild's language",
+      "purge": "Bulk delete messages from a channel",
+      "repeat": "Toggles repeat mode, where finished songs get re-added in the queue",
+      "8ball": "Asks the 8ball a question",
+      "dice": "Rolls some dice, using dice notation",
+      "coin": "Flips coins",
+      "subscribe": "Subscribes a channel to an event",
+      "unsubscribe": "Unsubscribes a channel from an event",
+      "timezone": "Allows moderators to set a guild's timezone",
+      "urban": "Searches Urban Dictionary for meanings",
+      "reset": "Resets all permission settings in a server",
+      "welcome": "Allows moderators to send welcome messages",
+      "goodbye": "Allows moderators to send goodbye messages",
+      "anime": "Gets information on an anime",
+      "manga": "Gets information on a manga",
+      "soundcloud": "Searches songs from Soundcloud",
+      "ban": "Bans a server member",
+      "kick": "Kicks a server member",
+      "multislots": "Plays the slot machine with all 3 rows"
+    },
+    "guilds": {
+      "join": [
+        "👋  Hello! I'm **haru**! Everyone's favourite idol ✨🎤 and part-time bot! 🤖",
+        "",
+        "You can find a list of my commands by typing {{help}} into chat!",
+        "To learn more about me, use the {{about}} command!"
+      ],
+      "ban": {
+        "self": "you can't ban yourself!",
+        "msg": "you have swung the banhammer on {{member}}. May the Goddesses have mercy.",
+        "dialog": [
+          "Swinging the Banhammer",
+          "",
+          "{{user}}, you are about to swing the banhammer on {{member}}.",
+          "To confirm, enter {{quote}} or {{exit}} to quit the menu."
+        ],
+        "exit": "the member has **not** been banned.",
+        "exitError": "something wrong happened, so the member has **not** been banned."
+      },
+      "kick": {
+        "self": "you can't kick yourself!",
+        "msg": "{{member}} has been kicked. That felt good.",
+        "dialog": [
+          "Kicking Someone?!",
+          "",
+          "{{user}}, you are about to kick {{member}}.",
+          "To confirm, enter {{quote}} or {{exit}} to quit the menu."
+        ],
+        "exit": "the member has **not** been kicked.",
+        "exitError": "something wrong happened, so the member has **not** been kicked."
+      },
+      "reason": "Reason"
+    },
+    "help": {
+      "header_1": "To run a command, invoke it with {{prefix}} in {{server}}",
+      "header_1_alt": "or the default {{defaultPrefix}}",
+      "header_2": "To get more help on a command, call {{helpCommand}}",
+      "header_3": "For example: {{exampleCommand}}",
+      "definitions": {
+        "usage": "Usage",
+        "aliases": "Aliases",
+        "pms": "PMs"
+      },
+      "footer": "For support, suggestions and feedback, visit {{link}}",
+      "footer_group": [
+        "`[]` refers to __**optional**__ arguments",
+        "`<>` refers to __**required**__ arguments",
+        "Omit `<>` or `[]` when invoking a command"
+      ],
+      "noDesc": "No description",
+      "checkPMs": "check your PMs!"
+    },
+    "images": {
+      "link": "{{image}} up for grabs!",
+      "catgirl": "Catgirl",
+      "wrongChannel": "you can only use this command in DM's or a NSFW channel!"
+    },
+    "info": {
+      "info": [
+        "👋  Hello! I'm **haru**!",
+        "Everyone's favourite idol ✨🎤 and part-time bot! 🤖"
+      ],
+      "invite": [
+        "Invite me using {{invite}}!",
+        "For suggestions and support, visit my server at {{server}}!"
+      ],
+      "warn": "Please ensure you have embeds enabled!",
+      "author": "Author",
+      "lib": "Library",
+      "ver": "Version",
+      "src": "Source code",
+      "support": "Customer Support",
+      "join": "For support, suggestions and feedback, visit {{link}}",
+      "inv": "Invite me!",
+      "ptr": "Help keep haru running!"
+    },
+    "infocmd": {
+      "server": {
+        "shard": "Shard",
+        "defaultChannel": "Default Channel",
+        "region": "Region",
+        "createdOn": "Account Creation",
+        "joinedOn": "Join Date",
+        "roles": "Roles",
+        "members": "Members",
+        "channels": "Channels",
+        "owner": "Owner",
+        "online": "online",
+        "text": "Text",
+        "voice": "Voice"
+      },
+      "whois": {
+        "shared": "Shared Servers",
+        "status": "Status",
+        "nick": "Nickname",
+        "createdOn": "Account Creation",
+        "joinedOn": "Join Date",
+        "roles": "Roles",
+        "none": "None",
+        "playing": "Playing",
+        "more": "and {{num}} more..."
+      },
+      "channel": {
+        "title": "Channel Info for {{channel}}",
+        "type": "Type",
+        "text": "Text",
+        "voice": "Voice",
+        "createdOn": "Creation Date"
+      }
+    },
+    "music": {
+      "nowPlaying": "Now Playing",
+      "skipping": "Skipping",
+      "finishedPlaying": "Finished playing",
+      "queueFinish": "The queue is now empty.",
+      "dcInactive": "Disconnected from voice channel due to inactivity.",
+      "queuedMulti": "Queued {{num}} songs",
+      "clearQueue": "The music queue has been cleared.",
+      "queued": "Queued",
+      "errors": {
+        "notInChannel": "bring me into a voice channel with {{command}} first!",
+        "emptyQueue": [
+          "there is nothing in the queue!",
+          "",
+          "Use the {{play}} command to queue a song!"
+        ],
+        "tooLong": "that song is too long! Queue one shorter than 90 minutes.",
+        "noResults": "the query {{query}} gave no results.",
+        "alreadyPlaying": "there is already a song being played! Queue another song with {{command}}.",
+        "notChannel": "the current bound text channel is {{channel}}. Please use the music commands there.",
+        "notFound": "the video you provided could not be found.",
+        "listNotFound": "the playlist you provided could not be found.",
+        "emptyPlaylist": "the playlist you provided has no streamable videos.",
+        "notInVoice": "you need to be in a voice channel!",
+        "errorQueue": "an error occurred while queuing {{url}}.",
+        "alreadyBinded": "I am already bound to {{text}}! Use commands in that channel.",
+        "noPerms": "I don't have the permissions to `connect` and/or `speak` in {{voice}}!",
+        "error": "something bad happened! Please try again later, or submit a bug report.",
+        "notInSameVoice": "you need to be in the voice channel {{channel}}!",
+        "skipNotFound": "the video specified could not be found.",
+        "notReadyYet": "The connection was not ready after 5 tries. Disconnected from voice channel.",
+        "connError": "A Discord error occurred while streaming to the channel: {{err}}\n"
+      },
+      "dc": "Disconnected from '{{voice}}' and unbound from {{text}}.",
+      "switch": "Switching to streaming mode and playing from {{station}}",
+      "playlist": "Playlist - {{guild}}",
+      "queuedSongs": "Queued Songs",
+      "queueProgress": "queuing playlist, please hold...",
+      "joinSuccess": [
+        "Connected to '{{voice}}' and bound to {{text}}.",
+        "",
+        "Use the {{command}} command to start playing songs! "
+      ],
+      "streamInfo": [
+        "{{title}} by {{artist}}",
+        "**Requested By**: {{requestedBy}}"
+      ],
+      "repeatOn": "you have enabled repeat mode. All finished songs will be re-added to the back of the queue.",
+      "repeatOff": "you have disabled repeat mode. All finished songs will not be re-added.",
+      "skipSuccess": "Removed {{song}} from the queue.",
+      "terminated": [
+        "The bot is being restarted, all voice connections have been terminated.",
+        "",
+        "The current queue has been saved in the database.",
+        "We apologise for any inconvenience caused."
+      ],
+      "votedSkip": "you have already voted to skip this song!",
+      "voteSkipSuccess": "you have voted to skip the current song!",
+      "votedClear": "you have already voted to clear the queue!",
+      "voteClearSuccess": "you have voted to clear the current queue!",
+      "stations": "Stations",
+      "shuffled": "shuffled {{num}} entries in the queue."
+    },
+    "slots": {
+      "insufficient": [
+        "you need {{amount}} more credits!",
+        "",
+        "You can use the command {{command}} to claim free credits every few hours!"
+      ],
+      "won": "{{user}} placed a bet of {{amount}} credits and won:",
+      "lost": "{{user}} placed a bet of {{amount}} credits and lost all of it.",
+      "credits": "credits",
+      "winnings": "Winnings",
+      "yudodis": "you can't bet less than one credit!",
+      "dailyLimit": "you have reached the daily limit of credits that can be won. Try again in {{time}}."
+    },
+    "stats": {
+      "users": "Users",
+      "unique": "unique",
+      "online": "online",
+      "guilds": "Guilds",
+      "channels": "Channels",
+      "text": "text",
+      "voice": "voice",
+      "total": "total",
+      "uptime": "Uptime",
+      "memoryUsage": "Memory Usage",
+      "commandsUsed": "Commands Used",
+      "server": "Studio 777 (Support Server)"
+    },
+    "settings": {
+      "prefix": {
+        "success": "successfully changed this guild's prefix to {{prefix}}",
+        "revert": "reverted this guild's prefix back to {{prefix}}",
+        "current": "the current prefix for this server is: {{prefix}}"
+      },
+      "lang": {
+        "success": "successfully changed this guild's language to {{lang}}"
+      },
+      "enabler": {
+        "success": "successfully {{action}} {{command}} for {{context}}",
+        "actions": {
+          "enable": "enabled",
+          "disable": "disabled",
+          "revert": "reverted"
+        }
+      },
+      "changelog": "Most Recent Changelogs",
+      "tz": {
+        "success": "successfully changed this guild's timezone to {{tz}}",
+        "notFound": [
+          "the timezone '{{tz}}' is invalid.",
+          "",
+          "Visit {{link}} for a list of valid timezone codes."
+        ],
+        "current": "the current timezone for this server is: {{tz}}"
+      },
+      "subscribe": {
+        "eventNotFound": [
+          "the event {{event}} could not be found.",
+          "",
+          "These are the supporting events: {{events}}"
+        ],
+        "notSubscribed": "{{channel}} is not subscribed to any events.",
+        "subSuccess": "successfully subscribed {{channel}} to {{events}}.",
+        "unsubSuccess": "successfully unsubscribed {{channel}} from {{events}}.",
+        "list": "{{channel}} is subscribed to {{events}}."
+      },
+      "reset": {
+        "success": "reset all permission settings in the server."
+      },
+      "welcome": {
+        "dialog": "Welcome Messages",
+        "action": {
+          "set": "Set the welcome message",
+          "get": "Get the current welcome message",
+          "enable": "Use this channel to send welcome messages"
+        },
+        "get": "Current Welcome Message:",
+        "setDialog": [
+          "{{author}}, please enter the new welcome message.",
+          "Supported tags: {{tags}}",
+          "To use a tag, surround it with `{{}}`. E.g. `{{guild}}`"
+        ],
+        "success": "the new welcome message is:",
+        "enabled": "now sending welcome messages in {{channel}}"
+      },
+      "goodbye": {
+        "dialog": "Goodbye Messages",
+        "action": {
+          "set": "Set the goodbye message",
+          "get": "Get the current goodbye message",
+          "enable": "Use this channel to send goodbye messages"
+        },
+        "get": "Current Goodbye Message:",
+        "setDialog": [
+          "{{author}}, please enter the new goodbye message.",
+          "Supported tags: {{tags}}",
+          "To use a tag, surround it with `{{}}`. E.g. `{{guild}}`"
+        ],
+        "success": "the new goodbye message is:",
+        "enabled": "now sending goodbye messages in {{channel}}"
+      },
+      "autorole": {
+        "success": "Successfully configured {{role}} as this server autorole",
+        "none": "There is no autorole on this server",
+        "current": "The current autorole for this server is {{role}}"
+      }
+    },
+    "purge": {
+      "success": "successfully purged {{num}} messages",
+      "filterSuccess": "purged {{num}} messages matching the following criteria: {{criteria}}"
+    },
+    "misc": {
+      "choose": {
+        "pick": "I pick {{choice}}"
+      },
+      "8ball": {
+        "question": "{{user}} asked",
+        "response": "{{8ball}} says",
+        "answer_1": "It is certain",
+        "answer_2": "It is decidedly so",
+        "answer_3": "Without a doubt",
+        "answer_4": "Yes, definitely",
+        "answer_5": "You may rely on it",
+        "answer_6": "As I see it, yes",
+        "answer_7": "Most likely",
+        "answer_8": "Outlook good",
+        "answer_9": "Yes",
+        "answer_10": "Signs point to yes",
+        "answer_11": "Reply hazy try again",
+        "answer_12": "Ask again later",
+        "answer_13": "Better not tell you now",
+        "answer_14": "Cannot predict now",
+        "answer_15": "Concentrate and ask again",
+        "answer_16": "Don't count on it",
+        "answer_17": "My reply is no",
+        "answer_18": "My sources say no",
+        "answer_19": "Outlook not so good",
+        "answer_20": "Very doubtful"
+      },
+      "dice": {
+        "result": "Result: {{result}}",
+        "invalid": "Invalid dice notation - {{text}}"
+      },
+      "coin": {
+        "result": "you tossed {{heads}} heads and {{tails}} tails!",
+        "heads": "you tossed a **heads**!",
+        "tails": "you tossed a **tails**!"
+      },
+      "urban": {
+        "noResults": "the query {{query}} gave no results."
+      }
+    },
+    "rss": {
+      "success": "added feed for {{channel}} with {{included}} included tags and {{excluded}} excluded tags: {{url}}",
+      "error": "could not validate {{url}}. Please check if it's a valid RSS feed.",
+      "rssDialog": "RSS Menu",
+      "rssDelFooter": "Enter the number of the RSS feed you would like to remove, or {{cancel}} to exit.",
+      "urlDialog": [
+        "**RSS - Feed URL**",
+        "",
+        "{{author}}, please enter the URL of the RSS feed you would like to add.",
+        "Otherwise, enter {{exit}} to exit."
+      ],
+      "includedTagsDialog": [
+        "**RSS - Included Tags**",
+        "",
+        "{{author}}, please enter a list of included tags, separated by commas. For example: `films, science`",
+        "Otherwise, enter {{skip}} to skip, or {{exit}} to exit."
+      ],
+      "excludedTagsDialog": [
+        "**RSS - Excluded Tags**",
+        "",
+        "{{author}}, please enter a list of excluded tags, separated by commas. For example: `anime, religion`",
+        "Otherwise, enter {{skip}} to skip, or {{exit}} to exit."
+      ],
+      "subscribedTo": "{{channel}} is subscribed to the following RSS feeds:",
+      "notSubscribed": "{{channel}} is not subscribed to any feed. Use {{command}} to add a new feed.",
+      "subscribedFeeds": "Subscribed Feeds for {{channel}}",
+      "noFeedFound": "there was no feed found with that name or URL.",
+      "removedFeed": "removed RSS entry: {{feed}}",
+      "confirmClear": [
+        "**Clear all RSS feeds**",
+        "",
+        "{{author}}, are you sure you want to clear all RSS feeds?",
+        "Enter {{confirm}} to confirm, or anything else to exit."
+      ],
+      "notCleared": "no RSS feeds were removed.",
+      "cleared": "{{count}} RSS feeds were removed from this channel.",
+      "action": {
+        "add": "Add an RSS feed to the channel",
+        "remove": "Remove an RSS feed from the channel",
+        "list": "List all RSS feeds added in this channel",
+        "clear": "Clears all RSS feeds added in this channel"
+      }
+    },
+    "anime": {
+      "noResults": "no results found. Please check your search query.",
+      "synopsis": "Synopsis",
+      "type": "Type",
+      "episodes": "Episodes",
+      "status": "Status",
+      "genres": "Genres",
+      "season": "Season",
+      "score": "Score",
+      "noDesc": "No description",
+      "airing": "Airing on {{start}}",
+      "aired": "Aired from {{start}} to {{end}}",
+      "publishing": "Publishing on {{start}}",
+      "published": "Published from {{start}} to {{end}}",
+      "seasons": {
+        "winter": "Winter",
+        "spring": "Spring",
+        "summer": "Summer",
+        "fall": "Fall"
+      },
+      "volumes": "Volumes",
+      "chapters": "Chapters"
+    }
+  },
   "en": {
     "anime": {
       "noResults": "no results found. Please check your search query.",
@@ -5054,6 +5720,7 @@
     "booru": {
       "noPictures": "the query {{query}} returned no pictures. Try searching something else!",
       "maxTwo": "you may only search Danbooru with a maximum of two tags!",
+      "wrongChannel": "you can only use this command in DM's or a NSFW channel!",
       "score": "Score",
       "rating": "Rating",
       "tags": "Tags",
@@ -5328,7 +5995,8 @@
     },
     "images": {
       "link": "{{image}} up for grabs!",
-      "catgirl": "Catgirl"
+      "catgirl": "Catgirl",
+      "wrongChannel": "you can only use this command in DM's or a NSFW channel!"
     },
     "info": {
       "info": [
@@ -5597,6 +6265,11 @@
         ],
         "success": "the new goodbye message is:",
         "enabled": "now sending goodbye messages in {{channel}}"
+      },
+      "autorole": {
+        "success": "Successfully configured {{role}} as this server autorole",
+        "none": "There is no autorole on this server",
+        "current": "The current autorole for this server is {{role}}"
       }
     },
     "slots": {
@@ -5626,6 +6299,642 @@
       "server": "Studio 777 (Support Server)"
     }
   },
+  "tr": {
+    "booru": {
+      "noPictures": "{{Query}} sorgusu hiçbir resim döndürmedi. Başka bir şey aramaya çalışın!",
+      "maxTwo": "Danbooru'yu yalnızca en fazla iki etiketle arayabilirsiniz!",
+      "score": "Skor",
+      "rating": "Değerlendirme",
+      "tags": "Etiketler",
+      "s": "Güvenli",
+      "q": "Kuşkulu",
+      "e": "Açık",
+      "wrongChannel": "Bu komutu yalnızca DM'lerde veya NSFW kanalında kullanabilirsiniz!"
+    },
+    "common": {
+      "CHECK_PMS": "Direkt mesajlarını kontrol et!",
+      "ERROR": "bir hata oluştu! Lütfen daha sonra tekrar deneyin veya bir hata raporu gönderin.",
+      "ERROR_FULL": "Bir hata meydana geldi! Lütfen daha sonra tekrar deneyin, ya da bir hata raporu gönderin.",
+      "COOLDOWN": "Lütfen soğutun! ({{time}} saniye kaldı)",
+      "NO_PERMS": "Bu komutu çalıştırmak için {{perms}} iznine ihtiyacınız var!",
+      "NO_PERMS_BOT": "Bu komutu çalıştırmak için {{perms}} iznine ihtiyacım var!",
+      "menus": {
+        "EXIT": "Menüden çıkmak için {{cancel}} girin.",
+        "ERRORED": "Menü kapandı:",
+        "EXITED": "Menüden çıktın.",
+        "SELECTION": "Seçim Menüsü",
+        "ERROR": "Bilinmeyen hata",
+        "INPUT": "İstediğiniz numarayı sohbete yazın veya '{{cancel}}' i iptal edin.",
+        "MORE_RESULTS": "Ve {# num}} tane daha ..."
+      },
+      "collector": {
+        "timeout": "Zaman aşımı sonra {{timeout}}s",
+        "max": "{{Max}} denemeyi aştı",
+        "maxMatches": "{{Max Matches}} eşleşmeleri aşıldı"
+      },
+      "resolver": {
+        "INSUFFICIENT_ARGS": "Yetersiz argüman - Beklenen en az {{required Args}}, {{args Count}}",
+        "CORRECT_USAGE": "Doğru kullanım",
+        "NO_END_QUOTE": "Eksik bir bitiş fiyatı var",
+        "member": {
+          "NOT_FOUND": "üye bulunamadı"
+        },
+        "channel": {
+          "NOT_FOUND": "kanal bulunamadı"
+        },
+        "command": {
+          "NOT_FOUND": "komut bulunamadı"
+        },
+        "string": {
+          "NOT_STRING": "{{arg}} bir sicim olmalı",
+          "MAX": "{{arg}} uzunluğu {{max}} uzunluğundan daha fazla olamaz",
+          "MIN": "{{arg}} uzunluğu {{min}} uzunlıuğundan daha az olamaz",
+          "ONE_OF": "{{arg}} aşağıdakilerden biri olmalı"
+        },
+        "list": {
+          "MAX": "{{Arg}} uzunluğu en fazla {{max}} öğe içerebilir",
+          "MIN": "{{Arg}} uzunluğu {{min}} öğeden daha az içeremez",
+          "MAX_LENGTH": "{{Arg}}, {{max Length}} uzunluğundan daha uzun öğeler içeremez",
+          "MIN_LENGTH": "{{Arg}}, {{minLength}} dan kısa öğeler içeremez",
+          "DUPES": "{{Arg}}, yinelenen değerleri içeremez"
+        },
+        "int": {
+          "NOT_INT": "{{arg}} bir tam sayı değil",
+          "MAX": "{{arg}}, {{max}} sayısından daha az ya da eşit olmalı",
+          "MIN": "{{arg}}, {{min}} sayısından daha fazla ya da eşit olmalı"
+        },
+        "role": {
+          "NOT_FOUND": "Rol bulunamadı"
+        },
+        "group": {
+          "NOT_FOUND": "komut grubu bulunamadı"
+        }
+      },
+      "NO_PMS": "Maalesef daha büyük bir kitleyi tercih ediyorum. (Bu komut PM'lerde çalıştırılamaz!)",
+      "ENABLE_EMBEDS": "Katıştırılmış öğelerinizin etkin olduğundan emin olun!"
+    },
+    "companion": {
+      "noPet": "Henüz bir pet'in yok! Bir tane satın almak için {{command}} kullanın!",
+      "ownedPet": "zaten bir yoldaşın var!",
+      "cannotAfford": "{{amount}} krediye ihtiyacın var ama sadece {{balance}} kredin var!",
+      "intro": "Bir başlangıç yoldaşı seç {{user}}!",
+      "dialog": [
+        "** Yoldaş Satın Alma **",
+        "",
+        "{{Author}}, {{animal}} 'i arkadaşınız olarak seçtiniz.",
+        "{{Amount}} kredi için satın almak istediğinizden emin misiniz?",
+        "",
+        "Onaylamak için lütfen {{code}} ya da çıkmak için başka herhangi bir şey yazın."
+      ],
+      "invalidCode": "geçersiz bir kod girdiniz! İşlem iptal edildi.",
+      "error": "bir hata meydana geldi! İşlem iptal edildi. Daha sonra tekrar deneyin.",
+      "result": [
+        "**Yoldaş Satın Alındı**",
+        "",
+        "{{author}}, {{animal}} 'ı yoldaş olarak başarıyla satın aldınız.",
+        "__Güncel Bakiye__: {{balance}} kredi",
+        "",
+        "{{command}} komutu ile yoldaşınızı yeniden isimlendirebilirsiniz."
+      ],
+      "definitions": {
+        "wins": "Galibiyetler",
+        "losses": "Kayıplar",
+        "info": "Yoldaş Bilgisi",
+        "info2": "{{author}} Adlı Kullanıcının Yoldaşı"
+      },
+      "errors": {
+        "self": "kendinle savaşamazsın!",
+        "noUser": "Bu kullanıcı benim kayıtlarımda yok!",
+        "ongoingBattle": "Bu kanalda zaten bir savaş var!",
+        "userInBattle": "şu anda bir savaştasın!",
+        "opponentInBattle": "rakibin şu anda bir savaşta!",
+        "noIncoming": "Gelen savaş istekleri yok.",
+        "noOutgoing": "Herhangi bir savaş isteği göndermediniz.",
+        "opponentNoCompanion": "O oyuncunun bir arkadaşı yok!",
+        "cantPlay": "Oynamak için {{amount}} tane krediye ihtiyacınız var, ancak şimdilik yalnızca {{balance}} var!",
+        "cantChallenge": "Oyuncunun oynamak için yeterli kredisi yok!",
+        "noBattle": "Bu kanalda devam eden savaşlar yok!",
+        "notParticipating": "Bu oyuncu bu savaşa katılamaz!",
+        "isParticipant": "sen bu savaşın bir katılımcısısın ve bahis oynayamazsın!",
+        "cantBet": "{{Amount}} bahis yapmak için yeterli krediniz yok ({{balance}})!",
+        "betMulti": "bir kereden fazla bahis oynayamazsın!",
+        "plsBetProperly": "bir krediden az bahis oynayamazsın!",
+        "notBetting": "savaş bahis aşamasına girmedi!",
+        "afterBetting": "Bahis safhası bu savaş için zaten sonuç aldı!",
+        "notOnline": "kullanıcı henüz çevrim-içi değil!"
+      },
+      "challenge": [
+        "Evcil hayvan savaşına {{mention}} meydan okudun!",
+        "",
+        "Oynatıcı, {{kabul}} veya {{red}} ile yanıt vermek için {{time}} saniyen var, aksi takdirde otomatik olarak kaybedersiniz!"
+      ],
+      "bet": "{{User}} ve onun arkadaşı {{pet}} üzerine {{amount}} adetlik bir bahis koymuşsunuz!",
+      "timedOut": "{{P2}}, {{time}} saniye sonra {{p1}} numaralı sorunun yanıtını veremedi ve kaybetti.",
+      "rejectChallenge": "{{P2}} {{p1}} 'nin meydan okumasını reddetti.",
+      "cancelChallenge": "{{P1}}, {{p2}}'nin meydan okumasını iptal etti.",
+      "acceptChallenge": [
+        "{{P2}}, {{p1}} düellosunu kabul etti!",
+        "",
+        "Savaş {{time}} saniye içinde başlayacak!",
+        "Bahislerinizi {{command}} ile birlikte yerleştirin!"
+      ],
+      "renameDialog": "{{Kullanıcı}}, {{pet}} arkadaşınızın yeni adı ne olsun istersiniz?",
+      "renameSuccess": "{{Pet}} arkadaşınızın adını {{newName}} olarak değiştirdiniz!",
+      "script": {
+        "HIT": [
+          "{{P1}} {{p2}} için {{dmg}} zararı karşılamak için güçlü bir isabet yönetti!",
+          "{{P1}}, {{dmg}} zarar gören {{p2}} üzerinde bir grev başlatıyor!",
+          "{{P2}}, {{dmg}} hasar için isabet eden {{p1}}, bir darbe çekiyor!",
+          "{{P1}} {{p2}} üzerinde {{dmg}} zarara uğrayan iyi bir isabet kazandı!",
+          "{{P1}}, {{p2}} hızlı bir {{dmg}} zarar veriyor!"
+        ],
+        "DODGE_3": "{{P1}} {{p2}} 'nin saldırısından kaçınılmaz!",
+        "DODGE_4": "{{P2}} 'nin saldırısı {{p1}} geçer!",
+        "HIT_1": "{{P1}} {{p2}} için {{dmg}} zararı karşılamak için güçlü bir isabet yönetti!",
+        "HIT_2": "{{P1}} {{p2}} etrafında yıpranarak {{dmg}} zarara neden oluyor!",
+        "HIT_3": "{{P1}}, {{dmg}} zarar gören {{p2}} üzerinde bir grev başlatıyor!",
+        "HIT_4": "{{P2}}, {{dmg}} hasar için isabet eden {{p1}}, bir darbe çekiyor!",
+        "HIT_5": "{{P1}} {{p2}} üzerinde {{dmg}} zarara uğrayan iyi bir isabet kazandı!",
+        "HIT_6": "{{P1}}, {{p2}} hızlı bir {{dmg}} zarar veriyor!",
+        "HEAL_1": "{{P1}} sağlığına kavuşmak için {{heal}} tarafından biraz ilaç tüketir!",
+        "HEAL_2": "{{P1}}, bir {{heal}} sağlık durumu ile iyileşen bir bant yardımı kullanıyor!",
+        "HEAL_3": "Sağlığınız için {{p1}} şifalı {{heal}} bir vahşi peri çıkageldi!",
+        "HEAL_4": "{{P1}} büyüleyici bir macun keşfeder, sağlığını {{heal}} alarak artırır!",
+        "DODGE_1": "{{P1}} {{p2}} 'nin saldırısından kurtulmayı başarıyor!",
+        "DODGE_2": "{{P2}} 'nin saldırısı {{p1}}' yi çok özlüyor!"
+      }
+    },
+    "credits": {
+      "balance": "{{User}} hesabın bakiyesi {{balance}} kredi.",
+      "topup": "{{amount}} kredi hesabına eklendi.",
+      "cooldown": "Hak talebinde bulunan krediniz {{time}} içinde yenilenir.",
+      "dialog": [
+        "**Kredi Transferi**",
+        "",
+        "{{author}}, {{amount}} krediyi {{user}} adlı kullanıcıya transfer ediyorsun",
+        "",
+        "__Mevcut bakiye__: {{balance}}",
+        "__Transferden sonraki bakiye__: {{afterAmount}}",
+        "",
+        "Onaylamak için, {{code}} kodunu yazarak devam edin ya da {{exit}} yazarak menüden çıkış yapın."
+      ],
+      "confirmation": [
+        "{{amount}} krediyi {{user}} adlı kullanıcının hesabına transfer ettiniz.",
+        "",
+        "__Güncellenmiş bakiye__: {{afterAmount}}"
+      ],
+      "invalidCode": "yanlış bir kod girdiniz! Kredileriniz transfer edilmedi.",
+      "selfSenderError": "kendine kredi gönderemezsin!",
+      "insufficientCredits": "Yetersiz ({{balance}}) krediniz var!",
+      "botUserError": "Botlara kredi gönderemezsin!",
+      "topTitle": "Discord'un En Zengin Kişileri",
+      "credits": "krediler"
+    },
+    "descriptions": {
+      "help": "Komutlar hakkında bilgi görüntüler",
+      "info": "Benim hakkımda bilgi",
+      "credits": "Para birimi sistemi",
+      "wage": "Her 8 saatte kredilerinizi alın",
+      "hate": "Ben-Ben senden nefret ediyorum!",
+      "love": "Ben-Ben seni seviyorum!",
+      "prefix": "Moderatörlerin bir lonca önekini ayarlamalarına izin ver",
+      "search": "Youtube'da müzik arar",
+      "skip": "Mevcut müzik parçasını atlar",
+      "stop": "Mevcut müziği durdurur",
+      "summon": "Beni bir sesli sohbet kanalına çağırır",
+      "companion": "Hayvan yoldaş sistemi",
+      "battle": "Diğer kullanıcıların yoldaşlarıyla savaşın",
+      "buypet": "Sizin kişisel yoldaşınızı satın alır",
+      "bet": "Savaş sırasında bahis yapar",
+      "booru": "Bir görüntü tahtasını arar",
+      "danbooru": "Danbooru görüntü tahtasını arar",
+      "gelbooru": "Gelbooru görüntü tahtasını arar",
+      "yandere": "Yandere görüntü tahtasını arar",
+      "slots": "Slot makinesini oynar",
+      "stats": "Benim hakkımda istatistikler",
+      "choose": "Belirli bir seçimi seçer",
+      "invite": "Davet linkimi görüntüler",
+      "stream": "Desteklenen bir akıştan oynatır",
+      "queue": "Sıradaki şarkıları listeler",
+      "whois": "Bir üyenin bilgilerini görüntüler",
+      "channel": "Bir kanalın bilgilerini görüntüler",
+      "server": "Bir sunucunun bilgilerini görüntüler",
+      "catgirl": "Rastgele bir kedi kız getirir",
+      "clear": "Müzik sırasını temizler",
+      "contact": "Hataları bildirin, özellik talep edin veya geri bildirim bırakın",
+      "enable": "Komutları bir kanal, kullanıcı ya da rol için etkinleştirin",
+      "disable": "Komutları bir kanal, kullanıcı ya da rol için devre dışı bırakın",
+      "lang": "Moderatörlerin loncanın dilini ayarlamasını sağlar",
+      "purge": "Bir kanaldaki iletileri toplu olarak silin",
+      "repeat": "Bitmiş şarkıların sıraya tekrar eklendiği tekrar modunu açar",
+      "8ball": "8ball'a bir soru sor",
+      "dice": "Zar işareti kullanarak zar atın",
+      "coin": "Madeni parayı çevirir",
+      "subscribe": "Bir kanal ve etkinliğe abone ol",
+      "unsubscribe": "Bir etkinlik ve kanal aboneliğini bitir",
+      "timezone": "Moderatörlerin bir guild'in saat dilimini ayarlamalarına izin ver",
+      "urban": "Anlamlar için Kentsel Sözlük araması",
+      "reset": "Bir sunucudaki tüm izin ayarlarını baştaki konumuna getirir",
+      "welcome": "Moderatörlerin karşılama mesajlarını göndermelerine izin verir",
+      "goodbye": "Moderatörlerin elveda mesajları göndermesine izin verir",
+      "anime": "Bir anime hakkında bilgi sahibi olur",
+      "manga": "Bir manga hakkında bilgi edinir",
+      "soundcloud": "Soundcloud'dan şarkı arar",
+      "ban": "Bir sunucu üyesini yasaklar",
+      "kick": "Bir sunucu üyesini atar",
+      "multislots": "3 satırlı slot makinesini oynatır"
+    },
+    "guilds": {
+      "join": [
+        "👋  Merhaba! Ben **haru**! Herkesin favori idolü ✨🎤 vr yarı zamanlı bot! 🤖",
+        "",
+        "Komutlarımın bir listesini sohbete {{help}} yazarak bulabilirsiniz!",
+        "Benim hakkımda daha fazla bilgi edinmek için {{about}} komutunu kullanın!"
+      ],
+      "ban": {
+        "self": "kendini yasaklayamazsın!",
+        "msg": "{{Member}} üzerinde yasak çekiç salladınız. Tanrıçaların merhameti olsun.",
+        "dialog": [
+          "Banhammer'i Sallamak",
+          "",
+          "{{User}}, {{member}} üzerindeki yasaklama görevini yapmak üzeresin.",
+          "Onaylamak için, {{quote}} veya {{exit}}"
+        ],
+        "exit": "Üye ** yasaklanmış ** değil.",
+        "exitError": "Bir şey oldu, bu yüzden üye ** yasaklanmış ** değil."
+      },
+      "kick": {
+        "self": "kendini atamazsın!",
+        "msg": "{{Member}} atıldı. İyi hissediyorum.",
+        "dialog": [
+          "Birisini mi tekmeliyorsun ?!",
+          "",
+          "{{User}}, {{member}} adlı kişiyi tekmeleyeceksiniz.",
+          "Onaylamak için, menüden çıkmak için {{quote}} veya {{exit}} girin"
+        ],
+        "exit": "Üye ** vurulmamış **.",
+        "exitError": "Bir şey oldu, bu nedenle üye ** vurulmamış **."
+      },
+      "reason": "Sebep"
+    },
+    "help": {
+      "header_1": "Bir komut çalıştırmak için, ",
+      "header_1_alt": "Veya varsayılan {{defaultPrefix}}",
+      "header_2": "Bir komut hakkında daha fazla yardım almak için {{help Command}}",
+      "header_3": "Örneğin: {{exampleCommand}}",
+      "definitions": {
+        "usage": "Kullanım",
+        "aliases": "Takma ad",
+        "pms": "DMler"
+      },
+      "footer": "Destek, öneri ve geri bildirim için ziyaret edin {{link}}",
+      "footer_group": [
+        "`[]`, ___ ** isteğe bağlı ** __ argümanını ifade eder",
+        "`<>`, ___ ** gerekli ** __ argümanını belirtir",
+        "Bir komut çağırırken `<>` veya `[]` yı atlar"
+      ],
+      "noDesc": "Açıklama yok",
+      "checkPMs": "direkt mesajlarını kontrol et!"
+    },
+    "images": {
+      "link": "{{image}} kapmak için!",
+      "catgirl": "Kedi kız",
+      "wrongChannel": "Bu komutu yalnızca DM'lerde veya bir NSFW kanalında kullanabilirsiniz!"
+    },
+    "info": {
+      "info": [
+        "👋  Merhaba! Ben **haru**!",
+        "Herkesin favori idolü ✨🎤 ve yarı zamanlı bot! 🤖"
+      ],
+      "invite": [
+        "{{invite}} kullanarak beni davet et!",
+        "Öneri ve destek için, benim sunucumu {{server}} 'da ziyaret et! "
+      ],
+      "warn": "Katıştırılmış öğelerin etkin olduğundan emin olun!",
+      "author": "Yazar",
+      "lib": "Kütüphane",
+      "ver": "Versiyon",
+      "src": "Kaynak kodu",
+      "support": "Müşteri Desteği",
+      "join": "Destek, öneriler ve geri bildirimler için, {{link}} 'i ziyaret edin",
+      "inv": "Beni davet et!",
+      "ptr": "Haru'nun koşmasına yardımcı olun!"
+    },
+    "infocmd": {
+      "server": {
+        "shard": "Shard",
+        "defaultChannel": "Varsayılan Kanal",
+        "region": "Bölge",
+        "createdOn": "Hesap Oluşturma",
+        "joinedOn": "Katılım Tarihi",
+        "roles": "Roller",
+        "members": "Üyeler",
+        "channels": "Kanallar",
+        "owner": "Sahip",
+        "online": "çevrimiçi",
+        "text": "Metin",
+        "voice": "Ses"
+      },
+      "whois": {
+        "shared": "Paylaşılan Sunucular",
+        "status": "Durum",
+        "nick": "Kullanıcı adı",
+        "createdOn": "Hesap oluşturulma",
+        "joinedOn": "Katılım Tarihi",
+        "roles": "Roller",
+        "none": "Yok",
+        "playing": "Oynatılıyor",
+        "more": "ve {{num}} daha fazla..."
+      },
+      "channel": {
+        "title": "{{channel}} için Kanal Bilgisi",
+        "type": "Tip",
+        "text": "Metin",
+        "voice": "Ses",
+        "createdOn": "Oluşturma Tarihi"
+      }
+    },
+    "music": {
+      "nowPlaying": "Şu Anda Oynatılıyor",
+      "skipping": "Atlanılıyor",
+      "finishedPlaying": "Oynatılması bitti",
+      "queueFinish": "Sıra artık boş.",
+      "dcInactive": "Hareketsizlik nedeniyle sesli sohbet kanalı bağlantısı kesildi.",
+      "queuedMulti": "{{num}} şarkı kuyruğa alındı",
+      "clearQueue": "Şarkı kuyruğu temizlendi",
+      "queued": "Kuyruğa alındı",
+      "errors": {
+        "notInChannel": "Beni önce {{command}} ile bir ses kanalına getir!",
+        "emptyQueue": [
+          "kuyrukta bir şey yok!",
+          "",
+          "Bir şarkı sıralamak için {{play}} komutunu kullanın!"
+        ],
+        "tooLong": "bu şarkı çok uzun! 90 dakikadan daha kısa bir şarkıyı kuyruğa alın.",
+        "noResults": "sorgu {{query}} hiç bir sonuç vermedi.",
+        "alreadyPlaying": "Zaten çalınan bir şarkı var! {{Command}} ile başka bir kuyruk sırala.",
+        "notChannel": "Geçerli bağlı metin kanalı {{channel}}. Lütfen orada müzik komutlarını kullanın.",
+        "notFound": "Aradığınız video bulunamadı",
+        "listNotFound": "Sağladığınız oynatma listesi bulunamadı.",
+        "emptyPlaylist": "Sağladığınız oynatma listesinin akış videosu mevcut değil",
+        "notInVoice": "bir sesli sohbet kanalında olmalısınız!",
+        "errorQueue": "Kuyruk sırasında bir hata oluştu {{url}}",
+        "alreadyBinded": "Zaten {{text}} adlı şeye bağlıyım! Bu kanaldaki komutları kullanın.",
+        "noPerms": "{{Voice}} içinde 'bağlan' ve / veya 'konuşmak' için izinlerim yok!",
+        "error": "Kötü bir şey oldu! Lütfen daha sonra tekrar deneyin veya bir hata raporu gönderin.",
+        "notInSameVoice": "{{channel}} sesli sohbet kanalında olmalısınız!",
+        "skipNotFound": "Belirtilen video bulunamadı",
+        "notReadyYet": "5 denemeden sonra bağlantı hazır değildi. Ses kanalı ile bağlantı kesildi.",
+        "connError": "Kanala akış sırasında bir Diskarenk hatası oluştu: {{err}}"
+      },
+      "dc": "'{{Ses}}' ile olan bağlantı kesildi ve {{text}} 'den bağlanmamış.",
+      "switch": "Akış moduna geçme ve {{station}} cihazından oynama",
+      "playlist": "Çalma listesi - {{guild}}",
+      "queuedSongs": "Kuyruktaki Şarkılar",
+      "queueProgress": "Çalma listesini kuyruğa konuluyor, lütfen bekleyin ...",
+      "joinSuccess": [
+        "'{{Ses}}' e bağlandı ve {{text}} ile bağlandı.",
+        "",
+        "Şarkı çalmaya başlamak için {{command}} komutunu kullanın!"
+      ],
+      "streamInfo": [
+        "{{Artist}} tarafından {{title}}",
+        "** Talep Edilen **: {{requestedBy}}"
+      ],
+      "repeatOn": "Tekrarlama modunu etkinleştirdiniz. Bitmiş olan tüm şarkılar kuyruğa geri eklenecektir.",
+      "repeatOff": "Tekrarlama modunu devre dışı bıraktınız. Bitmiş şarkıların tamamı yeniden eklenmeyecek.",
+      "skipSuccess": "{{song}} sıradan silindi.",
+      "terminated": [
+        "Bot yeniden başlatıldığında, tüm ses bağlantıları kesildi.",
+        "",
+        "Geçerli kuyruk, veritabanına kaydedildi.",
+        "Neden olan herhangi bir rahatsızlıktan dolayı özür dileriz."
+      ],
+      "votedSkip": "bu şarkıyı atlamak için zaten oy verdin!",
+      "voteSkipSuccess": "mevcut şarkıyı atlamak için oy verdin!",
+      "votedClear": "kuyruğu temizlemek için zaten oy verdin!",
+      "voteClearSuccess": "mecvut kuyruğu temizlemek için oy verdin!",
+      "stations": "İstasyonlar",
+      "shuffled": "Sıradaki {{num}} kayıtları karıştırdı."
+    },
+    "slots": {
+      "insufficient": [
+        "{{amount}} daha fazla krediye ihtiyacın var!",
+        "",
+        "Her birkaç saat bedava kredi almak için {{command}} komutunu kullanabilirsiniz"
+      ],
+      "won": "{{user}} , {{amount}} kredilik bir bahis koydu ve şunları kazandı:",
+      "lost": "{{user}} , {{amount}} kredilik bir bahis koydu ve hepsini kaybetti.",
+      "credits": "krediler",
+      "winnings": "Zaferler",
+      "yudodis": "1 krediden az bahis oynayamazsın!",
+      "dailyLimit": "bir gün içerisinde en fazla kazanılabilir kredi limitini aştın. {{time}} içerisinde tekrar dene."
+    },
+    "stats": {
+      "users": "Kullanıcılar",
+      "unique": "benzersiz",
+      "online": "çevrimiçi",
+      "guilds": "Loncalar",
+      "channels": "Kanallar",
+      "text": "yazı",
+      "voice": "ses",
+      "total": "toplam",
+      "uptime": "Çalışma süresi",
+      "memoryUsage": "Hafıza Kullanımı",
+      "commandsUsed": "Komutlar Kullanıldı",
+      "server": "Studio 777 (Destek Sunucusu)"
+    },
+    "settings": {
+      "prefix": {
+        "success": "Bu sunucuunun önekini {{prefix}} olarak başarıyla değiştirdi",
+        "revert": "Bu sunucunun önekini {{prefix}}'e geri döndürdü",
+        "current": "Bu sunucunun geçerli öneki: {{prefix}}"
+      },
+      "lang": {
+        "success": "Bu sunucunun dilini başarı ile değiştirdin {{lang}}"
+      },
+      "enabler": {
+        "success": "{{Action}} {{command}} {{context}} için başarılı oldu",
+        "actions": {
+          "enable": "etkinleştirildi",
+          "disable": "devre dışı bırakıldı",
+          "revert": "döndürüldü"
+        }
+      },
+      "changelog": "En son değişiklikler",
+      "tz": {
+        "success": "Bu sunucunun saat dilimini başarıyla {{tz}} olarak değiştirdi",
+        "notFound": [
+          "'{@ Tz}} zaman dilimi geçersiz.",
+          "",
+          "Geçerli saat dilimi kodlarının bir listesi için {{link}} sayfasını ziyaret edin."
+        ],
+        "current": "Bu sunucunun mevcut zaman dilimi: {{tz}}"
+      },
+      "subscribe": {
+        "eventNotFound": [
+          "{{Event}} etkinliği bulunamadı.",
+          "",
+          "Bunlar destekleyici etkinlikler: {{events}}"
+        ],
+        "notSubscribed": "{{Channel}} herhangi bir etkinliğe abone değil.",
+        "subSuccess": "{{Channel}} ile {{events}}'e abone oldunuz.",
+        "unsubSuccess": "{{events}} kanalından {{channel}} aboneliğinden başarıyla çıkıldı.",
+        "list": "{{Channel}}, {{events}} kanalına abone oldu."
+      },
+      "reset": {
+        "success": "sunucudaki tüm izin ayarlarını baştaki konumuna getir"
+      },
+      "welcome": {
+        "dialog": "Karşılama mesajları",
+        "action": {
+          "set": "Karşılama mesajını ayarlayın ",
+          "get": "Karşılama mesajını al",
+          "enable": "Karşılama mesajlarını göndermek için bu kanalı kullanın"
+        },
+        "get": "Geçerli Karşılama Mesajı:",
+        "setDialog": [
+          "{{Author}}, lütfen yeni karşılama mesajını giriniz.",
+          "Desteklenen etiketler: {{tags}}",
+          "Bir etiketi kullanmak için onu `{{}}` `ile çevreleyin. Örneğin. `{{Guild}} '"
+        ],
+        "success": "yeni karşılama mesajı:",
+        "enabled": "şimdi karşılama mesajları {{channel}} kanalına gönderiliyor"
+      },
+      "goodbye": {
+        "dialog": "Elveda Mesajları",
+        "action": {
+          "set": "Elveda mesajını ayarla",
+          "get": "Elveda mesajını al",
+          "enable": "Elveda mesajları göndermek için bu kanalı kullanın"
+        },
+        "get": "Mevcut Elveda Mesajı:",
+        "setDialog": [
+          "{{Author}}, lütfen yeni elveda mesajını giriniz.",
+          "Desteklenen etiketler: {{tags}}",
+          "Bir etiketi kullanmak için onu `{{}}` `ile çevreleyin. Örneğin. `{{Guild}} '"
+        ],
+        "success": "Yeni elveda mesajı:",
+        "enabled": "Şimdi eldeva mesajları gönderiyor {{channel}}"
+      },
+      "autorole": {
+        "success": "{{Role}}, bu sunucu autorole olarak başarıyla yapılandırıldı",
+        "none": "Bu sunucuda herhangi bir autorole  yok",
+        "current": "Bu sunucu için geçerli otomatik rol {{role}}"
+      }
+    },
+    "purge": {
+      "success": "{{num}} ileti başarıyla silindi",
+      "filterSuccess": "Aşağıdaki ölçütlerle eşleşen {{num}} iletiyi temizledi: {{criteria}}"
+    },
+    "misc": {
+      "choose": {
+        "pick": "Benim seçimim {{choice}}"
+      },
+      "8ball": {
+        "question": "{{user}} sordu",
+        "response": "{{8ball}} diyor",
+        "answer_1": "Kesinlikle",
+        "answer_2": "Kesinlikle öyle",
+        "answer_3": "Şüphesiz",
+        "answer_4": "Evet, kesinlikle",
+        "answer_5": "Güvenebilirsin",
+        "answer_6": "Gördüğüm gibi, evet",
+        "answer_7": "Büyük ihtimalle",
+        "answer_8": "İyi görünüm",
+        "answer_9": "Evet",
+        "answer_10": "İşaretler eveti gösteriyor.",
+        "answer_11": "Görüntü bulanık tekrar deneyin",
+        "answer_12": "Daha sonra tekrar sor",
+        "answer_13": "Şimdi söylemesem daha iyi",
+        "answer_14": "Şimdi tahmin edemem",
+        "answer_15": "Konsantre ol ve tekrar sor",
+        "answer_16": "Güvenmeyin",
+        "answer_17": "Cevabım hayır",
+        "answer_18": "Kaynaklarım hayır diyor",
+        "answer_19": "Görünüm o kadar iyi değil",
+        "answer_20": "Çok şüpheli"
+      },
+      "dice": {
+        "result": "Sonuç: {{result}}",
+        "invalid": "Geçersiz zar işareti - {{text}}"
+      },
+      "coin": {
+        "result": "{{Head}} baş ve {{tail}} kuyrukları fırlattın!",
+        "heads": "** kafa attı **!",
+        "tails": "Bir kuyruk atmışsın **!"
+      },
+      "urban": {
+        "noResults": "{{Query}} sorgusu sonuç vermedi."
+      }
+    },
+    "rss": {
+      "success": "{{Included}} dahil etiketler ve {{excluded}} hariç tutulan etiketlerle {{channel}} için feed ekledi: {{url}}",
+      "error": "{{Url}} 'yi doğrulayamadı. Lütfen geçerli bir RSS kaynağı olup olmadığını kontrol edin.",
+      "rssDialog": "RSS Menüsü",
+      "rssDelFooter": "Kaldırmak istediğiniz RSS yayınının numarasını girin veya çıkmak için {{cancel}} seçin.",
+      "urlDialog": [
+        "** RSS - Feed URL **",
+        "",
+        "{{Author}}, lütfen eklemek istediğiniz RSS yayınının URL'sini girin.",
+        "Aksi halde, çıkış yapmak için {{exit}} girin"
+      ],
+      "includedTagsDialog": [
+        "** RSS - Dahil Edilen Etiketler **",
+        "",
+        "{{Author}}, lütfen virgüllerle ayrılmış, birlikte verilen etiketleri giriniz. Örneğin: `filmler, bilim '",
+        "Aksi takdirde, atlamak için {{atla}} veya çıkış yapmak için {{exit}} girin."
+      ],
+      "excludedTagsDialog": [
+        "** RSS - Hariç Tutulan Etiketler **",
+        "",
+        "{{Author}}, lütfen hariç tutulan etiketleri virgülle ayırarak bir liste girin. Örneğin: 'anime, din'",
+        "Aksi takdirde, atlamak için {{skip}} tuşunu veya çıkmak için {{exit}} girin."
+      ],
+      "subscribedTo": "{{Channel}}, şu RSS akışlarına abone oldu:",
+      "notSubscribed": "{{Channel}} herhangi bir yayına abone değil. Yeni bir yayın eklemek için {{command}} kullanın.",
+      "subscribedFeeds": "{{Channel}} için abone olunan yayınlar",
+      "noFeedFound": "O ad veya URL ile hiçbir besleme bulunamadı.",
+      "removedFeed": "RSS girişi kaldırıldı: {{feed}}",
+      "confirmClear": [
+        "** Tüm RSS özet akışlarını silin **",
+        "",
+        "{{Author}}, tüm RSS yayınlarını silmek istediğinizden emin misiniz?",
+        "Onaylamak için {{confirm}}, ya da çıkmak için başka bir şey girin."
+      ],
+      "notCleared": "RSS yayınları kaldırılmadı",
+      "cleared": "{{Count}} Bu kanaldan RSS yayınları kaldırıldı",
+      "action": {
+        "add": "Kanala bir RSS kaynağı ekleyin",
+        "remove": "Bir RSS özet akışını kanaldan kaldır",
+        "list": "Bu kanala eklenen tüm RSS yayınlarını listele",
+        "clear": "Bu kanalda eklenen tüm RSS yayınlarını siler"
+      }
+    },
+    "anime": {
+      "noResults": "Sonuç bulunamadı. Lütfen arama sorgunuzu kontrol edin.",
+      "synopsis": "Özet",
+      "type": "Tür",
+      "episodes": "Bölümler",
+      "status": "Durum",
+      "genres": "Tarzlar",
+      "season": "Sezon",
+      "score": "Skor",
+      "noDesc": "Açıklama yok",
+      "airing": "{{Start}} tarihine havale edildi",
+      "aired": "{{Start}} ile {{end}} tarihleri ​​arasında havale edildi",
+      "publishing": "{{Start}} üzerinde yayın yapma",
+      "published": "{{Start}} ile {{end}} arasında yayınlandı",
+      "seasons": {
+        "winter": "Kış",
+        "spring": "İlk bahar",
+        "summer": "Yaz",
+        "fall": "Son bahar"
+      },
+      "volumes": "Ciltler",
+      "chapters": "Bölümler"
+    }
+  },
   "zh": {
     "booru": {
       "noPictures": "这次搜索{{query}}没有图片结果。请尝试搜索其他内容。",
@@ -5635,7 +6944,8 @@
       "tags": "标签",
       "s": "安全",
       "q": "质疑",
-      "e": "限制级"
+      "e": "限制级",
+      "wrongChannel": "这个命令只被允许在个人消息和NSFW频道中使用！"
     },
     "common": {
       "CHECK_PMS": "检查您的 PM！",
@@ -5659,7 +6969,7 @@
         "maxMatches": "超过{{maxMatches}}个匹配项。"
       },
       "resolver": {
-        "INSUFFICIENT_ARGS": "语法错误: 需要输入{{requiredArgs}}  {{argsCount",
+        "INSUFFICIENT_ARGS": "语法错误: 需要输入{{requiredArgs}}  {{argsCount}}",
         "CORRECT_USAGE": "正确用法",
         "NO_END_QUOTE": "您漏了一个终止记号",
         "member": {
@@ -5923,7 +7233,8 @@
     },
     "images": {
       "link": "{{image}}再此！",
-      "catgirl": "女仆"
+      "catgirl": "女仆",
+      "wrongChannel": "这个命令只被允许在个人消息和NSFW频道中使用！"
     },
     "info": {
       "info": [
@@ -6140,6 +7451,11 @@
         ],
         "success": "新的送别信息是：",
         "enabled": "现在将在{{channel}}中发送送别信息"
+      },
+      "autorole": {
+        "success": "成功为每位加入服务器的用户自动提供{{role}}角色",
+        "none": "服务器暂时没有启用自动提供角色功能",
+        "current": "当前服务器会自动提供"
       }
     },
     "purge": {

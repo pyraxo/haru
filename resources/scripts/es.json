@@ -1,27 +1,28 @@
 {
     "en": {
         "booru": {
-            "noPictures": "¡La búsqueda {{query}} regresó sin fotos. Trata de buscar algo diferente!",
-            "maxTwo": "¡Solo puedes buscar Danbooru con lo máximo de dos descripciones!",
-            "score": "Puntos",
-            "rating": "Calificación",
+            "noPictures": "la búsqueda {{query}} regresó sin fotos. ¡Trata de buscar algo diferente!",
+            "maxTwo": "¡sólo puedes buscar Danbooru con un máximo de dos etiquetas!",
+            "score": "Puntuación",
+            "rating": "Clasificación",
             "tags": "Etiquetas",
             "s": "Seguro",
             "q": "Cuestionable",
-            "e": "Explícito"
+            "e": "Explícito",
+            "wrongChannel": "¡sólo puedes usar este comando en MP o en un canal NSFW!"
         },
         "common": {
-            "CHECK_PMS": "¡Mira tus MP!",
-            "ERROR": "¡Un error ha ocurrido! Por favor inténtalo más tarde o envía un reporte.",
-            "ERROR_FULL": "¡un error ha ocurrido! Por favor inténtalo más tarde o envía un reporte.",
-            "COOLDOWN": "¡Porfavor cálmate! (Espera {{time}} segundos)",
-            "NO_PERMS": "¡Necesitas el permiso {{perms}} para utilizar este comando!",
-            "NO_PERMS_BOT": "¡Necesito el permiso {{perms}} para utilizar este comando!",
+            "CHECK_PMS": "¡revisa tus MPs!",
+            "ERROR": "¡un error ha ocurrido! Por favor inténtalo más tarde o envía un reporte.",
+            "ERROR_FULL": "¡Un error ha ocurrido! Por favor inténtalo más tarde o envía un reporte.",
+            "COOLDOWN": "¡por favor calma! ({{time}} segundos restantes)",
+            "NO_PERMS": "¡necesitas el permiso {{perms}} para utilizar este comando!",
+            "NO_PERMS_BOT": "¡necesito el permiso {{perms}} para utilizar este comando!",
             "menus": {
-                "EXIT": "Escribe {{cancel}} salir del menú.",
-                "ERRORED": "El menú se ha cerrado.",
-                "EXITED": "Tú has salido del menú.",
-                "SELECTION": "Selección de menú.",
+                "EXIT": "Escribe {{cancel}} para salir del menú.",
+                "ERRORED": "el menú ha cerrado:",
+                "EXITED": "has salido del menú.",
+                "SELECTION": "Selección de menú",
                 "ERROR": "Error desconocido.",
                 "INPUT": "Pon el número que tú quieras o '{{cancel}}' para cancelar.",
                 "MORE_RESULTS": "Y {{num}} more..."
@@ -34,19 +35,19 @@
             "resolver": {
                 "INSUFFICIENT_ARGS": "Argumentos insuficientes - Se necesita al menos de {{requiredArgs}}, solo se ha visto {{argsCount}}",
                 "CORRECT_USAGE": "Uso correcto",
-                "NO_END_QUOTE": "Tú no tienes la finalización. (Not 100% finish)",
+                "NO_END_QUOTE": "le falta las citas finales",
                 "member": {
-                    "NOT_FOUND": "El miembro no se pudo encontrar"
+                    "NOT_FOUND": "el miembro no se pudo encontrar"
                 },
                 "channel": {
-                    "NOT_FOUND": "El canal no se pudo encontrar"
+                    "NOT_FOUND": "el canal no se pudo encontrar"
                 },
                 "command": {
-                    "NOT_FOUND": "El comando no se pudo encontrar"
+                    "NOT_FOUND": "el comando no se pudo encontrar"
                 },
                 "string": {
                     "NOT_STRING": "{{arg}} debe ser una frase",
-                    "MAX": "{{arg}} tamaño no puede ser más de {{Max}}",
+                    "MAX": "{{arg}} tamaño no puede ser más de {{max}}",
                     "MIN": "{{arg}} tamaño no puede ser menos de {{min}}",
                     "ONE_OF": "{{arg}} tiene que ser uno de los siguientes"
                 },
@@ -59,7 +60,7 @@
                 },
                 "int": {
                     "NOT_INT": "{{arg}} debe ser un integral",
-                    "MAX": "{{arg}} tiene que ser menos o lo mismo de {{Max}}",
+                    "MAX": "{{arg}} tiene que ser menos o lo mismo de {{max}}",
                     "MIN": "{{arg}} tiene que ser más de o igual a {{min}}"
                 },
                 "role": {
@@ -73,10 +74,10 @@
             "ENABLE_EMBEDS": "¡Por favor asegúrate de tener tus incrustaciones activadas!"
         },
         "companion": {
-            "noPet": "¡Tú no tienes un compañero! ¡Usa {{command}} para comprar uno!",
-            "ownedPet": "¡Tu ya tienes un compañero!",
-            "cannotAfford": "Tu necesitas {{amount}} créditos, pero solo tienes {{balance}} créditos!",
-            "intro": "Escoge un compañero de inicio {{user}}",
+            "noPet": "¡tú no tienes un compañero! ¡Usa {{command}} para comprar uno!",
+            "ownedPet": "¡tú ya tienes un compañero!",
+            "cannotAfford": "¡tú necesitas {{amount}} créditos, pero solo tienes {{balance}} créditos!",
+            "intro": "¡Escoge un compañero de inicio, {{user}}!",
             "dialog": [
                 "**Adquisición de compañero**",
                 "",
@@ -85,10 +86,10 @@
                 "",
                 "Para confirmar, escribe {{code}}, u otra cosa para salir."
             ],
-            "invalidCode": "¡Has introducido un código inválido! La transacción ha sido cancelada. ",
-            "error": "¡Ha ocurrido un error! La transacción se ha cancelado. Inténtalo otra vez más tarde.",
+            "invalidCode": "¡has introducido un código inválido! La transacción ha sido cancelada. ",
+            "error": "¡ha ocurrido un error! La transacción se ha cancelado. Inténtalo otra vez más tarde.",
             "result": [
-                "*Compañero comprado*",
+                "**Compañero comprado**",
                 "",
                 "{{author}}, has comprado exitosamente a {{animal}} como tu compañero.",
                 "__Dinero actual__: {{balance}} créditos",
@@ -97,38 +98,38 @@
                 ""
             ],
             "definitions": {
-                "wins": "Vencidas",
+                "wins": "Ganadas",
                 "losses": "Perdidas",
                 "info": "Información del compañero.",
                 "info2": "Compañero de {{author}}"
             },
             "errors": {
-                "self": "¡No puedes pelear contigo mismo!",
-                "noUser": "¡Ese usuario no existe en mis registros!",
-                "ongoingBattle": "¡Ya hay una batalla iniciada en este canal!",
-                "userInBattle": "¡Estás en una batalla!",
-                "opponentInBattle": "¡Tu oponente está en una batalla en estos momentos!",
-                "noIncoming": "No tienes peticiones de batalla.",
-                "noOutgoing": "No has enviado ninguna petición de batalla.",
-                "opponentNoCompanion": "¡Ese jugador no posee un compañero!",
-                "cantPlay": "¡Necesitas {{amount}} de créditos para jugar, pero sólo tienes {{balance}}!",
-                "cantChallenge": "¡El jugador no tiene los suficientes créditos para jugar!",
-                "noBattle": "¡Este canal no tiene batallas empezadas!",
-                "notParticipating": "¡Ese jugador no es un participante en esta batalla!",
-                "isParticipant": "¡Eres un participante de la batalla y no puedes apostar!",
-                "cantBet": "¡No tienes los suficientes créditos {{balance}} para apostar {{amount}}!",
-                "betMulti": "¡No puedes apostar más de una vez!",
-                "plsBetProperly": "¡No puedes apostar menos de un crédito!",
-                "notBetting": "¡La batalla no ha entrado en la fase de apuestas!",
-                "afterBetting": "¡La fase de apuestas ya ha terminado para esta batalla!",
-                "notOnline": "¡Ese usuario no está conectado todavía!"
+                "self": "¡no puedes pelear contigo mismo!",
+                "noUser": "¡ese usuario no existe en mis registros!",
+                "ongoingBattle": "¡ya hay una batalla iniciada en este canal!",
+                "userInBattle": "¡estás en una batalla!",
+                "opponentInBattle": "¡tu oponente está en una batalla en estos momentos!",
+                "noIncoming": "no tienes peticiones de batalla.",
+                "noOutgoing": "no has enviado ninguna petición de batalla.",
+                "opponentNoCompanion": "¡ese jugador no posee un compañero!",
+                "cantPlay": "¡necesitas {{amount}} de créditos para jugar, pero sólo tienes {{balance}}!",
+                "cantChallenge": "¡el jugador no tiene los suficientes créditos para jugar!",
+                "noBattle": "¡este canal no tiene batallas empezadas!",
+                "notParticipating": "¡ese jugador no es un participante en esta batalla!",
+                "isParticipant": "¡eres un participante de la batalla y no puedes apostar!",
+                "cantBet": "¡no tienes los suficientes créditos {{balance}} para apostar {{amount}}!",
+                "betMulti": "¡no puedes apostar más de una vez!",
+                "plsBetProperly": "¡no puedes apostar menos de un crédito!",
+                "notBetting": "¡la batalla no ha entrado en la fase de apuestas!",
+                "afterBetting": "¡la fase de apuestas ya ha terminado para esta batalla!",
+                "notOnline": "¡ese usuario no está conectado todavía!"
             },
             "challenge": [
-                "¡Has desafiado a {{mention}} a una batalla de mascotas!",
+                "¡has desafiado a {{mention}} a una batalla de mascotas!",
                 "",
                 "¡El jugador tiene {{time}} segundos para responder con {{accept}}} o {{reject}}, de no ser así se perderá automáticamente!"
             ],
-            "bet": "¡Has apostado {{amount}} créditos por {{user}}y su compañero {{pet}}!",
+            "bet": "¡has apostado {{amount}} créditos por {{user}}y su compañero {{pet}}!",
             "timedOut": "{{p2}} falló al responder el desafío de {{p1}} después de {{time}} segundos y se ha perdido.",
             "rejectChallenge": "{{p2}} ha rechazado el desafío de {{p1}}.\n",
             "cancelChallenge": "{{p1}} ha cancelado su desafío para {{p2}}.",
@@ -139,7 +140,7 @@
                 "¡Apostad con {{command}}!"
             ],
             "renameDialog": "{{user}}, ¿cómo quieres renombrar a tu compañero {{pet}}?",
-            "renameSuccess": "¡Has renombrado a tu compañero {{pet}} a {{newName}}!",
+            "renameSuccess": "¡has renombrado a tu compañero {{pet}} a {{newName}}!",
             "script": {
                 "HIT": [
                     "¡{{p1}} le da un golpe fuerte a {{p2}}, haciendo {{dmg}} daño!",
@@ -167,7 +168,7 @@
         "credits": {
             "balance": "El balance de la cuenta de {{user}} es de {{balance}} créditos.",
             "topup": "{{amount}} créditos han sido ingresados a tu cuenta.",
-            "cooldown": "Tus créditos reclamables se renovarán en {{time}}.",
+            "cooldown": "tus créditos reclamables se renovarán en {{time}}.",
             "dialog": [
                 "**Transferencia de créditos**",
                 "",
@@ -179,14 +180,14 @@
                 "Para confirmar, introduce {{code}} para proceder o {{exit}} para salir del menú."
             ],
             "confirmation": [
-                "Has transferido {{amount}} créditos a la cuenta de {user}}.",
+                "has transferido {{amount}} créditos a la cuenta de {user}}.",
                 "",
                 "_Balance actualizado__: {{afterAmount}}"
             ],
-            "invalidCode": "¡Has introducido un código inválido! Tus créditos no se han transferido.",
-            "selfSenderError": "¡No te puedes enviar créditos a ti mismo!",
-            "insufficientCredits": "¡No tienes suficientes ({{balance}}) créditos!",
-            "botUserError": "¡No le puedes enviar créditos a bots!",
+            "invalidCode": "¡has introducido un código inválido! Tus créditos no se han transferido.",
+            "selfSenderError": "¡no te puedes enviar créditos a ti mismo!",
+            "insufficientCredits": "¡no tienes suficientes ({{balance}}) créditos!",
+            "botUserError": "¡no le puedes enviar créditos a bots!",
             "topTitle": "Los individuos más ricos de Discord",
             "credits": "créditos"
         },
@@ -195,8 +196,8 @@
             "info": "Información sobre mí",
             "credits": "Sistema de moneda",
             "wage": "Pide tus créditos cada 8 horas",
-            "hate": "Te-¡Te odio!",
-            "love": "Te- ¡Te quiero!",
+            "hate": "¡Te-Te odio!",
+            "love": "¡Te-Te quiero!",
             "prefix": "Permitir a los moderadores poner un prefijo del gremio.",
             "search": "Buscar música en Youtube",
             "skip": "Saltar la pista actual",
@@ -253,15 +254,15 @@
             ],
             "ban": {
                 "self": "¡no te puedes expulsar a ti mismo!",
-                "msg": "has usado el banhammer sobre {{member}}. Que las Diosas sean misericordiosas.",
+                "msg": "has usado el banhammer sobre {{member}}. Quizás las Diosas tengan piedad.",
                 "dialog": [
                     "Moviendo el Banhammer",
                     "",
                     "{{user}}, estás a punto de usar el banhammer sobre {{member}}.",
                     "Para confirmar, introduce {{quote}} o {{exit}} para salir del menú."
                 ],
-                "exit": "el miembro **no** ha sido expulsado",
-                "exitError": "algo raro ha pasado, así que el miembro **no** ha sido expulsado"
+                "exit": "el miembro **no** ha sido expulsado.",
+                "exitError": "algo raro ha pasado, así que el miembro **no** ha sido expulsado."
             },
             "kick": {
                 "self": "¡no te puedes echar a ti mismo!",
@@ -299,12 +300,13 @@
         },
         "images": {
             "link": "{{imagen}} ¡arriba!",
-            "catgirl": "Niña-gato"
+            "catgirl": "Niña-gato",
+            "wrongChannel": "¡sólo puedes usar este comando en MP o en un canal NSFW!"
         },
         "info": {
             "info": [
                 "👋   ¡Hola! ¡Soy **haru**!",
-                "La ídolo favorita de todos ✨🎤 y bot a tiempo parcial! 🤖"
+                "¡La ídolo favorita de todos ✨🎤 y bot a tiempo parcial! 🤖"
             ],
             "invite": [
                 "¡Invítame usando {{invite}}!",
@@ -408,12 +410,12 @@
                 "La lista actual se ha guardado en nuestra base de datos.",
                 "Lo sentimos por cualquier inconveniencia causada."
             ],
-            "votedSkip": "¡ya has votado para saltar la canción\"",
+            "votedSkip": "¡ya has votado para saltar la canción!\n",
             "voteSkipSuccess": "¡has votado para saltar la canción!",
             "votedClear": "¡ya has votado para vaciar la cola!",
             "voteClearSuccess": "¡has votado para vaciar la cola!",
             "stations": "Estaciones",
-            "shuffled": "barajado {{num}} entradas en la cola"
+            "shuffled": "barajado {{num}} entradas en la cola."
         },
         "slots": {
             "insufficient": [
@@ -487,7 +489,7 @@
                 "dialog": "Mensajes de Bienvenida",
                 "action": {
                     "set": "Escribir un mensaje de bienvenida",
-                    "get": "Vet el mensaje de bienvenida actual",
+                    "get": "Ver el mensaje de bienvenida actual",
                     "enable": "Usar este canal para enviar mensajes de bienvenida"
                 },
                 "get": "Mensaje de bienvenida actual:",
@@ -514,6 +516,11 @@
                 ],
                 "success": "el nuevo mensaje de despedida es:",
                 "enabled": "enviando mensajes de despedida en {{channel}}"
+            },
+            "autorole": {
+                "success": "Configurado con éxito que el autorol de este servidor sea {{role}}",
+                "none": "No hay autorol en este servidor",
+                "current": "El autorol actual para este servidor es {{role}}"
             }
         },
         "purge": {

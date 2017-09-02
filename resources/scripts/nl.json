@@ -2,13 +2,14 @@
     "en": {
         "booru": {
             "noPictures": "de zoekopdracht {{query}} heeft geen resultaten opgeleverd. Probeer iets anders!",
-            "maxTwo": "je mag Danbooru maar met maximaal twee tags opzoeken!",
+            "maxTwo": "je mag maar met maximaal 2 tags Danbooru doorzoeken!\n",
             "score": "Score",
             "rating": "Beoordeling",
             "tags": "Tags",
             "s": "Veilig",
             "q": "Twijfelachtig",
-            "e": "uitdrukkelijk"
+            "e": "18+ (onveilig)",
+            "wrongChannel": "je kan dit commando alleen in DM's of een NSFW (18+) channel gebruiken!"
         },
         "common": {
             "CHECK_PMS": "check je berichten!",
@@ -297,7 +298,8 @@
         },
         "images": {
             "link": "{{image}} voor het pakken!",
-            "catgirl": "Kattenmeisje"
+            "catgirl": "Kattenmeisje",
+            "wrongChannel": "je kan dit commando alleen in DM's of een NSFW (18+) channel gebruiken!"
         },
         "info": {
             "info": [
@@ -514,6 +516,11 @@
                 ],
                 "success": "het nieuwe verlatingsbericht is:",
                 "enabled": "nu verlatingsberichten aan het versturen in {{channel}}"
+            },
+            "autorole": {
+                "success": "Met succes de auto-rol van de server ingesteld as {{role}}",
+                "none": "Er is geen auto-rol in deze server",
+                "current": "De huidige auto-rol voor deze server is {{role}}"
             }
         },
         "purge": {

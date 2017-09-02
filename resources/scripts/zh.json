@@ -8,7 +8,8 @@
             "tags": "标签",
             "s": "安全",
             "q": "质疑",
-            "e": "限制级"
+            "e": "限制级",
+            "wrongChannel": "这个命令只被允许在个人消息和NSFW频道中使用！"
         },
         "common": {
             "CHECK_PMS": "检查您的 PM！",
@@ -32,7 +33,7 @@
                 "maxMatches": "超过{{maxMatches}}个匹配项。"
             },
             "resolver": {
-                "INSUFFICIENT_ARGS": "语法错误: 需要输入{{requiredArgs}}  {{argsCount",
+                "INSUFFICIENT_ARGS": "语法错误: 需要输入{{requiredArgs}}  {{argsCount}}",
                 "CORRECT_USAGE": "正确用法",
                 "NO_END_QUOTE": "您漏了一个终止记号",
                 "member": {
@@ -296,7 +297,8 @@
         },
         "images": {
             "link": "{{image}}再此！",
-            "catgirl": "女仆"
+            "catgirl": "女仆",
+            "wrongChannel": "这个命令只被允许在个人消息和NSFW频道中使用！"
         },
         "info": {
             "info": [
@@ -513,6 +515,11 @@
                 ],
                 "success": "新的送别信息是：",
                 "enabled": "现在将在{{channel}}中发送送别信息"
+            },
+            "autorole": {
+                "success": "成功为每位加入服务器的用户自动提供{{role}}角色",
+                "none": "服务器暂时没有启用自动提供角色功能",
+                "current": "当前服务器会自动提供"
             }
         },
         "purge": {

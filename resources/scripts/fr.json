@@ -1,20 +1,21 @@
 {
     "en": {
         "booru": {
-            "noPictures": "la requête {{query}} n'a retourné aucune image. Essaie de chercher quelque chose d'autre !",
+            "noPictures": "la requête {{query}} n'a rendue aucune image. Essaie de chercher quelque chose d'autre !\n",
             "maxTwo": "tu ne peux rechercher sur Danbooru qu'avec un maximum de deux tags !",
             "score": "Score",
             "rating": "Classification",
             "tags": "Tags",
             "s": "Sûr",
             "q": "Douteux",
-            "e": "Explicite"
+            "e": "Explicite",
+            "wrongChannel": "tu peux utiliser cette commande uniquement dans les MP ou dans un salon NSFW."
         },
         "common": {
             "CHECK_PMS": "regarde tes messages privés !",
             "ERROR": "une erreur est survenue ! Réessaie plus tard, ou envoie un rapport de bug.",
             "ERROR_FULL": "Une erreur est survenue ! Réessaie plus tard, ou envoie un rapport de bug.",
-            "COOLDOWN": "du calme! ({{time}} seconde restante)",
+            "COOLDOWN": "s'il te plait calme toi! ({{time}} secondes restantes)",
             "NO_PERMS": "tu as besoin d'avoir la permission {{perms}} pour exécuter cette commande !",
             "NO_PERMS_BOT": "J'ai besoin de la permission {{perms}} pour exécuter cette commande !",
             "menus": {
@@ -32,7 +33,7 @@
                 "maxMatches": "Nombre de matches maximum ({{maxMatches}}) dépassé."
             },
             "resolver": {
-                "INSUFFICIENT_ARGS": "Il n'y a pas assez d'arguments - Au moins {{requiredArgs}} était(ent) attendu(s), regarde {{argsCount}}",
+                "INSUFFICIENT_ARGS": "Il n'y a pas assez d'arguments - Au moins {{requiredArgs}} était(ent) attendu(s), en a vu {{argsCount}}",
                 "CORRECT_USAGE": "Usage correct",
                 "NO_END_QUOTE": "il te manque une fin de citation",
                 "member": {
@@ -293,7 +294,8 @@
         },
         "images": {
             "link": "voila ton image ! {{image}}",
-            "catgirl": "Catgirl"
+            "catgirl": "Catgirl",
+            "wrongChannel": "tu peux utiliser cette commande uniquement dans les MP ou dans un salon NSFW."
         },
         "info": {
             "info": [
@@ -510,6 +512,11 @@
                 ],
                 "success": "le nouveau message d'au revoir est :",
                 "enabled": "dès maintenant, envoie des messages d'au revoir dans {{channel}}"
+            },
+            "autorole": {
+                "success": "{{role}} configuré avec succès en tant que rôle automatique de ce serveur.",
+                "none": "Il n'y a pas de rôle automatique sur ce serveur.",
+                "current": "Le rôle automatique actuel pour ce serveur est {{role}}"
             }
         },
         "purge": {
