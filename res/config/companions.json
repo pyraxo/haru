@@ -1,0 +1,28 @@
+{
+  "companions": [
+    {
+      "dog": {},
+      "cat": {},
+      "rabbit": {},
+      "hamster": {},
+      "mouse": {},
+      "chicken": {}
+    },
+    {
+      "fox": {},
+      "owl": {},
+      "wolf": {},
+      "koala": {},
+      "cow": {},
+      "pig": {}
+    },
+    {
+      "bear": {},
+      "tiger": {},
+      "lion": {},
+      "gorilla": {},
+      "boar": {}
+    }
+  ],
+  "prices": [1000, 5000, 10000]
+}

@@ -1,0 +1,51 @@
+{
+  "name": "haru",
+  "version": "2.0.0",
+  "description": "number one discord idol-automaton",
+  "main": "index.js",
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "bufferutil": "^3.0.2",
+    "chalk": "^2.1.0",
+    "dotenv-safe": "^4.0.4",
+    "erlpack": "^0.1.2",
+    "eventemitter3": "^2.0.3",
+    "feedparser": "^2.2.1",
+    "gm": "^1.23.0",
+    "hot-shots": "^4.5.0",
+    "longjohn": "^0.2.12",
+    "moment": "^2.18.1",
+    "moment-duration-format": "^1.3.0",
+    "moment-timezone": "^0.5.13",
+    "nani": "^1.2.0",
+    "node-emoji": "^1.8.1",
+    "node-opus": "^0.2.6",
+    "redis": "^2.8.0",
+    "sodium-native": "^1.10.3",
+    "superagent": "^3.5.2",
+    "superagent-xml2jsparser": "^0.1.1",
+    "sylphy": "github:pyraxo/sylphy#dev",
+    "thinky": "^2.3.8",
+    "to-markdown": "^3.1.0",
+    "uws": "^8.14.1",
+    "winston": "^2.3.1",
+    "winston-daily-rotate-file": "^1.4.6",
+    "ws": "^3.1.0",
+    "youtube-node": "^1.3.2",
+    "ytdl-core": "^0.15.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pyraxo/natsu.git"
+  },
+  "author": "pyraxo <pyraxo@pyraxo.moe> (https://pyraxo.moe)",
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/pyraxo/natsu/issues"
+  },
+  "homepage": "https://github.com/pyraxo/natsu#readme"
+}
