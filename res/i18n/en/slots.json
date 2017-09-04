@@ -1,0 +1,12 @@
+{
+  "insufficient": [
+    "you need {{amount}} more credits!\n",
+    "You can use the command {{command}} to claim free credits every few hours!"
+  ],
+  "won": "{{user}} placed a bet of {{amount}} credits and won:",
+  "lost": "{{user}} placed a bet of {{amount}} credits and lost all of it.",
+  "credits": "credits",
+  "winnings": "Winnings",
+  "yudodis": "you can't bet less than one credit!",
+  "dailyLimit": "you have reached the daily limit of credits that can be won. Try again in {{time}}."
+}

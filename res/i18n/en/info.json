@@ -1,0 +1,19 @@
+{
+  "info": [
+    "👋  Hello! I'm **haru**!",
+    "Everyone's favourite idol ✨🎤 and part-time bot! 🤖"
+  ],
+  "invite": [
+    "Invite me using {{invite}}!",
+    "For suggestions and support, visit my server at {{server}}!"
+  ],
+  "warn": "Please ensure you have embeds enabled!",
+  "author": "Author",
+  "lib": "Library",
+  "ver": "Version",
+  "src": "Source code",
+  "support": "Customer Support",
+  "join": "For support, suggestions and feedback, visit {{link}}",
+  "inv": "Invite me!",
+  "ptr": "Help keep haru running!"
+}

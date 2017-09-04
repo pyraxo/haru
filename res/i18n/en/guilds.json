@@ -1,0 +1,30 @@
+{
+  "join": [
+    "👋  Hello! I'm **haru**! Everyone's favourite idol ✨🎤 and part-time bot! 🤖\n",
+    "You can find a list of my commands by typing {{help}} into chat!",
+    "To learn more about me, use the {{about}} command!"
+  ],
+  "ban": {
+    "self": "you can't ban yourself!",
+    "msg": "you have swung the banhammer on {{member}}. May the Goddesses have mercy.",
+    "dialog": [
+      "Swinging the Banhammer\n",
+      "{{user}}, you are about to swing the banhammer on {{member}}.",
+      "To confirm, enter {{quote}} or {{exit}} to quit the menu."
+    ],
+    "exit": "the member has **not** been banned.",
+    "exitError": "something wrong happened, so the member has **not** been banned."
+  },
+  "kick": {
+    "self": "you can't kick yourself!",
+    "msg": "{{member}} has been kicked. That felt good.",
+    "dialog": [
+      "Kicking Someone?!\n",
+      "{{user}}, you are about to kick {{member}}.",
+      "To confirm, enter {{quote}} or {{exit}} to quit the menu."
+    ],
+    "exit": "the member has **not** been kicked.",
+    "exitError": "something wrong happened, so the member has **not** been kicked."
+  },
+  "reason": "Reason"
+}

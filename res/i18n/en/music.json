@@ -1,0 +1,60 @@
+{
+  "nowPlaying": "Now Playing",
+  "streamInfo": [
+    "{{title}} by {{artist}}",
+    "**Requested By**: {{requestedBy}}"
+  ],
+  "skipping": "Skipping",
+  "finishedPlaying": "Finished playing",
+  "queueFinish": "The queue is now empty.",
+  "dcInactive": "Disconnected from voice channel due to inactivity.",
+  "queuedMulti": "Queued {{num}} songs",
+  "clearQueue": "The music queue has been cleared.",
+  "queued": "Queued",
+  "errors": {
+    "notInChannel": "bring me into a voice channel with {{command}} first!",
+    "emptyQueue": [
+      "there is nothing in the queue!\n",
+      "Use the {{play}} command to queue a song!"
+    ],
+    "tooLong": "that song is too long! Queue one shorter than 90 minutes.",
+    "noResults": "the query {{query}} gave no results.",
+    "alreadyPlaying": "there is already a song being played! Queue another song with {{command}}.",
+    "notChannel": "the current bound text channel is {{channel}}. Please use the music commands there.",
+    "notFound": "the video you provided could not be found.",
+    "listNotFound": "the playlist you provided could not be found.",
+    "emptyPlaylist": "the playlist you provided has no streamable videos.",
+    "notInVoice": "you need to be in a voice channel!",
+    "errorQueue": "an error occurred while queuing {{url}}.",
+    "alreadyBinded": "I am already bound to {{text}}! Use commands in that channel.",
+    "noPerms": "I don't have the permissions to `connect` and/or `speak` in {{voice}}!",
+    "error": "something bad happened! Please try again later, or submit a bug report.",
+    "notInSameVoice": "you need to be in the voice channel {{channel}}!",
+    "skipNotFound": "the video specified could not be found.",
+    "notReadyYet": "The connection was not ready after 5 tries. Disconnected from voice channel.",
+    "connError": "A Discord error occurred while streaming to the channel: {{err}}\n"
+  },
+  "dc": "Disconnected from '{{voice}}' and unbound from {{text}}.",
+  "switch": "Switching to streaming mode and playing from {{station}}",
+  "votedSkip": "you have already voted to skip this song!",
+  "voteSkipSuccess": "you have voted to skip the current song!",
+  "votedClear": "you have already voted to clear the queue!",
+  "voteClearSuccess": "you have voted to clear the current queue!",
+  "playlist": "Playlist - {{guild}}",
+  "queuedSongs": "Queued Songs",
+  "queueProgress": "queuing playlist, please hold...",
+  "joinSuccess": [
+    "Connected to '{{voice}}' and bound to {{text}}.\n",
+    "Use the {{command}} command to start playing songs! "
+  ],
+  "repeatOn": "you have enabled repeat mode. All finished songs will be re-added to the back of the queue.",
+  "repeatOff": "you have disabled repeat mode. All finished songs will not be re-added.",
+  "skipSuccess": "Removed {{song}} from the queue.",
+  "terminated": [
+    "The bot is being restarted, all voice connections have been terminated.\n",
+    "The current queue has been saved in the database.",
+    "We apologise for any inconvenience caused."
+  ],
+  "stations": "Stations",
+  "shuffled": "shuffled {{num}} entries in the queue."
+}

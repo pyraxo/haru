@@ -1,0 +1,39 @@
+{
+  "success": "added feed for {{channel}} with {{included}} included tags and {{excluded}} excluded tags: {{url}}",
+  "error": "could not validate {{url}}. Please check if it's a valid RSS feed.",
+  "rssDialog": "RSS Menu",
+  "rssDelFooter": "Enter the number of the RSS feed you would like to remove, or {{cancel}} to exit.",
+  "urlDialog": [
+    "**RSS - Feed URL**\n",
+    "{{author}}, please enter the URL of the RSS feed you would like to add.",
+    "Otherwise, enter {{exit}} to exit."
+  ],
+  "includedTagsDialog": [
+    "**RSS - Included Tags**\n",
+    "{{author}}, please enter a list of included tags, separated by commas. For example: `films, science`",
+    "Otherwise, enter {{skip}} to skip, or {{exit}} to exit."
+  ],
+  "excludedTagsDialog": [
+    "**RSS - Excluded Tags**\n",
+    "{{author}}, please enter a list of excluded tags, separated by commas. For example: `anime, religion`",
+    "Otherwise, enter {{skip}} to skip, or {{exit}} to exit."
+  ],
+  "subscribedTo": "{{channel}} is subscribed to the following RSS feeds:",
+  "notSubscribed": "{{channel}} is not subscribed to any feed. Use {{command}} to add a new feed.",
+  "subscribedFeeds": "Subscribed Feeds for {{channel}}",
+  "noFeedFound": "there was no feed found with that name or URL.",
+  "removedFeed": "removed RSS entry: {{feed}}",
+  "confirmClear": [
+    "**Clear all RSS feeds**\n",
+    "{{author}}, are you sure you want to clear all RSS feeds?",
+    "Enter {{confirm}} to confirm, or anything else to exit."
+  ],
+  "notCleared": "no RSS feeds were removed.",
+  "cleared": "{{count}} RSS feeds were removed from this channel.",
+  "action": {
+    "add": "Add an RSS feed to the channel",
+    "remove": "Remove an RSS feed from the channel",
+    "list": "List all RSS feeds added in this channel",
+    "clear": "Clears all RSS feeds added in this channel"
+  }
+}

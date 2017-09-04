@@ -47,7 +47,7 @@ jspm_packages
 .yarn-integrity
 
 .env
-res/i18n
-res/audio
+res/i18n/*
+res/audio/*
 !res/i18n/en
 docs

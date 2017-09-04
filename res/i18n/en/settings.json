@@ -1,0 +1,77 @@
+{
+  "prefix": {
+    "success": "successfully changed this guild's prefix to {{prefix}}",
+    "revert": "reverted this guild's prefix back to {{prefix}}",
+    "current": "the current prefix for this server is: {{prefix}}"
+  },
+  "lang": {
+    "success": "successfully changed this guild's language to {{lang}}"
+  },
+  "tz": {
+    "success": "successfully changed this guild's timezone to {{tz}}",
+    "notFound": [
+      "the timezone '{{tz}}' is invalid.\n",
+      "Visit {{link}} for a list of valid timezone codes."
+    ],
+    "current": "the current timezone for this server is: {{tz}}"
+  },
+  "enabler": {
+    "success": "successfully {{action}} {{command}} for {{context}}",
+    "actions": {
+      "enable": "enabled",
+      "disable": "disabled",
+      "revert": "reverted"
+    }
+  },
+  "changelog": "Most Recent Changelogs",
+  "subscribe": {
+    "eventNotFound": [
+      "the event {{event}} could not be found.\n",
+      "These are the supporting events: {{events}}"
+    ],
+    "notSubscribed": "{{channel}} is not subscribed to any events.",
+    "subSuccess": "successfully subscribed {{channel}} to {{events}}.",
+    "unsubSuccess": "successfully unsubscribed {{channel}} from {{events}}.",
+    "list": "{{channel}} is subscribed to {{events}}."
+  },
+  "reset": {
+    "success": "reset all permission settings in the server."
+  },
+  "welcome": {
+    "dialog": "Welcome Messages",
+    "action": {
+      "set": "Set the welcome message",
+      "get": "Get the current welcome message",
+      "enable": "Use this channel to send welcome messages"
+    },
+    "get": "Current Welcome Message:",
+    "setDialog": [
+      "{{author}}, please enter the new welcome message.",
+      "Supported tags: {{tags}}",
+      "To use a tag, surround it with `{{}}`. E.g. `{{guild}}`"
+    ],
+    "success": "the new welcome message is:",
+    "enabled": "now sending welcome messages in {{channel}}"
+  },
+  "goodbye": {
+    "dialog": "Goodbye Messages",
+    "action": {
+      "set": "Set the goodbye message",
+      "get": "Get the current goodbye message",
+      "enable": "Use this channel to send goodbye messages"
+    },
+    "get": "Current Goodbye Message:",
+    "setDialog": [
+      "{{author}}, please enter the new goodbye message.",
+      "Supported tags: {{tags}}",
+      "To use a tag, surround it with `{{}}`. E.g. `{{guild}}`"
+    ],
+    "success": "the new goodbye message is:",
+    "enabled": "now sending goodbye messages in {{channel}}"
+  },
+  "autorole": {
+  "success": "Successfully configured {{role}} as this server autorole",
+  "none": "There is no autorole on this server",
+  "current": "The current autorole for this server is {{role}}"
+  }
+}
