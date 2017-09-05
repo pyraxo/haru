@@ -9,9 +9,11 @@ class Cache extends EventEmitter {
   constructor (bot, opts) {
     super()
     this._bot = bot
+
+    this.load()
   }
 
-  run (opts = {}) {
+  load (opts = {}) {
     let options = {
       host: opts.host || process.env.REDIS_HOST,
       port: opts.port || process.env.REDIS_PORT || 6379,
