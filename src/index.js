@@ -71,7 +71,12 @@ bot
 .register('middleware', resolve('middleware'))
 .register('commands', resolve('commands'), { groupedCommands: true })
 .createPlugin('cache', Cache)
-.createPlugin('db', Database)
+.createPlugin('db', Database, {
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  db: process.env.DB_DBNAME,
+  authKey: process.env.DB_AUTHKEY
+})
 .createPlugin('ipc', Transmitter)
 .register('db', path.join(__dirname, 'models'))
 .register('ipc', resolve('ipc'))
