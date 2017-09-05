@@ -17,7 +17,7 @@ const processID = parseInt(process.env['NODE_APP_INSTANCE'], 10)
 const processShards = parseInt(process.env['CLIENT_SHARDS_PER_PROCESS'] || 1, 10)
 const firstShardID = processID * processShards
 const lastShardID = firstShardID + processShards - 1
-const maxShards = processID * parseInt(process.env['CLIENT_PROCESSES'], 10)
+const maxShards = processShards * parseInt(process.env['CLIENT_PROCESSES'], 10)
 
 const logger = new (winston.Logger)({
   transports: [
