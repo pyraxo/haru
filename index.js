@@ -15,6 +15,7 @@ require('dotenv-safe').config({
 if (process.env['NODE_APP_INSTANCE']) {
   require('./src')
 } else {
+  // pm2 is preferred to run the bot, and may be enforced in the future
   const cluster = new Crystal(path.join('src', 'index.js'), parseInt(process.env.CLIENT_PROCESSES, 10))
   const timestamp = () => `[${chalk.grey(moment().format('HH:mm:ss'))}]`
 

@@ -17,6 +17,7 @@ const processID = parseInt(process.env['NODE_APP_INSTANCE'] || 1, 10)
 const processShards = parseInt(process.env['CLIENT_SHARDS_PER_PROCESS'] || 1, 10)
 const firstShardID = processID * processShards
 const lastShardID = firstShardID + processShards - 1
+const maxShards = processID * parseInt(process.env['CLIENT_PROCESSES'], 10)
 
 const logger = new (winston.Logger)({
   transports: [
@@ -52,7 +53,7 @@ const bot = new Client({
   messageLimit: 0,
   getAllUsers: true,
   disableEveryone: true,
-  maxShards: processID * parseInt(process.env['PROCESS_COUNT'], 10),
+  maxShards,
   firstShardID,
   lastShardID
 })
