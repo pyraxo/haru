@@ -33,6 +33,6 @@ if (process.env['NODE_APP_INSTANCE']) {
   )
 }
 
-process.on('unhandledRejection', r => {
-  console.log('Unhandled rejection:', r.stack)
+process.on('unhandledRejection', (r, p) => {
+  console.log('Unhandled rejection:', p, 'reason:', r.message)
 })
