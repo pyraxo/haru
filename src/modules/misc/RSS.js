@@ -2,7 +2,6 @@ const request = require('superagent')
 const Feedparser = require('feedparser')
 const moment = require('moment')
 const toMarkdown = require('to-markdown')
-const Promise = require('bluebird')
 
 const { Module } = require('sylphy')
 
