@@ -13,7 +13,7 @@ const { stripColor } = require('./utils')
 
 const resolve = (str) => path.join('src', str)
 
-const processID = parseInt(process.env['NODE_APP_INSTANCE'] || 1, 10)
+const processID = parseInt(process.env['NODE_APP_INSTANCE'], 10)
 const processShards = parseInt(process.env['CLIENT_SHARDS_PER_PROCESS'] || 1, 10)
 const firstShardID = processID * processShards
 const lastShardID = firstShardID + processShards - 1
