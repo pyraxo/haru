@@ -58,9 +58,11 @@ const bot = new Client({
   lastShardID
 })
 
+/* Noisy logging
 bot.on('commander:registered', ({ trigger, group, aliases } = {}) =>
   bot.logger.debug(`Command '${trigger}' in group '${group}' registered with ${aliases} aliases`)
 )
+*/
 
 bot
 .unregister('logger', 'console')

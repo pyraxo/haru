@@ -2,7 +2,7 @@
   "apps": [{
     "name": "haru",
     "script": "index.js",
-    "exec_mode": "cluster",
+    "exec_mode": "cluster_mode",
     "instances": "max",
     "watch": false,
     "merge_logs": true
