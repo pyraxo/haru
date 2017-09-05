@@ -1,5 +1,5 @@
 const request = require('superagent')
-const { Command } = require('sylphy')
+const { Command, utils } = require('sylphy')
 
 class Catgirl extends Command {
   constructor (...args) {
@@ -18,7 +18,7 @@ class Catgirl extends Command {
       const url = (await request.get('https://catgirls.brussell98.tk/api/random').set('User-Agent', 'haru v2.1.0')).body.url
       return responder
       .embed({
-        color: this.colours.green,
+        color: utils.getColour('green'),
         description: '📷  ' + responder.t('{{link}}', { image: `**[${responder.t('{{catgirl}}')}](${url})**` }),
         image: { url }
       })
