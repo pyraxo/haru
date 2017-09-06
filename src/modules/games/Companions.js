@@ -1,7 +1,8 @@
 const fs = require('fs')
 const path = require('path')
+const logger = require('winston')
 
-const { Module, Collection } = require('sylphy')
+const { Module, Collection } = require('../../core')
 
 class Companions extends Module {
   constructor (...args) {
@@ -9,6 +10,8 @@ class Companions extends Module {
       name: 'companions',
       localeKey: 'companion'
     })
+
+    this.db = this.bot.engine.db.data
 
     /*
       Outcomes:
@@ -20,15 +23,15 @@ class Companions extends Module {
   }
 
   init () {
-    this.db = this._client.plugins.get('db').data
     this.battles = new Collection()
-    fs.readFile(path.join(process.cwd(), 'res', 'config', 'companions.json'), (err, res) => {
+    fs.readFile(path.join(this.bot.paths.resources, 'config', 'companions.json'), (err, res) => {
       if (err) {
-        this.logger.error('Could not read companions configuration -', err)
+        logger.error('Could not read companions configuration')
+        logger.error(err)
         return
       }
 
-      this._data = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'res', 'config', 'companions.json')))
+      this._data = JSON.parse(fs.readFileSync(path.join(this.bot.paths.resources, 'config', 'companions.json')))
       this._check = setInterval(() => this.checkBattles(), 2000)
     })
   }
@@ -75,8 +78,8 @@ class Companions extends Module {
       bets: { p1: {}, p2: {} },
       timer: setTimeout(() => {
         this.send(channel.id, ':rooster:  |  {{timedOut}}', {
-          p1: this._client.users.get(p1.id).mention,
-          p2: this._client.users.get(p2.id).mention,
+          p1: this.bot.users.get(p1.id).mention,
+          p2: this.bot.users.get(p2.id).mention,
           time: `**${time}**`
         })
         this.battles.delete(channel.id)
@@ -143,20 +146,22 @@ class Companions extends Module {
     battle._stats = {
       p1: {
         name: p1.name,
-        owner: this._client.users.get(battle.p1).mention,
+        owner: this.bot.users.get(battle.p1).mention,
         maxHp: p1.hp || 10,
         hp: p1.hp || 10,
         crit: p1.crit || 1,
         atk: p1.atk || 1,
+        heal: p1.heal || 1,
         type: p1.type
       },
       p2: {
         name: p2.name,
-        owner: this._client.users.get(battle.p2).mention,
+        owner: this.bot.users.get(battle.p2).mention,
         maxHp: p2.hp || 10,
         hp: p2.hp || 10,
         crit: p2.crit || 1,
         atk: p2.atk || 1,
+        heal: p2.heal || 1,
         type: p2.type
       }
     }
@@ -174,17 +179,20 @@ class Companions extends Module {
       if (stats.p2.hp <= 0) return this.endBattle(battle, true)
 
       const responder = battle.responder
+      const settings = battle.settings
       const turn = battle._turn < 0 ? ~~(Math.random() * 2) : battle._turn % 2 + 1
       const attacker = 'p' + turn
       const receiver = 'p' + (turn % 2 + 1)
 
       const res = this.outcomes[~~(Math.random() * 100)]
       if (!stats[attacker] || !stats[receiver]) return
-      if (battle._turn < 0) battle._actions.push(':info:  **Match begins!**')
+      if (battle._turn < 0) battle._actions.push(':information_source:  **Match begins!**')
       battle._turn = turn
 
       const crit = stats[attacker].crit
-      const multiplier = Array(100).fill(2, 0, crit).fill(1, crit)[~~(Math.random() * 100)]
+      const critmultiplier = Array(100).fill(2, 0, crit).fill(1, crit)[~~(Math.random() * 100)]
+      const heal = stats[attacker].heal
+      const healmultiplier = Array(100).fill(2, 0, heal).fill(1, heal)[~~(Math.random() * 100)]
       const damagenum = Math.floor(Math.random() * (6 - 1 + 1)) + 1;
       const actionnum = Math.floor(Math.random() * (4 - 1 + 1)) + 1;
       switch (res) {
@@ -193,13 +201,13 @@ class Companions extends Module {
           break
         }
         case 1: {
-          const dmg = (stats[attacker].atk * multiplier)
-          battle._actions.push(`${multiplier > 1 ? ':anger:' : ':punch:'}  **${responder.t(`{{script.HIT_${damagenum}}}`, {p1: stats[attacker].name, p2: stats[receiver].name, dmg: dmg}) }**`)
+          const dmg = (stats[attacker].atk * critmultiplier)
+          battle._actions.push(`${critmultiplier > 1 ? ':anger:' : ':punch:'}  **${responder.t(`{{script.HIT_${damagenum}}}`, {p1: stats[attacker].name, p2: stats[receiver].name, dmg: dmg}) }**`)
           battle._stats[receiver].hp -= dmg
           break
         }
         case 2: {
-          const heal = (1 * multiplier)
+          const heal = (1 * healmultiplier)
           battle._actions.push(`:sparkles:  **${responder.t(`{{script.HEAL_${actionnum}}}`, {p1: stats[attacker].name, heal: heal}) }**`)
           battle._stats[attacker].hp += heal
           break
@@ -249,10 +257,16 @@ class Companions extends Module {
     winUser.credits += battle.fee * 2
     winUser.companion.xp = (winUser.companion.xp || 0) + ~~(Math.random() * 5) + 2
     winUser.companion.stats.wins += 1
+    winUser.companion.hunger -= 1
+    if (winUser.companion.mood < 10) {
+      winUser.companion.mood += 1
+    }
 
     const loseUser = await this.db.User.fetch(battle[loser], { companion: true })
     loseUser.companion.xp = (loseUser.companion.xp || 0) + ~~(Math.random() * 3) + 1
     loseUser.companion.stats.losses += 1
+    loseUser.companion.hunger -= 1
+    loseUser.companion.mood -= 1
     await loseUser.saveAll({ companion: true })
 
     await this.send(battle.channel, [
@@ -285,11 +299,11 @@ class Companions extends Module {
       await this.send(battle.channel, [
         winners.length
         ? ':moneybag:  **Winning Bets**:\n' +
-        winners.map(b => this._client.users.get(b[0]).username + ` -- **${b[1]} credits**`).join('\n')
+        winners.map(b => this.bot.users.get(b[0]).username + ` -- **${b[1]} credits**`).join('\n')
         : '',
         losers.length
         ? '\n:money_with_wings:  **Losing Bets**:\n' +
-        losers.map(b => this._client.users.get(b[0]).username + ` -- **${b[1]} credits**`).join('\n')
+        losers.map(b => this.bot.users.get(b[0]).username + ` -- **${b[1]} credits**`).join('\n')
         : ''
       ].join('\n'))
     }

@@ -1,4 +1,5 @@
-const { Command } = require('sylphy')
+const logger = require('winston')
+const { Command } = require('../../core')
 
 class Battle extends Command {
   constructor (...args) {
@@ -9,8 +10,7 @@ class Battle extends Command {
       usage: [
         { name: 'action', displayName: '@user | accept | reject', types: ['member', 'string'] }
       ],
-      options: { localeKey: 'companion', guildOnly: true },
-      group: 'games'
+      options: { localeKey: 'companion', guildOnly: true }
     })
 
     this.respondTime = 60
@@ -18,13 +18,10 @@ class Battle extends Command {
   }
 
   async handle (container, responder) {
-    const { msg, plugins, settings, args, rawArgs, modules } = container
-    const User = plugins.get('db').data.models.User
+    const { msg, settings, data, args, rawArgs, modules } = container
     const companions = modules.get('companions')
-    if (!companions) {
-      return this.logger.error('Companions module not found')
-    }
-    const userProfile = await User.fetchJoin(msg.author.id, { companion: true })
+    if (!companions) return logger.error('Companions module not found')
+    const userProfile = await data.User.fetchJoin(msg.author.id, { companion: true })
     if (!userProfile.companion) {
       return responder.error('{{noPet}}', { command: `**\`${settings.prefix}companion buy\`**` })
     }
@@ -50,9 +47,24 @@ class Battle extends Command {
         balance: `**${userProfile.credits}**`
       })
     }
-    const oppProfile = await User.fetch(opp.id)
+
+    if (userProfile.companion.hunger <= 1) {
+      return responder.error('{{errors.hungry}}')
+    }
+
+    if (userProfile.companion.mood <= 1) {
+      return responder.error('{{errors.moody}}')
+    }
+
+    const oppProfile = await data.User.fetch(opp.id)
     if (!oppProfile.companion) return responder.error('{{errors.opponentNoCompanion}}')
     if (oppProfile.credits < this.entryFee) return responder.error('{{errors.cantChallenge}}')
+    if (oppProfile.companion.hunger === 1) {
+      return responder.error('{{errors.hungryOpponent}}')
+    }
+    if (oppProfile.companion.mood === 1) {
+      return responder.error('{{errors.moodyOpponent}}')
+    }
 
     try {
       await companions.initBattle(msg.author, opp, msg.channel, settings, responder, this.respondTime, this.entryFee)
@@ -64,7 +76,7 @@ class Battle extends Command {
       })
     } catch (err) {
       if (err instanceof Error) {
-        this.logger.error(`Error creating battle - ${err}`)
+        logger.error(`Error creating battle - ${err}`)
         return responder.error('{{%ERROR}}')
       }
       return responder.error(`{{errors.${err}}}`)
@@ -86,7 +98,7 @@ class Battle extends Command {
       await p2.save()
     } catch (err) {
       if (err instanceof Error) {
-        this.logger.error(`Error deducting entry fee - ${err}`)
+        logger.error(`Error deducting entry fee - ${err}`)
         return responder.error('{{%ERROR}}')
       }
       return responder.error(`{{errors.${err}}}`)

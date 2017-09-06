@@ -1,11 +1,12 @@
-const { Command, utils } = require('sylphy')
+const logger = require('winston')
+const { Command, padEnd } = require('../../core')
 
 class Companions extends Command {
   constructor (...args) {
     super(...args, {
       name: 'companion',
       description: 'Animal companion system',
-      usage: [{ name: 'action', displayName: 'buy | rename | peek', type: 'string', optional: true }],
+      usage: [{ name: 'action', displayName: 'buy | rename | peek | feed', type: 'string', optional: true }],
       aliases: ['pet'],
       cooldown: 5,
       subcommands: {
@@ -14,16 +15,17 @@ class Companions extends Command {
           usage: [{ name: 'user', type: 'member', optional: false }],
           options: { guildOnly: true }
         },
-        rename: 'rename'
+        rename: 'rename',
+        feed: {
+          usage: [{ name: 'amount', type: 'int', optional: true }]
+        }
       },
-      options: { botPerms: ['embedLinks'] },
-      group: 'games'
+      options: { botPerms: ['embedLinks'] }
     })
   }
 
-  async handle ({ msg, plugins, settings, trigger }, responder) {
-    const User = plugins.get('db').data.User
-    const companion = (await User.fetchJoin(msg.author.id, { companion: true })).companion
+  async handle ({ msg, data, settings, trigger }, responder) {
+    const companion = (await data.User.fetchJoin(msg.author.id, { companion: true })).companion
     if (!companion) {
       responder.error('{{noPet}}', { command: `**\`${settings.prefix}${trigger} buy\`**` })
       return
@@ -35,16 +37,71 @@ class Companions extends Command {
       description: `**\`LVL ${Math.floor(Math.cbrt(companion.xp)) || 0}\`** :${companion.type}:  ${companion.name}`,
       fields: [
         { name: responder.t('{{definitions.wins}}'), value: stats.wins || 0, inline: true },
-        { name: responder.t('{{definitions.losses}}'), value: stats.losses || 0, inline: true }
+        { name: responder.t('{{definitions.losses}}'), value: stats.losses || 0, inline: true },
+        { name: responder.t('{{definitions.mood}}'), value: companion.mood || 10, inline: true},
+        { name: responder.t('{{definitions.hunger}}'), value: companion.hunger || 10, inline: true}
       ]
     }).send()
   }
 
-  async peek ({ args, plugins }, responder) {
-    const User = plugins.get('db').data.User
+  async feed ({ msg, args, data }, responder) {
+    const user = await data.User.fetch(msg.author.id)
+    const companion = (await data.User.fetchJoin(msg.author.id, { companion: true })).companion
+    if (!companion) {
+      responder.error('{{noPet}}', { command: `**\`${settings.prefix}${trigger} buy\`**` })
+      return
+    }
+    const amount = args.amount || 1
+    if ((companion.hunger + amount) > 10) {
+      responder.error('{{tooHungry}}', {amount: `**${amount}**`})
+      return
+    }
+    if (user.petfood < amount) {
+      responder.error('{{notEnoughFood}}', {
+        amount: `**${amount}**`,
+        inv: `**${user.petfood}**`,
+        animal: `:${companion.type}:`
+      })
+      return
+    }
+    const code = ~~(Math.random() * 8999) + 1000
+    const arg = await responder.format('emoji:info').dialog([{
+      prompt: '{{food}}',
+      input: { type: 'string', name: 'code' }
+    }], {
+      author: `**${msg.author.username}**`,
+      animal: `:${companion.type}:`,
+      amount: `**${amount}**`,
+      code: `**\`${code}\`**`
+    })
+    if (parseInt(arg.code, 10) !== code) {
+      return responder.error('{{invalidCode}}')
+    }
+    if ((companion.mood + amount) > 10) {
+      companion.mood = 10
+    } else {
+      companion.mood += amount
+    }
+    companion.hunger += amount
+    try {
+      await user.saveAll()
+      await data.User.update(user.id, user)
+    } catch (err) {
+      logger.error(`Could not save after companion feeding: ${err}`)
+      return responder.error('{{error}}')
+    }
+    responder.format('emoji:success').send('{{petFed}}', {
+      author: `**${msg.author.username}**`,
+      animal: `:${companion.type}:`,
+      amount: `**${amount}**`
+    })
+  }
+
+  async peek ({ args, data }, responder) {
     const [member] = await responder.selection(args.user, { mapFunc: m => `${m.user.username}#${m.user.discriminator}` })
     if (!member) return
-    const companion = (await User.fetchJoin(member.user.id, { companion: true })).companion
+    const user = await data.User.fetch(member.id)
+    const companion = (await data.User.fetchJoin(member.user.id, { companion: true })).companion
     if (!companion) {
       responder.error('{{errors.opponentNoCompanion}}')
       return
@@ -56,16 +113,17 @@ class Companions extends Command {
       description: `**\`LVL ${Math.floor(Math.cbrt(companion.xp)) || 0}\`** :${companion.type}:  ${companion.name}`,
       fields: [
         { name: responder.t('{{definitions.wins}}'), value: stats.wins || 0, inline: true },
-        { name: responder.t('{{definitions.losses}}'), value: stats.losses || 0, inline: true }
+        { name: responder.t('{{definitions.losses}}'), value: stats.losses || 0, inline: true },
+        { name: responder.t('{{definitions.mood}}'), value: companion.mood || 10, inline: true},
+        { name: responder.t('{{definitions.hunger}}'), value: companion.hunger || 10, inline: true}
       ]
     }).send()
   }
 
-  async rename ({ msg, settings, plugins, modules }, responder) {
-    const User = plugins.get('db').data.User
+  async rename ({ msg, settings, data, db, modules }, responder) {
     const companions = modules.get('companions')
-    if (!companions) return this.logger.error('Companions module not found')
-    const user = await User.fetchJoin(msg.author.id, { companion: true })
+    if (!companions) return logger.error('Companions module not found')
+    const user = await data.User.fetchJoin(msg.author.id, { companion: true })
     if (!user.companion) {
       responder.error('{{noPet}}', { command: `**\`${settings.prefix}companion buy\`**` })
       return
@@ -81,9 +139,9 @@ class Companions extends Command {
     user.companion.name = arg.newName
     try {
       await user.saveAll({ companion: true })
-      User.update(user.id, user)
+      data.User.update(user.id, user)
     } catch (err) {
-      this.logger.error(`Could not save after companion rename: ${err}`)
+      logger.error(`Could not save after companion rename: ${err}`)
       return responder.error('{{error}}')
     }
     responder.success('{{renameSuccess}}', {
@@ -92,11 +150,10 @@ class Companions extends Command {
     })
   }
 
-  async buy ({ msg, settings, plugins, modules }, responder) {
-    const db = plugins.get('db')
+  async buy ({ msg, settings, data, db, modules }, responder) {
     const companions = modules.get('companions')
-    if (!companions) return this.logger.error('Companions module not found')
-    const user = await db.models.User.fetchJoin(msg.author.id, { companion: true })
+    if (!companions) return logger.error('Companions module not found')
+    const user = await data.User.fetchJoin(msg.author.id, { companion: true })
     if (user.companion) {
       responder.error('{{ownedPet}}')
       return
@@ -117,11 +174,11 @@ class Companions extends Command {
     const message = await responder.format('emoji:info').send([
       '**{{intro}}**',
       '```markdown',
-      pets.map((c, i) => `${utils.padEnd(`[${i + 1}]:`, 4)} :${c}:`).join('\n'),
+      pets.map((c, i) => `${padEnd(`[${i + 1}]:`, 4)} :${c}:`).join('\n'),
       '> {{%menus.INPUT}}',
       '```'
     ], { user: msg.author.username, cancel: 'cancel' })
-    const collector = plugins.get('middleware').collect({
+    const collector = this.bot.engine.bridge.collect({
       channel: msg.channel.id,
       author: msg.author.id,
       time: 30
@@ -184,7 +241,7 @@ class Companions extends Command {
       return responder.error('{{invalidCode}}')
     }
     user.credits -= companions.prices[0]
-    const companion = new db.models.Companion({
+    const companion = new db.Companion({
       id: msg.author.id,
       name: responder.t('{{definitions.info2}}', {
         author: msg.author.username
@@ -196,9 +253,9 @@ class Companions extends Command {
     try {
       await companion.save()
       await user.saveAll({ companion: true })
-      await db.models.User.update(user.id, user)
+      await data.User.update(user.id, user)
     } catch (err) {
-      this.logger.error(`Could not save after companion purchase: ${err}`)
+      logger.error(`Could not save after companion purchase: ${err}`)
       return responder.error('{{error}}')
     }
     responder.format('emoji:success').send('{{result}}', {
@@ -223,4 +280,17 @@ class PetBuy extends Companions {
   }
 }
 
-module.exports = [ Companions, PetBuy ]
+class PetFeed extends Companions {
+  constructor (...args) {
+    super(...args, {
+      name: 'feedpet',
+      description: 'Feeds your personal companion',
+      options: { localeKey: 'companion' },
+      aliases: [],
+      usage: [{ name: 'amount', type: 'int', optional: true }],
+      subcommand: 'feed'
+    })
+  }
+}
+
+module.exports = [ Companions, PetBuy, PetFeed ]
