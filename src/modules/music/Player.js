@@ -145,7 +145,7 @@ class Player extends Module {
     const length = await this.queue.getLength(channel.guild.id)
     const textChannel = this.manager.getBoundChannel(guildID)
     if (length === 0 && textChannel) {
-      this.send(textChannel, ':info:  |  {{queueFinish}}')
+      this.send(textChannel, ':information_source:  |  {{queueFinish}}')
       return
     }
     const result = await this.queue.shift(guildID)

@@ -14,9 +14,9 @@ require('dotenv-safe').config({
 
 const procCount = parseInt(process.env['CLIENT_PROCESSES'], 10)
 
-process.on('unhandledRejection', (r, p) => {
-  console.error('Unhandled rejection:', p, 'reason:', r.message)
-})
+process.on('unhandledRejection', (r, p) =>
+  r && console.error('Unhandled rejection:', p, 'reason:', r.message)
+)
 
 pm2.launchBus((err, bus) => {
   if (err) console.error(err)
