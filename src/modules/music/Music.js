@@ -125,6 +125,7 @@ class Music extends Module {
   }
 
   getState (guildID) {
+    if (!this.states) return null
     return this.states.get(guildID)
   }
 
@@ -134,14 +135,15 @@ class Music extends Module {
   }
 
   modifyState (guildID, stateName, value) {
-    let state = this.states.get(guildID)
+    if (!this.states) return
+    let state = this.getState(guildID)
     if (typeof state !== 'object') return
     state[stateName] = value
     this.states.set(guildID, state)
   }
 
   getBoundChannel (guildID) {
-    const connection = this.states.get(guildID)
+    const connection = this.getState(guildID)
     return connection ? connection.channel : null
   }
 

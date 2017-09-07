@@ -33,7 +33,7 @@ class Reactions extends Module {
 
   addMenu (msg, userID, list = [], { cleanup = true, timeout = 0 } = {}) {
     return new Promise((resolve, reject) => {
-      let emojis = list.map(e => sEmoji.get(e)[0] !== ':' ? Emoji.get(e) : e)
+      let emojis = list.map(e => Emoji.get(e)[0] !== ':' ? Emoji.get(e) : e)
       this.addMulti(msg, emojis)
       .then(() => {
         this.menus.set(msg.id, { msg, user: userID, emojis, resolve, cleanup })
