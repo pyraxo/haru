@@ -18,7 +18,6 @@ class Stats extends Command {
       this.logger.error('Could not fetch stats -', err)
       return responder.error()
     }
-    console.log('stats?!')
     let stats = {
       u: [],
       g: [],

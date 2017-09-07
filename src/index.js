@@ -109,4 +109,8 @@ bot.on('ready', () => {
 
 bot.on('error', bot.logger.error)
 
+process.on('unhandledRejection', (r, p) =>
+  r && bot.logger.error('Unhandled rejection:', p, 'reason:', r.message)
+)
+
 bot.run()

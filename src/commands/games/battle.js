@@ -71,7 +71,8 @@ class Battle extends Command {
     }
   }
 
-  async accept ({ msg, client, settings, data }, responder, companions) {
+  async accept ({ msg, client, settings }, responder, companions) {
+    const data = client.plugins.get('db').data
     const battle = companions.getBattle(msg.channel)
     if (!battle || battle.p2 !== msg.author.id) return responder.error('{{errors.noIncoming}}')
     if (battle.state !== 1) return responder.error('{{errors.userInBattle}}')
