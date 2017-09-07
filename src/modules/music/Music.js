@@ -106,6 +106,7 @@ class Music extends Module {
     }
     delete this.streamInfo
     delete this._ws
+    delete this.states
   }
 
   bindChannel (guildID, textChannelID) {
