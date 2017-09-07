@@ -19,10 +19,6 @@ class Auditor extends Module {
     this.db = this._client.plugins.get('db').data
   }
 
-  unload () {
-    delete this.db
-  }
-
   onJoin (guild, user) {
     this.db.Guild.fetch(guild.id).then(settings => {
       if (typeof settings.events !== 'object') return

@@ -20,7 +20,7 @@ class Reload extends Command {
   async handle ({ plugins, args }, responder) {
     try {
       const data = await plugins.get('ipc').awaitResponse('reloadFile', { type: args.type })
-      return responder.format('code:js').send(data.map(d => util.inspect(d)).join('\n'))
+      return responder.format('code:js').send(data.map(d => `${d.id} - ${util.inspect(d.resp)}`).join('\n'))
     } catch (err) {
       return responder.format('code:js').send(err)
     }

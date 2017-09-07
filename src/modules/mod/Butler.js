@@ -29,10 +29,6 @@ class Butler extends Module {
     this.db = this._client.plugins.get('db').data
   }
 
-  unload () {
-    this.db = null
-  }
-
   onJoin (guild, member) {
     this.db.Guild.fetch(guild.id).then(settings =>
       typeof settings.welcome === 'object' &&

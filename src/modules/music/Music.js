@@ -125,7 +125,6 @@ class Music extends Module {
   }
 
   getState (guildID) {
-    if (!this.states) return null
     return this.states.get(guildID)
   }
 
@@ -135,7 +134,6 @@ class Music extends Module {
   }
 
   modifyState (guildID, stateName, value) {
-    if (!this.states) return
     let state = this.getState(guildID)
     if (typeof state !== 'object') return
     state[stateName] = value
