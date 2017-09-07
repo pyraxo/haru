@@ -4,6 +4,6 @@
     "script": "src/index.js",
     "exec_mode": "cluster_mode",
     "instances": "max",
-    "watch": false  
+    "watch": false
   }]
 }

@@ -9,17 +9,23 @@ const util = require('util')
 const { Client } = require('sylphy')
 
 global.Promise = require('bluebird')
+require('longjohn')
+require('dotenv-safe').config({
+  path: path.join(process.cwd(), '.env'),
+  allowEmptyValues: true
+})
 
 const { Cache, Database, Station } = require('./plugins')
 const { stripColor } = require('./utils')
 
 const resolve = (str) => path.join('src', str)
 
-const processID = parseInt(process.env['NODE_APP_INSTANCE'], 10)
+const processCount = parseInt(process.env['CLIENT_PROCESSES'], 10)
+const processID = parseInt(process.env['NODE_APP_INSTANCE'], 10) % processCount
 const processShards = parseInt(process.env['CLIENT_SHARDS_PER_PROCESS'] || 1, 10)
 const firstShardID = processID * processShards
 const lastShardID = firstShardID + processShards - 1
-const maxShards = processShards * parseInt(process.env['CLIENT_PROCESSES'], 10)
+const maxShards = processShards * processCount
 
 const logger = new (winston.Logger)({
   transports: [

@@ -23,8 +23,15 @@ pm2.launchBus((err, bus) => {
 
   bus.on('process:msg', packet => {
     const data = packet.raw
-    const payload = { op: data.op, d: data.d, origin: packet.process.pm_id, code: data.code }
+    const payload = {
+      op: data.op,
+      d: data.d,
+      origin: packet.process.pm_id % procCount,
+      code: data.code
+    }
     if (data.dest === -1) {
+      // warning: this assumes id count starts from 0
+      // recommended to query pm2 via connect+list first
       for (let i = 0; i < procCount; i++) {
         pm2.sendDataToProcessId(i, {
           type: 'process:msg',
