@@ -96,7 +96,7 @@ class Companions extends Command {
     const db = plugins.get('db')
     const companions = modules.get('companions')
     if (!companions) return this.logger.error('Companions module not found')
-    const user = await db.models.User.fetchJoin(msg.author.id, { companion: true })
+    const user = await db.data.User.fetchJoin(msg.author.id, { companion: true })
     if (user.companion) {
       responder.error('{{ownedPet}}')
       return
