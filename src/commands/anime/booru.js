@@ -1,5 +1,5 @@
 const request = require('superagent')
-const { Command } = require('sylphy')
+const { Command, utils } = require('sylphy')
 
 class Booru extends Command {
   constructor (...args) {
@@ -37,9 +37,9 @@ class Booru extends Command {
       image: { url, height, width },
       color: (r => {
         switch (r) {
-          case 's': return this.colours.green
-          case 'q': return this.colours.orange
-          case 'e': return this.colours.red
+          case 's': return utils.getColour('green')
+          case 'q': return utils.getColour('orange')
+          case 'e': return utils.getColour('red')
         }
       })(rating)
     }).send(`**ID ${id}**`)

@@ -1,6 +1,6 @@
 const Feedparser = require('feedparser')
 const request = require('superagent')
-const { Command } = require('sylphy')
+const { Command, utils } = require('sylphy')
 
 const options = { guildOnly: true, botPerms: ['embedLinks'] }
 
@@ -112,9 +112,9 @@ class RSS extends Command {
       return responder.format('emoji:newspaper').embed({
         description: [
           `**${responder.t('{{subscribedFeeds}}', { channel: '#' + msg.channel.name })}**\n`,
-          feeds.map((f, i) => `\`[${i+1}]\` [${f.name}](${f.id})`).join('\n')
+          feeds.map((f, i) => `\`[${i + 1}]\` [${f.name}](${f.id})`).join('\n')
         ].join('\n'),
-        color: this.colours.blue
+        color: utils.getColour('blue')
       }).reply('{{subscribedTo}}', { channel: `**#${msg.channel.name}**` }).then(m => {
         if (pagination + 10 > feeds.length) return
         let emotes = []
