@@ -19,7 +19,7 @@ class Battle extends Command {
 
   async handle (container, responder) {
     const { msg, plugins, settings, args, rawArgs, modules } = container
-    const User = plugins.get('db').data.models.User
+    const User = plugins.get('db').data.User
     const companions = modules.get('companions')
     if (!companions) {
       return this.logger.error('Companions module not found')

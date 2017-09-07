@@ -32,6 +32,7 @@ class Reactions extends Module {
   }
 
   addMenu (msg, userID, list = [], { cleanup = true, timeout = 0 } = {}) {
+    if (!this.menus) return
     return new Promise((resolve, reject) => {
       let emojis = list.map(e => Emoji.get(e)[0] !== ':' ? Emoji.get(e) : e)
       this.addMulti(msg, emojis)
@@ -44,12 +45,14 @@ class Reactions extends Module {
   }
 
   onDelete (msg) {
+    if (!this.menus) return
     if (this.menus.has(msg.id)) {
       this.menus.delete(msg.id)
     }
   }
 
   check (msg, emoji, userID) {
+    if (!this.menus) return
     const menu = this.menus.get(msg.id)
     if (!menu) return
     this._client.getMessage(msg.channel.id, msg.id).then(message => {
