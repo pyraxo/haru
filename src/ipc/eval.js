@@ -4,7 +4,7 @@ module.exports = function evaluate (msg, client) {
   const content = msg.d ? msg.d.content || true : true
   let resp
   try {
-    resp = eval(String(content))
+    resp = eval(String(content)) // eslint-disable-line
   } catch (err) {
     resp = `${err.message}\n\n${err.stack}`
   }
@@ -12,5 +12,5 @@ module.exports = function evaluate (msg, client) {
     resp = util.inspect(resp)
   }
 
-  process.send({ op: 'resp', d: resp })
+  process.send({ op: 'resp', d: resp, code: msg.code, dest: msg.origin })
 }

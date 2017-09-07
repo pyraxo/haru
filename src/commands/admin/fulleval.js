@@ -18,7 +18,7 @@ class FullEval extends Command {
     const content = msg.content.split(' ').slice(1).join(' ')
     plugins.get('ipc').awaitResponse('evaluate', { content })
     .then(data => responder.format('code:js').send(data.map(d => {
-      const r = d.result || null
+      const r = d || null
       return [
         `PROCESS ${d.id}:`,
         (r && r.length > 200 ? r.substr(0, 200) + '...' : r) + '\n'

@@ -1,0 +1,8 @@
+{
+  "apps": [{
+    "name": "haru-master",
+    "script": "index.js",
+    "watch": false,
+    "merge_logs": true
+  }]
+}

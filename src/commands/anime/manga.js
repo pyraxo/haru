@@ -1,6 +1,6 @@
 const moment = require('moment')
 const nani = require('nani')
-const { Command } = require('sylphy')
+const { Command, utils } = require('sylphy')
 
 class Manga extends Command {
   constructor (...args) {
@@ -31,7 +31,7 @@ class Manga extends Command {
     if (!data) return
 
     return responder.embed({
-      color: this.colours.blue,
+      color: utils.getColour('blue'),
       author: {
         name: (data.title_english || data.title_romaji) + ' • ' + data.title_japanese,
         url: `http://www.anilist.co/manga/${data.id}`,

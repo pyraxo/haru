@@ -32,7 +32,7 @@ class Companions extends Command {
     }
     const stats = companion.stats || {}
     responder.embed({
-      color: this.colours.blue,
+      color: utils.getColour('blue'),
       author: { name: responder.t('{{definitions.info}}'), icon_url: msg.author.avatarURL },
       description: `**\`LVL ${Math.floor(Math.cbrt(companion.xp)) || 0}\`** :${companion.type}:  ${companion.name}`,
       fields: [
@@ -108,7 +108,7 @@ class Companions extends Command {
     }
     const stats = companion.stats || {}
     responder.embed({
-      color: this.colours.blue,
+      color: utils.getColour('blue'),
       author: { name: responder.t('{{definitions.info}}'), icon_url: member.user.avatarURL },
       description: `**\`LVL ${Math.floor(Math.cbrt(companion.xp)) || 0}\`** :${companion.type}:  ${companion.name}`,
       fields: [
@@ -152,8 +152,8 @@ class Companions extends Command {
 
   async buy ({ msg, settings, data, db, modules }, responder) {
     const companions = modules.get('companions')
-    if (!companions) return logger.error('Companions module not found')
-    const user = await data.User.fetchJoin(msg.author.id, { companion: true })
+    if (!companions) return this.logger.error('Companions module not found')
+    const user = await db.data.User.fetchJoin(msg.author.id, { companion: true })
     if (user.companion) {
       responder.error('{{ownedPet}}')
       return

@@ -29,11 +29,10 @@ class Music extends Module {
     this.headers = {
       'User-Agent': 'haru v2.0.0 (https://github.com/pyraxo/haru)'
     }
-
-    this.states = new Collection()
   }
 
   init () {
+    this.states = new Collection()
     this.redis = this._client.plugins.get('cache').client
     this.player = this._client.plugins.get('modules').get('music:player')
     this.queue = this._client.plugins.get('modules').get('music:queue')
@@ -107,6 +106,7 @@ class Music extends Module {
     }
     delete this.streamInfo
     delete this._ws
+    delete this.states
   }
 
   bindChannel (guildID, textChannelID) {

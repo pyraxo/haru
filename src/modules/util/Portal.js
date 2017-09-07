@@ -61,6 +61,6 @@ class Portal extends Module {
       d: { channelID, content, options }
     })
   }
-} 
+}
 
 module.exports = Portal
