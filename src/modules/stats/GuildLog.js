@@ -2,7 +2,7 @@ const chalk = require('chalk')
 const moment = require('moment')
 const request = require('superagent')
 
-const { Module } = require('sylphy')
+const { Module, utils } = require('sylphy')
 
 class GuildLog extends Module {
   constructor (...args) {
@@ -70,7 +70,7 @@ class GuildLog extends Module {
         icon_url: guild.iconURL
       },
       title: `Guild Created: ${guild.memberCount} members`,
-      color: this.getColour('green'),
+      color: utils.getColour('green'),
       footer: {
         text: `Shard ${guild.shard.id}  |  ${moment().format('ddd Do MMM, YYYY [at] hh:mm:ss a')}`
       }
@@ -93,7 +93,7 @@ class GuildLog extends Module {
         icon_url: guild.iconURL
       },
       title: `Guild Deleted: ${guild.memberCount} members`,
-      color: this.getColour('red'),
+      color: utils.getColour('red'),
       footer: {
         text: `Shard ${guild.shard.id}  |  ${moment().format('ddd Do MMM, YYYY [at] hh:mm:ss a')}`
       }

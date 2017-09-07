@@ -14,9 +14,11 @@ module.exports = function stats (msg, client) {
           p += c.channels.filter(ch => ch.type === 2).length
           return p
         }, 0)
-      }
+      },
+      dest: msg.origin,
+      code: msg.code
     })
   } catch (err) {
-    process.send({ op: 'resp', d: err.toString() })
+    process.send({ op: 'resp', d: err.toString(), dest: msg.origin, code: msg.code })
   }
 }

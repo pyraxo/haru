@@ -6,9 +6,11 @@ const chalk = require('chalk')
 const winston = require('winston')
 const moment = require('moment')
 const util = require('util')
-const { Client, Transmitter } = require('sylphy')
+const { Client } = require('sylphy')
 
-const { Cache, Database } = require('./plugins')
+global.Promise = require('bluebird')
+
+const { Cache, Database, Station } = require('./plugins')
 const { stripColor } = require('./utils')
 
 const resolve = (str) => path.join('src', str)
@@ -77,7 +79,7 @@ bot
   db: process.env.DB_DBNAME,
   authKey: process.env.DB_AUTHKEY
 })
-.createPlugin('ipc', Transmitter)
+.createPlugin('ipc', Station)
 .register('db', path.join(__dirname, 'models'))
 .register('ipc', resolve('ipc'))
 

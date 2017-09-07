@@ -7,9 +7,11 @@ module.exports = async function channelLogs (msg, bot) {
     }
     return process.send({
       op: 'resp',
-      d: resp
+      d: resp,
+      dest: msg.origin,
+      code: msg.code
     })
   } catch (err) {
-    return process.send({ op: 'resp', d: err.toString() })
+    return process.send({ op: 'resp', d: err.toString(), dest: msg.origin, code: msg.code })
   }
 }

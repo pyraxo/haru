@@ -158,7 +158,7 @@ class Credits extends Command {
       const data = await plugins.get('ipc').awaitResponse('query', {
         queries: [{ prop: 'users', query: 'id', input: res.map(u => u.id) }]
       })
-      const users = data.map(d => d.result[0])
+      const users = data.map(d => d[0])
       let unique = []
       for (let i = 0; i < users[0].length; i++) {
         if (users[0][i]) unique.push(users[0][i])

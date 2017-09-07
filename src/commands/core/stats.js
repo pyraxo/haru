@@ -22,14 +22,14 @@ class Stats extends Command {
     let stats = {
       u: [],
       g: [],
-      vc: 0,
-      tc: 0
+      tc: 0,
+      vc: 0
     }
     results.forEach(elem => {
-      stats.tc += elem.result.tc
-      stats.vc += elem.result.vc
-      stats.u = elem.result.us.split(';').filter(u => stats.u.indexOf(u) < 0)
-      stats.g = elem.result.gs.split(';').filter(g => stats.g.indexOf(g) < 0)
+      stats.tc += elem.tc
+      stats.vc += elem.vc
+      stats.u = elem.us.split(';').filter(u => stats.u.indexOf(u) < 0)
+      stats.g = elem.gs.split(';').filter(g => stats.g.indexOf(g) < 0)
     })
     return responder.embed({
       author: {
