@@ -28,8 +28,8 @@ class Stats extends Command {
     results.forEach(elem => {
       stats.tc += elem.tc
       stats.vc += elem.vc
-      stats.u = elem.us.split(';').filter(u => stats.u.indexOf(u) < 0)
-      stats.g = elem.gs.split(';').filter(g => stats.g.indexOf(g) < 0)
+      stats.u = stats.u.concat(elem.us)
+      stats.g = stats.g.concat(elem.gs)
     })
     return responder.embed({
       author: {
@@ -44,7 +44,7 @@ class Stats extends Command {
       fields: [
         {
           name: responder.t('{{users}}'),
-          value: stats.u.length,
+          value: [...new Set(stats.u)].length,
           inline: true
         },
         {
@@ -61,7 +61,7 @@ class Stats extends Command {
         },
         {
           name: responder.t('{{guilds}}'),
-          value: stats.g.length,
+          value: [...new Set(stats.g)].length,
           inline: true
         },
         {
