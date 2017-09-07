@@ -4,11 +4,10 @@ module.exports = function reloadFile (msg, client) {
   let payload = {
     op: 'resp',
     dest: msg.origin,
-    code: msg.code,
-    id: id
+    code: msg.code
   }
   if (!plugin) {
-    payload.d = { resp: 'invalid plugin' }
+    payload.d = { resp: 'invalid plugin', id }
     process.send(payload)
     return
   }
@@ -17,9 +16,9 @@ module.exports = function reloadFile (msg, client) {
     if (typeof plugin.reload === 'function') {
       plugin.reload()
     }
-    payload.d = { resp: 'success' }
+    payload.d = { resp: 'success', id }
   } catch (err) {
-    payload.d = { resp: err.toString() }
+    payload.d = { resp: err.toString(), id }
   } finally {
     process.send(payload)
   }
