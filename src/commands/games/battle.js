@@ -1,5 +1,5 @@
 const logger = require('winston')
-const { Command } = require('../../core')
+const { Command } = require('sylphy')
 
 class Battle extends Command {
   constructor (...args) {
@@ -10,7 +10,8 @@ class Battle extends Command {
       usage: [
         { name: 'action', displayName: '@user | accept | reject', types: ['member', 'string'] }
       ],
-      options: { localeKey: 'companion', guildOnly: true }
+      options: { localeKey: 'companion', guildOnly: true },
+      group: 'games'
     })
 
     this.respondTime = 60
@@ -21,8 +22,8 @@ class Battle extends Command {
     const { msg, plugins, settings, args, rawArgs, modules } = container
     const User = plugins.get('db').data.User
     const companions = modules.get('companions')
-    if (!companions) return logger.error('Companions module not found')
-    const userProfile = await data.User.fetchJoin(msg.author.id, { companion: true })
+    if (!companions) return this.logger.error('Companions module not found')
+    const userProfile = await User.fetchJoin(msg.author.id, { companion: true })
     if (!userProfile.companion) {
       return responder.error('{{noPet}}', { command: `**\`${settings.prefix}companion buy\`**` })
     }
@@ -57,7 +58,7 @@ class Battle extends Command {
       return responder.error('{{errors.moody}}')
     }
 
-    const oppProfile = await data.User.fetch(opp.id)
+    const oppProfile = await User.fetch(opp.id)
     if (!oppProfile.companion) return responder.error('{{errors.opponentNoCompanion}}')
     if (oppProfile.credits < this.entryFee) return responder.error('{{errors.cantChallenge}}')
     if (oppProfile.companion.hunger === 1) {
@@ -77,7 +78,7 @@ class Battle extends Command {
       })
     } catch (err) {
       if (err instanceof Error) {
-        logger.error(`Error creating battle - ${err}`)
+        this.logger.error(`Error creating battle - ${err}`)
         return responder.error('{{%ERROR}}')
       }
       return responder.error(`{{errors.${err}}}`)
@@ -100,7 +101,7 @@ class Battle extends Command {
       await p2.save()
     } catch (err) {
       if (err instanceof Error) {
-        logger.error(`Error deducting entry fee - ${err}`)
+        this.logger.error(`Error deducting entry fee - ${err}`)
         return responder.error('{{%ERROR}}')
       }
       return responder.error(`{{errors.${err}}}`)

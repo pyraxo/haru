@@ -1,5 +1,5 @@
 const logger = require('winston')
-const { Command, Permitter } = require('../../core')
+const { Command, Permitter } = require('sylphy')
 
 class Autorole extends Command {
   constructor (...args) {
