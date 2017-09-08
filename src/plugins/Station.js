@@ -36,17 +36,17 @@ class Station extends Collection {
     let payload = { op, d, dest, code }
     const procCount = parseInt(process.env['CLIENT_PROCESSES'], 10)
     return new Promise((resolve, reject) => {
-      let replies = new Collection()
+      let replies = []
       const awaitListener = (msg) => {
         const data = msg.data
         if (data.code !== code) return
         if (!['resp', 'error'].includes(data.op)) return
 
         if (data.op === 'error') return reject(data.d.error)
-        replies.set(data.origin, data.d)
+        replies[data.origin] = data.d
 
         for (let i = 0; i < procCount; i++) {
-          if (!replies.has(i)) return
+          if (!replies[i]) return
         }
         process.removeListener('message', awaitListener)
         return resolve(replies)
