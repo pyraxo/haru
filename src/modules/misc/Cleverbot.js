@@ -21,7 +21,7 @@ class Cleverbot extends Module {
           nick: nick
         })).body
       } catch (err) {
-        this.logger.error('Error initialising Cleverbot.io instance -', err)
+        this.logger.error('Error initialising Cleverbot.io instance', err)
         return
       }
       if (res.status === 'Error: reference name already exists' || res.status === 'success') {
@@ -44,7 +44,7 @@ class Cleverbot extends Module {
       }
       return this.send(channel, `💬  |  ${req.response}`)
     } catch (err) {
-      this.logger.error('Error querying Cleverbot.io -', err)
+      this.logger.error('Error querying Cleverbot.io', err)
     }
   }
 }

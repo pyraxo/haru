@@ -15,7 +15,7 @@ class Subscribe extends Command {
         last: true,
         unique: true
       }],
-      options: { guildOnly: true, localeKey: 'settings', botPerms: ['embedLinks'], permissions: ['manageGuild'] },
+      options: { guildOnly: true, localeKey: 'settings', botPerms: ['embedLinks'], modOnly: true },
       group: 'moderation'
     })
   }

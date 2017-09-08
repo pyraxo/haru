@@ -23,7 +23,7 @@ class Music extends Module {
     this.streams = {
       'listen.moe': {
         socket: 'https://listen.moe/api/v2/socket',
-        url: 'http://listen.moe:9999/stream'
+        url: 'http://listen.moe/stream'
       }
     }
     this.headers = {
@@ -79,7 +79,7 @@ class Music extends Module {
       this._connects = 0
       ws.on('close', () => {
         if (this._connects >= this._maxReconnects) return
-        this.logger.error(`Reopening closed ${stream.socket} socket`)
+        this.logger.debug(`Reopening closed ${stream.socket} socket`)
         this._connects++
         setTimeout(this.connectWS, 2500)
       })

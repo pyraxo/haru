@@ -76,7 +76,7 @@ class GuildLog extends Module {
       }
     }})
 
-    this.send(guild.defaultChannel, '{{join}}', {
+    this.send(guild.defaultChannel || guild.channels.find(c => c.name === 'general') || guild.id, '{{join}}', {
       help: `**\`${process.env.CLIENT_PREFIX}help\`**`,
       about: `**\`${process.env.CLIENT_PREFIX}info\`**`
     })
