@@ -19,7 +19,7 @@ class GuildLog extends Module {
   }
 
   init () {
-    this.db = this._client.plugins.get('db').data.models
+    this.db = this._client.plugins.get('db').data
     this.portal = this._client.plugins.get('modules').get('portal')
   }
 

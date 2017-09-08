@@ -26,7 +26,8 @@ class Credits extends Command {
           aliases: ['lb', 'leaderboards'],
           usage: [{ name: 'page', type: 'int', optional: true, default: 1 }]
         }
-      }
+      },
+      group: 'currency'
     })
   }
 
