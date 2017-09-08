@@ -29,11 +29,10 @@ class Music extends Module {
     this.headers = {
       'User-Agent': 'haru v2.0.0 (https://github.com/pyraxo/haru)'
     }
-
-    this.states = new Collection()
   }
 
   init () {
+    this.states = new Collection()
     this.redis = this._client.plugins.get('cache').client
     this.player = this._client.plugins.get('modules').get('music:player')
     this.queue = this._client.plugins.get('modules').get('music:queue')
@@ -95,7 +94,7 @@ class Music extends Module {
       if (conn.playing) conn.stopPlaying()
       conn.disconnect()
       if (state.channel) {
-        this.send(state.channel, ':info:  |  {{terminated}}')
+        this.send(state.channel, ':information_source:  |  {{terminated}}')
       }
     }
 
@@ -134,14 +133,14 @@ class Music extends Module {
   }
 
   modifyState (guildID, stateName, value) {
-    let state = this.states.get(guildID)
+    let state = this.getState(guildID)
     if (typeof state !== 'object') return
     state[stateName] = value
     this.states.set(guildID, state)
   }
 
   getBoundChannel (guildID) {
-    const connection = this.states.get(guildID)
+    const connection = this.getState(guildID)
     return connection ? connection.channel : null
   }
 
@@ -228,7 +227,7 @@ class Music extends Module {
   }
 
   async getInfo (url, fetchAll = false) {
-    const key = 'music:info:' + this.hash(url)
+    const key = 'music:information_source:' + this.hash(url)
     let info = await this.redis.getAsync(key).catch(() => false)
     if (info) return JSON.parse(info)
 
@@ -317,7 +316,7 @@ class Music extends Module {
     }
 
     if (!await this.queue.getLength(guildId)) {
-      this.send(textChannel, ':info:  |  {{queueFinish}}')
+      this.send(textChannel, ':information_source:  |  {{queueFinish}}')
       return this.player.stop(channel)
     }
 
@@ -386,11 +385,11 @@ class Music extends Module {
     const textChannel = this.getBoundChannel(guildId)
     try {
       await this.queue.clear(guildId)
-      return this.send(textChannel, ':success:  |  {{clearQueue}}')
+      return this.send(textChannel, ':white_check_mark:  |  {{clearQueue}}')
     } catch (err) {
       this.logger.error(`Could not clear queue for ${guildId} -`, err)
 
-      return this.send(textChannel, ':error:  |  {{%ERROR_FULL}}')
+      return this.send(textChannel, ':negative_squared_cross_mark:  |  {{%ERROR_FULL}}')
     }
   }
 
@@ -481,7 +480,7 @@ class Music extends Module {
         .catch(err => {
           this.send(
             msg.channel,
-            `:error:  |  **${msg.author.username}**, ${
+            `:negative_squared_cross_mark:  |  **${msg.author.username}**, ${
               err instanceof Error
               ? `{{errors.errorQueue}}\n\n${err.message}`
               : `{{errors.${err}}}`
@@ -510,10 +509,10 @@ class Music extends Module {
 
         const firstVideo = await this.queueMulti(playlist.items, msg, voiceChannel, settings.prefix)
         if (!firstVideo) {
-          return this.edit(m, `:error:  |  **${msg.author.username}**, {{errors.emptyPlaylist}}`)
+          return this.edit(m, `:negative_squared_cross_mark:  |  **${msg.author.username}**, {{errors.emptyPlaylist}}`)
         }
 
-        await this.edit(m, `:success:  |  {{queuedMulti}} - **${msg.author.mention}**`, {
+        await this.edit(m, `:white_check_mark:  |  {{queuedMulti}} - **${msg.author.mention}**`, {
           num: playlist.results > 50 ? 50 : playlist.results - 1
         })
         return this.deleteMessages(msg)
@@ -522,7 +521,7 @@ class Music extends Module {
         const info = await this.add(msg.channel.guild.id, voiceChannel, `https://www.youtube.com/watch?v=${videoID}`)
         const length = info.length ? `(${moment.duration(info.length, 'seconds').format('h[h] m[m] s[s]')}) ` : ''
 
-        await this.send(msg.channel, `:success:  |  {{queued}} **${info.title}** ${length}- **${msg.author.mention}**`)
+        await this.send(msg.channel, `:white_check_mark:  |  {{queued}} **${info.title}** ${length}- **${msg.author.mention}**`)
         return this.deleteMessages(msg)
       }
     } catch (err) {
@@ -532,9 +531,9 @@ class Music extends Module {
           `${msg.channel.guild.name} (${msg.channel.guild.id})'s queue -`,
           err
         )
-        return this.send(msg.channel, `:error:  |  **${msg.author.username}**, {{%ERROR}}\n\n${err}`)
+        return this.send(msg.channel, `:negative_squared_cross_mark:  |  **${msg.author.username}**, {{%ERROR}}\n\n${err}`)
       }
-      return this.send(msg.channel, `:error:  |  **${msg.author.username}**, {{errors.${err}}}`, { command: `**\`${settings.prefix}summon\`**` })
+      return this.send(msg.channel, `:negative_squared_cross_mark:  |  **${msg.author.username}**, {{errors.${err}}}`, { command: `**\`${settings.prefix}summon\`**` })
     }
   }
 
@@ -562,10 +561,10 @@ class Music extends Module {
       const info = await this.queueSong(msg.channel.guild.id, voiceChannel, await this.querySC(query))
       const length = info.length ? `(${moment.duration(info.length, 'seconds').format('h[h] m[m] s[s]')}) ` : ''
 
-      return this.send(msg.channel, `:success:  |  {{queued}} **${info.title}** ${length}- **${msg.author.mention}**`)
+      return this.send(msg.channel, `:white_check_mark:  |  {{queued}} **${info.title}** ${length}- **${msg.author.mention}**`)
     } catch (err) {
       this.logger.error(`Error querying SC with ${query} -`, err)
-      return this.send(msg.channel, `:error:  |  **${msg.author.username}**, {{%ERROR}}\n\n${err}`)
+      return this.send(msg.channel, `:negative_squared_cross_mark:  |  **${msg.author.username}**, {{%ERROR}}\n\n${err}`)
     }
   }
 }

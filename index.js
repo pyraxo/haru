@@ -1,8 +1,6 @@
 const fs = require('fs')
-const chalk = require('chalk')
 const path = require('path')
-const moment = require('moment')
-const { Crystal } = require('sylphy')
+const pm2 = require('pm2')
 
 global.Promise = require('bluebird')
 
@@ -14,25 +12,39 @@ require('dotenv-safe').config({
 
 !fs.existsSync('./logs') && fs.mkdirSync('./logs')
 
-if (process.env['NODE_APP_INSTANCE']) {
-  require('./src')
-} else {
-  // pm2 is preferred to run the bot, and may be enforced in the future
-  const cluster = new Crystal(path.join('src', 'index.js'), parseInt(process.env.CLIENT_PROCESSES, 10))
-  const timestamp = () => `[${chalk.grey(moment().format('HH:mm:ss'))}]`
+const procCount = parseInt(process.env['CLIENT_PROCESSES'], 10)
 
-  cluster.on('error', console.log)
+process.on('unhandledRejection', (r, p) =>
+  r && console.error('Unhandled rejection:', p, 'reason:', r.message)
+)
 
-  cluster.on('clusterCreate', id =>
-    console.log(`${timestamp()} [MASTER]: CLUSTER ${chalk.cyan.bold(id)} ONLINE`)
-  )
+pm2.launchBus((err, bus) => {
+  if (err) console.error(err)
 
-  cluster.createClusters().then(
-    () => console.log(`${timestamp()} [MASTER]: ` + chalk.magenta('We\'re live, ladies and gentlemen.')),
-    err => console.error(err)
-  )
-}
-
-process.on('unhandledRejection', (r, p) => {
-  console.error('Unhandled rejection:', p, 'reason:', r.message)
+  bus.on('process:msg', packet => {
+    const data = packet.raw
+    const payload = {
+      op: data.op,
+      d: data.d,
+      origin: packet.process.pm_id % procCount,
+      code: data.code
+    }
+    if (data.dest === -1) {
+      // warning: this assumes id count starts from 0
+      // recommended to query pm2 via connect+list first
+      for (let i = 0; i < procCount; i++) {
+        pm2.sendDataToProcessId(i, {
+          type: 'process:msg',
+          data: payload,
+          topic: 'broadcast'
+        }, err => err && console.error(err))
+      }
+    } else {
+      pm2.sendDataToProcessId(data.dest, {
+        type: 'process:msg',
+        data: payload,
+        topic: 'relay'
+      }, err => err && console.error(err))
+    }
+  })
 })

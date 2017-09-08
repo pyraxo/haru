@@ -15,21 +15,20 @@ class Stats extends Command {
     try {
       var results = await client.plugins.get('ipc').awaitResponse('stats')
     } catch (err) {
-      this.logger.error('Could not fetch stats')
-      this.logger.error(err)
+      this.logger.error('Could not fetch stats', err)
       return responder.error()
     }
     let stats = {
       u: [],
       g: [],
-      vc: 0,
-      tc: 0
+      tc: 0,
+      vc: 0
     }
     results.forEach(elem => {
-      stats.tc += elem.result.tc
-      stats.vc += elem.result.vc
-      stats.u = elem.result.us.split(';').filter(u => stats.u.indexOf(u) < 0)
-      stats.g = elem.result.gs.split(';').filter(g => stats.g.indexOf(g) < 0)
+      stats.tc += elem.tc
+      stats.vc += elem.vc
+      stats.u = stats.u.concat(elem.us)
+      stats.g = stats.g.concat(elem.gs)
     })
     return responder.embed({
       author: {
@@ -44,7 +43,7 @@ class Stats extends Command {
       fields: [
         {
           name: responder.t('{{users}}'),
-          value: stats.u.length,
+          value: [...new Set(stats.u)].length,
           inline: true
         },
         {
@@ -61,7 +60,7 @@ class Stats extends Command {
         },
         {
           name: responder.t('{{guilds}}'),
-          value: stats.g.length,
+          value: [...new Set(stats.g)].length,
           inline: true
         },
         {

@@ -26,7 +26,8 @@ class Credits extends Command {
           aliases: ['lb', 'leaderboards'],
           usage: [{ name: 'page', type: 'int', optional: true, default: 1 }]
         }
-      }
+      },
+      group: 'currency'
     })
   }
 
@@ -158,7 +159,7 @@ class Credits extends Command {
       const data = await plugins.get('ipc').awaitResponse('query', {
         queries: [{ prop: 'users', query: 'id', input: res.map(u => u.id) }]
       })
-      const users = data.map(d => d.result[0])
+      const users = data.map(d => d[0])
       let unique = []
       for (let i = 0; i < users[0].length; i++) {
         if (users[0][i]) unique.push(users[0][i])
@@ -195,8 +196,7 @@ class Credits extends Command {
         '```'
       ].join('\n'))
     } catch (err) {
-      this.logger.error('Error getting top credits scoreboards')
-      this.logger.error(err)
+      this.logger.error('Error getting top credits scoreboards', err)
       return responder.error()
     }
   }

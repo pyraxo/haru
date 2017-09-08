@@ -33,8 +33,6 @@ class RSS extends Module {
   }
 
   scanFeed (feed) {
-    const portal = this.portal
-    if (!portal) return
     return new Promise((resolve, reject) => {
       if (!feed.channels || !feed.channels.length) return resolve()
       const fparse = new Feedparser()

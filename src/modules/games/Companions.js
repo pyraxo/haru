@@ -24,7 +24,7 @@ class Companions extends Module {
     this.battles = new Collection()
     fs.readFile(path.join(process.cwd(), 'res', 'config', 'companions.json'), (err, res) => {
       if (err) {
-        this.logger.error('Could not read companions configuration -', err)
+        this.logger.error('Could not read companions configuration', err)
         return
       }
 
@@ -180,7 +180,7 @@ class Companions extends Module {
 
       const res = this.outcomes[~~(Math.random() * 100)]
       if (!stats[attacker] || !stats[receiver]) return
-      if (battle._turn < 0) battle._actions.push(':info:  **Match begins!**')
+      if (battle._turn < 0) battle._actions.push(':information_source:  **Match begins!**')
       battle._turn = turn
 
       const crit = stats[attacker].crit

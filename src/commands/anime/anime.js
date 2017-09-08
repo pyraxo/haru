@@ -1,6 +1,6 @@
 const moment = require('moment')
 const nani = require('nani')
-const { Command } = require('sylphy')
+const { Command, utils } = require('sylphy')
 
 const seasons = {
   1: 'winter',
@@ -44,7 +44,7 @@ class Anime extends Command {
     if (!data) return
 
     return responder.embed({
-      color: this.colours.blue,
+      color: utils.getColour('blue'),
       author: {
         name: (data.title_english || data.title_romaji) + ' • ' + data.title_japanese,
         url: `http://www.anilist.co/anime/${data.id}`,

@@ -29,10 +29,6 @@ class Butler extends Module {
     this.db = this._client.plugins.get('db').data
   }
 
-  unload () {
-    this.db = null
-  }
-
   onJoin (guild, member) {
     this.db.Guild.fetch(guild.id).then(settings =>
       typeof settings.welcome === 'object' &&
@@ -49,11 +45,11 @@ class Butler extends Module {
           humans: guild.members.filter(m => !m.bot).length
         }))
       )
-    ).catch(err => this.logger.error('Error sending welcome message -', err))
+    ).catch(err => this.logger.error('Error sending welcome message', err))
     this.db.Guild.fetch(guild.id).then(settings =>
       typeof settings.autorole === 'string' &&
       member.addRole(settings.autorole, 'Added role on user join -haru')
-    ).catch(err => this.logger.error('Error setting role -', err))
+    ).catch(err => this.logger.error('Error setting role', err))
   }
 
   onLeave (guild, member) {
@@ -70,7 +66,7 @@ class Butler extends Module {
         members: guild.members.size,
         humans: guild.members.filter(m => !m.bot).length
       }))
-    ).catch(err => this.logger.error('Error sending goodbye message -', err))
+    ).catch(err => this.logger.error('Error sending goodbye message', err))
   }
 }
 

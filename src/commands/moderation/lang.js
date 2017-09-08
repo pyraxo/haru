@@ -14,7 +14,7 @@ class Lang extends Command {
           'en', 'pt', 'nl', 'ro', 'bg', 'de', 'fr', 'it', 'zh', 'es', 'tr', 'ru'
         ]
       }],
-      options: { guildOnly: true, localeKey: 'settings', permissions: ['manageGuild'] },
+      options: { guildOnly: true, localeKey: 'settings', modOnly: true },
       group: 'moderation'
     })
   }

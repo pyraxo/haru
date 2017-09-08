@@ -4,45 +4,62 @@ require('moment-duration-format')
 const path = require('path')
 const chalk = require('chalk')
 const winston = require('winston')
+const Sentry = require('winston-raven-sentry')
 const moment = require('moment')
 const util = require('util')
-const { Client, Transmitter } = require('sylphy')
+const { Client } = require('sylphy')
 
-const { Cache, Database } = require('./plugins')
+global.Promise = require('bluebird')
+require('longjohn')
+require('dotenv-safe').config({
+  path: path.join(process.cwd(), '.env'),
+  allowEmptyValues: true
+})
+
+const { Cache, Database, Station } = require('./plugins')
 const { stripColor } = require('./utils')
 
 const resolve = (str) => path.join('src', str)
 
-const processID = parseInt(process.env['NODE_APP_INSTANCE'], 10)
+const processCount = parseInt(process.env['CLIENT_PROCESSES'], 10)
+const processID = parseInt(process.env['NODE_APP_INSTANCE'], 10) % processCount
 const processShards = parseInt(process.env['CLIENT_SHARDS_PER_PROCESS'] || 1, 10)
 const firstShardID = processID * processShards
 const lastShardID = firstShardID + processShards - 1
-const maxShards = processShards * parseInt(process.env['CLIENT_PROCESSES'], 10)
+const maxShards = processShards * processCount
 
-const logger = new (winston.Logger)({
-  transports: [
-    new (winston.transports.Console)({
-      level: 'silly',
-      colorize: true,
-      label: processShards > 1 ? `C ${firstShardID}-${lastShardID}` : `C ${processID}`,
-      timestamp: () => `[${chalk.grey(moment().format('HH:mm:ss'))}]`
-    }),
-    new (winston.transports.DailyRotateFile)({
-      colorize: false,
-      datePattern: '.yyyy-MM-dd',
-      prepend: true,
-      json: false,
-      formatter: function ({ level, message = '', meta = {}, formatter, depth, colorize }) {
-        const timestamp = moment().format('YYYY-MM-DD hh:mm:ss a')
-        const obj = Object.keys(meta).length
-        ? `\n\t${meta.stack ? meta.stack : util.inspect(meta, false, depth || null, colorize)}`
-        : ''
-        return `${timestamp} ${level.toUpperCase()} ${stripColor(message)} ${obj}`
-      },
-      filename: path.join(process.cwd(), `logs/shard-${processID}.log`),
-    })
-  ]
-})
+const transports = [
+  new (winston.transports.Console)({
+    level: 'silly',
+    colorize: true,
+    label: processShards > 1 ? `C ${firstShardID}-${lastShardID}` : `C ${processID}`,
+    timestamp: () => `[${chalk.grey(moment().format('HH:mm:ss'))}]`
+  }),
+  new (winston.transports.DailyRotateFile)({
+    colorize: false,
+    datePattern: '.yyyy-MM-dd',
+    prepend: true,
+    json: false,
+    formatter: function ({ level, message = '', meta = {}, formatter, depth, colorize }) {
+      const timestamp = moment().format('YYYY-MM-DD hh:mm:ss a')
+      const obj = Object.keys(meta).length
+      ? `\n\t${meta.stack ? meta.stack : util.inspect(meta, false, depth || null, colorize)}`
+      : ''
+      return `${timestamp} ${level.toUpperCase()} ${stripColor(message)} ${obj}`
+    },
+    filename: path.join(process.cwd(), `logs/shard-${processID}.log`),
+  })
+]
+
+if (process.env['SENTRY_DSN']) {
+  transports.push(new Sentry({
+    dsn: process.env['SENTRY_DSN'],
+    level: 'warn',
+    install: true
+  }))
+}
+
+const logger = new (winston.Logger)({ transports })
 
 const bot = new Client({
   token: process.env['CLIENT_TOKEN'],
@@ -77,7 +94,7 @@ bot
   db: process.env.DB_DBNAME,
   authKey: process.env.DB_AUTHKEY
 })
-.createPlugin('ipc', Transmitter)
+.createPlugin('ipc', Station)
 .register('db', path.join(__dirname, 'models'))
 .register('ipc', resolve('ipc'))
 
@@ -100,5 +117,9 @@ bot.on('ready', () => {
 })
 
 bot.on('error', bot.logger.error)
+
+process.on('unhandledRejection', (r, p) =>
+  r && bot.logger.error('Unhandled rejection:', p, 'reason:', r.message)
+)
 
 bot.run()

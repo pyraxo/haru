@@ -5,7 +5,7 @@ class Welcome extends Command {
     super(...args, {
       name: 'welcome',
       description: 'Allows moderators to send welcome messages',
-      options: { guildOnly: true, localeKey: 'settings', permissions: ['manageGuild'] },
+      options: { guildOnly: true, localeKey: 'settings', modOnly: true },
       group: 'moderation'
     })
   }

@@ -17,7 +17,7 @@ class Purge extends Command {
           unique: true
         }
       ],
-      options: { guildOnly: true, permissions: ['manageGuild'] },
+      options: { guildOnly: true, modOnly: true },
       group: 'moderation'
     })
   }
