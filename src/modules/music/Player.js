@@ -33,7 +33,7 @@ class Player extends Module {
       if (err) {
         this.stop(channel).then(() => {
           const textChannel = this.manager.getBoundChannel(channel.guild.id)
-          this.send(textChannel, ':stop:  |  {{errors.error}}')
+          this.send(textChannel, ':stop_button:  |  {{errors.error}}')
           this.stream(channel, url, volume)
           this.logger.error(`Encountered an error while playing stream to ${conn.id} -`, err)
         })
@@ -42,7 +42,7 @@ class Player extends Module {
 
     conn.once('end', () => {
       const textChannel = this.manager.getBoundChannel(channel.guild.id)
-      this.send(textChannel, `:stop:  |  {{finishedPlaying}} **${url}**`)
+      this.send(textChannel, `:stop_button:  |  {{finishedPlaying}} **${url}**`)
       this.stop(channel)
     })
 
@@ -81,7 +81,7 @@ class Player extends Module {
 
     conn.once('end', () => {
       this.manager.modifyState(channel.guild.id, 'state', null)
-      this.send(textChannel, `:stop:  |  {{finishedPlaying}} **${mediaInfo.title}** `)
+      this.send(textChannel, `:stop_button:  |  {{finishedPlaying}} **${mediaInfo.title}** `)
       if (channel.voiceMembers.size === 1 && channel.voiceMembers.has(this._client.user.id)) {
         return this.stop(channel, true)
       }
@@ -112,7 +112,7 @@ class Player extends Module {
     this.logger.info(`Playing ${mediaInfo.title} in ${channel.guild.name} (${channel.guild.id})`)
 
     return this.send(textChannel, [
-      `:play:  |  {{nowPlaying}}: **${mediaInfo.title}** ` +
+      `:arrow_forward:  |  {{nowPlaying}}: **${mediaInfo.title}** ` +
       (mediaInfo.length ? `(${moment.duration(mediaInfo.length, 'seconds').format('h[h] m[m] s[s]')})` : ''),
       `<${mediaInfo.url}>`
     ])
@@ -149,7 +149,7 @@ class Player extends Module {
       return
     }
     const result = await this.queue.shift(guildID)
-    this.send(textChannel, `:skip:  |  {{skipping}} **${this.manager.getPlaying(guildID).title}**`)
+    this.send(textChannel, `:fast_forward:  |  {{skipping}} **${this.manager.getPlaying(guildID).title}**`)
     return this.manager.play(channel, result)
   }
 }
