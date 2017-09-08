@@ -196,7 +196,7 @@ class Credits extends Command {
         '```'
       ].join('\n'))
     } catch (err) {
-      this.logger.error('Error getting top credits scoreboards -', err)
+      this.logger.error('Error getting top credits scoreboards', err)
       return responder.error()
     }
   }

@@ -4,6 +4,7 @@ require('moment-duration-format')
 const path = require('path')
 const chalk = require('chalk')
 const winston = require('winston')
+const Sentry = require('winston-raven-sentry')
 const moment = require('moment')
 const util = require('util')
 const { Client } = require('sylphy')
@@ -48,6 +49,11 @@ const logger = new (winston.Logger)({
         return `${timestamp} ${level.toUpperCase()} ${stripColor(message)} ${obj}`
       },
       filename: path.join(process.cwd(), `logs/shard-${processID}.log`),
+    }),
+    new Sentry({
+      dsn: process.env['SENTRY_DSN'],
+      level: 'warn',
+      install: true
     })
   ]
 })

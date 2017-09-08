@@ -24,7 +24,7 @@ class Companions extends Module {
     this.battles = new Collection()
     fs.readFile(path.join(process.cwd(), 'res', 'config', 'companions.json'), (err, res) => {
       if (err) {
-        this.logger.error('Could not read companions configuration -', err)
+        this.logger.error('Could not read companions configuration', err)
         return
       }
 
