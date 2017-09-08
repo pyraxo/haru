@@ -30,6 +30,7 @@ class Portal extends Module {
   }
 
   messageCreate (msg) {
+    if (msg.author.bot) return
     const portal = this.portals.get(msg.channel.id)
     if (!portal) return
     const wrapper = portal.messageWrapper
@@ -56,9 +57,10 @@ class Portal extends Module {
   }
 
   tunnel (channelID, content, options) {
-    return this.ipc.send('broadcast', {
+    return process.send({
       op: 'messagePortal',
-      d: { channelID, content, options }
+      d: { channelID, content, options },
+      dest: -1
     })
   }
 }

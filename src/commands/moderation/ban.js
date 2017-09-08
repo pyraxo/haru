@@ -17,7 +17,7 @@ class Ban extends Command {
         { name: 'member', type: 'member', optional: false },
         { name: 'reason', displayName: '[reason]', last: true, type: 'string', optional: true }
       ],
-      options: { guildOnly: true, localeKey: 'guilds', permissions: ['manageGuild'] },
+      options: { guildOnly: true, localeKey: 'guilds', modOnly: true },
       group: 'moderation'
     })
   }
