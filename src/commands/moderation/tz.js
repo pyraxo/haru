@@ -8,7 +8,7 @@ class Timezone extends Command {
       description: 'Allows moderators to set a guild\'s timezone',
       aliases: ['tz'],
       usage: [{ name: 'tz', type: 'string', optional: true }],
-      options: { guildOnly: true, localeKey: 'settings', permissions: ['manageGuild'] },
+      options: { guildOnly: true, localeKey: 'settings', modOnly: true },
       group: 'moderation'
     })
   }

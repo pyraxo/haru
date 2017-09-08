@@ -15,7 +15,7 @@ class Stats extends Command {
     try {
       var results = await client.plugins.get('ipc').awaitResponse('stats')
     } catch (err) {
-      this.logger.error('Could not fetch stats -', err)
+      this.logger.error('Could not fetch stats', err)
       return responder.error()
     }
     let stats = {

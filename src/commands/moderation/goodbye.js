@@ -5,7 +5,7 @@ class Goodbye extends Command {
     super(...args, {
       name: 'goodbye',
       description: 'Allows moderators to send goodbye PMs',
-      options: { guildOnly: true, localeKey: 'settings', permissions: ['manageGuild'] },
+      options: { guildOnly: true, localeKey: 'settings', modOnly: true },
       group: 'moderation'
     })
   }
