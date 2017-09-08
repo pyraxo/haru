@@ -6,7 +6,8 @@ class Shop extends Command {
     super(...args, {
       name: 'shop',
       description: 'A small shop to buy things with credits',
-      options: { localeKey: 'shop' }
+      options: { localeKey: 'shop' },
+      group: 'games'
     })
   }
 

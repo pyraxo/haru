@@ -18,7 +18,8 @@ class Autorole extends Command {
           aliases: ['delete']
         }
       },
-      options: { guildOnly: true, localeKey: 'settings', modOnly: true }
+      options: { guildOnly: true, localeKey: 'settings', modOnly: true },
+      group: 'moderation'
     })
   }
 
