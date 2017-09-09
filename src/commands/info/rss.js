@@ -57,7 +57,7 @@ class RSS extends Command {
       }
     } catch (err) {
       if (err) {
-        this.logger.error(`Could not validate ${args.url} -`, err)
+        this.logger.error(`Could not validate ${args.url}`, err)
         return responder.error('{{error}}', { url: `**${args.url}**` })
       }
     }

@@ -32,7 +32,7 @@ class Autorole extends Command {
       let role = msg.channel.guild.roles.get(settings.autorole).name
       return responder.format('emoji:info').reply('{{autorole.current}}', { role: `**${role}**` })
     } catch (err) {
-      logger.error(`Could not list autorole for ${msg.channel.guild.name} (${msg.channel.guild.id}) - ${err}`)
+      this.logger.error(`Could not load autorole for ${msg.channel.guild.name} (${msg.channel.guild.id})`, err)
       return responder.error()
     }
   }
@@ -45,7 +45,7 @@ class Autorole extends Command {
         role: `**\`${args.role[0].name}\`**`
       })
     } catch (err) {
-      logger.error(`Could not add autorole for ${msg.channel.guild.name} (${msg.channel.guild.id}) - ${err}`)
+      this.logger.error(`Could not add autorole for ${msg.channel.guild.name} (${msg.channel.guild.id})`, err)
       return responder.error()
     }
   }

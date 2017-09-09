@@ -35,7 +35,7 @@ class Repeat extends Command {
 
       return responder.success(`{{repeat${isRepeat ? 'Off' : 'On'}}}`)
     } catch (err) {
-      this.logger.error(`Error toggling repeat for ${msg.channel.guild.name} (${msg.channel.guild.id}) -`, err)
+      this.logger.error(`Error toggling repeat for ${msg.channel.guild.name} (${msg.channel.guild.id})`, err)
       return responder.error()
     }
   }

@@ -30,7 +30,7 @@ class Timezone extends Command {
         tz: `**\`${args.tz}\`**`
       })
     } catch (err) {
-      this.logger.error(`Could not change timezone to '${args.tz}' for ${msg.channel.guild.name} (${msg.channel.guild.id}) -`, err)
+      this.logger.error(`Could not change timezone to '${args.tz}' for ${msg.channel.guild.name} (${msg.channel.guild.id})`, err)
       return responder.error()
     }
   }

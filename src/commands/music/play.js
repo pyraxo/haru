@@ -46,7 +46,7 @@ class Play extends Command {
         }
         return music.play(voiceChannel)
       } catch (err) {
-        this.logger.error(`Encountered erroring querying queue length for ${msg.channel.guild.id} -`, err)
+        this.logger.error(`Encountered erroring querying queue length for ${msg.channel.guild.id}`, err)
         responder.error('{{%ERROR}}')
       }
     }
@@ -71,7 +71,7 @@ class Play extends Command {
       return responder.format('emoji:success').send(`{{queued}} **${info.title}** ${length}- ${msg.author.mention}`)
     } catch (err) {
       if (err instanceof Error) {
-        this.logger.error(`Error adding query ${text} to ${msg.channel.guild.name} (${msg.channel.guild.id})'s queue -`, err)
+        this.logger.error(`Error adding query ${text} to ${msg.channel.guild.name} (${msg.channel.guild.id})'s queue`, err)
         return responder.error('{{%ERROR}}')
       }
       return responder.error(`{{errors.${err}}}`, { command: `**\`${settings.prefix}summon\`**` })

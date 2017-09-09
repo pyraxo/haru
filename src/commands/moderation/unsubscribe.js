@@ -47,7 +47,7 @@ class Unsubscribe extends Command {
     } catch (err) {
       this.logger.error(
         `Error saving unsubscribed events for #${msg.channel.name} (${msg.channel.id}) ` +
-        `in ${msg.channel.guild.name} (${msg.channel.guild.id}) -`,
+        `in ${msg.channel.guild.name} (${msg.channel.guild.id})`,
         err
       )
       return responder.error()
