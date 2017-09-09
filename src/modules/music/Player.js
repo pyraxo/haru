@@ -35,7 +35,7 @@ class Player extends Module {
           const textChannel = this.manager.getBoundChannel(channel.guild.id)
           this.send(textChannel, ':stop_button:  |  {{errors.error}}')
           this.stream(channel, url, volume)
-          this.logger.error(`Encountered an error while playing stream to ${conn.id} -`, err)
+          this.logger.error(`Encountered an error while playing stream to ${conn.id}`, err)
         })
       }
     })
@@ -72,7 +72,7 @@ class Player extends Module {
     conn.once('error', err => {
       if (err) {
         this.stop(channel, true).then(() => {
-          this.logger.error(`Encountered an error while streaming to ${conn.id} -`, err)
+          this.logger.error(`Encountered an error while streaming to ${conn.id}`, err)
           // return this.play(channel, mediaInfo, volume)
           return this.send(textChannel, '{{errors.connError}}', { err: `**${err.message || 'Stream error'}**` })
         })

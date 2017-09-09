@@ -74,7 +74,7 @@ class Purge extends Command {
     } catch (err) {
       this.logger.error(
         `Could not purge ${args.amount} messages from #${msg.channel.name} ` +
-        `(${msg.channel.id}) in ${msg.channel.guild.name} (${msg.channel.guild.id}) -`,
+        `(${msg.channel.id}) in ${msg.channel.guild.name} (${msg.channel.guild.id})`,
         err
       )
       return responder.error()
