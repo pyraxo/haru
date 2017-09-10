@@ -2,7 +2,7 @@ const util = require('util')
 
 module.exports = function evaluate (msg, client) {
   const content = msg.d ? msg.d.content || true : true
-  const id = parseInt(process.env['NODE_APP_INSTANCE'], 10) % parseInt(process.env['CLIENT_PROCESSES'], 10)  
+  const id = parseInt(process.env['NODE_APP_INSTANCE'], 10) % parseInt(process.env['CLIENT_PROCESSES'], 10)
   let resp
   try {
     resp = eval(String(content)) // eslint-disable-line
