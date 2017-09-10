@@ -36,7 +36,7 @@ class Summon extends Command {
       })
     } catch (err) {
       if (err instanceof Error) {
-        this.logger.error(`Could not join voice channel ${channel} in ${msg.channel.guild.name} (${msg.channel.guild.id}) -`, err)
+        this.logger.error(`Could not join voice channel ${channel} in ${msg.channel.guild.name} (${msg.channel.guild.id})`, err)
         return
       }
       return responder.error(`{{errors.${err}}}`, {

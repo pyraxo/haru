@@ -43,7 +43,7 @@ class Goodbye extends Command {
         '```'
       ]), err => {
         if (typeof err === 'undefined') return
-        this.logger.error(`Error setting goodbye message for ${msg.channel.guild.name} (${msg.channel.guild.id}) -`, err)
+        this.logger.error(`Error setting goodbye message for ${msg.channel.guild.name} (${msg.channel.guild.id})`, err)
         return responder.error()
       }
     )

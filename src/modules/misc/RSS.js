@@ -39,7 +39,7 @@ class RSS extends Module {
 
       fparse
       .once('error', err => {
-        this.logger.error(`Error while parsing ${feed.id} -`, err)
+        this.logger.error(`Error while parsing ${feed.id}`, err)
         return resolve()
       })
       .once('readable', function readable () {

@@ -27,7 +27,7 @@ class Lang extends Command {
         lang: `**\`${args.lang}\`**`
       })
     } catch (err) {
-      this.logger.error(`Could not change language to '${args.lang}' for ${msg.channel.guild.name} (${msg.channel.guild.id}) -`, err)
+      this.logger.error(`Could not change language to '${args.lang}' for ${msg.channel.guild.name} (${msg.channel.guild.id})`, err)
       return responder.error()
     }
   }

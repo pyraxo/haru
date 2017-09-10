@@ -72,10 +72,10 @@ class Music extends Module {
             })(streamName)
           }
         } catch (err) {
-          this.logger.error(`Error parsing ${stream.socket} message -`, err)
+          this.logger.error(`Error parsing ${stream.socket} message`, err)
         }
       })
-      ws.on('error', err => err && this.logger.error(`Error occurred with ${stream.socket} -`, err))
+      ws.on('error', err => err && this.logger.error(`Error occurred with ${stream.socket}`, err))
       this._connects = 0
       ws.on('close', () => {
         if (this._connects >= this._maxReconnects) return
@@ -174,7 +174,7 @@ class Music extends Module {
     try {
       return await this._client.joinVoiceChannel(voiceID)
     } catch (err) {
-      this.logger.error(`Could not join voice channel ${voiceID} in ${guild.name} (${guild.id}) -`, err)
+      this.logger.error(`Could not join voice channel ${voiceID} in ${guild.name} (${guild.id})`, err)
       return Promise.reject('error')
     }
   }
@@ -255,7 +255,7 @@ class Music extends Module {
       formattedInfo.audiourl,
       this.hash(info.url) + (formattedInfo.audioformat === 'webm' ? '.webm' : '.flv')
     ).catch(err => {
-      this.logger.error(`Could not download from ${url} -`, err)
+      this.logger.error(`Could not download from ${url}`, err)
       return false
     })
     return info
@@ -387,7 +387,7 @@ class Music extends Module {
       await this.queue.clear(guildId)
       return this.send(textChannel, ':white_check_mark:  |  {{clearQueue}}')
     } catch (err) {
-      this.logger.error(`Could not clear queue for ${guildId} -`, err)
+      this.logger.error(`Could not clear queue for ${guildId}`, err)
 
       return this.send(textChannel, ':negative_squared_cross_mark:  |  {{%ERROR_FULL}}')
     }
@@ -402,7 +402,7 @@ class Music extends Module {
       ? res.error ? Promise.reject('error') : Promise.reject('notFound')
       : videoID
     } catch (err) {
-      this.logger.error(`Error encountered while validating video ${videoID} -`, err)
+      this.logger.error(`Error encountered while validating video ${videoID}`, err)
       return Promise.reject(err)
     }
   }
@@ -434,7 +434,7 @@ class Music extends Module {
       return playlistInfo
     } catch (err) {
       if (err instanceof Error) {
-        this.logger.error(`Error encountered while querying playlist ${pid} -`, err)
+        this.logger.error(`Error encountered while querying playlist ${pid}`, err)
       }
       throw err
     }
@@ -528,7 +528,7 @@ class Music extends Module {
       if (err instanceof Error) {
         this.logger.error(
           `Error adding ${query.v ? 'song ' + query.v : 'playlist ' + query.pid} to ` +
-          `${msg.channel.guild.name} (${msg.channel.guild.id})'s queue -`,
+          `${msg.channel.guild.name} (${msg.channel.guild.id})'s queue`,
           err
         )
         return this.send(msg.channel, `:negative_squared_cross_mark:  |  **${msg.author.username}**, {{%ERROR}}\n\n${err}`)
@@ -563,7 +563,7 @@ class Music extends Module {
 
       return this.send(msg.channel, `:white_check_mark:  |  {{queued}} **${info.title}** ${length}- **${msg.author.mention}**`)
     } catch (err) {
-      this.logger.error(`Error querying SC with ${query} -`, err)
+      this.logger.error(`Error querying SC with ${query}`, err)
       return this.send(msg.channel, `:negative_squared_cross_mark:  |  **${msg.author.username}**, {{%ERROR}}\n\n${err}`)
     }
   }

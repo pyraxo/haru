@@ -257,9 +257,8 @@ class Companions extends Command {
     try {
       await companion.save()
       await user.saveAll({ companion: true })
-      await db.models.User.update(user.id, user)
     } catch (err) {
-      this.logger.error(`Could not save after companion purchase: ${err}`)
+      this.logger.error(`Could not save after companion purchase`, err)
       return responder.error('{{error}}')
     }
     responder.format('emoji:success').send('{{result}}', {
