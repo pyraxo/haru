@@ -1,4 +1,3 @@
-const logger = require('winston')
 const { Command, Permitter } = require('sylphy')
 
 class Autorole extends Command {

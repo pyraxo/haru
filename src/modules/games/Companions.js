@@ -1,6 +1,5 @@
 const fs = require('fs')
 const path = require('path')
-const logger = require('winston')
 
 const { Module, Collection } = require('sylphy')
 

@@ -1,4 +1,3 @@
-const logger = require('winston')
 const { Command, utils } = require('sylphy')
 
 class Shop extends Command {

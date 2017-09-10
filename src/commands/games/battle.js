@@ -1,4 +1,3 @@
-const logger = require('winston')
 const { Command } = require('sylphy')
 
 class Battle extends Command {

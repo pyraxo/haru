@@ -1,4 +1,3 @@
-const logger = require('winston')
 const { Command, utils, padEnd } = require('sylphy')
 
 class Companions extends Command {
