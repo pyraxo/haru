@@ -130,9 +130,7 @@ class Credits extends Command {
           afterAmount: `**\`$ ${credits - amt}\`**`
         })
       }, err => {
-        this.logger.error('Error carrying out transaction')
-        this.logger.error(`S: ${msg.author.username} (${msg.author.id}) | T: ${user.username} (${user.id})`)
-        this.logger.error(err)
+        this.logger.error('Error carrying out transaction', err)
       })
     })
   }
