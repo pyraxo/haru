@@ -6,9 +6,8 @@ module.exports = {
   process: async container => {
     const { settings, msg, modules, client, isPrivate } = container
     const { prefix } = settings
-    const defPrefix = process.env.CLIENT_PREFIX
 
-    if (msg.content.startsWith(prefix) || msg.content.startsWith(defPrefix)) return container
+    if (msg.content.startsWith(prefix)) return container
 
     const splitMsg = msg.content.split(' ')
     if (!splitMsg[0].match(new RegExp('<@!*' + client.user.id + '>'))) return
