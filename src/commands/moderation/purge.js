@@ -30,8 +30,7 @@ class Purge extends Command {
       case 'files': return (msg) => msg.attachments.length
       case 'images': return (msg) => msg.attachments.length + msg.embeds.length
       case 'links': return (msg) => /https?:\/\/[^ ]*(?:.\w+(?:\/(?:[^ ]*)?)?)$/.test(msg.content)
-      case 'commands': return (msg) => msg.content.startsWith(settings.prefix) ||
-      msg.content.startsWith(process.env.CLIENT_PREFIX)
+      case 'commands': return (msg) => msg.content.startsWith(settings.prefix)
       default: {
         const isMember = val.match(/^<@!?(\d{17,18})>$/) || val.match(/^(\d{17,18})$/)
         if (isMember) return (msg) => msg.author.id === isMember[1]

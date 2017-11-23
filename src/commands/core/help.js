@@ -76,14 +76,13 @@ class HelpMenu extends Command {
     if (toSend.length) await responder.send(['**```glsl'].concat(toSend, '```**'), { DM: true })
 
     return responder.send([
-      `{{header_1}} ${prefix === process.env.CLIENT_PREFIX ? '' : '{{header_1_alt}}'}`,
+      '{{header_1}}',
       '{{header_2}}',
       '{{header_3}}',
       '{{footer}}'
     ], {
       DM: true,
       prefix: `\`${prefix}\``,
-      defaultPrefix: `\`${process.env.CLIENT_PREFIX}\``,
       server: `**${msg.channel.guild ? msg.channel.guild.name : responder.t('{{pms}}')}**`,
       helpCommand: `\`${prefix}help <command>\``,
       exampleCommand: `\`${prefix}help credits\``,
