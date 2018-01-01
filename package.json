@@ -25,7 +25,7 @@
     "sodium-native": "^1.10.3",
     "superagent": "^3.5.2",
     "superagent-xml2jsparser": "^0.1.1",
-    "sylphy": "github:pyraxo/sylphy#dev",
+    "sylphy": "github:pyraxo/sylphy",
     "thinky": "^2.3.8",
     "to-markdown": "^3.1.0",
     "uws": "^8.14.1",

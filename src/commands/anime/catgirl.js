@@ -6,6 +6,7 @@ class Catgirl extends Command {
     super(...args, {
       name: 'catgirl',
       description: 'Fetches a random catgirl',
+      usage: [{ name: 'nsfw', displayName: '--nsfw', type: 'string', choices: ['--nsfw'], optional: true }],
       options: { botPerms: ['embedLinks'], localeKey: 'images' },
       group: 'anime'
     })
@@ -15,7 +16,7 @@ class Catgirl extends Command {
     try {
       if (msg.channel.nsfw === false) return responder.error('{{wrongChannel}}')
       await responder.typing()
-      const url = (await request.get('https://catgirls.brussell98.tk/api/random').set('User-Agent', 'haru v2.1.0')).body.url
+      const url = (await request.get(`https://catgirls.brussell98.tk/api/${args.nsfw ? 'nsfw/' : ''}random`).set('User-Agent', 'haru v2.1.0')).body.url
       return responder
       .embed({
         color: utils.getColour('green'),

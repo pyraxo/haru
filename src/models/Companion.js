@@ -12,6 +12,7 @@ module.exports = function () {
       type: string(),
       name: string().default('Mongrel'),
       exp: number().default(0),
+      level: number().default(0),
       stats: object().schema({
         wins: number().default(0),
         losses: number().default(0)
