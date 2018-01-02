@@ -23,7 +23,7 @@ class Enabler extends Command {
   async handle ({ msg, args, data, settings, trigger }, responder) {
     const enable = trigger === 'enable'
 
-    const cmd = args.command ? args.command.cmd.permissionNode : '*'
+    const cmd = args.command ? args.command.permissionNode : '*'
     const ctx = args.context
     ? Array.isArray(args.context)
     ? (await responder.selection(args.context, { mapFunc: o => {

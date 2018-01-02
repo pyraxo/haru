@@ -30,7 +30,7 @@ class GuildLog extends Module {
       .type('json')
       .send({
         key: process.env.API_CARBONITEX,
-        shard_id: process.env.BASE_SHARD_ID,
+        shard_id: process.env.NODE_APP_INSTANCE,
         shard_count: process.env.CLIENT_PROCESSES,
         servercount: this._client.guilds.size
       })
@@ -45,7 +45,7 @@ class GuildLog extends Module {
       request
       .post(`https://bots.discord.pw/api/bots/${this._client.user.id}/stats`)
       .send({
-        shard_id: process.env.BASE_SHARD_ID,
+        shard_id: process.env.NODE_APP_INSTANCE,
         shard_count: process.env.CLIENT_PROCESSES,
         server_count: this._client.guilds.size
       })

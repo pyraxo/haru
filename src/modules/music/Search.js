@@ -10,8 +10,11 @@ class Search extends Module {
       name: 'music:search'
     })
 
-    if (!process.env.API_YT) throw new Error('Missing Youtube API key')
-    yt.setKey(process.env.API_YT)
+    if (!process.env.API_YT) {
+      console.error('Missing Youtube API key')
+    } else {
+      yt.setKey(process.env.API_YT)
+    }
   }
 
   init () {
