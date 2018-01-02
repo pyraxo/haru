@@ -1,4 +1,4 @@
-const { Command, utils, padEnd } = require('sylphy')
+const { Command, utils } = require('sylphy')
 
 class Companions extends Command {
   constructor (...args) {
@@ -35,7 +35,7 @@ class Companions extends Command {
     responder.embed({
       color: utils.getColour('blue'),
       author: { name: responder.t('{{definitions.info}}'), icon_url: msg.author.avatarURL },
-      description: `**\`LVL ${Math.floor(Math.cbrt(companion.xp)) || 0}\`** :${companion.type}:  ${companion.name}`,
+      description: `**\`LVL ${companion.level || 0}\`** :${companion.type}:  ${companion.name}`,
       fields: [
         { name: responder.t('{{definitions.wins}}'), value: stats.wins || 0, inline: true },
         { name: responder.t('{{definitions.losses}}'), value: stats.losses || 0, inline: true },
@@ -112,7 +112,7 @@ class Companions extends Command {
     responder.embed({
       color: utils.getColour('blue'),
       author: { name: responder.t('{{definitions.info}}'), icon_url: member.user.avatarURL },
-      description: `**\`LVL ${Math.floor(Math.cbrt(companion.xp)) || 0}\`** :${companion.type}:  ${companion.name}`,
+      description: `**\`LVL ${companion.level || 0}\`** :${companion.type}:  ${companion.name}`,
       fields: [
         { name: responder.t('{{definitions.wins}}'), value: stats.wins || 0, inline: true },
         { name: responder.t('{{definitions.losses}}'), value: stats.losses || 0, inline: true },
@@ -178,7 +178,7 @@ class Companions extends Command {
     const message = await responder.format('emoji:info').send([
       '**{{intro}}**',
       '```markdown',
-      pets.map((c, i) => `${padEnd(`[${i + 1}]:`, 4)} :${c}:`).join('\n'),
+      pets.map((c, i) => `${utils.padEnd(`[${i + 1}]:`, 4)} :${c}:`).join('\n'),
       '> {{%menus.INPUT}}',
       '```'
     ], { user: msg.author.username, cancel: 'cancel' })

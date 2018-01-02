@@ -251,7 +251,8 @@ class Companions extends Module {
 
     const winUser = await this.db.User.fetchJoin(battle[winner], { companion: true })
     winUser.credits += battle.fee * 2
-    winUser.companion.xp = (winUser.companion.xp || 0) + ~~(Math.random() * 5) + 2
+    winUser.companion.exp = (winUser.companion.exp || 0) + ~~(Math.random() * 5) + 2
+    winUser.companion.level = Math.floor(Math.cbrt(winUser.companion.exp))
     winUser.companion.stats.wins += 1
     winUser.companion.hunger -= 1
     if (winUser.companion.mood < 10) {
@@ -259,7 +260,8 @@ class Companions extends Module {
     }
 
     const loseUser = await this.db.User.fetch(battle[loser], { companion: true })
-    loseUser.companion.xp = (loseUser.companion.xp || 0) + ~~(Math.random() * 3) + 1
+    loseUser.companion.exp = (loseUser.companion.exp || 0) + ~~(Math.random() * 3) + 1
+    loseUser.companion.level = Math.floor(Math.cbrt(loseUser.companion.exp))
     loseUser.companion.stats.losses += 1
     loseUser.companion.hunger -= 1
     loseUser.companion.mood -= 1
