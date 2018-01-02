@@ -1,0 +1,732 @@
+{
+    "en": {
+        "booru": {
+            "noPictures": "A procura {{query}} não retornou imagens. Tenta procurar outra coisa!",
+            "maxTwo": "só podes fazer procuras no Danbooru com um máximo de duas tags!",
+            "score": "Pontos",
+            "rating": "Classificação",
+            "tags": "Tags",
+            "s": "Seguro",
+            "q": "Questionável",
+            "e": "Explícito",
+            "wrongChannel": "you can only use this command in DM's or a NSFW channel!"
+        },
+        "common": {
+            "CHECK_PMS": "verifica as tuas mensagens privadas!",
+            "ERROR": "ocurreu um erro! Por favor tenta outra vez mais tarde, ou submete um bug report.",
+            "ERROR_FULL": "Ocurreu um erro! Por favor tenta outra vez mais tarde, ou submete um bug report.",
+            "COOLDOWN": "por favor espera! ({{time}} segundos)",
+            "NO_PERMS": "precisas da permissão {{perms}} para utilizar este comando!",
+            "NO_PERMS_BOT": "Eu preciso da permissão {{perms}} para mostrar este comando!",
+            "menus": {
+                "EXIT": "Escreve {{cancel}} para sair do menu.",
+                "ERRORED": "o menu foi fechado:",
+                "EXITED": "saiste do menu.",
+                "SELECTION": "Menu de Seleção",
+                "ERROR": "Erro Desconhecido",
+                "INPUT": "Escreve o numero da escolha que queres selecionar ou '{{cancel}}' para cancelar.",
+                "MORE_RESULTS": "E {{num}} mais..."
+            },
+            "collector": {
+                "timeout": "Tempo esgotado depois de {{time}}s",
+                "max": "Excedeu {{max}} tentativas",
+                "maxMatches": "Excedeu {{maxMatches}} escolhas"
+            },
+            "resolver": {
+                "INSUFFICIENT_ARGS": "Argumentos Insuficientes - Esperei pelo menos {{requiredArgs}}, vi apenas {{argsCount}}",
+                "CORRECT_USAGE": "Uso correto",
+                "NO_END_QUOTE": "falta-te uma citação final",
+                "member": {
+                    "NOT_FOUND": "esse utilizador não foi encontrado"
+                },
+                "channel": {
+                    "NOT_FOUND": "esse canal não foi encontrado"
+                },
+                "command": {
+                    "NOT_FOUND": "esse comando não foi encontrado"
+                },
+                "string": {
+                    "NOT_STRING": "{{arg}} tem de ser texto normal",
+                    "MAX": "o tamanho de {{arg}} não pode exceder {{max}}",
+                    "MIN": "o tamanho de {{arg}} não pode ser mais pequeno do que {{min}}",
+                    "ONE_OF": "{{arg}} tem de ser 1 dos seguintes"
+                },
+                "list": {
+                    "MAX": "o tamanho de {{arg}} não pode conter mais do que {{max}} itens",
+                    "MIN": "o tamanho de {{arg}} não pode conter menos do que {{min}} itens",
+                    "MAX_LENGTH": "{{arg}} não pode conter itens maiores do que {{maxLength}} caracteres",
+                    "MIN_LENGTH": "{{arg}} não pode conter itens menores do que {{maxLength}} caractere",
+                    "DUPES": "{{arg}} não pode conter valores repetidos"
+                },
+                "int": {
+                    "NOT_INT": "{{arg}} não é um numero",
+                    "MAX": "{{arg}} tem de ser menor ou igual a {{max}}",
+                    "MIN": "{{arg}} tem de ser maior ou igual a {{min}}"
+                },
+                "role": {
+                    "NOT_FOUND": "o role não foi encontrado"
+                },
+                "group": {
+                    "NOT_FOUND": "o grupo commando não encontrado"
+                }
+            },
+            "NO_PMS": "Sorry, but I prefer a larger audience. (This command can't be run in PMs!)",
+            "ENABLE_EMBEDS": "Please ensure that you have embeds enabled!"
+        },
+        "companion": {
+            "noPet": "ainda não és dono de um companheiro! Usa {{command}} para comprar um!",
+            "ownedPet": "tu já és dono de um companheiro!",
+            "cannotAfford": "precisas de {{amount}} creditos mas só tens {{balance}}!",
+            "intro": "Escolhe um companheiro para começar, {{user}}!",
+            "dialog": [
+                "**Compra de Companheiro**",
+                "",
+                "{{author}}, selecionas-te {{animal}} para ser o teu companheiro.",
+                "Tens a certeza de que o queres comprar por {{amount}} creditos?",
+                "",
+                "Para confirmar, por favor escreve {{code}}, ou outra coisa qualquer para sair."
+            ],
+            "invalidCode": "Introduziste um código errado! A transação foi cancelada.",
+            "error": "ocurreu um erro! A transação foi cancelada. Tenta outra vez mais tarde.",
+            "result": [
+                "**Companheiro Comprado**",
+                "",
+                "{{author}}, compraste com suceso {{animal}} como o teu companheiro.",
+                "__Saldo atual__: {{balance}} creditos",
+                "",
+                "Podes renomear o teu companheiro usando {{command}}."
+            ],
+            "definitions": {
+                "wins": "Vitórias",
+                "losses": "Perdas",
+                "info": "Informação de Companheiros",
+                "info2": "Companheiro de {{author}}",
+                "mood": "Mood",
+                "hunger": "Food"
+            },
+            "errors": {
+                "self": "não podes lutar contra ti mesmo!",
+                "noUser": "esse utilizador não existe nos meus registros!",
+                "ongoingBattle": "uma batalha já está a decorrer neste canal!",
+                "userInBattle": "estás atualmente numa batalha!",
+                "opponentInBattle": "o teu oponente está atualmente numa batalha!",
+                "noIncoming": "não tens nenhum pedido de batalha.",
+                "noOutgoing": "não enviaste nenhum pedido de batalha.",
+                "opponentNoCompanion": "esse utilizador não é dono de um companheiro!",
+                "cantPlay": "precisas de {{amount}} creditos para jogar, mas só tens {{balance}}!",
+                "cantChallenge": "o utilizador não tem créditos suficientes para jogar!",
+                "noBattle": "este canal não tem batalhas a decorrer!",
+                "notParticipating": "esse utilizador não está a participar nesta batalha!",
+                "isParticipant": "tu não estás a participar nesta batalha e não podes apostar!",
+                "cantBet": "não tens créditos suficientes ({{balance}}) para apostar {{amount}}!",
+                "betMulti": "não podes apostar mais do que uma vez!",
+                "plsBetProperly": "não podes apostar menos do que 1 crédito!",
+                "notBetting": "a batalha ainda não entrou na fase de apostas!",
+                "afterBetting": "a fase de apostas já acabou para esta batalha!",
+                "notOnline": "esse utilizador ainda não está online!",
+                "hungry": "your companion is too hungry to battle",
+                "moody": "your companion's mood is too low to battle",
+                "hungryOpponent": "your opponent's companion is too hungry to battle",
+                "moodyOpponent": "your opponent's companion's mood is too low to battle"
+            },
+            "challenge": [
+                "desafiaste {{mention}} para uma batalha de companheiros!",
+                "",
+                "O utilizador tem {{time}} segundos para responder com {{accept}} ou {{reject}}, caso contrário eles automaticamente perdem!"
+            ],
+            "bet": "fizeste uma aposta de {{amount}} créditos em {{user}} e no seu companheiro {{pet}}!",
+            "timedOut": "{{p2}} não respondeu ao desafio de {{p1}} depois de {{time}} segundos e perdeu.",
+            "rejectChallenge": "{{p2}} rejeitou o desafio de {{p1}}.",
+            "cancelChallenge": "{{p1}} cancelou o desafio que tinha feito a {{p2}}.",
+            "acceptChallenge": [
+                "{{p2}} aceitou o desafio de {{p1}}!",
+                "",
+                "A batalha irá começar em {{time}} segundos!",
+                "Façam as vossas apostas com {{command}}!"
+            ],
+            "renameDialog": "{{user}}, que nome novo é que gostarias de dár ao teu companheiro {{pet}}?",
+            "renameSuccess": "renomeaste o teu companheiro {{pet}} para {{newName}}!",
+            "script": {
+                "DODGE_3": "{{p1}} barely avoids {{p2}}'s attack!",
+                "DODGE_4": "{{p2}}'s attack passes by {{p1}}!",
+                "HIT_1": "{{p1}} administers a strong hit to {{p2}}, dealing {{dmg}} damage!",
+                "HIT_2": "{{p1}} smacks {{p2}} around, causing {{dmg}} damage!",
+                "HIT_3": "{{p1}} lands a strike on {{p2}}, who suffers {{dmg}} damage!",
+                "HIT_4": "{{p2}} suffers a pounding by {{p1}}, who hits for {{dmg}} damage!",
+                "HIT_5": "{{p1}} secures a good hit on {{p2}}, delivering {{dmg}} damage!",
+                "HIT_6": "{{p1}} delivers a quick {{dmg}} damage to {{p2}}!",
+                "HEAL_1": "{{p1}} eats some medicine, raising his health by {{heal}}!",
+                "HEAL_2": "{{p1}} uses a bandaid, healing by {{heal}} health!",
+                "HEAL_3": "A wild fairy appeared, healing {{p1}} for {{heal}} health!",
+                "HEAL_4": "{{p1}} discovers a magical paste, increasing his health by {{heal}}!",
+                "DODGE_1": "{{p1}} manages to dodge {{p2}}'s attack!",
+                "DODGE_2": "{{p2}}'s attack narrowly misses {{p1}}!"
+            },
+            "food": [
+                "{{author}}, are you sure you'd like to feed your {{animal}} {{amount}} food?",
+                "",
+                "To confirm, please write {{code}}, or anything else to exit."
+            ],
+            "petFed": "{{author}}, you have just fed your {{animal}}, restoring their **hunger** and **mood** by {{amount}}",
+            "tooHungry": "Your companion is too full to feed it {{amount}} food!",
+            "notEnoughFood": "You can't feed your {{animal}} {{amount}} food as you only have {{inv}} in your inventory!"
+        },
+        "credits": {
+            "balance": "o saldo da conta de {{user}} é {{balance}} creditos.",
+            "topup": "{{amount}} créditos foram adicionados ao teu saldo.",
+            "cooldown": "os teus créditos diários atualizam em {{time}}.",
+            "dialog": [
+                "**Transferência de créditos**",
+                "",
+                "{{author}}, estás a transferir {{amount}} créditos para {{user}}",
+                "",
+                "__Saldo atual__: {{balance}}",
+                "__Saldo depois da transferência__: {{afterAmount}}",
+                "",
+                "Para confirmar, escreve {{code}} ou escreve {{exit}} para sair do menu."
+            ],
+            "confirmation": [
+                "transferiste {{amount}} créditos para o saldo de {{user}}.",
+                "",
+                "__Saldo Atualizado__: {{afterAmount}}"
+            ],
+            "invalidCode": "Introduziste um código errado! A transferência foi cancelada.",
+            "selfSenderError": "não podes enviar créditos a ti mesmo!",
+            "insufficientCredits": "não tens créditos suficientes ({{balance}})!",
+            "botUserError": "não podes enviar créditos para bots!",
+            "topTitle": "As pessoas mais ricas do Discord",
+            "credits": "créditos"
+        },
+        "descriptions": {
+            "help": "Mostra informação sobre comandos",
+            "info": "Informação sobre mim",
+            "credits": "Sistema monetário",
+            "wage": "Reivindica os teus créditos a cada 8 horas",
+            "hate": "E-Eu odeio-te!",
+            "love": "E-Eu amo-te!",
+            "prefix": "Permite aos moderadores colocar um prefixo para o servidor",
+            "search": "Procura o youtube por musica",
+            "skip": "Salta a musica atual",
+            "stop": "Pára a musica atual",
+            "summon": "Convoca-me para um canal de voz",
+            "companion": "Sistema de Companheiros animais",
+            "battle": "Combate os companheiros de outros utilizadores",
+            "buypet": "Adquire o teu companheiro pessoal",
+            "bet": "Fáz apostas durante batalhas",
+            "booru": "Procura uma galeria de imagens",
+            "danbooru": "Procura a galeria de imagens do Danbooru",
+            "gelbooru": "Procura a galeria de imagens do Gelbooru",
+            "yandere": "Procura a galeria de imagens do Yandere",
+            "slots": "Joga nas slot machines",
+            "stats": "Estatísticas sobre mim",
+            "choose": "Seleciona uma determinada escolha",
+            "invite": "Mostra o meu link de convite",
+            "stream": "Reproduz de uma stream suportada",
+            "queue": "Mostra as músicas na fila",
+            "whois": "Mostra informação sobre um utilizador",
+            "channel": "Mostra informação sobre um canal",
+            "server": "Mostra informação sobre um servidor",
+            "catgirl": "Encontra uma catgirl aleatória",
+            "clear": "Limpa a lista de músicas",
+            "contact": "Denuncia bugs, solicita novas características ou deixa feedback",
+            "enable": "Ativa comandos para um canal, utilizador ou role",
+            "disable": "Desativa comandos para um canal, utilizador ou role",
+            "lang": "Permite aos moderadores mudar a linguagem do servidor",
+            "purge": "excluir mensagens em massa no final de um canal",
+            "repeat": "alternado o modo de repetição, onde terminou obter músicas re-adicionado na fila",
+            "8ball": "Asks the 8ball a question",
+            "dice": "Rolls some dice, using dice notation",
+            "coin": "Flips coins",
+            "subscribe": "Subscribes a channel to an event",
+            "unsubscribe": "Unsubscribes a channel from an event",
+            "timezone": "Allows moderators to set a guild's timezone",
+            "urban": "Searches Urban Dictionary for meanings",
+            "reset": "Resets all permission settings in a server",
+            "welcome": "Allows moderators to send welcome messages",
+            "goodbye": "Allows moderators to send goodbye messages",
+            "anime": "Gets information on an anime",
+            "manga": "Gets information on a manga",
+            "soundcloud": "Searches songs from Soundcloud",
+            "ban": "Bans a server member",
+            "kick": "Kicks a server member",
+            "multislots": "Plays the slot machine with all 3 rows"
+        },
+        "guilds": {
+            "join": [
+                "👋  Olá! Eu sou a **haru**! O ídolo favorito de todas as pessoas✨🎤 e part-time bot! 🤖",
+                "",
+                "Podes encontrar uma lista dos meus comandos escrevendo {{help}} no chat!",
+                "Para aprender mais sobre mim, usa {{about}}! "
+            ],
+            "ban": {
+                "self": "you can't ban yourself!",
+                "msg": "you have swung the banhammer on {{member}}. May the Goddesses have mercy.",
+                "dialog": [
+                    "Swinging the Banhammer",
+                    "",
+                    "{{user}}, you are about to swing the banhammer on {{member}}.",
+                    "To confirm, enter {{quote}} or {{exit}} to quit the menu."
+                ],
+                "exit": "the member has **not** been banned.",
+                "exitError": "something wrong happened, so the member has **not** been banned."
+            },
+            "kick": {
+                "self": "you can't kick yourself!",
+                "msg": "{{member}} has been kicked. That felt good.",
+                "dialog": [
+                    "Kicking Someone?!",
+                    "",
+                    "{{user}}, you are about to kick {{member}}.",
+                    "To confirm, enter {{quote}} or {{exit}} to quit the menu."
+                ],
+                "exit": "the member has **not** been kicked.",
+                "exitError": "something wrong happened, so the member has **not** been kicked."
+            },
+            "reason": "Reason"
+        },
+        "help": {
+            "header_1": "Para executar um comando, usa o prefixo {{prefix}} em {{server}}",
+            "header_1_alt": "ou o prefixo padrão {{defaultPrefix}}",
+            "header_2": "Para obter mais ajuda sobre um comando, utiliza {{helpCommand}}",
+            "header_3": "Por exemplo: {{exampleCommand}}",
+            "definitions": {
+                "usage": "Uso",
+                "aliases": "Aliases",
+                "pms": "PMs"
+            },
+            "footer": "Para suporte, sugestões e feedback, visita {{link}}",
+            "footer_group": [
+                "`[]` refere-se a argumentos __**opcionais**__",
+                "`<>` refere-se a argumentos __**requeridos**__",
+                "Omite `<>` e `[]` quando utilizares comandos"
+            ],
+            "noDesc": "Sem descrição",
+            "checkPMs": "verifica as tuas mensagens!"
+        },
+        "images": {
+            "link": "{{Image}} a ganhar!",
+            "catgirl": "Catgirl",
+            "wrongChannel": "you can only use this command in DM's or a NSFW channel!"
+        },
+        "info": {
+            "info": [
+                "👋  Olá! Eu sou a **haru**!",
+                "O ídolo favorito de todas as pessoas✨🎤 e part-time bot! 🤖"
+            ],
+            "invite": [
+                "Convida-me utilizando {{invite}}!",
+                "Para suporte e sugestões, visita o meu servidor em {{server}}!"
+            ],
+            "warn": "Certifica-te de que tens embeds ativados!",
+            "author": "Autor",
+            "lib": "Library",
+            "ver": "Versão",
+            "src": "Source code",
+            "support": "Suporte ao cliente",
+            "join": "Para suporte, sugestões e feedback, visita {{link}}",
+            "inv": "Convida-me!",
+            "ptr": "Ajuda a manter a haru operacional!"
+        },
+        "infocmd": {
+            "server": {
+                "shard": "Shard",
+                "defaultChannel": "Canal Padrão",
+                "region": "Região",
+                "createdOn": "Criação da conta",
+                "joinedOn": "Data de afiliação",
+                "roles": "Roles",
+                "members": "Membros",
+                "channels": "Canais",
+                "owner": "Dono",
+                "online": "online",
+                "text": "Texto",
+                "voice": "Voz"
+            },
+            "whois": {
+                "shared": "Servidores partilhados",
+                "status": "Status",
+                "nick": "Alcunha",
+                "createdOn": "Criação da conta",
+                "joinedOn": "Data de afiliação",
+                "roles": "Roles",
+                "none": "Nenhum",
+                "playing": "A jogar",
+                "more": "e mais {{num}}..."
+            },
+            "channel": {
+                "title": "Informação do canal para {{channel}}",
+                "type": "Tipo",
+                "text": "Texto",
+                "voice": "Voz",
+                "createdOn": "Data de Criação"
+            }
+        },
+        "music": {
+            "nowPlaying": "A tocar",
+            "skipping": "A saltar",
+            "finishedPlaying": "Acabou de tocar",
+            "queueFinish": "A lista está agora vazia.",
+            "dcInactive": "Desconectado do canal de voz devido à inatividade.",
+            "queuedMulti": "{{num}} musicas em espera",
+            "clearQueue": "A lista de musicas foi limpa.",
+            "queued": "Metida na fila",
+            "errors": {
+                "notInChannel": "primeiro, junta-me a um canal de voz usando {{command}}!",
+                "emptyQueue": [
+                    "não á musicas em espera!",
+                    "",
+                    "Usa {{play}} para adicionar uma musica á fila!"
+                ],
+                "tooLong": "Essa música é muito longa! Adiciona uma menor do que 90 minutos.",
+                "noResults": "a procura {{query}} não teve resultados.",
+                "alreadyPlaying": "uma musica já está a ser reproduzida! Adiciona outra musica usando {{command}}.",
+                "notChannel": "o atual canal vinculado é {{channel}}. Usa os comandos de música lá.",
+                "notFound": "o vídeo que pediste não pôde ser encontrado.",
+                "listNotFound": "a lista de reprodução que pediste não pôde ser encontrado.",
+                "emptyPlaylist": "a lista de reprodução que pediste não tem videos reproduzíveis.",
+                "notInVoice": "precisas de estar num canal de voz!",
+                "errorQueue": "ocurreu um erro enquanto adicionava {{url}} á lista.",
+                "alreadyBinded": "Eu já estou vinculado a {{text}}. Usa os comandos de música nesse canal.",
+                "noPerms": "Eu não tenho permissões para `connect` e/ou `speak` em {{voice}}!",
+                "error": "Algo ruim aconteceu! Tente novamente mais tarde ou envie um relatório de bugs.",
+                "notInSameVoice": "precisas de estar no canal de voz {{channel}}!",
+                "skipNotFound": "não foi possível encontrar o vídeo especificado.",
+                "notReadyYet": "The connection was not ready after 5 tries. Disconnected from voice channel.",
+                "connError": "A Discord error occurred while streaming to the channel: {{err}}\n"
+            },
+            "dc": "Desconectei de '{{voice}}' e esqueci {{text}}.",
+            "switch": "A mudar para o modo de streaming e a reproduzir a partir de {{station}}",
+            "playlist": "Lista de Musicas - {{guild}}",
+            "queuedSongs": "Musicas em espera",
+            "queueProgress": "a adicionar playlist, por favor espera...",
+            "joinSuccess": [
+                "Conectado a '{{voice}}' e vinculado a {{text}}.",
+                "",
+                "Usa {{command}} para começar a reproduzir musicas!"
+            ],
+            "streamInfo": [
+                "{{title}} by {{artist}}",
+                "**Pedido por**: {{requestedBy}}"
+            ],
+            "repeatOn": "ativaste o modo de repetição. Todas as músicas finalizadas serão re-adicionadas para o final da lista de reprodução.",
+            "repeatOff": "desativaste o modo de repetição. Todas as músicas concluídas não serão re-adicionadas.",
+            "skipSuccess": "removi {{song}} da lista de reprodução.",
+            "terminated": [
+                "O bot está sendo reiniciado, todas as conexões de voz foram encerradas.",
+                "",
+                "A lista de reprodução atual foi salva na base de dados.",
+                "Pedimos desculpas por qualquer inconveniente causado."
+            ],
+            "votedSkip": "you have already voted to skip this song!",
+            "voteSkipSuccess": "you have voted to skip the current song!",
+            "votedClear": "you have already voted to clear the queue!",
+            "voteClearSuccess": "you have voted to clear the current queue!",
+            "stations": "Stations",
+            "shuffled": "shuffled {{num}} entries in the queue."
+        },
+        "slots": {
+            "insufficient": [
+                "precisas de {{amount}} mais créditos!",
+                "",
+                "Podes usar {{command}} para reclamar créditos a cada poucas horas!"
+            ],
+            "won": "{{user}} apostou {{amount}} créditos e ganhou:",
+            "lost": "{{user}} apostou {{amount}} créditos e perdeu tudo.",
+            "credits": "créditos",
+            "winnings": "Ganhos",
+            "yudodis": "Não podes apostar menos de 1 crédito!",
+            "dailyLimit": "atingiste o limite diário de créditos que podem ser ganhos. Tenta novamente em {{time}}."
+        },
+        "stats": {
+            "users": "Utilizadores",
+            "unique": "único",
+            "online": "online",
+            "guilds": "Servidores",
+            "channels": "Canais",
+            "text": "texto",
+            "voice": "voz",
+            "total": "total",
+            "uptime": "Tempo Online",
+            "memoryUsage": "Uso de memória",
+            "commandsUsed": "Comandos utilizados",
+            "server": "Studio 777 (Servidor de Suporte)"
+        },
+        "settings": {
+            "prefix": {
+                "success": "o prefixo deste servidor foi mudado com sucesso para {{prefix}}",
+                "revert": "o prefixo deste servidor foi revertido com sucesso de volta para {{prefix}}",
+                "current": "the current prefix for this server is: {{prefix}}"
+            },
+            "lang": {
+                "success": "o idioma deste servidor foi mudado com sucesso para {{lang}}"
+            },
+            "enabler": {
+                "success": "{{action}} {{command}} com sucesso no {{context}}",
+                "actions": {
+                    "enable": "ativaste",
+                    "disable": "desativaste",
+                    "revert": "reverteste"
+                }
+            },
+            "changelog": "Most Recent Changelogs",
+            "tz": {
+                "success": "successfully changed this guild's timezone to {{tz}}",
+                "notFound": [
+                    "the timezone '{{tz}}' is invalid.",
+                    "",
+                    "Visit {{link}} for a list of valid timezone codes."
+                ],
+                "current": "the current timezone for this server is: {{tz}}"
+            },
+            "subscribe": {
+                "eventNotFound": [
+                    "the event {{event}} could not be found.",
+                    "",
+                    "These are the supporting events: {{events}}"
+                ],
+                "notSubscribed": "{{channel}} is not subscribed to any events.",
+                "subSuccess": "successfully subscribed {{channel}} to {{events}}.",
+                "unsubSuccess": "successfully unsubscribed {{channel}} from {{events}}.",
+                "list": "{{channel}} is subscribed to {{events}}."
+            },
+            "reset": {
+                "success": "reset all permission settings in the server."
+            },
+            "welcome": {
+                "dialog": "Welcome Messages",
+                "action": {
+                    "set": "Set the welcome message",
+                    "get": "Get the current welcome message",
+                    "enable": "Use this channel to send welcome messages"
+                },
+                "get": "Current Welcome Message:",
+                "setDialog": [
+                    "{{author}}, please enter the new welcome message.",
+                    "Supported tags: {{tags}}",
+                    "To use a tag, surround it with `{{}}`. E.g. `{{guild}}`"
+                ],
+                "success": "the new welcome message is:",
+                "enabled": "now sending welcome messages in {{channel}}"
+            },
+            "goodbye": {
+                "dialog": "Goodbye Messages",
+                "action": {
+                    "set": "Set the goodbye message",
+                    "get": "Get the current goodbye message",
+                    "enable": "Use this channel to send goodbye messages"
+                },
+                "get": "Current Goodbye Message:",
+                "setDialog": [
+                    "{{author}}, please enter the new goodbye message.",
+                    "Supported tags: {{tags}}",
+                    "To use a tag, surround it with `{{}}`. E.g. `{{guild}}`"
+                ],
+                "success": "the new goodbye message is:",
+                "enabled": "now sending goodbye messages in {{channel}}"
+            },
+            "autorole": {
+                "success": "Successfully configured {{role}} as this server autorole",
+                "none": "There is no autorole on this server",
+                "current": "The current autorole for this server is {{role}}"
+            }
+        },
+        "purge": {
+            "success": "purgado com sucesso {{num}} mensagens",
+            "filterSuccess": "purged {{num}} messages matching the following criteria: {{criteria}}"
+        },
+        "misc": {
+            "choose": {
+                "pick": "I pick {{choice}}"
+            },
+            "8ball": {
+                "question": "{{user}} asked",
+                "response": "{{8ball}} says",
+                "answer_1": "It is certain",
+                "answer_2": "It is decidedly so",
+                "answer_3": "Without a doubt",
+                "answer_4": "Yes, definitely",
+                "answer_5": "You may rely on it",
+                "answer_6": "As I see it, yes",
+                "answer_7": "Most likely",
+                "answer_8": "Outlook good",
+                "answer_9": "Yes",
+                "answer_10": "Signs point to yes",
+                "answer_11": "Reply hazy try again",
+                "answer_12": "Ask again later",
+                "answer_13": "Better not tell you now",
+                "answer_14": "Cannot predict now",
+                "answer_15": "Concentrate and ask again",
+                "answer_16": "Don't count on it",
+                "answer_17": "My reply is no",
+                "answer_18": "My sources say no",
+                "answer_19": "Outlook not so good",
+                "answer_20": "Very doubtful"
+            },
+            "dice": {
+                "result": "Result: {{result}}",
+                "invalid": "Invalid dice notation - {{text}}"
+            },
+            "coin": {
+                "result": "you tossed {{heads}} heads and {{tails}} tails!",
+                "heads": "you tossed a **heads**!",
+                "tails": "you tossed a **tails**!"
+            },
+            "urban": {
+                "noResults": "the query {{query}} gave no results."
+            }
+        },
+        "rss": {
+            "success": "added feed for {{channel}} with {{included}} included tags and {{excluded}} excluded tags: {{url}}",
+            "error": "could not validate {{url}}. Please check if it's a valid RSS feed.",
+            "rssDialog": "RSS Menu",
+            "rssDelFooter": "Enter the number of the RSS feed you would like to remove, or {{cancel}} to exit.",
+            "urlDialog": [
+                "**RSS - Feed URL**",
+                "",
+                "{{author}}, please enter the URL of the RSS feed you would like to add.",
+                "Otherwise, enter {{exit}} to exit."
+            ],
+            "includedTagsDialog": [
+                "**RSS - Included Tags**",
+                "",
+                "{{author}}, please enter a list of included tags, separated by commas. For example: `films, science`",
+                "Otherwise, enter {{skip}} to skip, or {{exit}} to exit."
+            ],
+            "excludedTagsDialog": [
+                "**RSS - Excluded Tags**",
+                "",
+                "{{author}}, please enter a list of excluded tags, separated by commas. For example: `anime, religion`",
+                "Otherwise, enter {{skip}} to skip, or {{exit}} to exit."
+            ],
+            "subscribedTo": "{{channel}} is subscribed to the following RSS feeds:",
+            "notSubscribed": "{{channel}} is not subscribed to any feed. Use {{command}} to add a new feed.",
+            "subscribedFeeds": "Subscribed Feeds for {{channel}}",
+            "noFeedFound": "there was no feed found with that name or URL.",
+            "removedFeed": "removed RSS entry: {{feed}}",
+            "confirmClear": [
+                "**Clear all RSS feeds**",
+                "",
+                "{{author}}, are you sure you want to clear all RSS feeds?",
+                "Enter {{confirm}} to confirm, or anything else to exit."
+            ],
+            "notCleared": "no RSS feeds were removed.",
+            "cleared": "{{count}} RSS feeds were removed from this channel.",
+            "action": {
+                "add": "Add an RSS feed to the channel",
+                "remove": "Remove an RSS feed from the channel",
+                "list": "List all RSS feeds added in this channel",
+                "clear": "Clears all RSS feeds added in this channel"
+            }
+        },
+        "anime": {
+            "noResults": "no results found. Please check your search query.",
+            "synopsis": "Synopsis",
+            "type": "Type",
+            "episodes": "Episodes",
+            "status": "Status",
+            "genres": "Genres",
+            "season": "Season",
+            "score": "Score",
+            "noDesc": "No description",
+            "airing": "Airing on {{start}}",
+            "aired": "Aired from {{start}} to {{end}}",
+            "publishing": "Publishing on {{start}}",
+            "published": "Published from {{start}} to {{end}}",
+            "seasons": {
+                "winter": "Winter",
+                "spring": "Spring",
+                "summer": "Summer",
+                "fall": "Fall"
+            },
+            "volumes": "Volumes",
+            "chapters": "Chapters"
+        },
+        "default": {
+            "ERROR": "an error has occurred! Please try again later, or submit a bug report.",
+            "ERROR_FULL": "An error has occurred! Please try again later, or submit a bug report.",
+            "ENABLE_EMBEDS": "Please ensure that you have embeds enabled!",
+            "errors": {
+                "INSUFFICIENT_ARGS": "insufficient arguments supplied - {{requiredArgs}} expected, but only {{argsCount}} found.",
+                "NO_END_QUOTE": "you have a missing end quote.",
+                "ON_COOLDOWN": "please cool down! ({{time}} seconds left)",
+                "NO_PERMS": "you need the permissions {{perms}} to run this command!",
+                "NO_PERMS_BOT": "I need the permissions {{perms}} to run this command!",
+                "NO_PMS": "this command can't be run in PMs.",
+                "member": {
+                    "NOT_FOUND": "the member could not be found"
+                },
+                "channel": {
+                    "NOT_FOUND": "the channel could not be found"
+                },
+                "command": {
+                    "NOT_FOUND": "the command could not be found"
+                },
+                "group": {
+                    "NOT_FOUND": "the command group could not be found"
+                },
+                "role": {
+                    "NOT_FOUND": "the role could not be found"
+                },
+                "string": {
+                    "NOT_STRING": "{{arg}} must be a string",
+                    "MAX": "{{arg}} length cannot be more than {{max}}",
+                    "MIN": "{{arg}} length cannot be less than {{min}}",
+                    "ONE_OF": "{{arg}} must be one of the following: {{choices}}"
+                },
+                "list": {
+                    "MAX": "{{arg}} length cannot contain more than {{max}} items",
+                    "MIN": "{{arg}} length cannot contain less than {{min}} items",
+                    "MAX_LENGTH": "{{arg}} cannot contain items longer than {{maxLength}}",
+                    "MIN_LENGTH": "{{arg}} cannot contain items shorter than {{minLength}}",
+                    "DUPES": "{{arg}} cannot contain duplicate values"
+                },
+                "int": {
+                    "NOT_INT": "{{arg}} is not an integer",
+                    "MAX": "{{arg}} must be less than or equals to {{max}}",
+                    "MIN": "{{arg}} must be more than or equals to {{min}}"
+                }
+            },
+            "menus": {
+                "EXIT": "Enter {{cancel}} to exit the menu.",
+                "ERRORED": "the menu has closed:",
+                "EXITED": "you have exited the menu.",
+                "SELECTION": "Selection Menu",
+                "ERROR": "Unknown Error",
+                "INPUT": "Type the number of your choice into chat or '{{cancel}}' to cancel.",
+                "MORE_RESULTS": "And {{num}} more..."
+            },
+            "collector": {
+                "timeout": "Timeout after {{timeout}}s",
+                "max": "Exceeded {{max}} tries",
+                "maxMatches": "Exceeded {{maxMatches}} matches"
+            }
+        },
+        "shop": {
+            "buyDialog": "Items for purchase",
+            "sellDialog": "Items for sale",
+            "menu": {
+                "food": "Bag of generic pet food. Raises food by 1",
+                "checkInv": "Check your current inventory"
+            },
+            "howMuch": "{{author}}, how many {{selection}} would you like to buy?",
+            "purchase": [
+                "{{author}}, are you sure you'd like to purchase {{amount}} {{selection}}?",
+                "",
+                "To confirm, please write {{code}}, or anything else to exit."
+            ],
+            "result": [
+                "**Food Purchased**",
+                "",
+                "{{author}}, you have successfully purchased {{amount}} {{selection}}.",
+                "__Current Balance__: {{balance}} credits",
+                ""
+            ],
+            "error": "an error has occurred! The transaction was cancelled. Try again later.",
+            "cannotAfford": "I'm sorry, you need {{ammount}} credits to buy that but you only have {{balance}}",
+            "info": "Current Inventory",
+            "amounts": {
+                "petFood": "Pet food"
+            }
+        }
+    }
+}
