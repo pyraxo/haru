@@ -1,0 +1,732 @@
+{
+    "en": {
+        "booru": {
+            "noPictures": "{{Query}} sorgusu hiçbir resim döndürmedi. Başka bir şey aramaya çalışın!",
+            "maxTwo": "Danbooru'yu yalnızca en fazla iki etiketle arayabilirsiniz!",
+            "score": "Skor",
+            "rating": "Değerlendirme",
+            "tags": "Etiketler",
+            "s": "Güvenli",
+            "q": "Kuşkulu",
+            "e": "Açık",
+            "wrongChannel": "Bu komutu yalnızca DM'lerde veya NSFW kanalında kullanabilirsiniz!"
+        },
+        "common": {
+            "CHECK_PMS": "Direkt mesajlarını kontrol et!",
+            "ERROR": "bir hata oluştu! Lütfen daha sonra tekrar deneyin veya bir hata raporu gönderin.",
+            "ERROR_FULL": "Bir hata meydana geldi! Lütfen daha sonra tekrar deneyin, ya da bir hata raporu gönderin.",
+            "COOLDOWN": "Lütfen soğutun! ({{time}} saniye kaldı)",
+            "NO_PERMS": "Bu komutu çalıştırmak için {{perms}} iznine ihtiyacınız var!",
+            "NO_PERMS_BOT": "Bu komutu çalıştırmak için {{perms}} iznine ihtiyacım var!",
+            "menus": {
+                "EXIT": "Menüden çıkmak için {{cancel}} girin.",
+                "ERRORED": "Menü kapandı:",
+                "EXITED": "Menüden çıktın.",
+                "SELECTION": "Seçim Menüsü",
+                "ERROR": "Bilinmeyen hata",
+                "INPUT": "İstediğiniz numarayı sohbete yazın veya '{{cancel}}' i iptal edin.",
+                "MORE_RESULTS": "Ve {# num}} tane daha ..."
+            },
+            "collector": {
+                "timeout": "Zaman aşımı sonra {{timeout}}s",
+                "max": "{{Max}} denemeyi aştı",
+                "maxMatches": "{{Max Matches}} eşleşmeleri aşıldı"
+            },
+            "resolver": {
+                "INSUFFICIENT_ARGS": "Yetersiz argüman - Beklenen en az {{required Args}}, {{args Count}}",
+                "CORRECT_USAGE": "Doğru kullanım",
+                "NO_END_QUOTE": "Eksik bir bitiş fiyatı var",
+                "member": {
+                    "NOT_FOUND": "üye bulunamadı"
+                },
+                "channel": {
+                    "NOT_FOUND": "kanal bulunamadı"
+                },
+                "command": {
+                    "NOT_FOUND": "komut bulunamadı"
+                },
+                "string": {
+                    "NOT_STRING": "{{arg}} bir sicim olmalı",
+                    "MAX": "{{arg}} uzunluğu {{max}} uzunluğundan daha fazla olamaz",
+                    "MIN": "{{arg}} uzunluğu {{min}} uzunlıuğundan daha az olamaz",
+                    "ONE_OF": "{{arg}} aşağıdakilerden biri olmalı"
+                },
+                "list": {
+                    "MAX": "{{Arg}} uzunluğu en fazla {{max}} öğe içerebilir",
+                    "MIN": "{{Arg}} uzunluğu {{min}} öğeden daha az içeremez",
+                    "MAX_LENGTH": "{{Arg}}, {{max Length}} uzunluğundan daha uzun öğeler içeremez",
+                    "MIN_LENGTH": "{{Arg}}, {{minLength}} dan kısa öğeler içeremez",
+                    "DUPES": "{{Arg}}, yinelenen değerleri içeremez"
+                },
+                "int": {
+                    "NOT_INT": "{{arg}} bir tam sayı değil",
+                    "MAX": "{{arg}}, {{max}} sayısından daha az ya da eşit olmalı",
+                    "MIN": "{{arg}}, {{min}} sayısından daha fazla ya da eşit olmalı"
+                },
+                "role": {
+                    "NOT_FOUND": "Rol bulunamadı"
+                },
+                "group": {
+                    "NOT_FOUND": "komut grubu bulunamadı"
+                }
+            },
+            "NO_PMS": "Maalesef daha büyük bir kitleyi tercih ediyorum. (Bu komut PM'lerde çalıştırılamaz!)",
+            "ENABLE_EMBEDS": "Katıştırılmış öğelerinizin etkin olduğundan emin olun!"
+        },
+        "companion": {
+            "noPet": "Henüz bir pet'in yok! Bir tane satın almak için {{command}} kullanın!",
+            "ownedPet": "zaten bir yoldaşın var!",
+            "cannotAfford": "{{amount}} krediye ihtiyacın var ama sadece {{balance}} kredin var!",
+            "intro": "Bir başlangıç yoldaşı seç {{user}}!",
+            "dialog": [
+                "** Yoldaş Satın Alma **",
+                "",
+                "{{Author}}, {{animal}} 'i arkadaşınız olarak seçtiniz.",
+                "{{Amount}} kredi için satın almak istediğinizden emin misiniz?",
+                "",
+                "Onaylamak için lütfen {{code}} ya da çıkmak için başka herhangi bir şey yazın."
+            ],
+            "invalidCode": "geçersiz bir kod girdiniz! İşlem iptal edildi.",
+            "error": "bir hata meydana geldi! İşlem iptal edildi. Daha sonra tekrar deneyin.",
+            "result": [
+                "**Yoldaş Satın Alındı**",
+                "",
+                "{{author}}, {{animal}} 'ı yoldaş olarak başarıyla satın aldınız.",
+                "__Güncel Bakiye__: {{balance}} kredi",
+                "",
+                "{{command}} komutu ile yoldaşınızı yeniden isimlendirebilirsiniz."
+            ],
+            "definitions": {
+                "wins": "Galibiyetler",
+                "losses": "Kayıplar",
+                "info": "Yoldaş Bilgisi",
+                "info2": "{{author}} Adlı Kullanıcının Yoldaşı",
+                "mood": "Mood",
+                "hunger": "Food"
+            },
+            "errors": {
+                "self": "kendinle savaşamazsın!",
+                "noUser": "Bu kullanıcı benim kayıtlarımda yok!",
+                "ongoingBattle": "Bu kanalda zaten bir savaş var!",
+                "userInBattle": "şu anda bir savaştasın!",
+                "opponentInBattle": "rakibin şu anda bir savaşta!",
+                "noIncoming": "Gelen savaş istekleri yok.",
+                "noOutgoing": "Herhangi bir savaş isteği göndermediniz.",
+                "opponentNoCompanion": "O oyuncunun bir arkadaşı yok!",
+                "cantPlay": "Oynamak için {{amount}} tane krediye ihtiyacınız var, ancak şimdilik yalnızca {{balance}} var!",
+                "cantChallenge": "Oyuncunun oynamak için yeterli kredisi yok!",
+                "noBattle": "Bu kanalda devam eden savaşlar yok!",
+                "notParticipating": "Bu oyuncu bu savaşa katılamaz!",
+                "isParticipant": "sen bu savaşın bir katılımcısısın ve bahis oynayamazsın!",
+                "cantBet": "{{Amount}} bahis yapmak için yeterli krediniz yok ({{balance}})!",
+                "betMulti": "bir kereden fazla bahis oynayamazsın!",
+                "plsBetProperly": "bir krediden az bahis oynayamazsın!",
+                "notBetting": "savaş bahis aşamasına girmedi!",
+                "afterBetting": "Bahis safhası bu savaş için zaten sonuç aldı!",
+                "notOnline": "kullanıcı henüz çevrim-içi değil!",
+                "hungry": "your companion is too hungry to battle",
+                "moody": "your companion's mood is too low to battle",
+                "hungryOpponent": "your opponent's companion is too hungry to battle",
+                "moodyOpponent": "your opponent's companion's mood is too low to battle"
+            },
+            "challenge": [
+                "Evcil hayvan savaşına {{mention}} meydan okudun!",
+                "",
+                "Oynatıcı, {{kabul}} veya {{red}} ile yanıt vermek için {{time}} saniyen var, aksi takdirde otomatik olarak kaybedersiniz!"
+            ],
+            "bet": "{{User}} ve onun arkadaşı {{pet}} üzerine {{amount}} adetlik bir bahis koymuşsunuz!",
+            "timedOut": "{{P2}}, {{time}} saniye sonra {{p1}} numaralı sorunun yanıtını veremedi ve kaybetti.",
+            "rejectChallenge": "{{P2}} {{p1}} 'nin meydan okumasını reddetti.",
+            "cancelChallenge": "{{P1}}, {{p2}}'nin meydan okumasını iptal etti.",
+            "acceptChallenge": [
+                "{{P2}}, {{p1}} düellosunu kabul etti!",
+                "",
+                "Savaş {{time}} saniye içinde başlayacak!",
+                "Bahislerinizi {{command}} ile birlikte yerleştirin!"
+            ],
+            "renameDialog": "{{Kullanıcı}}, {{pet}} arkadaşınızın yeni adı ne olsun istersiniz?",
+            "renameSuccess": "{{Pet}} arkadaşınızın adını {{newName}} olarak değiştirdiniz!",
+            "script": {
+                "DODGE_3": "{{P1}} {{p2}} 'nin saldırısından kaçınılmaz!",
+                "DODGE_4": "{{P2}} 'nin saldırısı {{p1}} geçer!",
+                "HIT_1": "{{P1}} {{p2}} için {{dmg}} zararı karşılamak için güçlü bir isabet yönetti!",
+                "HIT_2": "{{P1}} {{p2}} etrafında yıpranarak {{dmg}} zarara neden oluyor!",
+                "HIT_3": "{{P1}}, {{dmg}} zarar gören {{p2}} üzerinde bir grev başlatıyor!",
+                "HIT_4": "{{P2}}, {{dmg}} hasar için isabet eden {{p1}}, bir darbe çekiyor!",
+                "HIT_5": "{{P1}} {{p2}} üzerinde {{dmg}} zarara uğrayan iyi bir isabet kazandı!",
+                "HIT_6": "{{P1}}, {{p2}} hızlı bir {{dmg}} zarar veriyor!",
+                "HEAL_1": "{{P1}} sağlığına kavuşmak için {{heal}} tarafından biraz ilaç tüketir!",
+                "HEAL_2": "{{P1}}, bir {{heal}} sağlık durumu ile iyileşen bir bant yardımı kullanıyor!",
+                "HEAL_3": "Sağlığınız için {{p1}} şifalı {{heal}} bir vahşi peri çıkageldi!",
+                "HEAL_4": "{{P1}} büyüleyici bir macun keşfeder, sağlığını {{heal}} alarak artırır!",
+                "DODGE_1": "{{P1}} {{p2}} 'nin saldırısından kurtulmayı başarıyor!",
+                "DODGE_2": "{{P2}} 'nin saldırısı {{p1}}' yi çok özlüyor!"
+            },
+            "food": [
+                "{{author}}, are you sure you'd like to feed your {{animal}} {{amount}} food?",
+                "",
+                "To confirm, please write {{code}}, or anything else to exit."
+            ],
+            "petFed": "{{author}}, you have just fed your {{animal}}, restoring their **hunger** and **mood** by {{amount}}",
+            "tooHungry": "Your companion is too full to feed it {{amount}} food!",
+            "notEnoughFood": "You can't feed your {{animal}} {{amount}} food as you only have {{inv}} in your inventory!"
+        },
+        "credits": {
+            "balance": "{{User}} hesabın bakiyesi {{balance}} kredi.",
+            "topup": "{{amount}} kredi hesabına eklendi.",
+            "cooldown": "Hak talebinde bulunan krediniz {{time}} içinde yenilenir.",
+            "dialog": [
+                "**Kredi Transferi**",
+                "",
+                "{{author}}, {{amount}} krediyi {{user}} adlı kullanıcıya transfer ediyorsun",
+                "",
+                "__Mevcut bakiye__: {{balance}}",
+                "__Transferden sonraki bakiye__: {{afterAmount}}",
+                "",
+                "Onaylamak için, {{code}} kodunu yazarak devam edin ya da {{exit}} yazarak menüden çıkış yapın."
+            ],
+            "confirmation": [
+                "{{amount}} krediyi {{user}} adlı kullanıcının hesabına transfer ettiniz.",
+                "",
+                "__Güncellenmiş bakiye__: {{afterAmount}}"
+            ],
+            "invalidCode": "yanlış bir kod girdiniz! Kredileriniz transfer edilmedi.",
+            "selfSenderError": "kendine kredi gönderemezsin!",
+            "insufficientCredits": "Yetersiz ({{balance}}) krediniz var!",
+            "botUserError": "Botlara kredi gönderemezsin!",
+            "topTitle": "Discord'un En Zengin Kişileri",
+            "credits": "krediler"
+        },
+        "descriptions": {
+            "help": "Komutlar hakkında bilgi görüntüler",
+            "info": "Benim hakkımda bilgi",
+            "credits": "Para birimi sistemi",
+            "wage": "Her 8 saatte kredilerinizi alın",
+            "hate": "Ben-Ben senden nefret ediyorum!",
+            "love": "Ben-Ben seni seviyorum!",
+            "prefix": "Moderatörlerin bir lonca önekini ayarlamalarına izin ver",
+            "search": "Youtube'da müzik arar",
+            "skip": "Mevcut müzik parçasını atlar",
+            "stop": "Mevcut müziği durdurur",
+            "summon": "Beni bir sesli sohbet kanalına çağırır",
+            "companion": "Hayvan yoldaş sistemi",
+            "battle": "Diğer kullanıcıların yoldaşlarıyla savaşın",
+            "buypet": "Sizin kişisel yoldaşınızı satın alır",
+            "bet": "Savaş sırasında bahis yapar",
+            "booru": "Bir görüntü tahtasını arar",
+            "danbooru": "Danbooru görüntü tahtasını arar",
+            "gelbooru": "Gelbooru görüntü tahtasını arar",
+            "yandere": "Yandere görüntü tahtasını arar",
+            "slots": "Slot makinesini oynar",
+            "stats": "Benim hakkımda istatistikler",
+            "choose": "Belirli bir seçimi seçer",
+            "invite": "Davet linkimi görüntüler",
+            "stream": "Desteklenen bir akıştan oynatır",
+            "queue": "Sıradaki şarkıları listeler",
+            "whois": "Bir üyenin bilgilerini görüntüler",
+            "channel": "Bir kanalın bilgilerini görüntüler",
+            "server": "Bir sunucunun bilgilerini görüntüler",
+            "catgirl": "Rastgele bir kedi kız getirir",
+            "clear": "Müzik sırasını temizler",
+            "contact": "Hataları bildirin, özellik talep edin veya geri bildirim bırakın",
+            "enable": "Komutları bir kanal, kullanıcı ya da rol için etkinleştirin",
+            "disable": "Komutları bir kanal, kullanıcı ya da rol için devre dışı bırakın",
+            "lang": "Moderatörlerin loncanın dilini ayarlamasını sağlar",
+            "purge": "Bir kanaldaki iletileri toplu olarak silin",
+            "repeat": "Bitmiş şarkıların sıraya tekrar eklendiği tekrar modunu açar",
+            "8ball": "8ball'a bir soru sor",
+            "dice": "Zar işareti kullanarak zar atın",
+            "coin": "Madeni parayı çevirir",
+            "subscribe": "Bir kanal ve etkinliğe abone ol",
+            "unsubscribe": "Bir etkinlik ve kanal aboneliğini bitir",
+            "timezone": "Moderatörlerin bir guild'in saat dilimini ayarlamalarına izin ver",
+            "urban": "Anlamlar için Kentsel Sözlük araması",
+            "reset": "Bir sunucudaki tüm izin ayarlarını baştaki konumuna getirir",
+            "welcome": "Moderatörlerin karşılama mesajlarını göndermelerine izin verir",
+            "goodbye": "Moderatörlerin elveda mesajları göndermesine izin verir",
+            "anime": "Bir anime hakkında bilgi sahibi olur",
+            "manga": "Bir manga hakkında bilgi edinir",
+            "soundcloud": "Soundcloud'dan şarkı arar",
+            "ban": "Bir sunucu üyesini yasaklar",
+            "kick": "Bir sunucu üyesini atar",
+            "multislots": "3 satırlı slot makinesini oynatır"
+        },
+        "guilds": {
+            "join": [
+                "👋  Merhaba! Ben **haru**! Herkesin favori idolü ✨🎤 vr yarı zamanlı bot! 🤖",
+                "",
+                "Komutlarımın bir listesini sohbete {{help}} yazarak bulabilirsiniz!",
+                "Benim hakkımda daha fazla bilgi edinmek için {{about}} komutunu kullanın!"
+            ],
+            "ban": {
+                "self": "kendini yasaklayamazsın!",
+                "msg": "{{Member}} üzerinde yasak çekiç salladınız. Tanrıçaların merhameti olsun.",
+                "dialog": [
+                    "Banhammer'i Sallamak",
+                    "",
+                    "{{User}}, {{member}} üzerindeki yasaklama görevini yapmak üzeresin.",
+                    "Onaylamak için, {{quote}} veya {{exit}}"
+                ],
+                "exit": "Üye ** yasaklanmış ** değil.",
+                "exitError": "Bir şey oldu, bu yüzden üye ** yasaklanmış ** değil."
+            },
+            "kick": {
+                "self": "kendini atamazsın!",
+                "msg": "{{Member}} atıldı. İyi hissediyorum.",
+                "dialog": [
+                    "Birisini mi tekmeliyorsun ?!",
+                    "",
+                    "{{User}}, {{member}} adlı kişiyi tekmeleyeceksiniz.",
+                    "Onaylamak için, menüden çıkmak için {{quote}} veya {{exit}} girin"
+                ],
+                "exit": "Üye ** vurulmamış **.",
+                "exitError": "Bir şey oldu, bu nedenle üye ** vurulmamış **."
+            },
+            "reason": "Sebep"
+        },
+        "help": {
+            "header_1": "Bir komut çalıştırmak için, ",
+            "header_1_alt": "Veya varsayılan {{defaultPrefix}}",
+            "header_2": "Bir komut hakkında daha fazla yardım almak için {{help Command}}",
+            "header_3": "Örneğin: {{exampleCommand}}",
+            "definitions": {
+                "usage": "Kullanım",
+                "aliases": "Takma ad",
+                "pms": "DMler"
+            },
+            "footer": "Destek, öneri ve geri bildirim için ziyaret edin {{link}}",
+            "footer_group": [
+                "`[]`, ___ ** isteğe bağlı ** __ argümanını ifade eder",
+                "`<>`, ___ ** gerekli ** __ argümanını belirtir",
+                "Bir komut çağırırken `<>` veya `[]` yı atlar"
+            ],
+            "noDesc": "Açıklama yok",
+            "checkPMs": "direkt mesajlarını kontrol et!"
+        },
+        "images": {
+            "link": "{{image}} kapmak için!",
+            "catgirl": "Kedi kız",
+            "wrongChannel": "Bu komutu yalnızca DM'lerde veya bir NSFW kanalında kullanabilirsiniz!"
+        },
+        "info": {
+            "info": [
+                "👋  Merhaba! Ben **haru**!",
+                "Herkesin favori idolü ✨🎤 ve yarı zamanlı bot! 🤖"
+            ],
+            "invite": [
+                "{{invite}} kullanarak beni davet et!",
+                "Öneri ve destek için, benim sunucumu {{server}} 'da ziyaret et! "
+            ],
+            "warn": "Katıştırılmış öğelerin etkin olduğundan emin olun!",
+            "author": "Yazar",
+            "lib": "Kütüphane",
+            "ver": "Versiyon",
+            "src": "Kaynak kodu",
+            "support": "Müşteri Desteği",
+            "join": "Destek, öneriler ve geri bildirimler için, {{link}} 'i ziyaret edin",
+            "inv": "Beni davet et!",
+            "ptr": "Haru'nun koşmasına yardımcı olun!"
+        },
+        "infocmd": {
+            "server": {
+                "shard": "Shard",
+                "defaultChannel": "Varsayılan Kanal",
+                "region": "Bölge",
+                "createdOn": "Hesap Oluşturma",
+                "joinedOn": "Katılım Tarihi",
+                "roles": "Roller",
+                "members": "Üyeler",
+                "channels": "Kanallar",
+                "owner": "Sahip",
+                "online": "çevrimiçi",
+                "text": "Metin",
+                "voice": "Ses"
+            },
+            "whois": {
+                "shared": "Paylaşılan Sunucular",
+                "status": "Durum",
+                "nick": "Kullanıcı adı",
+                "createdOn": "Hesap oluşturulma",
+                "joinedOn": "Katılım Tarihi",
+                "roles": "Roller",
+                "none": "Yok",
+                "playing": "Oynatılıyor",
+                "more": "ve {{num}} daha fazla..."
+            },
+            "channel": {
+                "title": "{{channel}} için Kanal Bilgisi",
+                "type": "Tip",
+                "text": "Metin",
+                "voice": "Ses",
+                "createdOn": "Oluşturma Tarihi"
+            }
+        },
+        "music": {
+            "nowPlaying": "Şu Anda Oynatılıyor",
+            "skipping": "Atlanılıyor",
+            "finishedPlaying": "Oynatılması bitti",
+            "queueFinish": "Sıra artık boş.",
+            "dcInactive": "Hareketsizlik nedeniyle sesli sohbet kanalı bağlantısı kesildi.",
+            "queuedMulti": "{{num}} şarkı kuyruğa alındı",
+            "clearQueue": "Şarkı kuyruğu temizlendi",
+            "queued": "Kuyruğa alındı",
+            "errors": {
+                "notInChannel": "Beni önce {{command}} ile bir ses kanalına getir!",
+                "emptyQueue": [
+                    "kuyrukta bir şey yok!",
+                    "",
+                    "Bir şarkı sıralamak için {{play}} komutunu kullanın!"
+                ],
+                "tooLong": "bu şarkı çok uzun! 90 dakikadan daha kısa bir şarkıyı kuyruğa alın.",
+                "noResults": "sorgu {{query}} hiç bir sonuç vermedi.",
+                "alreadyPlaying": "Zaten çalınan bir şarkı var! {{Command}} ile başka bir kuyruk sırala.",
+                "notChannel": "Geçerli bağlı metin kanalı {{channel}}. Lütfen orada müzik komutlarını kullanın.",
+                "notFound": "Aradığınız video bulunamadı",
+                "listNotFound": "Sağladığınız oynatma listesi bulunamadı.",
+                "emptyPlaylist": "Sağladığınız oynatma listesinin akış videosu mevcut değil",
+                "notInVoice": "bir sesli sohbet kanalında olmalısınız!",
+                "errorQueue": "Kuyruk sırasında bir hata oluştu {{url}}",
+                "alreadyBinded": "Zaten {{text}} adlı şeye bağlıyım! Bu kanaldaki komutları kullanın.",
+                "noPerms": "{{Voice}} içinde 'bağlan' ve / veya 'konuşmak' için izinlerim yok!",
+                "error": "Kötü bir şey oldu! Lütfen daha sonra tekrar deneyin veya bir hata raporu gönderin.",
+                "notInSameVoice": "{{channel}} sesli sohbet kanalında olmalısınız!",
+                "skipNotFound": "Belirtilen video bulunamadı",
+                "notReadyYet": "5 denemeden sonra bağlantı hazır değildi. Ses kanalı ile bağlantı kesildi.",
+                "connError": "Kanala akış sırasında bir Diskarenk hatası oluştu: {{err}}"
+            },
+            "dc": "'{{Ses}}' ile olan bağlantı kesildi ve {{text}} 'den bağlanmamış.",
+            "switch": "Akış moduna geçme ve {{station}} cihazından oynama",
+            "playlist": "Çalma listesi - {{guild}}",
+            "queuedSongs": "Kuyruktaki Şarkılar",
+            "queueProgress": "Çalma listesini kuyruğa konuluyor, lütfen bekleyin ...",
+            "joinSuccess": [
+                "'{{Ses}}' e bağlandı ve {{text}} ile bağlandı.",
+                "",
+                "Şarkı çalmaya başlamak için {{command}} komutunu kullanın!"
+            ],
+            "streamInfo": [
+                "{{Artist}} tarafından {{title}}",
+                "** Talep Edilen **: {{requestedBy}}"
+            ],
+            "repeatOn": "Tekrarlama modunu etkinleştirdiniz. Bitmiş olan tüm şarkılar kuyruğa geri eklenecektir.",
+            "repeatOff": "Tekrarlama modunu devre dışı bıraktınız. Bitmiş şarkıların tamamı yeniden eklenmeyecek.",
+            "skipSuccess": "{{song}} sıradan silindi.",
+            "terminated": [
+                "Bot yeniden başlatıldığında, tüm ses bağlantıları kesildi.",
+                "",
+                "Geçerli kuyruk, veritabanına kaydedildi.",
+                "Neden olan herhangi bir rahatsızlıktan dolayı özür dileriz."
+            ],
+            "votedSkip": "bu şarkıyı atlamak için zaten oy verdin!",
+            "voteSkipSuccess": "mevcut şarkıyı atlamak için oy verdin!",
+            "votedClear": "kuyruğu temizlemek için zaten oy verdin!",
+            "voteClearSuccess": "mecvut kuyruğu temizlemek için oy verdin!",
+            "stations": "İstasyonlar",
+            "shuffled": "Sıradaki {{num}} kayıtları karıştırdı."
+        },
+        "slots": {
+            "insufficient": [
+                "{{amount}} daha fazla krediye ihtiyacın var!",
+                "",
+                "Her birkaç saat bedava kredi almak için {{command}} komutunu kullanabilirsiniz"
+            ],
+            "won": "{{user}} , {{amount}} kredilik bir bahis koydu ve şunları kazandı:",
+            "lost": "{{user}} , {{amount}} kredilik bir bahis koydu ve hepsini kaybetti.",
+            "credits": "krediler",
+            "winnings": "Zaferler",
+            "yudodis": "1 krediden az bahis oynayamazsın!",
+            "dailyLimit": "bir gün içerisinde en fazla kazanılabilir kredi limitini aştın. {{time}} içerisinde tekrar dene."
+        },
+        "stats": {
+            "users": "Kullanıcılar",
+            "unique": "benzersiz",
+            "online": "çevrimiçi",
+            "guilds": "Loncalar",
+            "channels": "Kanallar",
+            "text": "yazı",
+            "voice": "ses",
+            "total": "toplam",
+            "uptime": "Çalışma süresi",
+            "memoryUsage": "Hafıza Kullanımı",
+            "commandsUsed": "Komutlar Kullanıldı",
+            "server": "Studio 777 (Destek Sunucusu)"
+        },
+        "settings": {
+            "prefix": {
+                "success": "Bu sunucuunun önekini {{prefix}} olarak başarıyla değiştirdi",
+                "revert": "Bu sunucunun önekini {{prefix}}'e geri döndürdü",
+                "current": "Bu sunucunun geçerli öneki: {{prefix}}"
+            },
+            "lang": {
+                "success": "Bu sunucunun dilini başarı ile değiştirdin {{lang}}"
+            },
+            "enabler": {
+                "success": "{{Action}} {{command}} {{context}} için başarılı oldu",
+                "actions": {
+                    "enable": "etkinleştirildi",
+                    "disable": "devre dışı bırakıldı",
+                    "revert": "döndürüldü"
+                }
+            },
+            "changelog": "En son değişiklikler",
+            "tz": {
+                "success": "Bu sunucunun saat dilimini başarıyla {{tz}} olarak değiştirdi",
+                "notFound": [
+                    "'{@ Tz}} zaman dilimi geçersiz.",
+                    "",
+                    "Geçerli saat dilimi kodlarının bir listesi için {{link}} sayfasını ziyaret edin."
+                ],
+                "current": "Bu sunucunun mevcut zaman dilimi: {{tz}}"
+            },
+            "subscribe": {
+                "eventNotFound": [
+                    "{{Event}} etkinliği bulunamadı.",
+                    "",
+                    "Bunlar destekleyici etkinlikler: {{events}}"
+                ],
+                "notSubscribed": "{{Channel}} herhangi bir etkinliğe abone değil.",
+                "subSuccess": "{{Channel}} ile {{events}}'e abone oldunuz.",
+                "unsubSuccess": "{{events}} kanalından {{channel}} aboneliğinden başarıyla çıkıldı.",
+                "list": "{{Channel}}, {{events}} kanalına abone oldu."
+            },
+            "reset": {
+                "success": "sunucudaki tüm izin ayarlarını baştaki konumuna getir"
+            },
+            "welcome": {
+                "dialog": "Karşılama mesajları",
+                "action": {
+                    "set": "Karşılama mesajını ayarlayın ",
+                    "get": "Karşılama mesajını al",
+                    "enable": "Karşılama mesajlarını göndermek için bu kanalı kullanın"
+                },
+                "get": "Geçerli Karşılama Mesajı:",
+                "setDialog": [
+                    "{{Author}}, lütfen yeni karşılama mesajını giriniz.",
+                    "Desteklenen etiketler: {{tags}}",
+                    "Bir etiketi kullanmak için onu `{{}}` `ile çevreleyin. Örneğin. `{{Guild}} '"
+                ],
+                "success": "yeni karşılama mesajı:",
+                "enabled": "şimdi karşılama mesajları {{channel}} kanalına gönderiliyor"
+            },
+            "goodbye": {
+                "dialog": "Elveda Mesajları",
+                "action": {
+                    "set": "Elveda mesajını ayarla",
+                    "get": "Elveda mesajını al",
+                    "enable": "Elveda mesajları göndermek için bu kanalı kullanın"
+                },
+                "get": "Mevcut Elveda Mesajı:",
+                "setDialog": [
+                    "{{Author}}, lütfen yeni elveda mesajını giriniz.",
+                    "Desteklenen etiketler: {{tags}}",
+                    "Bir etiketi kullanmak için onu `{{}}` `ile çevreleyin. Örneğin. `{{Guild}} '"
+                ],
+                "success": "Yeni elveda mesajı:",
+                "enabled": "Şimdi eldeva mesajları gönderiyor {{channel}}"
+            },
+            "autorole": {
+                "success": "{{Role}}, bu sunucu autorole olarak başarıyla yapılandırıldı",
+                "none": "Bu sunucuda herhangi bir autorole  yok",
+                "current": "Bu sunucu için geçerli otomatik rol {{role}}"
+            }
+        },
+        "purge": {
+            "success": "{{num}} ileti başarıyla silindi",
+            "filterSuccess": "Aşağıdaki ölçütlerle eşleşen {{num}} iletiyi temizledi: {{criteria}}"
+        },
+        "misc": {
+            "choose": {
+                "pick": "Benim seçimim {{choice}}"
+            },
+            "8ball": {
+                "question": "{{user}} sordu",
+                "response": "{{8ball}} diyor",
+                "answer_1": "Kesinlikle",
+                "answer_2": "Kesinlikle öyle",
+                "answer_3": "Şüphesiz",
+                "answer_4": "Evet, kesinlikle",
+                "answer_5": "Güvenebilirsin",
+                "answer_6": "Gördüğüm gibi, evet",
+                "answer_7": "Büyük ihtimalle",
+                "answer_8": "İyi görünüm",
+                "answer_9": "Evet",
+                "answer_10": "İşaretler eveti gösteriyor.",
+                "answer_11": "Görüntü bulanık tekrar deneyin",
+                "answer_12": "Daha sonra tekrar sor",
+                "answer_13": "Şimdi söylemesem daha iyi",
+                "answer_14": "Şimdi tahmin edemem",
+                "answer_15": "Konsantre ol ve tekrar sor",
+                "answer_16": "Güvenmeyin",
+                "answer_17": "Cevabım hayır",
+                "answer_18": "Kaynaklarım hayır diyor",
+                "answer_19": "Görünüm o kadar iyi değil",
+                "answer_20": "Çok şüpheli"
+            },
+            "dice": {
+                "result": "Sonuç: {{result}}",
+                "invalid": "Geçersiz zar işareti - {{text}}"
+            },
+            "coin": {
+                "result": "{{Head}} baş ve {{tail}} kuyrukları fırlattın!",
+                "heads": "** kafa attı **!",
+                "tails": "Bir kuyruk atmışsın **!"
+            },
+            "urban": {
+                "noResults": "{{Query}} sorgusu sonuç vermedi."
+            }
+        },
+        "rss": {
+            "success": "{{Included}} dahil etiketler ve {{excluded}} hariç tutulan etiketlerle {{channel}} için feed ekledi: {{url}}",
+            "error": "{{Url}} 'yi doğrulayamadı. Lütfen geçerli bir RSS kaynağı olup olmadığını kontrol edin.",
+            "rssDialog": "RSS Menüsü",
+            "rssDelFooter": "Kaldırmak istediğiniz RSS yayınının numarasını girin veya çıkmak için {{cancel}} seçin.",
+            "urlDialog": [
+                "** RSS - Feed URL **",
+                "",
+                "{{Author}}, lütfen eklemek istediğiniz RSS yayınının URL'sini girin.",
+                "Aksi halde, çıkış yapmak için {{exit}} girin"
+            ],
+            "includedTagsDialog": [
+                "** RSS - Dahil Edilen Etiketler **",
+                "",
+                "{{Author}}, lütfen virgüllerle ayrılmış, birlikte verilen etiketleri giriniz. Örneğin: `filmler, bilim '",
+                "Aksi takdirde, atlamak için {{atla}} veya çıkış yapmak için {{exit}} girin."
+            ],
+            "excludedTagsDialog": [
+                "** RSS - Hariç Tutulan Etiketler **",
+                "",
+                "{{Author}}, lütfen hariç tutulan etiketleri virgülle ayırarak bir liste girin. Örneğin: 'anime, din'",
+                "Aksi takdirde, atlamak için {{skip}} tuşunu veya çıkmak için {{exit}} girin."
+            ],
+            "subscribedTo": "{{Channel}}, şu RSS akışlarına abone oldu:",
+            "notSubscribed": "{{Channel}} herhangi bir yayına abone değil. Yeni bir yayın eklemek için {{command}} kullanın.",
+            "subscribedFeeds": "{{Channel}} için abone olunan yayınlar",
+            "noFeedFound": "O ad veya URL ile hiçbir besleme bulunamadı.",
+            "removedFeed": "RSS girişi kaldırıldı: {{feed}}",
+            "confirmClear": [
+                "** Tüm RSS özet akışlarını silin **",
+                "",
+                "{{Author}}, tüm RSS yayınlarını silmek istediğinizden emin misiniz?",
+                "Onaylamak için {{confirm}}, ya da çıkmak için başka bir şey girin."
+            ],
+            "notCleared": "RSS yayınları kaldırılmadı",
+            "cleared": "{{Count}} Bu kanaldan RSS yayınları kaldırıldı",
+            "action": {
+                "add": "Kanala bir RSS kaynağı ekleyin",
+                "remove": "Bir RSS özet akışını kanaldan kaldır",
+                "list": "Bu kanala eklenen tüm RSS yayınlarını listele",
+                "clear": "Bu kanalda eklenen tüm RSS yayınlarını siler"
+            }
+        },
+        "anime": {
+            "noResults": "Sonuç bulunamadı. Lütfen arama sorgunuzu kontrol edin.",
+            "synopsis": "Özet",
+            "type": "Tür",
+            "episodes": "Bölümler",
+            "status": "Durum",
+            "genres": "Tarzlar",
+            "season": "Sezon",
+            "score": "Skor",
+            "noDesc": "Açıklama yok",
+            "airing": "{{Start}} tarihine havale edildi",
+            "aired": "{{Start}} ile {{end}} tarihleri ​​arasında havale edildi",
+            "publishing": "{{Start}} üzerinde yayın yapma",
+            "published": "{{Start}} ile {{end}} arasında yayınlandı",
+            "seasons": {
+                "winter": "Kış",
+                "spring": "İlk bahar",
+                "summer": "Yaz",
+                "fall": "Son bahar"
+            },
+            "volumes": "Ciltler",
+            "chapters": "Bölümler"
+        },
+        "default": {
+            "ERROR": "an error has occurred! Please try again later, or submit a bug report.",
+            "ERROR_FULL": "An error has occurred! Please try again later, or submit a bug report.",
+            "ENABLE_EMBEDS": "Please ensure that you have embeds enabled!",
+            "errors": {
+                "INSUFFICIENT_ARGS": "insufficient arguments supplied - {{requiredArgs}} expected, but only {{argsCount}} found.",
+                "NO_END_QUOTE": "you have a missing end quote.",
+                "ON_COOLDOWN": "please cool down! ({{time}} seconds left)",
+                "NO_PERMS": "you need the permissions {{perms}} to run this command!",
+                "NO_PERMS_BOT": "I need the permissions {{perms}} to run this command!",
+                "NO_PMS": "this command can't be run in PMs.",
+                "member": {
+                    "NOT_FOUND": "the member could not be found"
+                },
+                "channel": {
+                    "NOT_FOUND": "the channel could not be found"
+                },
+                "command": {
+                    "NOT_FOUND": "the command could not be found"
+                },
+                "group": {
+                    "NOT_FOUND": "the command group could not be found"
+                },
+                "role": {
+                    "NOT_FOUND": "the role could not be found"
+                },
+                "string": {
+                    "NOT_STRING": "{{arg}} must be a string",
+                    "MAX": "{{arg}} length cannot be more than {{max}}",
+                    "MIN": "{{arg}} length cannot be less than {{min}}",
+                    "ONE_OF": "{{arg}} must be one of the following: {{choices}}"
+                },
+                "list": {
+                    "MAX": "{{arg}} length cannot contain more than {{max}} items",
+                    "MIN": "{{arg}} length cannot contain less than {{min}} items",
+                    "MAX_LENGTH": "{{arg}} cannot contain items longer than {{maxLength}}",
+                    "MIN_LENGTH": "{{arg}} cannot contain items shorter than {{minLength}}",
+                    "DUPES": "{{arg}} cannot contain duplicate values"
+                },
+                "int": {
+                    "NOT_INT": "{{arg}} is not an integer",
+                    "MAX": "{{arg}} must be less than or equals to {{max}}",
+                    "MIN": "{{arg}} must be more than or equals to {{min}}"
+                }
+            },
+            "menus": {
+                "EXIT": "Enter {{cancel}} to exit the menu.",
+                "ERRORED": "the menu has closed:",
+                "EXITED": "you have exited the menu.",
+                "SELECTION": "Selection Menu",
+                "ERROR": "Unknown Error",
+                "INPUT": "Type the number of your choice into chat or '{{cancel}}' to cancel.",
+                "MORE_RESULTS": "And {{num}} more..."
+            },
+            "collector": {
+                "timeout": "Timeout after {{timeout}}s",
+                "max": "Exceeded {{max}} tries",
+                "maxMatches": "Exceeded {{maxMatches}} matches"
+            }
+        },
+        "shop": {
+            "buyDialog": "Items for purchase",
+            "sellDialog": "Items for sale",
+            "menu": {
+                "food": "Bag of generic pet food. Raises food by 1",
+                "checkInv": "Check your current inventory"
+            },
+            "howMuch": "{{author}}, how many {{selection}} would you like to buy?",
+            "purchase": [
+                "{{author}}, are you sure you'd like to purchase {{amount}} {{selection}}?",
+                "",
+                "To confirm, please write {{code}}, or anything else to exit."
+            ],
+            "result": [
+                "**Food Purchased**",
+                "",
+                "{{author}}, you have successfully purchased {{amount}} {{selection}}.",
+                "__Current Balance__: {{balance}} credits",
+                ""
+            ],
+            "error": "an error has occurred! The transaction was cancelled. Try again later.",
+            "cannotAfford": "I'm sorry, you need {{ammount}} credits to buy that but you only have {{balance}}",
+            "info": "Current Inventory",
+            "amounts": {
+                "petFood": "Pet food"
+            }
+        }
+    }
+}

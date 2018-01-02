@@ -1,0 +1,728 @@
+{
+    "en": {
+        "booru": {
+            "noPictures": "quaesatio {{query}} neminem remissit. Quaeri rem aliam!",
+            "maxTwo": "sole quaeras Danbooru cum summo tesserarum duarum!",
+            "score": "Ratio",
+            "rating": "Ratio",
+            "tags": "Tesserae",
+            "s": "Tutus",
+            "q": "Suspiciosus",
+            "e": "Amatorius",
+            "wrongChannel": "Sole ages mandatum hoc in DM aut NSFW serminem!"
+        },
+        "common": {
+            "CHECK_PMS": "i ad tuas litteras privatas!",
+            "ERROR": "error occurit! Sis conari rursus cras, aut da relationem erroris.",
+            "ERROR_FULL": "error occurit! Sis conari rursus cras, aut da relationem erroris.",
+            "COOLDOWN": "sis desisti! ({{time}} manet)",
+            "NO_PERMS": "permissiones egis {{perms}} ut illum mandatum agas!",
+            "NO_PERMS_BOT": "permissiones ego {{perms}} ut illum mandatum agam!",
+            "menus": {
+                "EXIT": "Age {{cancel}} ut forum evenias.",
+                "ERRORED": "forum clausum est:",
+                "EXITED": "forum eventus es.",
+                "SELECTION": "Forum Eligens",
+                "ERROR": "Error Inexploratus",
+                "INPUT": "Pute numerus tui electi in serminis aut '{{cancel}}' eveni.",
+                "MORE_RESULTS": "Et {{num}} alii..."
+            },
+            "collector": {
+                "timeout": "Intervallum post {{timeout}}",
+                "max": "Excedisti {{max}} conatūs",
+                "maxMatches": "Excedisti {{maxMatches}} pares"
+            },
+            "resolver": {
+                "INSUFFICIENT_ARGS": "Non satis argumenta - Exspectavi ad minimum {{requiredArgs}}, vidi {{argsCount}}",
+                "CORRECT_USAGE": "Consuetendo recta",
+                "NO_END_QUOTE": "prolatio finis dees",
+                "member": {
+                    "NOT_FOUND": "civis non inveniebatur"
+                },
+                "channel": {
+                    "NOT_FOUND": "sermo non inveniebatur"
+                },
+                "command": {
+                    "NOT_FOUND": "mandatum non inveniebatur"
+                },
+                "string": {
+                    "NOT_STRING": "{{arg}} chordam essendam est.",
+                    "MAX": "longitudino {{arg}} essendam est major quam {{max}}",
+                    "MIN": "longitudino {{arg}} essendam est minor quam {{max}}",
+                    "ONE_OF": "{{arg}} essendam est unus proximum"
+                },
+                "list": {
+                    "MAX": "longitudino {{args}} habendam est non major quam {{max}} res",
+                    "MIN": "longitudino {{args}} habendam est non minor quam {{min}} res",
+                    "MAX_LENGTH": "{{arg}} habendam est non res major quam {{maxLength}}",
+                    "MIN_LENGTH": "{{arg}} habendam est non res minor quam {{minLength}}",
+                    "DUPES": "{{arg}} habendam est pretium simile"
+                },
+                "int": {
+                    "NOT_INT": "{{arg}} est non numerus",
+                    "MAX": "{{arg}} essendam est minor aut idem ad {{max}}",
+                    "MIN": "{{arg}} essendam est major aut idem ad {{min}}"
+                },
+                "role": {
+                    "NOT_FOUND": "partes non posset invenire"
+                },
+                "group": {
+                    "NOT_FOUND": "partes mandatorum inveniebatur"
+                }
+            },
+            "NO_PMS": "Delecto magnopere populum. (Illud mandatum non posset in PMs!)",
+            "ENABLE_EMBEDS": "Sis fecit embedes factus est!"
+        },
+        "companion": {
+            "noPet": "Non Habes Comitem! Age {{command}} ut unus emias!",
+            "ownedPet": "Comitem Habes!",
+            "cannotAfford": "Requiris {{amount}} argenta sed sole habes {{balance}}!",
+            "intro": "Eligi principium comitem, {{user}}!",
+            "dialog": [
+                "**Emptio Comitis**",
+                "",
+                "{{author}}, eligisti {{animal}} nam tuam comitem.",
+                "Esne certus vis emere id pro {{amount}} argentis?",
+                "",
+                "Confirmare, scribe {{code}}, aut scribe alii evenire."
+            ],
+            "invalidCode": "dedisti codecem inritum! Emptio finiebatur.",
+            "error": "error habuisti! Emptio finiebatur. Conari rursus cras.",
+            "result": [
+                "**Comes Emitur**",
+                "",
+                "{{author}}, feliciter emisti {{animal}} nam tuam comitem.",
+                "_Argenta_: {{balance}} argenta",
+                "",
+                "Renomines tuam comitem cum {{command}} mandatum."
+            ],
+            "definitions": {
+                "wins": "Victoriae",
+                "losses": "Damna",
+                "info": "Comes Scientia",
+                "info2": "{{author}}'s Comes",
+                "mood": "Mood",
+                "hunger": "Food"
+            },
+            "errors": {
+                "self": "non pugnas te!",
+                "noUser": "ille civis non est in scientiam meam!",
+                "ongoingBattle": "est proelium in sermo hanc!",
+                "userInBattle": "es in proelium!",
+                "opponentInBattle": "tua hostis est in proelium!",
+                "noIncoming": "habes nihil rogationem proelii.",
+                "noOutgoing": "non misisti rogationem proelii.",
+                "opponentNoCompanion": "ille civis comitem non habet!",
+                "cantPlay": "requiris {{amount}} argenta ludere sed sole habes {{balance}}!",
+                "cantChallenge": "civis satis argenta ludere non habet!",
+                "noBattle": "hic sermo non habet proelia!",
+                "notParticipating": "ille civis est non in hoc proeliā!",
+                "isParticipant": "es gladiator hujus proelii et non posses certare!",
+                "cantBet": "non habes satis argentorum ({{balance}}) certare {{amount}}!",
+                "betMulti": "non posses certare major quam primus!",
+                "plsBetProperly": "non posses certare minor quam unum argentum!",
+                "notBetting": "proelium non est in certante ratione!",
+                "afterBetting": "certante ratione pro hoc proelio finitus est!",
+                "notOnline": "ille civis est non in nondum!",
+                "hungry": "your companion is too hungry to battle",
+                "moody": "your companion's mood is too low to battle",
+                "hungryOpponent": "your opponent's companion is too hungry to battle",
+                "moodyOpponent": "your opponent's companion's mood is too low to battle"
+            },
+            "challenge": [
+                "provacavisti {{mention}} ad proelium comitis!",
+                "",
+                "Civis habet {{time}} pars horae respondere cum {{accept}} aut {{reject}}, aliter ammitunt!"
+            ],
+            "bet": "posuisti pignus {{amount}} argentorum in {{user}} et suā comite",
+            "timedOut": "{{p2}} concidit respondare ad {{p1}} certamen post {{time}} et ammisit.",
+            "rejectChallenge": "{{p2}} respuit {{p1}} certamen.",
+            "cancelChallenge": "{{p1}} recessit certamen cum {{p2}}.",
+            "acceptChallenge": [
+                "{{p2}} respondit certamen ab {{p1}}",
+                "",
+                "Bellum incipet in {{time}} pars horae!",
+                "Pone licitationem cum {{command}}!"
+            ],
+            "renameDialog": "{{user}}, qui nomen renuncupabis {{pet}} comitem?",
+            "renameSuccess": "renuncupabis {{pet}} comitem ad {{newName}}!",
+            "script": {
+                "DODGE_3": "{{p1}} difficile defugit {{p2}} impetum!",
+                "DODGE_4": "{{p2}} impetum transit ab {{p1}}!",
+                "HIT_1": "{{p1}} aget plagam fortem ad {{p2}}, imponens {{dmg}} damnum!",
+                "HIT_2": "{{p1}} vulnerat {{p2}} circum, imponens {{dmg}} damnum!",
+                "HIT_3": "{{p1}} decimat {{p2}}, quem accipit {{dmg}} damnum!",
+                "HIT_4": "{{p2}} accipit damnum ab {{p1}}, quem decimat pro {{dmg}} damnum!",
+                "HIT_5": "{{p1}} frigit {{p2}} imponens {{dmg}} damnum!",
+                "HIT_6": "{{p1}} imponens facile {{dmg}} damnum ad {{p2}}!",
+                "HEAL_1": "{{p1}} edit medicinam, sanans sanitatem suum ab {{heal}}!",
+                "HEAL_2": "{{p1}} aget ligamentum, sanans ab {{heal}} sanitate!",
+                "HEAL_3": "Dea silvae apparuit, sanans {{p1}} pro {{heal}} sanitate!",
+                "HEAL_4": "{{p1}} invenit rem arcanam, sanas sanitatem suum ab {{heal}}!",
+                "DODGE_1": "{{p1}} defugit {{p2}} impetum!",
+                "DODGE_2": "{{p2}} impetum difficile transit {{p1}}!"
+            },
+            "food": [
+                "{{author}}, are you sure you'd like to feed your {{animal}} {{amount}} food?",
+                "",
+                "To confirm, please write {{code}}, or anything else to exit."
+            ],
+            "petFed": "{{author}}, you have just fed your {{animal}}, restoring their **hunger** and **mood** by {{amount}}",
+            "tooHungry": "Your companion is too full to feed it {{amount}} food!",
+            "notEnoughFood": "You can't feed your {{animal}} {{amount}} food as you only have {{inv}} in your inventory!"
+        },
+        "credits": {
+            "balance": "{{user}} habet {{balance}} argenta.",
+            "topup": "{{amount}} argenta posita sunt ad expensam ferre.",
+            "cooldown": "Argenta libera revenit in {{time}}.",
+            "dialog": [
+                "**Argenta Traducens**",
+                "",
+                "{{author}}, traducis {{amount}} argenta ad {{user}}",
+                "",
+                "__Argenta Nunc__:{{balance}}",
+                "__Argenta post traducentem__:{{afterAmount}}",
+                "",
+                "Confirmare, scribe {{code}} ire aut {{exit}} pro exito."
+            ],
+            "confirmation": [
+                "Tradidisti {{amount}} argenta ad {{user}} expensam ferre. ",
+                "__Nova Expensa Ferre__:{{afterAmount}}"
+            ],
+            "invalidCode": "Scribisti infirmum mandatum! Argenta non traducta sunt.",
+            "selfSenderError": "non posses mittere argenta ad te!",
+            "insufficientCredits": "habes impar ({{balance}}) argenta!",
+            "botUserError": "non posses mittere argenta ad Artificiosum Mentem!",
+            "topTitle": "Divissimus Hominis Discordiae",
+            "credits": "argenta"
+        },
+        "descriptions": {
+            "help": "Ostendit scientiam in mandata",
+            "info": "Scientia de me",
+            "credits": "Ratio nummorum",
+            "wage": "Postula argenta octavium quisque horam",
+            "hate": "O-Odo te!",
+            "love": "A-Amat te!",
+            "prefix": "Sinet tribunis ponere conlegii praeponentem",
+            "search": "Quaerit Youtube ad musicam",
+            "skip": "Transilit Cantatam",
+            "stop": "Inhibit Cantata",
+            "summon": "Convacat me ad serminis vocis",
+            "companion": "Ratio comitis animaliae",
+            "battle": "Pugna comites civium",
+            "buypet": "Emit Comitem",
+            "bet": "Ponit certa apud bellis",
+            "booru": "Quaerit tabulam imaginis",
+            "danbooru": "Quaerit Danbooru tabulam imaginis",
+            "gelbooru": "Quaerit Gelbooru tabluam imaginis",
+            "yandere": "Quaerit Yandere tabulam imaginis",
+            "slots": "Ludit machina aleae",
+            "stats": "Scientia de me",
+            "choose": "Eligit exitum certum",
+            "invite": "Ostendit invitationem",
+            "stream": "Ludit a flumine sustineto",
+            "queue": "Scribit cantatas in innuito",
+            "whois": "Ostendit scientiam civis",
+            "channel": "Ostendit scientiam serminis",
+            "server": "Ostendit scientiam conlegii",
+            "catgirl": "Arcessit temere felis-meretrix",
+            "clear": "Purgat innuitum musica",
+            "contact": "Nuntia errores, quaerit rem aut relinquis rem",
+            "enable": "Fecit mandata pro sermine, cive aut partibus",
+            "disable": "Enervat mandata pro sermine, cive aut partibus",
+            "lang": "Dat permissionem pro tribunis ponere linguam conlegii",
+            "purge": "magnopere purgat litterae ab sermine",
+            "repeat": "Fecit modam-rursus, ubi cantatae finitus est sunt re-addit in innuito",
+            "8ball": "Quaerit 8ball quasationem",
+            "dice": "Jactat alea, agens alea numeri",
+            "coin": "Jactat argenta",
+            "subscribe": "Scribit sermine ad re",
+            "unsubscribe": "Nescribit sermine ab re",
+            "timezone": "Facit tribunos ponere tempum-locum conlegii",
+            "urban": "Quaerit Indecem Urbium pro scientia",
+            "reset": "reddit omnes res permissionis in foro",
+            "welcome": "Dat permissionis pro tribunis mittere litteras salutationis",
+            "goodbye": "Dat permissionis pro tribunis mittere litteras vale",
+            "anime": "Advehit scientia in anime",
+            "manga": "Advehit scientia in manga",
+            "soundcloud": "Quaerit Cantatas in Sonumnubes",
+            "ban": "Interdicit civis fori",
+            "kick": "Calcitrat civis fori",
+            "multislots": "Ludit machinam aleae cum omnes flumina"
+        },
+        "guilds": {
+            "join": [
+                "👋  Salve! Sum **haru**! Deliciae carae omnium ✨🎤  et pars-tempus Artificiosus Mens! 🤖",
+                "",
+                "Posses invenire libellum mandati mei a scribens {{help}} in serminem!",
+                "Invenire major de me, scribe {{about}} mandatum!"
+            ],
+            "ban": {
+                "self": "non interdicis te!",
+                "msg": "agitas Malleum Interdicentem in {{member}}. Deae Miserere.",
+                "dialog": [
+                    "Agitans Malleus Interedicens",
+                    "",
+                    "{{user}}, aves agitare Malleum Interdicentem in {{member}}.",
+                    "Confirmare, scribe {{quote}} aut {{exit}} si alii."
+                ],
+                "exit": "civis **non** interdictus est.",
+                "exitError": "Malus res acciderit, itaque civis **non** interdictus est."
+            },
+            "kick": {
+                "self": "Non calcitras te!",
+                "msg": "{{member}} calcitratus est. Bonus erat.",
+                "dialog": [
+                    "Calcitrans Civis?!",
+                    "",
+                    "{{user}}, aves calcitrare {{member}}.",
+                    "Confirmare, scribe {{quote}} aut {{exit}} si alii."
+                ],
+                "exit": "Civis **non** calcitratus est.",
+                "exitError": "Malus res acciderit, itaque civis **non** calcitratus est. "
+            },
+            "reason": "Ratio"
+        },
+        "help": {
+            "header_1": "Agere mandatum, invoca id cum {{prefix}} in {{server}}",
+            "header_1_alt": "aut delictum {{defaultPrefix}}",
+            "header_2": "Agere auxilium majus in mandato, voce {{helpCommand}}",
+            "header_3": "Exempla gratia: {{exampleCommand}}",
+            "definitions": {
+                "usage": "Agens",
+                "aliases": "Alter ego",
+                "pms": "Litterae"
+            },
+            "footer": "Pro auxilio et sententia, i {{link}}",
+            "footer_group": [
+                "`[]` est __**optionem dare**__ responsionem",
+                "`<>` war __**necessitum**__ responsionem",
+                "Omitte `<>` aut `[]` cum invocente mandato"
+            ],
+            "noDesc": "Nulla scientia",
+            "checkPMs": "Quaerit tuum PMs!"
+        },
+        "images": {
+            "link": "{{image}} sursum pro praetemptens!",
+            "catgirl": "Felis-Meretrix",
+            "wrongChannel": "Sole ages mandatum hoc in DM aut NSFW serminem!"
+        },
+        "info": {
+            "info": [
+                "👋  Salve! Sum **haru**!",
+                "Deliciae carae omnium ✨🎤  et pars-tempus Artificiosus Mens! 🤖"
+            ],
+            "invite": [
+                "Invita me agens {{invite}}!",
+                "Pro auxiliis et sententia, i meum forum ad {{server}}!"
+            ],
+            "warn": "Sis fecit certe embeds fecit facultatem!",
+            "author": "Scriptor",
+            "lib": "Bibliotheca",
+            "ver": "Liber Conversus",
+            "src": "Mandata Principis",
+            "support": "Auxilium Emptoris",
+            "join": "Pro auxilio et sententia, i {{link}}",
+            "inv": "Invita me!",
+            "ptr": "Auxilia haru iens!"
+        },
+        "infocmd": {
+            "server": {
+                "shard": "Crystallus",
+                "defaultChannel": "Sermis Delicta",
+                "region": "Regionis",
+                "createdOn": "Creatum Rationis",
+                "joinedOn": "Tempus Jungentis",
+                "roles": "Partes",
+                "members": "Cives",
+                "channels": "Sermines",
+                "owner": "Imperator",
+                "online": "Junctus",
+                "text": "Litterae",
+                "voice": "Vox"
+            },
+            "whois": {
+                "shared": "Fora Communicatus",
+                "status": "Status",
+                "nick": "Nomen",
+                "createdOn": "Creatum Rationis",
+                "joinedOn": "Tempus Jungenis",
+                "roles": "Partes",
+                "none": "Nihil",
+                "playing": "Ludens",
+                "more": "et {[num}} alii..."
+            },
+            "channel": {
+                "title": "Scientia Serminis pro {{channel}}",
+                "type": "Genera",
+                "text": "Litterae",
+                "voice": "Vox",
+                "createdOn": "Tempus Creati"
+            }
+        },
+        "music": {
+            "nowPlaying": "Ludens Nunc",
+            "skipping": "Transilit",
+            "finishedPlaying": "Finis ludentis",
+            "queueFinish": "Innuitus est nunc vacuus.",
+            "dcInactive": "Nejungebaris a sermine vocis quod pigritiam.",
+            "queuedMulti": "Innuit {{num}} cantatae",
+            "clearQueue": "Musica innuendi purgatus est. ",
+            "queued": "Innuit",
+            "errors": {
+                "notInChannel": "Adlecta me in sermine vocis cum {{command}} primum!",
+                "emptyQueue": [
+                    "Nihil innuitur!",
+                    "",
+                    "Age {{play}} mandatum innuere cantatum!"
+                ],
+                "tooLong": "illa cantata est nimis longior! Innuis id minor quam XC pars horae.",
+                "noResults": "quaesatio {{query}} dedit nihil.",
+                "alreadyPlaying": "cantata luditur! Innue cantata alia cum {{command}}.",
+                "notChannel": "sermis ligata litterae est {{channel}}. Sis age mandata musicae ibi.",
+                "notFound": "Video paravisti non inveniebatur.",
+                "listNotFound": "index musicae paravisiti non inveniebatur",
+                "emptyPlaylist": "index musicae paravisti habet nullum videonem fluminis.",
+                "notInVoice": "in sermine vocis adesendus estis!",
+                "errorQueue": "error erat cum innuendo {{url}}.",
+                "alreadyBinded": "Ligator ad {{text}}! Age mandata in sermine illa.",
+                "noPerms": "Non habeo permissionem `jungare` et/aut `orare` in {{voice}}!",
+                "error": "Est mala! Sis age rursus, aut submitte responsum erroris.",
+                "notInSameVoice": "in sermine vocis adesendus estis {{channel}}!",
+                "skipNotFound": "video vocabatur non inveniebatur.",
+                "notReadyYet": "Junctus erat non bonus post quinque. Nejungisti a sermine vocis.",
+                "connError": "Error Discordis factus est cum fluente ad serminem: {{err}}"
+            },
+            "dc": "Nejeci a '{{voice}}' et neligavi a {{text}}.",
+            "switch": "Muto ad modam fluminis et ludo a {{station}}",
+            "playlist": "Index musicae - {{guild}}",
+            "queuedSongs": "Cantatae Innuitae",
+            "queueProgress": "Innuo indecem musicae, sis mane...",
+            "joinSuccess": [
+                "Jungior ad `{{voice}}` et ligator ad {{text}}.",
+                "",
+                "Age {{command}} mandatum inire musicam! "
+            ],
+            "streamInfo": [
+                "{{title}} ab {{artist}}",
+                "**Quaerit Ab**: {{requestedBy}}"
+            ],
+            "repeatOn": "fecisti modum-rursus. Omnes cantatae ut finiuntur a tergo innuiti re-agentur.",
+            "repeatOff": "enervasti modum-rursus. Omnes cantatae ut finiuntur non re-agentur.",
+            "skipSuccess": "Removit {{song}} a innuito.",
+            "terminated": [
+                "artificiosus mens redditur, omnes junctus vocis terminarerunt.",
+                "",
+                "Nunc Innuitus scriptus est in index.",
+                "Nostra Culpa."
+            ],
+            "votedSkip": "Suffragium tulisti transilire illam cantatam!",
+            "voteSkipSuccess": "Suffragium tulisti transilire illam cantatam!",
+            "votedClear": "Suffragium tulisti purgare innuitus!",
+            "voteClearSuccess": "Suffragium tulisti purgare innuitus!",
+            "stations": "Stationes",
+            "shuffled": "miscerit {{num}} rem in innuito"
+        },
+        "slots": {
+            "insufficient": [
+                "{{amount}} argenta requiris!",
+                "",
+                "Posses agere mandatum {{command}} capere argenta libera horae quisque!"
+            ],
+            "won": "{{user}} ponit certam {{amount}} argenta et occupit:",
+            "lost": "{{user}} ponit certam {{amount}} argenta et ammittit.",
+            "credits": "Argenta",
+            "winnings": "Praemia",
+            "yudodis": "posses certare minor quam argentum unum!",
+            "dailyLimit": "tangisti limitum argentorum hodie. Age rursus in {{time}}."
+        },
+        "stats": {
+            "users": "Cives",
+            "unique": "Sole",
+            "online": "Junctus",
+            "guilds": "Conlegii",
+            "channels": "Sermines",
+            "text": "litterae",
+            "voice": "vox",
+            "total": "summus",
+            "uptime": "Altius-Tempus",
+            "memoryUsage": "Memoria Actus",
+            "commandsUsed": "Mandata Actus",
+            "server": "Studio DCCLXXVII (Auxilium)"
+        },
+        "settings": {
+            "prefix": {
+                "success": "mutavi illum preficem conlegii ad {{prefix}}",
+                "revert": "mutavi illum preficem conlegii ad {{prefix}}",
+                "current": "prefix pro foro est nunc: {{prefix}}"
+            },
+            "lang": {
+                "success": "mutavi illum linguam conlegii ad {{lang}}"
+            },
+            "enabler": {
+                "success": "bene {{action}} {{command}} pro {{context}}",
+                "actions": {
+                    "enable": "fecit",
+                    "disable": "enervavit",
+                    "revert": "revertitur"
+                }
+            },
+            "changelog": "Novissismus Mutans",
+            "tz": {
+                "success": "bene mutavi hunc tempum-locum conlegii ad {{tz}}",
+                "notFound": [
+                    "tempus-locus '{{tz}}' est infirmus.",
+                    "I {{link}} pro indece vero tempi-loci mandatis."
+                ],
+                "current": "tempus-locus pro foro est nunc: {{tz}}"
+            },
+            "subscribe": {
+                "eventNotFound": [
+                    "res {{event}} non inveniebatur.",
+                    "",
+                    "Haec sunt res sustinuntur: {{events}}"
+                ],
+                "notSubscribed": "{{channel}} non scribitur ad ullam re.",
+                "subSuccess": "bene scribit {{channel}} ad {{events}}.",
+                "unsubSuccess": "bene nescribit {{channel}} ab {{events}}",
+                "list": "{[channel}} scribitur ad {{events}}"
+            },
+            "reset": {
+                "success": "redde omnes res permissionis in foro"
+            },
+            "welcome": {
+                "dialog": "Litterae Salutationis",
+                "action": {
+                    "set": "Pone litteras salutationis",
+                    "get": "Cape nunc litteras salutationis",
+                    "enable": "Age hanc serminem mittere litteras salutationis"
+                },
+                "get": "Nunc Litterae Salutationis:",
+                "setDialog": [
+                    "{{author}}, sis age novam litteras salutationis.",
+                    "Cum Tesserae: {{tags}}",
+                    "Agere tesseram, feci id cum `{{}}`. E.g. `{{guild}}`"
+                ],
+                "success": "nova litterae salutationis est:",
+                "enabled": "nunc mittens litterae salutationis in {{channel}}"
+            },
+            "goodbye": {
+                "dialog": "Litterae Vale",
+                "action": {
+                    "set": "Pone litteras vale",
+                    "get": "Cape nunc litteras vale",
+                    "enable": "Age hanc serminem mittere litteras vale"
+                },
+                "get": "Nunc Litterae Vale",
+                "setDialog": [
+                    "{{author}} sis age novam litteras vale.",
+                    "Cum Tesserae: {{tags}}",
+                    "Agere tessearam, faci id cum `{{}}`. E.g. `{{guild}}`"
+                ],
+                "success": "novae litterae vale est:",
+                "enabled": "nunc mittens litteras vale in {{channel}}"
+            },
+            "autorole": {
+                "success": "Bene fecit  {{role}} sicut partes fori",
+                "none": "Est non partes in hoc foro",
+                "current": "Nunc partes pro hoc foro est {{role}}"
+            }
+        },
+        "purge": {
+            "success": "bene purgavi {{num}} litterae",
+            "filterSuccess": "purgavi {{num}} litterae criteriorum: {{criteria}}"
+        },
+        "misc": {
+            "choose": {
+                "pick": "Eligo {{choice}}"
+            },
+            "8ball": {
+                "question": "{{user}} rogat",
+                "response": "{{8ball}} inquit",
+                "answer_1": "Certa est",
+                "answer_2": "Ita firme est",
+                "answer_3": "Sine dubium",
+                "answer_4": "Ita, certe",
+                "answer_5": "Fidas in eo",
+                "answer_6": "Sicut video, ita",
+                "answer_7": "Probabiliter",
+                "answer_8": "Spes bona",
+                "answer_9": "Ita",
+                "answer_10": "Signa indicant ita",
+                "answer_11": "Responsum necertum age rursus",
+                "answer_12": "Quaere rursus",
+                "answer_13": "Non narrabo te nunc",
+                "answer_14": "Non possum predicare nunc",
+                "answer_15": "Attende et quaere rursus",
+                "answer_16": "Non fide in eo",
+                "answer_17": "Responsum est non",
+                "answer_18": "Responsum orat non",
+                "answer_19": "Spes mala",
+                "answer_20": "Dubius"
+            },
+            "dice": {
+                "result": "Exitus: {{result}}",
+                "invalid": "Alea numeri infirma - {{text}}"
+            },
+            "coin": {
+                "result": "Jecisti {{heads}} capita et {{tails}} caudae!",
+                "heads": "Jecisti **capita**!",
+                "tails": "Jecisti **caudae**!"
+            },
+            "urban": {
+                "noResults": "Quaesatio {{query}} dedit nihil."
+            }
+        },
+        "rss": {
+            "success": "addit flumen pro {{channel}} cum {{included}} tesseris et sine {{excluded}} tesseris: {{url}}",
+            "error": "non valeret {{url}}. Sis feci si est verum RSS flumen.",
+            "rssDialog": "RSS Forum",
+            "rssDelFooter": "Age numerum RSS fluminis ut delectaretur removere, aut {{cancel}} exitere.",
+            "urlDialog": [
+                "**RSS - Flumen URL**",
+                "{{author}}, sis age URL RSS fluminis delectes addere.",
+                "Alii, age {{exit}} exitere."
+            ],
+            "includedTagsDialog": [
+                "**RSS - Cum Tesserae**",
+                "{{author}}, sis age indecem cum tesseris, paratus est a commis. E.g.: `films, science'",
+                "Alii, age {{skip}} transilire, aut {{exit}} exitere."
+            ],
+            "excludedTagsDialog": [
+                "RSS - Sine Tesseare**",
+                "",
+                "{{author}}, sis age indecem sine tesseris, paratus est a commis. E.g.: `anime, religion`",
+                "Alii, age {{skip}} transilire, aut {{exit}} exitere."
+            ],
+            "subscribedTo": "{{channel}} scribitur ad flumen RSS:",
+            "notSubscribed": "{{channel}} non scribitur ad flumen ullum. Age {{command}} agere flumen novum.",
+            "subscribedFeeds": "Flumen Scriptus pro {{channel}}",
+            "noFeedFound": "erat flumen nullum inveniebatur cum illo nomine aut URL.",
+            "removedFeed": "removit RSS rem: {{feed}}",
+            "confirmClear": [
+                "**Removit omnia RSS flumina**",
+                "",
+                "{{author}}, removitne omnia RSS flumina?",
+                "Scribe {[confirm}} confirmare, aut alii exitere."
+            ],
+            "notCleared": "nulla RSS flumina nescribebatur.",
+            "cleared": "{{count}} RSS flumina nescribebatur ab hac sermine.",
+            "action": {
+                "add": "Age RSS flumen ad serminem",
+                "remove": "Removit RSS flumen a sermine",
+                "list": "Scribe omnia RSS flumina addit in hoc sermine",
+                "clear": "Removit omnia RSS flumina addit in hoc sermine"
+            }
+        },
+        "anime": {
+            "noResults": "Nihil invenibatur. Sis quaere quaesationem tuam.",
+            "synopsis": "Epitome",
+            "type": "Genera",
+            "episodes": "Partes",
+            "status": "Status",
+            "genres": "Genera",
+            "season": "Tempus",
+            "score": "Ratio",
+            "noDesc": "Non scientia",
+            "airing": "Edens in {{start}}",
+            "aired": "Edetus ab {{start}} ad {{end}}",
+            "publishing": "Edens in {{start}}",
+            "published": "Edetus ab {{start}} ad {{end}}",
+            "seasons": {
+                "winter": "Hiems",
+                "spring": "Ver",
+                "summer": "Aestas",
+                "fall": "Autumnus"
+            },
+            "volumes": "Volumina",
+            "chapters": "Partes"
+        },
+        "default": {
+            "ERROR": "an error has occurred! Please try again later, or submit a bug report.",
+            "ERROR_FULL": "An error has occurred! Please try again later, or submit a bug report.",
+            "ENABLE_EMBEDS": "Please ensure that you have embeds enabled!",
+            "errors": {
+                "INSUFFICIENT_ARGS": "insufficient arguments supplied - {{requiredArgs}} expected, but only {{argsCount}} found.",
+                "NO_END_QUOTE": "you have a missing end quote.",
+                "ON_COOLDOWN": "please cool down! ({{time}} seconds left)",
+                "NO_PERMS": "you need the permissions {{perms}} to run this command!",
+                "NO_PERMS_BOT": "I need the permissions {{perms}} to run this command!",
+                "NO_PMS": "this command can't be run in PMs.",
+                "member": {
+                    "NOT_FOUND": "the member could not be found"
+                },
+                "channel": {
+                    "NOT_FOUND": "the channel could not be found"
+                },
+                "command": {
+                    "NOT_FOUND": "the command could not be found"
+                },
+                "group": {
+                    "NOT_FOUND": "the command group could not be found"
+                },
+                "role": {
+                    "NOT_FOUND": "the role could not be found"
+                },
+                "string": {
+                    "NOT_STRING": "{{arg}} must be a string",
+                    "MAX": "{{arg}} length cannot be more than {{max}}",
+                    "MIN": "{{arg}} length cannot be less than {{min}}",
+                    "ONE_OF": "{{arg}} must be one of the following: {{choices}}"
+                },
+                "list": {
+                    "MAX": "{{arg}} length cannot contain more than {{max}} items",
+                    "MIN": "{{arg}} length cannot contain less than {{min}} items",
+                    "MAX_LENGTH": "{{arg}} cannot contain items longer than {{maxLength}}",
+                    "MIN_LENGTH": "{{arg}} cannot contain items shorter than {{minLength}}",
+                    "DUPES": "{{arg}} cannot contain duplicate values"
+                },
+                "int": {
+                    "NOT_INT": "{{arg}} is not an integer",
+                    "MAX": "{{arg}} must be less than or equals to {{max}}",
+                    "MIN": "{{arg}} must be more than or equals to {{min}}"
+                }
+            },
+            "menus": {
+                "EXIT": "Enter {{cancel}} to exit the menu.",
+                "ERRORED": "the menu has closed:",
+                "EXITED": "you have exited the menu.",
+                "SELECTION": "Selection Menu",
+                "ERROR": "Unknown Error",
+                "INPUT": "Type the number of your choice into chat or '{{cancel}}' to cancel.",
+                "MORE_RESULTS": "And {{num}} more..."
+            },
+            "collector": {
+                "timeout": "Timeout after {{timeout}}s",
+                "max": "Exceeded {{max}} tries",
+                "maxMatches": "Exceeded {{maxMatches}} matches"
+            }
+        },
+        "shop": {
+            "buyDialog": "Items for purchase",
+            "sellDialog": "Items for sale",
+            "menu": {
+                "food": "Bag of generic pet food. Raises food by 1",
+                "checkInv": "Check your current inventory"
+            },
+            "howMuch": "{{author}}, how many {{selection}} would you like to buy?",
+            "purchase": [
+                "{{author}}, are you sure you'd like to purchase {{amount}} {{selection}}?",
+                "",
+                "To confirm, please write {{code}}, or anything else to exit."
+            ],
+            "result": [
+                "**Food Purchased**",
+                "",
+                "{{author}}, you have successfully purchased {{amount}} {{selection}}.",
+                "__Current Balance__: {{balance}} credits",
+                ""
+            ],
+            "error": "an error has occurred! The transaction was cancelled. Try again later.",
+            "cannotAfford": "I'm sorry, you need {{ammount}} credits to buy that but you only have {{balance}}",
+            "info": "Current Inventory",
+            "amounts": {
+                "petFood": "Pet food"
+            }
+        }
+    }
+}
