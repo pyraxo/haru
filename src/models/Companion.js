@@ -23,6 +23,7 @@ module.exports = function () {
       heal: number().default(1),
       mood: number().default(10),
       hunger: number().default(10),
+      lvltokens: number().default(0),
       inventory: array().default([])
     },
     relations: {
