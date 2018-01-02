@@ -16,7 +16,8 @@ class Catgirl extends Command {
     try {
       if (msg.channel.nsfw === false) return responder.error('{{wrongChannel}}')
       await responder.typing()
-      const url = (await request.get(`https://catgirls.brussell98.tk/api/${args.nsfw ? 'nsfw/' : ''}random`).set('User-Agent', 'haru v2.1.0')).body.url
+      const id = (await request.get(`https://nekos.brussell.me/api/v1/random/image${args.nsfw ? '?nsfw=true' : ''}`).set('User-Agent', 'haru v2.1.0')).body.images[0].id
+      const url = `https://nekos.brussell.me/image/${id}`
       return responder
       .embed({
         color: utils.getColour('green'),
