@@ -5,7 +5,7 @@ class Companions extends Command {
     super(...args, {
       name: 'companion',
       description: 'Animal companion system',
-      usage: [{ name: 'action', displayName: 'buy | rename | peek | feed', type: 'string', optional: true }],
+      usage: [{ name: 'action', displayName: 'buy | rename | peek | feed | sell', type: 'string', optional: true }],
       aliases: ['pet'],
       cooldown: 5,
       subcommands: {
@@ -17,7 +17,8 @@ class Companions extends Command {
         rename: 'rename',
         feed: {
           usage: [{ name: 'amount', type: 'int', optional: true }]
-        }
+        },
+        sell: 'sell'
       },
       options: { botPerms: ['embedLinks'] },
       group: 'games'
@@ -255,7 +256,6 @@ class Companions extends Command {
     user.companion = companion
 
     try {
-      await companion.save()
       await user.saveAll({ companion: true })
     } catch (err) {
       this.logger.error(`Could not save after companion purchase`, err)
@@ -268,6 +268,39 @@ class Companions extends Command {
       command: `**\`${settings.prefix}companion rename\`**`
     })
   }
+
+  async sell ({ msg, settings, plugins, modules }, responder) {
+    const User = plugins.get('db').data.User
+    const companions = modules.get('companions')
+    if (!companions) return this.logger.error('Companions module not found')
+    const user = await User.fetchJoin(msg.author.id, { companion: true })
+    if (!user.companion) {
+      responder.error('{{noPet}}', { command: `**\`${settings.prefix}companion buy\`**` })
+      return
+    }
+    const code = ~~(Math.random() * 8999) + 1000
+    const argCode = await responder.format('emoji:info').dialog([{
+      prompt: '{{sold.dialog}}',
+      input: { type: 'string', name: 'code' }
+    }], {
+      code: `**\`${code}\`**`
+    })
+    if (parseInt(argCode.code, 10) !== code) {
+      return responder.error('{{invalidCode}}')
+    }
+
+    try {
+      delete user.companion
+      await user.save()
+    } catch (err) {
+      this.logger.error(`Could not save after companion removal`, err)
+      return responder.error('{{error}}')
+    }
+    responder.format('emoji:success').send('{{sold.result}}', {
+      author: `**${msg.author.username}**`
+    })
+  }
+
 }
 
 class PetBuy extends Companions {
@@ -296,4 +329,17 @@ class PetFeed extends Companions {
   }
 }
 
-module.exports = [ Companions, PetBuy, PetFeed ]
+class PetSell extends Companions {
+  constructor (...args) {
+    super(...args, {
+      name: 'sellpet',
+      description: 'Sells your personal companion',
+      options: { localeKey: 'companion' },
+      aliases: [],
+      usage: [],
+      subcommand: 'sell'
+    })
+  }
+}
+
+module.exports = [ Companions, PetBuy, PetFeed, PetSell ]
