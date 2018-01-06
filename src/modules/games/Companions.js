@@ -135,6 +135,13 @@ class Companions extends Module {
     return Promise.resolve(amt)
   }
 
+  /*
+  ██████   █████  ████████ ████████ ██      ███████     ███████ ████████  █████  ██████  ████████
+  ██   ██ ██   ██    ██       ██    ██      ██          ██         ██    ██   ██ ██   ██    ██
+  ██████  ███████    ██       ██    ██      █████       ███████    ██    ███████ ██████     ██
+  ██   ██ ██   ██    ██       ██    ██      ██               ██    ██    ██   ██ ██   ██    ██
+  ██████  ██   ██    ██       ██    ███████ ███████     ███████    ██    ██   ██ ██   ██    ██
+  */
   async startBattle (id) {
     let battle = this.getBattle(id)
     if (!battle) return
@@ -185,10 +192,14 @@ class Companions extends Module {
       if (battle._turn < 0) battle._actions.push(':information_source:  **Match begins!**')
       battle._turn = turn
 
+      const atk = stats[attacker].atk
       const crit = stats[attacker].crit
+      // crit adjusts the chance of a critical hit
       const critmultiplier = Array(100).fill(2, 0, crit).fill(1, crit)[~~(Math.random() * 100)]
+      // heal adjusts the chance of a critical heal
       const heal = stats[attacker].heal
       const healmultiplier = Array(100).fill(2, 0, heal).fill(1, heal)[~~(Math.random() * 100)]
+      // actionnum and damagenum change the number of the string used for that battle action
       const damagenum = Math.floor(Math.random() * (6 - 1 + 1)) + 1;
       const actionnum = Math.floor(Math.random() * (4 - 1 + 1)) + 1;
       switch (res) {
@@ -197,7 +208,7 @@ class Companions extends Module {
           break
         }
         case 1: {
-          const dmg = (stats[attacker].atk * critmultiplier)
+          const dmg = (atk * critmultiplier)
           battle._actions.push(`${critmultiplier > 1 ? ':anger:' : ':punch:'}  **${responder.t(`{{script.HIT_${damagenum}}}`, {p1: stats[attacker].name, p2: stats[receiver].name, dmg: dmg}) }**`)
           battle._stats[receiver].hp -= dmg
           break
@@ -244,6 +255,13 @@ class Companions extends Module {
     return [':' + pet.type + ':'].concat(hearts).join(' ')
   }
 
+  /*
+  ██████   █████  ████████ ████████ ██      ███████     ███████ ███    ██ ██████
+  ██   ██ ██   ██    ██       ██    ██      ██          ██      ████   ██ ██   ██
+  ██████  ███████    ██       ██    ██      █████       █████   ██ ██  ██ ██   ██
+  ██   ██ ██   ██    ██       ██    ██      ██          ██      ██  ██ ██ ██   ██
+  ██████  ██   ██    ██       ██    ███████ ███████     ███████ ██   ████ ██████
+  */
   async endBattle (battle, player = true) {
     const winner = player ? 'p1' : 'p2'
     const loser = player ? 'p2' : 'p1'
@@ -252,19 +270,27 @@ class Companions extends Module {
     const winUser = await this.db.User.fetchJoin(battle[winner], { companion: true })
     winUser.credits += battle.fee * 2
     winUser.companion.exp = (winUser.companion.exp || 0) + ~~(Math.random() * 5) + 2
+    const oldWinningCompanionLevel = winUser.companion.level
     winUser.companion.level = Math.floor(Math.cbrt(winUser.companion.exp))
     winUser.companion.stats.wins += 1
     winUser.companion.hunger -= 1
     if (winUser.companion.mood < 10) {
       winUser.companion.mood += 1
     }
+    if (winUser.companion.level > oldWinningCompanionLevel) {
+      winUser.companion.lvltokens += 1
+    }
 
     const loseUser = await this.db.User.fetch(battle[loser], { companion: true })
     loseUser.companion.exp = (loseUser.companion.exp || 0) + ~~(Math.random() * 3) + 1
+    const oldLosingCompanionLevel = loseUser.companion.level
     loseUser.companion.level = Math.floor(Math.cbrt(loseUser.companion.exp))
     loseUser.companion.stats.losses += 1
     loseUser.companion.hunger -= 1
     loseUser.companion.mood -= 1
+    if (loseUser.companion.level > oldLosingCompanionLevel) {
+      loseUser.companion.lvltokens += 1
+    }
     await loseUser.saveAll({ companion: true })
 
     await this.send(battle.channel, [

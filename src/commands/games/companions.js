@@ -25,6 +25,13 @@ class Companions extends Command {
     })
   }
 
+  /*
+  ██   ██  █████  ███    ██ ██████  ██      ███████
+  ██   ██ ██   ██ ████   ██ ██   ██ ██      ██
+  ███████ ███████ ██ ██  ██ ██   ██ ██      █████
+  ██   ██ ██   ██ ██  ██ ██ ██   ██ ██      ██
+  ██   ██ ██   ██ ██   ████ ██████  ███████ ███████
+  */
   async handle ({ msg, plugins, settings, trigger }, responder) {
     const User = plugins.get('db').data.User
     const companion = (await User.fetchJoin(msg.author.id, { companion: true })).companion
@@ -40,12 +47,23 @@ class Companions extends Command {
       fields: [
         { name: responder.t('{{definitions.wins}}'), value: stats.wins || 0, inline: true },
         { name: responder.t('{{definitions.losses}}'), value: stats.losses || 0, inline: true },
+        // INSERT LINEBREAK HERE !!!!!!!!!!!!!!!!!!!!!
+        { name: responder.t('{{definitions.atk}}'), value: (companion.atk / 100).toString() || 0, inline: true },
+        { name: responder.t('{{definitions.crit}}'), value: (companion.crit / 100).toString() || 0, inline: true },
+        { name: responder.t('{{definitions.heal}}'), value: (companion.heal / 100).toString() || 0, inline: true },
         { name: responder.t('{{definitions.mood}}'), value: companion.mood || 10, inline: true},
         { name: responder.t('{{definitions.hunger}}'), value: companion.hunger || 10, inline: true}
       ]
     }).send()
   }
 
+  /*
+  ███████ ███████ ███████ ██████
+  ██      ██      ██      ██   ██
+  █████   █████   █████   ██   ██
+  ██      ██      ██      ██   ██
+  ██      ███████ ███████ ██████
+  */
   async feed ({ msg, plugins, args }, responder) {
     const User = plugins.get('db').data.User
     const user = await User.fetch(msg.author.id)
@@ -100,6 +118,13 @@ class Companions extends Command {
     })
   }
 
+  /*
+  ██████  ███████ ███████ ██   ██
+  ██   ██ ██      ██      ██  ██
+  ██████  █████   █████   █████
+  ██      ██      ██      ██  ██
+  ██      ███████ ███████ ██   ██
+  */
   async peek ({ args, plugins }, responder) {
     const User = plugins.get('db').data.User
     const [member] = await responder.selection(args.user, { mapFunc: m => `${m.user.username}#${m.user.discriminator}` })
@@ -116,13 +141,24 @@ class Companions extends Command {
       description: `**\`LVL ${companion.level || 0}\`** :${companion.type}:  ${companion.name}`,
       fields: [
         { name: responder.t('{{definitions.wins}}'), value: stats.wins || 0, inline: true },
-        { name: responder.t('{{definitions.losses}}'), value: stats.losses || 0, inline: true },
+        { name: responder.t('{{definitions.losses}}\n'), value: stats.losses || 0, inline: true },
+        // INSERT LINEBREAK HERE !!!!!!!!!!!!!!!!!!!!!
+        { name: responder.t('{{definitions.atk}}'), value: (companion.atk / 100).toString() || 0, inline: true },
+        { name: responder.t('{{definitions.crit}}'), value: (companion.crit / 100).toString() || 0, inline: true },
+        { name: responder.t('{{definitions.heal}}'), value: (companion.heal / 100).toString() || 0, inline: true },
         { name: responder.t('{{definitions.mood}}'), value: companion.mood || 10, inline: true},
         { name: responder.t('{{definitions.hunger}}'), value: companion.hunger || 10, inline: true}
       ]
     }).send()
   }
 
+  /*
+  ██████  ███████ ███    ██  █████  ███    ███ ███████
+  ██   ██ ██      ████   ██ ██   ██ ████  ████ ██
+  ██████  █████   ██ ██  ██ ███████ ██ ████ ██ █████
+  ██   ██ ██      ██  ██ ██ ██   ██ ██  ██  ██ ██
+  ██   ██ ███████ ██   ████ ██   ██ ██      ██ ███████
+  */
   async rename ({ msg, settings, plugins, modules }, responder) {
     const User = plugins.get('db').data.User
     const companions = modules.get('companions')
@@ -154,6 +190,13 @@ class Companions extends Command {
     })
   }
 
+  /*
+  ██████  ██    ██ ██    ██
+  ██   ██ ██    ██  ██  ██
+  ██████  ██    ██   ████
+  ██   ██ ██    ██    ██
+  ██████   ██████     ██
+  */
   async buy ({ msg, settings, plugins, modules }, responder) {
     const db = plugins.get('db')
     const companions = modules.get('companions')
@@ -269,6 +312,13 @@ class Companions extends Command {
     })
   }
 
+  /*
+  ███████ ███████ ██      ██
+  ██      ██      ██      ██
+  ███████ █████   ██      ██
+       ██ ██      ██      ██
+  ███████ ███████ ███████ ███████
+  */
   async sell ({ msg, settings, plugins, modules }, responder) {
     const User = plugins.get('db').data.User
     const companions = modules.get('companions')
@@ -303,6 +353,13 @@ class Companions extends Command {
 
 }
 
+/*
+███████ ██    ██ ██████   ██████  ██████  ███    ███ ███    ███  █████  ███    ██ ██████  ███████
+██      ██    ██ ██   ██ ██      ██    ██ ████  ████ ████  ████ ██   ██ ████   ██ ██   ██ ██
+███████ ██    ██ ██████  ██      ██    ██ ██ ████ ██ ██ ████ ██ ███████ ██ ██  ██ ██   ██ ███████
+     ██ ██    ██ ██   ██ ██      ██    ██ ██  ██  ██ ██  ██  ██ ██   ██ ██  ██ ██ ██   ██      ██
+███████  ██████  ██████   ██████  ██████  ██      ██ ██      ██ ██   ██ ██   ████ ██████  ███████
+*/
 class PetBuy extends Companions {
   constructor (...args) {
     super(...args, {
