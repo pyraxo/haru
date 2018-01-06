@@ -27,6 +27,7 @@
     "atk": "Attack points",
     "crit": "Critical hit chance",
     "heal": "Mega heal chance",
+    "health": "Health Points"
   },
   "upgrade": [
     "{{author}}, are you sure you'd like to spend {{amount}} tokens to upgrade the {{selection}} stat?\n",

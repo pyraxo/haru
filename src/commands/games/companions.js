@@ -48,7 +48,8 @@ class Companions extends Command {
         { name: responder.t('{{definitions.wins}}'), value: stats.wins || 0, inline: true },
         { name: responder.t('{{definitions.losses}}'), value: stats.losses || 0, inline: true },
         // INSERT LINEBREAK HERE !!!!!!!!!!!!!!!!!!!!!
-        { name: responder.t('{{definitions.atk}}'), value: (companion.atk / 100).toString() || 0, inline: true },
+        { name: responder.t('{{definitions.hp}}'), value: (companion.hp).toString() || 0, inline: true },
+        { name: responder.t('{{definitions.atk}}'), value: (companion.atk).toString() || 0, inline: true },
         { name: responder.t('{{definitions.crit}}'), value: (companion.crit / 100).toString() || 0, inline: true },
         { name: responder.t('{{definitions.heal}}'), value: (companion.heal / 100).toString() || 0, inline: true },
         { name: responder.t('{{definitions.mood}}'), value: companion.mood || 10, inline: true},
@@ -143,7 +144,8 @@ class Companions extends Command {
         { name: responder.t('{{definitions.wins}}'), value: stats.wins || 0, inline: true },
         { name: responder.t('{{definitions.losses}}\n'), value: stats.losses || 0, inline: true },
         // INSERT LINEBREAK HERE !!!!!!!!!!!!!!!!!!!!!
-        { name: responder.t('{{definitions.atk}}'), value: (companion.atk / 100).toString() || 0, inline: true },
+        { name: responder.t('{{definitions.hp}}'), value: (companion.hp).toString() || 0, inline: true },
+        { name: responder.t('{{definitions.atk}}'), value: (companion.atk).toString() || 0, inline: true },
         { name: responder.t('{{definitions.crit}}'), value: (companion.crit / 100).toString() || 0, inline: true },
         { name: responder.t('{{definitions.heal}}'), value: (companion.heal / 100).toString() || 0, inline: true },
         { name: responder.t('{{definitions.mood}}'), value: companion.mood || 10, inline: true},

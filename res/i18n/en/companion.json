@@ -44,7 +44,8 @@
     "hunger": "Food",
     "atk": "Attack",
     "crit": "Critical Chance",
-    "heal": "Heal Chance"
+    "heal": "Heal Chance",
+    "hp": "Health"
   },
   "errors": {
     "self": "you can't battle yourself!",
