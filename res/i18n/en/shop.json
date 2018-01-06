@@ -16,9 +16,26 @@
     "__Current Balance__: {{balance}} credits\n"
   ],
   "error": "an error has occurred! The transaction was cancelled. Try again later.",
-  "cannotAfford": "I'm sorry, you need {{ammount}} credits to buy that but you only have {{balance}}",
+  "cannotAfford": "I'm sorry, you need {{amount}} credits to buy that but you only have {{balance}}",
   "info": "Current Inventory",
   "amounts": {
     "petFood": "Pet food"
-  }
+  },
+  "invalidCode": "you have entered an invalid code! The transaction was cancelled.",
+  "upgradeDialog": "Which stat would you like to upgrade?",
+  "upgradeMenu": {
+    "atk": "Attack points",
+    "crit": "Critical hit chance",
+    "heal": "Mega heal chance",
+  },
+  "upgrade": [
+    "{{author}}, are you sure you'd like to spend {{amount}} tokens to upgrade the {{selection}} stat?\n",
+    "To confirm, please write {{code}}, or anything else to exit."
+  ],
+  "upgradeResult": [
+    "**Stat Upgraded**\n",
+    "{{author}}, you have successfully upgraded the {{selection}} stat. The curent amount for that stat is {{new}}",
+    "__Level Tokens Left__: {{balance}}\n"
+  ],
+  "cannotUpgrade": "I'm sorry, you need {{amount}} tokens to upgrade this stat but you only have {{balance}}"
 }

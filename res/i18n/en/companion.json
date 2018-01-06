@@ -41,7 +41,10 @@
     "info": "Companion Info",
     "info2": "{{author}}'s Companion",
     "mood": "Mood",
-    "hunger": "Food"
+    "hunger": "Food",
+    "atk": "Attack",
+    "crit": "Critical Chance",
+    "heal": "Heal Chance"
   },
   "errors": {
     "self": "you can't battle yourself!",
