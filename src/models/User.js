@@ -11,10 +11,12 @@ module.exports = function () {
       id: string(),
       credits: number().default(0),
       exp: number().default(0),
+      level: number().default(0),
       petfood: number().default(0),
       deleted: bool().default(false),
       title: string().default('Commoner'),
       description: string().default('A simple wandering soul'),
+      team: string().default('None'),
       inventory: array().default([])
     },
     expiry: 300,
