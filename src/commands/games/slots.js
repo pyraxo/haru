@@ -24,15 +24,15 @@ class Slots extends Command {
       '🍒 x 3': 10,
       '7⃣ x 2': 30,
       '7⃣ x 3': 75,
-      '🍐 x 3': 15,
-      '🍈 x 3': 15,
-      '🍇 x 3': 15,
-      '🍊 x 3': 15,
-      '🍌 x 3': 15,
+      '🍐 x 3': 10,
+      '🍈 x 3': 10,
+      '🍇 x 3': 10,
+      '🍊 x 3': 10,
+      '🍌 x 3': 10,
       '💎 x 2': 30,
       '💎 x 3': 60,
       '🔔 x 3': 40,
-      '🍉 x 3': 15,
+      '🍉 x 3': 10,
       '🇱🇻 x 2': 25,
       '🇱🇻 x 3': 50
     }
@@ -65,7 +65,7 @@ class Slots extends Command {
     const machine = this.generateSlots
     const payline = [machine[0][1], machine[1][1], machine[2][1]]
     const winnings = this.checkWinnings(payline, bet)
-   
+
     const rando = Math.random()
     return !winnings.length ? [ machine, payline, winnings ]
     : rando >= (0.8 / winnings[0][2])

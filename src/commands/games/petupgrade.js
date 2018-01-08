@@ -3,9 +3,9 @@ const { Command, utils } = require('sylphy')
 class UpgradePet extends Command {
   constructor (...args) {
     super(...args, {
-      name: 'training',
+      name: 'train',
       description: 'A place to upgrade your pet\'s stats',
-      alises: ['pleasetakemetothetrainiggroundsoicanupgrademypetokthanks'],
+      alises: ['training', 'pleasetakemetothetrainiggroundsoicanupgrademypetokthanks'],
       options: { localeKey: 'shop' },
       group: 'games'
     })
@@ -20,7 +20,7 @@ class UpgradePet extends Command {
   */
   handle (container, responder) {
     const { msg, settings } = container
-    return responder.selection(['atk', 'crit', 'heal', health], {
+    return responder.selection(['atk', 'crit', 'heal', 'health'], {
       title: '{{upgradeDialog}}',
       mapFunc: ch => responder.t(`{{upgradeMenu.${ch}}}`)
     }).then(arg => arg.length ? this[arg[0]](container, responder) : false)
@@ -109,7 +109,7 @@ class UpgradePet extends Command {
     if (parseInt(argCode.code, 10) !== code) {
       return responder.error('{{invalidCode}}')
     }
-    companion.crit += 1
+    companion.crit += 2
     companion.lvltokens -= amount
     try {
       await user.saveAll()
@@ -159,7 +159,7 @@ class UpgradePet extends Command {
     if (parseInt(argCode.code, 10) !== code) {
       return responder.error('{{invalidCode}}')
     }
-    companion.heal += 1
+    companion.heal += 2
     companion.lvltokens -= amount
     try {
       await user.saveAll()

@@ -17,7 +17,8 @@ module.exports = function () {
       title: string().default('Commoner'),
       description: string().default('A simple wandering soul'),
       team: string().default('None'),
-      inventory: array().default([])
+      inventory: array().default([]),
+      excluded: bool().default(false)
     },
     expiry: 300,
     relations: {

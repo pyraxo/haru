@@ -101,6 +101,17 @@
       "ownedPet": "you already own a companion!",
       "cannotAfford": "you need {{amount}} credits but only have {{balance}}!",
       "intro": "Choose a starter companion, {{user}}!",
+      "sold": {
+        "dialog": [
+          "**Companion Sale**\n",
+          "Are you sure you'd like to sell your companion?",
+          "To confirm, please write {{code}}, or anything else to exit."
+        ],
+        "result": [
+          "**Companion Sold**\n",
+          "{{author}}, you have successfully sold your companion."
+        ]
+      },
       "dialog": [
         "**Companion Purchase**\n",
         "{{author}}, you have selected {{animal}} as your companion.",
@@ -128,7 +139,11 @@
         "info": "Companion Info",
         "info2": "{{author}}'s Companion",
         "mood": "Mood",
-        "hunger": "Food"
+        "hunger": "Food",
+        "atk": "Attack",
+        "crit": "Critical Chance",
+        "heal": "Heal Chance",
+        "hp": "Health"
       },
       "errors": {
         "self": "you can't battle yourself!",
@@ -669,11 +684,29 @@
         "__Current Balance__: {{balance}} credits\n"
       ],
       "error": "an error has occurred! The transaction was cancelled. Try again later.",
-      "cannotAfford": "I'm sorry, you need {{ammount}} credits to buy that but you only have {{balance}}",
+      "cannotAfford": "I'm sorry, you need {{amount}} credits to buy that but you only have {{balance}}",
       "info": "Current Inventory",
       "amounts": {
         "petFood": "Pet food"
-      }
+      },
+      "invalidCode": "you have entered an invalid code! The transaction was cancelled.",
+      "upgradeDialog": "Which stat would you like to upgrade?",
+      "upgradeMenu": {
+        "atk": "Attack points",
+        "crit": "Critical hit chance",
+        "heal": "Mega heal chance",
+        "health": "Health Points"
+      },
+      "upgrade": [
+        "{{author}}, are you sure you'd like to spend {{amount}} tokens to upgrade the {{selection}} stat?\n",
+        "To confirm, please write {{code}}, or anything else to exit."
+      ],
+      "upgradeResult": [
+        "**Stat Upgraded**\n",
+        "{{author}}, you have successfully upgraded the {{selection}} stat. The curent amount for that stat is {{new}}",
+        "__Level Tokens Left__: {{balance}}\n"
+      ],
+      "cannotUpgrade": "I'm sorry, you need {{amount}} tokens to upgrade this stat but you only have {{balance}}"
     },
     "slots": {
       "insufficient": [
