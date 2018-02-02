@@ -31,7 +31,7 @@ class Battle extends Command {
       return this[rawArgs[0]](container, responder, companions)
     }
 
-    if (args.action[0].status === 'offline') {
+    if (args.action[0].status === 'offline' || args.action[0].status === 'dnd') {
       return responder.error('{{errors.notOnline}}')
     }
 
@@ -92,6 +92,11 @@ class Battle extends Command {
     try {
       const p1 = await data.User.fetch(battle.p1)
       const p2 = await data.User.fetch(battle.p2)
+
+      if (p1.credits < this.entryFee || p2.credits < this.entryFee) {
+        companions.updateBattle(msg.channel, 0)
+        return responder.error('{{errors.cantFight}}')
+      }
 
       p1.credits -= this.entryFee
       p2.credits -= this.entryFee

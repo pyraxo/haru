@@ -105,6 +105,7 @@ class Companions extends Command {
       companion.mood += amount
     }
     companion.hunger += amount
+    user.petfood -= amount
     try {
       await user.saveAll()
       await User.update(user.id, user)
