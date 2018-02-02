@@ -141,8 +141,8 @@
         "mood": "Mood",
         "hunger": "Food",
         "atk": "Attack",
-        "crit": "Critical Chance",
-        "heal": "Heal Chance",
+        "crit": "Critical Hit Chance",
+        "heal": "Mega Heal Chance",
         "hp": "Health"
       },
       "errors": {
@@ -156,6 +156,7 @@
         "opponentNoCompanion": "that player does not own a companion!",
         "cantPlay": "you need {{amount}} credits to play but currently only have {{balance}}!",
         "cantChallenge": "the player does not have enough credits to play!",
+        "cantFight": "A player in this battle doesn't have enough credits!",
         "noBattle": "this channel has no ongoing battles!",
         "notParticipating": "that player is not a participant of this battle!",
         "isParticipant": "you're a participant of this battle and can't place bets!",
@@ -667,6 +668,7 @@
       }
     },
     "shop": {
+      "noPet": "you don't own a companion yet! Use {{command}} to purchase one!",
       "buyDialog": "Items for purchase",
       "sellDialog": "Items for sale",
       "menu": {

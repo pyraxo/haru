@@ -1,4 +1,5 @@
 {
+  "noPet": "you don't own a companion yet! Use {{command}} to purchase one!",
   "buyDialog": "Items for purchase",
   "sellDialog": "Items for sale",
   "menu": {
