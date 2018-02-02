@@ -5,7 +5,7 @@ class UpgradePet extends Command {
     super(...args, {
       name: 'train',
       description: 'A place to upgrade your pet\'s stats',
-      alises: ['training', 'pleasetakemetothetrainiggroundsoicanupgrademypetokthanks'],
+      aliases: ['training'],
       options: { localeKey: 'shop' },
       group: 'games'
     })
@@ -18,62 +18,18 @@ class UpgradePet extends Command {
   ██   ██ ██   ██ ██  ██ ██ ██   ██ ██      ██
   ██   ██ ██   ██ ██   ████ ██████  ███████ ███████
   */
-  handle (container, responder) {
-    const { msg, settings } = container
-    return responder.selection(['atk', 'crit', 'heal', 'health'], {
+  async handle (container, responder) {
+    const { msg, plugins, settings, trigger } = container
+    const User = plugins.get('db').data.User
+    const companion = (await User.fetch(msg.author.id)).companion
+    if (!companion) {
+      responder.error('{{noPet}}', { command: `**\`${settings.prefix}companion buy\`**` })
+      return
+    }
+    return responder.selection(['crit', 'heal', 'health'], {
       title: '{{upgradeDialog}}',
       mapFunc: ch => responder.t(`{{upgradeMenu.${ch}}}`)
     }).then(arg => arg.length ? this[arg[0]](container, responder) : false)
-  }
-
-  /*
-   █████  ████████ ████████  █████   ██████ ██   ██
-  ██   ██    ██       ██    ██   ██ ██      ██  ██
-  ███████    ██       ██    ███████ ██      █████
-  ██   ██    ██       ██    ██   ██ ██      ██  ██
-  ██   ██    ██       ██    ██   ██  ██████ ██   ██
-  */
-  async atk ({ msg, plugins, settings }, responder) {
-    const selection = 'atk'
-    const User = plugins.get('db').data.User
-    const user = await User.fetch(msg.author.id)
-    const companion = user.companion
-    const amount = 5
-    if (companion.lvltokens < amount) {
-      responder.error('{{cannotUpgrade}}', {
-        amount: `**${amount}**`,
-        balance: `**${companion.lvltokens}**`
-      })
-      return
-    }
-    const code = ~~(Math.random() * 8999) + 1000
-    const argCode = await responder.format('emoji:info').dialog([{
-      prompt: '{{upgrade}}',
-      input: { type: 'string', name: 'code' }
-    }], {
-      author: `**${msg.author.username}**`,
-      selection: `${selection}`,
-      amount: `**${amount}**`,
-      code: `**\`${code}\`**`
-    })
-    if (parseInt(argCode.code, 10) !== code) {
-      return responder.error('{{invalidCode}}')
-    }
-    companion.atk += 1
-    companion.lvltokens -= amount
-    try {
-      await user.saveAll()
-      await User.update(user.id, user)
-    } catch (err) {
-      this.logger.error(`Could not save after stat upgrade: ${err}`)
-      return responder.error('{{error}}')
-    }
-    responder.format('emoji:success').send('{{upgradeResult}}', {
-      author: `**${msg.author.username}**`,
-      selection: `${selection}`,
-      new: `${companion.atk}`,
-      balance: `**${companion.lvltokens}**`
-    })
   }
 
   /*
@@ -188,7 +144,7 @@ class UpgradePet extends Command {
     const User = plugins.get('db').data.User
     const user = await User.fetch(msg.author.id)
     const companion = user.companion
-    const amount = 2
+    const amount = 4
     if (companion.lvltokens < amount) {
       responder.error('{{cannotUpgrade}}', {
         amount: `**${amount}**`,
@@ -209,7 +165,7 @@ class UpgradePet extends Command {
     if (parseInt(argCode.code, 10) !== code) {
       return responder.error('{{invalidCode}}')
     }
-    companion.health += 1
+    companion.hp += 1
     companion.lvltokens -= amount
     try {
       await user.saveAll()
