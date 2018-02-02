@@ -145,8 +145,8 @@ class Companions extends Module {
   async startBattle (id) {
     let battle = this.getBattle(id)
     if (!battle) return
-    const p1 = (await this.db.User.fetchJoin(battle.p1, { companion: true })).companion
-    const p2 = (await this.db.User.fetchJoin(battle.p2, { companion: true })).companion
+    const p1 = (await this.db.User.fetch(battle.p1)).companion
+    const p2 = (await this.db.User.fetch(battle.p2)).companion
     battle._stats = {
       p1: {
         name: p1.name,
@@ -267,7 +267,7 @@ class Companions extends Module {
     const loser = player ? 'p2' : 'p1'
     this.updateBattle(battle.channel, 5)
 
-    const winUser = await this.db.User.fetchJoin(battle[winner], { companion: true })
+    const winUser = await this.db.User.fetch(battle[winner])
     winUser.credits += battle.fee * 2
     winUser.companion.exp = (winUser.companion.exp || 0) + ~~(Math.random() * 5) + 2
     const oldWinningCompanionLevel = winUser.companion.level

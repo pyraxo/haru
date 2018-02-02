@@ -34,7 +34,7 @@ class Companions extends Command {
   */
   async handle ({ msg, plugins, settings, trigger }, responder) {
     const User = plugins.get('db').data.User
-    const companion = (await User.fetchJoin(msg.author.id, { companion: true })).companion
+    const companion = (await User.fetch(msg.author.id)).companion
     if (!companion) {
       responder.error('{{noPet}}', { command: `**\`${settings.prefix}${trigger} buy\`**` })
       return
@@ -68,7 +68,7 @@ class Companions extends Command {
   async feed ({ msg, plugins, args }, responder) {
     const User = plugins.get('db').data.User
     const user = await User.fetch(msg.author.id)
-    const companion = (await User.fetchJoin(msg.author.id, { companion: true })).companion
+    const companion = (await User.fetch(msg.author.id)).companion
     if (!companion) {
       responder.error('{{noPet}}', { command: `**\`${settings.prefix}${trigger} buy\`**` })
       return
@@ -130,7 +130,7 @@ class Companions extends Command {
     const User = plugins.get('db').data.User
     const [member] = await responder.selection(args.user, { mapFunc: m => `${m.user.username}#${m.user.discriminator}` })
     if (!member) return
-    const companion = (await User.fetchJoin(member.user.id, { companion: true })).companion
+    const companion = (await User.fetch(member.user.id)).companion
     if (!companion) {
       responder.error('{{errors.opponentNoCompanion}}')
       return
@@ -165,7 +165,7 @@ class Companions extends Command {
     const User = plugins.get('db').data.User
     const companions = modules.get('companions')
     if (!companions) return this.logger.error('Companions module not found')
-    const user = await User.fetchJoin(msg.author.id, { companion: true })
+    const user = await User.fetch(msg.author.id)
     if (!user.companion) {
       responder.error('{{noPet}}', { command: `**\`${settings.prefix}companion buy\`**` })
       return
@@ -203,7 +203,7 @@ class Companions extends Command {
     const db = plugins.get('db')
     const companions = modules.get('companions')
     if (!companions) return this.logger.error('Companions module not found')
-    const user = await db.data.User.fetchJoin(msg.author.id, { companion: true })
+    const user = await db.data.User.fetch(msg.author.id)
     if (user.companion) {
       responder.error('{{ownedPet}}')
       return
@@ -325,7 +325,7 @@ class Companions extends Command {
     const User = plugins.get('db').data.User
     const companions = modules.get('companions')
     if (!companions) return this.logger.error('Companions module not found')
-    const user = await User.fetchJoin(msg.author.id, { companion: true })
+    const user = await User.fetch(msg.author.id)
     if (!user.companion) {
       responder.error('{{noPet}}', { command: `**\`${settings.prefix}companion buy\`**` })
       return

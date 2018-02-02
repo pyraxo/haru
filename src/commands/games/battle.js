@@ -22,7 +22,7 @@ class Battle extends Command {
     const User = plugins.get('db').data.User
     const companions = modules.get('companions')
     if (!companions) return this.logger.error('Companions module not found')
-    const userProfile = await User.fetchJoin(msg.author.id, { companion: true })
+    const userProfile = await User.fetch(msg.author.id)
     if (!userProfile.companion) {
       return responder.error('{{noPet}}', { command: `**\`${settings.prefix}companion buy\`**` })
     }

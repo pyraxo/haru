@@ -44,7 +44,7 @@ class Bet extends Command {
         balance: `**${balance}**`
       })
     }
-    const pet = (await User.fetchJoin(member.id, { companion: true })).companion
+    const pet = (await User.fetch(member.id)).companion
     if (amount < 1) return responder.error('{{errors.plsBetProperly}}')
     try {
       await companions.placeBet(msg.channel.id, member.id, msg.author.id, amount)
