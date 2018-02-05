@@ -63,7 +63,7 @@ class Shop extends Command {
       author: `**${msg.author.username}**`,
       amount: `**${amount}**`,
       selection: `food`,
-      balance: `:credits: **${user.credits}**`
+      balance: `:credit_card: **${user.credits}**`
     })
   }
 

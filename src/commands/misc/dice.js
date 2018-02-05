@@ -47,12 +47,12 @@ class Dice extends Command {
 
   handle ({ msg, args, settings, trigger }, responder) {
     if (!args.notation) {
-      return responder.send(':dice: **1d6**  |  {{dice.result}}', {
+      return responder.send(':game_die: **1d6**  |  {{dice.result}}', {
         result: `**${this.roll().total}**`
       })
     }
     if (/^[1-9]*$/.test(args.notation)) {
-      return responder.send(`:dice: **${args.notation}d6**  |  {{dice.result}}`, {
+      return responder.send(`:game_die: **${args.notation}d6**  |  {{dice.result}}`, {
         result: `**${this.roll(args.notation).total}**`
       })
     }
@@ -65,7 +65,7 @@ class Dice extends Command {
     }
     const result = this.roll(...input.slice(1))
     return responder.send([
-      `:dice: **${args.notation}**  |  {{dice.result}}`,
+      `:game_die: **${args.notation}**  |  {{dice.result}}`,
       result.results.length > 1 ? ['```xl', result.results.join(' '), '```'].join('\n') : ''
     ], {
       result: `**${result.total}**`

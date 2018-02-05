@@ -310,7 +310,7 @@ class Companions extends Command {
     responder.format('emoji:success').send('{{result}}', {
       author: `**${msg.author.username}**`,
       animal: `:${choice}:`,
-      balance: `:credits: **${user.credits}**`,
+      balance: `:credit_card: **${user.credits}**`,
       command: `**\`${settings.prefix}companion rename\`**`
     })
   }
