@@ -21,7 +21,7 @@ class Catgirl extends Command {
       return responder
       .embed({
         color: utils.getColour('green'),
-        description: '📷  ' + responder.t('{{link}}', { image: `**[${responder.t('{{catgirl}}')}](${url})**` }),
+        description: `📷  **[URL](${url})**`,
         image: { url }
       })
       .send()
