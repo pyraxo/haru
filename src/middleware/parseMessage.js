@@ -3,7 +3,7 @@ module.exports = {
   process: container => {
     const { settings, msg, commands, client, _overwrite } = container
     const { prefix } = settings
-    const defPrefix = `<@!${client.user.id}> `
+    const defPrefix = `<@${client.user.id}> `
 
     if (!_overwrite) {
       const chk = msg.content.startsWith(prefix)
