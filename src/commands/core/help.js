@@ -14,7 +14,7 @@ class HelpMenu extends Command {
     })
   }
 
-  async handle ({ msg, commands, settings, args }, responder) {
+  async handle ({ msg, commands, client, settings, args }, responder) {
     const prefix = settings.prefix
     if (args.command) {
       const command = args.command
@@ -83,7 +83,7 @@ class HelpMenu extends Command {
     ], {
       DM: true,
       prefix: `\`${prefix}\``,
-      defaultPrefix: `\`${process.env.CLIENT_PREFIX}\``,
+      defaultPrefix: `\`@${client.user.username}\``,
       server: `**${msg.channel.guild ? msg.channel.guild.name : responder.t('{{pms}}')}**`,
       helpCommand: `\`${prefix}help <command>\``,
       exampleCommand: `\`${prefix}help credits\``,

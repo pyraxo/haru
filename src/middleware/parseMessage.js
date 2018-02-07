@@ -1,11 +1,13 @@
 module.exports = {
   priority: 10,
   process: container => {
-    const { settings, msg, commands, _overwrite } = container
+    const { settings, msg, commands, client, _overwrite } = container
     const { prefix } = settings
+    const defPrefix = `<@!${client.user.id}> `
 
     if (!_overwrite) {
-      const rawArgs = msg.content.substring(prefix.length).split(' ')
+      const chk = msg.content.startsWith(prefix)
+      const rawArgs = msg.content.substring((chk ? prefix : defPrefix).length).split(' ')
       container.trigger = rawArgs[0].toLowerCase()
       container.isCommand = commands.has(container.trigger)
       container.rawArgs = rawArgs.slice(1).filter(v => !!v)
