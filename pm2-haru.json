@@ -4,6 +4,9 @@
     "script": "src/index.js",
     "exec_mode": "cluster_mode",
     "instances": "1",
-    "watch": false
+    "watch": false,
+    "args": [
+      "--color"
+    ]
   }]
 }
