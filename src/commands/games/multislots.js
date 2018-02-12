@@ -16,9 +16,9 @@ class Multislots extends Command {
     })
 
     this.reel = [
-      '🍇', '🍊', '🇱🇻', '🍈', '🍌', '🍎', '🍒', '🍉', '🔔', '💎', '🍐', '🍇', '🍊',
-      '🍈', '🍒', '🍌', '🍉', '🇱🇻', '💎', '🍌', '🍎', '🔔', '🍇', '🍐', '🍊',
-      '🍊', '🍌', '🍎', '🍒', '🇱🇻', '🍐', '🍈', '🍇', '🍌', '🍎'
+      '🍇', '🍊', '🇱🇻', '🍈', '🍌', '🍎', '🍒', '🍉', '🔔', '💎', '🍇', '🍊',
+      '🍈', '🍒', '🍌', '🍉', '🇱🇻', '💎', '🍌', '🍎', '🔔', '🍇', '🍊',
+      '🍊', '🍌', '🍎', '🍒', '🇱🇻', '🍈', '🍇', '🍌', '🍎'
     ]
 
     this.wins = {
@@ -26,7 +26,6 @@ class Multislots extends Command {
       '🍒 x 3': 5,
       '7⃣ x 2': 50,
       '7⃣ x 3': 150,
-      '🍐 x 3': 15,
       '🍈 x 3': 15,
       '🍇 x 3': 15,
       '🍊 x 3': 15,
@@ -96,7 +95,7 @@ class Multislots extends Command {
     const cache = plugins.get('cache')
     const User = plugins.get('db').data.User
     let dailyWins = await cache.client.getAsync(`slots:${msg.author.id}`)
-    if (parseInt(dailyWins, 10) >= 1000000) {
+    if (parseInt(dailyWins, 10) >= 100000) {
       const res = await cache.client.pttlAsync(`slots:${msg.author.id}`)
       return responder.error('{{dailyLimit}}', {
         time: `${moment(res + moment()).fromNow(true)}`
