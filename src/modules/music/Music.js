@@ -22,7 +22,7 @@ class Music extends Module {
 
     this.streams = {
       'listen.moe': {
-        socket: 'https://listen.moe/api/v2/socket',
+        socket: 'https://listen.moe/api/v3/socket',
         url: 'http://listen.moe/stream'
       }
     }
@@ -410,7 +410,7 @@ class Music extends Module {
   async fetchPlaylist (pid) {
     const res = await request.get(
       'https://www.googleapis.com/youtube/v3/playlistItems?part=contentDetails&maxResults=50' +
-      `&playlistId=${pid}&key=${process.env.API_YT}` 
+      `&playlistId=${pid}&key=${process.env.API_YT}`
     )
     return res.statusCode === 404 || res.statusMessage === 'Not Found'
     ? res.error ? Promise.reject('error') : Promise.reject('notFound')
