@@ -105,5 +105,7 @@
     "DODGE_2": "{{p2}}'s attack narrowly misses {{p1}}!",
     "DODGE_3": "{{p1}} barely avoids {{p2}}'s attack!",
     "DODGE_4": "{{p2}}'s attack passes by {{p1}}!"
-      }
+  },
+  "exp": "Experience",
+  "topTitle": "Discord's Best Companions"
 }
