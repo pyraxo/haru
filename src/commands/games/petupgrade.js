@@ -65,6 +65,13 @@ class UpgradePet extends Command {
     if (parseInt(argCode.code, 10) !== code) {
       return responder.error('{{invalidCode}}')
     }
+    if (companion.lvltokens < amount) {
+      responder.error('{{cannotUpgrade}}', {
+        amount: `**${amount}**`,
+        balance: `**${companion.lvltokens}**`
+      })
+      return
+    }
     companion.crit += 2
     companion.lvltokens -= amount
     try {
@@ -115,6 +122,13 @@ class UpgradePet extends Command {
     if (parseInt(argCode.code, 10) !== code) {
       return responder.error('{{invalidCode}}')
     }
+    if (companion.lvltokens < amount) {
+      responder.error('{{cannotUpgrade}}', {
+        amount: `**${amount}**`,
+        balance: `**${companion.lvltokens}**`
+      })
+      return
+    }
     companion.heal += 2
     companion.lvltokens -= amount
     try {
@@ -164,6 +178,13 @@ class UpgradePet extends Command {
     })
     if (parseInt(argCode.code, 10) !== code) {
       return responder.error('{{invalidCode}}')
+    }
+    if (companion.lvltokens < amount) {
+      responder.error('{{cannotUpgrade}}', {
+        amount: `**${amount}**`,
+        balance: `**${companion.lvltokens}**`
+      })
+      return
     }
     companion.hp += 1
     companion.lvltokens -= amount

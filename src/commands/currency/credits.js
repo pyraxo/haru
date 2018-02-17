@@ -192,7 +192,7 @@ class Credits extends Command {
         '```py',
         `@ ${responder.t('{{topTitle}}')}\n`,
         unique.map((u, i) => (
-          utils.padEnd(`[${i + 1}]`, 6) +
+          utils.padEnd(`[${i + 1}]`, 5) +
           ` ${utils.padEnd(`${u.username}#${u.discriminator}`, maxName)} >>   ` +
           `${utils.padStart(res[i].credits, maxCred)} ${responder.t('{{credits}}')}`
         )).join('\n'),

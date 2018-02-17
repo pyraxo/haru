@@ -5,7 +5,7 @@ class Companions extends Command {
     super(...args, {
       name: 'companion',
       description: 'Animal companion system',
-      usage: [{ name: 'action', displayName: 'buy | rename | peek | feed | sell', type: 'string', optional: true }],
+      usage: [{ name: 'action', displayName: 'buy | rename | peek | feed | sell | top', type: 'string', optional: true }],
       aliases: ['pet'],
       cooldown: 5,
       subcommands: {
@@ -18,7 +18,8 @@ class Companions extends Command {
         feed: {
           usage: [{ name: 'amount', type: 'int', optional: true }]
         },
-        sell: 'sell'
+        sell: 'sell',
+        top: 'top'
       },
       options: { botPerms: ['embedLinks'] },
       group: 'games'
@@ -352,6 +353,62 @@ class Companions extends Command {
     responder.format('emoji:success').send('{{sold.result}}', {
       author: `**${msg.author.username}**`
     })
+  }
+
+  /*
+  ████████  ██████  ██████
+     ██    ██    ██ ██   ██
+     ██    ██    ██ ██████
+     ██    ██    ██ ██
+     ██     ██████  ██
+  */
+  async top ({ args, plugins }, responder) {
+    const db = plugins.get('db').models
+    try {
+      const res = await db.User.filter({ deleted: false, excluded: false, companion: { atk: 1 } }).orderBy(db.r.desc(db.r.row('companion')('exp'))).limit(10).execute()
+      const data = await plugins.get('ipc').awaitResponse('query', {
+        queries: [{ prop: 'users', query: 'id', input: res.map(u => u.id) }]
+      })
+      const users = data.map(d => d[0])
+      let unique = []
+      for (let i = 0; i < users[0].length; i++) {
+        if (users[0][i]) unique.push(users[0][i])
+        else {
+          let idx = 1
+          let usr
+          while (idx < data.length) {
+            usr = users[idx++][i]
+            if (usr) break
+          }
+          unique.push(usr)
+        }
+      }
+      unique = unique.filter(u => u)
+      let maxName = 16
+      unique.forEach(u => {
+        const str = `${u.username}#${u.discriminator}`
+        maxName = str.length + 6 > maxName ? str.length + 6 : maxName
+      })
+      let maxCred = 4
+      res.forEach(r => {
+        r = r.companion.exp
+        maxCred = String(r).length > maxCred ? String(r).length + 1 : maxCred
+      })
+
+      return responder.send([
+        '```py',
+        `@ ${responder.t('{{topTitle}}')}\n`,
+        unique.map((u, i) => (
+          utils.padEnd(`[${i + 1}]`, 5) +
+          ` ${utils.padEnd(`${u.username}#${u.discriminator}`, maxName)} >>   ` +
+          `${utils.padStart(res[i].companion.exp, maxCred)} ${responder.t('{{exp}}')}`
+        )).join('\n'),
+        '```'
+      ].join('\n'))
+    } catch (err) {
+      this.logger.error('Error getting top credits scoreboards', err)
+      return responder.error()
+    }
   }
 
 }
