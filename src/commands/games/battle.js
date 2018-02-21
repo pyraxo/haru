@@ -60,10 +60,10 @@ class Battle extends Command {
     const oppProfile = await User.fetch(opp.id)
     if (!oppProfile.companion) return responder.error('{{errors.opponentNoCompanion}}')
     if (oppProfile.credits < this.entryFee) return responder.error('{{errors.cantChallenge}}')
-    if (oppProfile.companion.hunger === 1) {
+    if (oppProfile.companion.hunger <= 1) {
       return responder.error('{{errors.hungryOpponent}}')
     }
-    if (oppProfile.companion.mood === 1) {
+    if (oppProfile.companion.mood <= 1) {
       return responder.error('{{errors.moodyOpponent}}')
     }
 
