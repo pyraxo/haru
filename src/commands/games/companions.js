@@ -87,19 +87,6 @@ class Companions extends Command {
       })
       return
     }
-    const code = ~~(Math.random() * 8999) + 1000
-    const arg = await responder.format('emoji:info').dialog([{
-      prompt: '{{food}}',
-      input: { type: 'string', name: 'code' }
-    }], {
-      author: `**${msg.author.username}**`,
-      animal: `:${companion.type}:`,
-      amount: `**${amount}**`,
-      code: `**\`${code}\`**`
-    })
-    if (parseInt(arg.code, 10) !== code) {
-      return responder.error('{{invalidCode}}')
-    }
     if ((companion.mood + amount) > 10) {
       companion.mood = 10
     } else {
