@@ -90,7 +90,8 @@ class Resetter extends Command {
     super(...args, {
       name: 'reset',
       description: 'Resets all permissions in the server',
-      options: { guildOnly: true, localeKey: 'settings', modOnly: true }
+      options: { guildOnly: true, localeKey: 'settings', modOnly: true },
+      group: 'moderation'
     })
   }
 

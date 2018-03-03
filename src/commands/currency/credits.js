@@ -115,9 +115,14 @@ class Credits extends Command {
       code: `**\`${code}\`**`,
       exit: '**`cancel`**',
       tries: 1
-    }).then(arg => {
+    }).then(async arg => {
       if (parseInt(arg.code, 10) !== code) {
         responder.error('{{invalidCode}}')
+        return
+      }
+      const credits2 = (await data.User.fetch(msg.author.id)).credits
+      if (credits2 < amt) {
+        responder.error('{{insufficientCredits}}', { balance: `**${credits2}**` })
         return
       }
       Promise.all([
@@ -127,7 +132,7 @@ class Credits extends Command {
         responder.format('emoji:credits').reply('{{confirmation}}', {
           amount: `**${amt}**`,
           user: `**${user.username}**`,
-          afterAmount: `**\`$ ${credits - amt}\`**`
+          afterAmount: `**\`$ ${credits2 - amt}\`**`
         })
       }, err => {
         this.logger.error('Error carrying out transaction', err)
@@ -187,7 +192,7 @@ class Credits extends Command {
         '```py',
         `@ ${responder.t('{{topTitle}}')}\n`,
         unique.map((u, i) => (
-          utils.padEnd(`[${i + 1}]`, 6) +
+          utils.padEnd(`[${i + 1}]`, 5) +
           ` ${utils.padEnd(`${u.username}#${u.discriminator}`, maxName)} >>   ` +
           `${utils.padStart(res[i].credits, maxCred)} ${responder.t('{{credits}}')}`
         )).join('\n'),

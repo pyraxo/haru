@@ -3,7 +3,10 @@
     "name": "haru",
     "script": "src/index.js",
     "exec_mode": "cluster_mode",
-    "instances": "max",
-    "watch": false
+    "instances": "1",
+    "watch": false,
+    "args": [
+      "--color"
+    ]
   }]
 }

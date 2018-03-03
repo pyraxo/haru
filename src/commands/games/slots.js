@@ -13,28 +13,27 @@ class Slots extends Command {
     })
 
     this.reel = [
-      '🍇', '🍊', '🇱🇻', '🍈', '🍌', '🍒', '🍉', '🔔', '💎', '🍐', '🍇', '🍊',
-      '🍈', '🍒', '🍌', '🍉', '🇱🇻', '💎', '🍌', '🔔', '🍇', '🍐', '🍊',
-      '🍊', '🍌', '🍒', '🇱🇻', '🍐', '🍈', '🍇', '🍌', '7⃣'
+      '🍇', '🍊', '🇱🇻', '🍈', '🍌', '🍎', '🍒', '🍉', '🔔', '💎', '🍇', '🍊',
+      '🍈', '🍒', '🍌', '🍉', '🇱🇻', '💎', '🍌', '🍎', '🔔', '🍇', '🍊',
+      '🍊', '🍌', '🍎', '🍒', '🇱🇻', '🍈', '🍇', '🍌', '🍎'
     ]
 
     this.wins = {
-      '🍒 x 1': 1,
-      '🍒 x 2': 5,
-      '🍒 x 3': 10,
-      '7⃣ x 2': 30,
-      '7⃣ x 3': 75,
-      '🍐 x 3': 15,
+      '🍒 x 2': 3,
+      '🍒 x 3': 5,
+      '7⃣ x 2': 50,
+      '7⃣ x 3': 150,
       '🍈 x 3': 15,
       '🍇 x 3': 15,
       '🍊 x 3': 15,
       '🍌 x 3': 15,
+      '🍎 x 3': 15,
       '💎 x 2': 30,
-      '💎 x 3': 60,
-      '🔔 x 3': 40,
+      '💎 x 3': 75,
+      '🔔 x 3': 50,
       '🍉 x 3': 15,
-      '🇱🇻 x 2': 25,
-      '🇱🇻 x 3': 50
+      '🇱🇻 x 2': 30,
+      '🇱🇻 x 3': 60
     }
   }
 
@@ -65,7 +64,7 @@ class Slots extends Command {
     const machine = this.generateSlots
     const payline = [machine[0][1], machine[1][1], machine[2][1]]
     const winnings = this.checkWinnings(payline, bet)
-   
+
     const rando = Math.random()
     return !winnings.length ? [ machine, payline, winnings ]
     : rando >= (0.8 / winnings[0][2])
@@ -76,7 +75,7 @@ class Slots extends Command {
     const cache = plugins.get('cache')
     const User = plugins.get('db').data.User
     let dailyWins = await cache.client.getAsync(`slots:${msg.author.id}`)
-    if (parseInt(dailyWins, 10) >= 1000000) {
+    if (parseInt(dailyWins, 10) >= 750000) {
       const res = await cache.client.pttlAsync(`slots:${msg.author.id}`)
       return responder.error('{{dailyLimit}}', {
         time: `${moment(res + moment()).fromNow(true)}`
