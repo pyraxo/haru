@@ -42,12 +42,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pyraxo/natsu.git"
+    "url": "git+ssh://git@owo.codes:pyraxo/haru"
   },
   "author": "pyraxo <pyraxo@pyraxo.moe> (https://pyraxo.moe)",
   "license": "AGPL-3.0",
-  "bugs": {
-    "url": "https://github.com/pyraxo/natsu/issues"
-  },
-  "homepage": "https://github.com/pyraxo/natsu#readme"
+  "homepage": "https://owo.codes/haru/pyraxo"
 }

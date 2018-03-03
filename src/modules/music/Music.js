@@ -45,7 +45,7 @@ class Music extends Module {
       }
     }, 120000)
 
-    this.connectWS()
+    // this.connectWS()
   }
 
   connectWS () {

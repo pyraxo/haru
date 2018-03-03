@@ -81,7 +81,6 @@ class Companions extends Command {
     user.companion.name = arg.newName
     try {
       await user.saveAll({ companion: true })
-      User.update(user.id, user)
     } catch (err) {
       this.logger.error(`Could not save after companion rename: ${err}`)
       return responder.error('{{error}}')
