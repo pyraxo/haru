@@ -1,10 +1,9 @@
-const logger = require('winston')
 const request = require('superagent')
 const Feedparser = require('feedparser')
 const moment = require('moment')
 const toMarkdown = require('to-markdown')
 
-const { Module, Collection } = require('../../core')
+const { Module } = require('sylphy')
 
 class RSS extends Module {
   constructor (...args) {
@@ -14,8 +13,8 @@ class RSS extends Module {
   }
 
   init () {
-    this.portal = this.bot.engine.modules.get('portal')
-    this.db = this.bot.engine.db.models
+    this.portal = this._client.plugins.get('modules').get('portal')
+    this.db = this._client.plugins.get('db').models
     this._timer = setInterval(this.scanRSS.bind(this), 15 * 60 * 1000)
   }
 
@@ -28,33 +27,31 @@ class RSS extends Module {
     this.db.RSS.run().then(results =>
       Promise.map(results.filter((r, i) =>
         i % parseInt(process.env.CLIENT_PROCESSES, 10) === parseInt(process.env.BASE_SHARD_ID, 10)
-      ), this.scanFeed.bind(this)).then(res => logger.info(`Parsed ${res.length} feeds`, err => logger.error)),
-      logger.error
+      ), this.scanFeed.bind(this)).then(res => this.logger.info(`Parsed ${res.length} feeds`), this.logger.error),
+      this.logger.error
     )
   }
 
   scanFeed (feed) {
-    const portal = this.portal
-    if (!portal) return
     return new Promise((resolve, reject) => {
       if (!feed.channels || !feed.channels.length) return resolve()
       const fparse = new Feedparser()
 
       fparse
       .once('error', err => {
-        logger.error(`Error while parsing ${feed.id} -`, err)
+        this.logger.error(`Error while parsing ${feed.id}`, err)
         return resolve()
       })
       .once('readable', function readable () {
         const article = this.read()
         if (!article) {
-          logger.error(`No data found for ${feed.id}`)
+          this.logger.error(`No data found for ${feed.id}`)
           return resolve()
         }
 
         let pubdate = 0
         let lastUpdated = feed.lastUpdated
-        
+
         if (article.pubdate && article.pubdate !== 'Invalid Data') {
           pubdate = moment(article.pubdate).unix()
         } else if (article.meta.pubdate) {
@@ -101,8 +98,8 @@ class RSS extends Module {
 
         feed.lastUpdated = pubdate
         return feed.save().then(
-          () => logger.info(`Parsed ${feed.id} for ${channels} channels`),
-          logger.error
+          () => this.logger.info(`Parsed ${feed.id} for ${channels} channels`),
+          this.logger.error
         ).finally(() => resolve())
       })
 

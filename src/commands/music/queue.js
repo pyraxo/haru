@@ -1,4 +1,4 @@
-const { Command } = require('../../core')
+const { Command } = require('sylphy')
 
 class Queue extends Command {
   constructor (...args) {
@@ -7,12 +7,14 @@ class Queue extends Command {
       aliases: ['np', 'nowplaying', 'q'],
       description: 'Displays songs that are in queue',
       cooldown: 5,
-      options: { guildOnly: true, localeKey: 'music' }
+      options: { guildOnly: true, localeKey: 'music' },
+      group: 'music'
     })
   }
 
-  async handle ({ msg, settings, client, cache, modules }, responder) {
+  async handle ({ msg, settings, client, modules }, responder) {
     const music = modules.get('music')
+    const cache = client.plugins.get('cache')
     if (!music) return
 
     const conn = music.getConnection(msg.channel)

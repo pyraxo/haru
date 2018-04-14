@@ -1,27 +1,29 @@
 const chalk = require('chalk')
-const logger = require('winston')
 
-const { Permitter } = require('../core')
+const { Permitter } = require('sylphy')
 
 module.exports = {
   priority: 100,
   process: container => {
-    const { msg, isPrivate, isCommand, cache, commander, trigger, settings, admins, _overwrite } = container
+    const { msg, client, isPrivate, isCommand, commands, trigger, settings, admins, _overwrite } = container
     if (!_overwrite) {
+      const cache = client.plugins.get('cache')
+      if (!cache) return
+
       if (!isCommand) return Promise.resolve()
-      const cmd = commander.get(trigger).cmd
+      const cmd = commands.get(trigger)
       if (!(cmd.options.modOnly || cmd.options.adminOnly || admins.includes(msg.author.id))) {
         const isAllowed = Permitter.verifyMessage(cmd.permissionNode, msg, settings.permissions)
         if (!isAllowed) return Promise.resolve()
       }
 
       cache.client.multi()
-      .hincrby('usage', commander.get(trigger).cmd.labels[0], 1)
+      .hincrby('usage', commands.get(trigger).triggers[0], 1)
       .hincrby('usage', 'ALL', 1)
       .exec()
     }
 
-    logger.info(
+    client.logger.info(
       `${chalk.bold.magenta(
         !isPrivate
         ? msg.channel.guild.name

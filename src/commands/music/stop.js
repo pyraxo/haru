@@ -1,4 +1,4 @@
-const { Command } = require('../../core')
+const { Command } = require('sylphy')
 
 class Stop extends Command {
   constructor (...args) {
@@ -7,7 +7,8 @@ class Stop extends Command {
       aliases: ['destroy'],
       description: 'Stops currently playing music',
       cooldown: 5,
-      options: { guildOnly: true, localeKey: 'music' }
+      options: { guildOnly: true, localeKey: 'music' },
+      group: 'music'
     })
   }
 

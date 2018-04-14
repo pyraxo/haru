@@ -1,5 +1,5 @@
 const moment = require('moment-timezone')
-const { Command } = require('../../core')
+const { Command, utils } = require('sylphy')
 
 class ServerInfo extends Command {
   constructor (...args) {
@@ -7,7 +7,8 @@ class ServerInfo extends Command {
       name: 'server',
       aliases: ['serverinfo'],
       description: 'Displays information of the server',
-      options: { guildOnly: true, localeKey: 'infocmd', botPerms: ['embedLinks'] }
+      options: { guildOnly: true, localeKey: 'infocmd', botPerms: ['embedLinks'] },
+      group: 'info'
     })
   }
 
@@ -17,7 +18,7 @@ class ServerInfo extends Command {
     const owner = guild.members.get(guild.ownerID).user
 
     return responder.embed({
-      color: this.colours.blue,
+      color: utils.getColour('blue'),
       author: { name: guild.name, icon_url: guild.iconURL },
       thumbnail: { url: guild.iconURL },
       fields: [

@@ -1,14 +1,12 @@
-const logger = require('winston')
-const request = require('superagent')
 const moment = require('moment')
 const nani = require('nani')
-const { Command } = require('../../core')
+const { Command, utils } = require('sylphy')
 
 const seasons = {
-	1: 'winter',
-	2: 'spring',
-	3: 'summer',
-	4: 'fall'
+  1: 'winter',
+  2: 'spring',
+  3: 'summer',
+  4: 'fall'
 }
 
 class Anime extends Command {
@@ -21,7 +19,8 @@ class Anime extends Command {
       usage: [
         { name: 'query', displayName: '<query>', type: 'string', optional: false, last: true }
       ],
-      options: { botPerms: ['embedLinks'] }
+      options: { botPerms: ['embedLinks'] },
+      group: 'anime'
     })
 
     nani.init(process.env.API_ANILIST_CLIENT, process.env.API_ANILIST_SECRET)
@@ -30,7 +29,7 @@ class Anime extends Command {
   parseSeason (season) {
     return season < 350
     ? `{{seasons.${seasons[season % 10]}}} 20${Math.floor(season / 10)}`
-		: `{{seasons.${seasons[season % 10]}}} 19${Math.floor(season / 10)}`
+    : `{{seasons.${seasons[season % 10]}}} 19${Math.floor(season / 10)}`
   }
 
   async handle ({ msg, args }, responder) {
@@ -45,7 +44,7 @@ class Anime extends Command {
     if (!data) return
 
     return responder.embed({
-      color: this.colours.blue,
+      color: utils.getColour('blue'),
       author: {
         name: (data.title_english || data.title_romaji) + ' • ' + data.title_japanese,
         url: `http://www.anilist.co/anime/${data.id}`,
@@ -64,25 +63,25 @@ class Anime extends Command {
           inline: true
         },
         {
-					name: responder.t('{{status}}'),
-					value: data.airing_status.replace(/(\b\w)/gi, lc => lc.toUpperCase()),
-					inline: true
-				},
+          name: responder.t('{{status}}'),
+          value: data.airing_status.replace(/(\b\w)/gi, lc => lc.toUpperCase()),
+          inline: true
+        },
         {
-					name: responder.t('{{score}}'),
-					value: (data.average_score / 10).toFixed(2),
-					inline: true
-				},
+          name: responder.t('{{score}}'),
+          value: (data.average_score / 10).toFixed(2),
+          inline: true
+        },
         {
-					name: responder.t('{{season}}'),
-					value: data.season ? responder.t(this.parseSeason(data.season)) : '?',
-					inline: true
-				},
+          name: responder.t('{{season}}'),
+          value: data.season ? responder.t(this.parseSeason(data.season)) : '?',
+          inline: true
+        },
         {
-					name: responder.t('{{genres}}'),
-					value: data.genres.join(', ') || '?',
-					inline: true
-				},
+          name: responder.t('{{genres}}'),
+          value: data.genres.join(', ') || '?',
+          inline: true
+        },
         {
           name: responder.t('{{synopsis}}'),
           value: data.description

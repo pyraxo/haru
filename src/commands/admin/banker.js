@@ -1,5 +1,4 @@
-const logger = require('winston')
-const { Command } = require('../../core')
+const { Command } = require('sylphy')
 
 class Banker extends Command {
   constructor (...args) {
@@ -24,35 +23,38 @@ class Banker extends Command {
             { name: 'amount', type: 'int', optional: false }
           ]
         }
-      }
+      },
+      group: 'admin'
     })
   }
 
-  async give ({ args, data }, responder) {
+  async give ({ args, client }, responder) {
     const member = args.user[0]
     const amount = args.amount
+    const data = client.plugins.get('db').data
     try {
       const user = await data.User.fetch(member.id)
       user.credits += amount
       await user.save()
       return responder.success(`you've given ${member.mention} **${amount}** credits.`)
     } catch (err) {
-      logger.error(`Could not give credits to ${member.user.username} (${member.id})`)
-      logger.error(err)
+      this.logger.error(`Could not give credits to ${member.user.username} (${member.id})`)
+      this.logger.error(err)
     }
   }
 
-  async take ({ args, data }, responder) {
+  async take ({ args, client }, responder) {
     const member = args.user[0]
     const amount = args.amount
+    const data = client.plugins.get('db').data
     try {
       const user = await data.User.fetch(member.id)
       user.credits -= amount
       await user.save()
       return responder.success(`you've taken **${amount}** credits from ${member.mention}.`)
     } catch (err) {
-      logger.error(`Could not take credits from ${member.user.username} (${member.id})`)
-      logger.error(err)
+      this.logger.error(`Could not take credits from ${member.user.username} (${member.id})`)
+      this.logger.error(err)
     }
   }
 }

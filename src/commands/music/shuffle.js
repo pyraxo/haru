@@ -1,4 +1,4 @@
-const { Command } = require('../../core')
+const { Command } = require('sylphy')
 
 class Shuffle extends Command {
   constructor (...args) {
@@ -6,7 +6,8 @@ class Shuffle extends Command {
       name: 'shuffle',
       description: 'Shuffle the music queue',
       cooldown: 5,
-      options: { guildOnly: true, localeKey: 'music' }
+      options: { guildOnly: true, localeKey: 'music' },
+      group: 'music'
     })
   }
 
@@ -21,7 +22,8 @@ class Shuffle extends Command {
     return array
   }
 
-  async handle ({ msg, settings, client, modules, cache }, responder) {
+  async handle ({ msg, settings, client, modules }, responder) {
+    const cache = client.plugins.get('cache')
     const music = modules.get('music')
     if (!music) return
     const conn = music.getConnection(msg.channel)

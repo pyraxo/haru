@@ -1,12 +1,13 @@
 const { exec } = require('child_process')
-const { Command } = require('../../core')
+const { Command } = require('sylphy')
 
 class Exec extends Command {
   constructor (...args) {
     super(...args, {
       name: 'exec',
       description: 'Executes a shell command',
-      options: { adminOnly: true }
+      options: { adminOnly: true },
+      group: 'admin'
     })
   }
 

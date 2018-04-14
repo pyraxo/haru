@@ -1,6 +1,5 @@
-const logger = require('winston')
 const moment = require('moment-timezone')
-const { Command } = require('../../core')
+const { Command } = require('sylphy')
 
 class Timezone extends Command {
   constructor (...args) {
@@ -9,11 +8,12 @@ class Timezone extends Command {
       description: 'Allows moderators to set a guild\'s timezone',
       aliases: ['tz'],
       usage: [{ name: 'tz', type: 'string', optional: true }],
-      options: { guildOnly: true, localeKey: 'settings', permissions: ['manageGuild'] }
+      options: { guildOnly: true, localeKey: 'settings', modOnly: true },
+      group: 'moderation'
     })
   }
 
-  async handle ({ msg, args, data, settings }, responder) {
+  async handle ({ msg, args, settings }, responder) {
     if (!args.tz) {
       return responder.format('emoji:info').reply('{{tz.current}}', { tz: `**${settings.tz}**` })
     }
@@ -30,7 +30,7 @@ class Timezone extends Command {
         tz: `**\`${args.tz}\`**`
       })
     } catch (err) {
-      logger.error(`Could not change timezone to '${args.tz}' for ${msg.channel.guild.name} (${msg.channel.guild.id}) - ${err}`)
+      this.logger.error(`Could not change timezone to '${args.tz}' for ${msg.channel.guild.name} (${msg.channel.guild.id})`, err)
       return responder.error()
     }
   }

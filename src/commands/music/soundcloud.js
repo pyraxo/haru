@@ -1,7 +1,4 @@
-const logger = require('winston')
-const moment = require('moment')
-
-const { Command } = require('../../core')
+const { Command } = require('sylphy')
 
 class Soundcloud extends Command {
   constructor (...args) {
@@ -11,13 +8,13 @@ class Soundcloud extends Command {
       description: 'Plays songs from Soundcloud',
       usage: [{ name: 'query', optional: false }],
       cooldown: 10,
-      options: { guildOnly: true, localeKey: 'music' }
+      options: { guildOnly: true, localeKey: 'music' },
+      group: 'music'
     })
   }
 
   async handle ({ msg, settings, rawArgs, client, trigger, modules }, responder) {
     const music = modules.get('music')
-    const searcher = modules.get('music:search')
 
     const conn = music.getConnection(msg.channel)
     if (!conn) {

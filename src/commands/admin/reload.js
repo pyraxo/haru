@@ -1,5 +1,5 @@
 const util = require('util')
-const { Command } = require('../../core')
+const { Command } = require('sylphy')
 
 class Reload extends Command {
   constructor (...args) {
@@ -11,17 +11,16 @@ class Reload extends Command {
       },
       cooldown: 0,
       usage: [
-        { name: 'type', type: 'string', optional: true },
-        { name: 'group', type: 'string', optional: true },
-        { name: 'file', type: 'string', optional: true }
-      ]
+        { name: 'type', type: 'string', optional: true }
+      ],
+      group: 'admin'
     })
   }
 
-  async handle ({ args }, responder) {
+  async handle ({ plugins, args }, responder) {
     try {
-      const data = await this.bot.engine.ipc.awaitResponse('reload', { type: args.type, group: args.group, file: args.file })
-      return responder.format('code:js').send(data.map(d => util.inspect(d)).join('\n'))
+      const data = await plugins.get('ipc').awaitResponse('reloadFile', { type: args.type })
+      return responder.format('code:js').send(data.map(d => `${d.id} - ${util.inspect(d.resp)}`).join('\n'))
     } catch (err) {
       return responder.format('code:js').send(err)
     }

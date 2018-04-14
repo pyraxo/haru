@@ -1,5 +1,4 @@
-const logger = require('winston')
-const { Command } = require('../../core')
+const { Command } = require('sylphy')
 
 class Battle extends Command {
   constructor (...args) {
@@ -10,7 +9,8 @@ class Battle extends Command {
       usage: [
         { name: 'action', displayName: '@user | accept | reject', types: ['member', 'string'] }
       ],
-      options: { localeKey: 'companion', guildOnly: true }
+      options: { localeKey: 'companion', guildOnly: true },
+      group: 'games'
     })
 
     this.respondTime = 60
@@ -18,10 +18,11 @@ class Battle extends Command {
   }
 
   async handle (container, responder) {
-    const { msg, settings, data, args, rawArgs, modules } = container
+    const { msg, plugins, settings, args, rawArgs, modules } = container
+    const User = plugins.get('db').data.User
     const companions = modules.get('companions')
-    if (!companions) return logger.error('Companions module not found')
-    const userProfile = await data.User.fetchJoin(msg.author.id, { companion: true })
+    if (!companions) return this.logger.error('Companions module not found')
+    const userProfile = await User.fetch(msg.author.id)
     if (!userProfile.companion) {
       return responder.error('{{noPet}}', { command: `**\`${settings.prefix}companion buy\`**` })
     }
@@ -30,7 +31,7 @@ class Battle extends Command {
       return this[rawArgs[0]](container, responder, companions)
     }
 
-    if (args.action[0].status === 'offline') {
+    if (args.action[0].status === 'offline' || args.action[0].status === 'dnd') {
       return responder.error('{{errors.notOnline}}')
     }
 
@@ -47,9 +48,24 @@ class Battle extends Command {
         balance: `**${userProfile.credits}**`
       })
     }
-    const oppProfile = await data.User.fetch(opp.id)
+
+    if (userProfile.companion.hunger <= 1) {
+      return responder.error('{{errors.hungry}}')
+    }
+
+    if (userProfile.companion.mood <= 1) {
+      return responder.error('{{errors.moody}}')
+    }
+
+    const oppProfile = await User.fetch(opp.id)
     if (!oppProfile.companion) return responder.error('{{errors.opponentNoCompanion}}')
     if (oppProfile.credits < this.entryFee) return responder.error('{{errors.cantChallenge}}')
+    if (oppProfile.companion.hunger <= 1) {
+      return responder.error('{{errors.hungryOpponent}}')
+    }
+    if (oppProfile.companion.mood <= 1) {
+      return responder.error('{{errors.moodyOpponent}}')
+    }
 
     try {
       await companions.initBattle(msg.author, opp, msg.channel, settings, responder, this.respondTime, this.entryFee)
@@ -61,20 +77,26 @@ class Battle extends Command {
       })
     } catch (err) {
       if (err instanceof Error) {
-        logger.error(`Error creating battle - ${err}`)
+        this.logger.error(`Error creating battle - ${err}`)
         return responder.error('{{%ERROR}}')
       }
       return responder.error(`{{errors.${err}}}`)
     }
   }
 
-  async accept ({ msg, client, settings, data }, responder, companions) {
+  async accept ({ msg, client, settings }, responder, companions) {
+    const data = client.plugins.get('db').data
     const battle = companions.getBattle(msg.channel)
     if (!battle || battle.p2 !== msg.author.id) return responder.error('{{errors.noIncoming}}')
     if (battle.state !== 1) return responder.error('{{errors.userInBattle}}')
     try {
       const p1 = await data.User.fetch(battle.p1)
       const p2 = await data.User.fetch(battle.p2)
+
+      if (p1.credits < this.entryFee || p2.credits < this.entryFee) {
+        companions.updateBattle(msg.channel, 0)
+        return responder.error('{{errors.cantFight}}')
+      }
 
       p1.credits -= this.entryFee
       p2.credits -= this.entryFee
@@ -83,7 +105,7 @@ class Battle extends Command {
       await p2.save()
     } catch (err) {
       if (err instanceof Error) {
-        logger.error(`Error deducting entry fee - ${err}`)
+        this.logger.error(`Error deducting entry fee - ${err}`)
         return responder.error('{{%ERROR}}')
       }
       return responder.error(`{{errors.${err}}}`)

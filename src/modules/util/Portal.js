@@ -1,4 +1,4 @@
-const { Module, Collection } = require('../../core')
+const { Module, Collection } = require('sylphy')
 
 class Portal extends Module {
   constructor (...args) {
@@ -8,35 +8,33 @@ class Portal extends Module {
         messageCreate: 'messageCreate'
       }
     })
-
-    this.ipc = this.bot.engine.ipc
-    this.data = this.bot.engine.db.data
-    this.db = this.bot.engine.db.models
-    this.listeners = new Map()
-  }
-
-  init () {
-    this.listeners.set('messagePortal', this.receive.bind(this))
-
-    this.ipc.removeAllListeners()
-    for (const [event, listener] of this.listeners.entries()) {
-      this.ipc.on(event, listener)
-    }
-
     this.portals = new Collection()
   }
 
+  init () {
+    const plugins = this._client.plugins
+    this.ipc = plugins.get('ipc')
+    this.data = plugins.get('db').data
+    this.db = plugins.get('db').models
+
+    this.ipc.attach({
+      name: 'messagePortal',
+      command: this.receive.bind(this)
+    })
+  }
+
   unload () {
-    this.ipc.removeAllListeners()
+    this.ipc.unregister('messagePortal')
     delete this.listeners
     delete this.portals
   }
 
   messageCreate (msg) {
+    if (msg.author.bot) return
     const portal = this.portals.get(msg.channel.id)
     if (!portal) return
     const wrapper = portal.messageWrapper
-    return this.tunnel(portal.dest, typeof wrapper === 'function' ? wrapper(msg) : msg)
+    return this.tunnel(portal.dest, typeof wrapper === 'function' ? wrapper(msg) : msg.content)
   }
 
   open (origin, dest, messageWrapper) {
@@ -51,16 +49,18 @@ class Portal extends Module {
     this.portals.delete(dest)
   }
 
-  receive ({ channelID, content, options } = {}) {
-    const channel = this.bot.getChannel(channelID)
+  receive (data) {
+    const { channelID, content, options } = data.d
+    const channel = this._client.getChannel(channelID)
     if (!channel) return
     return this.send(channel, content, options)
   }
 
   tunnel (channelID, content, options) {
-    return this.ipc.send('broadcast', {
+    return process.send({
       op: 'messagePortal',
-      d: { channelID, content, options }
+      d: { channelID, content, options },
+      dest: -1
     })
   }
 }

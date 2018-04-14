@@ -1,4 +1,4 @@
-const { Command } = require('../../core')
+const { Command } = require('sylphy')
 
 class Choose extends Command {
   constructor (...args) {
@@ -9,7 +9,8 @@ class Choose extends Command {
       usage: [
         { name: 'choices', displayName: 'choice 1 | choice 2 | etc', type: 'list', separator: ' | ', min: 2, last: true, optional: false }
       ],
-      options: { localeKey: 'misc' }
+      options: { localeKey: 'misc' },
+      group: 'misc'
     })
   }
 

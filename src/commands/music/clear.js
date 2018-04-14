@@ -1,4 +1,4 @@
-const { Command } = require('../../core')
+const { Command } = require('sylphy')
 
 class Clear extends Command {
   constructor (...args) {
@@ -6,7 +6,8 @@ class Clear extends Command {
       name: 'clear',
       description: 'Clear the music queue',
       cooldown: 5,
-      options: { guildOnly: true, localeKey: 'music' }
+      options: { guildOnly: true, localeKey: 'music' },
+      group: 'music'
     })
   }
 

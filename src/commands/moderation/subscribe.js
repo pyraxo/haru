@@ -1,5 +1,4 @@
-const logger = require('winston')
-const { Command } = require('../../core')
+const { Command } = require('sylphy')
 
 class Subscribe extends Command {
   constructor (...args) {
@@ -16,11 +15,12 @@ class Subscribe extends Command {
         last: true,
         unique: true
       }],
-      options: { guildOnly: true, localeKey: 'settings', botPerms: ['embedLinks'], permissions: ['manageGuild'] }
+      options: { guildOnly: true, localeKey: 'settings', botPerms: ['embedLinks'], modOnly: true },
+      group: 'moderation'
     })
   }
 
-  async handle ({ msg, args, client, settings }, responder) {
+  async handle ({ msg, args, settings }, responder) {
     if (args.event.length === 1 && args.event[0] === 'list') {
       if (!settings.events) {
         settings.events = {}
@@ -65,8 +65,11 @@ class Subscribe extends Command {
         events: args.event.map(e => `**\`${e}\`**`).join(', ')
       })
     } catch (err) {
-      logger.error(`Error saving subscribed events for #${msg.channel.name} (${msg.channel.id}) in ${msg.channel.guild.name} (${msg.channel.guild.id})`)
-      logger.error(err)
+      this.logger.error(
+        `Error saving subscribed events for #${msg.channel.name} (${msg.channel.id}) ` +
+        `in ${msg.channel.guild.name} (${msg.channel.guild.id})`,
+        err
+      )
       return responder.error()
     }
   }

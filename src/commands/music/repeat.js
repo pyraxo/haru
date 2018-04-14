@@ -1,5 +1,4 @@
-const logger = require('winston')
-const { Command } = require('../../core')
+const { Command } = require('sylphy')
 
 class Repeat extends Command {
   constructor (...args) {
@@ -7,11 +6,13 @@ class Repeat extends Command {
       name: 'repeat',
       description: 'Toggles repeat mode, where songs get repeated in the queue',
       cooldown: 5,
-      options: { guildOnly: true, localeKey: 'music' }
+      options: { guildOnly: true, localeKey: 'music' },
+      group: 'music'
     })
   }
 
-  async handle ({ msg, settings, client, modules, cache }, responder) {
+  async handle ({ msg, settings, client, modules }, responder) {
+    const cache = client.plugins.get('cache')
     const music = modules.get('music')
     if (!music) return
     const conn = music.getConnection(msg.channel)
@@ -34,8 +35,7 @@ class Repeat extends Command {
 
       return responder.success(`{{repeat${isRepeat ? 'Off' : 'On'}}}`)
     } catch (err) {
-      logger.error(`Error toggling repeat for ${msg.channel.guild.name} (${msg.channel.guild.id})`)
-      logger.error(err)
+      this.logger.error(`Error toggling repeat for ${msg.channel.guild.name} (${msg.channel.guild.id})`, err)
       return responder.error()
     }
   }

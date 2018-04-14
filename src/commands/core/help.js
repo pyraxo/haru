@@ -1,5 +1,4 @@
-const { padEnd } = require('../../core/util')
-const { Command } = require('../../core')
+const { Command, utils } = require('sylphy')
 
 class HelpMenu extends Command {
   constructor (...args) {
@@ -7,31 +6,32 @@ class HelpMenu extends Command {
       name: 'help',
       description: 'Displays info on commands',
       aliases: ['h'],
-      cooldown: 1,
+      cooldown: 10,
       usage: [
         { name: 'command', type: 'command', optional: true }
-      ]
+      ],
+      group: 'core'
     })
   }
 
-  async handle ({ msg, commander, settings, args }, responder) {
+  async handle ({ msg, commands, client, settings, args }, responder) {
     const prefix = settings.prefix
     if (args.command) {
-      const command = args.command.cmd
-      const name = command.labels[0]
+      const command = args.command
+      const name = command.triggers[0]
       let desc = this.i18n.get(`descriptions.${name}`, settings.lang) ||
       this.i18n.get(`${command.localeKey}.description`, settings.lang) ||
       command.description || '{{noDesc}}'
 
       let reply = [
         `**\`${prefix}${name}\`**  __\`${desc}\`__\n`,
-        `**{{definitions.usage}}**: ${prefix}${command.labels[0]} ${Object.keys(command.resolver.usage).map(usage => {
+        `**{{definitions.usage}}**: ${prefix}${command.triggers[0]} ${Object.keys(command.resolver.usage).map(usage => {
           usage = command.resolver.usage[usage]
           return usage.last ? usage.displayName : usage.optional ? `[${usage.displayName}]` : `<${usage.displayName}>`
         }).join(' ')}`
       ]
-      if (command.labels.length > 1) {
-        reply.push(`\n**{{definitions.aliases}}**: \`${command.labels.slice(1).join(' ')}\``)
+      if (command.triggers.length > 1) {
+        reply.push(`\n**{{definitions.aliases}}**: \`${command.triggers.slice(1).join(' ')}\``)
       }
       if (command._help) {
         for (const key in command._help) {
@@ -46,14 +46,14 @@ class HelpMenu extends Command {
     }
 
     let maxPad = 10
-    const commands = commander.unique().reduce((obj, c) => {
-      if (c.cmd.labels[0] !== c.label || c.cmd.options.hidden || c.cmd.options.adminOnly) return obj
+    const cmds = commands.unique().reduce((obj, c) => {
+      if (c.triggers[0] !== c.name || c.options.hidden || c.options.adminOnly) return obj
       const module = c.group
-      const name = c.cmd.labels[0]
+      const name = c.triggers[0]
 
       let desc = this.i18n.get(`descriptions.${name}`, settings.lang) ||
-      this.i18n.get(`${c.cmd.localeKey}.description`, settings.lang) ||
-      c.cmd.description || '{{noDesc}}'
+      this.i18n.get(`${c.localeKey}.description`, settings.lang) ||
+      c.description || '{{noDesc}}'
 
       if (name.length > maxPad) maxPad = name.length
       if (!Array.isArray(obj[module])) obj[module] = []
@@ -62,11 +62,11 @@ class HelpMenu extends Command {
     }, {})
 
     let toSend = []
-    for (const mod in commands) {
-      if (!commands[mod].length) continue
+    for (const mod in cmds) {
+      if (!cmds[mod].length) continue
       toSend.push([
         `# ${mod}:`,
-        commands[mod].map(c => `  ${padEnd(c[0], maxPad)} // ${c[1]}`).join('\n')
+        cmds[mod].map(c => `  ${utils.padEnd(c[0], maxPad)} // ${c[1]}`).join('\n')
       ].join('\n'))
       if (toSend.length >= 5) {
         await responder.send(['**```glsl'].concat(toSend, '```**'), { DM: true })
@@ -83,7 +83,7 @@ class HelpMenu extends Command {
     ], {
       DM: true,
       prefix: `\`${prefix}\``,
-      defaultPrefix: `\`${process.env.CLIENT_PREFIX}\``,
+      defaultPrefix: `\`@${client.user.username}\``,
       server: `**${msg.channel.guild ? msg.channel.guild.name : responder.t('{{pms}}')}**`,
       helpCommand: `\`${prefix}help <command>\``,
       exampleCommand: `\`${prefix}help credits\``,

@@ -1,5 +1,5 @@
 const Emoji = require('node-emoji')
-const { Module, Collection, Emojis } = require('../../core')
+const { Module, Collection } = require('sylphy')
 
 class Reactions extends Module {
   constructor (...args) {
@@ -32,8 +32,9 @@ class Reactions extends Module {
   }
 
   addMenu (msg, userID, list = [], { cleanup = true, timeout = 0 } = {}) {
+    if (!this.menus) return
     return new Promise((resolve, reject) => {
-      let emojis = list.map(e => Emojis[e] || Emoji.get(e)[0] !== ':' ? Emoji.get(e) : e)
+      let emojis = list.map(e => Emoji.get(e)[0] !== ':' ? Emoji.get(e) : e)
       this.addMulti(msg, emojis)
       .then(() => {
         this.menus.set(msg.id, { msg, user: userID, emojis, resolve, cleanup })
@@ -44,21 +45,23 @@ class Reactions extends Module {
   }
 
   onDelete (msg) {
+    if (!this.menus) return
     if (this.menus.has(msg.id)) {
       this.menus.delete(msg.id)
     }
   }
 
   check (msg, emoji, userID) {
+    if (!this.menus) return
     const menu = this.menus.get(msg.id)
     if (!menu) return
-    this.bot.getMessage(msg.channel.id, msg.id).then(message => {
+    this._client.getMessage(msg.channel.id, msg.id).then(message => {
       const emCheck = !menu.emojis.includes(
         emoji.id ? `${emoji.name}:${emoji.id}` : Emoji.get(emoji.name)[0] !== ':'
         ? Emoji.get(emoji.name)
         : emoji.name
       )
-      if (emCheck || (userID !== menu.user && userID !== this.bot.user.id)) {
+      if (emCheck || (userID !== menu.user && userID !== this._client.user.id)) {
         return message.removeReaction(emoji.id ? `${emoji.name}:${emoji.id}` : emoji.name, userID)
       }
       if (userID === menu.user) {

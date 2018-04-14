@@ -1,5 +1,5 @@
 const moment = require('moment')
-const { Command } = require('../../core')
+const { Command } = require('sylphy')
 
 class Contact extends Command {
   constructor (...args) {
@@ -15,7 +15,8 @@ class Contact extends Command {
           optional: false
         },
         { name: 'text', last: true }
-      ]
+      ],
+      group: 'core'
     })
   }
 

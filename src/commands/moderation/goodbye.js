@@ -1,17 +1,16 @@
-const logger = require('winston')
-const { Command } = require('../../core')
+const { Command } = require('sylphy')
 
 class Goodbye extends Command {
   constructor (...args) {
     super(...args, {
       name: 'goodbye',
       description: 'Allows moderators to send goodbye PMs',
-      options: { guildOnly: true, localeKey: 'settings', permissions: ['manageGuild'] }
+      options: { guildOnly: true, localeKey: 'settings', modOnly: true },
+      group: 'moderation'
     })
   }
 
   handle (container, responder) {
-    const { msg, data, settings } = container
     return responder.selection(['set', 'get', 'enable'], {
       title: '{{goodbye.dialog}}',
       mapFunc: ch => responder.t(`{{goodbye.action.${ch}}}`)
@@ -44,13 +43,13 @@ class Goodbye extends Command {
         '```'
       ]), err => {
         if (typeof err === 'undefined') return
-        logger.error(`Error setting goodbye message for ${msg.channel.guild.name} (${msg.channel.guild.id}) -`, err)
+        this.logger.error(`Error setting goodbye message for ${msg.channel.guild.name} (${msg.channel.guild.id})`, err)
         return responder.error()
       }
     )
   }
 
-  async get ({ settings }, responder) {
+  get ({ settings }, responder) {
     return responder.format('emoji:info').send([
       '{{goodbye.get}}',
       '```',
@@ -58,7 +57,7 @@ class Goodbye extends Command {
       '```'
     ])
   }
-  
+
   enable ({ settings, msg }, responder) {
     settings.goodbye.chan = msg.channel.id
     return settings.save().then(() =>

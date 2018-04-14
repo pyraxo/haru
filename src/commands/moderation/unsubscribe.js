@@ -1,5 +1,4 @@
-const logger = require('winston')
-const { Command } = require('../../core')
+const { Command } = require('sylphy')
 
 class Unsubscribe extends Command {
   constructor (...args) {
@@ -16,7 +15,8 @@ class Unsubscribe extends Command {
         last: true,
         unique: true
       }],
-      options: { guildOnly: true, localeKey: 'settings', botPerms: ['embedLinks'], permissions: ['manageGuild'] }
+      options: { guildOnly: true, localeKey: 'settings', botPerms: ['embedLinks'], modOnly: true },
+      group: 'moderation'
     })
   }
 
@@ -45,8 +45,11 @@ class Unsubscribe extends Command {
         events: args.event.map(e => `**\`${e}\`**`).join(', ')
       })
     } catch (err) {
-      logger.error(`Error saving unsubscribed events for #${msg.channel.name} (${msg.channel.id}) in ${msg.channel.guild.name} (${msg.channel.guild.id})`)
-      logger.error(err)
+      this.logger.error(
+        `Error saving unsubscribed events for #${msg.channel.name} (${msg.channel.id}) ` +
+        `in ${msg.channel.guild.name} (${msg.channel.guild.id})`,
+        err
+      )
       return responder.error()
     }
   }

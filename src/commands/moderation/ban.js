@@ -1,10 +1,11 @@
-const logger = require('winston')
-const { Command } = require('../../core')
+const { Command } = require('sylphy')
 
 const phrases = [
   'ur banne',
   'haru u r beautiful',
-  'i find durians visually appealing'
+  'gotta ban fast',
+  'hewwo',
+  '1+1=2'
 ]
 
 class Ban extends Command {
@@ -16,11 +17,12 @@ class Ban extends Command {
         { name: 'member', type: 'member', optional: false },
         { name: 'reason', displayName: '[reason]', last: true, type: 'string', optional: true }
       ],
-      options: { guildOnly: true, localeKey: 'guilds', permissions: ['manageGuild'] }
+      options: { guildOnly: true, localeKey: 'guilds', modOnly: true },
+      group: 'moderation'
     })
   }
 
-  async handle ({ msg, args, data, settings, client }, responder) {
+  async handle ({ msg, args, settings, client }, responder) {
     const member = (await responder.selection(args.member, { mapFunc: m => `${m.user.username}#${m.user.discriminator}` }))[0]
     if (!member) return
     if (member.id === msg.author.id) {
@@ -42,18 +44,19 @@ class Ban extends Command {
       return responder.error('{{ban.exit}}')
     }
     try {
-      const channel = await this.bot.getDMChannel(user.id)
+      const channel = await client.getDMChannel(member.id)
       await this.send(channel, [
-        `🔨  |  You have been banned from **\`${guild.name}\`**\n`,
-        `**Reason**: ${reason}`
+        `🔨  |  You have been banned from **\`${msg.channel.guild.name}\`**\n`,
+        `**Reason**: ${args.reason}`
       ].join('\n'))
-      await msg.channel.guild.banMember(member.id)
+      await msg.channel.guild.banMember(member.id, 0, args.reason)
       client.emit('haruMemberBanned', msg.channel.guild, member.user, args.reason)
       return responder.format('emoji:hammer').reply('{{ban.msg}}', {
         member: `**${member.user.username}#${member.user.discriminator}**`,
         deleteDelay: 5000
       })
     } catch (err) {
+      this.logger.error(err)
       return responder.error('{{ban.exitError}}')
     }
   }

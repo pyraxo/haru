@@ -1,5 +1,5 @@
 const moment = require('moment')
-const { Command } = require('../../core')
+const { Command } = require('sylphy')
 
 class Slots extends Command {
   constructor (...args) {
@@ -8,32 +8,32 @@ class Slots extends Command {
       description: 'Slot machine command',
       usage: [{ name: 'bet', type: 'int', optional: true, default: 1 }],
       aliases: ['slot'],
-      cooldown: 6
+      cooldown: 6,
+      group: 'games'
     })
 
     this.reel = [
-      '🍇', '🍊', '🇱🇻', '🍈', '🍌', '🍒', '🍉', '🔔', '💎', '🍐', '🍇', '🍊',
-      '🍈', '🍒', '🍌', '🍉', '🇱🇻', '💎', '🍌', '🔔', '🍇', '🍐', '🍊',
-      '🍊', '🍌', '🍒', '🇱🇻', '🍐', '🍈', '🍇', '🍌'
+      '🍇', '🍊', '🇱🇻', '🍈', '🍌', '🍎', '🍒', '🍉', '🔔', '💎', '🍇', '🍊',
+      '🍈', '🍒', '🍌', '🍉', '🇱🇻', '💎', '🍌', '🍎', '🔔', '🍇', '🍊',
+      '🍊', '🍌', '🍎', '🍒', '🇱🇻', '🍈', '🍇', '🍌', '🍎'
     ]
 
     this.wins = {
-      '🍒 x 1': 2,
-      '🍒 x 2': 5,
-      '🍒 x 3': 10,
+      '🍒 x 2': 3,
+      '🍒 x 3': 5,
       '7⃣ x 2': 50,
-      '7⃣ x 3': 125,
-      '🍐 x 3': 20,
-      '🍈 x 3': 20,
-      '🍇 x 3': 20,
-      '🍊 x 3': 20,
-      '🍌 x 3': 20,
-      '💎 x 2': 25,
-      '💎 x 3': 175,
+      '7⃣ x 3': 150,
+      '🍈 x 3': 15,
+      '🍇 x 3': 15,
+      '🍊 x 3': 15,
+      '🍌 x 3': 15,
+      '🍎 x 3': 15,
+      '💎 x 2': 30,
+      '💎 x 3': 75,
       '🔔 x 3': 50,
-      '🍉 x 3': 20,
-      '🇱🇻 x 2': 40,
-      '🇱🇻 x 3': 100
+      '🍉 x 3': 15,
+      '🇱🇻 x 2': 30,
+      '🇱🇻 x 3': 60
     }
   }
 
@@ -64,22 +64,24 @@ class Slots extends Command {
     const machine = this.generateSlots
     const payline = [machine[0][1], machine[1][1], machine[2][1]]
     const winnings = this.checkWinnings(payline, bet)
-   
+
     const rando = Math.random()
     return !winnings.length ? [ machine, payline, winnings ]
-    : random >= (0.8 / winnings[0][2])
+    : rando >= (0.8 / winnings[0][2])
     ? this.doSlots(bet, amount) : [ machine, payline, winnings ]
   }
 
-  async handle ({ msg, args, data, settings, cache }, responder) {
+  async handle ({ msg, args, settings, plugins }, responder) {
+    const cache = plugins.get('cache')
+    const User = plugins.get('db').data.User
     let dailyWins = await cache.client.getAsync(`slots:${msg.author.id}`)
-    if (parseInt(dailyWins, 10) >= 1000000) {
+    if (parseInt(dailyWins, 10) >= 750000) {
       const res = await cache.client.pttlAsync(`slots:${msg.author.id}`)
       return responder.error('{{dailyLimit}}', {
         time: `${moment(res + moment()).fromNow(true)}`
       })
     }
-    const user = await data.User.fetch(msg.author.id)
+    const user = await User.fetch(msg.author.id)
     if (args.bet > 10000) args.bet = 10000
     if (args.bet < 1) return responder.error('{{yudodis}}')
     if (user.credits < args.bet) {

@@ -1,5 +1,5 @@
 const moment = require('moment-timezone')
-const { Command } = require('../../core')
+const { Command, utils } = require('sylphy')
 
 class ChannelInfo extends Command {
   constructor (...args) {
@@ -8,7 +8,8 @@ class ChannelInfo extends Command {
       aliases: ['cinfo'],
       description: 'Displays information of a channel',
       usage: [{ name: 'member', type: 'channel', optional: true }],
-      options: { guildOnly: true, localeKey: 'infocmd', botPerms: ['embedLinks'] }
+      options: { guildOnly: true, localeKey: 'infocmd', botPerms: ['embedLinks'] },
+      group: 'info'
     })
   }
 
@@ -20,11 +21,11 @@ class ChannelInfo extends Command {
     }
 
     return responder.embed({
-      color: this.colours.blue,
+      color: utils.getColour('blue'),
       author: { name: responder.t('{{channel.title}}', { channel: '#' + channel.name }), icon_url: msg.channel.guild.iconURL },
       fields: [
         { name: 'ID', value: channel.id, inline: true },
-        { name: responder.t('{{channel.type}}'), value: responder.t(channel.type === 0 ? '{{channel.text}}' : '{{channel.voice}}'), inline: true },
+        { name: responder.t('{{channel.type}}'), value: responder.t(channel.type === 0 ? '📝 {{channel.text}}' : '🎧 {{channel.voice}}'), inline: true },
         {
           name: responder.t('{{channel.createdOn}}'),
           value: moment(channel.createdAt).locale(settings.lang).tz(settings.tz).format('ddd Do MMM, YYYY [at] hh:mm:ss a')

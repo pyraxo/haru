@@ -1,13 +1,25 @@
-module.exports = async function reload (msg, bot) {
-  const type = msg.d.type || 'commands'
-  const group = msg.d.group
-  const file = msg.d.file
+module.exports = function reloadFile (msg, client) {
+  const plugin = client.plugins.get(msg.d.type || 'commands')
+  const id = parseInt(process.env['NODE_APP_INSTANCE'], 10) % parseInt(process.env['CLIENT_PROCESSES'], 10)
+  let payload = {
+    op: 'resp',
+    dest: msg.origin,
+    code: msg.code
+  }
+  if (!plugin) {
+    payload.d = { resp: 'invalid plugin', id }
+    process.send(payload)
+    return
+  }
 
   try {
-    await bot.engine.reload(type, group, file)
-    bot.engine[`load${type.charAt(0).toUpperCase()}${type.substr(1)}`](group, file)
-    process.send({ op: 'resp', d: 'success' })
+    if (typeof plugin.reload === 'function') {
+      plugin.reload()
+    }
+    payload.d = { resp: 'success', id }
   } catch (err) {
-    process.send({ op: 'resp', d: err.toString() })
+    payload.d = { resp: err.toString(), id }
+  } finally {
+    process.send(payload)
   }
 }

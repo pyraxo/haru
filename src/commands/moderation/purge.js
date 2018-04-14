@@ -1,5 +1,4 @@
-const logger = require('winston')
-const { Command } = require('../../core')
+const { Command } = require('sylphy')
 
 class Purge extends Command {
   constructor (...args) {
@@ -18,7 +17,8 @@ class Purge extends Command {
           unique: true
         }
       ],
-      options: { guildOnly: true, permissions: ['manageGuild'] }
+      options: { guildOnly: true, modOnly: true },
+      group: 'moderation'
     })
   }
 
@@ -40,7 +40,7 @@ class Purge extends Command {
     }
   }
 
-  async handle ({ msg, args, data, settings, client }, responder) {
+  async handle ({ msg, args, settings, client }, responder) {
     let success = 0
     const opts = Array.isArray(args.options) ? args.options : [args.options]
     try {
@@ -72,8 +72,11 @@ class Purge extends Command {
         }).join(', ') : null
       })
     } catch (err) {
-      logger.error(`Could not purge ${args.amount} messages from #${msg.channel.name} (${msg.channel.id}) in ${msg.channel.guild.name} (${msg.channel.guild.id})`)
-      logger.error(err)
+      this.logger.error(
+        `Could not purge ${args.amount} messages from #${msg.channel.name} ` +
+        `(${msg.channel.id}) in ${msg.channel.guild.name} (${msg.channel.guild.id})`,
+        err
+      )
       return responder.error()
     }
   }

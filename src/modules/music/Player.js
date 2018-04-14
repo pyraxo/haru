@@ -1,7 +1,7 @@
-const logger = require('winston')
 const moment = require('moment')
+const fs = require('fs')
 
-const { Module } = require('../../core')
+const { Module } = require('sylphy')
 
 class Player extends Module {
   constructor (...args) {
@@ -11,8 +11,10 @@ class Player extends Module {
   }
 
   init () {
-    this.manager = this.bot.engine.modules.get('music')
-    this.queue = this.bot.engine.modules.get('music:queue')
+    this.redis = this._client.plugins.get('cache').client
+    const m = this._client.plugins.get('modules')
+    this.manager = m.get('music')
+    this.queue = m.get('music:queue')
   }
 
   async stream (channel, url, volume = 2) {
@@ -25,28 +27,26 @@ class Player extends Module {
     this.manager.modifyState(channel.guild.id, 'clear', [])
     conn.play(url)
 
-    logger.info(`Playing ${url} in ${channel.guild.name} (${channel.guild.id})`)
+    this.logger.info(`Playing ${url} in ${channel.guild.name} (${channel.guild.id})`)
 
     conn.on('error', err => {
       if (err) {
         this.stop(channel).then(() => {
           const textChannel = this.manager.getBoundChannel(channel.guild.id)
-          this.send(textChannel, ':stop:  |  {{errors.error}}')
+          this.send(textChannel, ':stop_button:  |  {{errors.error}}')
           this.stream(channel, url, volume)
-          logger.error(`Encountered an error while playing stream to ${conn.id}`)
-          logger.error(err)
+          this.logger.error(`Encountered an error while playing stream to ${conn.id}`, err)
         })
       }
     })
 
     conn.once('end', () => {
       const textChannel = this.manager.getBoundChannel(channel.guild.id)
-      this.send(textChannel, `:stop:  |  {{finishedPlaying}} **${url}**`)
+      this.send(textChannel, `:stop_button:  |  {{finishedPlaying}} **${url}**`)
       this.stop(channel)
     })
 
     this.manager.modifyState(channel.guild.id, 'state', url)
-    return
   }
 
   async play (channel, mediaInfo, volume = 2) {
@@ -72,8 +72,7 @@ class Player extends Module {
     conn.once('error', err => {
       if (err) {
         this.stop(channel, true).then(() => {
-          logger.error(`Encountered an error while streaming to ${conn.id}`)
-          logger.error(err)
+          this.logger.error(`Encountered an error while streaming to ${conn.id}`, err)
           // return this.play(channel, mediaInfo, volume)
           return this.send(textChannel, '{{errors.connError}}', { err: `**${err.message || 'Stream error'}**` })
         })
@@ -82,10 +81,13 @@ class Player extends Module {
 
     conn.once('end', () => {
       this.manager.modifyState(channel.guild.id, 'state', null)
-      this.send(textChannel, `:stop:  |  {{finishedPlaying}} **${mediaInfo.title}** `)
-      if (channel.voiceMembers.size === 1 && channel.voiceMembers.has(this.bot.user.id)) {
+      this.send(textChannel, `:stop_button:  |  {{finishedPlaying}} **${mediaInfo.title}** `)
+      if (channel.voiceMembers.size === 1 && channel.voiceMembers.has(this._client.user.id)) {
         return this.stop(channel, true)
       }
+
+      const localPath = `music:downloads:${mediaInfo.audiourl}`
+      this.redis.getAsync(localPath).then(res => res >= 10 && this.redis.delAsync(localPath).then(() => fs.unlink(localPath)))
 
       return this.queue.isRepeat(channel.guild.id).then(res =>
         (res ? this.queue.add(channel.guild.id, mediaInfo) : Promise.resolve()).then(() =>
@@ -99,7 +101,7 @@ class Player extends Module {
       await Promise.delay(1000)
     }
     if (!conn.ready) {
-      logger.info(`Voice connection not ready after 5 tries - ${channel.guild.name} (${channel.guild.id})`)
+      this.logger.info(`Voice connection not ready after 5 tries - ${channel.guild.name} (${channel.guild.id})`)
       await this.stop(channel, true)
       return this.send(textChannel, '{{errors.notReadyYet}}')
     }
@@ -107,10 +109,10 @@ class Player extends Module {
     conn.play(filepath || mediaInfo.audiourl, options)
     this.manager.modifyState(channel.guild.id, 'state', mediaInfo)
 
-    logger.info(`Playing ${mediaInfo.title} in ${channel.guild.name} (${channel.guild.id})`)
+    this.logger.info(`Playing ${mediaInfo.title} in ${channel.guild.name} (${channel.guild.id})`)
 
     return this.send(textChannel, [
-      `:play:  |  {{nowPlaying}}: **${mediaInfo.title}** ` +
+      `:arrow_forward:  |  {{nowPlaying}}: **${mediaInfo.title}** ` +
       (mediaInfo.length ? `(${moment.duration(mediaInfo.length, 'seconds').format('h[h] m[m] s[s]')})` : ''),
       `<${mediaInfo.url}>`
     ])
@@ -131,12 +133,11 @@ class Player extends Module {
     if (conn.playing) conn.stopPlaying()
 
     if (leave) {
-      this.bot.leaveVoiceChannel(channel.id)
+      this._client.leaveVoiceChannel(channel.id)
       this.manager.unbindChannel(channel.guild.id)
       this.manager.states.delete(channel.guild.id)
       await this.queue.clear(channel.guild.id)
     }
-    return
   }
 
   async skip (guildID, channel) {
@@ -144,11 +145,11 @@ class Player extends Module {
     const length = await this.queue.getLength(channel.guild.id)
     const textChannel = this.manager.getBoundChannel(guildID)
     if (length === 0 && textChannel) {
-      this.send(textChannel, ':info:  |  {{queueFinish}}')
+      this.send(textChannel, ':information_source:  |  {{queueFinish}}')
       return
     }
     const result = await this.queue.shift(guildID)
-    this.send(textChannel, `:skip:  |  {{skipping}} **${this.manager.getPlaying(guildID).title}**`)
+    this.send(textChannel, `:fast_forward:  |  {{skipping}} **${this.manager.getPlaying(guildID).title}**`)
     return this.manager.play(channel, result)
   }
 }

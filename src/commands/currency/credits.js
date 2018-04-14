@@ -1,7 +1,5 @@
 const moment = require('moment')
-const logger = require('winston')
-const { Command } = require('../../core')
-const { padStart, padEnd } = require('../../core/util')
+const { Command, utils } = require('sylphy')
 
 class Credits extends Command {
   constructor (...args) {
@@ -28,7 +26,8 @@ class Credits extends Command {
           aliases: ['lb', 'leaderboards'],
           usage: [{ name: 'page', type: 'int', optional: true, default: 1 }]
         }
-      }
+      },
+      group: 'currency'
     })
   }
 
@@ -43,19 +42,21 @@ class Credits extends Command {
     }
   }
 
-  async handle ({ msg, data }, responder) {
+  async handle ({ msg, client }, responder) {
     try {
-      const user = await data.User.fetch(msg.author.id)
+      const user = await client.plugins.get('db').data.User.fetch(msg.author.id)
       responder.format('emoji:credits').send('{{balance}}', {
         user: msg.author.username,
         balance: `**\`${user.credits}\`**`
       })
     } catch (err) {
-      this.logError(err)
+      this.logger.error(err)
     }
   }
 
-  async claim ({ msg, cache, data, settings }, responder) {
+  async claim ({ msg, plugins, settings }, responder) {
+    const cache = plugins.get('cache')
+    const data = plugins.get('db').data
     const claimID = 'claims:' + msg.author.id
     try {
       let res = await cache.client.pttlAsync(claimID)
@@ -74,11 +75,12 @@ class Credits extends Command {
         }
       }
     } catch (err) {
-      logger.error(`Error claiming credits for ${msg.author.username} (${msg.author.id}): ${err}`)
+      this.logger.error(`Error claiming credits for ${msg.author.username} (${msg.author.id}): ${err}`)
     }
   }
 
-  async give ({ msg, cache, data, args }, responder) {
+  async give ({ msg, plugins, args }, responder) {
+    const data = plugins.get('db').data
     const [member] = await responder.selection(args.member, { mapFunc: m => `${m.user.username}#${m.user.discriminator}` })
     if (!member) return
     if (member.id === msg.author.id) {
@@ -113,9 +115,14 @@ class Credits extends Command {
       code: `**\`${code}\`**`,
       exit: '**`cancel`**',
       tries: 1
-    }).then(arg => {
+    }).then(async arg => {
       if (parseInt(arg.code, 10) !== code) {
         responder.error('{{invalidCode}}')
+        return
+      }
+      const credits2 = (await data.User.fetch(msg.author.id)).credits
+      if (credits2 < amt) {
+        responder.error('{{insufficientCredits}}', { balance: `**${credits2}**` })
         return
       }
       Promise.all([
@@ -125,17 +132,16 @@ class Credits extends Command {
         responder.format('emoji:credits').reply('{{confirmation}}', {
           amount: `**${amt}**`,
           user: `**${user.username}**`,
-          afterAmount: `**\`$ ${credits - amt}\`**`
+          afterAmount: `**\`$ ${credits2 - amt}\`**`
         })
       }, err => {
-        logger.error('Error carrying out transaction')
-        logger.error(`S: ${msg.author.username} (${msg.author.id}) | T: ${user.username} (${user.id})`)
-        logger.error(err)
+        this.logger.error('Error carrying out transaction', err)
       })
     })
   }
 
-  async peek ({ args, data }, responder) {
+  async peek ({ args, plugins }, responder) {
+    const data = plugins.get('db').data
     const [member] = await responder.selection(args.user, { mapFunc: m => `${m.user.username}#${m.user.discriminator}` })
     if (!member) return
     try {
@@ -145,17 +151,18 @@ class Credits extends Command {
         balance: `**\`${user.credits}\`**`
       })
     } catch (err) {
-      this.logError(err)
+      this.logger.error(err)
     }
   }
 
-  async top ({ args, db, client }, responder) {
+  async top ({ args, plugins }, responder) {
+    const db = plugins.get('db').models
     try {
       const res = await db.User.filter({ deleted: false }).orderBy(db.r.desc('credits')).limit(10).execute()
-      const data = await this.bot.engine.ipc.awaitResponse('query', {
+      const data = await plugins.get('ipc').awaitResponse('query', {
         queries: [{ prop: 'users', query: 'id', input: res.map(u => u.id) }]
       })
-      const users = data.map(d => d.result[0])
+      const users = data.map(d => d[0])
       let unique = []
       for (let i = 0; i < users[0].length; i++) {
         if (users[0][i]) unique.push(users[0][i])
@@ -169,7 +176,6 @@ class Credits extends Command {
           unique.push(usr)
         }
       }
-      logger.info(args)
       unique = unique.filter(u => u)
       let maxName = 16
       unique.forEach(u => {
@@ -186,15 +192,14 @@ class Credits extends Command {
         '```py',
         `@ ${responder.t('{{topTitle}}')}\n`,
         unique.map((u, i) => (
-          padEnd(`[${i + 1}]`, 6) +
-          ` ${padEnd(`${u.username}#${u.discriminator}`, maxName)} >>   ` +
-          `${padStart(res[i].credits, maxCred)} ${responder.t('{{credits}}')}`
+          utils.padEnd(`[${i + 1}]`, 5) +
+          ` ${utils.padEnd(`${u.username}#${u.discriminator}`, maxName)} >>   ` +
+          `${utils.padStart(res[i].credits, maxCred)} ${responder.t('{{credits}}')}`
         )).join('\n'),
         '```'
       ].join('\n'))
     } catch (err) {
-      logger.error('Error getting top credits scoreboards')
-      logger.error(err)
+      this.logger.error('Error getting top credits scoreboards', err)
       return responder.error()
     }
   }

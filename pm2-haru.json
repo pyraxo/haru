@@ -1,0 +1,12 @@
+{
+  "apps": [{
+    "name": "haru",
+    "script": "src/index.js",
+    "exec_mode": "cluster_mode",
+    "instances": "1",
+    "watch": false,
+    "args": [
+      "--color"
+    ]
+  }]
+}

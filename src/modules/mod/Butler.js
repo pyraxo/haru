@@ -1,6 +1,5 @@
 const moment = require('moment')
-const logger = require('winston')
-const { Module } = require('../../core')
+const { Module } = require('sylphy')
 
 class Butler extends Module {
   constructor (...args) {
@@ -11,8 +10,6 @@ class Butler extends Module {
         guildMemberRemove: 'onLeave'
       }
     })
-
-    this.db = this.bot.engine.db.data
   }
 
   get tags () {
@@ -28,11 +25,15 @@ class Butler extends Module {
     ]
   }
 
+  init () {
+    this.db = this._client.plugins.get('db').data
+  }
+
   onJoin (guild, member) {
     this.db.Guild.fetch(guild.id).then(settings =>
       typeof settings.welcome === 'object' &&
       (settings.welcome.chan || settings.welcome.pm) &&
-      (settings.welcome.pm ? this.bot.getDMChannel(member.id) : Promise.resolve(settings.welcome.chan)).then(chan =>
+      (settings.welcome.pm ? this._client.getDMChannel(member.id) : Promise.resolve(settings.welcome.chan)).then(chan =>
         this.send(chan, this.i18n.shift(settings.welcome.msg, {
           user: member.mention,
           guild: guild.name,
@@ -44,11 +45,11 @@ class Butler extends Module {
           humans: guild.members.filter(m => !m.bot).length
         }))
       )
-    ).catch(err => logger.error('Error sending welcome message -', err))
+    ).catch(err => this.logger.error('Error sending welcome message', err))
     this.db.Guild.fetch(guild.id).then(settings =>
       typeof settings.autorole === 'string' &&
       member.addRole(settings.autorole, 'Added role on user join -haru')
-    ).catch(err => logger.error('Error setting role -', err))
+    ).catch(err => this.logger.error('Error setting role', err))
   }
 
   onLeave (guild, member) {
@@ -65,7 +66,7 @@ class Butler extends Module {
         members: guild.members.size,
         humans: guild.members.filter(m => !m.bot).length
       }))
-    ).catch(err => logger.error('Error sending goodbye message -', err))
+    ).catch(err => this.logger.error('Error sending goodbye message', err))
   }
 }
 

@@ -1,34 +1,34 @@
-const logger = require('winston')
 const moment = require('moment')
-const { Command } = require('../../core')
+const { Command, utils } = require('sylphy')
 
 class Stats extends Command {
   constructor (...args) {
     super(...args, {
       name: 'stats',
       description: 'Statistics about me',
-      options: { botPerms: ['embedLinks'] }
+      options: { botPerms: ['embedLinks'] },
+      group: 'core'
     })
   }
 
-  async handle ({ msg, settings, client, cache }, responder) {
+  async handle ({ msg, settings, client }, responder) {
     try {
-      var results = await this.bot.engine.ipc.awaitResponse('stats')
+      var results = await client.plugins.get('ipc').awaitResponse('stats')
     } catch (err) {
-      logger.error('Could not fetch stats')
-      logger.error(err)
+      this.logger.error('Could not fetch stats', err)
       return responder.error()
     }
     let stats = {
-      u: 0,
-      g: 0,
-      vc: 0,
-      tc: 0
+      u: [],
+      g: [],
+      tc: 0,
+      vc: 0
     }
     results.forEach(elem => {
-      for (const stat in elem.result) {
-        stats[stat] += elem.result[stat]
-      }
+      stats.tc += elem.tc
+      stats.vc += elem.vc
+      stats.u = stats.u.concat(elem.us)
+      stats.g = stats.g.concat(elem.gs)
     })
     return responder.embed({
       author: {
@@ -39,11 +39,11 @@ class Stats extends Command {
       description: [
         `**[${responder.t('{{server}}')}](https://discord.gg/vYMRRZF)**`
       ].join('\n'),
-      color: this.colours.pink,
+      color: utils.getColour('pink'),
       fields: [
         {
           name: responder.t('{{users}}'),
-          value: stats.u,
+          value: [...new Set(stats.u)].length,
           inline: true
         },
         {
@@ -60,7 +60,7 @@ class Stats extends Command {
         },
         {
           name: responder.t('{{guilds}}'),
-          value: stats.g,
+          value: [...new Set(stats.g)].length,
           inline: true
         },
         {
@@ -75,7 +75,7 @@ class Stats extends Command {
         },
         {
           name: responder.t('{{commandsUsed}}'),
-          value: (await cache.client.hgetAsync('usage', 'ALL') || '0'),
+          value: (await client.plugins.get('cache').client.hgetAsync('usage', 'ALL') || '0'),
           inline: true
         }
       ]

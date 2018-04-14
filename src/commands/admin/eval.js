@@ -1,4 +1,4 @@
-const { Command } = require('../../core')
+const { Command, utils } = require('sylphy')
 
 class Eval extends Command {
   constructor (...args) {
@@ -6,10 +6,9 @@ class Eval extends Command {
       name: 'eval',
       description: 'Evaluates an expression',
       usage: [{ name: 'code', type: 'string', optional: false, last: true }],
-      options: {
-        adminOnly: true
-      },
-      cooldown: 0
+      options: { adminOnly: true },
+      cooldown: 0,
+      group: 'admin'
     })
   }
 
@@ -22,19 +21,19 @@ class Eval extends Command {
         case true: {
           title = 'Promise resolved'
           message = String(result || 'undefined')
-          color = this.colours.green
+          color = utils.getColour('green')
           break
         }
         case false: {
           title = 'Promise rejected'
           message = result.message
-          color = this.colours.red
+          color = utils.getColour('red')
           break
         }
         default: {
           title = 'Promise'
           message = 'Promise pending'
-          color = this.colours.blue
+          color = utils.getColour('blue')
           break
         }
       }
@@ -42,11 +41,11 @@ class Eval extends Command {
       if (success) {
         title = 'Success'
         message = String(result)
-        color = this.colours.green
+        color = utils.getColour('green')
       } else {
         title = 'Error'
         message = result.message
-        color = this.colours.red
+        color = utils.getColour('red')
       }
     }
     return { title, color, description: message }
@@ -76,31 +75,4 @@ class Eval extends Command {
   }
 }
 
-class FullEval extends Command {
-  constructor (...args) {
-    super(...args, {
-      name: 'fulleval',
-      description: 'Evaluates an expression across processes',
-      options: {
-        adminOnly: true
-      },
-      cooldown: 0
-    })
-  }
-
-  async handle (container, responder) {
-    const { msg } = container
-    const content = msg.content.split(' ').slice(1).join(' ')
-    this.bot.engine.ipc.awaitResponse('evaluate', { content })
-    .then(data => responder.format('code:js').send(data.map(d => {
-      const r = d.result || null
-      return [
-        `PROCESS ${d.id}:`,
-        (r && r.length > 200 ? r.substr(0, 200) + '...' : r) + '\n'
-      ].join('\n')
-    }).join('\n')))
-    .catch(err => responder.format('code:js').send(err))
-  }
-}
-
-module.exports = [ Eval, FullEval ]
+module.exports = Eval

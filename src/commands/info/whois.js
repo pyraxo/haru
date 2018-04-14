@@ -1,5 +1,5 @@
 const moment = require('moment-timezone')
-const { Command } = require('../../core')
+const { Command, utils } = require('sylphy')
 
 class Whois extends Command {
   constructor (...args) {
@@ -8,7 +8,8 @@ class Whois extends Command {
       aliases: ['uinfo', 'user'],
       description: 'Displays information of a user',
       usage: [{ name: 'member', type: 'member', optional: true }],
-      options: { guildOnly: true, localeKey: 'infocmd', botPerms: ['embedLinks'] }
+      options: { guildOnly: true, localeKey: 'infocmd', botPerms: ['embedLinks'] },
+      group: 'info'
     })
   }
 
@@ -23,7 +24,7 @@ class Whois extends Command {
     const sharedServers = client.guilds.filter(g => g.members.get(member.id)).map(g => g.name) || responder.t('{{whois.none}}')
 
     return responder.embed({
-      color: this.colours.blue,
+      color: utils.getColour('blue'),
       author: { name: `${member.user.username}#${member.user.discriminator}`, icon_url: member.user.avatarURL },
       description: member.game ? `${responder.t('{{whois.playing}}')} **${member.game.name}**` : undefined,
       thumbnail: { url: member.user.avatarURL },

@@ -3,12 +3,30 @@
   "ownedPet": "you already own a companion!",
   "cannotAfford": "you need {{amount}} credits but only have {{balance}}!",
   "intro": "Choose a starter companion, {{user}}!",
+  "sold": {
+    "dialog": [
+      "**Companion Sale**\n",
+      "Are you sure you'd like to sell your companion?",
+      "To confirm, please write {{code}}, or anything else to exit."
+    ],
+    "result": [
+      "**Companion Sold**\n",
+      "{{author}}, you have successfully sold your companion."
+    ]
+  },
   "dialog": [
     "**Companion Purchase**\n",
     "{{author}}, you have selected {{animal}} as your companion.",
     "Are you certain you'd like to purchase it for {{amount}} credits?\n",
     "To confirm, please write {{code}}, or anything else to exit."
   ],
+  "food": [
+    "{{author}}, are you sure you'd like to feed your {{animal}} {{amount}} food?\n",
+    "To confirm, please write {{code}}, or anything else to exit."
+  ],
+  "petFed": "{{author}}, you have just fed your {{animal}}, restoring their **hunger** and **mood** by {{amount}}",
+  "tooHungry": "Your companion is too full to feed it {{amount}} food!",
+  "notEnoughFood": "You can't feed your {{animal}} {{amount}} food as you only have {{inv}} in your inventory!",
   "invalidCode": "you have entered an invalid code! The transaction was cancelled.",
   "error": "an error has occurred! The transaction was cancelled. Try again later.",
   "result": [
@@ -21,7 +39,13 @@
     "wins": "Wins",
     "losses": "Losses",
     "info": "Companion Info",
-    "info2": "{{author}}'s Companion"
+    "info2": "{{author}}'s Companion",
+    "mood": "Mood",
+    "hunger": "Food",
+    "atk": "Attack",
+    "crit": "Critical Hit Chance",
+    "heal": "Mega Heal Chance",
+    "hp": "Health"
   },
   "errors": {
     "self": "you can't battle yourself!",
@@ -34,6 +58,7 @@
     "opponentNoCompanion": "that player does not own a companion!",
     "cantPlay": "you need {{amount}} credits to play but currently only have {{balance}}!",
     "cantChallenge": "the player does not have enough credits to play!",
+    "cantFight": "A player in this battle doesn't have enough credits!",
     "noBattle": "this channel has no ongoing battles!",
     "notParticipating": "that player is not a participant of this battle!",
     "isParticipant": "you're a participant of this battle and can't place bets!",
@@ -42,7 +67,11 @@
     "plsBetProperly": "you can't bet less than one credit!",
     "notBetting": "the battle has not entered the betting phase!",
     "afterBetting": "the betting phase has already concluded for this battle!",
-    "notOnline": "that user is not online yet!"
+    "notOnline": "that user is not online yet!",
+    "hungry": "your companion is too hungry to battle",
+    "moody": "your companion's mood is too low to battle",
+    "hungryOpponent": "your opponent's companion is too hungry to battle",
+    "moodyOpponent": "your opponent's companion's mood is too low to battle"
   },
   "challenge": [
     "you have challenged {{mention}} to a pet battle!\n",
@@ -76,5 +105,7 @@
     "DODGE_2": "{{p2}}'s attack narrowly misses {{p1}}!",
     "DODGE_3": "{{p1}} barely avoids {{p2}}'s attack!",
     "DODGE_4": "{{p2}}'s attack passes by {{p1}}!"
-      }
+  },
+  "exp": "Experience",
+  "topTitle": "Discord's Best Companions"
 }

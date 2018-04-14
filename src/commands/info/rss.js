@@ -1,7 +1,6 @@
-const logger = require('winston')
 const Feedparser = require('feedparser')
 const request = require('superagent')
-const { Command } = require('../../core')
+const { Command, utils } = require('sylphy')
 
 const options = { guildOnly: true, botPerms: ['embedLinks'] }
 
@@ -19,7 +18,8 @@ class RSS extends Command {
         remove: { usage: [{ name: 'entry', type: 'string', optional: true }], options },
         clear: { options }
       },
-      options
+      options,
+      group: 'info'
     })
   }
 
@@ -38,13 +38,12 @@ class RSS extends Command {
     }).then(arg => arg.length ? this[arg[0]](container, responder) : false)
   }
 
-  async add ({ msg, args, client, settings, data, modules }, responder) {
-    let url
-    let meta
+  async add ({ msg, args, plugins, settings, modules }, responder) {
+    const data = plugins.get('db').data
     try {
       if (args.url) {
-        meta = await this.validate(args.url)
-        url = args.url
+        var meta = await this.validate(args.url)
+        var url = args.url
       } else {
         const arg = await responder.format('emoji:newspaper').dialog([{
           prompt: '{{urlDialog}}',
@@ -58,7 +57,7 @@ class RSS extends Command {
       }
     } catch (err) {
       if (err) {
-        logger.error(`Could not validate ${args.url} -`, err)
+        this.logger.error(`Could not validate ${args.url}`, err)
         return responder.error('{{error}}', { url: `**${args.url}**` })
       }
     }
@@ -84,7 +83,7 @@ class RSS extends Command {
     rss.channels = rss.channels.filter(r => r.channel !== msg.channel.id)
     rss.channels.push({ channel: msg.channel.id, includedTags, excludedTags })
     await rss.save()
-    
+
     return responder.success('{{success}}', {
       url: `\n\n**${meta.title}** (<${url}>)`,
       channel: `**#${msg.channel.name}**`,
@@ -99,8 +98,9 @@ class RSS extends Command {
 
   list (container, responder, page = 0) {
     const pagination = (page < 0 ? 0 : page) * 10
-    const { msg, db, trigger, settings, args, modules } = container
-    return db.RSS.filter(feed => feed('channels')('channel').contains(msg.channel.id)).run().then(feeds => {
+    const { msg, plugins, trigger, settings, modules } = container
+    const RSS = plugins.get('db').models.RSS
+    return RSS.filter(feed => feed('channels')('channel').contains(msg.channel.id)).run().then(feeds => {
       if (!feeds.length) {
         return responder.format('emoji:newspaper').reply('{{notSubscribed}}', {
           channel: `**#${msg.channel.name}**`,
@@ -112,9 +112,9 @@ class RSS extends Command {
       return responder.format('emoji:newspaper').embed({
         description: [
           `**${responder.t('{{subscribedFeeds}}', { channel: '#' + msg.channel.name })}**\n`,
-          feeds.map((f, i) => `\`[${i+1}]\` [${f.name}](${f.id})`).join('\n')
+          feeds.map((f, i) => `\`[${i + 1}]\` [${f.name}](${f.id})`).join('\n')
         ].join('\n'),
-        color: this.colours.blue
+        color: utils.getColour('blue')
       }).reply('{{subscribedTo}}', { channel: `**#${msg.channel.name}**` }).then(m => {
         if (pagination + 10 > feeds.length) return
         let emotes = []
@@ -128,7 +128,8 @@ class RSS extends Command {
     })
   }
 
-  clear ({ msg, db }, responder) {
+  clear ({ msg, plugins }, responder) {
+    const RSS = plugins.get('db').models.RSS
     return responder.format('emoji:info').dialog([{
       prompt: '{{confirmClear}}',
       input: { type: 'string', name: 'confirm' }
@@ -136,14 +137,15 @@ class RSS extends Command {
       if (arg.confirm !== 'yes') {
         return responder.success('{{notCleared}}')
       }
-      return db.RSS.filter(feed => feed('channels')('channel').contains(msg.channel.id)).delete().then(res =>
+      return RSS.filter(feed => feed('channels')('channel').contains(msg.channel.id)).delete().then(res =>
         responder.success('{{cleared}}', { count: `**${res.deleted}**` })
       )
     })
   }
 
-  async remove ({ msg, db, trigger, settings, args }, responder) {
-    const feeds = await db.RSS.filter(feed => feed('channels')('channel').contains(msg.channel.id)).run()
+  async remove ({ msg, plugins, trigger, settings, args }, responder) {
+    const RSS = plugins.get('db').models.RSS
+    const feeds = await RSS.filter(feed => feed('channels')('channel').contains(msg.channel.id)).run()
     if (!feeds.length) {
       return responder.format('emoji:newspaper').reply('{{notSubscribed}}', {
         channel: `**#${msg.channel.name}**`,

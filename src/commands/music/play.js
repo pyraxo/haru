@@ -1,7 +1,6 @@
-const logger = require('winston')
 const moment = require('moment')
 
-const { Command } = require('../../core')
+const { Command } = require('sylphy')
 
 class Play extends Command {
   constructor (...args) {
@@ -11,7 +10,8 @@ class Play extends Command {
       description: 'Searches Youtube for music',
       usage: [{ name: 'action', displayName: 'youtube URL | query', optional: true }],
       cooldown: 10,
-      options: { guildOnly: true, localeKey: 'music' }
+      options: { guildOnly: true, localeKey: 'music' },
+      group: 'music'
     })
   }
 
@@ -46,8 +46,7 @@ class Play extends Command {
         }
         return music.play(voiceChannel)
       } catch (err) {
-        logger.error(`Encountered erroring querying queue length for ${msg.channel.guild.id}`)
-        logger.error(err)
+        this.logger.error(`Encountered erroring querying queue length for ${msg.channel.guild.id}`, err)
         responder.error('{{%ERROR}}')
       }
     }
@@ -72,8 +71,7 @@ class Play extends Command {
       return responder.format('emoji:success').send(`{{queued}} **${info.title}** ${length}- ${msg.author.mention}`)
     } catch (err) {
       if (err instanceof Error) {
-        logger.error(`Error adding query ${text} to ${msg.channel.guild.name} (${msg.channel.guild.id})'s queue`)
-        logger.error(err)
+        this.logger.error(`Error adding query ${text} to ${msg.channel.guild.name} (${msg.channel.guild.id})'s queue`, err)
         return responder.error('{{%ERROR}}')
       }
       return responder.error(`{{errors.${err}}}`, { command: `**\`${settings.prefix}summon\`**` })

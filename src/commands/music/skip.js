@@ -1,5 +1,4 @@
-const logger = require('winston')
-const { Command } = require('../../core')
+const { Command } = require('sylphy')
 
 class Skip extends Command {
   constructor (...args) {
@@ -8,7 +7,8 @@ class Skip extends Command {
       description: 'Skips the current music track',
       cooldown: 5,
       options: { guildOnly: true, localeKey: 'music' },
-      usage: [{ name: 'id', type: 'int', optional: true, min: 1 }]
+      usage: [{ name: 'id', type: 'int', optional: true, min: 1 }],
+      group: 'music'
     })
   }
 
@@ -41,8 +41,7 @@ class Skip extends Command {
         }
         return responder.success('{{skipSuccess}}', { song: `**${video.title}**` })
       } catch (err) {
-        logger.error(`Error skipping video ${args.id - 1} for ${msg.channel.guild.name} (${msg.channel.guild.name})`)
-        logger.error(err)
+        this.logger.error(`Error skipping video ${args.id - 1} for ${msg.channel.guild.name} (${msg.channel.guild.name})`, err)
         return responder.error()
       }
     }

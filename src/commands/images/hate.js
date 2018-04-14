@@ -1,7 +1,6 @@
 const gm = require('gm')
 const path = require('path')
-const logger = require('winston')
-const { Command } = require('../../core')
+const { Command } = require('sylphy')
 
 class Hate extends Command {
   constructor (...args) {
@@ -9,9 +8,10 @@ class Hate extends Command {
       name: 'hate',
       description: 'I-I hate you!',
       usage: [
-        { name: 'text', optional: true }
+        { name: 'text', optional: true, last: true }
       ],
-      options: { botPerms: ['attachFiles'] }
+      options: { botPerms: ['attachFiles'] },
+      group: 'images'
     })
   }
 
@@ -30,14 +30,15 @@ class Hate extends Command {
 
     await responder.typing()
 
-    gm(path.join(this.bot.paths.resources, 'images/hate.png'))
-    .font(path.join(this.bot.paths.resources, 'fonts/animeace.ttf'), 13.5)
+    gm(path.join(process.cwd(), 'res', 'images', 'hate.png'))
+    .font(path.join(process.cwd(), 'res', 'fonts', 'animeace.ttf'), 13.5)
     .gravity('Center')
     .drawText(-67, 32, text)
     .toBuffer('PNG', (err, buf) => {
       if (err) {
-        logger.error(`Error creating 'hate' image - ${err}`)
-        responder.error('{{%ERROR}}')
+        this.logger.error('Error creating \'hate\' image')
+        this.logger.error(err)
+        responder.error()
         return
       }
       responder.file('love.png', buf).send()

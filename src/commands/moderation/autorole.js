@@ -1,5 +1,4 @@
-const logger = require('winston')
-const { Command, Permitter } = require('../../core')
+const { Command, Permitter } = require('sylphy')
 
 class Autorole extends Command {
   constructor (...args) {
@@ -7,7 +6,7 @@ class Autorole extends Command {
       name: 'autorole',
       description: 'Add a role to a user on join',
       usage: [
-        { name: 'action', displayName: ' add | remove', type: 'string', optional: true }],
+        { name: 'action', displayName: ' add <@role> | remove', type: 'string', optional: true }],
       subcommands: {
         add: {
           usage: [
@@ -18,7 +17,8 @@ class Autorole extends Command {
           aliases: ['delete']
         }
       },
-      options: { guildOnly: true, localeKey: 'settings', modOnly: true }
+      options: { guildOnly: true, localeKey: 'settings', modOnly: true, permissions: ['manageRoles'], botPerms: ['manageRoles'] },
+      group: 'moderation'
     })
   }
 
@@ -31,7 +31,7 @@ class Autorole extends Command {
       let role = msg.channel.guild.roles.get(settings.autorole).name
       return responder.format('emoji:info').reply('{{autorole.current}}', { role: `**${role}**` })
     } catch (err) {
-      logger.error(`Could not ${cmd} for ${msg.channel.guild.name} (${msg.channel.guild.id}) - ${err}`)
+      this.logger.error(`Could not load autorole for ${msg.channel.guild.name} (${msg.channel.guild.id})`, err)
       return responder.error()
     }
   }
@@ -44,7 +44,7 @@ class Autorole extends Command {
         role: `**\`${args.role[0].name}\`**`
       })
     } catch (err) {
-      logger.error(`Could not ${cmd} for ${msg.channel.guild.name} (${msg.channel.guild.id}) - ${err}`)
+      this.logger.error(`Could not add autorole for ${msg.channel.guild.name} (${msg.channel.guild.id})`, err)
       return responder.error()
     }
   }
@@ -55,7 +55,7 @@ class Autorole extends Command {
       await settings.save()
       return responder.success('{{autorole.none}}')
     } catch (err) {
-      logger.error(`Cound not ${cmd} for ${msg.channel.guild.name} (${msg.channel.guild.id}) - ${err}`)
+      logger.error(`Cound not remove autorole for ${msg.channel.guild.name} (${msg.channel.guild.id}) - ${err}`)
       return responder.error()
     }
   }

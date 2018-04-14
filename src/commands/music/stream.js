@@ -1,4 +1,4 @@
-const { Command } = require('../../core')
+const { Command } = require('sylphy')
 
 class Stream extends Command {
   constructor (...args) {
@@ -7,7 +7,8 @@ class Stream extends Command {
       description: 'Plays from a supported stream',
       cooldown: 5,
       usage: [{ name: 'station', type: 'string', optional: false, choices: ['listen.moe'] }],
-      options: { guildOnly: true, localeKey: 'music' }
+      options: { guildOnly: true, localeKey: 'music', adminOnly: true },
+      group: 'music',
     })
   }
 

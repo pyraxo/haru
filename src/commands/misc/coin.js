@@ -1,4 +1,4 @@
-const { Command } = require('../../core')
+const { Command } = require('sylphy')
 
 class Coin extends Command {
   constructor (...args) {
@@ -9,7 +9,8 @@ class Coin extends Command {
       usage: [
         { name: 'times', type: 'int', optional: true, min: 1, max: 1000 }
       ],
-      options: { localeKey: 'misc' }
+      options: { localeKey: 'misc' },
+      group: 'misc'
     })
   }
 

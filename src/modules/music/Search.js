@@ -1,9 +1,8 @@
 const crypto = require('crypto')
-const logger = require('winston')
 const YouTube = require('youtube-node')
-const yt = Promise.promisifyAll(new YouTube())
+const yt = require('bluebird').promisifyAll(new YouTube())
 
-const { Module } = require('../../core')
+const { Module } = require('sylphy')
 
 class Search extends Module {
   constructor (...args) {
@@ -11,10 +10,15 @@ class Search extends Module {
       name: 'music:search'
     })
 
-    this.redis = this.bot.engine.cache.client
+    if (!process.env.API_YT) {
+      console.error('Missing Youtube API key')
+    } else {
+      yt.setKey(process.env.API_YT)
+    }
+  }
 
-    if (!process.env.API_YT) throw new Error('Missing Youtube API key')
-    yt.setKey(process.env.API_YT)
+  init () {
+    this.redis = this._client.plugins.get('cache').client
   }
 
   parseItems (result) {
@@ -51,8 +55,7 @@ class Search extends Module {
         return result
       }
     } catch (err) {
-      logger.error('Could not query YT cache')
-      logger.error(err)
+      this.logger.error('Could not query YT cache', err)
     }
 
     yt.addParam('type', type)

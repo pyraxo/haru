@@ -1,5 +1,5 @@
 const moment = require('moment')
-const { Command } = require('../../core')
+const { Command } = require('sylphy')
 
 class Multislots extends Command {
   constructor (...args) {
@@ -11,32 +11,32 @@ class Multislots extends Command {
       cooldown: 6,
       options: {
         localeKey: 'slots'
-      }
+      },
+      group: 'games'
     })
 
     this.reel = [
-      '🍇', '🍊', '🇱🇻', '🍈', '🍌', '🍒', '🍉', '🔔', '💎', '🍐', '🍇', '🍊',
-      '🍈', '🍒', '🍌', '🍉', '🇱🇻', '💎', '🍌', '🔔', '🍇', '🍐', '🍊',
-      '🍊', '🍌', '🍒', '🇱🇻', '🍐', '🍈', '🍇', '🍌'
+      '🍇', '🍊', '🇱🇻', '🍈', '🍌', '🍎', '🍒', '🍉', '🔔', '💎', '🍇', '🍊',
+      '🍈', '🍒', '🍌', '🍉', '🇱🇻', '💎', '🍌', '🍎', '🔔', '🍇', '🍊',
+      '🍊', '🍌', '🍎', '🍒', '🇱🇻', '🍈', '🍇', '🍌', '🍎'
     ]
 
     this.wins = {
-      '🍒 x 1': 1,
-      '🍒 x 2': 2,
+      '🍒 x 2': 3,
       '🍒 x 3': 5,
-      '7⃣ x 2': 25,
-      '7⃣ x 3': 60,
-      '🍐 x 3': 10,
-      '🍈 x 3': 10,
-      '🍇 x 3': 10,
-      '🍊 x 3': 10,
-      '🍌 x 3': 10,
-      '💎 x 2': 15,
+      '7⃣ x 2': 50,
+      '7⃣ x 3': 150,
+      '🍈 x 3': 15,
+      '🍇 x 3': 15,
+      '🍊 x 3': 15,
+      '🍌 x 3': 15,
+      '🍎 x 3': 15,
+      '💎 x 2': 30,
       '💎 x 3': 75,
-      '🔔 x 3': 25,
-      '🍉 x 3': 10,
-      '🇱🇻 x 2': 20,
-      '🇱🇻 x 3': 50
+      '🔔 x 3': 50,
+      '🍉 x 3': 15,
+      '🇱🇻 x 2': 30,
+      '🇱🇻 x 3': 60
     }
   }
 
@@ -88,10 +88,12 @@ class Multislots extends Command {
 
     const rando = Math.random()
     return (amount > 1000000 && winnings.length && rando >= 0.5)
-    ? this.doSlots(bet, amount) : [ machine, payline1, payline2, payline3, winnings ]
+    ? this.doSlots(bet, amount) : [ payline1, payline2, payline3, winnings ]
   }
 
-  async handle ({ msg, args, data, settings, cache }, responder) {
+  async handle ({ msg, args, settings, plugins }, responder) {
+    const cache = plugins.get('cache')
+    const User = plugins.get('db').data.User
     let dailyWins = await cache.client.getAsync(`slots:${msg.author.id}`)
     if (parseInt(dailyWins, 10) >= 750000) {
       const res = await cache.client.pttlAsync(`slots:${msg.author.id}`)
@@ -99,7 +101,7 @@ class Multislots extends Command {
         time: `${moment(res + moment()).fromNow(true)}`
       })
     }
-    const user = await data.User.fetch(msg.author.id)
+    const user = await User.fetch(msg.author.id)
     if (args.bet > 5000) args.bet = 5000
     if (args.bet < 1) return responder.error('{{yudodis}}')
     if (user.credits < args.bet * 3) {
@@ -109,7 +111,7 @@ class Multislots extends Command {
       })
     }
 
-    const [machine, payline1, payline2, payline3, winnings] = this.doSlots(args.bet, user.credits)
+    const [payline1, payline2, payline3, winnings] = this.doSlots(args.bet, user.credits)
     try {
       user.credits -= args.bet * 3
       let total = 0

@@ -1,5 +1,4 @@
-const logger = require('winston')
-const { Command, Permitter } = require('../../core')
+const { Command, Permitter } = require('sylphy')
 
 class Enabler extends Command {
   constructor (...args) {
@@ -10,7 +9,8 @@ class Enabler extends Command {
         { name: 'context', types: ['member', 'channel', 'role'], optional: true, voice: false },
         { name: 'command', displayName: 'command', type: 'command', optional: true }
       ],
-      options: { guildOnly: true, localeKey: 'settings', modOnly: true }
+      options: { guildOnly: true, localeKey: 'settings', modOnly: true },
+      group: 'moderation'
     })
   }
 
@@ -23,7 +23,7 @@ class Enabler extends Command {
   async handle ({ msg, args, data, settings, trigger }, responder) {
     const enable = trigger === 'enable'
 
-    const cmd = args.command ? args.command.cmd.permissionNode : '*'
+    const cmd = args.command ? args.command.permissionNode : '*'
     const ctx = args.context
     ? Array.isArray(args.context)
     ? (await responder.selection(args.context, { mapFunc: o => {
@@ -31,7 +31,8 @@ class Enabler extends Command {
         case 'channels': return '#' + o.name
         case 'members': return `${o.user.username}#${o.user.discriminator}`
         case 'roles': return o.name === '@everyone' ? 'everyone' : '@' + o.name
-      } },
+      }
+    },
       cancel: 'cancel'
     }))[0]
     : args.context
@@ -40,7 +41,7 @@ class Enabler extends Command {
     if (!ctx) return
     const type = this.getType(ctx)
     const everyone = type === 'roles' && ctx.name === '@everyone'
-    
+
     ctx.id = everyone ? '*' : ctx.id
     const node = `${type === 'channels' ? ctx.id : '*'}.${type !== 'channels' ? ctx.id : '*'}.${cmd}`
 
@@ -64,7 +65,7 @@ class Enabler extends Command {
         })(type)
       })
     } catch (err) {
-      logger.error(`Could not ${trigger} ${cmd} for ${msg.channel.guild.name} (${msg.channel.guild.id}) - ${err}`)
+      this.logger.error(`Could not ${trigger} ${cmd} for ${msg.channel.guild.name} (${msg.channel.guild.id})`, err)
       return responder.error()
     }
   }
@@ -89,7 +90,8 @@ class Resetter extends Command {
     super(...args, {
       name: 'reset',
       description: 'Resets all permissions in the server',
-      options: { guildOnly: true, localeKey: 'settings', modOnly: true }
+      options: { guildOnly: true, localeKey: 'settings', modOnly: true },
+      group: 'moderation'
     })
   }
 

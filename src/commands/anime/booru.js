@@ -1,6 +1,5 @@
-const logger = require('winston')
 const request = require('superagent')
-const { Command } = require('../../core')
+const { Command, utils } = require('sylphy')
 
 class Booru extends Command {
   constructor (...args) {
@@ -17,7 +16,8 @@ class Booru extends Command {
         danbooru: 'danbooru',
         yandere: 'yandere'
       },
-      options: { botPerms: ['embedLinks'] }
+      options: { botPerms: ['embedLinks'] },
+      group: 'anime'
     })
   }
 
@@ -37,15 +37,15 @@ class Booru extends Command {
       image: { url, height, width },
       color: (r => {
         switch (r) {
-          case 's': return this.colours.green
-          case 'q': return this.colours.orange
-          case 'e': return this.colours.red
+          case 's': return utils.getColour('green')
+          case 'q': return utils.getColour('orange')
+          case 'e': return utils.getColour('red')
         }
       })(rating)
     }).send(`**ID ${id}**`)
   }
 
-  async danbooru ({ msg, rawArgs }, responder) {
+  async danbooru ({ msg, rawArgs, client }, responder) {
     if (msg.channel.nsfw === false) return responder.error('{{wrongChannel}}')
     if (rawArgs.length > 2) return responder.error('{{maxTwo}}')
     const query = rawArgs.join('+') + (rawArgs.length === 1 ? '+order:random' : '')
@@ -53,8 +53,8 @@ class Booru extends Command {
     try {
       res = await request.get(`http://danbooru.donmai.us/posts.json/?limit=100&page=1&tags=${query}`)
     } catch (err) {
-      logger.error('Error encountered while querying danbooru')
-      logger.error(err)
+      this.logger.error('Error encountered while querying danbooru')
+      this.loggererror(err)
       return responder.clean().error('{{%ERROR}}')
     }
     const r = res.body[~~(Math.random() * 100)] || res.body[0]
@@ -112,8 +112,8 @@ class Booru extends Command {
         return this.gelbooru(container, responder, { pass: ++pass })
       }
     } catch (err) {
-      logger.error('Error encountered while querying gelbooru')
-      logger.error(err)
+      this.logger.error('Error encountered while querying gelbooru')
+      this.logger.error(err)
       return responder.clean().error('{{%ERROR}}')
     }
   }
@@ -125,8 +125,8 @@ class Booru extends Command {
     try {
       res = await request.get(`https://yande.re/post/index.json/?limit=1&page=1&tags=order:random${query ? `+${query}` : ''}`)
     } catch (err) {
-      logger.error('Error encountered while querying danbooru')
-      logger.error(err)
+      this.logger.error('Error encountered while querying danbooru')
+      this.logger.error(err)
       return responder.clean().error('{{%ERROR}}')
     }
     const r = res.body[~~(Math.random() * 100)] || res.body[0]

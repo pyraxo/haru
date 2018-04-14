@@ -1,5 +1,4 @@
-const logger = require('winston')
-const { Command } = require('../../core')
+const { Command } = require('sylphy')
 
 class Prefix extends Command {
   constructor (...args) {
@@ -8,11 +7,12 @@ class Prefix extends Command {
       description: 'Allows moderators to set a guild\'s prefix',
       aliases: ['setprefix'],
       usage: [{ name: 'prefix', type: 'string', optional: true }],
-      options: { guildOnly: true, localeKey: 'settings', permissions: ['manageGuild'] }
+      options: { guildOnly: true, localeKey: 'settings', modOnly: true },
+      group: 'moderation'
     })
   }
 
-  async handle ({ msg, args, data, settings }, responder) {
+  async handle ({ msg, args, settings }, responder) {
     if (!args.prefix) {
       return responder.format('emoji:info').reply('{{prefix.current}}', { prefix: `**${settings.prefix}**` })
     }
@@ -23,7 +23,7 @@ class Prefix extends Command {
         prefix: `**\`${args.prefix}\`**`
       })
     } catch (err) {
-      logger.error(`Could not change prefix to '${args.prefix}' for ${msg.channel.guild.name} (${msg.channel.guild.id}) - ${err}`)
+      this.logger.error(`Could not change prefix to '${args.prefix}' for ${msg.channel.guild.name} (${msg.channel.guild.id})`, err)
       return responder.error()
     }
   }

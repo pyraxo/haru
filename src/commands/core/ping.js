@@ -1,20 +1,20 @@
-const logger = require('winston')
-const { Command } = require('../../core')
+const { Command } = require('sylphy')
 
 class Ping extends Command {
   constructor (...args) {
     super(...args, {
       name: 'ping',
       description: 'Pong!',
-      options: { hidden: true }
+      options: { hidden: true },
+      group: 'core'
     })
   }
 
   handle ({ msg }, responder) {
-    return responder.format('emoji:info').send('Pong!').then(m => {
+    return responder.format('emoji:info').send('Pong!').then(m =>
       m.edit(`${m.content} - Time taken: **${m.timestamp - msg.timestamp}ms**`)
-      .catch(logger.error)
-    })
+      .catch(this.logger.error)
+    )
   }
 }
 

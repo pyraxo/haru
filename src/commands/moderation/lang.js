@@ -1,5 +1,4 @@
-const logger = require('winston')
-const { Command } = require('../../core')
+const { Command } = require('sylphy')
 
 class Lang extends Command {
   constructor (...args) {
@@ -12,14 +11,15 @@ class Lang extends Command {
         type: 'string',
         optional: false,
         choices: [
-          'en', 'pt', 'nl', 'ro', 'bg', 'de', 'fr', 'it', 'zh', 'es'
+          'en', 'pt', 'nl', 'ro', 'bg', 'de', 'fr', 'it', 'zh', 'es', 'tr', 'ru'
         ]
       }],
-      options: { guildOnly: true, localeKey: 'settings', permissions: ['manageGuild'] }
+      options: { guildOnly: true, localeKey: 'settings', modOnly: true },
+      group: 'moderation'
     })
   }
 
-  async handle ({ msg, args, data, settings }, responder) {
+  async handle ({ msg, args, settings }, responder) {
     try {
       settings.lang = args.lang
       await settings.save()
@@ -27,7 +27,7 @@ class Lang extends Command {
         lang: `**\`${args.lang}\`**`
       })
     } catch (err) {
-      logger.error(`Could not change language to '${args.lang}' for ${msg.channel.guild.name} (${msg.channel.guild.id}) - ${err}`)
+      this.logger.error(`Could not change language to '${args.lang}' for ${msg.channel.guild.name} (${msg.channel.guild.id})`, err)
       return responder.error()
     }
   }

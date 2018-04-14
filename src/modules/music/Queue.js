@@ -1,13 +1,14 @@
-const logger = require('winston')
-const { Module } = require('../../core')
+const { Module } = require('sylphy')
 
 class Queue extends Module {
   constructor (...args) {
     super(...args, {
       name: 'music:queue'
     })
+  }
 
-    this.redis = this.bot.engine.cache.client
+  init () {
+    this.redis = this._client.plugins.get('cache').client
   }
 
   add (guildID, video, prepend = false) {
@@ -38,8 +39,8 @@ class Queue extends Module {
     return this.redis.sismemberAsync('music:repeats', guildID)
   }
 
-  async getSongs (guildID, start = 0, stop = start) {
-    return await this.redis.lrangeAsync(`music:queues:${guildID}`, start, stop)
+  getSongs (guildID, start = 0, stop = start) {
+    return this.redis.lrangeAsync(`music:queues:${guildID}`, start, stop)
   }
 }
 

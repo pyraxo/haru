@@ -1,5 +1,4 @@
-const { Command } = require('../../core')
-const logger = require('winston')
+const { Command } = require('sylphy')
 
 class Summon extends Command {
   constructor (...args) {
@@ -7,7 +6,8 @@ class Summon extends Command {
       name: 'summon',
       description: 'Summons me to a voice channel',
       cooldown: 5,
-      options: { guildOnly: true, localeKey: 'music' }
+      options: { guildOnly: true, localeKey: 'music' },
+      group: 'music'
     })
   }
 
@@ -21,7 +21,7 @@ class Summon extends Command {
     }
     const vc = msg.channel.guild.channels.get(channel)
 
-    if (!this.hasPermissions(vc, this.bot.user, 'voiceConnect')) {
+    if (!this.hasPermissions(vc, client.user, 'voiceConnect')) {
       return responder.error('{{errors.noPerms}}', {
         voice: `**${vc.name}**`
       })
@@ -36,7 +36,7 @@ class Summon extends Command {
       })
     } catch (err) {
       if (err instanceof Error) {
-        logger.error(`Could not join voice channel ${channel} in ${msg.channel.guild.name} (${msg.channel.guild.id}) - ${err}`)
+        this.logger.error(`Could not join voice channel ${channel} in ${msg.channel.guild.name} (${msg.channel.guild.id})`, err)
         return
       }
       return responder.error(`{{errors.${err}}}`, {

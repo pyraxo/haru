@@ -1,4 +1,4 @@
-const { Command } = require('../../core')
+const { Command } = require('sylphy')
 
 class Eightball extends Command {
   constructor (...args) {
@@ -8,7 +8,8 @@ class Eightball extends Command {
       usage: [
         { name: 'response', displayName: 'question', type: 'string', last: true, optional: false }
       ],
-      options: { localeKey: 'misc' }
+      options: { localeKey: 'misc' },
+      group: 'misc'
     })
   }
 

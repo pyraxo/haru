@@ -23,7 +23,8 @@ module.exports = function () {
       goodbye: object().schema({
         chan: string().allowNull(true).default(null),
         msg: string().default('User {{user}} has left us.')
-      }).required().default({})
+      }).required().default({}),
+      excluded: bool().default(false)
     },
     expiry: 300
   }

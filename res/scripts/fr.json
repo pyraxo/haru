@@ -1,20 +1,21 @@
 {
     "en": {
         "booru": {
-            "noPictures": "la requête {{query}} n'a retourné aucune image. Essaie de chercher quelque chose d'autre !",
+            "noPictures": "la requête {{query}} n'a rendue aucune image. Essaie de chercher quelque chose d'autre !\n",
             "maxTwo": "tu ne peux rechercher sur Danbooru qu'avec un maximum de deux tags !",
             "score": "Score",
             "rating": "Classification",
             "tags": "Tags",
             "s": "Sûr",
             "q": "Douteux",
-            "e": "Explicite"
+            "e": "Explicite",
+            "wrongChannel": "tu peux utiliser cette commande uniquement dans les MP ou dans un salon NSFW."
         },
         "common": {
             "CHECK_PMS": "regarde tes messages privés !",
             "ERROR": "une erreur est survenue ! Réessaie plus tard, ou envoie un rapport de bug.",
             "ERROR_FULL": "Une erreur est survenue ! Réessaie plus tard, ou envoie un rapport de bug.",
-            "COOLDOWN": "du calme! ({{time}} seconde restante)",
+            "COOLDOWN": "s'il te plait calme toi! ({{time}} secondes restantes)",
             "NO_PERMS": "tu as besoin d'avoir la permission {{perms}} pour exécuter cette commande !",
             "NO_PERMS_BOT": "J'ai besoin de la permission {{perms}} pour exécuter cette commande !",
             "menus": {
@@ -32,7 +33,7 @@
                 "maxMatches": "Nombre de matches maximum ({{maxMatches}}) dépassé."
             },
             "resolver": {
-                "INSUFFICIENT_ARGS": "Il n'y a pas assez d'arguments - Au moins {{requiredArgs}} était(ent) attendu(s), regarde {{argsCount}}",
+                "INSUFFICIENT_ARGS": "Il n'y a pas assez d'arguments - Au moins {{requiredArgs}} était(ent) attendu(s), en a vu {{argsCount}}",
                 "CORRECT_USAGE": "Usage correct",
                 "NO_END_QUOTE": "il te manque une fin de citation",
                 "member": {
@@ -99,7 +100,9 @@
                 "wins": "Victoires",
                 "losses": "Défaites",
                 "info": "Informations sur le compagnon",
-                "info2": "Le compagnon de {{author}}"
+                "info2": "Le compagnon de {{author}}",
+                "mood": "Mood",
+                "hunger": "Food"
             },
             "errors": {
                 "self": "tu ne peux pas faire de bataille avec toi-même !",
@@ -120,7 +123,11 @@
                 "plsBetProperly": "tu ne peux pas parier moins d'un crédit !",
                 "notBetting": "la bataille n'est pas encore dans la phase de pari !",
                 "afterBetting": "la phase de pari pour cette bataille est déjà terminée !",
-                "notOnline": "cet utilisateur n'est pas connecté !"
+                "notOnline": "cet utilisateur n'est pas connecté !",
+                "hungry": "your companion is too hungry to battle",
+                "moody": "your companion's mood is too low to battle",
+                "hungryOpponent": "your opponent's companion is too hungry to battle",
+                "moodyOpponent": "your opponent's companion's mood is too low to battle"
             },
             "challenge": [
                 "tu as défié {{mention}} à une bataille de compagnon !",
@@ -140,13 +147,6 @@
             "renameDialog": "{{user}}, quel nouveau nom veux-tu donner à ton compagnon {{pet}} ?",
             "renameSuccess": "tu as renommé ton compagnon {{pet}} en {{newName}} !",
             "script": {
-                "HIT": [
-                    "{{p1}} frappe violemment {{p2}}, lui faisant {{dmg}} point(s) de dommage!",
-                    "{{p1}} porte un coup à {{p2}}, ce dernier souffre de {{dmg}} point(s) de dommage!",
-                    "{{p2}} subit une déculottée de la part de {{p1}}, qui lui enlève {{dmg}} point(s) de vie!",
-                    "{{p1}} donne un bon coup à {{p2}},  lui faisant {{dmg}} point(s) de dégât!",
-                    "{{p1}} distribue rapidement {{dmg}} point(s) de dommage a {{p2}}!"
-                ],
                 "DODGE_3": "{{p1}} évite de justesse l'attaque de {{p2}} !",
                 "DODGE_4": "L'attaque de {{p2}} passe juste à côté de {{p1}} !",
                 "HIT_1": "{{p1}} donne un bon coup à {{p2}}, lui administrant {{dmg}} de dommage !",
@@ -161,7 +161,15 @@
                 "HEAL_4": "{{p1}} découvre une mixture bizarre, il la boit et sa vie augmente de {{heal}} !",
                 "DODGE_1": "{{p1}} réussi à éviter l'attaque de {{p2}} !",
                 "DODGE_2": "L'attaque de {{p2}} loupe de peu {{p1}} !"
-            }
+            },
+            "food": [
+                "{{author}}, are you sure you'd like to feed your {{animal}} {{amount}} food?",
+                "",
+                "To confirm, please write {{code}}, or anything else to exit."
+            ],
+            "petFed": "{{author}}, you have just fed your {{animal}}, restoring their **hunger** and **mood** by {{amount}}",
+            "tooHungry": "Your companion is too full to feed it {{amount}} food!",
+            "notEnoughFood": "You can't feed your {{animal}} {{amount}} food as you only have {{inv}} in your inventory!"
         },
         "credits": {
             "balance": "le solde du compte de {{user}} est de {{balance}} crédits.",
@@ -293,7 +301,8 @@
         },
         "images": {
             "link": "voila ton image ! {{image}}",
-            "catgirl": "Catgirl"
+            "catgirl": "Catgirl",
+            "wrongChannel": "tu peux utiliser cette commande uniquement dans les MP ou dans un salon NSFW."
         },
         "info": {
             "info": [
@@ -510,6 +519,11 @@
                 ],
                 "success": "le nouveau message d'au revoir est :",
                 "enabled": "dès maintenant, envoie des messages d'au revoir dans {{channel}}"
+            },
+            "autorole": {
+                "success": "{{role}} configuré avec succès en tant que rôle automatique de ce serveur.",
+                "none": "Il n'y a pas de rôle automatique sur ce serveur.",
+                "current": "Le rôle automatique actuel pour ce serveur est {{role}}"
             }
         },
         "purge": {
@@ -622,6 +636,93 @@
             },
             "volumes": "Tomes",
             "chapters": "Chapitres"
+        },
+        "default": {
+            "ERROR": "an error has occurred! Please try again later, or submit a bug report.",
+            "ERROR_FULL": "An error has occurred! Please try again later, or submit a bug report.",
+            "ENABLE_EMBEDS": "Please ensure that you have embeds enabled!",
+            "errors": {
+                "INSUFFICIENT_ARGS": "insufficient arguments supplied - {{requiredArgs}} expected, but only {{argsCount}} found.",
+                "NO_END_QUOTE": "you have a missing end quote.",
+                "ON_COOLDOWN": "please cool down! ({{time}} seconds left)",
+                "NO_PERMS": "you need the permissions {{perms}} to run this command!",
+                "NO_PERMS_BOT": "I need the permissions {{perms}} to run this command!",
+                "NO_PMS": "this command can't be run in PMs.",
+                "member": {
+                    "NOT_FOUND": "the member could not be found"
+                },
+                "channel": {
+                    "NOT_FOUND": "the channel could not be found"
+                },
+                "command": {
+                    "NOT_FOUND": "the command could not be found"
+                },
+                "group": {
+                    "NOT_FOUND": "the command group could not be found"
+                },
+                "role": {
+                    "NOT_FOUND": "the role could not be found"
+                },
+                "string": {
+                    "NOT_STRING": "{{arg}} must be a string",
+                    "MAX": "{{arg}} length cannot be more than {{max}}",
+                    "MIN": "{{arg}} length cannot be less than {{min}}",
+                    "ONE_OF": "{{arg}} must be one of the following: {{choices}}"
+                },
+                "list": {
+                    "MAX": "{{arg}} length cannot contain more than {{max}} items",
+                    "MIN": "{{arg}} length cannot contain less than {{min}} items",
+                    "MAX_LENGTH": "{{arg}} cannot contain items longer than {{maxLength}}",
+                    "MIN_LENGTH": "{{arg}} cannot contain items shorter than {{minLength}}",
+                    "DUPES": "{{arg}} cannot contain duplicate values"
+                },
+                "int": {
+                    "NOT_INT": "{{arg}} is not an integer",
+                    "MAX": "{{arg}} must be less than or equals to {{max}}",
+                    "MIN": "{{arg}} must be more than or equals to {{min}}"
+                }
+            },
+            "menus": {
+                "EXIT": "Enter {{cancel}} to exit the menu.",
+                "ERRORED": "the menu has closed:",
+                "EXITED": "you have exited the menu.",
+                "SELECTION": "Selection Menu",
+                "ERROR": "Unknown Error",
+                "INPUT": "Type the number of your choice into chat or '{{cancel}}' to cancel.",
+                "MORE_RESULTS": "And {{num}} more..."
+            },
+            "collector": {
+                "timeout": "Timeout after {{timeout}}s",
+                "max": "Exceeded {{max}} tries",
+                "maxMatches": "Exceeded {{maxMatches}} matches"
+            }
+        },
+        "shop": {
+            "buyDialog": "Items for purchase",
+            "sellDialog": "Items for sale",
+            "menu": {
+                "food": "Bag of generic pet food. Raises food by 1",
+                "checkInv": "Check your current inventory"
+            },
+            "howMuch": "{{author}}, how many {{selection}} would you like to buy?",
+            "purchase": [
+                "{{author}}, are you sure you'd like to purchase {{amount}} {{selection}}?",
+                "",
+                "To confirm, please write {{code}}, or anything else to exit."
+            ],
+            "result": [
+                "**Food Purchased**",
+                "",
+                "{{author}}, you have successfully purchased {{amount}} {{selection}}.",
+                "__Current Balance__: {{balance}} credits",
+                ""
+            ],
+            "error": "an error has occurred! The transaction was cancelled. Try again later.",
+            "cannotAfford": "I'm sorry, you need {{ammount}} credits to buy that but you only have {{balance}}",
+            "info": "Current Inventory",
+            "amounts": {
+                "petFood": "Pet food"
+            }
         }
     }
 }
