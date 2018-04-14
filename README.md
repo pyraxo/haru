@@ -14,4 +14,4 @@
 
 **haru** is an idol, bringing joy to people's lives. when not performing, she works part-time as a bot.
 
-**haru** was taken down on 6/4/18. This repo is imported from its original over on [owo.codes](https://owo.codes). No assistance will be provided to those intending to self-host the bot. This repo has been open-sourced for **EDUCATIONAL PURPOSES ONLY**.
+**haru** was taken down on 6/4/18. This repo is imported from its **previously closed-source** original over on [owo.codes](https://owo.codes). No assistance will be provided to those intending to self-host the bot. This repo has been open-sourced for **EDUCATIONAL PURPOSES ONLY**.
