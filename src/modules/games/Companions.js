@@ -151,6 +151,7 @@ class Companions extends Module {
         hp: p1.hp || 10,
         crit: p1.crit || 1,
         atk: p1.atk || 1,
+        heal: p1.heal || 1,
         type: p1.type
       },
       p2: {
@@ -160,6 +161,7 @@ class Companions extends Module {
         hp: p2.hp || 10,
         crit: p2.crit || 1,
         atk: p2.atk || 1,
+        heal: p2.heal || 1,
         type: p2.type
       }
     }
@@ -184,11 +186,13 @@ class Companions extends Module {
 
       const res = this.outcomes[~~(Math.random() * 100)]
       if (!stats[attacker] || !stats[receiver]) return
-      if (battle._turn < 0) battle._actions.push(':info:  **Match begins!**')
+      if (battle._turn < 0) battle._actions.push(':information_source:  **Match begins!**')
       battle._turn = turn
 
       const crit = stats[attacker].crit
-      const multiplier = Array(100).fill(2, 0, crit).fill(1, crit)[~~(Math.random() * 100)]
+      const critmultiplier = Array(100).fill(2, 0, crit).fill(1, crit)[~~(Math.random() * 100)]
+      const heal = stats[attacker].heal
+      const healmultiplier = Array(100).fill(2, 0, heal).fill(1, heal)[~~(Math.random() * 100)]
       const damagenum = Math.floor(Math.random() * (6 - 1 + 1)) + 1;
       const actionnum = Math.floor(Math.random() * (4 - 1 + 1)) + 1;
       switch (res) {
@@ -197,13 +201,13 @@ class Companions extends Module {
           break
         }
         case 1: {
-          const dmg = (stats[attacker].atk * multiplier)
-          battle._actions.push(`${multiplier > 1 ? ':anger:' : ':punch:'}  **${responder.t(`{{script.HIT_${damagenum}}}`, {p1: stats[attacker].name, p2: stats[receiver].name, dmg: dmg}) }**`)
+          const dmg = (stats[attacker].atk * critmultiplier)
+          battle._actions.push(`${critmultiplier > 1 ? ':anger:' : ':punch:'}  **${responder.t(`{{script.HIT_${damagenum}}}`, {p1: stats[attacker].name, p2: stats[receiver].name, dmg: dmg}) }**`)
           battle._stats[receiver].hp -= dmg
           break
         }
         case 2: {
-          const heal = (1 * multiplier)
+          const heal = (1 * healmultiplier)
           battle._actions.push(`:sparkles:  **${responder.t(`{{script.HEAL_${actionnum}}}`, {p1: stats[attacker].name, heal: heal}) }**`)
           battle._stats[attacker].hp += heal
           break
@@ -253,10 +257,16 @@ class Companions extends Module {
     winUser.credits += battle.fee * 2
     winUser.companion.xp = (winUser.companion.xp || 0) + ~~(Math.random() * 5) + 2
     winUser.companion.stats.wins += 1
+    winUser.companion.hunger -= 1
+    if (winUser.companion.mood < 10) {
+      winUser.companion.mood += 1
+    }
 
     const loseUser = await this.db.User.fetch(battle[loser], { companion: true })
     loseUser.companion.xp = (loseUser.companion.xp || 0) + ~~(Math.random() * 3) + 1
     loseUser.companion.stats.losses += 1
+    loseUser.companion.hunger -= 1
+    loseUser.companion.mood -= 1
     await loseUser.saveAll({ companion: true })
 
     await this.send(battle.channel, [

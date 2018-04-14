@@ -6,7 +6,7 @@ class Companions extends Command {
     super(...args, {
       name: 'companion',
       description: 'Animal companion system',
-      usage: [{ name: 'action', displayName: 'buy | rename | peek', type: 'string', optional: true }],
+      usage: [{ name: 'action', displayName: 'buy | rename | peek | feed', type: 'string', optional: true }],
       aliases: ['pet'],
       cooldown: 5,
       subcommands: {
@@ -15,7 +15,10 @@ class Companions extends Command {
           usage: [{ name: 'user', type: 'member', optional: false }],
           options: { guildOnly: true }
         },
-        rename: 'rename'
+        rename: 'rename',
+        feed: {
+          usage: [{ name: 'amount', type: 'int', optional: true }]
+        }
       },
       options: { botPerms: ['embedLinks'] }
     })
@@ -34,9 +37,64 @@ class Companions extends Command {
       description: `**\`LVL ${Math.floor(Math.cbrt(companion.xp)) || 0}\`** :${companion.type}:  ${companion.name}`,
       fields: [
         { name: responder.t('{{definitions.wins}}'), value: stats.wins || 0, inline: true },
-        { name: responder.t('{{definitions.losses}}'), value: stats.losses || 0, inline: true }
+        { name: responder.t('{{definitions.losses}}'), value: stats.losses || 0, inline: true },
+        { name: responder.t('{{definitions.mood}}'), value: companion.mood || 10, inline: true},
+        { name: responder.t('{{definitions.hunger}}'), value: companion.hunger || 10, inline: true}
       ]
     }).send()
+  }
+
+  async feed ({ msg, args, data }, responder) {
+    const user = await data.User.fetch(msg.author.id)
+    const companion = (await data.User.fetchJoin(msg.author.id, { companion: true })).companion
+    if (!companion) {
+      responder.error('{{noPet}}', { command: `**\`${settings.prefix}${trigger} buy\`**` })
+      return
+    }
+    const amount = args.amount || 1
+    if ((companion.hunger + amount) > 10) {
+      responder.error('{{tooHungry}}', {amount: `**${amount}**`})
+      return
+    }
+    if (user.petfood < amount) {
+      responder.error('{{notEnoughFood}}', {
+        amount: `**${amount}**`,
+        inv: `**${user.petfood}**`,
+        animal: `:${companion.type}:`
+      })
+      return
+    }
+    const code = ~~(Math.random() * 8999) + 1000
+    const arg = await responder.format('emoji:info').dialog([{
+      prompt: '{{food}}',
+      input: { type: 'string', name: 'code' }
+    }], {
+      author: `**${msg.author.username}**`,
+      animal: `:${companion.type}:`,
+      amount: `**${amount}**`,
+      code: `**\`${code}\`**`
+    })
+    if (parseInt(arg.code, 10) !== code) {
+      return responder.error('{{invalidCode}}')
+    }
+    if ((companion.mood + amount) > 10) {
+      companion.mood = 10
+    } else {
+      companion.mood += amount
+    }
+    companion.hunger += amount
+    try {
+      await user.saveAll()
+      await data.User.update(user.id, user)
+    } catch (err) {
+      logger.error(`Could not save after companion feeding: ${err}`)
+      return responder.error('{{error}}')
+    }
+    responder.format('emoji:success').send('{{petFed}}', {
+      author: `**${msg.author.username}**`,
+      animal: `:${companion.type}:`,
+      amount: `**${amount}**`
+    })
   }
 
   async peek ({ args, data }, responder) {
@@ -55,7 +113,9 @@ class Companions extends Command {
       description: `**\`LVL ${Math.floor(Math.cbrt(companion.xp)) || 0}\`** :${companion.type}:  ${companion.name}`,
       fields: [
         { name: responder.t('{{definitions.wins}}'), value: stats.wins || 0, inline: true },
-        { name: responder.t('{{definitions.losses}}'), value: stats.losses || 0, inline: true }
+        { name: responder.t('{{definitions.losses}}'), value: stats.losses || 0, inline: true },
+        { name: responder.t('{{definitions.mood}}'), value: companion.mood || 10, inline: true},
+        { name: responder.t('{{definitions.hunger}}'), value: companion.hunger || 10, inline: true}
       ]
     }).send()
   }
@@ -220,4 +280,17 @@ class PetBuy extends Companions {
   }
 }
 
-module.exports = [ Companions, PetBuy ]
+class PetFeed extends Companions {
+  constructor (...args) {
+    super(...args, {
+      name: 'feedpet',
+      description: 'Feeds your personal companion',
+      options: { localeKey: 'companion' },
+      aliases: [],
+      usage: [{ name: 'amount', type: 'int', optional: true }],
+      subcommand: 'feed'
+    })
+  }
+}
+
+module.exports = [ Companions, PetBuy, PetFeed ]

@@ -7,7 +7,7 @@ class Autorole extends Command {
       name: 'autorole',
       description: 'Add a role to a user on join',
       usage: [
-        { name: 'action', displayName: ' add | remove', type: 'string', optional: true }],
+        { name: 'action', displayName: ' add <@role> | remove', type: 'string', optional: true }],
       subcommands: {
         add: {
           usage: [

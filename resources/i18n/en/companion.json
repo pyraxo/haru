@@ -9,6 +9,13 @@
     "Are you certain you'd like to purchase it for {{amount}} credits?\n",
     "To confirm, please write {{code}}, or anything else to exit."
   ],
+  "food": [
+    "{{author}}, are you sure you'd like to feed your {{animal}} {{amount}} food?\n",
+    "To confirm, please write {{code}}, or anything else to exit."
+  ],
+  "petFed": "{{author}}, you have just fed your {{animal}}, restoring their **hunger** and **mood** by {{amount}}",
+  "tooHungry": "Your companion is too full to feed it {{amount}} food!",
+  "notEnoughFood": "You can't feed your {{animal}} {{amount}} food as you only have {{inv}} in your inventory!",
   "invalidCode": "you have entered an invalid code! The transaction was cancelled.",
   "error": "an error has occurred! The transaction was cancelled. Try again later.",
   "result": [
@@ -21,7 +28,9 @@
     "wins": "Wins",
     "losses": "Losses",
     "info": "Companion Info",
-    "info2": "{{author}}'s Companion"
+    "info2": "{{author}}'s Companion",
+    "mood": "Mood",
+    "hunger": "Food"
   },
   "errors": {
     "self": "you can't battle yourself!",
@@ -42,7 +51,11 @@
     "plsBetProperly": "you can't bet less than one credit!",
     "notBetting": "the battle has not entered the betting phase!",
     "afterBetting": "the betting phase has already concluded for this battle!",
-    "notOnline": "that user is not online yet!"
+    "notOnline": "that user is not online yet!",
+    "hungry": "your companion is too hungry to battle",
+    "moody": "your companion's mood is too low to battle",
+    "hungryOpponent": "your opponent's companion is too hungry to battle",
+    "moodyOpponent": "your opponent's companion's mood is too low to battle"
   },
   "challenge": [
     "you have challenged {{mention}} to a pet battle!\n",

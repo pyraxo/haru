@@ -47,9 +47,24 @@ class Battle extends Command {
         balance: `**${userProfile.credits}**`
       })
     }
+
+    if (userProfile.companion.hunger <= 1) {
+      return responder.error('{{errors.hungry}}')
+    }
+
+    if (userProfile.companion.mood <= 1) {
+      return responder.error('{{errors.moody}}')
+    }
+
     const oppProfile = await data.User.fetch(opp.id)
     if (!oppProfile.companion) return responder.error('{{errors.opponentNoCompanion}}')
     if (oppProfile.credits < this.entryFee) return responder.error('{{errors.cantChallenge}}')
+    if (oppProfile.companion.hunger === 1) {
+      return responder.error('{{errors.hungryOpponent}}')
+    }
+    if (oppProfile.companion.mood === 1) {
+      return responder.error('{{errors.moodyOpponent}}')
+    }
 
     try {
       await companions.initBattle(msg.author, opp, msg.channel, settings, responder, this.respondTime, this.entryFee)
